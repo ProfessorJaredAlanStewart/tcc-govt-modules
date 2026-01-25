@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-light: #F5F5F5;
+            --highlight-blue: #E3F2FD;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-icon {
+            text-align: center;
+        }
+
+        .hero-icon .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-icon .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-green);
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .chapter-number {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .chapter-card h3 {
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            padding-right: 30px;
+        }
+
+        .chapter-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .chapter-card .tag {
+            display: inline-block;
+            background: var(--highlight-blue);
+            color: var(--primary-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .info-box h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .info-box ul {
+            margin-left: 1.5rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid #ddd;
+            margin-top: 2rem;
+        }
+
+        .footer a {
+            color: var(--primary-blue);
+        }
+
+        .tcc-logo {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-icons {
+                gap: 1.5rem;
+            }
+
+            .chapters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+        <p>GOVT 2305 - Federal Government | Tarrant County College</p>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h2>🗽 Interactive Learning Modules 📚</h2>
+            <p>Explore the foundations of American government through engaging, gamified learning experiences. Earn points, unlock achievements, and master the concepts that shape our democracy.</p>
+            <div class="hero-icons">
+                <div class="hero-icon">
+                    <div class="icon">🎯</div>
+                    <div class="label">1000+ Points<br>Per Chapter</div>
+                </div>
+                <div class="hero-icon">
+                    <div class="icon">📖</div>
+                    <div class="label">16 Interactive<br>Chapters</div>
+                </div>
+                <div class="hero-icon">
+                    <div class="icon">✅</div>
+                    <div class="label">Instant<br>Feedback</div>
+                </div>
+                <div class="hero-icon">
+                    <div class="icon">📊</div>
+                    <div class="label">Progress<br>Reports</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📚 Course Chapters</h2>
+
+        <div class="chapters-grid">
+            <a href="Chapter%201%20-%20Critical%20Thinking%20%26%20Political%20Culture%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">1</div>
+                <h3>🧠 Critical Thinking & Political Culture</h3>
+                <p>Explore how government works, who really governs, and why your participation matters.</p>
+                <span class="tag">🌟 Foundation</span>
+            </a>
+
+            <a href="Chapter%202%20-%20The%20Constitution%20and%20Its%20Origins%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">2</div>
+                <h3>📜 The Constitution and Its Origins</h3>
+                <p>Discover the founding principles, the Constitutional Convention, and the birth of American democracy.</p>
+                <span class="tag">🌟 Foundation</span>
+            </a>
+
+            <a href="Chapter%203%20-%20American%20Federalism%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">3</div>
+                <h3>🏛️ American Federalism</h3>
+                <p>Understand the division of power between federal and state governments.</p>
+                <span class="tag">🌟 Foundation</span>
+            </a>
+
+            <a href="Chapter%204%20-%20Civil%20Liberties%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">4</div>
+                <h3>🗽 Civil Liberties</h3>
+                <p>Explore the freedoms protected by the Bill of Rights and how they've evolved.</p>
+                <span class="tag">⚖️ Rights</span>
+            </a>
+
+            <a href="Chapter%205%20-%20Civil%20Rights%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">5</div>
+                <h3>✊ Civil Rights</h3>
+                <p>Learn about the struggle for equality and the ongoing fight for civil rights in America.</p>
+                <span class="tag">⚖️ Rights</span>
+            </a>
+
+            <a href="Chapter%206%20-%20Public%20Opinion%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">6</div>
+                <h3>📊 Public Opinion</h3>
+                <p>Discover how public opinion is measured and its influence on government policy.</p>
+                <span class="tag">🗳️ Participation</span>
+            </a>
+
+            <a href="Chapter%207%20-%20Voting%20and%20Elections%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">7</div>
+                <h3>🗳️ Voting and Elections</h3>
+                <p>Understand the electoral process, voting behavior, and campaign strategies.</p>
+                <span class="tag">🗳️ Participation</span>
+            </a>
+
+            <a href="Chapter%208%20-%20The%20Media%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">8</div>
+                <h3>📺 The Media</h3>
+                <p>Explore the role of media in politics and its impact on public discourse.</p>
+                <span class="tag">🗳️ Participation</span>
+            </a>
+
+            <a href="Chapter%209%20-%20Political%20Parties%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">9</div>
+                <h3>🐘🫏 Political Parties</h3>
+                <p>Learn about the two-party system, party platforms, and political mobilization.</p>
+                <span class="tag">🗳️ Participation</span>
+            </a>
+
+            <a href="Chapter%2010%20-%20Interest%20Groups%20and%20Lobbying%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">10</div>
+                <h3>🤝 Interest Groups and Lobbying</h3>
+                <p>Discover how organized interests influence government decisions.</p>
+                <span class="tag">🗳️ Participation</span>
+            </a>
+
+            <a href="Chapter%2011%20-%20Congress%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">11</div>
+                <h3>🏛️ Congress</h3>
+                <p>Explore the legislative branch, how laws are made, and congressional powers.</p>
+                <span class="tag">🏛️ Institutions</span>
+            </a>
+
+            <a href="Chapter%2012%20-%20Presidency%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">12</div>
+                <h3>🦅 The Presidency</h3>
+                <p>Understand executive power, presidential leadership, and the modern presidency.</p>
+                <span class="tag">🏛️ Institutions</span>
+            </a>
+
+            <a href="Chapter%2013%20-%20The%20Courts%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">13</div>
+                <h3>⚖️ The Courts</h3>
+                <p>Learn about the judicial system, Supreme Court, and constitutional interpretation.</p>
+                <span class="tag">🏛️ Institutions</span>
+            </a>
+
+            <a href="Chapter%2015%20-%20The%20Bureaucracy%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">15</div>
+                <h3>📋 The Bureaucracy</h3>
+                <p>Explore the federal bureaucracy, civil service, and government administration.</p>
+                <span class="tag">🏛️ Institutions</span>
+            </a>
+
+            <a href="Chapter%2016%20-%20Domestic%20Policy%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">16</div>
+                <h3>🏠 Domestic Policy</h3>
+                <p>Understand how government addresses issues like healthcare, education, and the economy.</p>
+                <span class="tag">📋 Policy</span>
+            </a>
+
+            <a href="Chapter%2017%20-%20Foreign%20Policy%20(Expanded%20Edition).html" class="chapter-card">
+                <div class="chapter-number">17</div>
+                <h3>🌍 Foreign Policy</h3>
+                <p>Explore America's role in the world and the making of foreign policy.</p>
+                <span class="tag">📋 Policy</span>
+            </a>
+        </div>
+
+        <div class="info-box">
+            <h3>📖 How to Use These Modules</h3>
+            <ul>
+                <li><strong>Enter your name</strong> when you start each module to personalize your experience</li>
+                <li><strong>Click on interactive cards</strong> to reveal content and earn points</li>
+                <li><strong>Answer knowledge check questions</strong> to test your understanding</li>
+                <li><strong>Complete all sections</strong> to unlock the full completion report</li>
+                <li><strong>Print your report</strong> at the end to submit for credit</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>ℹ️ About This Resource</h3>
+            <p>These interactive modules are part of the <strong>TCC Trailblazer Trek</strong> series, designed to make learning about American government engaging and accessible. Content is based on OpenStax American Government 4e, an Open Educational Resource (OER).</p>
+            <p style="margin-top: 1rem;"><strong>Course:</strong> GOVT 2305 - Federal Government<br>
+            <strong>Institution:</strong> Tarrant County College<br>
+            <strong>Format:</strong> Self-paced, interactive, gamified learning</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p><span class="tcc-logo">Tarrant County College</span> | GOVT 2305 Federal Government</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Content adapted from <a href="https://openstax.org/details/books/american-government-4e" target="_blank">OpenStax American Government 4e</a> (CC BY 4.0)</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #888;">© 2025 TCC Trailblazer Trek Project</p>
+    </footer>
+</body>
+</html>
