@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Public Opinion - TCC Federal Government Trailblazer Trek (Complete Edition)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-icons {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-icon {
+            text-align: center;
+        }
+
+        .stat-icon span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .name-input-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input {
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        .start-button {
+            margin-left: 1rem;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill-inner {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card.completed {
+            background: var(--highlight-green);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .points-indicator {
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-blue);
+        }
+
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .section-header span {
+            font-size: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-card {
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .interactive-card.revealed {
+            background: var(--highlight-green);
+            cursor: default;
+        }
+
+        .card-prompt {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s;
+            margin-top: 1rem;
+        }
+
+        .card-content.show {
+            max-height: 1000px;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.correct):not(.incorrect) {
+            border-color: var(--primary-blue);
+            transform: translateX(5px);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .kc-option.incorrect {
+            background: #ffebee;
+            border-color: var(--error);
+            cursor: default;
+        }
+
+        .kc-option.disabled {
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .feedback-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: var(--highlight-green);
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #ffebee;
+            color: var(--error);
+        }
+
+        .complete-section-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 2rem auto;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .case-study-box {
+            background: #fff9e6;
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .case-study-title {
+            font-weight: bold;
+            color: var(--warning);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border-left: 4px solid var(--secondary-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: var(--secondary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .bullet-list {
+            margin-left: 2rem;
+            line-height: 1.8;
+        }
+
+        .bullet-list li {
+            margin: 0.5rem 0;
+        }
+
+        .quote-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary-green);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .statistic-highlight {
+            background: var(--highlight-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .report-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .report-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            min-height: 100vh;
+            background: var(--bg-light);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+
+        .report-header-bar h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: background 0.3s;
+        }
+
+        .report-back-button:hover {
+            background: var(--secondary-blue);
+        }
+
+        .report-main {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-title {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .report-grade-display {
+            background: var(--primary-green);
+            color: white;
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .grade-percentage {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .student-info-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3,
+        .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            color: var(--text-primary);
+        }
+
+        .performance-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .performance-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .performance-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-cell {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: #e8f5e9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .metric-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .report-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .instructor-note {
+            background: #fff3cd;
+            padding: 1rem;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .print-report-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background 0.3s;
+        }
+
+        .print-report-button:hover {
+            background: var(--secondary-blue);
+        }
+
+        #pointsPopup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 2000;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-icons {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .name-input {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .start-button {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .report-main {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <h1>📊 TCC Federal Government Trailblazer Trek: Public Opinion</h1>
+        <div class="score-display">
+            ⭐ Score: <span id="totalPoints">0</span> | 🎯 Level: <span id="currentLevel">Explorer</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <h2>📊 Chapter 6: The Politics of Public Opinion 🗳️</h2>
+                <p>Explore how Americans form, express, and measure their political views!</p>
+                <div class="stat-icons">
+                    <div class="stat-icon">
+                        <span>🧠</span>
+                        <div>Political Socialization</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span>📊</span>
+                        <div>Polling Methods</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span>🗳️</span>
+                        <div>Electoral Impact</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name Input Section -->
+            <div class="name-input-section">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" class="name-input" placeholder="Your Name">
+                <button class="start-button" onclick="startAdventure()">Start Adventure</button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <h3>📈 Overall Progress</h3>
+                <div class="progress-fill">
+                    <div class="progress-fill-inner" id="progressBar">0%</div>
+                </div>
+            </div>
+
+            <!-- Section Grid -->
+            <div class="section-grid">
+                <div class="section-card" onclick="navigateToSection(1)">
+                    <div class="section-number">1</div>
+                    <h3>The Nature of Public Opinion</h3>
+                    <p>Learn how political views are formed through socialization and experience</p>
+                    <div class="points-indicator">🌟 240 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection(2)">
+                    <div class="section-number">2</div>
+                    <h3>Political Socialization & Ideology</h3>
+                    <p>Discover the agents that shape our political beliefs from childhood</p>
+                    <div class="points-indicator">🌟 255 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection(3)">
+                    <div class="section-number">3</div>
+                    <h3>Measuring Public Opinion</h3>
+                    <p>Explore polling methods, sampling techniques, and margin of error</p>
+                    <div class="points-indicator">🌟 245 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection(4)">
+                    <div class="section-number">4</div>
+                    <h3>Polling Problems & Technology</h3>
+                    <p>Understand the problems and biases in public opinion polling</p>
+                    <div class="points-indicator">🌟 235 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection(5)">
+                    <div class="section-number">5</div>
+                    <h3>What the Public Thinks</h3>
+                    <p>Examine American opinions on politics, policies, and institutions</p>
+                    <div class="points-indicator">🌟 250 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection(6)">
+                    <div class="section-number">6</div>
+                    <h3>Effects of Public Opinion</h3>
+                    <p>Learn how polls influence elections, politicians, and policy</p>
+                    <div class="points-indicator">🌟 240 points available</div>
+                </div>
+            </div>
+
+            <!-- Generate Report Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="report-button" onclick="generateReport()">📋 Generate Completion Report</button>
+            </div>
+        </div>
+
+        <!-- Section 1: The Nature of Public Opinion -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🧠</span>
+                    <h2>The Nature of Public Opinion</h2>
+                </div>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">🔍 Case Study: The 2012 Romney Campaign Miscalculation</div>
+                    <p>On November 7, 2012, the day after the presidential election, journalists found Mitt Romney's transition website, detailing the Republican candidate's plans for the upcoming inauguration celebration and criteria for Cabinet and White House appointees and leaving space for video of his acceptance speech. Yet, Romney had lost his bid for the White House.</p>
+                    
+                    <p>In fact, Romney's campaign staff had been so sure he would win that he had not written a concession speech. How could they have been wrong? Romney's staff blamed the campaign's own polls. Believing Republican voters to be highly motivated, Romney pollsters had overestimated how many would turn out. The campaign's polls showed Romney close to President Barack Obama, although non-campaign polls showed Obama ahead. On election night, Romney gave his hastily drafted concession speech, still unsure how he had lost.</p>
+                </div>
+
+                <p>In the 2016 election, most polls showed Democratic nominee Hillary Clinton with an advantage nationwide and in the battleground states in the days leading up to the election. However, Republican nominee Donald Trump was elected president as many new voters joined the process, voters who were not studied in the polls as likely voters. As many a disappointed candidate knows, <strong>public opinion matters</strong>. The way opinions are formed and the way we measure public opinion also matter. But how much, and why? These are some of the questions we'll explore in this chapter.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📊 What Is Public Opinion?</div>
+                    <div>Public opinion is a collection of popular views about something, perhaps a person, a local or national event, or a new idea. For example, each day, a number of polling companies call Americans at random to ask whether they approve or disapprove of the way the president is guiding the economy. When situations arise internationally, polling companies survey whether citizens support U.S. intervention in places like Syria or Ukraine. These individual opinions are collected together to be analyzed and interpreted for politicians and the media. The analysis examines how the public feels or thinks, so politicians can use the information to make decisions about their future legislative votes, campaign messages, or propaganda.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'beliefs-attitudes', 35)">
+                    <div class="card-prompt">🔍 Click to explore: How Beliefs and Attitudes Form the Foundation</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've discovered the building blocks of opinion!</p>
+                        <p>But where do people's opinions come from? Most citizens base their political opinions on their <strong>beliefs</strong> and their <strong>attitudes</strong>, both of which begin to form in childhood. <strong>Beliefs</strong> are closely held ideas that support our values and expectations about life and politics. For example, the idea that we are all entitled to equality, liberty, freedom, and privacy is a belief most people in the United States share. We may acquire this belief by growing up in the United States or by having come from a country that did not afford these valued principles to its citizens.</p>
+                        
+                        <p>Our <strong>attitudes</strong> are also affected by our personal beliefs and represent the preferences we form based on our life experiences and values. A person who has suffered racism or bigotry may have a skeptical attitude toward the actions of authority figures, for example.</p>
+                    </div>
+                </div>
+
+                <p>Over time, our beliefs and our attitudes about people, events, and ideas will become a set of <strong>norms</strong>, or accepted ideas, about what we may feel should happen in our society or what is right for the government to do in a situation. In this way, attitudes and beliefs form the foundation for opinions.</p>
+
+                <h3>Political Socialization</h3>
+
+                <p>At the same time that our beliefs and attitudes are forming during childhood, we are also being <strong>socialized</strong>; that is, we are learning from many information sources about the society and community in which we live and how we are to behave in it.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎓 Political Socialization</div>
+                    <div>Political socialization is the process by which we are trained to understand and join a country's political world, and, like most forms of socialization, it starts when we are very young. We may first become aware of politics by watching a parent or guardian vote, for instance, or by hearing presidents and candidates speak on television or the Internet, or seeing adults honor the American flag at an event.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'early-socialization', 30)">
+                    <div class="card-prompt">🔍 Click to learn: Early Political Education</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You understand childhood political learning!</p>
+                        <p>As socialization continues, we are introduced to basic political information in school. We recite the Pledge of Allegiance and learn about the Founding Fathers, the Constitution, the two major political parties, the three branches of government, and the economic system.</p>
+                        
+                        <p>By the time we complete school, we have usually acquired the information necessary to form political views and be contributing members of the political system. A young man may realize he prefers the Democratic Party because it supports his views on social programs and education, whereas a young woman may decide she wants to vote for the Republican Party because its platform echoes her beliefs about economic growth and family values.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Accounting for the process of socialization is central to our understanding of public opinion, because the beliefs we acquire early in life are unlikely to change dramatically as we grow older.</p>
+                </div>
+
+                <p>Our <strong>political ideology</strong>, made up of the attitudes and beliefs that help shape our opinions on political theory and policy, is rooted in who we are as individuals. Our ideology may change subtly as we grow older and are introduced to new circumstances or new information, but our underlying beliefs and attitudes are unlikely to change very much, unless we experience events that profoundly affect us.</p>
+
+                <div class="example-box">
+                    <div class="example-title">📊 Example: Major Events Shifting Ideology</div>
+                    <p>For example, family members of 9/11 victims became more Republican and more political following the terrorist attacks. Similarly, young adults who attended political protest rallies in the 1960s and 1970s were more likely to participate in politics in general than their peers who had not protested.</p>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What best describes public opinion?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
+                        Individual responses to a single poll question
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">
+                        A collection of popular views shaped by beliefs and experiences
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
+                        Government propaganda messages
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
+                        Media interpretations of events
+                    </div>
+                    <div class="feedback-box" id="feedback-q1-1"></div>
+                </div>
+
+                <h3>Historical Shifts in Party Control</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'party-shifts', 35)">
+                    <div class="card-prompt">🔍 Click to discover: The Great Depression's Political Impact</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about major political realignments!</p>
+                        <p>If enough beliefs or attitudes are shattered by an event, such as an economic catastrophe or a threat to personal safety, ideology shifts may affect the way we vote. During the 1920s, the Republican Party controlled the House of Representatives and the Senate, sometimes by wide margins. After the stock market collapsed and the nation slid into the Great Depression, many citizens abandoned the Republican Party.</p>
+                        
+                        <p>In 1932, voters overwhelmingly chose Democratic candidates, for both the presidency and Congress. The Democratic Party gained registered members and the Republican Party lost them. Citizens' beliefs had shifted enough to cause the control of Congress to change from one party to the other, and Democrats continued to hold Congress for several decades. Another sea change occurred in Congress in the 1994 elections when the Republican Party took control of both the House and the Senate for the first time in over forty years.</p>
+                    </div>
+                </div>
+
+                <h3>Modern Polarization</h3>
+
+                <p>Today, polling agencies have noticed that citizens' beliefs have become far more <strong>polarized</strong>, or widely opposed, over the last decade. To track this polarization, Pew Research conducted a study of Republican and Democratic respondents over a twenty-five-year span.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'polarization-study', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Growing Partisan Divide</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand modern political polarization!</p>
+                        <p>Every few years, Pew would poll respondents, asking them whether they agreed or disagreed with statements. These statements are referred to as "value questions" or "value statements," because they measure what the respondent values. Examples of statements include:</p>
+                        <ul>
+                            <li>"Government regulation of business usually does more harm than good"</li>
+                            <li>"Labor unions are necessary to protect the working person"</li>
+                            <li>"Society should ensure all have equal opportunity to succeed"</li>
+                        </ul>
+                        <p>After comparing such answers for twenty-five years, Pew Research found that Republican and Democratic respondents are increasingly answering these questions very differently. This is especially true for questions about the government and politics.</p>
+                    </div>
+                </div>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">📊 Polarization Example: Government Control</div>
+                    <p>In 1987, <span class="statistic-highlight">58 percent of Democrats and 60 percent of Republicans</span> agreed with the statement that the government controlled too much of our daily lives.</p>
+                    <p>In 2012, <span class="statistic-highlight">47 percent of Democrats and 77 percent of Republicans</span> agreed with the statement.</p>
+                    <p>This is an example of polarization, in which members of one party see government from a very different perspective than the members of the other party. The gap between the parties on the role of government has grown further since 2012. While the 2012 gap was 30 percent, a 2019 Pew study put that number at <span class="statistic-highlight">35 percent</span>.</p>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What major event caused a significant shift from Republican to Democratic control in the 1930s?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
+                        World War I
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 30)">
+                        The Great Depression
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
+                        The Civil War
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
+                        The Vietnam War
+                    </div>
+                    <div class="feedback-box" id="feedback-q1-2"></div>
+                </div>
+
+                <h3>Post-9/11 Changes in Public Opinion</h3>
+
+                <p>Political scientists noted this and other changes in beliefs following the 9/11 terrorist attacks on the United States, including an increase in the level of trust in government and a new willingness to limit liberties for groups or citizens who "did not fit into the dominant cultural type."</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'post-911', 30)">
+                    <div class="card-prompt">🔍 Click to understand: How 9/11 Changed American Opinion</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You grasp the impact of national crises!</p>
+                        <p>According to some scholars, these shifts led partisanship to become more polarized than in previous decades, as more citizens began thinking of themselves as conservative or liberal rather than moderate. Some believe 9/11 caused a number of citizens to become more conservative overall, although it is hard to judge whether such a shift will be permanent.</p>
+                        <p>The attacks also created a "rally around the flag" effect, temporarily increasing support for government institutions and leaders, though this effect typically fades over time.</p>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(1)">✓ Complete Section</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Political Socialization & Ideology -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🎓</span>
+                    <h2>Socialization Agents and Ideological Spectrum</h2>
+                </div>
+
+                <h3>Agents of Political Socialization</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Agent of Political Socialization</div>
+                    <div>An agent of political socialization is a source of political information intended to help citizens understand how to act in their political system and how to make decisions on political matters. The information may help a citizen decide how to vote, where to donate money, or how to protest decisions made by the government.</div>
+                </div>
+
+                <p>The most prominent agents of socialization are family and school. Other influential agents are social groups, such as religious institutions and friends, and the media. Political socialization is not unique to the United States. Many nations have realized the benefits of socializing their populations. China, for example, stresses nationalism in schools as a way to increase national unity.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'diffuse-support', 30)">
+                    <div class="card-prompt">🔍 Click to learn: The Importance of Diffuse Support</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You understand system stability!</p>
+                        <p>In the United States, one benefit of socialization is that our political system enjoys <strong>diffuse support</strong>, which is support characterized by a high level of stability in politics, acceptance of the government as legitimate, and a common goal of preserving the system. These traits keep a country steady, even during times of political or social upheaval. But diffuse support does not happen quickly, nor does it occur without the help of agents of political socialization.</p>
+                    </div>
+                </div>
+
+                <h3>Family: The First Teacher</h3>
+
+                <p>For many children, family is the first introduction to politics. Children may hear adult conversations at home and piece together the political messages their parents support. They often know how their parents or grandparents plan to vote, which in turn can socialize them into political behavior such as political party membership.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'family-influence', 35)">
+                    <div class="card-prompt">🔍 Click to explore: How Family Shapes Party Identification</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've discovered family's political impact!</p>
+                        <p>Children who accompany their parents on Election Day in November are exposed to the act of voting and the concept of <strong>civic duty</strong>, which is the performance of actions that benefit the country or community. Families active in community projects or politics make children aware of community needs and politics.</p>
+                        
+                        <p>Both early and recent findings suggest that children adopt some of the political beliefs and attitudes of their parents. Children of Democratic parents often become registered Democrats, whereas children in Republican households often become Republicans. Children living in households where parents do not display a consistent political party loyalty are less likely to be strong Democrats or strong Republicans, and instead are often independents.</p>
+                    </div>
+                </div>
+
+                <h3>Schools: Formal Political Education</h3>
+
+                <p>While family provides an informal political education, schools offer a more formal and increasingly important one. The early introduction is often broad and thematic, covering explorers, presidents, victories, and symbols, but generally the lessons are idealized and do not discuss many of the specific problems or controversies connected with historical figures and moments.</p>
+
+                <div class="example-box">
+                    <div class="example-title">🏫 Example: Idealized History Lessons</div>
+                    <p>George Washington's contributions as our first president are highlighted, for instance, but teachers are unlikely to mention that he enslaved people. In fact, a 2018 report from the Southern Poverty Law Center shows evidence of a continued lack of coverage of slavery, difficulty in teaching it, and a too superficial treatment of the topic in textbooks.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'school-progression', 30)">
+                    <div class="card-prompt">🔍 Click to learn: Advanced Civic Education</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You understand educational progression!</p>
+                        <p>As students progress to higher grades, lessons will cover more detailed information about the history of the United States, its economic system, and the workings of the government. Complex topics such as the legislative process, checks and balances, and domestic policymaking are covered. Introductory economics classes teach about the various ways to build an economy, explaining how the capitalist system works.</p>
+                        
+                        <p>Many high schools have implemented civic volunteerism requirements as a way to encourage students to participate in their communities. Many offer Advanced Placement classes in U.S. government and history, or other honors-level courses, such as International Baccalaureate or dual-credit courses.</p>
+                    </div>
+                </div>
+
+                <h3>Religious Institutions and Peers</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'religion-peers', 35)">
+                    <div class="card-prompt">🔍 Click to discover: Social Group Influences</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You grasp social influence on politics!</p>
+                        <p>We are also socialized outside our homes and schools. When citizens attend religious ceremonies, as <span class="statistic-highlight">64 percent of Americans</span> in a recent survey claimed, they are socialized to adopt beliefs that affect their politics. Religion leaders often teach on matters of life, death, punishment, and obligation, which translate into views on political issues such as abortion, euthanasia, social services, the death penalty, and military involvement abroad.</p>
+                        
+                        <p>Friends and peers too have a socializing effect on citizens. Communication networks are based on trust and common interests, so when we receive information from friends and neighbors, we often readily accept it because we trust them. Information transmitted through social media like Facebook is also likely to have a socializing effect.</p>
+                    </div>
+                </div>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">🗳️ Political Candidates and Religious Venues</div>
+                    <p>Political candidates speak at religious centers and institutions in an effort to meet like-minded voters. For example, Senator Ted Cruz (R-TX) announced his 2016 presidential bid at Liberty University, an evangelical Christian institution. This university matched Cruz's conservative and religious ideological leanings and was intended to give him a boost from the conservative evangelical community.</p>
+                </div>
+
+                <h3>Media as a Socializing Force</h3>
+
+                <p>Media—newspapers, television, radio, and the Internet—also socialize citizens through the information they provide. For a long time, the media served as gatekeepers of our information, creating reality by choosing what to present. If the media did not cover an issue or event, it was as if it did not exist. With the rise of the Internet and social media, however, traditional media have become less powerful agents of this kind of socialization.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📺 Media Framing</div>
+                    <div>Another way the media socializes audiences is through <strong>framing</strong>, or choosing the way information is presented. Framing can affect the way an event or story is perceived. Candidates described with negative adjectives, for instance, may do poorly on Election Day.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'baltimore-framing', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Baltimore Protests - A Framing Example</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand media framing effects!</p>
+                        <p>Consider the recent demonstrations over the deaths of Michael Brown in Ferguson, Missouri, and of Freddie Gray in Baltimore, Maryland. Both deaths were caused by police actions against unarmed African American men. Brown was shot to death by an officer on August 9, 2014. Gray died from spinal injuries sustained in transport to jail in April 2015.</p>
+                        
+                        <p>Following each death, family, friends, and sympathizers protested the police actions as excessive and unfair. While some television stations framed the demonstrations as riots and looting, other stations framed them as protests and fights against corruption. The demonstrations contained both riot and protest, but individuals' perceptions were affected by the framing chosen by their preferred information sources.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Which agent of socialization typically has the earliest influence on political beliefs?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">
+                        Family
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
+                        Schools
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
+                        Media
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
+                        Religious institutions
+                    </div>
+                    <div class="feedback-box" id="feedback-q2-1"></div>
+                </div>
+
+                <h3>Covert vs. Overt Political Content</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'content-types', 30)">
+                    <div class="card-prompt">🔍 Click to learn: Hidden and Open Political Messages</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You can identify political messaging!</p>
+                        <p><strong>Covert content</strong> is political information provided under the pretense that it is neutral. A magazine might run a story on climate change by interviewing representatives of only one side of the policy debate and downplaying the opposing view, all without acknowledging the one-sided nature of its coverage.</p>
+                        
+                        <p>In contrast, when the writer or publication makes clear to the reader or viewer that the information offers only one side of the political debate, the political message is <strong>overt content</strong>. Political commentators like Rush Limbaugh and publications like Mother Jones openly state their ideological viewpoints.</p>
+                    </div>
+                </div>
+
+                <h3>Socialization and Ideology</h3>
+
+                <p>The socialization process leaves citizens with attitudes and beliefs that create a personal ideology. Ideologies depend on attitudes and beliefs, and on the way we prioritize each belief over the others. Most citizens hold a great number of beliefs and attitudes about government action.</p>
+
+                <div class="example-box">
+                    <div class="example-title">⚖️ The Guns vs. Butter Debate</div>
+                    <p>Many think government should provide for the common defense, in the form of a national military. They also argue that government should provide services to its citizens in the form of free education, unemployment benefits, and assistance for the poor.</p>
+                    <p>When asked how to divide the national budget, Americans reveal priorities that divide public opinion. Should we have a smaller military and larger social benefits, or a larger military budget and limited social benefits? This is the <strong>guns versus butter debate</strong>, which assumes that governments have a finite amount of money and must choose whether to spend a larger part on the military or on social programs.</p>
+                </div>
+
+                <h3>The Ideological Spectrum</h3>
+
+                <p>One useful way to look at ideologies is to place them on a spectrum that visually compares them based on what they prioritize. Liberal ideologies are traditionally put on the left and conservative ideologies on the right. (This placement dates from the French Revolution and is why liberals are called left-wing and conservatives are called right-wing.)</p>
+
+                <table>
+                    <tr>
+                        <th>Ideology</th>
+                        <th>Core Beliefs</th>
+                        <th>Government Role</th>
+                        <th>Economic Policy</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Fascism</strong></td>
+                        <td>Total state control, nationalism</td>
+                        <td>Controls all aspects of life</td>
+                        <td>State-run economy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authoritarianism</strong></td>
+                        <td>Strong leadership, order</td>
+                        <td>Controls politics and military</td>
+                        <td>Often controls economy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Traditional Conservatism</strong></td>
+                        <td>Tradition, monarchy, church authority</td>
+                        <td>Maintains social order</td>
+                        <td>Protects traditional economic structures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modern Conservatism</strong></td>
+                        <td>Individual liberty, tradition</td>
+                        <td>Limited government</td>
+                        <td>Free market, low taxes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Classical Liberalism</strong></td>
+                        <td>Individual rights, free will</td>
+                        <td>Minimal interference</td>
+                        <td>Laissez-faire capitalism</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modern Liberalism</strong></td>
+                        <td>Equality, social justice</td>
+                        <td>Active in promoting equality</td>
+                        <td>Regulated capitalism, social programs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Socialism</strong></td>
+                        <td>Economic equality</td>
+                        <td>Provides expanded services</td>
+                        <td>Controls key industries, high taxes on wealthy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communism</strong></td>
+                        <td>Classless society</td>
+                        <td>Owns all property and production</td>
+                        <td>Centrally planned economy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Libertarianism</strong></td>
+                        <td>Maximum individual freedom</td>
+                        <td>Minimal in all areas</td>
+                        <td>Completely free market</td>
+                    </tr>
+                </table>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Which ideology prioritizes maximum individual freedom with minimal government?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
+                        Socialism
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
+                        Modern Conservatism
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 30)">
+                        Libertarianism
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
+                        Fascism
+                    </div>
+                    <div class="feedback-box" id="feedback-q2-2"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'ideology-practice', 35)">
+                    <div class="card-prompt">🔍 Click to explore: How Ideology Affects Policy Views</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand ideological applications!</p>
+                        <p>The point where a person's ideology falls on the spectrum gives us some insight to that person's opinions. Though people can sometimes be liberal on one issue and conservative on another:</p>
+                        <ul>
+                            <li>A citizen to the left of liberalism, near socialism, would likely be happy with the passage of the Raise the Wage Act of 2021, which would eventually increase the minimum wage from $7.25 to $15 an hour.</li>
+                            <li>A citizen falling near conservatism would believe the Patriot Act is reasonable, because it allows the FBI and other government agencies to collect data on citizens' phone calls and social media communications to monitor potential terrorism.</li>
+                            <li>A citizen to the right of the spectrum is more likely to favor cutting social services like unemployment and Medicaid.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(2)">✓ Complete Section</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Measuring Public Opinion -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>📊</span>
+                    <h2>How Is Public Opinion Measured?</h2>
+                </div>
+
+                <p>Polling has changed over the years. The first opinion poll was taken in 1824; it asked voters how they voted as they left their polling places. Informal polls are called <strong>straw polls</strong>, and they informally collect opinions of a non-random population or group. Newspapers and social media continue the tradition of unofficial polls, mainly because interested readers want to know how elections will end. Facebook and online newspapers often offer informal, pop-up quizzes that ask a single question about politics or an event. The poll is not meant to be formal, but it provides a general idea of what the readership thinks.</p>
+
+                <p>Modern public opinion polling is relatively new, only eighty years old. These polls are far more sophisticated than straw polls and are carefully designed to probe what we think, want, and value. The information they gather may be relayed to politicians or newspapers, and is analyzed by statisticians and social scientists. As the media and politicians pay more attention to the polls, an increasing number are put in the field every week.</p>
+
+                <h3>Taking a Poll</h3>
+
+                <p>Most public opinion polls aim to be accurate, but this is not an easy task. Political polling is a science. From design to implementation, polls are complex and require careful planning and care. Mitt Romney's campaign polls are only a recent example of problems stemming from polling methods. Our history is littered with examples of polling companies producing results that incorrectly predicted public opinion due to poor survey design or bad polling methods.</p>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">📰 The 1936 Literary Digest Disaster</div>
+                    <p>In 1936, Literary Digest continued its tradition of polling citizens to determine who would win the presidential election. The magazine sent opinion cards to people who had a subscription, a phone, or a car registration. Only some of the recipients sent back their cards.</p>
+                    <p>The result? Alf Landon was predicted to win <span class="statistic-highlight">55.4 percent</span> of the popular vote; in the end, he received only <span class="statistic-highlight">38 percent</span>. Franklin D. Roosevelt won another term, but the story demonstrates the need to be scientific in conducting polls.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'dewey-truman', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The "Dewey Defeats Truman" Mistake</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned from polling history!</p>
+                        <p>A few years later, Thomas Dewey lost the 1948 presidential election to Harry Truman, despite polls showing Dewey far ahead and Truman destined to lose. More recently, John Zogby, of Zogby Analytics, went public with his prediction that John Kerry would win the presidency against incumbent president George W. Bush in 2004, only to be proven wrong on election night.</p>
+                        
+                        <p>These are just a few cases, but each offers a different lesson. In 1948, pollsters did not poll up to the day of the election, relying on old numbers that did not include a late shift in voter opinion. Zogby's polls did not represent likely voters and incorrectly predicted who would vote and for whom.</p>
+                    </div>
+                </div>
+
+                <h3>Scientific Polling Requirements</h3>
+
+                <p>Most polling companies employ statisticians and methodologists trained in conducting polls and analyzing data. A number of criteria must be met if a poll is to be completed scientifically.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Key Components of Scientific Polling</div>
+                    <div>
+                        <strong>1. Identify the desired population:</strong> The group of respondents to interview<br>
+                        <strong>2. Build a random sample:</strong> Each person has an equal chance of being chosen<br>
+                        <strong>3. Create a representative sample:</strong> Demographics match the population<br>
+                        <strong>4. Calculate margin of error:</strong> How far results may be from actual opinion
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'random-sampling', 30)">
+                    <div class="card-prompt">🔍 Click to understand: The Power of Random Sampling</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You grasp sampling methodology!</p>
+                        <p>A <strong>random sample</strong> consists of a limited number of people from the overall population, selected in such a way that each has an equal chance of being chosen. In the early years of polling, telephone numbers of potential respondents were arbitrarily selected from various areas to avoid regional bias.</p>
+                        
+                        <p>While landline phones allow polls to try to ensure randomness, the increasing use of cell phones makes this process difficult. Cell phones, and their numbers, are portable and move with the owner. To prevent errors, polls that include known cellular numbers may screen for zip codes and other geographic indicators to prevent regional bias.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">📊 Representative Sample Example</div>
+                    <p>A <strong>representative sample</strong> consists of a group whose demographic distribution is similar to that of the overall population. For example, nearly <span class="statistic-highlight">51 percent of the U.S. population is female</span>. To match this demographic distribution of women, any poll intended to measure what most Americans think about an issue should survey a sample containing slightly more women than men.</p>
+                </div>
+
+                <h3>Sample Size and Accuracy</h3>
+
+                <p>Pollsters try to interview a set number of citizens to create a reasonable sample of the population. This sample size will vary based on the size of the population being interviewed and the level of accuracy the pollster wishes to reach.</p>
+
+                <table>
+                    <tr>
+                        <th>Poll Scope</th>
+                        <th>Typical Sample Size</th>
+                        <th>Expected Margin of Error</th>
+                    </tr>
+                    <tr>
+                        <td>State or regional</td>
+                        <td>500-1,000</td>
+                        <td>±3-4%</td>
+                    </tr>
+                    <tr>
+                        <td>National (Gallup)</td>
+                        <td>500</td>
+                        <td>±4%</td>
+                    </tr>
+                    <tr>
+                        <td>National (Rasmussen/Pew)</td>
+                        <td>1,000-1,500</td>
+                        <td>±2-3%</td>
+                    </tr>
+                    <tr>
+                        <td>Academic studies</td>
+                        <td>2,500+</td>
+                        <td>±2%</td>
+                    </tr>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'margin-error', 35)">
+                    <div class="card-prompt">🔍 Click to learn: Understanding Margin of Error</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You can interpret poll results!</p>
+                        <p>The <strong>margin of error</strong> is a number that states how far the poll results may be from the actual opinion of the total population of citizens. The lower the margin of error, the more predictive the poll. Large margins of error are problematic.</p>
+                        
+                        <p>For example, if a poll that claims Elizabeth Warren is likely to win 30 percent of the vote in the 2020 Massachusetts Democratic primary has a margin of error of +/-6, it tells us that Warren may receive as little as 24 percent of the vote (30 – 6) or as much as 36 percent (30 + 6). A lower margin of error is clearly desirable because it gives us the most precise picture of what people actually think or will do.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What makes a poll scientifically valid?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
+                        Interviewing as many people as possible
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 30)">
+                        Using random and representative sampling
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
+                        Only polling likely voters
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
+                        Conducting polls online only
+                    </div>
+                    <div class="feedback-box" id="feedback-q3-1"></div>
+                </div>
+
+                <h3>Technology and Polling Methods</h3>
+
+                <p>The days of randomly walking neighborhoods and phone book cold-calling to interview random citizens are gone. Scientific polling has made interviewing more deliberate. Historically, many polls were conducted in person, yet this was expensive and yielded problematic results.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'modern-polling', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Evolution of Polling Technology</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand modern polling methods!</p>
+                        <p><strong>Face-to-face polling:</strong> Still exists for exit polls and focus groups. Organizations like Gallup conduct face-to-face interviews in areas where less than 80% of households have phones.</p>
+                        
+                        <p><strong>Phone polling:</strong> Uses random-digit-dialing (RDD) where computers generate random phone numbers. Computer-assisted telephone interviewing (CATI) connects respondents with trained interviewers.</p>
+                        
+                        <p><strong>Robo-polls:</strong> Entirely computerized with prerecorded questions. Cheaper but have lower response rates and cannot call cell phones due to the Telephone Consumer Protection Act (1991).</p>
+                        
+                        <p><strong>Online polls:</strong> Growing in popularity but face challenges with multiple accounts, verifying demographics, and ensuring representative samples.</p>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(3)">✓ Complete Section</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Polling Problems & Technology -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>⚠️</span>
+                    <h2>Problems in Polling</h2>
+                </div>
+
+                <p>For a number of reasons, polls may not produce accurate results. Two important factors a polling company faces are timing and human nature. Unless you conduct an exit poll during an election and interviewers stand at the polling places on Election Day to ask voters how they voted, there is always the possibility the poll results will be wrong.</p>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">🗳️ Why Polls Can Be Wrong</div>
+                    <p>The simplest reason is that if there is time between the poll and Election Day, a citizen might change their mind, lie, or choose not to vote at all. Timing is very important during elections, because surprise events can shift enough opinions to change an election result. Of course, there are many other reasons why polls, even those not time-bound by elections or events, may be inaccurate.</p>
+                </div>
+
+                <h3>Question Wording and Framing</h3>
+
+                <p>Polls begin with a list of carefully written questions. The questions need to be free of framing, meaning they should not be worded to lead respondents to a particular answer.</p>
+
+                <div class="example-box">
+                    <div class="example-title">❓ Example: Leading Questions</div>
+                    <p><strong>Leading Question:</strong> "Given the high unemployment rate, do you approve of the job President Biden is doing?"</p>
+                    <p><strong>Neutral Question:</strong> "Do you approve of the job President Biden is doing?"</p>
+                    <p>Both questions want to know how respondents perceive the president's success, but the first question sets up a frame for the respondent to believe the economy is doing poorly before answering. This is likely to make the respondent's answer more negative.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'push-polls', 35)">
+                    <div class="card-prompt">🔍 Click to learn: Push Polls and Political Manipulation</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You can identify push polls!</p>
+                        <p><strong>Push polls</strong> consist of political campaign information presented as polls. Respondents are called and asked a series of questions about their position or candidate selections. If a respondent's answers are for the wrong candidate, the next questions will give negative information about the candidate in an effort to change the voter's mind.</p>
+                        
+                        <p>Example from 2014 Texas fracking ban vote: "If you knew the following, would it change your vote... two Texas railroad commissioners, the state agency that oversees oil and gas in Texas, have raised concerns about Russia's involvement in the anti-fracking efforts in the U.S.?" This question played upon voter fears about Russia to convince them to vote against the fracking ban.</p>
+                    </div>
+                </div>
+
+                <h3>The Bradley Effect</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎭 The Bradley Effect</div>
+                    <div>Named after Tom Bradley's 1982 California gubernatorial race, this occurs when respondents give socially desirable answers rather than truthful ones. In the 1982 governor's race in California, Tom Bradley was far ahead in the polls, yet on Election Day he lost. This result was nicknamed the Bradley effect, on the theory that voters who answered the poll were afraid to admit they would not vote for a Black man because it would appear politically incorrect and racist.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'social-desirability', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Modern Examples of Response Bias</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You understand response bias!</p>
+                        <p>In the 2016 presidential election, the level of support for Republican nominee Donald Trump may have been artificially low in the polls due to the fact that some respondents did not want to admit they were voting for Trump.</p>
+                        
+                        <p>In 2010, Proposition 19 (marijuana legalization in California) showed inconsistent polling results. Nate Silver found that voters speaking with a live interviewer gave the socially acceptable answer that they would vote against Proposition 19, while voters interviewed by a computer felt free to be honest.</p>
+                    </div>
+                </div>
+
+                <h3>Lack of Knowledge</h3>
+
+                <p>Sometimes lack of knowledge affects the results of a poll. Respondents may not know that much about the polling topic but are unwilling to say, "I don't know." For this reason, surveys may contain a quiz with questions that determine whether the respondent knows enough about the situation to answer survey questions accurately.</p>
+
+                <div class="example-box">
+                    <div class="example-title">📝 Screening for Knowledge</div>
+                    <p>A poll to discover whether citizens support changes to the Affordable Care Act or Medicaid might first ask who these programs serve and how they are funded. Polls about China's threats against Taiwan or prospects for renewing the Iran Nuclear Deal may include a set of questions to determine whether the respondent reads or hears any international news. Respondents who cannot answer correctly may be excluded from the poll, or their answers may be separated from the others.</p>
+                </div>
+
+                <h3>Challenges with Modern Technology</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'tech-challenges', 35)">
+                    <div class="card-prompt">🔍 Click to discover: How Technology Complicates Polling</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You grasp modern polling challenges!</p>
+                        <p><strong>Cell Phone Challenge:</strong> A growing number of citizens, especially younger citizens, use only cell phones, and their phone numbers are no longer based on geographic areas. The Millennial generation and Generation Z are more likely to text than to answer an unknown call.</p>
+                        
+                        <p><strong>Online Polling Issues:</strong> Web surveys must run on varied browsers and devices. Online polls cannot detect whether a person with multiple email accounts answers the same poll multiple times, nor can they tell when a respondent misrepresents demographics.</p>
+                        
+                        <p><strong>Response Rates:</strong> Overall response rates have declined dramatically. In the 1990s, response rates were often 30-40%. Today, they're typically under 10%, raising questions about representativeness.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is a push poll?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
+                        A poll conducted door-to-door
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 30)">
+                        Political campaign information disguised as a poll
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
+                        A poll about physical fitness
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
+                        The most accurate type of poll
+                    </div>
+                    <div class="feedback-box" id="feedback-q4-1"></div>
+                </div>
+
+                <h3>Exit Polls and Their Effects</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'exit-polls', 30)">
+                    <div class="card-prompt">🔍 Click to learn: The Controversy of Exit Polls</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You understand exit poll effects!</p>
+                        <p>Exit polls, taken the day of the election, are the last election polls conducted by the media. Announced results of these surveys can deter voters from going to the polls if they believe the election has already been decided.</p>
+                        
+                        <p>In 1985, a "gentleman's agreement" between major networks and Congress kept exit poll results from being announced before a state's polls closed. Studies suggest that exit polls can affect voter turnout by up to 5 percent. Reports of close races may bring additional voters to the polls, whereas apparent landslides may prompt people to stay home.</p>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(4)">✓ Complete Section</button>
+            </div>
+        </div>
+
+        <!-- Section 5: What the Public Thinks -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🤔</span>
+                    <h2>What Does the Public Think?</h2>
+                </div>
+
+                <p>While attitudes and beliefs are slow to change, ideology can be influenced by events. A student might leave college with a liberal ideology but become more conservative as she ages. A first-year teacher may view unions with suspicion based on second-hand information but change his mind after reading newsletters and attending union meetings. These shifts may change the way citizens vote and the answers they give in polls.</p>
+
+                <h3>Experiences That Affect Public Opinion</h3>
+
+                <p>Ideological shifts are more likely to occur if a voter's ideology is only weakly supported by their beliefs. Citizens can also hold beliefs or opinions that are contrary or conflicting, especially if their knowledge of an issue or candidate is limited. And having limited information makes it easier for them to abandon an opinion. Finally, citizens' opinions will change as they grow older and separate from family.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Heuristics in Decision Making</div>
+                    <div>Citizens use two methods to form an opinion about an issue or candidate. The first is to rely on <strong>heuristics</strong>, shortcuts or rules of thumb (cues) for decision making. Political party membership is one of the most common heuristics in voting. Many voters join a political party whose platform aligns most closely with their political beliefs, and voting for a candidate from that party simply makes sense.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'voting-heuristics', 35)">
+                    <div class="card-prompt">🔍 Click to explore: How Voters Use Shortcuts</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand voter decision-making!</p>
+                        <p>Studies have shown that <span class="statistic-highlight">up to half of voters</span> make decisions using their political party identification, or party ID, especially in races where information about candidates is scarce.</p>
+                        
+                        <p>In non-partisan and some local elections, where candidates are not permitted to list their party identifications, voters may have to rely on a candidate's background or job description to form a quick opinion of a candidate's suitability. A candidate for judge may list "criminal prosecutor" as current employment, leaving the voter to determine whether a prosecutor would make a good judge.</p>
+                        
+                        <p>Gender, race, socio-economic status, and interest-group affiliation also serve as heuristics. Voters may assume women candidates have a stronger understanding about social issues relevant to women. Business owners may prefer to vote for a candidate with a college degree who has worked in business rather than a career politician.</p>
+                    </div>
+                </div>
+
+                <h3>Demographic Differences in Opinion</h3>
+
+                <p>A look at the 2020 presidential election shows how the opinions of different demographic groups vary. For instance:</p>
+
+                <table>
+                    <tr>
+                        <th>Demographic</th>
+                        <th>Biden Support</th>
+                        <th>Trump Support</th>
+                        <th>Key Factor</th>
+                    </tr>
+                    <tr>
+                        <td>Women</td>
+                        <td>57%</td>
+                        <td>42%</td>
+                        <td>Gender gap</td>
+                    </tr>
+                    <tr>
+                        <td>Men</td>
+                        <td>45%</td>
+                        <td>53%</td>
+                        <td>Traditional Republican lean</td>
+                    </tr>
+                    <tr>
+                        <td>Under 30</td>
+                        <td>60%</td>
+                        <td>36%</td>
+                        <td>Youth liberal trend</td>
+                    </tr>
+                    <tr>
+                        <td>Over 65</td>
+                        <td>47%</td>
+                        <td>52%</td>
+                        <td>Conservative aging</td>
+                    </tr>
+                    <tr>
+                        <td>Black Americans</td>
+                        <td>87%</td>
+                        <td>12%</td>
+                        <td>Historic Democratic support</td>
+                    </tr>
+                    <tr>
+                        <td>Hispanic Americans</td>
+                        <td>65%</td>
+                        <td>32%</td>
+                        <td>Growing GOP outreach</td>
+                    </tr>
+                    <tr>
+                        <td>Income <$50K</td>
+                        <td>55%</td>
+                        <td>44%</td>
+                        <td>Economic concerns</td>
+                    </tr>
+                    <tr>
+                        <td>Income >$100K</td>
+                        <td>42%</td>
+                        <td>54%</td>
+                        <td>Tax policy preferences</td>
+                    </tr>
+                </table>
+
+                <p>These demographic effects are likely to be strong because of shared experiences, concerns, and ideas. Citizens who are comfortable with one another will talk more and share opinions, leading to more opportunities to influence or reinforce one another.</p>
+
+                <h3>State Political Culture</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'state-culture', 35)">
+                    <div class="card-prompt">🔍 Click to discover: How State Culture Affects Opinion</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand regional differences!</p>
+                        <p>The political culture of a state can also have an effect on ideology and opinion. In the 1960s, Daniel Elazar researched interviews, voting data, newspapers, and politicians' speeches. He determined that states had unique cultures and that different state governments instilled different attitudes and beliefs in their citizens, creating political cultures.</p>
+                        
+                        <p>Example: Gun rights opinions vary dramatically by state. <span class="statistic-highlight">61% of Californians</span> support more gun controls, while in Texas, <span class="statistic-highlight">50% of self-identified Democrats</span>—who typically prefer more controls—said Texans should be allowed to carry a concealed weapon with a permit. State culture can move citizens away from expected ideological beliefs.</p>
+                    </div>
+                </div>
+
+                <h3>Opinions About Politics and Policies</h3>
+
+                <p>What do Americans think about their political system, policies, and institutions? Public opinion has not been consistent over the years. It fluctuates based on the times and events, and on the people holding major office.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ How has party identification changed in recent years?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">
+                        More people identify as Republicans
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">
+                        More people identify as Democrats
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 30)">
+                        More people identify as independent
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">
+                        Party identification has remained stable
+                    </div>
+                    <div class="feedback-box" id="feedback-q5-1"></div>
+                </div>
+
+                <h3>The Two-Party System</h3>
+
+                <p>The United States is traditionally a two-party system. Only Democrats and Republicans regularly win the presidency and, with few exceptions, seats in Congress. The majority of voters cast ballots only for Republicans and Democrats, even when third parties are represented on the ballot. Yet, citizens say they are frustrated with the current party system.</p>
+
+                <div class="highlight-box">
+                    <p>Current Party Identification (2020):</p>
+                    <ul>
+                        <li><span class="statistic-highlight">33%</span> identify as Democrats</li>
+                        <li><span class="statistic-highlight">29%</span> identify as Republicans</li>
+                        <li><span class="statistic-highlight">34%</span> identify as independent</li>
+                        <li><span class="statistic-highlight">58%</span> say a third party is needed in U.S. politics</li>
+                    </ul>
+                </div>
+
+                <h3>Changing Social Opinions</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'social-change', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Dramatic Shifts in Social Issues</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You see how opinions evolve!</p>
+                        <p><strong>Same-Sex Marriage:</strong> Support increased from <span class="statistic-highlight">27% in 1996</span> to <span class="statistic-highlight">70% today</span>. This dramatic shift led to the Supreme Court's Obergefell v. Hodges decision in 2015.</p>
+                        
+                        <p><strong>Marijuana Legalization:</strong> <span class="statistic-highlight">68%</span> now support legalization, despite federal prohibition.</p>
+                        
+                        <p><strong>Immigration:</strong> <span class="statistic-highlight">69%</span> believe there should be a path to citizenship for undocumented residents.</p>
+                        
+                        <p><strong>Abortion:</strong> <span class="statistic-highlight">59%</span> say it should be legal in most cases, while <span class="statistic-highlight">39%</span> say it should be illegal in most cases.</p>
+                    </div>
+                </div>
+
+                <h3>Trust in Government Institutions</h3>
+
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Presidential Approval</div>
+                        <p>Presidents typically start with ~<span class="statistic-highlight">66% approval</span>, dropping to ~<span class="statistic-highlight">53%</span> by the end of their first term. Second-term presidents average <span class="statistic-highlight">55.5%</span> at the beginning, falling to <span class="statistic-highlight">47%</span> by the end.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Congressional Approval</div>
+                        <p>Congress has historically received lower approval ratings than presidents. For most of the last forty years, congressional approval levels have bounced between <span class="statistic-highlight">20% and 60%</span>, but in the last fifteen years they have regularly fallen below <span class="statistic-highlight">40%</span>. As of March 2021, approval sits at around <span class="statistic-highlight">34%</span>.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Supreme Court Approval</div>
+                        <p>The Supreme Court generally enjoys less visibility than the other two branches, leading to more stable polling results. Between 2000 and 2010, the court's approval rating bounced between <span class="statistic-highlight">50% and 60%</span>.</p>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(5)">✓ Complete Section</button>
+            </div>
+        </div>
+
+        <!-- Section 6: Effects of Public Opinion -->
+        <div id="section6" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🎯</span>
+                    <h2>The Effects of Public Opinion</h2>
+                </div>
+
+                <p>Public opinion polling is prevalent even outside election season. Are politicians and leaders listening to these polls, or is there some other reason for them? Some believe the increased collection of public opinion is due to growing support of delegate representation.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Theory of Delegate Representation</div>
+                    <div>The theory of delegate representation assumes the politician is in office to be the voice of the people. If voters want the legislator to vote for legalizing marijuana, for example, the legislator should vote to legalize marijuana. Legislators or candidates who believe in delegate representation may poll the public before an important vote comes up for debate in order to learn what the public desires them to do.</div>
+                </div>
+
+                <p>Others believe polling has increased because politicians, like the president, operate in permanent campaign mode. To continue contributing money, supporters must remain happy and convinced the politician is listening to them. Even if the elected official does not act in a manner consistent with the polls, they can mollify everyone by explaining the reasons behind the vote.</p>
+
+                <h3>Public Opinion and Elections</h3>
+
+                <p>Elections are the events on which opinion polls have the greatest measured effect. Public opinion polls do more than show how we feel on issues or project who might win an election. The media use public opinion polls to decide which candidates are ahead of the others and therefore of interest to voters and worthy of interview.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'bandwagon-effect', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Bandwagon Effect</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand electoral momentum!</p>
+                        <p>During presidential primary season, we see examples of the <strong>bandwagon effect</strong>, in which the media pays more attention to candidates who poll well during the fall and the first few primaries.</p>
+                        
+                        <p>Bill Clinton was nicknamed the "Comeback Kid" in 1992, after he placed second in the New Hampshire primary despite accusations of adultery with Gennifer Flowers. The media's attention on Clinton gave him the momentum to make it through the rest of the primary season, ultimately winning the Democratic nomination and the presidency.</p>
+                    </div>
+                </div>
+
+                <h3>Horserace Coverage</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏇 Horserace Coverage</div>
+                    <div>Polling is at the heart of horserace coverage, in which, just like an announcer at the racetrack, the media calls out every candidate's move throughout the presidential campaign. It often includes near-constant reporting on polls, accompanied by commentary from election experts. Sound bites, tweets, and video of campaign stops are frequently integrated into this somewhat surface-level reporting.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'poll-effects', 30)">
+                    <div class="card-prompt">🔍 Click to learn: How Polls Affect Campaign Donations</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You grasp financial impacts!</p>
+                        <p>Public opinion polls affect how much money candidates receive in campaign donations. Donors assume polls are accurate enough to determine who the top candidates will be, and they give money to those who do well.</p>
+                        
+                        <p>Example from 2015: <span class="statistic-highlight">75%</span> of Democrats likely to vote said they would vote for Clinton, while <span class="statistic-highlight">15%</span> said Sanders. During this period, Clinton raised <span class="statistic-highlight">$47 million</span>, Sanders raised <span class="statistic-highlight">$15 million</span>, and O'Malley raised <span class="statistic-highlight">$2 million</span>.</p>
+                    </div>
+                </div>
+
+                <h3>Public Opinion and Government</h3>
+
+                <p>The relationship between public opinion polls and government action is murkier than that between polls and elections. Like the news media and campaign staffers, members of the three branches of government are aware of public opinion. But do politicians use public opinion polls to guide their decisions and actions?</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Which branch of government is most affected by public opinion polls?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6-1', 30)">
+                        House of Representatives (2-year terms)
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">
+                        Senate (6-year terms)
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">
+                        Supreme Court (lifetime tenure)
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">
+                        All equally affected
+                    </div>
+                    <div class="feedback-box" id="feedback-q6-1"></div>
+                </div>
+
+                <h3>Presidential Response to Public Opinion</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'presidential-response', 35)">
+                    <div class="card-prompt">🔍 Click to explore: How Presidents Use Public Opinion</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You understand executive dynamics!</p>
+                        <p>Presidential responsiveness to public opinion has been measured in various ways. Studies show mixed results:</p>
+                        
+                        <p><strong>Following Opinion:</strong> Presidents may file court briefs differently based on public mood. They use high approval ratings as political capital to push legislation through Congress.</p>
+                        
+                        <p><strong>Ignoring Opinion:</strong> Presidents sometimes act against public opinion. Obama pursued military action despite opposition. Clinton aided Mexico's economy despite negative polls. Bush continued the Iraq War despite declining support.</p>
+                        
+                        <p><strong>Shaping Opinion:</strong> Presidents often try to move public opinion toward their positions rather than moving themselves toward public opinion. They use speeches, media appearances, and the "bully pulpit" to convince voters.</p>
+                    </div>
+                </div>
+
+                <h3>Congressional Response to Public Opinion</h3>
+
+                <table>
+                    <tr>
+                        <th>Chamber</th>
+                        <th>Term Length</th>
+                        <th>Response to Opinion</th>
+                        <th>Key Factor</th>
+                    </tr>
+                    <tr>
+                        <td>House</td>
+                        <td>2 years</td>
+                        <td>Highly responsive</td>
+                        <td>Constant campaigning, frequent elections</td>
+                    </tr>
+                    <tr>
+                        <td>Senate</td>
+                        <td>6 years</td>
+                        <td>Moderately responsive</td>
+                        <td>Time for fence-mending after unpopular votes</td>
+                    </tr>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'congress-dynamics', 35)">
+                    <div class="card-prompt">🔍 Click to understand: Different Congressional Responses</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You grasp legislative behavior!</p>
+                        <p><strong>House Members:</strong> With two-year terms, they have more difficulty recovering from decisions that anger local voters. Unpopular decisions can hurt campaign donations. Studies show House members may alter their votes to match public mood to strengthen electoral chances.</p>
+                        
+                        <p><strong>Senators:</strong> Six-year terms give them time to engage in "fence-mending" to repair damage from unpopular decisions. Studies show that when public opinion shifts, fewer senators win reelection—new senators change the policy direction rather than existing senators changing their votes.</p>
+                    </div>
+                </div>
+
+                <h3>Supreme Court and Public Opinion</h3>
+
+                <p>There is some disagreement about whether the Supreme Court follows public opinion or shapes it. The lifetime tenure the justices enjoy was designed to remove everyday politics from their decisions, protect them from swings in political partisanship, and allow them to choose whether and when to listen to public opinion.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'court-opinion', 30)">
+                    <div class="card-prompt">🔍 Click to learn: The Court's Complex Relationship with Opinion</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You understand judicial independence!</p>
+                        <p>Studies that look at the connection between the Supreme Court and public opinion are contradictory:</p>
+                        
+                        <p><strong>Following Opinion:</strong> Some studies find that if the majority of Americans agree on a policy, the court's decision is likely to agree with public opinion. Public opinion may slightly affect which cases are accepted.</p>
+                        
+                        <p><strong>Maintaining Legitimacy:</strong> Other studies argue justices rule in ways that maintain support for the institution, considering long-term public acceptance.</p>
+                        
+                        <p><strong>Independence:</strong> The court is least susceptible to public opinion due to lifetime tenure and lack of elections. Major decisions can shift public approval of the court itself.</p>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(6)">✓ Complete Section</button>
+            </div>
+        </div>
+
+        <!-- Report Page -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <!-- Report Header Bar -->
+                <div class="report-header-bar">
+                    <h1>📊 TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateToHome()">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 6: The Politics of Public Opinion</p>
+                        
+                        <!-- Grade Display -->
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">95%</div>
+                        </div>
+
+                        <!-- Two-column layout -->
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Name:</span>
+                                    <span class="info-value" id="reportStudentName">Not Entered</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span class="info-value" id="reportDate">--</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span class="info-value" id="reportTime">--</span>
+                                </div>
+                            </div>
+
+                            <div class="performance-section">
+                                <h3>Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Points</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1. Nature of Public Opinion</td>
+                                        <td class="status-cell" id="status1">❌</td>
+                                        <td id="points1">0/240</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. Political Socialization</td>
+                                        <td class="status-cell" id="status2">❌</td>
+                                        <td id="points2">0/255</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Measuring Opinion</td>
+                                        <td class="status-cell" id="status3">❌</td>
+                                        <td id="points3">0/245</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Polling Problems</td>
+                                        <td class="status-cell" id="status4">❌</td>
+                                        <td id="points4">0/235</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. What Public Thinks</td>
+                                        <td class="status-cell" id="status5">❌</td>
+                                        <td id="points5">0/250</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6. Effects of Opinion</td>
+                                        <td class="status-cell" id="status6">❌</td>
+                                        <td id="points6">0/240</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Metrics Grid -->
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/6</div>
+                                <div class="metric-label">Sections</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This student has completed the Chapter 6: Public Opinion module of the TCC Federal Government Trailblazer Trek. This comprehensive interactive module covered the nature of public opinion, political socialization, agents of socialization, ideological spectrum, polling methodologies, sampling techniques, polling problems including the Bradley Effect and push polls, demographic differences in opinion, effects of public opinion on elections and government branches, and the relationship between polls and political behavior. The completion of this module demonstrates thorough engagement with Texas Higher Education Coordinating Board learning outcomes for understanding political behavior, public opinion formation, polling methodology, and democratic participation in American government.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div id="pointsPopup">+0 points!</div>
+
+    <script>
+        // Game State
+        let gameState = {
+            studentName: '',
+            totalPoints: 0,
+            currentLevel: 'Explorer',
+            sectionsCompleted: [],
+            sectionPoints: {
+                1: { earned: 0, max: 240 },
+                2: { earned: 0, max: 255 },
+                3: { earned: 0, max: 245 },
+                4: { earned: 0, max: 235 },
+                5: { earned: 0, max: 250 },
+                6: { earned: 0, max: 240 }
+            },
+            cardsRevealed: [],
+            questionsAnswered: [],
+            quizCorrect: 0,
+            quizTotal: 0,
+            startTime: new Date()
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            250: 'Scholar',
+            500: 'Analyst',
+            750: 'Expert',
+            1000: 'Master',
+            1250: 'Public Opinion Sage'
+        };
+
+        // Navigation Functions
+        function navigateToHome() {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            updateProgress();
+        }
+
+        function navigateToSection(sectionNum) {
+            if (!gameState.studentName) {
+                alert('Please enter your name first!');
+                return;
+            }
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(`section${sectionNum}`).classList.add('active');
+        }
+
+        function startAdventure() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            if (!nameInput) {
+                alert('Please enter your name to begin!');
+                return;
+            }
+            gameState.studentName = nameInput;
+            updateProgress();
+        }
+
+        // Card Interaction
+        function revealCard(element, cardId, points) {
+            if (gameState.cardsRevealed.includes(cardId)) {
+                return;
+            }
+
+            gameState.cardsRevealed.push(cardId);
+            element.classList.add('revealed');
+            
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+            
+            // Determine which section this card belongs to
+            let sectionNum = parseInt(element.closest('.page').id.replace('section', ''));
+            gameState.sectionPoints[sectionNum].earned += points;
+            
+            awardPoints(points);
+        }
+
+        // Knowledge Check Handler
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.questionsAnswered.includes(questionId)) {
+                return;
+            }
+
+            gameState.questionsAnswered.push(questionId);
+            gameState.quizTotal++;
+            
+            const options = element.parentElement.querySelectorAll('.kc-option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                opt.onclick = null;
+            });
+
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.classList.add('correct', 'show');
+                feedback.textContent = '✓ Correct! Well done!';
+                gameState.quizCorrect++;
+                
+                // Determine section
+                let sectionNum = parseInt(element.closest('.page').id.replace('section', ''));
+                gameState.sectionPoints[sectionNum].earned += points;
+                
+                awardPoints(points);
+            } else {
+                element.classList.add('incorrect');
+                feedback.classList.add('incorrect', 'show');
+                feedback.textContent = '✗ Not quite. The correct answer has been highlighted.';
+                
+                // Highlight correct answer
+                options.forEach(opt => {
+                    if (opt.onclick && opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        // Points System
+        function awardPoints(points) {
+            gameState.totalPoints += points;
+            updateScore();
+            showPointsPopup(points);
+            updateLevel();
+        }
+
+        function showPointsPopup(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateScore() {
+            document.getElementById('totalPoints').textContent = gameState.totalPoints;
+        }
+
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (let threshold in levels) {
+                if (gameState.totalPoints >= threshold) {
+                    newLevel = levels[threshold];
+                }
+            }
+            gameState.currentLevel = newLevel;
+            document.getElementById('currentLevel').textContent = newLevel;
+        }
+
+        // Section Completion
+        function completeSection(sectionNum) {
+            if (!gameState.sectionsCompleted.includes(sectionNum)) {
+                gameState.sectionsCompleted.push(sectionNum);
+                
+                // Award completion bonus
+                awardPoints(50);
+                
+                // Update home page
+                const cards = document.querySelectorAll('.section-card');
+                cards[sectionNum - 1].classList.add('completed');
+                
+                alert(`🎉 Section ${sectionNum} completed! +50 bonus points!`);
+                navigateToHome();
+            }
+        }
+
+        // Progress Tracking
+        function updateProgress() {
+            const totalSections = 6;
+            const completedCount = gameState.sectionsCompleted.length;
+            const percentage = Math.round((completedCount / totalSections) * 100);
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Report Generation
+        function generateReport() {
+            // Update report data
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Not Entered';
+            document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            // Calculate percentage
+            const maxPoints = 1465; // Updated total with all content
+            const percentage = Math.round((gameState.totalPoints / maxPoints) * 100);
+            
+            // Update scores in header
+            document.getElementById('reportTotalPoints').textContent = gameState.totalPoints;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.sectionsCompleted.length / 6) * 100);
+            
+            // Calculate letter grade
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) {
+                letterGrade = 'A';
+                gradeColor = '#1B5E20';
+            } else if (percentage >= 80) {
+                letterGrade = 'B';
+                gradeColor = '#00695C';
+            } else if (percentage >= 70) {
+                letterGrade = 'C';
+                gradeColor = '#F57C00';
+            } else if (percentage >= 60) {
+                letterGrade = 'D';
+                gradeColor = '#E65100';
+            }
+            
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = gradeColor;
+            
+            // Update section statuses
+            for (let i = 1; i <= 6; i++) {
+                const statusCell = document.getElementById(`status${i}`);
+                const pointsCell = document.getElementById(`points${i}`);
+                
+                if (gameState.sectionsCompleted.includes(i)) {
+                    statusCell.textContent = '✅';
+                    statusCell.style.color = '#1B5E20';
+                } else {
+                    statusCell.textContent = '❌';
+                    statusCell.style.color = '#B71C1C';
+                }
+                
+                pointsCell.textContent = `${gameState.sectionPoints[i].earned}/${gameState.sectionPoints[i].max}`;
+            }
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.totalPoints;
+            document.getElementById('metricSections').textContent = `${gameState.sectionsCompleted.length}/6`;
+            
+            const quizPercentage = gameState.quizTotal > 0 
+                ? Math.round((gameState.quizCorrect / gameState.quizTotal) * 100)
+                : 0;
+            document.getElementById('metricQuiz').textContent = quizPercentage + '%';
+            
+            const engagementPercentage = Math.round((gameState.cardsRevealed.length / 20) * 100); // Updated for more cards
+            document.getElementById('metricEngagement').textContent = engagementPercentage + '%';
+            
+            // Navigate to report
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('reportPage').classList.add('active');
+        }
+
+        // Initialize
+        updateScore();
+        updateLevel();
+        updateProgress();
+    </script>
+</body>
+</html>

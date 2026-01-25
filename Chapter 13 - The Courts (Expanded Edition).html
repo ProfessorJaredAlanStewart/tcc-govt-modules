@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 13: The Courts - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .section-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            opacity: 0.9;
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-block h4 {
+            color: var(--primary-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box {
+            background: var(--highlight-yellow);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box h4 {
+            color: #5D4037;
+            margin-top: 0;
+        }
+
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--secondary-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .interactive-card.revealed {
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        .kc-option.correct {
+            background: #C8E6C9;
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFCDD2;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #C8E6C9;
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFCDD2;
+            color: var(--error);
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-green);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .performance-table {
+            width: 100%;
+        }
+
+        .performance-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .report-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: static;
+            }
+            .container {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .hero-icons {
+                gap: 2rem;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-header-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <h1>⚖️ TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            <span>⭐ <span id="score">0</span> pts</span>
+            <span>🏆 <span id="level">Explorer</span></span>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div class="points-popup" id="pointsPopup">
+        <span id="pointsMessage">+25 points!</span>
+    </div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>⚖️ Chapter 13: The Courts 🏛️</h2>
+                <p class="hero-subtitle">Explore the judicial branch of the United States government, from district courts to the Supreme Court, and discover how courts protect individual rights and interpret the Constitution.</p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">🏛️</div>
+                        <div class="label">Federal Courts</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">⚖️</div>
+                        <div class="label">Judicial Review</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">📜</div>
+                        <div class="label">Constitutional Rights</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your name here...">
+                <button onclick="saveName()">Start Learning!</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" id="card1" onclick="navigateTo('section1')">
+                    <div class="badge">1</div>
+                    <h4>⚖️ Guardians of the Constitution</h4>
+                    <p>Explore judicial review, Marbury v. Madison, and how courts protect individual rights and shape public policy.</p>
+                    <div class="points">🌟 Up to 220 points</div>
+                </div>
+
+                <div class="section-card" id="card2" onclick="navigateTo('section2')">
+                    <div class="badge">2</div>
+                    <h4>🏛️ The Dual Court System</h4>
+                    <p>Understand the division between state and federal courts, their jurisdictions, and how cases move through the system.</p>
+                    <div class="points">🌟 Up to 200 points</div>
+                </div>
+
+                <div class="section-card" id="card3" onclick="navigateTo('section3')">
+                    <div class="badge">3</div>
+                    <h4>📋 The Federal Court System</h4>
+                    <p>Learn about district courts, circuit courts, the Supreme Court structure, and how federal judges are selected.</p>
+                    <div class="points">🌟 Up to 220 points</div>
+                </div>
+
+                <div class="section-card" id="card4" onclick="navigateTo('section4')">
+                    <div class="badge">4</div>
+                    <h4>🔨 The Supreme Court</h4>
+                    <p>Discover how the Supreme Court selects cases, the role of law clerks, and the procedures for oral arguments.</p>
+                    <div class="points">🌟 Up to 200 points</div>
+                </div>
+
+                <div class="section-card" id="card5" onclick="navigateTo('section5')">
+                    <div class="badge">5</div>
+                    <h4>📝 Judicial Decision-Making</h4>
+                    <p>Explore how justices make decisions, the role of opinions, and how courts interact with other branches of government.</p>
+                    <div class="points">🌟 Up to 210 points</div>
+                </div>
+
+                <div class="section-card" id="card6" onclick="navigateTo('reportPage')">
+                    <div class="badge">📊</div>
+                    <h4>📋 Completion Report</h4>
+                    <p>View your final score, completed sections, and print your completion certificate.</p>
+                    <div class="points">🎯 View Your Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Guardians of the Constitution and Individual Rights -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>⚖️ Section 1: Guardians of the Constitution and Individual Rights</h2>
+                <p class="subtitle">Understanding the evolving role of the courts in protecting rights and shaping policy</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Introduction to the Judiciary</h3>
+                <p>If democratic institutions struggle to balance individual freedoms and collective well-being, the judiciary is arguably the branch where the individual has the best chance to be heard. For those seeking protection on the basis of sexual orientation, for example, in recent years, the courts have expanded rights, such as the 2015 decision in which the Supreme Court ruled that same-sex couples have the right to marry in all fifty states.</p>
+                
+                <p>The U.S. courts pride themselves on two achievements: (1) as part of the system of checks and balances, they protect the sanctity of the U.S. Constitution from breaches by the other branches of government, and (2) they protect individual rights against societal and governmental oppression. At the federal level, nine Supreme Court judges are nominated by the president and confirmed by the Senate for lifetime appointments. This provides them the independence they need to carry out their duties. However, court power is confined to rulings on those cases the courts decide to hear.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Jurisdiction</div>
+                    <div>The authority of a court to hear cases and make decisions about them. Article III of the Constitution distinguishes between original jurisdiction (cases heard for the first time) and appellate jurisdiction (cases on appeal from lower courts).</div>
+                </div>
+
+                <p>Under the Articles of Confederation, there was no national judiciary. The U.S. Constitution changed that, but its Article III, which addresses "the judicial power of the United States," is the shortest and least detailed of the three articles that created the branches of government. It calls for the creation of "one supreme Court" and establishes the Court's jurisdiction, or its authority to hear cases and make decisions about them, and the types of cases the Court may hear.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: Hamilton's Vision of the Judiciary</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> In Federalist No. 78, Alexander Hamilton explained the importance of an independent judiciary separated from the other branches of government. He said "interpretation" was a key role of the courts as they seek to protect people from unjust laws. But he also believed "the Judiciary Department" would "always be the least dangerous" because "with no influence over either the sword or the purse," it had "neither force nor will, but merely judgment."</p>
+                    <p>The courts would only make decisions, not take action. With no control over how those decisions would be implemented and no power to enforce their choices, they could exercise only judgment, and their power would begin and end there. Hamilton would no doubt be surprised by what the judiciary has become: a key component of the nation's constitutional democracy, finding its place as the chief interpreter of the Constitution and the equal of the other two branches.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 The Judiciary Act of 1789</h3>
+                <p>The first session of the first U.S. Congress laid the framework for today's federal judicial system, established in the Judiciary Act of 1789. Although legislative changes over the years have altered it, the basic structure of the judicial branch remains as it was set early on: At the lowest level are the district courts, where federal cases are tried, witnesses testify, and evidence and arguments are presented. A losing party who is unhappy with a district court decision may appeal to the circuit courts, or U.S. courts of appeals, where the decision of the lower court is reviewed. Still further, appeal to the U.S. Supreme Court is possible, but of the thousands of petitions for appeal, the Supreme Court will typically hear fewer than one hundred a year.</p>
+
+                <h4>The Court's Humble Beginnings</h4>
+                <p>Starting in New York in 1790, the early Supreme Court focused on establishing its rules and procedures and perhaps trying to carve its place as the new government's third branch. However, given the difficulty of getting all the justices even to show up, and with no permanent home or building of its own for decades, finding its footing in the early days proved to be a monumental task. Even when the federal government moved to the nation's capital in 1800, the Court had to share space with Congress in the Capitol building. This ultimately meant that "the high bench crept into an undignified committee room in the Capitol beneath the House Chamber."</p>
+                
+                <p>It was not until the Court's 146th year of operation that Congress, at the urging of Chief Justice—and former president—William Howard Taft, provided the designation and funding for the Supreme Court's own building, "on a scale in keeping with the importance and dignity of the Court and the Judiciary as a coequal, independent branch of the federal government."</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-2', 25)">
+                <div class="card-prompt">🔍 Click to explore: The Eleventh Amendment and Early Setbacks</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> In their first case of significance, Chisholm v. Georgia (1793), the justices ruled that the federal courts could hear cases brought by a citizen of one state against a citizen of another state, and that Article III, Section 2, of the Constitution did not protect the states from facing such an interstate lawsuit.</p>
+                    <p>However, their decision was almost immediately overturned by the Eleventh Amendment, passed by Congress in 1794 and ratified by the states in 1795. The Eleventh Amendment stated: "The Judicial power of the United States shall not be construed to extend to any suit in law or equity, commenced or prosecuted against one of the United States by Citizens of another State, or by Citizens or Subjects of any Foreign State." It was an early hint that Congress had the power to change the jurisdiction of the courts as it saw fit and stood ready to use it.</p>
+                </div>
+            </div>
+
+            <div class="milestone-box">
+                <h4>📌 Milestone: Marbury v. Madison (1803)</h4>
+                <p>The Supreme Court found itself in the middle of a dispute between the outgoing presidential administration of John Adams and that of incoming president (and opposition party member) Thomas Jefferson. President Adams had appointed William Marbury to a position in Washington, DC, but his commission was not delivered before Adams left office.</p>
+                <p>Marbury petitioned the Supreme Court to use its power under the Judiciary Act of 1789 and issue a writ of mandamus to force the new president's secretary of state, James Madison, to deliver the commission documents. A unanimous Court under the leadership of Chief Justice John Marshall ruled that although Marbury was entitled to the job, the Court did not have the power to issue the writ and order Madison to deliver the documents, because the provision in the Judiciary Act that had given the Court that power was unconstitutional.</p>
+                <p>This ruling established the power of <strong>judicial review</strong>—the courts' power to look at actions taken by the other branches of government and the states and determine whether they are constitutional. If the courts find an action to be unconstitutional, it becomes null and void.</p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">⚖️ Judicial Review</div>
+                <div>The power of the courts, as part of the system of checks and balances, to look at actions taken by the other branches of government and the states and determine whether they are constitutional. If unconstitutional, the action becomes null and void. This power was established in Marbury v. Madison (1803).</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: The Courts and Public Policy</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The United States has a <strong>common law system</strong> in which law is largely developed through binding judicial decisions. With roots in medieval England, the system was inherited by the American colonies along with many other British traditions. It stands in contrast to code law systems, which provide very detailed and comprehensive laws that do not leave room for much interpretation and judicial decision-making.</p>
+                    <p>Under common law, as in the United States, judges interpret the law. Often referred to as a system of judge-made law, common law provides the opportunity for the judicial branch to have stronger involvement in the process of law-making itself, largely through its ruling and interpretation on a case-by-case basis.</p>
+                    <p>In their role as policymakers, Congress and the president tend to consider broad questions of public policy and their costs and benefits. But the courts consider specific cases with narrower questions, thus enabling them to focus more closely than other government institutions on the exact context of the individuals, groups, or issues affected by the decision.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏥 Courts Shaping Policy: The Affordable Care Act Example</h3>
+                <p>Consider health care, for example. In 2010, President Barack Obama signed into law the Patient Protection and Affordable Care Act (ACA), a statute that brought significant changes to the nation's healthcare system. People who opposed the law and understood that a congressional repeal would not happen any time soon looked to the courts for help. They challenged the constitutionality of the law in National Federation of Independent Business v. Sebelius, hoping the Supreme Court would overturn it. The practice of judicial review enabled the law's critics to exercise this opportunity, even though their hopes were ultimately dashed when, by a narrow 5–4 margin, the Supreme Court upheld the health care law as a constitutional extension of Congress's power to tax.</p>
+                
+                <p>Since this 2012 decision, the ACA has continued to face challenges, the most notable of which have also been decided by court rulings. It faced a setback in 2014, for instance, when the Supreme Court ruled in Burwell v. Hobby Lobby that, for religious reasons, some for-profit corporations could be exempt from the requirement that employers provide insurance coverage of contraceptives for their female employees. But the ACA also attained a victory in King v. Burwell, when the Court upheld the ability of the federal government to provide tax credits for people who bought their health insurance through an exchange created by the law.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-4', 25)">
+                <div class="card-prompt">🔍 Click to explore: The Reversal of Roe v. Wade</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> Another recent massive impact in public policy was brought when the Supreme Court reversed the famous 1973 Roe v. Wade decision, which had clarified a woman's right to reproductive freedom, including abortion. On June 24, 2022, the court voted 5-4 that the Constitution provided no protection for abortion in Dobbs v. Jackson Women's Health Organization.</p>
+                    <p>This decision pushed decisions about abortion rights to the states, which has resulted in a fragmentation of rights for women across the states. This demonstrates how courts continuously interpret and apply the Constitution to modern times and circumstances, sometimes expanding and sometimes contracting individual rights.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🛡️ Courts as a Last Resort</h3>
+                <p>While the U.S. Supreme Court and state supreme courts exert power over many when reviewing laws or declaring acts of other branches unconstitutional, they become particularly important when an individual or group comes before them believing there has been a wrong. A citizen or group that feels mistreated can approach a variety of institutional venues in the U.S. system for assistance in changing policy or seeking support. Organizing protests, garnering special interest group support, and changing laws through the legislative and executive branches are all possible, but an individual is most likely to find the courts especially well-suited to analyzing the particulars of a case.</p>
+                
+                <p>The adversarial judicial system comes from the common law tradition: In a court case, it is one party versus the other, and it is up to an impartial person or group, such as the judge or jury, to determine which party prevails. The federal court system is most often called upon when a case touches on constitutional rights.</p>
+
+                <h4>Example: EEOC v. Abercrombie & Fitch</h4>
+                <p>When Samantha Elauf, a Muslim woman, was denied a job working for the clothing retailer Abercrombie & Fitch because a headscarf she wears as religious practice violated the company's dress code, the Supreme Court ruled that her First Amendment rights had been violated, making it possible for her to sue the store for monetary damages. In so doing, the Court ruled Abercrombie violated Title VII of the Civil Rights Act of 1964, which prohibits employers from discriminating on the basis of race, color, religion, sex, or national origin, and requires them to accommodate religious practices.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What landmark case established the power of judicial review?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 30)">Marbury v. Madison (1803)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 30)">Chisholm v. Georgia (1793)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 30)">Brown v. Board of Education (1954)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 30)">Dred Scott v. Sandford (1857)</div>
+                <div class="feedback-box" id="feedback-q1-1"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Landmark Court Decisions Protecting Rights</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Case Name</th>
+                        <th>Year</th>
+                        <th>Court's Decision</th>
+                    </tr>
+                    <tr>
+                        <td>Brown v. Board of Education</td>
+                        <td>1954</td>
+                        <td>Public schools must be desegregated.</td>
+                    </tr>
+                    <tr>
+                        <td>Gideon v. Wainwright</td>
+                        <td>1963</td>
+                        <td>Poor criminal defendants must be provided an attorney.</td>
+                    </tr>
+                    <tr>
+                        <td>Miranda v. Arizona</td>
+                        <td>1966</td>
+                        <td>Criminal suspects must be read their rights.</td>
+                    </tr>
+                    <tr>
+                        <td>Roe v. Wade (reversed 2022)</td>
+                        <td>1973</td>
+                        <td>Women have a constitutional right to abortion. (Right removed in 2022 by Dobbs)</td>
+                    </tr>
+                    <tr>
+                        <td>McDonald v. Chicago</td>
+                        <td>2010</td>
+                        <td>An individual has the right to a handgun in his or her home.</td>
+                    </tr>
+                    <tr>
+                        <td>Riley v. California</td>
+                        <td>2014</td>
+                        <td>Police may not search a cell phone without a warrant.</td>
+                    </tr>
+                    <tr>
+                        <td>Obergefell v. Hodges</td>
+                        <td>2015</td>
+                        <td>Same-sex couples have the right to marry in all states.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-5', 25)">
+                <div class="card-prompt">🔍 Click to explore: The Death Penalty and Court Limits</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> The courts seldom if ever grant rights to a person instantly and upon request. They have expressed reluctance to expand rights without limit, and they still balance that expansion with the government's need to govern, provide for the common good, and serve a broader societal purpose.</p>
+                    <p>For example, the Supreme Court has upheld the constitutionality of the death penalty, ruling that the Eighth Amendment does not prevent a person from being put to death for committing a capital crime and that the government may consider "retribution and the possibility of deterrence" when it seeks capital punishment.</p>
+                    <p>Yet the Court has also put limits on the ability to impose the death penalty, ruling that the government may not execute a person with cognitive disabilities, a person who was under eighteen at the time of the crime, or a child rapist who did not kill the victim. The job of the courts on any given issue is never quite done, as justices continuously keep their eye on government laws, actions, and policy changes.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ In Federalist No. 78, Alexander Hamilton described the judiciary as:</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">The most powerful branch</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">The most political branch</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">The least dangerous branch</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">The most necessary branch</div>
+                <div class="feedback-box" id="feedback-q1-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(1); navigateTo('homePage')">
+                ✓ Complete Section 1 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 2: The Dual Court System -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🏛️ Section 2: The Dual Court System</h2>
+                <p class="subtitle">Understanding federal and state court jurisdiction and their relationship</p>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ Origins of the Dual Court System</h3>
+                <p>Before the writing of the U.S. Constitution and the establishment of the permanent national judiciary under Article III, the states had courts. Each of the thirteen colonies had also had its own courts, based on the British common law model. The judiciary today continues as a <strong>dual court system</strong>, with courts at both the national and state levels. Both levels have three basic tiers consisting of trial courts, appellate courts, and finally courts of last resort, typically called supreme courts, at the top.</p>
+                
+                <p>To add to the complexity, the state and federal court systems sometimes intersect and overlap each other, and no two states are exactly alike when it comes to the organization of their courts. Since a state's court system is created by the state itself, each one differs in structure, the number of courts, and even name and jurisdiction.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Dual Court System</div>
+                    <div>The division of the courts into two separate systems, one federal and one state, with each of the fifty states having its own courts. This is a defining feature of American federalism.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-1', 25)">
+                <div class="card-prompt">🔍 Click to explore: Two Pathways to the Supreme Court</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> Cases heard by the U.S. Supreme Court come from two primary pathways:</p>
+                    <ol>
+                        <li><strong>The circuit courts, or U.S. courts of appeals</strong> (after the cases have originated in the federal district courts)</li>
+                        <li><strong>State supreme courts</strong> (when there is a substantive federal question in the case)</li>
+                    </ol>
+                    <p>This dual pathway reflects the federal nature of the American system, where both state and federal courts can ultimately have their decisions reviewed by the nation's highest court.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Criminal Law vs. Civil Law</h3>
+                <p>Courts hear two different types of disputes: criminal and civil.</p>
+                
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Criminal Law</div>
+                    <div>Governments establish rules and punishments; laws define conduct that is prohibited because it can harm others and impose punishment for committing such an act. Crimes are usually labeled felonies or misdemeanors based on their nature and seriousness; felonies are the more serious crimes. When someone commits a criminal act, the government charges that person with a crime.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Civil Law</div>
+                    <div>A non-criminal law defining private rights and remedies. Civil law cases involve two or more private (non-government) parties, at least one of whom alleges harm or injury committed by the other. In both criminal and civil matters, the courts decide the remedy and resolution of the case.</div>
+                </div>
+
+                <p>Although the Supreme Court tends to draw the most public attention, it typically hears fewer than one hundred cases every year. In fact, the entire federal side—both trial and appellate—handles proportionately very few cases, with about <strong>90 percent of all cases</strong> in the U.S. court system being heard at the state level. The several hundred thousand cases handled every year on the federal side pale in comparison to the several million handled by the states.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-2', 30)">
+                <div class="card-prompt">🔍 Click to explore: What State Courts Handle</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> State courts really are the core of the U.S. judicial system, and they are responsible for a huge area of law. Most crimes and criminal activity, such as robbery, rape, and murder, are violations of state laws, and cases are thus heard by state courts.</p>
+                    <p>State courts also handle civil matters including:</p>
+                    <ul>
+                        <li>Personal injury lawsuits</li>
+                        <li>Medical malpractice</li>
+                        <li>Divorce and family law</li>
+                        <li>Juvenile cases</li>
+                        <li>Probate and estates</li>
+                        <li>Contract disputes</li>
+                        <li>Real estate cases</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Federal Court Jurisdiction</h3>
+                <p>The federal courts, on the other hand, will hear any case that involves:</p>
+                <ul>
+                    <li>A foreign government</li>
+                    <li>Patent or copyright infringement</li>
+                    <li>Native American rights</li>
+                    <li>Maritime law</li>
+                    <li>Bankruptcy</li>
+                    <li>A controversy between two or more states</li>
+                    <li>Activities across state lines (interstate commerce)</li>
+                    <li>Cases in which the United States is a party</li>
+                </ul>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Diversity of Citizenship</div>
+                    <div>A dispute between two parties not from the same state or nation and in which damages of at least $75,000 are claimed is handled at the federal level. Such a case is known as a diversity of citizenship case.</div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Comparing State and Federal Courts</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>State Courts</th>
+                        <th>Federal Courts</th>
+                    </tr>
+                    <tr>
+                        <td>Hear most day-to-day cases, covering 90% of all cases</td>
+                        <td>Hear cases that involve a "federal question," involving the Constitution, federal laws or treaties</td>
+                    </tr>
+                    <tr>
+                        <td>Hear both civil and criminal matters</td>
+                        <td>Hear both civil and criminal matters, although many criminal cases involving federal law are tried in state courts</td>
+                    </tr>
+                    <tr>
+                        <td>Help the states retain sovereignty in judicial matters over their state laws</td>
+                        <td>Hear cases that involve "interstate" matters or "diversity of citizenship" with damages of at least $75,000</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="milestone-box">
+                <h4>📌 Case Study: Miranda v. Arizona</h4>
+                <p>Consider the case of Miranda v. Arizona. Ernesto Miranda, arrested for kidnapping and rape, which are violations of state law, was easily convicted and sentenced to prison after a key piece of evidence—his own signed confession—was presented at trial in the Arizona court.</p>
+                <p>On appeal first to the Arizona Supreme Court and then to the U.S. Supreme Court to exclude the confession on the grounds that its admission was a violation of his constitutional rights, Miranda won the case. By a slim 5–4 margin, the justices ruled that the confession had to be excluded from evidence because in obtaining it, the police had violated Miranda's Fifth Amendment right against self-incrimination and his Sixth Amendment right to an attorney.</p>
+                <p>Yet the Supreme Court considered only the violation of Miranda's constitutional rights, but not whether he was guilty of the crimes. He was therefore retried in state court in 1967, the second time without the confession as evidence, found guilty again based on witness testimony and other evidence, and sent to prison.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-3', 25)">
+                <div class="card-prompt">🔍 Click to explore: Benefits of the Dual Court System</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> From an individual's perspective, the dual court system has both benefits and drawbacks.</p>
+                    <p><strong>Benefits:</strong></p>
+                    <ul>
+                        <li>Each person has more than just one court system ready to protect their rights</li>
+                        <li>Provides alternate venues in which to appeal for assistance</li>
+                        <li>A minority voice can be heard in court, and grievances can be resolved in their favor if warranted</li>
+                        <li>State courts vary in the degree to which they take on certain types of cases or issues, giving rise to many different opportunities for an interest to be heard</li>
+                    </ul>
+                    <p>As researchers Brace and Hall found: "Regarding courts, one size does not fit all, and the republic has survived in part because federalism allows these critical variations."</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What percentage of all U.S. court cases are heard at the state level?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 30)">About 50 percent</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 30)">About 70 percent</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 30)">About 90 percent</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 30)">About 99 percent</div>
+                <div class="feedback-box" id="feedback-q2-1"></div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-4', 30)">
+                <div class="card-prompt">🔍 Click to explore: Marijuana Laws and Court Complexity</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The complexities of the dual court system are well illustrated by marijuana laws. There are so many differences in marijuana laws between states, and between the states and the national government, that uniform application of treatment in courts across the nation is nearly impossible.</p>
+                    <p>For example, a person over the age of twenty-one may legally buy marijuana for recreational use in twenty-four states and for medicinal purpose in more than 80 percent of the country, but could face charges—and time in court—for possession in a neighboring state where marijuana use is not legal.</p>
+                    <p>Under federal law, marijuana is still regulated as a Schedule 1 (most dangerous) drug, and federal authorities often find themselves pitted against states that have legalized it. This can lead to arrests and federal criminal charges for people who have marijuana in states where it is legal, or to federal raids on growers and dispensaries that would otherwise be operating legally under their state's law.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚠️ Drawbacks of the Dual System</h3>
+                <p>The existence of the dual court system and variations across the states and nation also mean that there are different courts in which a person could face charges for a crime or for a violation of another person's rights. Except for the fact that the U.S. Constitution binds judges and justices in all the courts, it is state law that governs the authority of state courts, so judicial rulings about what is legal or illegal may differ from state to state.</p>
+                
+                <p>Where you are physically located can affect not only what is allowable and what is not, but also how cases are judged. Political scientists have confirmed that political culture affects the operation of government institutions, and when we add to that the differing political interests and cultures at work within each state, we end up with court systems that vary greatly in their judicial and decision-making processes.</p>
+                
+                <p>Each state court system operates with its own individual set of biases. People with varying interests, ideologies, behaviors, and attitudes run the disparate legal systems, so the results they produce are not always the same. Moreover, the selection method for judges at the state and local level varies. In some states, judges are elected rather than appointed, which can affect their rulings.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which type of case involves a dispute between parties from different states with damages of at least $75,000?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Federal question case</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">Diversity of citizenship case</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Interstate commerce case</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Constitutional case</div>
+                <div class="feedback-box" id="feedback-q2-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(2); navigateTo('homePage')">
+                ✓ Complete Section 2 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 3: The Federal Court System -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📋 Section 3: The Federal Court System</h2>
+                <p class="subtitle">Understanding the three-tiered structure and the selection of federal judges</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ The Three Tiers of Federal Courts</h3>
+                <p>Congress has made numerous changes to the federal judicial system throughout the years, but the three-tiered structure of the system is quite clear-cut today. Federal cases typically begin at the lowest federal level, the district (or trial) court. Losing parties may appeal their case to the higher courts—first to the circuit courts, or U.S. courts of appeals, and then, if chosen by the justices, to the U.S. Supreme Court.</p>
+                
+                <p>Decisions of the higher courts are binding on the lower courts. The precedent set by each ruling, particularly by the Supreme Court's decisions, both builds on principles and guidelines set by earlier cases and frames the ongoing operation of the courts, steering the direction of the entire system.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ District Courts</div>
+                    <div>The trial courts of the federal court system where cases are tried, evidence is presented, and witness testimony is heard. There are ninety-four U.S. district courts in the fifty states and U.S. territories, of which eighty-nine are in the states (at least one in each state). No district court crosses state lines, and a single judge oversees each case.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Circuit Courts (Courts of Appeals)</div>
+                    <div>The appellate courts of the federal court system that review decisions of the lower (district) courts. There are thirteen U.S. courts of appeals—eleven across the nation and two in Washington, DC. Each court is overseen by a rotating panel of three judges who review rulings of the trial courts within their geographic circuit.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: The History of Circuit Courts</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The circuit courts started out as the trial courts for most federal criminal cases and for some civil suits, including those initiated by the United States and those involving citizens of different states.</p>
+                    <p>But early on, they did not have their own judges; the local district judge and two Supreme Court justices formed each circuit court panel. That is how the name "circuit" arose—judges in the early circuit courts traveled from town to town to hear cases, following prescribed paths or circuits to arrive at destinations where they were needed.</p>
+                    <p>Circuit courts also exercised appellate jurisdiction over most civil suits that originated in the district courts; however, that role ended in 1891, and their appellate jurisdiction was turned over to the newly created circuit courts, or U.S. courts of appeals. The original circuit courts—the ones that did not have "of appeals" added to their name—were abolished in 1911.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ Specialized Federal Courts</h3>
+                <p>While we often focus primarily on the district and circuit courts of the federal system, other federal trial courts exist that have more specialized jurisdictions:</p>
+                <ul>
+                    <li><strong>Court of International Trade</strong> - Handles cases involving international trade and customs issues</li>
+                    <li><strong>Court of Federal Claims</strong> - Hears monetary claims against the United States</li>
+                    <li><strong>U.S. Tax Court</strong> - Handles disputes between taxpayers and the IRS</li>
+                    <li><strong>Court of Appeals for the Armed Forces</strong> - Reviews military court decisions</li>
+                    <li><strong>Court of Appeals for Veterans Claims</strong> - Handles appeals from veterans</li>
+                </ul>
+                <p>Cases from any of these courts may also be appealed to the Supreme Court, although that result is very rare.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-2', 25)">
+                <div class="card-prompt">🔍 Click to explore: The Principle of Stare Decisis</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> The U.S. court system operates on the principle of <strong>stare decisis</strong> (Latin for "stand by things decided"), which means that today's decisions are based largely on rulings from the past, and tomorrow's rulings rely on what is decided today.</p>
+                    <p>Stare decisis is especially important in the U.S. common law system, in which the consistency of precedent ensures greater certainty and stability in law and constitutional interpretation, and it also contributes to the solidity and legitimacy of the court system itself.</p>
+                    <p>As former Supreme Court justice Benjamin Cardozo summarized it: "Adherence to precedent must then be the rule rather than the exception if litigants are to have faith in the even-handed administration of justice in the courts."</p>
+                </div>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">⚖️ Stare Decisis</div>
+                <div>Latin for "stand by things decided." The principle by which courts rely on past decisions and their precedents when making decisions in new cases. This ensures consistency and stability in the law.</div>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">⚖️ Precedent</div>
+                <div>The principles or guidelines established by courts in earlier cases that frame the ongoing operation of the courts, steering the direction of the entire system.</div>
+            </div>
+
+            <div class="content-block">
+                <h3>👨‍⚖️ The Selection of Judges</h3>
+                <p>Judges fulfill a vital role in the U.S. judicial system and are carefully selected. At the federal level, the president nominates a candidate to a judgeship or justice position, and the nominee must be confirmed by a majority vote in the U.S. Senate, a function of the Senate's "advice and consent" role. <strong>All judges and justices in the national courts serve lifetime terms of office.</strong></p>
+                
+                <p>The president sometimes chooses nominees from a list of candidates maintained by the American Bar Association, a national professional organization of lawyers. The president's nominee is then discussed (and sometimes hotly debated) in the Senate Judiciary Committee. After a committee vote, the candidate must be confirmed by a majority vote of the full Senate. He or she is then sworn in, taking an oath of office to uphold the Constitution and the laws of the United States.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">👨‍⚖️ Senatorial Courtesy</div>
+                    <div>An unwritten custom by which the president consults the senators in the state before nominating a candidate for a federal vacancy there, particularly for court positions. When a vacancy occurs in a lower federal court, senators exert considerable influence on the selection of judges in their state, especially those senators who share a party affiliation with the president.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: Presidential Legacies Through Judicial Appointments</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Presidential nominees for the courts typically reflect the chief executive's own ideological position. With a confirmed nominee serving a lifetime appointment, a president's ideological legacy has the potential to live on long after the end of the term.</p>
+                    <p>But some nominees turn out to be surprises or end up ruling in ways that the president who nominated them did not anticipate:</p>
+                    <ul>
+                        <li>Republican Dwight D. Eisenhower reportedly called his nomination of Earl Warren as chief justice—in an era that saw substantial broadening of civil and criminal rights—"the biggest damn fool mistake" he had ever made.</li>
+                        <li>Sandra Day O'Connor, nominated by Republican president Ronald Reagan, often became a champion for women's rights.</li>
+                        <li>David Souter, nominated by Republican George H. W. Bush, more often than not sided with the Court's liberal wing.</li>
+                        <li>Anthony Kennedy, a Reagan appointee, was notorious as the Court's swing vote.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ How many U.S. district courts exist in the fifty states and U.S. territories?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 30)">Fifty (one per state)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 30)">Thirteen</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 30)">Ninety-four</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 30)">One hundred seventy-nine</div>
+                <div class="feedback-box" id="feedback-q3-1"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Supreme Court "Firsts"</h3>
+                <p>What was once a predominantly White, male, Protestant institution is today much more diverse:</p>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Milestone</th>
+                        <th>Justice</th>
+                        <th>Year Nominated</th>
+                    </tr>
+                    <tr>
+                        <td>First Catholic</td>
+                        <td>Roger B. Taney</td>
+                        <td>1836</td>
+                    </tr>
+                    <tr>
+                        <td>First Jew</td>
+                        <td>Louis J. Brandeis</td>
+                        <td>1916</td>
+                    </tr>
+                    <tr>
+                        <td>First (and only) former U.S. President</td>
+                        <td>William Howard Taft</td>
+                        <td>1921</td>
+                    </tr>
+                    <tr>
+                        <td>First African American</td>
+                        <td>Thurgood Marshall</td>
+                        <td>1967</td>
+                    </tr>
+                    <tr>
+                        <td>First Woman</td>
+                        <td>Sandra Day O'Connor</td>
+                        <td>1981</td>
+                    </tr>
+                    <tr>
+                        <td>First Hispanic American</td>
+                        <td>Sonia Sotomayor</td>
+                        <td>2009</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-4', 25)">
+                <div class="card-prompt">🔍 Click to explore: Diversity in the Federal Judiciary</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> The lower courts are also more diverse today. In the past few decades, the U.S. judiciary has expanded to include more women and minorities at both the federal and state levels.</p>
+                    <p>However, the number of women and people of color on the courts still lags behind the overall number of White men. As of 2021, the federal judiciary consists of:</p>
+                    <ul>
+                        <li><strong>Gender:</strong> 67% men, 33% women</li>
+                        <li><strong>Race/Ethnicity:</strong> 74% White, 12% African American, 8% Latinx, 4% Asian American</li>
+                    </ul>
+                    <p>This diversity continues to evolve as new judicial appointments are made.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚠️ Controversial Nominations</h3>
+                <p>Not all presidential nominations go smoothly. Some notable examples include:</p>
+                <ul>
+                    <li><strong>Robert Bork (Reagan)</strong> - Accused of taking an overly conservative and "extremist view of the Constitution"</li>
+                    <li><strong>Douglas Ginsburg (Reagan)</strong> - Withdrew after reports of marijuana use while a student and professor at Harvard</li>
+                    <li><strong>Harriet Miers (George W. Bush)</strong> - Nomination withdrawn amid criticism from both political sides questioning her qualifications</li>
+                    <li><strong>Brett Kavanaugh (Trump)</strong> - Faced an intensely partisan confirmation process with sharp divisions in the Senate</li>
+                </ul>
+                <p>One of the reasons the framers included lifetime terms for federal judges was to provide the judicial branch with enough independence such that it could not easily be influenced by the political winds of the time.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What is the principle called by which courts rely on past decisions when making current rulings?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">Amicus curiae</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">Stare decisis</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">Judicial review</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">Writ of certiorari</div>
+                <div class="feedback-box" id="feedback-q3-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(3); navigateTo('homePage')">
+                ✓ Complete Section 3 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 4: The Supreme Court -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🔨 Section 4: The Supreme Court</h2>
+                <p class="subtitle">Structure, case selection, and procedures of the nation's highest court</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ The Structure of the Supreme Court</h3>
+                <p>The Supreme Court of the United States, sometimes abbreviated SCOTUS, is a one-of-a-kind institution. While a look at the Supreme Court typically focuses on the nine justices themselves, they represent only the top layer of an entire branch of government that includes many administrators, lawyers, and assistants who contribute to and help run the overall judicial system.</p>
+                
+                <p>The original court in 1789 had six justices, but Congress set the number at nine in 1869, and it has remained there ever since. There is <strong>one chief justice</strong>, who is the lead or highest-ranking judge on the Court, and <strong>eight associate justices</strong>. All nine serve lifetime terms, after successful nomination by the president and confirmation by the Senate.</p>
+
+                <div class="key-concept-box">
+                    <h4>🔑 Key Point: Court Composition</h4>
+                    <p>Currently, there are six justices who are considered part of the Court's more conservative wing—Chief Justice Roberts and Associate Justices Thomas, Alito, Gorsuch, Kavanaugh, and Barrett—while three are considered more liberal-leaning—Justices Breyer (later replaced), Sotomayor, and Kagan.</p>
+                    <p>However, none of the justices works completely in an ideological bubble. While their numerous opinions have revealed certain ideological tendencies, they still consider each case as it comes to them, and they don't always rule in a consistently predictable or expected way.</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: The Role of Law Clerks</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Each justice has three or four <strong>law clerks</strong>, recent law school graduates who temporarily work for the justice. A Supreme Court clerkship is one of the most sought-after legal positions, giving "thirty-six young lawyers each year a chance to leave their fingerprints all over constitutional law."</p>
+                    <p>Law clerks have four main responsibilities:</p>
+                    <ol>
+                        <li><strong>Review the cases:</strong> Clerks participate in a "cert. pool" and make recommendations about which cases the Court should choose to hear.</li>
+                        <li><strong>Prepare the justices for oral argument:</strong> Clerks analyze the filed briefs and the law at issue in each case waiting to be heard.</li>
+                        <li><strong>Research and draft judicial opinions:</strong> Clerks do detailed research to assist justices in writing opinions.</li>
+                        <li><strong>Help with emergencies:</strong> Clerks also assist with emergency applications to the Court, including death penalty stays.</li>
+                    </ol>
+                    <p>A number of current and former justices were themselves clerks, including Chief Justice John Roberts and Justices Stephen Breyer and Elena Kagan.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 How the Supreme Court Selects Cases</h3>
+                <p>The Supreme Court begins its annual session on the first Monday in October and ends late the following June. Every year, there are literally thousands of people who would like to have their case heard before the Supreme Court, but the justices will select only a handful to be placed on the <strong>docket</strong>, which is the list of cases scheduled on the Court's calendar.</p>
+                
+                <p><strong>The Court typically accepts fewer than 2 percent</strong> of the as many as ten thousand cases it is asked to review every year.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Writ of Certiorari</div>
+                    <div>An order of the Supreme Court calling up the records of the lower court so a case may be reviewed. Most often, the petitioner is asking the Supreme Court to grant a writ of certiorari, a request that the lower court send up its record of the case for review. Sometimes abbreviated as "cert."</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Rule of Four</div>
+                    <div>A Supreme Court custom in which a case will be heard when four justices decide to do so. This is the threshold for granting certiorari.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-2', 25)">
+                <div class="card-prompt">🔍 Click to explore: When the Court Grants Certiorari</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> For decisions about cert., the Court's Rule 10 (Considerations Governing Review on Writ of Certiorari) takes precedence. The Court is more likely to grant certiorari when there is a conflict on an issue between or among the lower courts.</p>
+                    <p>Examples of conflicts include:</p>
+                    <ul>
+                        <li>Conflicting decisions among different courts of appeals on the same matter</li>
+                        <li>Decisions by an appeals court or a state court conflicting with precedent</li>
+                        <li>State court decisions that conflict with federal decisions</li>
+                    </ul>
+                    <p>Occasionally, the Court will fast-track a case that has special urgency, such as Bush v. Gore in the wake of the 2000 election.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>👔 The Solicitor General</h3>
+                <p>The <strong>solicitor general</strong> is the lawyer who represents the federal government before the Supreme Court. He or she decides which cases (in which the United States is a party) should be appealed from the lower courts and personally approves each one presented. Most of the cases the solicitor general brings to the Court will be given a place on the docket. <strong>About two-thirds of all Supreme Court cases involve the federal government.</strong></p>
+                
+                <p>The solicitor general determines the position the government will take on a case. The attorneys of the office prepare and file the petitions and briefs, and the solicitor general (or an assistant) presents the oral arguments before the Court.</p>
+                
+                <p>In other cases in which the United States is not the petitioner or the respondent, the solicitor general may choose to intervene or comment as a third party. The solicitor general may also recommend that the justices decline to hear a case. With such power over the Court, the solicitor general is sometimes referred to as "the tenth justice."</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ How many justices must agree to hear a case for the Supreme Court to grant certiorari?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 30)">Three</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 30)">Four</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 30)">Five</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 30)">All nine</div>
+                <div class="feedback-box" id="feedback-q4-1"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 Supreme Court Procedures</h3>
+                <p>Once a case has been placed on the docket, <strong>briefs</strong>, or short arguments explaining each party's view of the case, must be submitted—first by the petitioner putting forth the case, then by the respondent. After initial briefs have been filed, both parties may file subsequent briefs in response to the first.</p>
+                
+                <p>Likewise, people and groups that are not party to the case but are interested in its outcome may file an <strong>amicus curiae</strong> ("friend of the court") brief giving their opinion, analysis, and recommendations about how the Court should rule.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Amicus Curiae</div>
+                    <div>Literally a "friend of the court" and used for a brief filed by someone who is interested in but not party to a case. Interest groups can become heavily involved in trying to influence the judiciary by filing amicus briefs.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-3', 25)">
+                <div class="card-prompt">🔍 Click to explore: Oral Arguments and Court Ceremony</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> With briefs filed, the Court hears oral arguments in cases from October through April. The proceedings are quite ceremonial. When the Court is in session, the robed justices make a formal entrance into the courtroom to a standing audience and the sound of a banging gavel.</p>
+                    <p>The Court's marshal presents them with a traditional chant: "The Honorable, the Chief Justice and the Associate Justices of the Supreme Court of the United States. Oyez! Oyez! Oyez! [Hear ye!] All persons having business before the Honorable, the Supreme Court of the United States, are admonished to draw near and give their attention, for the Court is now sitting. God save the United States and this Honorable Court!"</p>
+                    <p>During oral arguments, each side's lawyers have <strong>thirty minutes</strong> to make their legal case, though the justices often interrupt the presentations with questions.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔒 The Conference</h3>
+                <p>When oral arguments have been concluded, the justices have to decide the case, and they do so in <strong>conference</strong>, which is held in private twice a week when the Court is in session and once a week when it is not. The conference is also a time to discuss petitions for certiorari.</p>
+                
+                <p>For those cases already heard, each justice may state their views on the case, ask questions, or raise concerns. The chief justice speaks first about a case, then each justice speaks in turn, in descending order of seniority, ending with the most recently appointed justice. The judges take an initial vote in private before the official announcement of their decisions is made public.</p>
+                
+                <p>Oral arguments are open to the public, but cameras are not allowed in the courtroom, so the only picture we get is one drawn by an artist's hand, an illustration or rendering. Over the years, groups have called for the Court to open its operations to greater transparency, but the justices have resisted the pressure and remain neither filmed nor photographed during oral arguments.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What percentage of cases brought to the Supreme Court does it typically accept for review?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">Fewer than 2 percent</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">About 10 percent</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">About 25 percent</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">About 50 percent</div>
+                <div class="feedback-box" id="feedback-q4-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(4); navigateTo('homePage')">
+                ✓ Complete Section 4 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 5: Judicial Decision-Making and Implementation -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📝 Section 5: Judicial Decision-Making and Implementation</h2>
+                <p class="subtitle">Understanding how justices decide cases and how decisions are enforced</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Judicial Opinions</h3>
+                <p>Every Court opinion sets precedent for the future. The Supreme Court's decisions are not always unanimous, however; the published <strong>majority opinion</strong>, or explanation of the justices' decision, is the one with which a majority of the nine justices agree. It can represent a vote as narrow as five in favor to four against. A tied vote is rare but can occur at a time of vacancy, absence, or abstention from a case. In the event of a tied vote, the decision of the lower court stands.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Majority Opinion</div>
+                    <div>An opinion of the Court with which more than half the nine justices agree. If in the majority, the chief justice decides who will write the opinion. If not, then the most senior justice ruling with the majority chooses the writer.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Dissenting Opinion</div>
+                    <div>An opinion written by a justice who disagrees with the majority opinion of the Court. The most senior justice in the dissenting group can assign a member of that group to write the dissenting opinion; however, any justice who disagrees with the majority may write a separate dissenting opinion.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Concurring Opinion</div>
+                    <div>An opinion written by a justice who agrees with the Court's majority opinion but has different reasons for doing so.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: Judicial Activism vs. Judicial Restraint</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Justices' decisions are influenced by how they define their role as a jurist:</p>
+                    <p><strong>Judicial Activism:</strong> A judicial philosophy in which a justice is more likely to overturn decisions or rule actions by the other branches unconstitutional, especially in an attempt to broaden individual rights and liberties. A judge or justice who views the role with an activist lens is more likely to use judicial power to broaden personal liberty, justice, and equality.</p>
+                    <p><strong>Judicial Restraint:</strong> A judicial philosophy in which a justice is more likely to let stand the decisions or actions of the other branches of government and stay focused on a narrower interpretation of the Bill of Rights. These justices are less likely to strike down actions or laws as unconstitutional and are less likely to focus on the expansion of individual liberties.</p>
+                    <p>As Justice Anthony Kennedy has said, "An activist court is a court that makes a decision you don't like."</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🌍 Influences on the Court</h3>
+                <p>The courts are the least covered and least publicly known of the three branches of government. We sometimes envision the justices formally robed and cloistered away in their chambers, unaffected by the world around them, but the reality is that they are not that isolated, and a number of outside factors influence their decisions.</p>
+                
+                <p>Justices' personal beliefs and political attitudes matter in their decision-making. Although we may prefer to believe a justice can leave political ideology or party identification outside the doors of the courtroom, the reality is that a more liberal-thinking judge may tend to make more liberal decisions and a more conservative-leaning judge may tend toward more conservative ones.</p>
+                
+                <p>And the courts themselves are affected by another "court"—the court of public opinion. Though somewhat isolated from politics and the volatility of the electorate, justices may still be swayed by special-interest pressure, the leverage of elected or other public officials, the mass media, and the general public.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-2', 25)">
+                <div class="card-prompt">🔍 Click to explore: Lawrence v. Texas and Changing Times</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> Take, for example, rulings on sodomy laws: In 1986, the Supreme Court upheld the constitutionality of the State of Georgia's ban on sodomy, but it reversed its decision seventeen years later in Lawrence v. Texas (2003), invalidating sodomy laws in Texas and thirteen other states.</p>
+                    <p>No doubt the Court considered what had been happening nationwide:</p>
+                    <ul>
+                        <li>In the 1960s, sodomy was banned in all the states</li>
+                        <li>By 1986, that number had been reduced by about half</li>
+                        <li>By 2002, thirty-six states had repealed their sodomy laws</li>
+                    </ul>
+                    <p>Changes in state laws, along with an emerging LGBTQ movement, no doubt swayed the Court. This decision was especially important because it meant all prior and existing laws that formally made same-sex relationships illegal were null and void.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ The Courts and the Other Branches of Government</h3>
+                <p>Both the executive and legislative branches check and balance the judiciary in many different ways:</p>
+                
+                <h4>Executive Checks:</h4>
+                <ul>
+                    <li>The president can leave a lasting imprint on the bench through nominations</li>
+                    <li>The president may influence the Court through the solicitor general's involvement</li>
+                    <li>The president can submit amicus briefs in cases where the United States is not a party</li>
+                </ul>
+
+                <h4>Legislative Checks:</h4>
+                <ul>
+                    <li>Congress retains the power to modify the federal court structure and its appellate jurisdiction</li>
+                    <li>The Senate may accept or reject presidential nominees to the federal courts</li>
+                    <li>Congress may rewrite a law the courts have declared unconstitutional</li>
+                    <li>Congress may begin a constitutional amendment process</li>
+                </ul>
+            </div>
+
+            <div class="milestone-box">
+                <h4>📌 Historical Example: FDR's Court-Packing Scheme</h4>
+                <p>President Franklin D. Roosevelt attempted to stack the odds in his favor in 1937, with a "court-packing scheme" in which he tried to get a bill passed through Congress that would have reorganized the judiciary and enabled him to appoint up to six additional judges to the high court. The bill never passed, but other presidents have also been accused of trying similar moves at different courts in the federal system.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: Judicial Implementation</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The most significant check on the Supreme Court is executive and legislative leverage over the implementation and enforcement of its rulings. This process is called <strong>judicial implementation</strong>.</p>
+                    <p>While it is true that courts play a major role in policymaking, they have no mechanism to make their rulings a reality. Remember it was Alexander Hamilton in Federalist No. 78 who remarked that the courts had "neither force nor will, but merely judgment."</p>
+                    <p>When the 1832 Supreme Court ruled Georgia's seizing of Native American lands unconstitutional, President Andrew Jackson reportedly said, "John Marshall has made his decision, now let him enforce it," and the Court's ruling was basically ignored. Abraham Lincoln, too, famously ignored Chief Justice Roger B. Taney's order finding unconstitutional Lincoln's suspension of habeas corpus rights in 1861.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What is a judicial philosophy that emphasizes deference to the decisions of the elected branches called?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 30)">Judicial activism</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 30)">Judicial restraint</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 30)">Judicial review</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 30)">Stare decisis</div>
+                <div class="feedback-box" id="feedback-q5-1"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Enforcement and Legitimacy</h3>
+                <p>The Court relies on the executive to implement or enforce its decisions and on the legislative branch to fund them. Presidents may simply ignore decisions of the Court, and Congress may withhold funding needed for implementation and enforcement. Fortunately for the courts, these situations rarely happen, and the other branches tend to provide support rather than opposition.</p>
+                
+                <p>In general, presidents have tended to see it as their duty to both obey and enforce Court rulings, and Congress seldom takes away the funding needed for the president to do so.</p>
+
+                <h4>Example: Little Rock, Arkansas (1957)</h4>
+                <p>In 1957, President Dwight D. Eisenhower called out the military by executive order to enforce the Supreme Court's order to racially integrate the public schools in Little Rock, Arkansas. Eisenhower told the nation: "Whenever normal agencies prove inadequate to the task and it becomes necessary for the executive branch of the federal government to use its powers and authority to uphold federal courts, the president's responsibility is inescapable."</p>
+                <p>Executive Order 10730 nationalized the Arkansas National Guard to enforce desegregation because the governor refused to use the state National Guard troops to protect the Black students trying to enter the school.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-4', 25)">
+                <div class="card-prompt">🔍 Click to explore: The Importance of Jury Duty</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong> Since judges and justices are not elected, we sometimes consider the courts removed from the public; however, this is not always the case, and there are times when average citizens may get involved with the courts firsthand as part of their decision-making process.</p>
+                    <p>At some point, you may receive a summons for jury duty from your local court system. While your first reaction may be to start planning a way to get out of it, participating in jury service is vital to the operation of the judicial system, because it provides individuals in court the chance to be heard and to be tried fairly by a group of their peers.</p>
+                    <p>Jury duty has benefits for those who serve as well. You will no doubt come away better informed about how the judicial system works and ready to share your experiences with others.</p>
+                </div>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>🔑 Key Takeaway</h4>
+                <p>So what becomes of court decisions is largely due to their credibility, their viability, and the assistance given by the other branches of government. It is also somewhat a matter of tradition and the way the United States has gone about its judicial business for more than two centuries.</p>
+                <p>Although not everyone agrees with the decisions made by the Court, rulings are generally accepted and followed, and the Court is respected as the key interpreter of the laws and the Constitution. Over time, its rulings have become yet another way policy is legitimately made and justice more adequately served in the United States.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What type of opinion is written by a justice who agrees with the outcome but for different reasons?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 25)">Majority opinion</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 25)">Dissenting opinion</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 25)">Concurring opinion</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 25)">Per curiam opinion</div>
+                <div class="feedback-box" id="feedback-q5-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(5); navigateTo('homePage')">
+                ✓ Complete Section 5 & Return Home
+            </button>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>⚖️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateTo('homePage')">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 13: The Courts</p>
+                        
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">95%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>📋 Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Name:</span>
+                                    <span id="reportStudentName">Anonymous</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span id="reportCompletionDate">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span id="reportTime">-</span>
+                                </div>
+                            </div>
+
+                            <div class="performance-section">
+                                <h3>📊 Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <td>Section 1: Guardians of the Constitution</td>
+                                        <td id="status1">⭕</td>
+                                        <td id="points1">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 2: The Dual Court System</td>
+                                        <td id="status2">⭕</td>
+                                        <td id="points2">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 3: The Federal Court System</td>
+                                        <td id="status3">⭕</td>
+                                        <td id="points3">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 4: The Supreme Court</td>
+                                        <td id="status4">⭕</td>
+                                        <td id="points4">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 5: Judicial Decision-Making</td>
+                                        <td id="status5">⭕</td>
+                                        <td id="points5">0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/5</div>
+                                <div class="metric-label">Sections</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This report documents the student's completion of Chapter 13: The Courts interactive learning module. The score reflects engagement with interactive reveal cards, knowledge check questions, and section completion. This module covers judicial review, the dual court system, federal court structure, Supreme Court procedures, and judicial decision-making.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            score: 0,
+            level: 'Explorer',
+            studentName: '',
+            completedSections: new Set(),
+            earnedPoints: new Set(),
+            answeredQuestions: new Set()
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Justice Sage'
+        };
+
+        // Total possible points
+        const maxPoints = 1050;
+
+        // Navigation
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            if (sectionId === 'reportPage') {
+                updateReportPage();
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Save student name
+        function saveName() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput.value.trim()) {
+                gameState.studentName = nameInput.value.trim();
+                showPoints(0, `Welcome, ${gameState.studentName}!`);
+            }
+        }
+
+        // Interactive card handling
+        function revealCard(element, cardId, points) {
+            if (gameState.earnedPoints.has(cardId)) return;
+            
+            element.classList.add('revealed');
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+            
+            gameState.earnedPoints.add(cardId);
+            addPoints(points);
+            showPoints(points);
+            
+            checkSectionCompletion(element);
+        }
+
+        // Knowledge check handling
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+            
+            gameState.answeredQuestions.add(questionId);
+            
+            const options = element.parentElement.querySelectorAll('.kc-option');
+            options.forEach(option => {
+                option.classList.add('disabled');
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                addPoints(points);
+                showPoints(points);
+                showFeedback(questionId, true, "✓ Correct! Great job!");
+            } else {
+                element.classList.add('incorrect');
+                showFeedback(questionId, false, "✗ Not quite. The correct answer has been highlighted.");
+                options.forEach(option => {
+                    if (option.getAttribute('onclick') && option.getAttribute('onclick').includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+            
+            checkSectionCompletion(element);
+        }
+
+        // Show feedback
+        function showFeedback(questionId, isCorrect, message) {
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            feedbackBox.textContent = message;
+            feedbackBox.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+        }
+
+        // Points system
+        function addPoints(points) {
+            gameState.score += points;
+            updateScore();
+            updateLevel();
+            updateProgress();
+        }
+
+        function showPoints(points, customMessage = null) {
+            const popup = document.getElementById('pointsPopup');
+            const message = document.getElementById('pointsMessage');
+            
+            message.textContent = customMessage || `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (gameState.score >= parseInt(threshold)) {
+                    newLevel = level;
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('level').textContent = newLevel;
+        }
+
+        function updateProgress() {
+            const percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Complete section
+        function completeSection(sectionNumber) {
+            gameState.completedSections.add(sectionNumber.toString());
+            const card = document.getElementById('card' + sectionNumber);
+            if (card) {
+                card.classList.add('completed');
+            }
+        }
+
+        // Check section completion
+        function checkSectionCompletion(element) {
+            let section = element.closest('.page');
+            if (!section) return;
+            
+            const sectionId = section.id;
+            const sectionNumber = sectionId.replace('section', '');
+            
+            const cards = section.querySelectorAll('.interactive-card');
+            const questions = section.querySelectorAll('.knowledge-check');
+            
+            let allCardsRevealed = true;
+            cards.forEach(card => {
+                if (!card.classList.contains('revealed')) {
+                    allCardsRevealed = false;
+                }
+            });
+            
+            let allQuestionsAnswered = true;
+            questions.forEach(question => {
+                const hasAnswer = question.querySelector('.kc-option.correct, .kc-option.incorrect');
+                if (!hasAnswer) {
+                    allQuestionsAnswered = false;
+                }
+            });
+            
+            if (allCardsRevealed && allQuestionsAnswered && sectionNumber) {
+                gameState.completedSections.add(sectionNumber);
+                const card = document.getElementById('card' + sectionNumber);
+                if (card) {
+                    card.classList.add('completed');
+                }
+            }
+        }
+
+        // Update report page
+        function updateReportPage() {
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Anonymous';
+            document.getElementById('reportCompletionDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            const percentage = Math.round((gameState.score / maxPoints) * 100);
+            
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.completedSections.size / 5) * 100);
+            
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            const gradeDisplay = document.getElementById('gradeDisplay');
+            gradeDisplay.style.background = gradeColor;
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            
+            const sectionPoints = {
+                1: 220, 2: 200, 3: 220, 4: 200, 5: 210
+            };
+            
+            for (let i = 1; i <= 5; i++) {
+                const isComplete = gameState.completedSections.has(i.toString());
+                const statusEl = document.getElementById('status' + i);
+                const pointsEl = document.getElementById('points' + i);
+                
+                if (isComplete) {
+                    statusEl.innerHTML = '✅';
+                    statusEl.style.color = '#1B5E20';
+                    const earned = Math.round(sectionPoints[i] * (gameState.score / maxPoints));
+                    pointsEl.textContent = earned;
+                } else {
+                    statusEl.innerHTML = '⭕';
+                    statusEl.style.color = '#B71C1C';
+                    pointsEl.textContent = '0';
+                }
+            }
+            
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = gameState.completedSections.size + '/5';
+            
+            const totalQuestions = 10;
+            const correctAnswers = Math.round((gameState.score / maxPoints) * totalQuestions);
+            const quizScore = Math.round((correctAnswers / totalQuestions) * 100);
+            document.getElementById('metricQuiz').textContent = Math.min(100, quizScore) + '%';
+            
+            const engagementScore = Math.min(100, Math.round((gameState.earnedPoints.size / 25) * 100));
+            document.getElementById('metricEngagement').textContent = engagementScore + '%';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateScore();
+            updateLevel();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

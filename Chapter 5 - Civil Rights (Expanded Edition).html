@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Civil Rights - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* ADA Compliant Colors - Blue-Green Theme */
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        #studentName {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-family: Georgia, serif;
+        }
+
+        .progress-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-green));
+            height: 100%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .section-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .points-badge {
+            background: var(--highlight-yellow);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: Georgia, serif;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-blue);
+        }
+
+        .section-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-content h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-content h3 {
+            color: var(--primary-green);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .section-content h4 {
+            color: var(--secondary-blue);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-concept-title {
+            font-weight: bold;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-card {
+            background: linear-gradient(135deg, var(--bg-section), #B2DFDB);
+            border: 2px solid var(--secondary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 105, 92, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .interactive-card.revealed {
+            background: var(--bg-white);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--secondary-green);
+        }
+
+        .card-content.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .card-content ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .card-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .knowledge-check {
+            background: var(--bg-white);
+            border: 2px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: var(--bg-light);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFEBEE;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback-box.visible {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: var(--highlight-green);
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFEBEE;
+            color: var(--error);
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 5%;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-green);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--primary-blue);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -32px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -32px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-green);
+            margin: 0.5rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            background: white;
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--bg-section);
+        }
+
+        .complete-section-btn {
+            background: linear-gradient(135deg, var(--success), var(--primary-green));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: Georgia, serif;
+            margin-top: 2rem;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+
+        .complete-section-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 105, 92, 0.3);
+        }
+
+        .complete-section-btn:disabled {
+            background: #9e9e9e;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            animation: slideIn 0.5s ease, fadeOut 0.5s ease 1.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: var(--bg-white);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-header-bar h1 {
+            font-size: 1.4rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: Georgia, serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-main {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th, .performance-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .performance-table th {
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+
+        .status-complete {
+            color: var(--success);
+        }
+
+        .status-incomplete {
+            color: var(--error);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--bg-section);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .report-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: Georgia, serif;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: relative;
+            }
+            .report-container {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.75rem 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+                margin-top: 100px;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+            }
+
+            .timeline-item .timeline-dot {
+                left: -42px !important;
+                right: auto !important;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Additional content styling */
+        .subsection-divider {
+            border-top: 2px dashed var(--secondary-green);
+            margin: 2rem 0;
+            padding-top: 1rem;
+        }
+
+        .case-study-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .case-study-title {
+            font-weight: bold;
+            color: #E65100;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .historical-note {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            border-left: 4px solid #7B1FA2;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .historical-note-title {
+            font-weight: bold;
+            color: #7B1FA2;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-content ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .learning-objectives {
+            background: linear-gradient(135deg, var(--highlight-blue), #BBDEFB);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .learning-objectives h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .learning-objectives ul {
+            margin-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚖️ TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            <span>⭐ <span id="currentScore">0</span> pts</span>
+            <span>🏆 <span id="currentLevel">Explorer</span></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div class="page active" id="home">
+            <div class="hero-section">
+                <h2>⚖️ Chapter 5: Civil Rights 🗽</h2>
+                <p>Explore the ongoing struggle for equality in America. From the fight against slavery to modern movements for justice, discover how various groups have worked to secure their civil rights.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">✊</div>
+                        <div class="stat-label">Equality Movements</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">📜</div>
+                        <div class="stat-label">Landmark Legislation</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">⚖️</div>
+                        <div class="stat-label">Court Decisions</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your Full Name" onchange="saveName()">
+            </div>
+
+            <div class="progress-container">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">📚 Chapter Sections</h3>
+            <div class="sections-grid">
+                <div class="section-card" onclick="navigateToSection('section1')" id="card-section1">
+                    <div class="section-number">1</div>
+                    <h3>What Are Civil Rights?</h3>
+                    <p>Define civil rights, understand legal standards for discrimination, and learn how to identify civil rights issues.</p>
+                    <div class="points-badge">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection('section2')" id="card-section2">
+                    <div class="section-number">2</div>
+                    <h3>African American Civil Rights</h3>
+                    <p>From slavery through Reconstruction to the modern civil rights movement and continuing challenges today.</p>
+                    <div class="points-badge">⭐ 250 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection('section3')" id="card-section3">
+                    <div class="section-number">3</div>
+                    <h3>Women's Rights Movement</h3>
+                    <p>The fight for suffrage, the Equal Rights Amendment, and continuing challenges women face today.</p>
+                    <div class="points-badge">⭐ 220 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection('section4')" id="card-section4">
+                    <div class="section-number">4</div>
+                    <h3>Indigenous Peoples' Rights</h3>
+                    <p>Native Americans, Alaska Natives, and Native Hawaiians—their history of discrimination and fight for rights.</p>
+                    <div class="points-badge">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection('section5')" id="card-section5">
+                    <div class="section-number">5</div>
+                    <h3>Equal Protection for Other Groups</h3>
+                    <p>Hispanic/Latino, Asian American, LGBTQ+, disability rights, and religious minorities.</p>
+                    <div class="points-badge">⭐ 250 points available</div>
+                </div>
+
+                <div class="section-card" onclick="navigateToSection('report')" id="card-report">
+                    <div class="section-number">📋</div>
+                    <h3>Completion Report</h3>
+                    <p>View your final score, achievements, and generate a completion report for your instructor.</p>
+                    <div class="points-badge">📄 View Results</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: What Are Civil Rights and How Do We Identify Them? -->
+        <div class="page" id="section1">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            <div class="section-content">
+                <h2>⚖️ Section 1: What Are Civil Rights and How Do We Identify Them?</h2>
+                
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Define the concept of civil rights</li>
+                        <li>Describe the standards that courts use when deciding whether a discriminatory law or regulation is unconstitutional</li>
+                        <li>Identify three core questions for recognizing a civil rights problem</li>
+                    </ul>
+                </div>
+
+                <p>The belief that people should be treated equally under the law is one of the cornerstones of political thought in the United States. Yet not all citizens have been treated equally throughout the nation's history, and some are treated differently even today. For example, until 1920, nearly all women in the United States lacked the right to vote. Black men received the right to vote in 1870, but as late as 1940, only 3 percent of African American adults living in the South were registered to vote, due largely to laws designed to keep them from the polls. Americans were not allowed to enter into legal marriage with a member of the same sex in many U.S. states until 2015.</p>
+
+                <p>Some types of unequal treatment are considered acceptable in some contexts, while others are clearly not. No one would consider it acceptable to allow a ten-year-old to vote, because a child lacks the ability to understand important political issues, but all reasonable people would agree that it is wrong to mandate racial segregation or to deny someone voting rights on the basis of race. It is important to understand which types of inequality are unacceptable and why.</p>
+
+                <h3>Defining Civil Rights</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Civil Rights</div>
+                    <div>Guarantees by the government that it will treat people equally—particularly people belonging to groups that have historically been denied the same rights and opportunities as others.</div>
+                </div>
+
+                <p>The due process clause of the Fifth Amendment to the U.S. Constitution enacted the Declaration of Independence's proclamation that "all men are created equal" by providing de jure equal treatment under the law. According to Chief Justice Earl Warren in the Supreme Court case of <em>Bolling v. Sharpe</em> (1954), "discrimination may be so unjustifiable as to be violative of due process."</p>
+
+                <p>Additional guarantees of equality were provided in 1868 by the <strong>equal protection clause</strong> of the Fourteenth Amendment, which states, in part, that "No State shall . . . deny to any person within its jurisdiction the equal protection of the laws." Thus, between the Fifth and Fourteenth Amendments, neither state governments nor the federal government may treat people unequally unless unequal treatment is necessary to maintain important governmental interests such as public safety.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'civil-liberties-distinction', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Civil Rights vs. Civil Liberties</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've mastered an important distinction!</p>
+                        <p>We can contrast <strong>civil rights</strong> with <strong>civil liberties</strong>, which are limitations on government power designed to protect our fundamental freedoms.</p>
+                        <ul>
+                            <li><strong>Civil Liberties:</strong> The Eighth Amendment prohibits "cruel and unusual punishments"—a limitation on government power</li>
+                            <li><strong>Civil Rights:</strong> The guarantee of equal protection means laws must be applied equally, limiting the government's ability to discriminate</li>
+                        </ul>
+                        <p>A law that imprisons men twice as long as women for the same offense would treat some people differently for no valid reason and would be unconstitutional.</p>
+                    </div>
+                </div>
+
+                <p>According to the Supreme Court's interpretation of the Equal Protection Clause, "all persons similarly circumstanced shall be treated alike." If people are not similarly circumstanced, however, they may be treated differently. Asian Americans and Latinos overstaying a visa are similarly circumstanced; however, a blind driver or a ten-year-old driver is differently circumstanced than a sighted, adult driver.</p>
+
+                <h3>Identifying Discrimination</h3>
+
+                <p>Laws that treat one group of people differently from others are not always unconstitutional. In fact, the government engages in legal discrimination quite often. In most states, you must be eighteen years old to smoke cigarettes and twenty-one to drink alcohol; these laws discriminate against the young. To get a driver's license, you have to be a minimum age and pass tests showing your knowledge, practical skills, and vision.</p>
+
+                <p>Some public colleges and universities have an open admission policy, but others require that students have a high school diploma or a particular score on the SAT or ACT. This is discrimination, because these requirements treat people who do not meet them differently. How can the government discriminate in all these ways even though the equal protection clause seems to suggest that everyone be treated the same?</p>
+
+                <div class="key-concept-box">
+                    <div class="key-concept-title">💡 The Rational Basis Test</div>
+                    <p>In most discrimination cases, the government only needs to demonstrate that it has a good reason for treating some people differently. As long as there's a reason "rationally related to a legitimate government interest," the discriminatory practice is acceptable.</p>
+                    <p>For example, forbidding blind people from driving is reasonably justified on safety grounds. Universities can deny admission to students with weaker grades because they may lack the skills needed to succeed.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'scrutiny-levels', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Levels of Judicial Scrutiny</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about judicial review standards!</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Standard</th>
+                                <th>Applies To</th>
+                                <th>Burden of Proof</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Rational Basis</strong></td>
+                                <td>Most laws (age, income, etc.)</td>
+                                <td>Challenger must prove law is irrational</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Intermediate Scrutiny</strong></td>
+                                <td>Gender/sex discrimination</td>
+                                <td>Government must show "substantially related to important objective"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Strict Scrutiny</strong></td>
+                                <td>Race, ethnicity, religion, national origin</td>
+                                <td>Government must show "compelling interest" and "narrowly tailored" approach</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>Intermediate Scrutiny</h4>
+                <p>The standard of <strong>intermediate scrutiny</strong> was first applied by the Supreme Court in <em>Craig v. Boren</em> (1976) and again in <em>Clark v. Jeter</em> (1988). It requires the government to demonstrate that treating men and women differently is "substantially related to an important governmental objective." This puts the burden of proof on the government to demonstrate why the unequal treatment is justifiable.</p>
+
+                <p>In practice, laws that treat men and women differently are sometimes upheld, although usually they are not. In the 1980s and 1990s, the courts ruled that states could not operate single-sex institutions of higher education and that schools like South Carolina's military college The Citadel must admit both male and female students. Women in the military are now also allowed to serve in all combat roles, although the courts have continued to allow the Selective Service System (the draft) to register only men.</p>
+
+                <h4>Strict Scrutiny</h4>
+                <p>Discrimination against members of racial, ethnic, or religious groups or those of various national origins is reviewed to the greatest degree by the courts. Under <strong>strict scrutiny</strong>, the burden of proof is on the government to demonstrate:</p>
+                <ul>
+                    <li>A <strong>compelling governmental interest</strong> in treating people differently</li>
+                    <li>The law can be <strong>narrowly tailored</strong> to achieve the goal</li>
+                    <li>It is the <strong>least restrictive means</strong> available to achieve that goal</li>
+                </ul>
+                <p>In the modern era, laws challenged under strict scrutiny have rarely been upheld. However, strict scrutiny was the legal basis for the Supreme Court's 1944 upholding of Japanese American internment during World War II.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Affirmative Action</div>
+                    <div>Government programs and policies designed to benefit members of groups historically subject to discrimination. Much controversy surrounds whether strict scrutiny should apply to these cases.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which standard of judicial review applies to laws that discriminate based on race?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Rational Basis Test</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">Intermediate Scrutiny</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-3', 25)">Strict Scrutiny</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-4', 0)">Minimal Review</div>
+                    <div class="feedback-box" id="feedback-q1"></div>
+                </div>
+
+                <h3>Putting Civil Rights in the Constitution</h3>
+
+                <p>At the time of the nation's founding, the treatment of many groups was unequal: the rights of women were decidedly fewer than those of men, and neither they, the hundreds of thousands of enslaved people of African descent, nor indigenous Americans were considered fully human, let alone U.S. citizens. While the early United States was perhaps a more inclusive society than most of the world at that time, equal treatment of all remained a radical idea.</p>
+
+                <div class="historical-note">
+                    <div class="historical-note-title">📖 The Aftermath of the Civil War</div>
+                    <p>The Republican majority in Congress was enraged by actions of reconstituted southern governments. Many former Confederate politicians returned to power and attempted to circumvent the Thirteenth Amendment by passing <strong>Black codes</strong>—laws designed to reduce formerly enslaved people to the status of serfs or indentured servants.</p>
+                    <ul>
+                        <li>Black people were denied the right to vote</li>
+                        <li>They could be arrested for vagrancy or idleness if they lacked jobs</li>
+                        <li>They were excluded from public schools and state colleges</li>
+                        <li>They were subject to violence at the hands of White people</li>
+                    </ul>
+                </div>
+
+                <p>To override the southern states' actions, lawmakers proposed the <strong>Fourteenth</strong> and <strong>Fifteenth Amendments</strong>. The Fourteenth Amendment included the equal protection clause and was designed to ensure states would respect freed people's civil liberties. The Fifteenth Amendment secured the right to vote for Black men.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'civil-rights-questions', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Identifying Civil Rights Issues</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned how to identify discrimination!</p>
+                        <p>To identify true discrimination, apply this analytical process:</p>
+                        <ol>
+                            <li><strong>Which groups?</strong> Identify the group facing discrimination</li>
+                            <li><strong>Which rights are threatened?</strong> What right or rights are being denied?</li>
+                            <li><strong>What do we do?</strong> What can the government do to bring about a fair situation? Is such a remedy realistic?</li>
+                        </ol>
+                        <p>New civil rights issues can emerge over time. Fifty years ago, few would have identified LGBTQ rights as an important civil rights issue.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What is the key difference between civil rights and civil liberties?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">Civil rights ensure equal treatment; civil liberties protect fundamental freedoms</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">Civil rights are in the Constitution; civil liberties are not</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">Civil rights apply to states; civil liberties apply to federal government</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-4', 0)">There is no meaningful difference between them</div>
+                    <div class="feedback-box" id="feedback-q2"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Under intermediate scrutiny, who bears the burden of proof?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">The person claiming discrimination</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">The government must justify the discrimination</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">The courts decide independently</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-4', 0)">No one—it's automatically considered invalid</div>
+                    <div class="feedback-box" id="feedback-q3"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which constitutional amendment contains the equal protection clause?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">Fifth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">Fourteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">Fifteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-4', 0)">Nineteenth Amendment</div>
+                    <div class="feedback-box" id="feedback-q4"></div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection('section1')">✓ Complete Section 1</button>
+            </div>
+        </div>
+
+        <!-- Section 2: African American Struggle for Equality -->
+        <div class="page" id="section2">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            <div class="section-content">
+                <h2>✊ Section 2: The African American Struggle for Equality</h2>
+                
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Identify key events in the history of African American civil rights</li>
+                        <li>Explain how the courts, Congress, and the executive branch supported the civil rights movement</li>
+                        <li>Describe the role of grassroots efforts in the civil rights movement</li>
+                    </ul>
+                </div>
+
+                <p>Many groups in U.S. history have sought recognition as equal citizens. Although each group's efforts have been notable and important, arguably the greatest, longest, and most violent struggle remains that of African Americans, whose dehumanization was even written into the text of the Constitution in the clause counting them as three-fifths of a person. Their fight for freedom and equality provided the legal and moral foundation for others who sought recognition of their equality later on.</p>
+
+                <h3>Slavery and the Civil War</h3>
+
+                <p>In the Declaration of Independence, Thomas Jefferson made the radical statement that "all men are created equal" and "are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness." Yet, like other wealthy landowners of his time, Jefferson also owned dozens of other human beings as his personal property. He recognized this contradiction, personally considered the institution of slavery to be a "hideous blot" on the nation, and agreed to free those he held in bondage upon his death.</p>
+
+                <p>However, to forge a political union that would stand the test of time, he and the other founders—and later the framers of the Constitution—chose not to address the issue in any definitive way. Political support for abolition was very much a minority stance in the United States at the time, although after the Revolution many northern states abolished slavery following the European example.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'dred-scott', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Dred Scott v. Sandford (1857)</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about this infamous Supreme Court decision!</p>
+                        <p>The Supreme Court's 1857 ruling in <em>Dred Scott v. Sandford</em> had devastating consequences:</p>
+                        <ul>
+                            <li>The Court rejected Scott's argument that living in free states made him free</li>
+                            <li>The majority stated Black people (free or enslaved) were not and could not become U.S. citizens</li>
+                            <li>Scott lacked standing to sue because he wasn't a citizen</li>
+                            <li>Congress lacked power to ban slavery in territories acquired after the Constitution was ratified</li>
+                        </ul>
+                        <p>This decision prohibited the federal government from limiting slavery's expansion into the West.</p>
+                    </div>
+                </div>
+
+                <p>Ultimately, the issue was decided by the Civil War (1861–1865), with the southern states seceding to defend "states' rights"—specifically, the purported right to own human property without federal interference. Although at the beginning of the war, President Abraham Lincoln had been willing to allow slavery to continue in the South to preserve the Union, he changed his policies over the course of the war.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 The Emancipation Proclamation (January 1, 1863)</div>
+                    <div>Stated "all persons held as slaves . . . henceforward shall be free," but was limited to states that had rebelled. Enslaved people in states that remained in the Union, such as Maryland and Delaware, were not freed. Although enslaved people in rebel states were freed by federal decree, the relatively small Union troop presence made enforcement impossible.</div>
+                </div>
+
+                <h3>Reconstruction (1865-1877)</h3>
+
+                <p>At the end of the Civil War, the South entered Reconstruction during which state governments were reorganized before rebellious states were readmitted to the Union. The Republican Party pushed for a permanent end to slavery through constitutional amendments:</p>
+
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">December 1865</div>
+                            <h4>Thirteenth Amendment</h4>
+                            <p>"Neither slavery nor involuntary servitude, except as a punishment for crime whereof the party shall have been duly convicted, shall exist within the United States."</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1868</div>
+                            <h4>Fourteenth Amendment</h4>
+                            <p>Extended due process to states, required states to respect privileges/immunities of citizens, defined citizenship at national and state levels, and introduced the equal protection clause.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1870</div>
+                            <h4>Fifteenth Amendment</h4>
+                            <p>Stated people could not be denied the right to vote based on "race, color, or previous condition of servitude."</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1877</div>
+                            <h4>End of Reconstruction</h4>
+                            <p>Military rule ended, Union army withdrew, and political control of the South fell back into the hands of White men.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'disenfranchisement', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Tools of Disenfranchisement</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about voter suppression tactics!</p>
+                        <p>After Reconstruction, White elites used various methods to prevent Black voting:</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Method</th>
+                                <th>How It Worked</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Literacy Tests</strong></td>
+                                <td>Officials gave easy passages to White voters, difficult ones to Black voters</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Understanding Tests</strong></td>
+                                <td>Required explaining Constitution passages—difficulty varied by race of applicant</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grandfather Clause</strong></td>
+                                <td>Exempted those who could vote pre-Civil War (and descendants) from tests</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Poll Tax</strong></td>
+                                <td>Annual fee ($1-2, equivalent to $20-50 today) required to register; often cumulative</td>
+                            </tr>
+                            <tr>
+                                <td><strong>White Primary</strong></td>
+                                <td>Democratic Party primaries allowed only White voters</td>
+                            </tr>
+                        </table>
+                        <p>At the Civil War's start, only 5% of Black people could read and write, most in the North.</p>
+                    </div>
+                </div>
+
+                <h3>Jim Crow and "Separate But Equal"</h3>
+
+                <p>With Black people effectively disenfranchised, restored southern state governments undermined Fourteenth Amendment guarantees. They passed laws that:</p>
+                <ul>
+                    <li>Excluded African Americans from juries</li>
+                    <li>Allowed imprisonment and forced labor of "idle" Black citizens</li>
+                    <li>Called for segregation of White and Black people in public places under the <strong>"separate but equal"</strong> doctrine</li>
+                    <li>Limited neighborhoods where Black and White people could live</li>
+                </ul>
+
+                <p>Collectively, these discriminatory laws became known as <strong>Jim Crow laws</strong>. The Supreme Court upheld separate but equal in <em>Plessy v. Ferguson</em> (1896), allowing segregation to continue despite the Fourteenth Amendment's equal protection clause.</p>
+
+                <h3>Civil Rights in the Courts</h3>
+
+                <p>By the turn of the twentieth century, the position of African Americans was bleak. African American leaders disagreed on the right path forward:</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'leaders-debate', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Booker T. Washington vs. W.E.B. Du Bois</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've explored competing strategies!</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Booker T. Washington</th>
+                                <th>W.E.B. Du Bois</th>
+                            </tr>
+                            <tr>
+                                <td>Acceptance of inequality short-term</td>
+                                <td>Confrontational approach</td>
+                            </tr>
+                            <tr>
+                                <td>Focus on improving educational and social status</td>
+                                <td>Founded NAACP in 1909</td>
+                            </tr>
+                            <tr>
+                                <td>Eventually White people would acknowledge equality</td>
+                                <td>Immediate demands for full rights</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <p>The NAACP focused on overturning Jim Crow laws through the courts, particularly challenging segregation in education. In 1938, the Supreme Court gave states a choice: integrate higher education institutions or establish equivalent ones for African Americans. Southern states chose to establish separate colleges rather than integrate.</p>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">⚖️ Brown v. Board of Education (1954)</div>
+                    <p>The landmark decision unanimously overturned <em>Plessy v. Ferguson</em> as it pertained to public education, stating that <strong>a separate but equal education was a logical impossibility</strong>. Even with the same funding and equivalent facilities, a segregated school could not have the same teachers or environment.</p>
+                    <p>The Court also rested its decision on social science studies suggesting racial discrimination led to feelings of inferiority among Black children. The only way to dispel this was to end segregation and integrate public schools.</p>
+                </div>
+
+                <p>Integration was controversial. While it took place without much incident in some areas, elsewhere it was confrontational—or nonexistent. In September 1957, Governor Orval Faubus of Arkansas resisted court-ordered integration, mobilizing National Guard troops to keep Black students out of Central High School in Little Rock. President Eisenhower called up the Arkansas National Guard for federal duty and sent soldiers of the 101st Airborne Division to escort the "Little Rock Nine" students to and from classes.</p>
+
+                <p>In Virginia, "massive resistance" led to closure of many public schools for years. Many White southerners established private academies that admitted only White students; many remain overwhelmingly White today.</p>
+
+                <h3>The Civil Rights Movement</h3>
+
+                <p>The slow rate of progress led to frustration. Newer grassroots organizations challenged the NAACP's legal-focused strategy:</p>
+                <ul>
+                    <li><strong>Southern Christian Leadership Conference (SCLC)</strong></li>
+                    <li><strong>Congress of Racial Equality (CORE)</strong></li>
+                    <li><strong>Student Non-Violent Coordinating Committee (SNCC)</strong></li>
+                </ul>
+
+                <p>These groups preferred confrontational approaches using <strong>direct action campaigns</strong>—marches and demonstrations. The strategies of <strong>nonviolent resistance</strong> and <strong>civil disobedience</strong> (refusal to obey unjust laws) had been effective in Mahatma Gandhi's campaign to liberate colonial India from British rule.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'movement-events', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Key Events of the Civil Rights Movement</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've explored pivotal moments!</p>
+                        <ul>
+                            <li><strong>1955-1956: Montgomery Bus Boycott</strong> - After Rosa Parks's arrest, E.D. Nixon led a year-long boycott that desegregated public transit</li>
+                            <li><strong>1960: Greensboro Sit-ins</strong> - Campaigns to desegregate lunch counters</li>
+                            <li><strong>1961: Freedom Rides</strong> - Black and White volunteers rode buses through the South to enforce desegregation of interstate transportation</li>
+                            <li><strong>1963: March on Washington</strong> - "I Have a Dream" speech</li>
+                            <li><strong>1965: Selma to Montgomery March</strong> - First attempt violently broken up ("Bloody Sunday"); led to Voting Rights Act</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Legislative Achievements</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Civil Rights Act of 1964</div>
+                    <div>Signed by President Lyndon B. Johnson, this landmark law:
+                        <ul>
+                            <li>Outlawed government discrimination and unequal application of voting qualifications by race</li>
+                            <li>Outlawed segregation and discrimination by businesses open to the public</li>
+                            <li>Prohibited employment discrimination based on race, ethnicity, religion, sex, or national origin</li>
+                            <li>Created the Equal Employment Opportunity Commission (EEOC)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Voting Rights Act of 1965</div>
+                    <div>Went beyond previous laws by:
+                        <ul>
+                            <li>Requiring greater federal oversight of elections</li>
+                            <li>Banning literacy tests, understanding tests, and other discriminatory devices</li>
+                            <li>Creating rapid increases in Black voter registration rates</li>
+                        </ul>
+                        <p>However, <em>Shelby County v. Holder</em> (2013) gutted a core aspect—states no longer need federal approval to change voting laws. Many states quickly resumed restrictive practices.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What Supreme Court case overturned "separate but equal" in public education?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">Plessy v. Ferguson</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 25)">Brown v. Board of Education</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 0)">Loving v. Virginia</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-4', 0)">Dred Scott v. Sandford</div>
+                    <div class="feedback-box" id="feedback-q5"></div>
+                </div>
+
+                <h3>Alternative Approaches and Continuing Challenges</h3>
+
+                <p>Not all African Americans were comfortable with gradual change. Leaders like <strong>Malcolm X</strong> and groups like the <strong>Black Panthers</strong> advocated more immediate action. Malcolm X expressed significant distrust of White people, sought to raise Black self-esteem, and advocated separation through eventual emigration to Africa. He laid the foundation for the <strong>Black Power movement</strong>, which sought self-determination and independence for Black people.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'modern-challenges', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Continuing Challenges for African Americans</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've examined ongoing issues!</p>
+                        <p>Legacies of de jure segregation persist:</p>
+                        <ul>
+                            <li>Many Black people still live in predominantly Black neighborhoods where ancestors were forced to live</li>
+                            <li>Two million African American young people attend schools almost entirely of students of color</li>
+                            <li>Attempts to integrate through busing were unpopular, contributing to "White flight"</li>
+                            <li><strong>De facto segregation</strong>—segregation resulting from individual choices rather than government action—remains widespread</li>
+                        </ul>
+                        <p>Lack of well-paying jobs, combined with legacies of slavery, Jim Crow terror, and persistent racism, has trapped many Black people in underserved neighborhoods with markedly lower opportunity and life expectancy.</p>
+                    </div>
+                </div>
+
+                <p><strong>Racial profiling</strong>—singling out Black (and Latino) people for greater police attention—remains a serious problem. When incidents of real or perceived injustice arise, as occurred in Ferguson, Missouri; Staten Island, New York; Baltimore, Maryland; Louisville, Kentucky; and Minneapolis, Minnesota, many African Americans turn to the streets to protest.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">The Civil Rights Act of 1964 prohibited discrimination based on:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">Race only</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-2', 0)">Race and gender only</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6-3', 25)">Race, color, religion, sex, or national origin</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-4', 0)">Race and religion only</div>
+                    <div class="feedback-box" id="feedback-q6"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which 2013 Supreme Court case weakened the Voting Rights Act?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q7-1', 0)">Brown v. Board of Education</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q7-2', 25)">Shelby County v. Holder</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q7-3', 0)">Obergefell v. Hodges</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q7-4', 0)">Citizens United v. FEC</div>
+                    <div class="feedback-box" id="feedback-q7"></div>
+                </div>
+
+                <div class="key-concept-box">
+                    <div class="key-concept-title">💡 Affirmative Action</div>
+                    <p>The practice of ensuring members of historically disadvantaged groups have equal access to opportunities. The Supreme Court's 2023 decision in <em>Students for Fair Admissions, Inc. v. Harvard</em> declared race-based college admissions unconstitutional under the Equal Protection Clause.</p>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection('section2')">✓ Complete Section 2</button>
+            </div>
+        </div>
+
+        <!-- Section 3: The Fight for Women's Rights -->
+        <div class="page" id="section3">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            <div class="section-content">
+                <h2>👩 Section 3: The Fight for Women's Rights</h2>
+                
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Describe early efforts to achieve rights for women</li>
+                        <li>Explain why the Equal Rights Amendment failed to be ratified</li>
+                        <li>Describe the ways in which women acquired greater rights in the twentieth century</li>
+                        <li>Analyze why women continue to experience unequal treatment</li>
+                    </ul>
+                </div>
+
+                <p>Along with African Americans, women of all races and ethnicities have long been discriminated against in the United States, and the women's rights movement began at the same time as the movement to abolish slavery. Indeed, the women's movement came about largely as a result of difficulties women encountered while trying to abolish slavery.</p>
+
+                <h3>The Early Women's Rights Movement</h3>
+
+                <p>At the time of the American Revolution, women had few rights. Although single women were allowed to own property, married women were not.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Coverture</div>
+                    <div>A legal principle whereby a married woman's legal identity was erased. Not only did women adopt their husbands' names, but all personal property they owned legally became their husbands' property. Husbands could manage their wives' real property and retain the profits. If women worked outside the home, their husbands were entitled to their wages. Divorce was difficult and in some places impossible to obtain.</div>
+                </div>
+
+                <p>Following the Revolution, women's conditions did not improve. Women were not granted the right to vote by any state except New Jersey, which at first allowed all taxpaying property owners to vote—but in 1807, the law changed to limit the vote to men.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'seneca-falls', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Seneca Falls Convention (1848)</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about this watershed moment!</p>
+                        <p><strong>Elizabeth Cady Stanton</strong> and <strong>Lucretia Mott</strong> organized the first women's rights convention, specifically addressing women's rights, at Seneca Falls, New York.</p>
+                        <p>Stanton wrote the <strong>Declaration of Sentiments</strong>, modeled after the Declaration of Independence, proclaiming women were equal to men and deserved the same rights. Among the rights demanded was <strong>suffrage</strong>—the right to vote.</p>
+                        <p>Many delegates feared demanding the vote would make the movement appear too radical. The Declaration passed, but the resolution demanding suffrage was the only one that did not pass unanimously.</p>
+                    </div>
+                </div>
+
+                <p>Along with other feminists like her friend <strong>Susan B. Anthony</strong>, Stanton fought for rights beyond suffrage, including the right to seek higher education. Their efforts led several states to pass laws allowing married women to retain property control and divorced women to keep custody of their children.</p>
+
+                <p>Prominent Black and formerly enslaved women such as <strong>Sojourner Truth</strong>, <strong>Frances Ellen Watkins Harper</strong>, and <strong>Mary Anne Shadd Cary</strong> joined the movement after establishing themselves as key figures in abolition. Truth's "Ain't I A Woman" speech is among the most well known of the movement.</p>
+
+                <h3>The Fight for Suffrage</h3>
+
+                <p>Following the Civil War, the women's rights movement fragmented. Stanton and Anthony denounced the Fifteenth Amendment because it granted voting rights only to Black men, not to women of any race.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'suffrage-orgs', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Competing Suffrage Organizations</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've explored suffrage strategies!</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Organization</th>
+                                <th>Leaders</th>
+                                <th>Strategy</th>
+                            </tr>
+                            <tr>
+                                <td><strong>NWSA</strong> (National Woman Suffrage Association, 1869)</td>
+                                <td>Stanton & Anthony</td>
+                                <td>Amend Constitution; also called for lenient divorce laws and end to sex discrimination</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AWSA</strong> (American Woman Suffrage Association, 1869)</td>
+                                <td>Lucy Stone</td>
+                                <td>Work state-by-state</td>
+                            </tr>
+                            <tr>
+                                <td><strong>NAWSA</strong> (National American Woman Suffrage Association, 1890)</td>
+                                <td>Merged groups</td>
+                                <td>Petitions, lobbying, parades</td>
+                            </tr>
+                            <tr>
+                                <td><strong>NWP</strong> (National Woman's Party)</td>
+                                <td>Alice Paul</td>
+                                <td>Public protests, picketing White House; faced arrests, force-feeding</td>
+                            </tr>
+                        </table>
+                        <p>Four western states—Utah, Colorado, Wyoming, and Idaho—extended the vote to women in the late nineteenth century.</p>
+                    </div>
+                </div>
+
+                <p>The more radical National Woman's Party held public protests and picketed outside the White House. Demonstrators were often beaten and arrested. When some, like Alice Paul, began hunger strikes, their jailers force-fed them—an incredibly painful and invasive experience.</p>
+
+                <p>Finally, in 1920, the triumphant passage of the <strong>Nineteenth Amendment</strong> granted all women the right to vote.</p>
+
+                <h3>Civil Rights and the Equal Rights Amendment</h3>
+
+                <p>The Nineteenth Amendment did not end discrimination in education, employment, or other areas of life. Women continued to be underrepresented in professions, and relatively few sought advanced degrees. The ideal was for women to marry, have children, and become housewives. Those who sought outside work were routinely denied jobs and paid less than men.</p>
+
+                <p><strong>Title VII of the Civil Rights Act of 1964</strong> prohibited employment discrimination based on sex as well as race, color, national origin, and religion. In 1966, feminists angered by lack of progress organized the <strong>National Organization for Women (NOW)</strong>, which promoted workplace equality and greater presence of women in public office.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'era', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Equal Rights Amendment</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about this ongoing effort!</p>
+                        <p>The <strong>ERA</strong>, written by Alice Paul and Crystal Eastman, mandated equal treatment regardless of sex. First proposed to Congress in 1923, it passed both houses in 1972 and was sent to states for ratification.</p>
+                        <p><strong>Opposition argued:</strong></p>
+                        <ul>
+                            <li>Women would be subject to military conscription</li>
+                            <li>Women would be denied alimony and custody in divorce</li>
+                        </ul>
+                        <p>The original deadline was March 22, 1979. Congress extended it to June 30, 1982, but only 35 states ratified (38 needed), with some rescinding.</p>
+                        <p>In 2020, Virginia became the 38th state to ratify—well after the deadline. The House passed legislation to remove deadlines, but the Senate has not acted.</p>
+                    </div>
+                </div>
+
+                <p><strong>Title IX of the Education Amendments of 1972</strong> applies to all educational institutions receiving federal aid and prohibits discrimination based on sex in academic programs, dormitory space, health-care access, and school activities including sports.</p>
+
+                <h3>Continuing Challenges for Women</h3>
+
+                <p>Women have made great progress since Seneca Falls. Today, more women than men attend college and are more likely to graduate. Women are represented in all professions, and approximately half of all law and medical school students are women. Women have held Cabinet positions, been elected to Congress, run for president and vice president, and four female justices currently serve on the Supreme Court.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What amendment granted women the right to vote nationwide?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q8-1', 0)">Fourteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q8-2', 0)">Fifteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q8-3', 25)">Nineteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q8-4', 0)">Equal Rights Amendment</div>
+                    <div class="feedback-box" id="feedback-q8"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'glass-ceiling', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Glass Ceiling and Wage Gap</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've explored ongoing inequalities!</p>
+                        <p>The <strong>glass ceiling</strong> is an invisible barrier caused by discrimination that prevents women from rising to highest levels of organizations.</p>
+                        <ul>
+                            <li>As of 2014, fully employed women earned 79 cents for every dollar earned by men</li>
+                            <li>Women from underrepresented groups face even greater discrimination</li>
+                            <li>Women are more likely to be single parents and live below the poverty line</li>
+                            <li>As of June 2021, women held only about 27% of seats in Congress and 31% in state legislatures</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="key-concept-box">
+                    <div class="key-concept-title">💡 Comparable Worth</div>
+                    <p>The doctrine that people should be compensated equally for work requiring comparable skills, responsibilities, and effort—even if the specific job differs. For example, daycare workers (predominantly female, $9.12/hour average) require more skills and responsibility than garbage collectors (predominantly male, $15.34/hour average).</p>
+                </div>
+
+                <p>Women remain subject to sexual harassment in the workplace and are more likely than men to be victims of domestic violence. Approximately one-third of all women have experienced domestic violence; one in five women is assaulted during her college years.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which law prohibits sex discrimination in educational programs receiving federal funds?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q9-1', 0)">Equal Rights Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q9-2', 25)">Title IX</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q9-3', 0)">Title VII</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q9-4', 0)">Nineteenth Amendment</div>
+                    <div class="feedback-box" id="feedback-q9"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">The Seneca Falls Convention in 1848 was significant because it:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q10-1', 0)">Passed the Nineteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q10-2', 25)">Launched the organized women's rights movement in the U.S.</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q10-3', 0)">Ended the practice of coverture</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q10-4', 0)">Created the National Organization for Women</div>
+                    <div class="feedback-box" id="feedback-q10"></div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection('section3')">✓ Complete Section 3</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Civil Rights for Indigenous Groups -->
+        <div class="page" id="section4">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            <div class="section-content">
+                <h2>🪶 Section 4: Civil Rights for Indigenous Groups</h2>
+                
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Outline the history of discrimination against Native Americans</li>
+                        <li>Describe the expansion of Native American civil rights from 1960 to 1990</li>
+                        <li>Discuss the persistence of problems Native Americans face today</li>
+                    </ul>
+                </div>
+
+                <p>Native Americans have long suffered the effects of segregation and discrimination imposed by the U.S. government and the larger White society. Native Americans were not granted the full rights and protections of U.S. citizenship until long after African Americans and women were, with many having to wait until the <strong>Nationality Act of 1940</strong> to become citizens.</p>
+
+                <p>This was long after the Fourteenth Amendment in 1868, which granted citizenship to African Americans but not, the Supreme Court decided in <em>Elk v. Wilkins</em> (1884), to Native Americans. Furthermore, Native Americans are the only group forcibly removed en masse from the lands on which they and their ancestors had lived.</p>
+
+                <h3>Native Americans Lose Their Land and Rights</h3>
+
+                <p>From the very beginning of European settlement in North America, Native Americans were abused and exploited. Early British settlers attempted to enslave members of various tribes, especially in the southern colonies. Following the American Revolution, the U.S. government assumed responsibility for conducting negotiations with Indian tribes, all designated as sovereign nations, and regulating commerce with them. Because Native Americans were officially regarded as citizens of other nations, they were denied U.S. citizenship.</p>
+
+                <p>As White settlement spread westward, Indian tribes were forced from their homelands. Although the federal government signed numerous treaties guaranteeing rights to live in traditional places, land-hungry White settlers routinely violated these agreements and the federal government did little to enforce them.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'indian-removal', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Indian Removal and the Trail of Tears</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about forced relocation!</p>
+                        <p>In 1830, Congress passed the <strong>Indian Removal Act</strong>, forcing Native Americans to move west of the Mississippi River.</p>
+                        <p>The Cherokee resisted. Georgia tried numerous tactics to force them from their territory, intensifying after gold was discovered in 1829. In <em>Cherokee Nation v. Georgia</em> (1831), the Supreme Court ruled:</p>
+                        <ul>
+                            <li>Indian tribes were not sovereign nations</li>
+                            <li>BUT tribes were entitled to their ancestral lands and could not be forced to move</li>
+                        </ul>
+                        <p>In <em>Worcester v. Georgia</em> (1832), the Court ruled non-Native Americans couldn't enter tribal lands without permission.</p>
+                        <p>White Georgians refused to comply. President Andrew Jackson refused to enforce the ruling. Between 1831-1838, members of several southern tribes, including the Cherokees, were forced by the U.S. Army to move west along what became known as the <strong>Trail of Tears</strong>. One-quarter of the Cherokee population died during the journey to Oklahoma Territory.</p>
+                    </div>
+                </div>
+
+                <p>By the Civil War, most Indian tribes had been relocated west of the Mississippi. However, once large numbers of White Americans and European immigrants moved west after the Civil War, Native Americans were again displaced. They were confined to <strong>reservations</strong>—federal lands set aside for their use where non-Indians could not settle. Reservation land was usually poor, and attempts to farm or raise livestock often failed.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Dawes Severalty Act (1887)</div>
+                    <div>Another effort to assimilate Native Americans to White society, this act divided reservation lands into individual allotments. Native Americans who accepted allotments and agreed to sever tribal ties were given U.S. citizenship. All lands remaining after division were sold by the federal government to White farmers and ranchers. Native Americans swiftly lost control of reservation land.</div>
+                </div>
+
+                <p>In 1898, the <strong>Curtis Act</strong> dealt the final blow to Indian sovereignty by abolishing all tribal governments.</p>
+
+                <h3>The Fight for Native American Rights</h3>
+
+                <p>As Native Americans were removed from tribal lands and saw their cultures destroyed, a movement to protect their rights began to grow. Sarah Winnemucca (Paiute) lectured throughout the east in the 1880s to acquaint White audiences with injustices. Lakota physician Charles Eastman also worked for Native American rights.</p>
+
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1924</div>
+                            <h4>Indian Citizenship Act</h4>
+                            <p>Granted citizenship to all Native Americans born after its passage.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1934</div>
+                            <h4>Indian Reorganization Act</h4>
+                            <p>Ended division of reservation land into allotments. Returned rights to self-government, write constitutions, and manage lands. Provided funds for businesses and college education.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1969-1971</div>
+                            <h4>Occupation of Alcatraz</h4>
+                            <p>Pan-Indian activists took control of the island, claiming it as compensation for treaty violations. Brought national attention to Native American concerns.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1973</div>
+                            <h4>AIM and Wounded Knee</h4>
+                            <p>American Indian Movement and 200 Oglala Lakota occupied Wounded Knee, site of 1890 massacre. Two activists killed; confrontation led to negotiations.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">1975</div>
+                            <h4>Indian Self-Determination Act</h4>
+                            <p>Tribes assumed control of programs formerly controlled by BIA (education, resource management) with federal funding.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'native-laws', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Key Native American Rights Legislation</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about important protections!</p>
+                        <ul>
+                            <li><strong>Indian Gaming Regulatory Act (1988)</strong> - Limited states' ability to control gaming on Native American lands, allowing tribes to open casinos</li>
+                            <li><strong>American Indian Religious Freedom Act (1978)</strong> - Granted rights to conduct traditional ceremonies including those using otherwise prohibited substances like peyote</li>
+                            <li><strong>Indian Child Welfare Act (1978)</strong> - Prevented removing Native American children from homes and placing them with non-Native families</li>
+                            <li><strong>McGirt v. Oklahoma (2020)</strong> - Landmark Supreme Court decision holding that a large part of Oklahoma is tribal land, with crimes subject to federal rather than state authority</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Alaska Natives and Native Hawaiians</h3>
+
+                <p>Alaska Natives and Native Hawaiians endured many of the same abuses. The <strong>Alaska Native Claims Settlement Act (1971)</strong> gave Alaska Natives 44 million acres of resource-rich land and more than $900 million in cash in exchange for relinquishing claims to ancestral lands.</p>
+
+                <p>Native Hawaiians lost control of nearly two million acres through the overthrow of the Hawaiian monarchy in 1893 and formal U.S. annexation in 1898. In September 2015, the U.S. Department of Interior created guidelines for Native Hawaiians who wish to govern themselves in a relationship with the federal government similar to Native American tribes.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which act ended the division of reservation land into individual allotments?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q11-1', 0)">Dawes Severalty Act</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q11-2', 25)">Indian Reorganization Act</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q11-3', 0)">Indian Removal Act</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q11-4', 0)">Curtis Act</div>
+                    <div class="feedback-box" id="feedback-q11"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">The Trail of Tears refers to:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q12-1', 25)">The forced relocation of Cherokee and other tribes to Oklahoma Territory</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q12-2', 0)">The 1890 massacre at Wounded Knee</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q12-3', 0)">The occupation of Alcatraz Island</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q12-4', 0)">The passage of the Indian Citizenship Act</div>
+                    <div class="feedback-box" id="feedback-q12"></div>
+                </div>
+
+                <div class="key-concept-box">
+                    <div class="key-concept-title">💡 Continuing Challenges</div>
+                    <p>American Indians, Alaska Natives, and Native Hawaiians still trail behind other ethnic groups in many areas:</p>
+                    <ul>
+                        <li>Some of the poorest U.S. counties are on Native American reservations</li>
+                        <li>Less likely than White, Black, or Asian Americans to complete high school or college</li>
+                        <li>High rates of infant mortality, alcoholism, and suicide on many reservations</li>
+                        <li>Native Hawaiians are more likely to live in poverty and be unhoused than White Hawaiians</li>
+                    </ul>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection('section4')">✓ Complete Section 4</button>
+            </div>
+        </div>
+
+        <!-- Section 5: Equal Protection for Other Groups -->
+        <div class="page" id="section5">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            <div class="section-content">
+                <h2>🌈 Section 5: Equal Protection for Other Groups</h2>
+                
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Discuss the discrimination faced by Hispanic/Latino Americans and Asian Americans</li>
+                        <li>Describe the influence of the African American civil rights movement on other movements</li>
+                        <li>Describe federal actions to improve opportunities for people with disabilities</li>
+                        <li>Describe discrimination faced by religious minorities</li>
+                    </ul>
+                </div>
+
+                <p>Many groups in American society have faced and continue to face challenges in achieving equality. Some are overlooked because they are not as large a percentage of the U.S. population, and organized movements to achieve equality for them are relatively young. This does not mean the discrimination they face has not been as longstanding or severe.</p>
+
+                <h3>Hispanic/Latino Civil Rights</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Hispanic vs. Latino</div>
+                    <div><strong>Hispanic</strong> usually refers to native speakers of Spanish or those descended from Spanish-speaking countries. <strong>Latino</strong> refers to people from Mexico, Central America, South America, and some Caribbean islands (Latin America). People from Spain are Hispanic but not Latino; people from Brazil are Latino but not Hispanic. Many people now use <strong>Latinx</strong> or <strong>Latine</strong> to be more inclusive.</div>
+                </div>
+
+                <p>Many Latinos became part of the U.S. population following the annexation of Texas (1845) and California, Arizona, New Mexico, Nevada, Utah, and Colorado after the War with Mexico (1848). Most were subject to discrimination and could find employment only as poorly paid migrant workers, railroad workers, and unskilled laborers.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'latino-history', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Latino Civil Rights History</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about key events!</p>
+                        <ul>
+                            <li><strong>1917:</strong> Jones Act granted U.S. citizenship to Puerto Ricans</li>
+                            <li><strong>1903:</strong> Mexican and Japanese farmworkers formed first agricultural union</li>
+                            <li><strong>1929:</strong> League of United Latin American Citizens (LULAC) formed</li>
+                            <li><strong>1930s:</strong> Mexican immigrants and Mexican Americans deported during Great Depression</li>
+                            <li><strong>WWII:</strong> Bracero Program invited Mexican farmworkers to enable American men to enlist</li>
+                            <li><strong>1947:</strong> <em>Mendez v. Westminster</em> - segregation of Mexican students unconstitutional</li>
+                            <li><strong>1953-1958:</strong> "Operation Wetback" deported over 3 million</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>In the 1960s, the Mexican American civil rights movement grew stronger and more radical. Young activists called for <strong>Brown Power</strong> and began referring to themselves as <strong>Chicanos</strong> to stress pride in their hybrid Spanish-Native American identity. <strong>Cesar Chavez</strong> and <strong>Dolores Huerta</strong> founded the <strong>United Farm Workers (UFW)</strong> in 1962 and led strikes and boycotts, including the 1965-1970 grape boycott.</p>
+
+                <div class="case-study-box">
+                    <div class="case-study-title">📖 East L.A. Student Walkouts (March 1968)</div>
+                    <p>Chicano students at five East Los Angeles high schools went on strike demanding better education. Schools did not allow Latino students to speak Spanish and gave no place to Mexican history. Guidance counselors encouraged vocational careers regardless of ability. The dropout rate was very high.</p>
+                    <p>Thirteen organizers were arrested. After teacher Sal Castro was dismissed, activists held a sit-in until he was reinstated. Protests spread across the Southwest. That same year, Congress passed the <strong>Bilingual Education Act</strong>.</p>
+                </div>
+
+                <h3>Asian American Civil Rights</h3>
+
+                <p>Often stereotyped as the "model minority," Asian Americans have long faced discrimination. The Chinese were the first large group to immigrate, arriving in the mid-nineteenth century to work in mining and on the Central Pacific Railroad.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'asian-exclusion', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Asian Exclusion Laws</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about discriminatory legislation!</p>
+                        <ul>
+                            <li><strong>Chinese Exclusion Act (1882)</strong> - Prevented Chinese immigration for 10 years and barred citizenship</li>
+                            <li><strong>Geary Act (1892)</strong> - Extended ban another 10 years</li>
+                            <li><strong>California law (1913)</strong> - Prevented all Asians from owning land</li>
+                            <li><strong>Immigration Act of 1924</strong> - Prevented all Asians (except Filipinos) from immigrating or becoming citizens</li>
+                        </ul>
+                        <p>Laws in several states barred marriage between Chinese and White Americans. Some cities required Asian children to attend segregated schools.</p>
+                    </div>
+                </div>
+
+                <p>During World War II, citizens of Japanese descent living on the West Coast—whether naturalized immigrants or Japanese Americans born in the United States—were removed from their communities and interned under Executive Order 9066. Although Italians and Germans suspected of disloyalty were also interned, only the Japanese were imprisoned solely on the basis of their ethnicity.</p>
+
+                <p>None of the more than 110,000 Japanese and Japanese American internees was ever found to have committed a disloyal act. In <em>Korematsu v. United States</em> (1944), the Supreme Court upheld the government's actions as a necessary wartime precaution. When internees returned after the war, many found their houses, cars, and businesses had been sold or destroyed.</p>
+
+                <p>During the COVID-19 pandemic, hate crimes against Asian Americans increased 150 percent in 2020 and rose over 800 percent in New York City.</p>
+
+                <h3>LGBTQ Civil Rights</h3>
+
+                <p>Laws against same-sex relations existed in most states throughout the nineteenth and twentieth centuries. By the late nineteenth century, homosexuality was regarded as mental illness and sin. Lesbian women, gay men, bisexual people, and transgender people had to keep their orientation "closeted."</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'lgbtq-history', 35)">
+                    <div class="card-prompt">🔍 Click to explore: LGBTQ Rights Movement</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've explored this important movement!</p>
+                        <ul>
+                            <li><strong>1950:</strong> Mattachine Society founded to champion gay men's rights</li>
+                            <li><strong>Daughters of Bilitis:</strong> Lesbian rights organization</li>
+                            <li><strong>June 1969:</strong> <strong>Stonewall Riots</strong> - patrons at NYC gay bar resisted police raid, sparking days of protests</li>
+                            <li><strong>1973:</strong> American Psychological Association stopped classifying homosexuality as mental disorder</li>
+                            <li><strong>2003:</strong> <em>Lawrence v. Texas</em> - struck down remaining state laws criminalizing same-sex relations</li>
+                            <li><strong>2015:</strong> <em>Obergefell v. Hodges</em> - made same-sex marriage legal nationwide</li>
+                            <li><strong>2020:</strong> <em>Bostock v. Clayton County</em> - employment discrimination based on sexual orientation or gender identity violates Title VII</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>"Don't Ask, Don't Tell" (1994-2011) prohibited military discrimination against gay, lesbian, and bisexual people but also prohibited them from speaking openly about their orientation. Now they may serve openly. Transgender people were banned from military service in 1960; the ban was lifted in 2016, reinstated, then removed again by the Biden administration in 2021. Upon taking office in 2025, President Trump signed an executive order reinstating the ban; a judge has blocked enforcement.</p>
+
+                <h3>Civil Rights for People with Disabilities</h3>
+
+                <p>People with disabilities were long denied employment and access to public education. Many were institutionalized. A eugenics movement sought to discourage reproduction among those with disabilities. Many states passed laws prohibiting marriage among people with "hereditary defects" and had programs to sterilize people considered "feeble minded" without consent.</p>
+
+                <p>In <em>Buck v. Bell</em> (1927), the Supreme Court upheld states' right to sterilize those believed likely to have children who would become dependent on public welfare. Some programs persisted into the 1970s.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Americans with Disabilities Act (1990)</div>
+                    <div>Greatly expanded opportunities and protections:
+                        <ul>
+                            <li>Prohibits employment discrimination based on disability</li>
+                            <li>Requires employers to make reasonable accommodations</li>
+                            <li>Mandates accessible public transportation and public accommodations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Rights of Religious Minorities</h3>
+
+                <p>Anti-Catholicism was common from the early nineteenth century, with Catholic immigrants denied jobs. Anti-Mormon sentiment led to violence, including the 1844 murder of LDS founder Joseph Smith. Jewish Americans faced discrimination in employment, education, and housing, with restrictive covenants and "gentlemen's agreements" limiting university admissions.</p>
+
+                <p>Jewish people or property are the most frequent targets of hate crimes motivated by religious bias. Muslims have experienced a rise in discrimination and hate crimes, with many believing they are subject to racial profiling. Many Christians have argued they are being deprived of rights because of their religious beliefs—as in <em>Burwell v. Hobby Lobby Stores, Inc.</em> (2014), where the Supreme Court ruled a company's health plan need not cover contraception if the owner's religious beliefs oppose it.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which Supreme Court case made same-sex marriage legal nationwide?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q13-1', 0)">Lawrence v. Texas</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q13-2', 25)">Obergefell v. Hodges</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q13-3', 0)">Bostock v. Clayton County</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q13-4', 0)">Loving v. Virginia</div>
+                    <div class="feedback-box" id="feedback-q13"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">The Stonewall Riots in 1969 are significant because they:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q14-1', 25)">Sparked the modern LGBTQ rights movement</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q14-2', 0)">Led directly to marriage equality</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q14-3', 0)">Overturned "Don't Ask, Don't Tell"</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q14-4', 0)">Passed the Americans with Disabilities Act</div>
+                    <div class="feedback-box" id="feedback-q14"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">The Americans with Disabilities Act requires all of the following EXCEPT:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q15-1', 0)">Accessible public transportation</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q15-2', 0)">Reasonable workplace accommodations</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q15-3', 25)">Guaranteed employment for all disabled persons</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q15-4', 0)">Accessible public accommodations</div>
+                    <div class="feedback-box" id="feedback-q15"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">The 2020 Bostock v. Clayton County decision held that:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q16-1', 25)">Employment discrimination based on sexual orientation or gender identity violates Title VII</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q16-2', 0)">Same-sex marriage is a constitutional right</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q16-3', 0)">States cannot ban same-sex relations</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q16-4', 0)">Religious employers are exempt from anti-discrimination laws</div>
+                    <div class="feedback-box" id="feedback-q16"></div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection('section5')">✓ Complete Section 5</button>
+            </div>
+        </div>
+
+        <!-- Report Page -->
+        <div class="page" id="report">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>👤 TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateToHome()">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 5: Civil Rights</p>
+                        
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">100%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Name:</span>
+                                    <span class="info-value" id="reportStudentName">Not entered</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span class="info-value" id="reportDate"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span class="info-value" id="reportTime"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="performance-section">
+                                <h3>Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Points</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1. What Are Civil Rights?</td>
+                                        <td id="status-section1" class="status-incomplete">⭕ Incomplete</td>
+                                        <td id="points-section1">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. African American Civil Rights</td>
+                                        <td id="status-section2" class="status-incomplete">⭕ Incomplete</td>
+                                        <td id="points-section2">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Women's Rights Movement</td>
+                                        <td id="status-section3" class="status-incomplete">⭕ Incomplete</td>
+                                        <td id="points-section3">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Indigenous Peoples' Rights</td>
+                                        <td id="status-section4" class="status-incomplete">⭕ Incomplete</td>
+                                        <td id="points-section4">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. Equal Protection for Other Groups</td>
+                                        <td id="status-section5" class="status-incomplete">⭕ Incomplete</td>
+                                        <td id="points-section5">0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/5</div>
+                                <div class="metric-label">Sections Complete</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This report was generated upon completion of the TCC Federal Government Trailblazer Trek - Chapter 5: Civil Rights module. The score reflects the student's engagement with interactive content and performance on knowledge check questions. Total possible points: 1120.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            studentName: '',
+            score: 0,
+            maxScore: 1120,
+            sectionsCompleted: [],
+            cardsRevealed: [],
+            questionsAnswered: [],
+            sectionPoints: {
+                section1: 0,
+                section2: 0,
+                section3: 0,
+                section4: 0,
+                section5: 0
+            },
+            correctAnswers: 0,
+            totalQuestions: 16
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Rights Scholar',
+            400: 'Equality Expert',
+            600: 'Justice Master',
+            800: 'Civil Rights Champion',
+            1000: 'Civil Rights Sage'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateDisplay();
+        });
+
+        // Save/Load Progress
+        function saveProgress() {
+            localStorage.setItem('chapter5Progress', JSON.stringify(gameState));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('chapter5Progress');
+            if (saved) {
+                Object.assign(gameState, JSON.parse(saved));
+                if (gameState.studentName) {
+                    document.getElementById('studentName').value = gameState.studentName;
+                }
+            }
+        }
+
+        function saveName() {
+            gameState.studentName = document.getElementById('studentName').value;
+            saveProgress();
+        }
+
+        // Navigation
+        function navigateToSection(sectionId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            if (sectionId === 'report') {
+                updateReport();
+            }
+        }
+
+        function navigateToHome() {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('home').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Interactive Cards
+        function revealCard(element, cardId, points) {
+            if (gameState.cardsRevealed.includes(cardId)) return;
+            
+            element.classList.add('revealed');
+            element.querySelector('.card-content').classList.add('visible');
+            element.querySelector('.card-prompt').innerHTML = '✓ ' + element.querySelector('.card-prompt').textContent.replace('Click to explore:', 'Explored:');
+            
+            gameState.cardsRevealed.push(cardId);
+            addPoints(points, cardId);
+        }
+
+        // Knowledge Check
+        function handleAnswer(element, isCorrect, questionId, points) {
+            const questionIdBase = questionId.split('-')[0];
+            if (gameState.questionsAnswered.includes(questionIdBase)) return;
+            
+            const parent = element.closest('.knowledge-check');
+            const options = parent.querySelectorAll('.kc-option');
+            const feedback = parent.querySelector('.feedback-box');
+            
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === element) {
+                    opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            });
+            
+            feedback.classList.add('visible');
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.innerHTML = '✓ Correct! +' + points + ' points';
+                gameState.correctAnswers++;
+                addPoints(points, questionId);
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.innerHTML = '✗ Not quite. Review the material and try to understand why.';
+            }
+            
+            gameState.questionsAnswered.push(questionIdBase);
+            saveProgress();
+        }
+
+        // Points System
+        function addPoints(points, sourceId) {
+            gameState.score += points;
+            
+            // Track section points
+            const currentSection = document.querySelector('.page.active').id;
+            if (gameState.sectionPoints[currentSection] !== undefined) {
+                gameState.sectionPoints[currentSection] += points;
+            }
+            
+            showPointsPopup(points);
+            updateDisplay();
+            saveProgress();
+        }
+
+        function showPointsPopup(points) {
+            const popup = document.createElement('div');
+            popup.className = 'points-popup';
+            popup.textContent = '+' + points + ' points!';
+            document.body.appendChild(popup);
+            
+            setTimeout(() => popup.remove(), 2000);
+        }
+
+        function getLevel(score) {
+            let currentLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (score >= parseInt(threshold)) {
+                    currentLevel = level;
+                }
+            }
+            return currentLevel;
+        }
+
+        // Complete Section
+        function completeSection(sectionId) {
+            if (!gameState.sectionsCompleted.includes(sectionId)) {
+                gameState.sectionsCompleted.push(sectionId);
+                document.getElementById('card-' + sectionId).classList.add('completed');
+                saveProgress();
+                updateDisplay();
+            }
+            navigateToHome();
+        }
+
+        // Update Display
+        function updateDisplay() {
+            document.getElementById('currentScore').textContent = gameState.score;
+            document.getElementById('currentLevel').textContent = getLevel(gameState.score);
+            
+            const progress = Math.round((gameState.sectionsCompleted.length / 5) * 100);
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressFill').textContent = progress + '%';
+            
+            gameState.sectionsCompleted.forEach(sectionId => {
+                const card = document.getElementById('card-' + sectionId);
+                if (card) card.classList.add('completed');
+            });
+        }
+
+        // Update Report
+        function updateReport() {
+            const now = new Date();
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Not entered';
+            document.getElementById('reportDate').textContent = now.toLocaleDateString();
+            document.getElementById('reportTime').textContent = now.toLocaleTimeString();
+            
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            
+            const percentage = Math.round((gameState.score / gameState.maxScore) * 100);
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            
+            const completionPercent = Math.round((gameState.sectionsCompleted.length / 5) * 100);
+            document.getElementById('reportCompletion').textContent = completionPercent;
+            
+            // Calculate grade
+            const gradeDisplay = document.getElementById('gradeDisplay');
+            const letterGrade = document.getElementById('letterGrade');
+            let grade, color;
+            
+            if (percentage >= 90) { grade = 'A'; color = '#1B5E20'; }
+            else if (percentage >= 80) { grade = 'B'; color = '#00695C'; }
+            else if (percentage >= 70) { grade = 'C'; color = '#F57C00'; }
+            else if (percentage >= 60) { grade = 'D'; color = '#E65100'; }
+            else { grade = 'F'; color = '#B71C1C'; }
+            
+            letterGrade.textContent = grade;
+            gradeDisplay.style.background = color;
+            
+            // Update section statuses
+            for (let i = 1; i <= 5; i++) {
+                const sectionId = 'section' + i;
+                const statusEl = document.getElementById('status-' + sectionId);
+                const pointsEl = document.getElementById('points-' + sectionId);
+                
+                if (gameState.sectionsCompleted.includes(sectionId)) {
+                    statusEl.textContent = '✅ Complete';
+                    statusEl.className = 'status-complete';
+                } else {
+                    statusEl.textContent = '⭕ Incomplete';
+                    statusEl.className = 'status-incomplete';
+                }
+                
+                pointsEl.textContent = gameState.sectionPoints[sectionId] || 0;
+            }
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = gameState.sectionsCompleted.length + '/5';
+            
+            const quizPercent = gameState.totalQuestions > 0 
+                ? Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) 
+                : 0;
+            document.getElementById('metricQuiz').textContent = quizPercent + '%';
+            
+            const engagementPercent = Math.round((gameState.cardsRevealed.length / 14) * 100); // 14 total cards
+            document.getElementById('metricEngagement').textContent = Math.min(engagementPercent, 100) + '%';
+        }
+    </script>
+</body>
+</html>

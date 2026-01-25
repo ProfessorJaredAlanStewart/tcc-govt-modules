@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Media - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 250px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: scale(1.05);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            padding-right: 30px;
+        }
+
+        .section-card .description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .section-card.completed {
+            background: var(--highlight-green);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 60px;
+            color: var(--success);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .section-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header .intro {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .learning-objectives {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .learning-objectives h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .learning-objectives ul {
+            margin-left: 1.5rem;
+        }
+
+        .learning-objectives li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-block h4 {
+            color: var(--secondary-blue);
+            margin: 1.5rem 0 0.75rem 0;
+            font-size: 1.15rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-blue);
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-card {
+            background: linear-gradient(135deg, #fff, #f0f7ff);
+            border: 2px solid var(--secondary-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .interactive-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1.02);
+        }
+
+        .interactive-card.revealed {
+            cursor: default;
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 1rem;
+        }
+
+        .interactive-card.revealed .card-content {
+            max-height: 2000px;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            transform: translateX(5px);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+            cursor: not-allowed;
+        }
+
+        .kc-option.incorrect {
+            background: #ffebee;
+            border-color: var(--error);
+            cursor: not-allowed;
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.success {
+            background: var(--highlight-green);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .feedback-box.error {
+            background: #ffebee;
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .bullet-list {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .bullet-list li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .insider-box {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            border: 2px solid var(--warning);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .insider-box h4 {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .milestone-box {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border: 2px solid var(--success);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .milestone-box h4 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .get-connected-box {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            border: 2px solid var(--secondary-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .get-connected-box h4 {
+            color: var(--secondary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .link-to-learning {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            border: 2px solid #6A1B9A;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .link-to-learning h5 {
+            color: #6A1B9A;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 5px;
+        }
+
+        .quote-attribution {
+            text-align: right;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            background: white;
+        }
+
+        tr:hover td {
+            background: var(--highlight-blue);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--primary-green));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-blue);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 5%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 5%;
+        }
+
+        .timeline-date {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Report Page Styles */
+        .report-page {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px 10px 0 0;
+            margin: -3rem -3rem 2rem -3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-back-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .report-back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            color: var(--text-primary);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--highlight-green);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .print-report-button {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .print-report-button:hover {
+            transform: scale(1.05);
+        }
+
+        #pointsPopup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .report-button {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.3);
+        }
+
+        .report-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            
+            .timeline-item::before {
+                left: 30px;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .report-header-bar {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.75rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .report-page {
+                box-shadow: none;
+            }
+
+            .header {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📺 Chapter 8: The Media - TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            Score: <span id="score">0</span> | Level: <span id="level">Explorer</span>
+        </div>
+    </div>
+
+    <div id="pointsPopup">
+        <span id="pointsMessage">+10 points!</span>
+    </div>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>📺 The Media 📰</h2>
+                <p class="hero-subtitle">Information, Democracy, and the Fourth Estate</p>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-icon">📱</div>
+                        <div class="stat-label">Digital Evolution</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🗞️</div>
+                        <div class="stat-label">Press Freedom</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">📡</div>
+                        <div class="stat-label">Media Influence</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your Name">
+                <button onclick="saveName()">Start Learning</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" id="card1" onclick="navigateToSection('section1')">
+                    <div class="badge">1</div>
+                    <h3>What Is the Media?</h3>
+                    <p class="description">Understanding mass media, types, functions, and conglomerates</p>
+                    <p class="points">⭐ 275 points available</p>
+                </div>
+
+                <div class="section-card" id="card2" onclick="navigateToSection('section2')">
+                    <div class="badge">2</div>
+                    <h3>Evolution of the Media</h3>
+                    <p class="description">From colonial newspapers to social media revolution</p>
+                    <p class="points">⭐ 300 points available</p>
+                </div>
+
+                <div class="section-card" id="card3" onclick="navigateToSection('section3')">
+                    <div class="badge">3</div>
+                    <h3>Regulating the Media</h3>
+                    <p class="description">First Amendment, FCC, and media transparency</p>
+                    <p class="points">⭐ 275 points available</p>
+                </div>
+
+                <div class="section-card" id="card4" onclick="navigateToSection('section4')">
+                    <div class="badge">4</div>
+                    <h3>The Impact of the Media</h3>
+                    <p class="description">Bias, framing, campaigns, and societal effects</p>
+                    <p class="points">⭐ 300 points available</p>
+                </div>
+            </div>
+
+            <button class="report-button" onclick="navigateToSection('reportPage')">📊 View Your Completion Report</button>
+        </div>
+
+        <!-- Section 1: What Is the Media? -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📰 Section 1: What Is the Media?</h2>
+                <p class="intro">
+                    Freedom of the press and an independent media are important dimensions of a liberal society and a necessary part of a healthy democracy. "No government ought to be without censors," said Thomas Jefferson, "and where the press is free, no one ever will."
+                </p>
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Explain what the media are and how they are organized</li>
+                        <li>Describe the main functions of the media in a free society</li>
+                        <li>Compare different media formats and their respective audiences</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📺 Media Basics</h3>
+                <p>
+                    Ours is an exploding media system. What started as print journalism was subsequently supplemented by radio coverage, then network television, followed by cable television. Now, with the addition of the Internet, blogs and <strong>social media</strong>—a set of applications or web platforms that allow users to immediately communicate with one another—give citizens a wide variety of sources for instant news of all kinds.
+                </p>
+                
+                <p>
+                    The Internet also allows citizens to initiate public discussion by uploading images and video for viewing, such as videos documenting interactions between citizens and the police. Provided we are connected digitally, we have a bewildering amount of choices for finding information about the world.
+                </p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📰 Mass Media</div>
+                    <div>The collection of all forms of media that communicate information to the general public, including television, print, radio, and Internet. One of the primary reasons citizens turn to the media is for news. We expect the media to cover important political and social events and information in a concise and neutral manner.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'media-roles', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Key Roles in Media Organizations</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🌟 To accomplish its work, the media employs a number of people in varied positions:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Journalists and Reporters:</strong> Responsible for uncovering news stories by keeping an eye on areas of public interest, like politics, business, and sports. They research background information and interview people to create complete and balanced accounts.</li>
+                            <li><strong>Editors:</strong> Work in the background of the newsroom, assigning stories, approving articles or packages, and editing content for accuracy and clarity.</li>
+                            <li><strong>Publishers:</strong> People or companies that own and produce print or digital media. They oversee both the content and finances of the publication.</li>
+                            <li><strong>Producers:</strong> Oversee the production and finances of visual media, like television, radio, and film.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎭 Public Relations</div>
+                    <div>Communication carried out to improve the image of companies, organizations, or candidates for office. Public relations is not a neutral information form. While journalists write stories to inform the public, a public relations spokesperson is paid to help an individual or organization get positive press. PR materials normally appear as press releases or paid advertisements. Some less reputable publications, however, publish paid articles under the news banner, blurring the line between journalism and public relations.</div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📱 Media Types and Demographics</h3>
+                <p>
+                    Each form of media has its own complexities and is used by different demographics. <strong>Millennials</strong> (born 1981-1996) and <strong>Generation Z</strong> (born 1997-2012) are more likely to get news and information from social media, such as Instagram, TikTok, Twitter, and YouTube, while <strong>Baby Boomers</strong> (born 1946-1964) are most likely to get their news from television, either national broadcasts or local news.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'tv-types', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Television Programming Types</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📺 Television offers viewers a variety of formats:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Scripted Programming:</strong> Dramas and comedies created by production companies</li>
+                            <li><strong>Unscripted Programming:</strong> Game shows and reality programs</li>
+                            <li><strong>Informative Programming:</strong> News programming and documentaries</li>
+                            <li><strong>National Networks:</strong> CBS, NBC, ABC purchase rights to programs and distribute to local affiliates</li>
+                            <li><strong>Local Affiliates:</strong> Broadcast national network programming to local viewers</li>
+                        </ul>
+                        <p>Network news has a national focus on politics, international events, and the economy, while local news focuses on regional business, crime, sports, and weather.</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Media Type</th>
+                            <th>Primary Audience</th>
+                            <th>Key Characteristics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Television News (Network)</td>
+                            <td>Baby Boomers</td>
+                            <td>Visual storytelling, scheduled programming, national focus</td>
+                        </tr>
+                        <tr>
+                            <td>Cable News (CNN, FOX, MSNBC)</td>
+                            <td>Adults 35+</td>
+                            <td>24-hour coverage, specialized content, opinion programming</td>
+                        </tr>
+                        <tr>
+                            <td>Social Media</td>
+                            <td>Millennials & Gen Z</td>
+                            <td>Instant updates, user interaction, viral sharing</td>
+                        </tr>
+                        <tr>
+                            <td>Radio</td>
+                            <td>Commuters, all ages</td>
+                            <td>Audio-only, local focus, talk shows</td>
+                        </tr>
+                        <tr>
+                            <td>Newspapers</td>
+                            <td>Older demographics</td>
+                            <td>In-depth coverage, investigative journalism</td>
+                        </tr>
+                        <tr>
+                            <td>Podcasts</td>
+                            <td>18-44 year olds</td>
+                            <td>On-demand, specialized topics, longer format</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'cable-internet', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Cable and Internet News</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📡 Cable and Internet have transformed news delivery:</p>
+                        <ul class="bullet-list">
+                            <li><strong>CNN (Cable News Network):</strong> The first 24-hour news station, creating live coverage and interview programs</li>
+                            <li><strong>Specialized Channels:</strong> MSNBC, FOX News, ESPN, Nickelodeon each serve specific audiences</li>
+                            <li><strong>C-SPAN:</strong> Three channels covering Congress, the president, the courts, and public interest matters</li>
+                            <li><strong>On-Demand Programming:</strong> Netflix and other streaming services allow viewing without schedules</li>
+                            <li><strong>Digital Paywall:</strong> The need for a paid subscription to access published online material</li>
+                        </ul>
+                        <p>The ease of online publication has made it possible for more niche media outlets to form, from the New York Times online to Politico to Daily Kos.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is the primary characteristic that distinguishes social media from traditional media?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
+                        Social media is always free
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">
+                        Users can immediately communicate with one another and share content that can grow exponentially
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
+                        Social media has better quality content
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
+                        Social media only covers entertainment news
+                    </div>
+                    <div class="feedback-box" id="feedback-q1-1"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏢 Media Conglomerates and Consolidation</h3>
+                <p>
+                    Most media are controlled by a limited number of conglomerates. A <strong>conglomerate</strong> is a corporation made up of a number of companies, organizations, and media networks. In the 1980s, more than fifty companies owned the majority of television and radio stations and networks. By 2011, six conglomerates controlled most of the broadcast media in the United States.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'conglomerate-history', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Shrinking Media Landscape</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📉 Media consolidation has accelerated dramatically:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1983:</strong> 50 companies owned 90% of U.S. media</li>
+                            <li><strong>2011:</strong> Six conglomerates controlled most broadcast media: CBS Corporation, Comcast, Time Warner, 21st Century Fox, Viacom, and The Walt Disney Company</li>
+                            <li><strong>2019:</strong> Disney-Fox merger and CBS-Viacom merger reduced this to just 4 major conglomerates</li>
+                            <li><strong>2021:</strong> Four conglomerates (Comcast, Disney, ViacomCBS, Warner Bros. Discovery) control 90% of U.S. media</li>
+                        </ul>
+                        <p>The Walt Disney Company owns ABC Television Network, ESPN, A&E, Lifetime, Disney Channel, and Disney+. Viacom owns BET, Comedy Central, MTV, Nickelodeon, and VH1.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is a potential problem with media conglomerates controlling most of the media?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
+                        They make media more expensive to produce
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">
+                        They can create a monopoly on information by controlling a sector of a market, potentially limiting the information citizens receive
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
+                        They only focus on entertainment, not news
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
+                        They are prohibited by the Constitution
+                    </div>
+                    <div class="feedback-box" id="feedback-q1-2"></div>
+                </div>
+
+                <p>
+                    Conglomerate ownership can create circumstances in which censorship may occur. For example, in 2010, iHeartMedia (formerly Clear Channel Media) refused to run several billboard ads for the St. Pete Pride Festival in Florida. Because iHeartMedia owns most of the billboards in the area, this limitation decreased awareness of the event and was viewed as censorship by festival organizers.
+                </p>
+
+                <div class="link-to-learning">
+                    <h5>🔗 Link to Learning</h5>
+                    <p>If you are concerned about the lack of variety in the media and the market dominance of media conglomerates, the non-profit organization <strong>Free Press</strong> tracks and promotes open communication.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Functions of the Media</h3>
+                <p>
+                    The media exist to fill a number of functions. Whether the medium is a newspaper, radio, or television newscast, a corporation behind the scenes must bring in revenue and pay for the cost of the product. Revenue comes from advertising and sponsors. But corporations will not pay for advertising if there are no viewers or readers. So all programs and publications need to entertain, inform, or interest the public.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'fourth-estate', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Fourth Estate</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🏛️ The media's critical functions in democracy:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Watchdog Role:</strong> The media are watchdogs of society and public officials. Some refer to the media as the "fourth estate," with the branches of government being the first three estates and the media equally participating as the fourth.</li>
+                            <li><strong>Accountability:</strong> This role helps maintain democracy and keeps the government accountable for its actions, even if a branch of government is reluctant to open itself to public scrutiny.</li>
+                            <li><strong>Information Gateway:</strong> The media keeps an eye on what is happening and sounds an alarm when the public needs to pay attention.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Agenda Setting</div>
+                    <div>The media's ability to choose which issues or topics deserve public discussion. For example, in the early 1980s, famine in Ethiopia drew worldwide attention after western media discovered it, which resulted in increased charitable giving. Yet the famine had been going on for a long time before media coverage brought it to public attention.</div>
+                </div>
+
+                <div class="insider-box">
+                    <h4>👤 Insider Perspective: Christiane Amanpour on "What Should Be News?"</h4>
+                    <p>
+                        As the chief international correspondent for CNN, Christiane Amanpour is one media decision maker. In an interview with Oprah Winfrey, Amanpour explains that her duty, and that of other journalists, is to make a difference in the world: "we have to educate people and use the media responsibly."
+                    </p>
+                    <p>
+                        Journalists cannot passively sit by and wait for stories to find them. "Words have consequences: the stories we decide to do, the stories we decide not to do . . . it all matters."
+                    </p>
+                    <p>
+                        One of her biggest regrets was not covering the genocide in Rwanda in 1994, which cost nearly a million lives. "If we don't respect our profession and we see it frittering away into the realm of triviality and sensationalism, we'll lose our standing. That won't be good for democracy. A thriving society must have a thriving press."
+                    </p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'media-public-good', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Media and the Public Good</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🌐 How media promotes democracy:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Public Forum:</strong> The media offers a platform for public debate and improving citizen awareness</li>
+                            <li><strong>National Coverage:</strong> Network news informs the electorate about national issues, elections, and international news</li>
+                            <li><strong>Local Coverage:</strong> Local news covers city government, school districts, and community events</li>
+                            <li><strong>Opinion and Analysis:</strong> Editorials, commentaries, Op-Ed columns, and blogs allow experts to express beliefs and attempt to persuade</li>
+                            <li><strong>Citizen Awareness:</strong> The New York Times, Los Angeles Times, NBC Nightly News help voters easily find out what issues affect the nation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ When the media engage in "agenda setting," they are:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">
+                        Creating fake news stories
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">
+                        Following government orders on what to cover
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-3', 25)">
+                        Choosing which issues or topics deserve public discussion
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">
+                        Meeting with political candidates to plan coverage
+                    </div>
+                    <div class="feedback-box" id="feedback-q1-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Evolution of the Media -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📜 Section 2: The Evolution of the Media</h2>
+                <p class="intro">
+                    The evolution of the media has been fraught with concerns and problems. Accusations of mind control, bias, and poor quality have been thrown at the media on a regular basis. Yet the growth of communications technology allows people today to find more information more easily than any previous generation.
+                </p>
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Discuss the history of major media formats</li>
+                        <li>Compare important changes in media types over time</li>
+                        <li>Explain how citizens learn political information from the media</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📰 Print Media: The Foundation</h3>
+                <p>
+                    Early news was presented to local populations through the print press. While several colonies had printers and occasional newspapers, high literacy rates combined with the desire for self-government made Boston a perfect location for the creation of a newspaper, and the first continuous press was started there in 1704.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'revolutionary-press', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Newspapers and the Revolutionary War</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📜 The role of newspapers in American independence:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Stamp Tax of 1765:</strong> Raised costs for publishers, causing several newspapers to fold</li>
+                            <li><strong>After Repeal (1766):</strong> Editors began questioning British rule over the colonies</li>
+                            <li><strong>Revolutionary Role:</strong> Newspapers took part in informing citizens of British misdeeds and inciting attempts to revolt</li>
+                            <li><strong>Growing Readership:</strong> Readership increased to nearly 40,000 homes (among a total population of two million)</li>
+                            <li><strong>Daily Papers:</strong> Sprang up in large cities to meet demand for news</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Party Press Era</div>
+                    <div>Period during the 1780s in which newspaper content was biased by political partisanship. The publication of The Federalist Papers, as well as the Anti-Federalist Papers, moved the nation into this era where party loyalty dominated editorial content. Subscriptions and advertisements did not fully cover printing costs, so political parties stepped in to support presses that aided their policies. Papers began printing party propaganda and messages, even publicly attacking political leaders like George Washington.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'print-evolution', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Penny Press and Yellow Journalism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📰 Print media evolution 1830-1900:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1830-1860:</strong> Machines made newspaper production faster and less expensive. Benjamin Day's New York Sun used the linotype machine for mass production.</li>
+                            <li><strong>Penny Press Papers:</strong> Contained more gossip than news but were affordable at one penny per issue</li>
+                            <li><strong>1841:</strong> Horace Greeley's New-York Tribune aimed for high journalistic standards</li>
+                            <li><strong>Yellow Journalism:</strong> Joseph Pulitzer's New York World included sensational front-page news, cartoons, and pictures. This style became known as yellow journalism—sensationalized coverage of scandals and human interest stories.</li>
+                            <li><strong>1896:</strong> Adolph Ochs purchased the New York Times with the goal of creating a dignified newspaper with important news rather than gossip</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔍 Muckraking</div>
+                    <div>News coverage focusing on exposing corrupt business and government practices. With the arrival of the Progressive Era, the media began this investigative journalism. Upton Sinclair's serialized novel The Jungle led to changes in how industrial workers were treated. The Pure Food and Drug Act and other laws were passed to protect consumers from unsafe food processing practices.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What was "yellow journalism"?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
+                        Newspapers printed on yellow paper
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">
+                        Sensationalized coverage of scandals and human interest stories to sell papers
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
+                        Journalism that only reported good news
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
+                        A form of government censorship
+                    </div>
+                    <div class="feedback-box" id="feedback-q2-1"></div>
+                </div>
+
+                <p>
+                    In the twenty-first century, newspapers have struggled to stay financially stable. Print media earned $46 billion from ads in 2012, but only $20.5 billion in 2020. Many newspapers now maintain both print and Internet presence. One-fifth of small-town newspapers have folded, and state legislative press corps have shrunk considerably.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>📻 Radio: A New Voice for Politics</h3>
+                <p>
+                    Radio news made its appearance in the 1920s. The National Broadcasting Company (NBC) and the Columbia Broadcasting System (CBS) began running sponsored news programs and radio dramas. Comedy programs like Amos 'n' Andy and Easy Aces became popular during the 1930s as listeners sought humor during the Depression.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'radio-golden-age', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Golden Age of Radio</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📻 Radio transformed American life:</p>
+                        <ul class="bullet-list">
+                            <li><strong>By 1940:</strong> Almost 83% of households had a radio, and most tuned in regularly</li>
+                            <li><strong>Rural America:</strong> Radio brought communications to rural communities with programs like the National Farm and Home Hour</li>
+                            <li><strong>Grand Ole Opry:</strong> WSM in Nashville began broadcasting this live music show, still the longest live broadcast radio show in U.S. history</li>
+                            <li><strong>Political Use:</strong> Warren Harding was the first president to regularly give speeches over radio</li>
+                            <li><strong>Herbert Hoover:</strong> Used radio to announce government programs on aid and unemployment relief</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="milestone-box">
+                    <h4>🎙️ Milestone: FDR's Fireside Chats</h4>
+                    <p>
+                        Franklin D. Roosevelt became famous for harnessing the political power of radio. On entering office in March 1933, President Roosevelt needed to quiet public fears about the economy and prevent people from removing their money from banks.
+                    </p>
+                    <p>
+                        Eight days after assuming the presidency, he delivered his first radio speech: "My friends: I want to talk for a few minutes with the people of the United States about banking..."
+                    </p>
+                    <p>
+                        Roosevelt spoke directly to the people and addressed them as equals. One listener described the chats as soothing, with the president acting like a father, sitting in the room with the family, cutting through the political nonsense. These "fireside chats" became an important way for him to promote his New Deal agenda and allowed him to expand both the government and the presidency beyond their traditional roles.
+                    </p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'wwii-radio', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Radio During World War II</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🎖️ World War II transformed radio news:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Demand for Updates:</strong> The constantly evolving war made newspapers too slow; people wanted immediate news</li>
+                            <li><strong>Edward R. Murrow:</strong> CBS reporter began reporting live about Germany's actions from Europe, including live coverage during Germany's aerial bombing of London</li>
+                            <li><strong>Government Guidelines:</strong> The White House placed guidelines on reporting classified information, making a legal exception to First Amendment protection</li>
+                            <li><strong>Voluntary Censorship:</strong> Newscasters agreed to suppress information about the atomic bomb and military movements until after events occurred</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Why were Franklin D. Roosevelt's radio addresses called "fireside chats"?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
+                        He always sat by a fireplace during broadcasts
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
+                        The radio studio was heated by a fireplace
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">
+                        He spoke directly to citizens in a soothing, personal manner as if sitting with families in their living rooms
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
+                        He discussed topics related to energy policy
+                    </div>
+                    <div class="feedback-box" id="feedback-q2-2"></div>
+                </div>
+
+                <p>
+                    The Radio Act of 1927 created the Federal Radio Commission (FRC) to set standards, frequencies, and license stations. The Communications Act of 1934 replaced it with the Federal Communications Commission (FCC), which still regulates interstate communications today.
+                </p>
+
+                <p>
+                    In the 1980s, talk stations began to gain ground on both AM and FM frequencies. By the 1990s, talk shows had gone national, showcasing broadcasters like Rush Limbaugh. Today, podcasting has exploded with 106.7 million U.S. listeners, with 77.9 million listening at least once per week.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>📺 Television: The Visual Revolution</h3>
+                <p>
+                    Television combined the best attributes of radio and pictures and changed media forever. The first official broadcast in the United States was President Franklin Roosevelt's speech at the opening of the 1939 World's Fair in New York. By the 1950s, the price of television sets had dropped, more stations were being created, and advertisers were buying spots.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'tv-politics', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Television and Political Campaigns</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> 🎬 Television transformed political communication:</p>
+                        <ul class="bullet-list">
+                            <li><strong>First TV Ads (1950s):</strong> Eisenhower and Stevenson ran mainly radio jingles with animation or short Q&A sessions</li>
+                            <li><strong>1960 Kennedy Campaign:</strong> Used a Hollywood-style approach to promote his image as young and vibrant</li>
+                            <li><strong>Nixon's Checkers Speech (1952):</strong> Addressed accusations of illegal campaign funds; remembered more for humanizing Nixon than proving innocence</li>
+                            <li><strong>1960 Debate:</strong> First televised presidential debate. Kennedy's careful grooming impressed viewers, while Nixon's sweaty appearance and obvious discomfort hurt him (though radio listeners thought Nixon won!)</li>
+                            <li><strong>1984 Geraldine Ferraro:</strong> Used a televised press conference to answer questions about her husband's business dealings for over two hours</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="link-to-learning">
+                    <h5>🔗 Link to Learning</h5>
+                    <p>Visit <strong>American Rhetoric</strong> for free access to speeches, video, and audio of famous presidential and political speeches.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'golden-age-tv', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The "Golden Age of Presidential Television"</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📺 Between the 1960s and 1990s:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Captive Audiences:</strong> With few independent local stations available, viewers had little alternative but to watch presidential addresses</li>
+                            <li><strong>Strong Command:</strong> Presidents had a strong command of the media during this period</li>
+                            <li><strong>"Rally 'Round the Flag":</strong> When a population feels threatened, they unite around the president. Presidential speeches during emergencies aided this phenomenon.</li>
+                            <li><strong>1995 Oklahoma City:</strong> President Clinton comforted families after the bombing, reminding the nation that children learn through action</li>
+                            <li><strong>9/11 Bullhorn Speech:</strong> Bush's Ground Zero speech—"I can hear you! The rest of the world hears you!"—became a rallying cry demonstrating the resilience of New Yorkers</li>
+                        </ul>
+                        <p>Following their speeches, Clinton's approval rose from 46% to 51%, and Bush's rose from 51% to 90%.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What lesson did the 1960 Kennedy-Nixon debate demonstrate about television?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 25)">
+                        Visual appearance and body language can be as important as substantive answers
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">
+                        Radio is more effective than television for debates
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">
+                        Candidates should avoid televised debates
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">
+                        Television viewers care only about policy positions
+                    </div>
+                    <div class="feedback-box" id="feedback-q2-3"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📱 New Media Trends and the Digital Revolution</h3>
+                <p>
+                    The invention of cable in the 1980s and the expansion of the Internet in the 2000s opened up more options for media consumers than ever before. Viewers can watch nearly anything at the click of a button, bypass commercials, and record programs. The resulting <strong>saturation</strong>, or inundation of information, may lead viewers to abandon the news entirely or become more suspicious and fatigued about politics.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'declining-viewership', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Decline of Presidential TV Audiences</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📉 Media saturation has changed presidential communication:</p>
+                        <ul class="bullet-list">
+                            <li><strong>State of the Union Decline:</strong> Viewership dropped from 67 million viewers in 1993 to 32 million in 2015</li>
+                            <li><strong>Audience Choice:</strong> Citizens who want to watch reality television and movies can easily avoid the news</li>
+                            <li><strong>No Sure Way:</strong> Presidents now have no guaranteed way to communicate with the public</li>
+                            <li><strong>New Voices:</strong> Talk show hosts and political pundits now fill the gap</li>
+                            <li><strong>Horse-Race Coverage:</strong> Modern journalists analyze campaigns and blunders rather than interviewing candidates or discussing issue positions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="milestone-box">
+                    <h4>🌐 Milestone: The First Social Media Candidate</h4>
+                    <p>
+                        When president-elect Barack Obama admitted an addiction to his Blackberry, the signs were clear: A new generation was assuming the presidency. Obama's use of technology was a part of life, not a campaign pretense.
+                    </p>
+                    <p>
+                        One of Obama's campaign advisors was Chris Hughes, a cofounder of Facebook. The campaign created a powerful online presence with sites on YouTube, Facebook, MySpace, and more.
+                    </p>
+                    <p>
+                        By Election Day, Obama's skill with the web was clear: he had over two million Facebook supporters, while McCain had 600,000. Obama had 112,000 followers on Twitter, and McCain had only 4,600.
+                    </p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'social-media-politics', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Social Media and Modern Politics</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📲 Social media has transformed political communication:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Direct Connection:</strong> Politicians can now connect to the people directly, bypassing journalists</li>
+                            <li><strong>Obama's YouTube Response:</strong> When accused of sharing inflammatory views of his minister Jeremiah Wright, Obama used YouTube to respond, drawing over seven million views</li>
+                            <li><strong>White House Social Media:</strong> The White House maintains YouTube channels and Facebook sites</li>
+                            <li><strong>Citizen Journalism:</strong> When citizens use personal recording devices and cell phones to capture events and post them on the Internet</li>
+                            <li><strong>2012 Examples:</strong> Mitt Romney was secretly taped saying 47% of Americans were "dependent on the government"; Obama was recorded saying some Midwesterners "cling to guns or religion"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📰 Soft News</div>
+                    <div>News presented in an entertaining and approachable manner, painlessly introducing a variety of topics. Shows like The Daily Show with Trevor Noah, the Late Show with Stephen Colbert, and Full Frontal with Samantha Bee demonstrate that news, even political news, can win young viewers if delivered well. While the depth or quality of reporting may be less than ideal, these shows can sound an alarm as needed to raise citizen awareness.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is "citizen journalism"?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-4', 0)">
+                        Journalism only for citizens, not non-citizens
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-4', 0)">
+                        Government-sponsored news programs
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-4', 25)">
+                        When citizens use their personal recording devices and cell phones to capture events and post them on the Internet
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-4', 0)">
+                        News written by naturalized citizens
+                    </div>
+                    <div class="feedback-box" id="feedback-q2-4"></div>
+                </div>
+
+                <div class="get-connected-box">
+                    <h4>🔌 Get Connected: Becoming a Citizen Journalist</h4>
+                    <p>
+                        Local government and politics need visibility. College students need a voice. Why not become a citizen journalist?
+                    </p>
+                    <p>
+                        City and county governments hold meetings on a regular basis and students rarely attend. Yet issues relevant to students are often discussed—like increases in street parking fines, zoning for off-campus housing, and tax incentives for new businesses that employ part-time student labor.
+                    </p>
+                    <p>
+                        Attend some meetings, ask questions, and write about the experience on your Facebook page. Create a blog, use Storify to curate a social media debate, or create a YouTube channel. If your state requires public institutions to open their meetings, consider attending university Board of Regents meetings, which cover tuition increases, class cuts, and student conduct policies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Regulating the Media -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>⚖️ Section 3: Regulating the Media</h2>
+                <p class="intro">
+                    The Constitution gives Congress responsibility for promoting the general welfare. While it is difficult to define what this broad dictate means, Congress has used it to protect citizens from media content it deems inappropriate. Although the media are independent participants in the U.S. political system, their liberties are not absolute and there are rules they must follow.
+                </p>
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Identify circumstances in which the freedom of the press is not absolute</li>
+                        <li>Compare the ways in which the government oversees and influences media programming</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 Media and the First Amendment</h3>
+                <p>
+                    The U.S. Constitution was written in secrecy. Journalists were neither invited to watch the drafting, nor did the framers talk to the press about their disagreements and decisions. Once finished, however, the Constitution was released to the public and almost all newspapers printed it, along with commentary about the new form of government it proposed.
+                </p>
+
+                <div class="quote-box">
+                    "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the government for a redress of grievances."
+                    <div class="quote-attribution">— First Amendment to the U.S. Constitution</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'zenger-trial', 30)">
+                    <div class="card-prompt">🔍 Click to explore: John Peter Zenger and Press Freedom</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> ⚖️ The foundation of American press freedom:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1733:</strong> John Peter Zenger began the New York Weekly Journal with the goal of exposing corruption in the colonial government</li>
+                            <li><strong>1735:</strong> Colonial Governor William Cosby had Zenger arrested and charged with seditious libel</li>
+                            <li><strong>The Defense:</strong> Zenger's lawyers argued that a statement is not libelous if it can be proved true</li>
+                            <li><strong>The Verdict:</strong> Zenger was found not guilty, affirming the importance of a free press in the colonies</li>
+                            <li><strong>The Legacy:</strong> This case established a crucial precedent for press freedom that would later be enshrined in the First Amendment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Slander and Libel</h4>
+                <p>
+                    The media do not have the right to commit <strong>slander</strong> (speaking false information with intent to harm a person or entity) or <strong>libel</strong> (printing false information with intent to harm). These acts constitute defamation of character that can cause loss of reputation and income.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'libel-standards', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Standards for Libel and Slander</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> ⚖️ When can media be sued for defamation?</p>
+                        <ul class="bullet-list">
+                            <li><strong>False Facts:</strong> Libel and slander occur only when false information is presented as fact. Opinions are protected.</li>
+                            <li><strong>Public vs. Private Figures:</strong> Courts have different standards depending on whether the claimant is public or private</li>
+                            <li><strong>Public Figure Standard:</strong> Must show the publisher acted in "reckless disregard" of the truth or with malicious intent</li>
+                            <li><strong>Private Individual Standard:</strong> Must show the author was negligent in not verifying information</li>
+                            <li><strong>New York Times v. Sullivan (1964):</strong> A police commissioner in Alabama sued over inaccurate statements. The Supreme Court applied a stringent test of malice for public figures.</li>
+                        </ul>
+                        <p>Example: In 2010, Star magazine published "Addiction Nightmare: Katie Drug Shocker." Katie Holmes filed a $50 million lawsuit, and Star's parent company eventually settled with an apology.</p>
+                    </div>
+                </div>
+
+                <h4>Classified Material and Prior Restraint</h4>
+                <p>
+                    The media have only a limited right to publish material the government says is classified. If a newspaper obtains classified material, the government may request certain material be redacted.
+                </p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🚫 Prior Restraint</div>
+                    <div>A government action that stops someone from doing something before they are able to do it (e.g., forbidding someone to publish a book they plan to release). The Supreme Court has ruled that while the government can impose prior restraint on the media, that right is very limited.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'pentagon-papers', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Pentagon Papers Case</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📰 A landmark case for press freedom:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1971:</strong> The U.S. government sued the New York Times and Washington Post to stop release of a classified study of the Vietnam War</li>
+                            <li><strong>Supreme Court Ruling:</strong> While the government can impose prior restraint, that right is very limited</li>
+                            <li><strong>Result:</strong> The newspapers were given the right to publish much of the study</li>
+                            <li><strong>Exceptions:</strong> Revelation of troop movements and names of undercover operatives are approved reasons for prior restraint</li>
+                            <li><strong>Geraldo Rivera Example (2003):</strong> FOX reporter was removed from Iraq after drawing a map showing troop locations and discussing future movements on live television</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Under what circumstances can the government exercise prior restraint over the media?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
+                        Whenever the president requests it
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
+                        When the media publishes negative stories about politicians
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">
+                        In very limited circumstances, such as revealing troop movements or names of undercover operatives
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
+                        The government cannot exercise prior restraint under any circumstances
+                    </div>
+                    <div class="feedback-box" id="feedback-q3-1"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📡 Media and FCC Regulations</h3>
+                <p>
+                    The liberties enjoyed by newspapers are overseen by the U.S. court system, while television and radio broadcasters are monitored by both the courts and a government regulatory commission.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'fcc-history', 30)">
+                    <div class="card-prompt">🔍 Click to explore: History of Broadcast Regulation</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📻 The evolution of broadcast regulation:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Radio Act of 1927:</strong> First attempt by Congress to regulate broadcast materials. Created the Federal Radio Commission (FRC) to set standards, frequencies, and license stations.</li>
+                            <li><strong>Communications Act of 1934:</strong> Created the Federal Communications Commission (FCC)—originally seven members, now five—to oversee radio, television, and telephone communications</li>
+                            <li><strong>FCC Powers:</strong> Requires stations to apply for licenses, follow advertising limits, provide public forum for discussion, and serve local and minority communities</li>
+                            <li><strong>Indecency Regulations:</strong> Laws that limit indecent and obscene material on public airwaves</li>
+                            <li><strong>Telecommunications Act of 1996:</strong> Dropped limits on station ownership, allowing networks to purchase large numbers of stations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⏰ Equal-Time Rule</div>
+                    <div>An FCC policy that all candidates running for office must be given the same radio and television airtime opportunities. If WBNS in Columbus, Ohio agrees to sell Senator Marco Rubio thirty seconds of airtime, the station must also sell all other candidates in that race thirty seconds at the same price. This rate cannot be more than the station charges favored commercial advertisers.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'equal-time-examples', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Equal-Time Rule in Practice</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📺 How the equal-time rule works:</p>
+                        <ul class="bullet-list">
+                            <li><strong>2015 Donald Trump on SNL:</strong> Other Republican candidates made equal-time requests; NBC gave each candidate twelve minutes and five seconds of air time</li>
+                            <li><strong>News Exception:</strong> The FCC waives the rule if coverage is purely news—interviews during rallies and short documentaries are exempt</li>
+                            <li><strong>2003 California Recall:</strong> Arnold Schwarzenegger and Gary Coleman were candidates. TV stations didn't run their shows to avoid equal-time requirements for all 135 candidates!</li>
+                            <li><strong>State of the Union:</strong> Broadcasting the president's speech can trigger equal-time provisions. Opposing parties now use their time immediately following for an official rebuttal.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Fairness Doctrine (defunct)</div>
+                    <div>A 1949 FCC policy that required holders of broadcast licenses to cover controversial issues in a balanced manner by providing listeners with information about all perspectives. The fairness doctrine ended in the 1980s after courts ruled it limited debate of controversial topics and placed the government in the role of editor. The FCC repealed it in 1987.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'indecency-rules', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Indecency Regulations</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🚫 How the FCC regulates content:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Miller Test:</strong> From Miller v. California (1973), obscenity is something that appeals to deviants, breaks local or state laws, and lacks value</li>
+                            <li><strong>Safe Harbor:</strong> Indecent programs can only be broadcast between 10 p.m. and 6 a.m.</li>
+                            <li><strong>George Carlin Case:</strong> When Carlin's skit was aired on radio with a warning, the FCC still censored it. The Supreme Court affirmed the FCC's authority to regulate content.</li>
+                            <li><strong>Janet Jackson 2004:</strong> The Super Bowl "wardrobe malfunction" cost CBS $550,000 in fines</li>
+                            <li><strong>Howard Stern:</strong> Fined more than $2 million while on public airwaves, then moved to Sirius Satellite in 2006 to avoid FCC oversight</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What was the "fairness doctrine" and why was it eliminated?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">
+                        A rule requiring equal pay for journalists; eliminated because it was too expensive
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">
+                        A policy requiring balanced coverage of controversial issues; eliminated because it was seen as limiting debate and placing government in the role of editor
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">
+                        A rule about fair competition among newspapers; eliminated by the Supreme Court
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">
+                        A policy requiring fair treatment of advertisers; it is still in effect today
+                    </div>
+                    <div class="feedback-box" id="feedback-q3-2"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>☀️ Media and Transparency</h3>
+                <p>
+                    The press has had some assistance in performing its muckraking duty. Laws that mandate federal and many state government proceedings and meeting documents be made available to the public are called <strong>sunshine laws</strong>.
+                </p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Freedom of Information Act (FOIA)</div>
+                    <div>A federal statute passed in 1966 and signed by President Lyndon B. Johnson that requires the executive branch of the U.S. government to provide information requested by citizens. It was intended to increase openness in the executive branch, which had been criticized for hiding information. Citizens wishing to obtain information may request documents from agencies, which may charge fees for collection and copying.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'foia-details', 30)">
+                    <div class="card-prompt">🔍 Click to explore: FOIA in Practice</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📁 How FOIA works:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Exemptions:</strong> Human resource and medical records, national defense records, and material from confidential sources do not need to be disclosed</li>
+                            <li><strong>1981:</strong> President Reagan exempted the CIA and FBI from FOIA requests</li>
+                            <li><strong>2014:</strong> U.S. agencies received over 700,000 requests, many to the Departments of State and Defense</li>
+                            <li><strong>Backlog:</strong> Information requests have increased significantly, creating substantial backlogs</li>
+                            <li><strong>Challenge:</strong> At the University of Oklahoma, two staff in the university counsel's office spend most of their time responding to FOIA requests</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="link-to-learning">
+                    <h5>🔗 Link to Learning</h5>
+                    <p>Want to request a government document but unsure where to start? If the agency is part of the U.S. government, the <strong>Freedom of Information Act portal</strong> will help you out.</p>
+                </div>
+
+                <h4>Reporter's Privilege and Confidential Sources</h4>
+                <p>
+                    Because White House limitations on the press are not unusual, many journalists rely on confidential sources. The practice of granting anonymity to sources is sometimes referred to as <strong>reporter's privilege</strong>.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'deep-throat', 30)">
+                    <div class="card-prompt">🔍 Click to explore: "Deep Throat" and Watergate</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🕵️ The most famous confidential source in American history:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1972:</strong> Mark Felt, associate director of the FBI, became a confidential source for Bob Woodward and Carl Bernstein at the Washington Post</li>
+                            <li><strong>Watergate:</strong> Felt provided information about President Nixon's involvement in illegal activities, including the break-in at Democratic Party headquarters</li>
+                            <li><strong>Result:</strong> The information eventually led to Nixon's resignation and the indictment of 69 people in his administration</li>
+                            <li><strong>Identity Protected:</strong> Felt was nicknamed "Deep Throat," and journalists kept his identity secret until 2005</li>
+                            <li><strong>Edward Snowden (2013):</strong> Leaked information about the U.S. government's massive internal surveillance and tapping program</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ In Branzburg v. Hayes (1972), what did the Supreme Court determine about reporter's privilege?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">
+                        Reporters have absolute protection to keep sources confidential
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">
+                        Reporters can never be forced to reveal sources under any circumstances
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-3', 25)">
+                        Journalists are not exempt from subpoenas, and courts can force testimony to name confidential sources if needed for criminal trials
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">
+                        Only newspaper reporters have privilege; TV journalists do not
+                    </div>
+                    <div class="feedback-box" id="feedback-q3-3"></div>
+                </div>
+
+                <p>
+                    The line between journalists' expectation of openness and the government's willingness to be open has continued to be a point of contention. Some administrations use the media to increase public support; others limit the media to limit dissent.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'press-relations', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Presidential Press Relations</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> 🏛️ How different presidents have handled the press:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Obama Promise:</strong> Promised to run a transparent White House but found that transparency makes it difficult to get work done</li>
+                            <li><strong>Comparison:</strong> In his first year, George W. Bush gave 147 Q&A sessions with journalists; Obama gave only 46</li>
+                            <li><strong>Helen Thomas:</strong> Long-time liberal White House correspondent said the Obama administration tried to control both information and journalists</li>
+                            <li><strong>Trump Administration:</strong> Rarely held press conferences, preferring Twitter. Labeled news media "fake news." CNN sued to get reporter Jim Acosta reinstated.</li>
+                            <li><strong>Biden Administration:</strong> More conventional relationship with regular interaction and briefings by Press Secretary Jennifer Psaki</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: The Impact of the Media -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📊 Section 4: The Impact of the Media</h2>
+                <p class="intro">
+                    In what ways can the media affect society and government? The media's primary duty is to present us with information and alert us when important events occur. This information may affect what we think and the actions we take. The media can also place pressure on government to act by signaling a need for intervention or showing that citizens want change.
+                </p>
+                <div class="learning-objectives">
+                    <h4>🎯 Learning Objectives</h4>
+                    <ul>
+                        <li>Identify forms of bias that exist in news coverage and ways the media can present biased coverage</li>
+                        <li>Explain how the media cover politics and issues</li>
+                        <li>Evaluate the impact of the media on politics and policymaking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🧠 Media Effects and Bias Theories</h3>
+                <p>
+                    Concerns about the effects of media on consumers and the existence and extent of media bias go back to the 1920s. Reporter and commentator Walter Lippmann noted that citizens have limited personal experience with government and the world and posited that the media, through their stories, place ideas in citizens' minds.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'media-theories', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Theories of Media Effects</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📚 How scholars have understood media influence:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Hypodermic Theory (1920s):</strong> The idea that information is "shot" into the receiver's mind and readily accepted. Based on Lippmann's observation that media ideas become part of citizens' frame of reference.</li>
+                            <li><strong>Minimal Effects Theory (1930s-40s):</strong> Studies found information was transmitted in two steps—one person reads news, then shares with friends. People listened to friends, not those they disagreed with. This led to the theory that media have little effect on citizens.</li>
+                            <li><strong>Cultivation Theory (1970s):</strong> Media develop a person's view of the world by presenting a perceived reality. What we see on a regular basis becomes our reality. Media can set norms by choosing what is covered or discussed.</li>
+                        </ul>
+                        <p>The consensus: media have some effect, even if subtle.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🖼️ Framing</div>
+                    <div>The process of giving a news story a specific context or background. The news often uses frames to place a story in context so the reader understands its importance or relevance. Yet, at the same time, framing affects the way the reader or viewer processes the story.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'framing-types', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Episodic vs. Thematic Framing</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🎬 Two approaches to framing stories:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Episodic Framing:</strong> Focuses on isolated details or specifics rather than looking broadly at an issue. Example: Reporting current homeless statistics, interviewing a few homeless people, and looking at a city's current shelter investment.</li>
+                            <li><strong>Thematic Framing:</strong> Takes a broad look at an issue, examining how it has changed over time and what has led to it. Example: Examining homelessness as a nationwide problem, exploring reasons people become homeless, and discussing trends in cities' attempts to solve the problem.</li>
+                            <li><strong>Effect:</strong> Episodic frames may create more sympathy, while thematic frames may leave readers emotionally disconnected and less sympathetic</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Priming</div>
+                    <div>The process of predisposing readers or viewers to think a particular way. When media coverage focuses on certain issues, it predisposes the viewer to a particular perspective. If a newspaper article focuses on unemployment, struggling industries, and jobs moving overseas, the reader will have a negative opinion about the economy. If then asked about the president's job performance, the reader is primed to say no.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is the difference between "framing" and "priming" in media coverage?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
+                        They are the same thing
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
+                        Framing is illegal while priming is legal
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">
+                        Framing gives a story specific context, while priming predisposes readers to think a particular way about subsequent topics
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
+                        Framing applies to TV while priming applies to newspapers
+                    </div>
+                    <div class="feedback-box" id="feedback-q4-1"></div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🗳️ Coverage Effects on Governance and Campaigns</h3>
+                <p>
+                    When it is spotty, the media's coverage of campaigns and government can sometimes affect the way government operates and the success of candidates. In 1972, the McGovern-Fraser reforms created a voter-controlled primary system, so party leaders no longer pick the presidential candidates. Now the media are seen as <strong>kingmakers</strong> and play a strong role in influencing who will become the nominees.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'campaign-bubble', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Campaign Control and the "Bubble"</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 🎪 How campaigns try to control media coverage:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1984 Issue-of-the-Day:</strong> Reagan and Bush campaigns provided quotes and material on only one topic each day, limiting what journalists could cover</li>
+                            <li><strong>1992:</strong> Both Bush and Clinton campaigns maintained carefully drawn candidate images by limiting photographers to photo opportunities at rallies</li>
+                            <li><strong>The "Bubble":</strong> The constant control of the media; journalists were less effective when in the campaign's bubble</li>
+                            <li><strong>Journalists Pushed Back:</strong> Reporters complained this was campaign advertising rather than journalism</li>
+                            <li><strong>Result:</strong> Journalists began analyzing campaigns without input from candidates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🐎 Horse-Race Coverage</div>
+                    <div>When modern journalists analyze campaigns and blunders or the overall race, rather than interviewing candidates or discussing their issue positions. Campaign coverage now focuses on the spectacle of the season—colorful personalities, strange comments, lapses of memory, and embarrassing revelations are more likely to get air time than candidates' issue positions.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'sound-bites', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Shrinking Sound Bite</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📺 How candidate coverage has changed:</p>
+                        <ul class="bullet-list">
+                            <li><strong>1968:</strong> Average sound bite from Richard Nixon was 42.3 seconds</li>
+                            <li><strong>2004:</strong> Sound bites had decreased to only 8 seconds</li>
+                            <li><strong>Content of Clips:</strong> 40% were attacks on opponents; only 30% contained information about candidate's issues or events</li>
+                            <li><strong>Visual Coverage:</strong> News showed images of candidates for an average of only 25 seconds while the newscaster discussed stories</li>
+                            <li><strong>2012 Pew Study:</strong> 64% of stories focused on campaign strategy; only 9% covered domestic issues; 6% covered public records; 1% covered foreign policy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🐺 Pack Journalism</div>
+                    <div>When journalists follow one another rather than digging for their own stories. Television news discusses strategies and blunders with colorful examples. Newspapers focus on polls. This shallow press coverage has become common today.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What has happened to the average length of sound bites from presidential candidates over time?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">
+                        They have stayed about the same
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">
+                        They have dramatically decreased from over 40 seconds in 1968 to about 8 seconds in 2004
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">
+                        They have increased as candidates have more access to media
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">
+                        They vary depending on the party
+                    </div>
+                    <div class="feedback-box" id="feedback-q4-2"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'cable-bias', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Media Bias in Cable News</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📺 The increase in partisan coverage:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Cable News Bias:</strong> Stations like FOX News and MSNBC are overt in their use of bias in framing stories</li>
+                            <li><strong>2012 Campaign Coverage:</strong>
+                                <ul>
+                                    <li>MSNBC: 71 of 74 stories about Mitt Romney were highly negative</li>
+                                    <li>FOX News: 46 of 52 stories about Obama contained negative information</li>
+                                </ul>
+                            </li>
+                            <li><strong>Major Networks:</strong> ABC, CBS, and NBC were somewhat more balanced, yet overall coverage of both candidates tended to be negative</li>
+                            <li><strong>COVID-19 Coverage:</strong> In 2020, FOX News viewers were more likely to believe the virus was created in a lab; MSNBC viewers believed it originated in nature</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'trump-media', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Trump, Social Media, and the Press</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📱 A new era in presidential-media relations:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Twitter Presidency:</strong> Trump rarely held press conferences, preferring to tweet—sometimes at all hours of the night</li>
+                            <li><strong>"Fake News":</strong> Trump repeatedly criticized the media as untrustworthy</li>
+                            <li><strong>Media Response:</strong> CNN sued to get reporter Jim Acosta reinstated after he was excluded from the White House. The Washington Post adopted tagline "Democracy Dies in Darkness."</li>
+                            <li><strong>January 6, 2021:</strong> Twitter permanently suspended Trump's account after the Capitol insurrection due to "risk of further incitement of violence"</li>
+                            <li><strong>Facebook and Instagram:</strong> Also followed with their own bans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🌍 Coverage Effects on Society</h3>
+                <p>
+                    The media choose what they want to discuss. This agenda setting creates a reality for voters and politicians that affects the way people think, act, and vote. Even if the crime rate is going down, citizens accustomed to reading stories about assault and other offenses still perceive crime to be an issue.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'racial-framing', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Racial Framing in Media</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 📊 Research on media's portrayal of race:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Crime Coverage:</strong> Local news shows were more likely to show pictures of criminals when they were African American, overrepresenting Black people as perpetrators and White people as victims</li>
+                            <li><strong>Latino Coverage:</strong> Latino people were underrepresented as both victims of crime and as police officers, while White people were overrepresented as both</li>
+                            <li><strong>Poverty Coverage:</strong> Network news misrepresents victims of poverty by using more images of African Americans than White people, leaving viewers believing African Americans are the majority of poor and unemployed</li>
+                            <li><strong>Magazine Study:</strong> Time and Newsweek showed images of young African Americans when discussing poverty, excluding the elderly, young, and White and Latino people—who represent the true picture of poverty</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ How does "racial framing" in media coverage affect viewers' perceptions?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">
+                        It has no effect on viewer perceptions
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-3', 25)">
+                        If viewers are continually presented with images of African Americans as criminals, there is increased chance they will perceive members of this group as violent or aggressive
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">
+                        It only affects viewers who already hold biased views
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">
+                        Viewers are able to easily identify and dismiss biased framing
+                    </div>
+                    <div class="feedback-box" id="feedback-q4-3"></div>
+                </div>
+
+                <p>
+                    Racial framing, even if unintentional, affects perceptions and policies. The perception that most recipients of welfare are working-age African Americans may have led some citizens to vote for candidates who promised to reduce welfare benefits. When survey respondents were shown a story of a White unemployed individual, 71% listed unemployment as one of the top three problems facing the United States, while only 53% did so if the story was about an unemployed African American.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'women-coverage', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Media Coverage of Women</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 👩 Historical bias in coverage of women:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Early 1900s:</strong> Most journalists were men, and women's issues were not part of newsroom discussion</li>
+                            <li><strong>1976:</strong> Barbara Walters became the first woman co-anchor on network news (ABC Evening News). She was met with hostility from co-anchor Harry Reasoner and critical press coverage.</li>
+                            <li><strong>Newspaper Staffs:</strong> Women reported having to fight for assignments to well-published beats like economy or politics</li>
+                            <li><strong>Women Candidates:</strong> Early coverage was sparse and focused on "viability" rather than issue positions. Women were seen as a novelty rather than serious contenders.</li>
+                            <li><strong>2020:</strong> Record numbers of women ran for office at all levels. Senator Kamala Harris became the first woman vice president.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'palin-coverage', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Media and Women Candidates' Families</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> 👨‍👩‍👧‍👦 Why negative coverage affects women candidates:</p>
+                        <ul class="bullet-list">
+                            <li><strong>Concrete Effect:</strong> Women are less likely than men to run for office partly due to fear of negative media coverage on their families</li>
+                            <li><strong>2008 Sarah Palin:</strong> Coverage questioned whether she had the "right" to run for office given she had young children, one of whom has developmental disabilities</li>
+                            <li><strong>Request Ignored:</strong> Even when candidates ask that children and families be off-limits, the press rarely honors requests</li>
+                            <li><strong>Result:</strong> Women with young children may wait until their children are grown before running for office, if they choose to run at all</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ According to research, why might a woman decide not to run for office?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-4', 0)">
+                        Women are not interested in politics
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-4', 0)">
+                        Campaign finance laws disadvantage women
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-4', 25)">
+                        Fear of negative media coverage of their families, especially children
+                    </div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-4', 0)">
+                        Political parties do not recruit women candidates
+                    </div>
+                    <div class="feedback-box" id="feedback-q4-4"></div>
+                </div>
+
+                <div class="link-to-learning">
+                    <h5>🔗 Link to Learning</h5>
+                    <p>The <strong>Center for American Women in Politics</strong> at Rutgers University researches the treatment women receive from both government and the media, and shares the data with the public.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Key Terms Review</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Agenda Setting</strong></td>
+                            <td>The media's ability to choose which issues or topics deserve public discussion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beat</strong></td>
+                            <td>The coverage area assigned to journalists for news or stories</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Citizen Journalism</strong></td>
+                            <td>Video and print news posted to the Internet by citizens rather than news media</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cultivation Theory</strong></td>
+                            <td>The idea that media affect a citizen's worldview through the information presented</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Equal-Time Rule</strong></td>
+                            <td>An FCC policy that all candidates must be given same radio/TV airtime opportunities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fairness Doctrine</strong></td>
+                            <td>A defunct 1949 FCC policy requiring balanced coverage of controversial issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Framing</strong></td>
+                            <td>The process of giving a news story a specific context or background</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FOIA</strong></td>
+                            <td>Federal statute requiring executive branch to provide requested information</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Libel/Slander</strong></td>
+                            <td>Printed/spoken false information intended to harm a person or entity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mass Media</strong></td>
+                            <td>Collection of all media forms that communicate information to the general public</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Muckraking</strong></td>
+                            <td>News coverage exposing corrupt business and government practices</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Priming</strong></td>
+                            <td>Predisposing readers or viewers to think a particular way</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prior Restraint</strong></td>
+                            <td>Government action that stops someone from publishing before they are able to</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reporter's Privilege</strong></td>
+                            <td>The right of a journalist to keep a source confidential</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Soft News</strong></td>
+                            <td>News presented in an entertaining style</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sunshine Laws</strong></td>
+                            <td>Laws requiring government documents and proceedings to be made public</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Yellow Journalism</strong></td>
+                            <td>Sensationalized coverage of scandals and human interest stories</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Report Page -->
+        <div id="reportPage" class="page">
+            <div class="report-page">
+                <div class="report-header-bar">
+                    <h1>📊 TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <button class="report-back-button no-print" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+                <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                <p class="report-subtitle">Chapter 8: The Media</p>
+
+                <div class="report-grade-display" id="gradeDisplay">
+                    <div class="letter-grade" id="letterGrade">A</div>
+                    <div class="grade-percentage" id="gradePercentage">95%</div>
+                </div>
+
+                <div class="report-sections">
+                    <div class="student-info-section">
+                        <h3>📋 Student Information</h3>
+                        <div class="info-row">
+                            <span class="info-label">Name:</span>
+                            <span class="info-value" id="reportStudentName">Not Provided</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Date:</span>
+                            <span class="info-value" id="reportDate"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Time:</span>
+                            <span class="info-value" id="reportTime"></span>
+                        </div>
+                    </div>
+
+                    <div class="performance-section">
+                        <h3>📈 Section Performance</h3>
+                        <table id="sectionPerformanceTable">
+                            <thead>
+                                <tr>
+                                    <th>Section</th>
+                                    <th>Status</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" id="metricPoints">0</div>
+                        <div class="metric-label">Points Earned</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="metricSections">0/4</div>
+                        <div class="metric-label">Sections Complete</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="metricQuiz">0%</div>
+                        <div class="metric-label">Quiz Score</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="metricEngagement">0%</div>
+                        <div class="metric-label">Engagement</div>
+                    </div>
+                </div>
+
+                <div class="instructor-note">
+                    <strong>📝 Instructor Note:</strong> This completion report documents the student's engagement with the Chapter 8: The Media interactive module. The module covers essential content including media types and functions, the evolution from print to digital media, FCC regulations and First Amendment protections, and the impact of media on campaigns and society.
+                </div>
+
+                <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            studentName: '',
+            score: 0,
+            level: 'Explorer',
+            completedSections: [],
+            cardsRevealed: {},
+            questionsAnswered: {},
+            correctAnswers: 0,
+            totalQuestions: 0,
+            revealedCards: 0,
+            totalCards: 0,
+            sectionPoints: {
+                section1: 0,
+                section2: 0,
+                section3: 0,
+                section4: 0
+            }
+        };
+
+        // Levels
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Media Sage'
+        };
+
+        // Save student name
+        function saveName() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput.value.trim()) {
+                gameState.studentName = nameInput.value.trim();
+                nameInput.disabled = true;
+                document.querySelector('.name-input-card button').disabled = true;
+                document.querySelector('.name-input-card button').textContent = '✓ Name Saved';
+            }
+        }
+
+        // Navigation
+        function navigateToSection(sectionId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            if (sectionId === 'reportPage') {
+                generateReport();
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        // Complete section
+        function completeSection(sectionNum) {
+            const sectionId = 'section' + sectionNum;
+            if (!gameState.completedSections.includes(sectionId)) {
+                gameState.completedSections.push(sectionId);
+                const card = document.getElementById('card' + sectionNum);
+                if (card) {
+                    card.classList.add('completed');
+                }
+                updateProgress();
+            }
+        }
+
+        // Interactive card reveal
+        function revealCard(element, cardId, points) {
+            if (!gameState.cardsRevealed[cardId]) {
+                gameState.cardsRevealed[cardId] = true;
+                gameState.totalCards++;
+                gameState.revealedCards++;
+                element.classList.add('revealed');
+                addPoints(points, element);
+                
+                // Check if section is complete
+                checkSectionCompletion(element);
+            }
+        }
+
+        // Handle quiz answers
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.questionsAnswered[questionId]) return;
+
+            gameState.questionsAnswered[questionId] = true;
+            gameState.totalQuestions++;
+
+            const options = element.parentElement.querySelectorAll('.kc-option');
+            options.forEach(option => {
+                option.classList.add('disabled');
+                option.onclick = null;
+            });
+
+            const feedback = document.getElementById('feedback-' + questionId);
+            
+            if (isCorrect) {
+                gameState.correctAnswers++;
+                element.classList.add('correct');
+                feedback.classList.add('success', 'show');
+                feedback.textContent = '✅ Correct! Well done!';
+                addPoints(points, element);
+            } else {
+                element.classList.add('incorrect');
+                feedback.classList.add('error', 'show');
+                feedback.textContent = '❌ Not quite. Review the material and try to understand why.';
+                
+                // Mark correct answer
+                options.forEach(option => {
+                    if (option.getAttribute('onclick') && option.getAttribute('onclick').includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+
+            // Check if section is complete
+            checkSectionCompletion(element);
+        }
+
+        // Check section completion
+        function checkSectionCompletion(element) {
+            // Find which section this element is in
+            let section = element.closest('.page');
+            if (section && section.id.startsWith('section')) {
+                const sectionNum = section.id.replace('section', '');
+                
+                // Check if all interactive elements in section are completed
+                const cards = section.querySelectorAll('.interactive-card:not(.revealed)');
+                const questions = section.querySelectorAll('.knowledge-check');
+                let allQuestionsAnswered = true;
+                
+                questions.forEach(q => {
+                    const feedbackBox = q.querySelector('.feedback-box');
+                    if (feedbackBox) {
+                        const questionId = feedbackBox.id.replace('feedback-', '');
+                        if (!gameState.questionsAnswered[questionId]) {
+                            allQuestionsAnswered = false;
+                        }
+                    }
+                });
+
+                if (cards.length === 0 && allQuestionsAnswered) {
+                    completeSection(sectionNum);
+                }
+            }
+        }
+
+        // Add points
+        function addPoints(points, element) {
+            gameState.score += points;
+            
+            // Track section points
+            if (element) {
+                let section = element.closest('.page');
+                if (section && section.id.startsWith('section')) {
+                    const sectionId = section.id;
+                    gameState.sectionPoints[sectionId] = (gameState.sectionPoints[sectionId] || 0) + points;
+                }
+            }
+            
+            updateScore();
+            showPointsPopup(points);
+        }
+
+        // Update score display
+        function updateScore() {
+            document.getElementById('score').textContent = gameState.score;
+            
+            // Update level
+            let newLevel = 'Explorer';
+            for (let threshold in levels) {
+                if (gameState.score >= parseInt(threshold)) {
+                    newLevel = levels[threshold];
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('level').textContent = gameState.level;
+        }
+
+        // Show points popup
+        function showPointsPopup(points) {
+            const popup = document.getElementById('pointsPopup');
+            const message = document.getElementById('pointsMessage');
+            message.textContent = `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const totalSections = 4;
+            const completedCount = gameState.completedSections.length;
+            const percentage = Math.round((completedCount / totalSections) * 100);
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Generate report
+        function generateReport() {
+            // Update date and time
+            const now = new Date();
+            document.getElementById('reportDate').textContent = now.toLocaleDateString();
+            document.getElementById('reportTime').textContent = now.toLocaleTimeString();
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Not Provided';
+            
+            // Calculate scores
+            const maxPoints = 1150;
+            const percentage = Math.round((gameState.score / maxPoints) * 100);
+            
+            // Update report scores
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = Math.min(percentage, 100);
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.completedSections.length / 4) * 100);
+            
+            // Calculate letter grade
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) { 
+                letterGrade = 'A'; 
+                gradeColor = '#1B5E20'; 
+            } else if (percentage >= 80) { 
+                letterGrade = 'B'; 
+                gradeColor = '#00695C'; 
+            } else if (percentage >= 70) { 
+                letterGrade = 'C'; 
+                gradeColor = '#F57C00'; 
+            } else if (percentage >= 60) { 
+                letterGrade = 'D'; 
+                gradeColor = '#E65100'; 
+            }
+            
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = Math.min(percentage, 100) + '%';
+            document.getElementById('gradeDisplay').style.background = gradeColor;
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = gameState.completedSections.length + '/4';
+            
+            const quizPercentage = gameState.totalQuestions > 0 
+                ? Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) 
+                : 0;
+            document.getElementById('metricQuiz').textContent = quizPercentage + '%';
+            
+            const engagementPercentage = gameState.totalCards > 0
+                ? Math.round((gameState.revealedCards / gameState.totalCards) * 100)
+                : 0;
+            document.getElementById('metricEngagement').textContent = engagementPercentage + '%';
+            
+            // Update section performance table
+            const tbody = document.querySelector('#sectionPerformanceTable tbody');
+            tbody.innerHTML = '';
+            
+            const sections = [
+                { name: 'What Is the Media?', id: 'section1' },
+                { name: 'Evolution of the Media', id: 'section2' },
+                { name: 'Regulating the Media', id: 'section3' },
+                { name: 'The Impact of the Media', id: 'section4' }
+            ];
+            
+            sections.forEach((section, index) => {
+                const isCompleted = gameState.completedSections.includes(section.id);
+                const row = tbody.insertRow();
+                
+                row.insertCell(0).textContent = section.name;
+                row.insertCell(1).innerHTML = isCompleted ? '✅ Complete' : '❌ Incomplete';
+                row.insertCell(2).textContent = (gameState.sectionPoints[section.id] || 0) + ' pts';
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateScore();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

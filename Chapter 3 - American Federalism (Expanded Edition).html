@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: American Federalism - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* ADA Compliant Colors */
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-light);
+        }
+
+        /* Fixed Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .header-title {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .score-display {
+            display: flex;
+            gap: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .level-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        /* Points Popup */
+        #pointsPopup {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Page Management */
+        .page { display: none; }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat { text-align: center; }
+
+        .hero-stat-icon {
+            font-size: 3em;
+            margin-bottom: 5px;
+        }
+
+        /* Student Input */
+        .student-input {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .student-input label {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .student-input input {
+            padding: 8px 15px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            font-size: 1em;
+            width: 250px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            height: 25px;
+            background: #E0E0E0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Section Grid */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-color: var(--primary-blue);
+        }
+
+        .section-card.completed {
+            border-color: var(--success);
+            background: linear-gradient(135deg, var(--highlight-green), white);
+        }
+
+        .section-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .section-card.completed .section-number {
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .section-points {
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .completion-check {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+        }
+
+        /* Content Pages */
+        .back-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            opacity: 0.9;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            color: var(--primary-blue);
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .content-block {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .content-block p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Definition Box */
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        /* Interactive Cards */
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--primary-green);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .interactive-card.revealed {
+            background: var(--highlight-green);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .interactive-card.revealed .card-content {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Knowledge Check */
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .kc-option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            border-color: var(--primary-blue);
+            background: var(--highlight-blue);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFEBEE;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background: var(--highlight-green);
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            display: block;
+            background: #FFEBEE;
+            color: var(--error);
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 90%;
+            margin: 0 30px;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .timeline-date {
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* Comparison Container */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .comparison-box h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Complete Section Button */
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .complete-section-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .complete-section-btn:disabled {
+            background: #9E9E9E;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .report-scores {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .report-content {
+            padding: 30px;
+        }
+
+        .report-main {
+            text-align: center;
+        }
+
+        .report-title {
+            color: var(--primary-blue);
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .report-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .letter-grade {
+            font-size: 3.5em;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .grade-percentage {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-box {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        /* Lists */
+        .content-block ul, .content-block ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        .content-block li {
+            margin-bottom: 10px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--highlight-yellow);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Key Concept Box */
+        .key-concept {
+            background: linear-gradient(135deg, var(--highlight-blue), var(--highlight-green));
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .key-concept h4 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item, .timeline-item:nth-child(odd) {
+                padding-left: 50px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-content {
+                margin: 0;
+            }
+
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .score-display {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            .report-container {
+                box-shadow: none;
+            }
+
+            .header {
+                position: static;
+            }
+
+            .main-container {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="header-title">🏛️ TCC Federal Government Trailblazer Trek</div>
+            <div class="score-display">
+                <span>⭐ <span id="currentScore">0</span> pts</span>
+                <span class="level-badge" id="currentLevel">Explorer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div id="pointsPopup">+0 points!</div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <div class="hero-title">🏛️ Chapter 3: American Federalism 🇺🇸</div>
+                <div class="hero-subtitle">Understanding the Division of Power Between National and State Governments</div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">⚖️</div>
+                        <div>Balance of Power</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">🗺️</div>
+                        <div>50 States, One Nation</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">📜</div>
+                        <div>Constitutional Design</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-input">
+                <label for="studentName">👤 Enter Your Name:</label>
+                <input type="text" id="studentName" placeholder="Your name here">
+            </div>
+
+            <div class="progress-container">
+                <h3 style="margin-bottom: 10px;">📊 Your Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; color: var(--primary-blue); margin: 20px 0;">📚 Learning Sections</h3>
+            
+            <div class="section-grid">
+                <div class="section-card" onclick="showPage('section1')">
+                    <div class="section-number">1</div>
+                    <div class="section-title">The Division of Powers</div>
+                    <div class="section-desc">Explore federalism, constitutional provisions, and how power is distributed between federal, state, and local governments.</div>
+                    <div class="section-points">🎯 200 points available</div>
+                    <div class="completion-check" id="check1"></div>
+                </div>
+
+                <div class="section-card" onclick="showPage('section2')">
+                    <div class="section-number">2</div>
+                    <div class="section-title">The Evolution of American Federalism</div>
+                    <div class="section-desc">Trace the historical development from dual federalism through cooperative federalism to new federalism.</div>
+                    <div class="section-points">🎯 200 points available</div>
+                    <div class="completion-check" id="check2"></div>
+                </div>
+
+                <div class="section-card" onclick="showPage('section3')">
+                    <div class="section-number">3</div>
+                    <div class="section-title">Intergovernmental Relationships</div>
+                    <div class="section-desc">Learn about federal grants, categorical vs. block grants, and unfunded mandates.</div>
+                    <div class="section-points">🎯 200 points available</div>
+                    <div class="completion-check" id="check3"></div>
+                </div>
+
+                <div class="section-card" onclick="showPage('section4')">
+                    <div class="section-number">4</div>
+                    <div class="section-title">Competitive Federalism Today</div>
+                    <div class="section-desc">Examine contemporary issues like immigration federalism, marriage equality, and venue shopping.</div>
+                    <div class="section-points">🎯 200 points available</div>
+                    <div class="completion-check" id="check4"></div>
+                </div>
+
+                <div class="section-card" onclick="showPage('section5')">
+                    <div class="section-number">5</div>
+                    <div class="section-title">Advantages and Disadvantages</div>
+                    <div class="section-desc">Weigh the benefits and drawbacks of the federal system for American citizens.</div>
+                    <div class="section-points">🎯 200 points available</div>
+                    <div class="completion-check" id="check5"></div>
+                </div>
+
+                <div class="section-card" onclick="showPage('reportPage')">
+                    <div class="section-number">📊</div>
+                    <div class="section-title">View Your Report</div>
+                    <div class="section-desc">See your completion status, scores, and generate your certificate of completion.</div>
+                    <div class="section-points">🏆 Summary & Certificate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: The Division of Powers -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="showPage('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>⚖️ Section 1: The Division of Powers</h2>
+                <p>Understanding how governmental power is divided in the American federal system</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Introduction to Federalism</h3>
+                <p>Federalism figures prominently in the U.S. political system. Specifically, the federal design spelled out in the Constitution divides powers between two levels of government—the states and the federal government—and creates a mechanism for them to check and balance one another. As an institutional design, federalism both safeguards state interests and creates a strong union led by a capable central government.</p>
+                
+                <p>American federalism also seeks to balance the forces of decentralization and centralization. We see decentralization when we cross state lines and encounter different taxation levels, welfare eligibility requirements, and voting regulations. Centralization is apparent in the fact that the federal government is the only entity permitted to print money, to challenge the legality of state laws, or to employ money grants and mandates to shape state actions.</p>
+                
+                <p>Colorful billboards with simple messages may greet us at state borders, but behind them lies a complex and evolving federal design that has structured relationships between states and the federal government since the late 1700s.</p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Learning Objectives:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Explain the concept of federalism</li>
+                        <li>Discuss the constitutional logic of federalism</li>
+                        <li>Identify the powers and responsibilities of federal, state, and local governments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Federalism Defined and Contrasted</h3>
+                <p>Modern democracies divide governmental power in two general ways; some, like the United States, use a combination of both structures. The first and more common mechanism shares power among three branches of government—the legislature, the executive, and the judiciary. The second, federalism, apportions power between two levels of government: national and subnational. In the United States, the term <strong>federal government</strong> refers to the government at the national level, while the term <strong>states</strong> means governments at the subnational level.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Federalism</div>
+                    <div>An institutional arrangement that creates two relatively autonomous levels of government, each possessing the capacity to act directly on behalf of the people with the authority granted to it by the national constitution.</div>
+                </div>
+
+                <p>Although today's federal systems vary in design, five structural characteristics are common to the United States and other federal systems around the world, including Germany and Mexico.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'char1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Five Characteristics of Federal Systems</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've discovered the structural characteristics of federal systems!</p>
+                        <ol>
+                            <li><strong>Two Levels of Government:</strong> Both levels are elected by the people and each is assigned different functions. The national government handles matters affecting the country as a whole (defense, national prosperity), while subnational governments are responsible for matters within their regions (education, health care, public safety).</li>
+                            <li><strong>Written National Constitution:</strong> Cannot be changed without the substantial consent of subnational governments. In the U.S., amendments require approval by two-thirds of both houses of Congress and three-fourths of the states.</li>
+                            <li><strong>Formal Allocation of Authority:</strong> Legislative, judicial, and executive authority is distributed to ensure each level maintains some degree of autonomy from the other.</li>
+                            <li><strong>National Courts Resolve Disputes:</strong> Courts commonly resolve disputes between levels and departments of government, with the Supreme Court serving as the final arbiter.</li>
+                            <li><strong>Subnational Representation:</strong> Subnational governments are always represented in the upper house of the national legislature (the U.S. Senate), enabling regional interests to influence national lawmaking.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <p>First, all federal systems establish two levels of government, with both levels being elected by the people and each level assigned different functions. The national government is responsible for handling matters that affect the country as a whole, for example, defending the nation against foreign threats and promoting national economic prosperity. Subnational, or state governments, are responsible for matters that lie within their regions, which include ensuring the well-being of their people by administering education, health care, public safety, and other public services.</p>
+
+                <p>By definition, a system like this requires that different levels of government cooperate, because the institutions at each level form an interacting network. In the U.S. federal system, all national matters are handled by the federal government, which is led by the president and members of Congress, all of whom are elected by voters across the country. All matters at the subnational level are the responsibility of the fifty states, each headed by an elected governor and legislature. Thus, there is a separation of functions between the federal and state governments, and voters choose the leader at each level.</p>
+
+                <p>The second characteristic common to all federal systems is a written national constitution that cannot be changed without the substantial consent of subnational governments. In the American federal system, the twenty-seven amendments added to the Constitution since its adoption were the result of an arduous process that required approval by two-thirds of both houses of Congress and three-fourths of the states. The main advantage of this supermajority requirement is that no changes to the Constitution can occur unless there is broad support within Congress and among states.</p>
+
+                <p>The potential drawback is that numerous national amendment initiatives—such as the Equal Rights Amendment (ERA), which aims to guarantee equal rights regardless of sex—have failed because they cannot garner sufficient consent among members of Congress or, in the case of the ERA, the states. The ERA appeared to gain new life in 2020 as a thirty-eighth state (Virginia) formally voted to ratify the amendment. Although the amendment's original ratification deadline was in 1982, the U.S. House of Representatives has passed legislation to extend the deadline; however, the Senate has not taken up the measure.</p>
+
+                <p>Third, the constitutions of countries with federal systems formally allocate legislative, judicial, and executive authority to the two levels of government in such a way as to ensure each level some degree of autonomy from the other. Under the U.S. Constitution, the president assumes executive power, Congress exercises legislative powers, and the federal courts (e.g., U.S. district courts, appellate courts, and the Supreme Court) assume judicial powers. In each of the fifty states, a governor assumes executive authority, a state legislature makes laws, and state-level courts (e.g., trial courts, intermediate appellate courts, and supreme courts) possess judicial authority.</p>
+
+                <p>While each level of government is somewhat independent of the others, a great deal of interaction occurs among them. In fact, the ability of the federal and state governments to achieve their objectives often depends on the cooperation of the other level of government. For example, the federal government's efforts to ensure homeland security are bolstered by the involvement of law enforcement agents working at local and state levels. On the other hand, the ability of states to provide their residents with public education and health care is enhanced by the federal government's financial assistance.</p>
+
+                <p>Another common characteristic of federalism around the world is that national courts commonly resolve disputes between levels and departments of government. In the United States, conflicts between states and the federal government are adjudicated by federal courts, with the U.S. Supreme Court being the final arbiter. The resolution of such disputes can preserve the autonomy of one level of government, as illustrated recently when the Supreme Court ruled that states cannot interfere with the federal government's actions relating to immigration.</p>
+
+                <p>In other instances, a Supreme Court ruling can erode that autonomy, as demonstrated in the 1940s when, in <em>United States v. Wrightwood Dairy Co.</em>, the Court enabled the federal government to regulate commercial activities that occurred within states, a function previously handled exclusively by the states.</p>
+
+                <p>Finally, subnational governments are always represented in the upper house of the national legislature, enabling regional interests to influence national lawmaking. In the American federal system, the U.S. Senate functions as a territorial body by representing the fifty states: Each state elects two senators to ensure equal representation regardless of state population differences. Thus, federal laws are shaped in part by state interests, which senators convey to the federal policymaking process.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏢 Comparing Government Systems</h3>
+                <p>Division of power can also occur via a unitary structure or confederation. In contrast to federalism, these systems allocate power differently.</p>
+
+                <div class="comparison-container">
+                    <div class="comparison-box">
+                        <h4>🏛️ Unitary System</h4>
+                        <p>Authority is concentrated in the central government. Subnational governments are dependent on the national government.</p>
+                        <p><strong>Examples:</strong> United Kingdom, Japan, Sweden, France</p>
+                        <p>Before the late 1990s, the United Kingdom's unitary system was centralized to the extent that the national government held the most important levers of power. Since then, power has been gradually decentralized through a process of <strong>devolution</strong>, leading to the creation of regional governments in Scotland, Wales, and Northern Ireland.</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h4>⚖️ Federation</h4>
+                        <p>Authority is divided between central and state governments, both deriving power from the people.</p>
+                        <p><strong>Examples:</strong> United States, Canada, India, Germany, Mexico</p>
+                        <p>The people grant authority to both levels of government, and each level has its own sphere of influence and responsibility.</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h4>🔗 Confederation</h4>
+                        <p>Authority is decentralized, and the central government's ability to act depends on the consent of the subnational governments.</p>
+                        <p><strong>Example:</strong> United States under the Articles of Confederation</p>
+                        <p>States were sovereign and powerful while the national government was subordinate and weak, lacking authority to service war debt, end commercial disputes, or address uprisings.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Unitary System</div>
+                    <div>A centralized system of government in which the subnational government is dependent on the central government, where substantial authority is concentrated.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔗 Devolution</div>
+                    <div>A process in which powers from the central government in a unitary system are delegated to subnational units.</div>
+                </div>
+
+                <p>Under the Articles of Confederation (the first constitution of the United States), states were sovereign and powerful while the national government was subordinate and weak. Because states were reluctant to give up any of their power, the national government lacked authority in the face of challenges such as servicing the war debt, ending commercial disputes among states, negotiating trade agreements with other countries, and addressing popular uprisings that were sweeping the country. As the brief American experience with confederation clearly shows, the main drawback with this system of government is that it maximizes regional self-rule at the expense of effective national governance.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What is the key difference between a federal system and a unitary system?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s1', 25)">In a federal system, there are no state governments</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1s1', 25)">In a federal system, the constitution allocates powers between states and federal government; in a unitary system, powers are concentrated in the national government</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s1', 25)">Unitary systems have more states than federal systems</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s1', 25)">Federal systems and unitary systems are identical</div>
+                <div class="feedback-box" id="feedback-q1s1"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 Federalism and the Constitution</h3>
+                <p>The Constitution contains several provisions that direct the functioning of U.S. federalism. Some delineate the scope of national and state power, while others restrict it. The remaining provisions shape relationships among the states and between the states and the federal government.</p>
+
+                <p>The <strong>enumerated powers</strong> of the national legislature are found in Article I, Section 8. These powers define the jurisdictional boundaries within which the federal government has authority. In seeking not to replay the problems that plagued the young country under the Articles of Confederation, the Constitution's framers granted Congress specific powers that ensured its authority over national and foreign affairs.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'enum1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Enumerated Powers of Congress</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about Congress's enumerated powers!</p>
+                        <p>To provide for the <strong>general welfare</strong> of the populace, Congress can:</p>
+                        <ul>
+                            <li>Tax</li>
+                            <li>Borrow money</li>
+                            <li>Regulate interstate and foreign commerce</li>
+                            <li>Protect property rights</li>
+                        </ul>
+                        <p>To provide for the <strong>common defense</strong> of the people, the federal government can:</p>
+                        <ul>
+                            <li>Raise and support armies</li>
+                            <li>Declare war</li>
+                        </ul>
+                        <p>Furthermore, national integration and unity are fostered with the government's powers over:</p>
+                        <ul>
+                            <li>Coining of money</li>
+                            <li>Naturalization</li>
+                            <li>Postal services</li>
+                            <li>And other responsibilities</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Elastic Clause (Necessary and Proper Clause)</div>
+                    <div>The last clause of Article I, Section 8, which enables the national government "to make all Laws which shall be necessary and proper for carrying" out all its constitutional responsibilities. This open-ended construction has enabled the national government to expand its authority beyond what is specified in the Constitution.</div>
+                </div>
+
+                <p>The last clause of Article I, Section 8, commonly referred to as the <strong>elastic clause</strong> or the <strong>necessary and proper clause</strong>, enables Congress "to make all Laws which shall be necessary and proper for carrying" out its constitutional responsibilities. While the enumerated powers define the policy areas in which the national government has authority, the elastic clause allows it to create the legal means to fulfill those responsibilities. However, the open-ended construction of this clause has enabled the national government to expand its authority beyond what is specified in the Constitution, a development also motivated by the expansive interpretation of the commerce clause, which empowers the federal government to regulate interstate economic transactions.</p>
+
+                <p>The powers of the state governments were never listed in the original Constitution. The consensus among the framers was that states would retain any powers not prohibited by the Constitution or delegated to the national government. However, when it came time to ratify the Constitution, a number of states requested that an amendment be added explicitly identifying the reserved powers of the states. What these Anti-Federalists sought was further assurance that the national government's capacity to act directly on behalf of the people would be restricted, which the first ten amendments (Bill of Rights) provided.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Tenth Amendment</div>
+                    <div>"The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people." This amendment affirms the states' reserved powers.</div>
+                </div>
+
+                <p>Some of the states' reserved powers are no longer exclusively within state domain, however. For example, since the 1940s, the federal government has also engaged in administering health, safety, income security, education, and welfare to state residents. The boundary between intrastate and interstate commerce has become indefinable as a result of broad interpretation of the commerce clause.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ Constitutional Powers Distribution</h3>
+                <p>Shared and overlapping powers have become an integral part of contemporary U.S. federalism. These <strong>concurrent powers</strong> range from taxing, borrowing, and making and enforcing laws to establishing court systems.</p>
+
+                <table class="data-table">
+                    <tr>
+                        <th>Federal Government Powers</th>
+                        <th>Concurrent Powers</th>
+                        <th>State Government Powers</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Enumerated Powers:</strong><br>
+                            • Coin money<br>
+                            • Regulate interstate and foreign commerce<br>
+                            • Conduct foreign affairs<br>
+                            • Establish rules of naturalization<br>
+                            • Punish counterfeiting<br>
+                            • Establish copyright/patent laws<br>
+                            • Regulate postal system<br>
+                            • Establish courts inferior to Supreme Court<br>
+                            • Declare war<br>
+                            • Raise and support armies<br>
+                            • Make all laws "necessary and proper"
+                        </td>
+                        <td>
+                            <strong>Shared Powers:</strong><br>
+                            • Levy and collect taxes<br>
+                            • Borrow money<br>
+                            • Make and enforce laws<br>
+                            • Establish courts<br>
+                            • Charter banks and corporations<br>
+                            • Take property for public purpose with just compensation (eminent domain)
+                        </td>
+                        <td>
+                            <strong>Reserved Powers:</strong><br>
+                            • Regulate intrastate commerce<br>
+                            • Conduct elections<br>
+                            • Provide for public health, safety, welfare, and morals<br>
+                            • Establish local governments<br>
+                            • Maintain militia (National Guard)<br>
+                            • Ratify amendments to the Constitution
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Powers Denied:</strong><br>
+                            • Tax state exports<br>
+                            • Change state boundaries<br>
+                            • Violate the Bill of Rights
+                        </td>
+                        <td></td>
+                        <td>
+                            <strong>Powers Denied:</strong><br>
+                            • Tax imports and exports<br>
+                            • Coin money<br>
+                            • Enter into treaties<br>
+                            • Impair obligation of contracts<br>
+                            • Abridge privileges or deny due process and equal protection
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Concurrent Powers</div>
+                    <div>Shared state and federal powers that range from taxing, borrowing, and making and enforcing laws to establishing court systems.</div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🛡️ Constitutional Restrictions</h3>
+                <p>Article I, Sections 9 and 10, along with several constitutional amendments, lay out the restrictions on federal and state authority. The most important restriction Section 9 places on the national government prevents measures that cause the deprivation of personal liberty.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'restrict1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Key Constitutional Restrictions</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about constitutional protections!</p>
+                        <p>Specifically, the government cannot:</p>
+                        <ul>
+                            <li><strong>Suspend the writ of habeas corpus</strong> - which enables someone in custody to petition a judge to determine whether that person's detention is legal</li>
+                            <li><strong>Pass a bill of attainder</strong> - a legislative action declaring someone guilty without a trial</li>
+                            <li><strong>Enact an ex post facto law</strong> - which criminalizes an act retroactively</li>
+                        </ul>
+                        <p>The Bill of Rights affirms and expands these constitutional restrictions, ensuring that the government cannot encroach on personal freedoms.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Writ of Habeas Corpus</div>
+                    <div>A petition that enables someone in custody to petition a judge to determine whether that person's detention is legal.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚠️ Bill of Attainder</div>
+                    <div>A legislative action declaring someone guilty without a trial; prohibited under the Constitution.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚠️ Ex Post Facto Law</div>
+                    <div>A law that criminalizes an act retroactively; prohibited under the Constitution.</div>
+                </div>
+
+                <p>The states are also constrained by the Constitution. Article I, Section 10, prohibits the states from entering into treaties with other countries, coining money, and levying taxes on imports and exports. Like the federal government, the states cannot violate personal freedoms by suspending the writ of habeas corpus, passing bills of attainder, or enacting ex post facto laws.</p>
+
+                <p>Furthermore, the Fourteenth Amendment, ratified in 1868, prohibits the states from denying citizens the rights to which they are entitled by the Constitution, due process of law, or the equal protection of the laws. Lastly, three civil rights amendments—the Fifteenth, Nineteenth, and Twenty-Sixth—prevent both the states and the federal government from abridging citizens' right to vote based on race, sex, and age. This topic remains controversial because states have not always ensured equal protection.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 The Supremacy Clause</h3>
+                <p>The <strong>supremacy clause</strong> in Article VI of the Constitution regulates relationships between the federal and state governments by declaring that the Constitution and federal law are the supreme law of the land. This means that if a state law clashes with a federal law found to be within the national government's constitutional authority, the federal law prevails.</p>
+
+                <p>The intent of the supremacy clause is not to subordinate the states to the federal government; rather, it affirms that one body of laws binds the country. In fact, all national and state government officials are bound by oath to uphold the Constitution regardless of the offices they hold.</p>
+
+                <div class="highlight-box">
+                    <strong>💡 Marijuana Laws: A Modern Example</strong>
+                    <p>Enforcement is not always simple. In the case of marijuana use, which the federal government defines to be illegal, thirty-six states and the District of Columbia have nevertheless established medical marijuana laws, others have decriminalized its recreational use, and fifteen states have completely legalized it. The federal government could act in this area if it wanted to. For example, in addition to the legalization issue, there is the question of how to treat the money from marijuana sales, which the national government designates as drug money and regulates under laws regarding its deposit in banks.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🤝 State-to-State Relations</h3>
+                <p>Various constitutional provisions govern state-to-state relations.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Full Faith and Credit Clause (Comity Clause)</div>
+                    <div>Found in Article IV, Section 1, of the Constitution, this clause requires the states to accept court decisions, public acts, and contracts of other states. Thus, an adoption certificate or driver's license issued in one state is valid in any other state.</div>
+                </div>
+
+                <p>The movement for marriage equality has put the full faith and credit clause to the test in recent decades. In light of <em>Baehr v. Lewin</em>, a 1993 ruling in which the Hawaii Supreme Court asserted that the state's ban on same-sex marriage was unconstitutional, a number of states became worried that they would be required to recognize those marriage certificates.</p>
+
+                <p>To address this concern, Congress passed and President Clinton signed the Defense of Marriage Act (DOMA) in 1996. The law declared that "No state (or other political subdivision within the United States) need recognize a marriage between persons of the same sex, even if the marriage was concluded or recognized in another state." The law also barred federal benefits for same-sex partners.</p>
+
+                <p>DOMA clearly made the topic a state matter. In <em>United States v. Windsor</em>, the Supreme Court changed the dynamic established by DOMA by ruling that the federal government had no authority to define marriage. The Court held that states possess the "historic and essential authority to define the marital relation." Then, in 2015, the <em>Obergefell v. Hodges</em> case had a sweeping effect when the Supreme Court clearly identified a constitutional right to marriage based on the Fourteenth Amendment.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Privileges and Immunities Clause</div>
+                    <div>Found in Article IV, Section 2, of the Constitution, this clause prohibits states from discriminating against out-of-staters by denying such guarantees as access to courts, legal protection, and property and travel rights.</div>
+                </div>
+
+                <p>The privileges and immunities clause of Article IV asserts that states are prohibited from discriminating against out-of-staters by denying them such guarantees as access to courts, legal protection, property rights, and travel rights. The clause has not been interpreted to mean there cannot be any difference in the way a state treats residents and non-residents. For example, individuals cannot vote in a state in which they do not reside, tuition at state universities is higher for out-of-state residents, and in some cases individuals who have recently become residents of a state must wait a certain amount of time to be eligible for social welfare benefits.</p>
+
+                <p>Another constitutional provision prohibits states from establishing trade restrictions on goods produced in other states. However, a state can tax out-of-state goods sold within its borders as long as state-made goods are taxed at the same level.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: The necessary and proper clause (elastic clause) is found in which part of the Constitution?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s1', 25)">Article II, Section 1</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2s1', 25)">Article I, Section 8</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s1', 25)">The Tenth Amendment</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s1', 25)">Article IV, Section 2</div>
+                <div class="feedback-box" id="feedback-q2s1"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>💰 The Distribution of Finances</h3>
+                <p>Federal, state, and local governments depend on different sources of revenue to finance their annual expenditures. In 2014, total revenue (or receipts) reached $3.2 trillion for the federal government, $1.7 trillion for the states, and $1.2 trillion for local governments.</p>
+
+                <p>Two important developments have fundamentally changed the allocation of revenue since the early 1900s:</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'finance1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Key Revenue Developments</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about major revenue changes!</p>
+                        <p><strong>1. The Sixteenth Amendment (1913):</strong> Authorized Congress to impose income taxes without apportioning it among the states on the basis of population, a burdensome provision that Article I, Section 9, had imposed on the national government. With this change, the federal government's ability to raise revenue significantly increased and so did its ability to spend.</p>
+                        <p><strong>2. Federal Grants:</strong> Transfers of federal money to state and local governments that do not have to be repaid. These are designed to support the activities of the recipient governments, but also to encourage them to pursue federal policy objectives they might not otherwise adopt. The expansion of the federal government's spending power has enabled it to transfer more grant money to lower government levels.</p>
+                    </div>
+                </div>
+
+                <h4>Federal Government Revenue (2020)</h4>
+                <ul>
+                    <li>47% from individual income taxes</li>
+                    <li>38% from payroll taxes (Social Security and Medicare)</li>
+                    <li>6% from corporate taxes</li>
+                    <li>3% from excise taxes</li>
+                    <li>6% from other sources</li>
+                </ul>
+
+                <h4>State Government Revenue (2018)</h4>
+                <ul>
+                    <li>39% from taxes (47% from sales tax, 38% from individual income taxes)</li>
+                    <li>25% from federal support</li>
+                    <li>15% from service charges</li>
+                    <li>21% from other sources</li>
+                </ul>
+
+                <p>The tax structure of states varies. Alaska, Florida, Nevada, South Dakota, Texas, Washington, and Wyoming do not have individual income taxes. Such decisions on taxation reflect a classic tradeoff, as each state government must collect some mix of revenue in order to fund their chosen public services. These states find revenue through higher property taxes and through tax revenues related to tourism.</p>
+
+                <h4>Local Government Revenue (2018)</h4>
+                <ul>
+                    <li>37% from taxes (72% from property tax, 18% from sales tax, 5% from individual income tax)</li>
+                    <li>30% from federal and state support</li>
+                    <li>20% from service charges</li>
+                    <li>13% from other sources</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Federal Spending</h3>
+                <p>A look at the federal budget in 2019 shows that the three largest spending categories were:</p>
+                <ul>
+                    <li><strong>Social Security</strong> - 24% of the total budget</li>
+                    <li><strong>Medicare, Medicaid, the Children's Health Insurance Program, and Affordable Care Act subsidies</strong> - 24%</li>
+                    <li><strong>Defense and international security assistance</strong> - 18%</li>
+                </ul>
+                <p>The rest was divided among:</p>
+                <ul>
+                    <li>Safety net programs (11%) - including the Earned Income Tax Credit, Child Tax Credit, unemployment insurance, food stamps, and other low-income assistance programs</li>
+                    <li>Benefits for federal retirees and veterans (8%)</li>
+                    <li>Interest on federal debt (7%)</li>
+                    <li>Transportation infrastructure (3%)</li>
+                </ul>
+                <p>It is clear from the 2019 federal budget that providing for the general welfare and national defense consumes much of the government's resources—not just its revenue, but also its administrative capacity and labor power.</p>
+
+                <h4>COVID-19 Pandemic Response</h4>
+                <p>The COVID-19 pandemic of 2020–2021 ushered in a massive mobilization of activity and coordination at and between various levels of U.S. government in the hope of defeating the deadly virus that overwhelmed hospitals and led to nearly 600,000 deaths nationwide as well as a bleeding of state and local government jobs.</p>
+                <p>The amount of federal funding to the states eclipsed the levels provided during the Great Recession. The $1.9 trillion American Rescue Plan Act passed by Congress and signed by President Biden included $350 million in direct aid to state, local, and tribal governments. Furthermore, earlier in the pandemic, the CARES Act, signed by President Trump, established the $150 billion Coronavirus Relief Fund to aid these same governments.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What is the most important source of tax revenue for local governments?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3s1', 25)">Sales tax</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3s1', 25)">Income tax</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3s1', 25)">Property tax</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3s1', 25)">Excise tax</div>
+                <div class="feedback-box" id="feedback-q3s1"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(1)">✓ Complete Section 1</button>
+        </div>
+
+        <!-- SECTION 2: The Evolution of American Federalism -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="showPage('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📜 Section 2: The Evolution of American Federalism</h2>
+                <p>Tracing the historical development of federal-state relationships</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Introduction</h3>
+                <p>The Constitution sketches a federal framework that aims to balance the forces of decentralized and centralized governance in general terms; it does not flesh out standard operating procedures that say precisely how the states and federal governments are to handle all policy contingencies imaginable. Therefore, officials at the state and national levels have had some room to maneuver as they operate within the Constitution's federal design. This has led to changes in the configuration of federalism over time, changes corresponding to different historical phases that capture distinct balances between state and federal authority.</p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Learning Objectives:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Describe how federalism has evolved in the United States</li>
+                        <li>Compare different conceptions of federalism</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚔️ The Struggle Between National Power and State Power</h3>
+                <p>As George Washington's secretary of the treasury from 1789 to 1795, Alexander Hamilton championed legislative efforts to create a publicly chartered bank. For Hamilton, the establishment of the Bank of the United States was fully within Congress's authority, and he hoped the bank would foster economic development, print and circulate paper money, and provide loans to the government. Although Thomas Jefferson, Washington's secretary of state, staunchly opposed Hamilton's plan on the constitutional grounds that the national government had no authority to create such an instrument, Hamilton managed to convince the reluctant president to sign the legislation.</p>
+
+                <p>When the bank's charter expired in 1811, Jeffersonian Democratic-Republicans prevailed in blocking its renewal. However, the fiscal hardships that plagued the government during the War of 1812, coupled with the fragility of the country's financial system, convinced Congress and then-president James Madison to create the Second Bank of the United States in 1816. Many states rejected the Second Bank, arguing that the national government was infringing upon the states' constitutional jurisdiction.</p>
+
+                <div class="key-concept">
+                    <h4>⚖️ McCulloch v. Maryland (1819)</h4>
+                    <p>A political showdown between Maryland and the national government emerged when James McCulloch, an agent for the Baltimore branch of the Second Bank, refused to pay a tax that Maryland had imposed on all out-of-state chartered banks. The standoff raised two constitutional questions:</p>
+                    <ol>
+                        <li>Did Congress have the authority to charter a national bank?</li>
+                        <li>Were states allowed to tax federal property?</li>
+                    </ol>
+                    <p>In <em>McCulloch v. Maryland</em>, Chief Justice John Marshall argued that Congress could create a national bank even though the Constitution did not expressly authorize it. Under the necessary and proper clause of Article I, Section 8, the Supreme Court asserted that Congress could establish "all means which are appropriate" to fulfill "the legitimate ends" of the Constitution.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'mcculloch', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Key Outcomes of McCulloch v. Maryland</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've mastered this landmark case!</p>
+                        <p><strong>1. Doctrine of Implied Powers:</strong> This ruling established that Congress has a vast source of discretionary power to achieve its constitutional responsibilities beyond what is expressly stated in the Constitution.</p>
+                        <p><strong>2. National Supremacy:</strong> The Supreme Court sided with the federal government on whether states could tax federal property. Under the supremacy clause of Article VI, legitimate national laws trump conflicting state laws. As the court observed, "the government of the Union, though limited in its powers, is supreme within its sphere of action and its laws, when made in pursuance of the constitution, form the supreme law of the land."</p>
+                        <p>Maryland's action violated national supremacy because <strong>"the power to tax is the power to destroy."</strong></p>
+                    </div>
+                </div>
+
+                <p>Defining the scope of national power was the subject of another landmark Supreme Court decision in 1824. In <em>Gibbons v. Ogden</em>, the court had to interpret the commerce clause of Article I, Section 8; specifically, it had to determine whether the federal government had the sole authority to regulate the licensing of steamboats operating between New York and New Jersey.</p>
+
+                <div class="key-concept">
+                    <h4>⚖️ Gibbons v. Ogden (1824)</h4>
+                    <p>Aaron Ogden, who had obtained an exclusive license from New York State to operate steamboat ferries between New York City and New Jersey, sued Thomas Gibbons, who was operating ferries along the same route under a coasting license issued by the federal government. Gibbons lost in New York state courts and appealed.</p>
+                    <p>Chief Justice Marshall delivered a two-part ruling in favor of Gibbons that strengthened the power of the national government:</p>
+                    <ol>
+                        <li>Interstate commerce was interpreted broadly to mean "commercial intercourse" among states, thus allowing Congress to regulate navigation.</li>
+                        <li>Because the federal Licensing Act of 1793 was a constitutional exercise of Congress's authority under the commerce clause, federal law trumped the New York State license-monopoly law. As Marshall pointed out, "the acts of New York must yield to the law of Congress."</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔥 Nullification and the Civil War</h3>
+                <p>Various states railed against the nationalization of power that had been going on since the late 1700s. When President John Adams signed the Sedition Act in 1798, which made it a crime to speak openly against the government, the Kentucky and Virginia legislatures passed resolutions declaring the act null on the grounds that they retained the discretion to follow national laws.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚠️ Nullification</div>
+                    <div>A doctrine promoted by John Calhoun of South Carolina in the 1830s, asserting that if a state deems a federal law unconstitutional, it can nullify it within its borders.</div>
+                </div>
+
+                <p>A nullification crisis emerged in the 1830s over President Andrew Jackson's tariff acts of 1828 and 1832. Led by John Calhoun, President Jackson's vice president, nullifiers argued that high tariffs on imported goods benefited northern manufacturing interests while disadvantaging economies in the South. South Carolina passed an Ordinance of Nullification declaring both tariff acts null and void and threatened to leave the Union.</p>
+
+                <p>The federal government responded by enacting the Force Bill in 1833, authorizing President Jackson to use military force against states that challenged federal tariff laws. The prospect of military action coupled with the passage of the Compromise Tariff Act of 1833 (which lowered tariffs over time) led South Carolina to back off, ending the nullification crisis.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'civil1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Civil War's Impact on Federalism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about this pivotal moment in federalism!</p>
+                        <p>The ultimate showdown between national and state authority came during the Civil War. Prior to the conflict, in <em>Dred Scott v. Sandford</em>, the Supreme Court ruled that the national government lacked the authority to ban slavery in the territories. But the election of President Abraham Lincoln in 1860 led eleven southern states to secede from the United States.</p>
+                        <p>What was initially a conflict to preserve the Union became a conflict to end slavery when Lincoln issued the Emancipation Proclamation in 1863. The defeat of the South had a huge impact on the balance of power:</p>
+                        <ul>
+                            <li><strong>First:</strong> The Union victory put an end to the right of states to secede and to challenge legitimate national laws.</li>
+                            <li><strong>Second:</strong> Congress imposed several conditions for readmitting former Confederate states into the Union, including ratification of the Fourteenth and Fifteenth Amendments.</li>
+                        </ul>
+                        <p>In sum, after the Civil War the power balance shifted toward the national government.</p>
+                    </div>
+                </div>
+
+                <p>The period between 1819 and the 1860s demonstrated that the national government sought to establish its role within the newly created federal design, which in turn often provoked the states to resist as they sought to protect their interests. With the exception of the Civil War, the Supreme Court settled the power struggles between the states and national government. From a historical perspective, the national supremacy principle introduced during this period did not so much narrow the states' scope of constitutional authority as restrict their encroachment on national powers.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: In McCulloch v. Maryland, the Supreme Court established which important principle?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s2', 25)">States can tax federal institutions</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1s2', 25)">The doctrine of implied powers and national supremacy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s2', 25)">The federal government cannot create a national bank</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s2', 25)">States have the right to nullify federal laws</div>
+                <div class="feedback-box" id="feedback-q1s2"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>🎂 Dual Federalism (1870s-1930s)</h3>
+                <p>The late 1870s ushered in a new phase in the evolution of U.S. federalism. Under <strong>dual federalism</strong>, the states and national government exercise exclusive authority in distinctly delineated spheres of jurisdiction. Like the layers of a cake, the levels of government do not blend with one another but rather are clearly defined.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎂 Dual Federalism ("Layer Cake")</div>
+                    <div>A style of federalism in which the states and national government exercise exclusive authority in distinctly delineated spheres of jurisdiction, creating a layer-cake view of federalism.</div>
+                </div>
+
+                <p>Two factors contributed to the emergence of this conception of federalism:</p>
+                <ol>
+                    <li>Several Supreme Court rulings blocked attempts by both state and federal governments to step outside their jurisdictional boundaries.</li>
+                    <li>The prevailing economic philosophy at the time loathed government interference in the process of industrial development.</li>
+                </ol>
+
+                <div class="interactive-card" onclick="revealCard(this, 'dual1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Early Federal Regulations</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about early regulatory efforts!</p>
+                        <p>Industrialization changed the socioeconomic landscape of the United States. One of its adverse effects was the concentration of market power. Because there was no national regulatory supervision to ensure fairness in market practices, collusive behavior among powerful firms emerged in several industries.</p>
+                        <p>To curtail widespread anticompetitive practices in the railroad industry, Congress passed:</p>
+                        <ul>
+                            <li><strong>Interstate Commerce Act (1887)</strong> - Created the Interstate Commerce Commission</li>
+                            <li><strong>Sherman Antitrust Act (1890)</strong> - Made it illegal to monopolize or attempt to monopolize and conspire in restraining commerce</li>
+                        </ul>
+                        <p>In the early stages of industrial capitalism, federal regulations were focused for the most part on promoting market competition rather than on addressing the social dislocations resulting from market operations, something the government began to tackle in the 1930s.</p>
+                    </div>
+                </div>
+
+                <p>The new federal regulatory regime was dealt a legal blow early in its existence. In 1895, in <em>United States v. E. C. Knight</em>, the Supreme Court ruled that the national government lacked the authority to regulate manufacturing. The case came about when the government, using its regulatory power under the Sherman Act, attempted to override American Sugar's purchase of four sugar refineries, which would give the company a commanding share of the industry. Distinguishing between commerce among states and the production of goods, the court argued that the national government's regulatory authority applied only to commercial activities.</p>
+
+                <p>In the late 1800s, some states attempted to regulate working conditions. For example, New York State passed the Bakeshop Act in 1897, which prohibited bakery employees from working more than sixty hours in a week. In <em>Lochner v. New York</em>, the Supreme Court ruled this state regulation that capped work hours unconstitutional, on the grounds that it violated the due process clause of the Fourteenth Amendment. In other words, the right to sell and buy labor is a "liberty of the individual" safeguarded by the Constitution, the court asserted.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🌀 Cooperative Federalism (1930s-1970s)</h3>
+                <p>The Great Depression of the 1930s brought economic hardships the nation had never witnessed before. Between 1929 and 1933:</p>
+                <ul>
+                    <li>The national unemployment rate reached 25 percent</li>
+                    <li>Industrial output dropped by half</li>
+                    <li>Stock market assets lost more than half their value</li>
+                    <li>Thousands of banks went out of business</li>
+                    <li>The gross domestic product shrunk by one-quarter</li>
+                </ul>
+                <p>Given the magnitude of the economic depression, there was pressure on the national government to coordinate a robust national response along with the states.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🌀 Cooperative Federalism ("Marble Cake")</div>
+                    <div>A style of federalism in which both levels of government coordinate their actions to solve national problems, leading to the blending of layers as in a marble cake. Born of necessity during the Great Depression, it erodes the jurisdictional boundaries between the states and national government.</div>
+                </div>
+
+                <p>Cooperative federalism was born of necessity and lasted well into the twentieth century as the national and state governments each found it beneficial. Under this model, both levels of government coordinated their actions to solve national problems, such as the Great Depression and the civil rights struggle of the following decades. In contrast to dual federalism, it erodes the jurisdictional boundaries between the states and national government, leading to a blending of layers as in a marble cake.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'newdeal', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The New Deal and the Supreme Court</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about this crucial turning point!</p>
+                        <p>The New Deal programs President Franklin D. Roosevelt proposed as a means to tackle the Great Depression ran afoul of the dual-federalism mindset of the justices on the Supreme Court in the 1930s. The court struck down key pillars of the New Deal—the National Industrial Recovery Act and the Agricultural Adjustment Act—on the grounds that the federal government was operating in matters that were within the purview of the states.</p>
+                        <p>The court's obstructionist position infuriated Roosevelt, leading him in 1937 to propose a <strong>court-packing plan</strong> that would add one new justice for each one over the age of seventy, allowing the president to make a maximum of six new appointments.</p>
+                        <p>Before Congress took action on the proposal, the Supreme Court began leaning in support of the New Deal as Chief Justice Charles Evans Hughes and Justice Owen Roberts changed their view on federalism.</p>
+                        <p>In <em>National Labor Relations Board (NLRB) v. Jones and Laughlin Steel</em>, the Supreme Court ruled the National Labor Relations Act of 1935 constitutional, asserting that Congress can use its authority under the commerce clause to regulate both manufacturing activities and labor-management relations.</p>
+                    </div>
+                </div>
+
+                <h4>The New Deal Changed American Government</h4>
+                <p>Before the Great Depression, the government offered little in terms of financial aid, social benefits, and economic rights. After the New Deal, it provided:</p>
+                <ul>
+                    <li>Old-age pensions (Social Security)</li>
+                    <li>Unemployment insurance</li>
+                    <li>Agricultural subsidies</li>
+                    <li>Protections for organizing in the workplace</li>
+                    <li>A variety of other public services</li>
+                </ul>
+
+                <h4>The Great Society (1960s)</h4>
+                <p>In the 1960s, President Lyndon Johnson's administration expanded the national government's role in society even more:</p>
+                <ul>
+                    <li><strong>Medicaid</strong> - provides medical assistance to the indigent</li>
+                    <li><strong>Medicare</strong> - provides health insurance to the elderly and some people with disabilities</li>
+                    <li><strong>School nutrition programs</strong></li>
+                    <li><strong>Elementary and Secondary Education Act (1965)</strong></li>
+                    <li><strong>Higher Education Act (1965)</strong></li>
+                    <li><strong>Head Start preschool program (1965)</strong></li>
+                    <li><strong>Clean Air Act (1965)</strong></li>
+                    <li><strong>Highway Safety Act (1966)</strong></li>
+                    <li><strong>Fair Packaging and Labeling Act (1966)</strong></li>
+                    <li><strong>Civil Rights Act (1964)</strong></li>
+                    <li><strong>Voting Rights Act (1965)</strong></li>
+                </ul>
+
+                <p>While the era of cooperative federalism witnessed a broadening of federal powers in concurrent and state policy domains, it is also the era of a deepening coordination between the states and the federal government in Washington. Nowhere is this clearer than with respect to the social welfare and social insurance programs created during the New Deal and Great Society eras, most of which are administered by both state and federal authorities and are jointly funded.</p>
+
+                <p>The Social Security Act of 1935 created federal subsidies for state-administered programs for the elderly; people with disabilities; dependent mothers; and children, giving state and local officials wide discretion over eligibility and benefit levels. The unemployment insurance program, also created by the Social Security Act, requires states to provide jobless benefits, but allows them significant latitude to decide the level of tax to impose on businesses in order to fund the program as well as the duration and replacement rate of unemployment benefits.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What event led to the emergence of cooperative federalism?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s2', 25)">The Civil War</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s2', 25)">World War I</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2s2', 25)">The Great Depression</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s2', 25)">The Cold War</div>
+                <div class="feedback-box" id="feedback-q2s2"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔄 New Federalism (1970s-Present)</h3>
+                <p>During the administrations of Presidents Richard Nixon (1969–1974) and Ronald Reagan (1981–1989), attempts were made to reverse the process of nationalization—that is, to restore states' prominence in policy areas into which the federal government had moved in the past.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔄 New Federalism</div>
+                    <div>A style of federalism premised on the idea that the decentralization of policies enhances administrative efficiency, reduces overall public spending, and improves policy outcomes.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">💵 General Revenue Sharing</div>
+                    <div>A type of federal grant that places minimal restrictions on how state and local governments spend the money. During Nixon's administration, these programs distributed funds to state and local governments with minimal restrictions on how the money was spent.</div>
+                </div>
+
+                <p>The election of Ronald Reagan heralded the advent of a "devolution revolution" in U.S. federalism, in which the president pledged to return authority to the states according to the Constitution. In the Omnibus Budget Reconciliation Act of 1981, congressional leaders together with President Reagan consolidated numerous federal grant programs related to social welfare and reformulated them in order to give state and local administrators greater discretion in using federal funds.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'newfed1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Reagan's Mixed Record on New Federalism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about the challenges of devolution!</p>
+                        <p>Reagan's track record in promoting new federalism was inconsistent. This was partly due to the fact that the president's devolution agenda met some opposition from:</p>
+                        <ul>
+                            <li>Democrats in Congress</li>
+                            <li>Moderate Republicans</li>
+                            <li>Interest groups</li>
+                        </ul>
+                        <p>His efforts to completely devolve Aid to Families With Dependent Children (a New Deal-era program) and food stamps (a Great Society-era program) to the states were rejected by members of Congress, who feared states would underfund both programs, and by members of the National Governors' Association, who believed the proposal would be too costly for states.</p>
+                        <p>Reagan terminated general revenue sharing in 1986.</p>
+                    </div>
+                </div>
+
+                <p>Several Supreme Court rulings also promoted new federalism by hemming in the scope of the national government's power, especially under the commerce clause. For example, in <em>United States v. Lopez</em>, the court struck down the Gun-Free School Zones Act of 1990, which banned gun possession in school zones. It argued that the regulation in question did not "substantively affect interstate commerce." The ruling ended a nearly sixty-year period in which the court had used a broad interpretation of the commerce clause that by the 1960s allowed it to regulate numerous local commercial activities.</p>
+
+                <h4>Post-9/11 Shift Back Toward Federal Power</h4>
+                <p>However, many would say that the years since the 9/11 attacks have swung the pendulum back in the direction of central federal power:</p>
+                <ul>
+                    <li>The creation of the <strong>Department of Homeland Security</strong> federalized disaster response power in Washington</li>
+                    <li>The <strong>Transportation Security Administration</strong> was created to federalize airport security</li>
+                    <li><strong>Faith-Based Initiative</strong> and <strong>No Child Left Behind</strong> (during the George W. Bush administration)</li>
+                    <li>The <strong>Affordable Care Act</strong> (during Barack Obama's administration)</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>🧁 Cooperative Federalism vs. New Federalism: Finding a Middle Ground</h3>
+                <p>Morton Grodzins coined the expression "marble-cake federalism" in the 1950s while conducting research on the evolution of American federalism as a professor of political science at the University of Chicago. Until then most scholars had thought of federalism as a layer cake, but according to Grodzins the 1930s ushered in "marble-cake federalism."</p>
+
+                <div class="highlight-box">
+                    <p><strong>Grodzins wrote:</strong> "The American form of government is often, but erroneously, symbolized by a three-layer cake. A far more accurate image is the rainbow or marble cake, characterized by an inseparable mingling of differently colored ingredients, the colors appearing in vertical and diagonal strands and unexpected whirls. As colors are mixed in the marble cake, so functions are mixed in the American federal system."</p>
+                </div>
+
+                <h4>Merits of Cooperative Federalism:</h4>
+                <ul>
+                    <li>Because state and local governments have varying fiscal capacities, the national government's involvement in state activities such as education, health, and social welfare is necessary to ensure some degree of uniformity in the provision of public services to citizens in richer and poorer states.</li>
+                    <li>The problem of collective action, which dissuades state and local authorities from raising regulatory standards for fear they will be disadvantaged as others lower theirs, is resolved by requiring state and local authorities to meet minimum federal standards (e.g., minimum wage and air quality).</li>
+                    <li>Federal assistance is necessary to ensure state and local programs that generate positive externalities are maintained. For example, one state's environmental regulations impose higher fuel prices on its residents, but the externality of the cleaner air they produce benefits neighboring states.</li>
+                </ul>
+
+                <h4>Advantages of New Federalism:</h4>
+                <ul>
+                    <li>Because of differences among states, one-size-fits-all features of federal laws are suboptimal. Decentralization accommodates the diversity that exists across states.</li>
+                    <li>By virtue of being closer to citizens, state and local authorities are better than federal agencies at discerning the public's needs.</li>
+                    <li>Decentralized federalism fosters a marketplace of innovative policy ideas as states compete against each other to minimize administrative costs and maximize policy output.</li>
+                </ul>
+            </div>
+
+            <div class="timeline">
+                <h3 style="text-align: center; margin-bottom: 30px;">📅 Timeline: Evolution of American Federalism</h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">1789-1800s</span>
+                        <h4>Early Republic</h4>
+                        <p>Debates over national vs. state power; Bank of the United States controversy; McCulloch v. Maryland (1819); Gibbons v. Ogden (1824)</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">1830s</span>
+                        <h4>Nullification Crisis</h4>
+                        <p>South Carolina challenges federal tariff laws; Force Bill enacted; crisis resolved with compromise</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">1861-1865</span>
+                        <h4>Civil War</h4>
+                        <p>Ultimate test of federalism; Union victory ends right to secede; Fourteenth and Fifteenth Amendments ratified</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">1870s-1930s</span>
+                        <h4>Dual Federalism</h4>
+                        <p>"Layer Cake" federalism; distinct spheres of authority; limited government intervention in economy</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">1930s-1970s</span>
+                        <h4>Cooperative Federalism</h4>
+                        <p>"Marble Cake" federalism; New Deal programs; Great Society; shared responsibilities between levels of government</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">1970s-Present</span>
+                        <h4>New Federalism</h4>
+                        <p>Attempts to restore state prominence; block grants; devolution revolution; but also renewed federal power post-9/11</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What metaphor is used to describe cooperative federalism?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3s2', 25)">Layer cake</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3s2', 25)">Marble cake</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3s2', 25)">Pound cake</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3s2', 25)">Sheet cake</div>
+                <div class="feedback-box" id="feedback-q3s2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(2)">✓ Complete Section 2</button>
+        </div>
+
+        <!-- SECTION 3: Intergovernmental Relationships -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="showPage('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🤝 Section 3: Intergovernmental Relationships</h2>
+                <p>Understanding how federal, state, and local governments interact through grants and mandates</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Introduction</h3>
+                <p>The national government's ability to achieve its objectives often requires the participation of state and local governments. Intergovernmental grants offer positive financial inducements to get states to work toward selected national goals. A grant is commonly likened to a "carrot" to the extent that it is designed to entice the recipient to do something.</p>
+                
+                <p>On the other hand, <strong>unfunded mandates</strong> impose federal requirements on state and local authorities. Mandates are typically backed by the threat of penalties for non-compliance and provide little to no compensation for the costs of implementation. Thus, given its coercive nature, a mandate is commonly likened to a "stick."</p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Learning Objectives:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Explain how federal intergovernmental grants have evolved over time</li>
+                        <li>Identify the types of federal intergovernmental grants</li>
+                        <li>Describe the characteristics of federal unfunded mandates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>💰 Grants</h3>
+                <p>The national government has used grants to influence state actions as far back as the Articles of Confederation when it provided states with land grants. In the first half of the 1800s, land grants were the primary means by which the federal government supported the states. Millions of acres of federal land were donated to support road, railroad, bridge, and canal construction projects, all of which were instrumental in piecing together a national transportation system to facilitate migration, interstate commerce, postal mail service, and movement of military people and equipment.</p>
+
+                <p>Numerous universities and colleges across the country, such as Oklahoma State University and President Biden's alma mater, the University of Delaware, are land-grant institutions because their campuses were built on land donated by the federal government or by using funding secured by the sale of donated federal land. In the segregated South, black land grant universities were established in 1890, including Florida A&M University and Prairie View A&M University (Texas). At the turn of the twentieth century, cash grants replaced land grants as the main form of federal intergovernmental transfers and have become a central part of modern federalism.</p>
+
+                <p>Federal cash grants do come with strings attached; the national government has an interest in seeing that public monies are used for policy activities that advance national objectives.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'grants1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Types of Federal Grants</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've mastered the types of federal grants!</p>
+                        
+                        <h4>1. Categorical Grants</h4>
+                        <p>Federal transfers formulated to limit recipients' discretion in the use of funds and subject them to strict administrative criteria that guide project selection, performance, and financial oversight. These grants also often require some commitment of matching funds.</p>
+                        <p><strong>Examples:</strong> Medicaid, Food Stamp program</p>
+                        
+                        <h4>2. Block Grants</h4>
+                        <p>Come with less stringent federal administrative conditions and provide recipients more flexibility over how to spend grant funds.</p>
+                        <p><strong>Examples:</strong> Workforce Investment Act program, Surface Transportation Program</p>
+                        
+                        <h4>3. General Revenue Sharing</h4>
+                        <p>Recipients faced the least restrictions on the use of federal grants. From 1972 to 1986, when revenue sharing was abolished, upwards of $85 billion of federal money was distributed to states, cities, counties, towns, and villages.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Categorical Grants</div>
+                    <div>Federal transfers formulated to limit recipients' discretion in the use of funds and subject them to strict administrative criteria that guide project selection, performance, and financial oversight, among other things.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📦 Block Grants</div>
+                    <div>A type of grant that comes with less stringent federal administrative conditions and provides recipients more latitude over how to spend grant funds.</div>
+                </div>
+
+                <p>During the 1960s and 1970s, funding for federal grants grew significantly. Growth picked up again in the 1990s and 2000s. The increase since the 1990s is primarily due to the increase in federal grant money going to Medicaid. Federally funded health-care programs jumped from $43.8 billion in 1990 to $320 billion in 2014. Health-related grant programs such as Medicaid and the Children's Health Insurance Program (CHIP) represented more than half of total federal grant expenses.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Why Categorical Grants Are More Popular</h3>
+                <p>The national government has greatly preferred using categorical grants to transfer funds to state and local authorities because this type of grant gives them more control and discretion in how the money is spent. In 2014, the federal government distributed 1,099 grants, 1,078 of which were categorical, while only 21 were block grants.</p>
+
+                <p>In response to the terrorist attack on the United States on September 11, 2001, more than a dozen new federal grant programs relating to homeland security were created, but as of 2011, only three were block grants.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'catgrant', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Why Categorical Grants Dominate</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned why categorical grants are preferred!</p>
+                        <p>There are a couple of reasons that categorical grants are more popular than block grants despite calls to decentralize public policy:</p>
+                        <ol>
+                            <li><strong>Political Credit:</strong> Elected officials who sponsor these grants can take credit for their positive outcomes (e.g., clean rivers, better-performing schools, healthier children, a secure homeland) since elected officials, not state officials, formulate the administrative standards that lead to the results.</li>
+                            <li><strong>Greater Control:</strong> Categorical grants afford federal officials greater command over grant program performance.</li>
+                            <li><strong>Vested Interests:</strong> Once categorical grants have been established, vested interests in Congress and the federal bureaucracy seek to preserve them. The legislators who enact them and the federal agencies that implement them invest heavily in defending them, ensuring their continuation.</li>
+                        </ol>
+                        <p>A common criticism leveled against block grants is that they lack mechanisms to hold state and local administrators accountable for outcomes.</p>
+                    </div>
+                </div>
+
+                <h4>Evolution of Block Grants</h4>
+                <p>Reagan's "devolution revolution" contributed to raising the number of block grants from six in 1981 to fourteen in 1989. Block grants increased to twenty-four in 1999 during the Clinton administration and to twenty-six during Obama's presidency, but by 2014 the total had dropped to twenty-one, accounting for 10 percent of total federal grant outlay.</p>
+
+                <h4>TANF: A Major Change</h4>
+                <p>In 1994, the Republican-controlled Congress passed legislation that called for block-granting Medicaid, which would have capped federal Medicaid spending. President Clinton vetoed the legislation. However, congressional efforts to convert Aid to Families with Dependent Children (AFDC) to a block grant succeeded.</p>
+
+                <p>The Temporary Assistance for Needy Families (TANF) block grant replaced the AFDC in 1996, marking the first time the federal government transformed an entitlement program (which guarantees individual rights to benefits) into a block grant. Under the AFDC, the federal government had reimbursed states a portion of the costs they bore for running the program without placing a ceiling on the amount. In contrast, the TANF block grant caps annual federal funding at $16.489 billion and provides a yearly lump sum to each state, which it can use to manage its own program.</p>
+
+                <p>Block grants have been championed for their cost-cutting effects. By eliminating uncapped federal funding, the national government can reverse the escalating costs of federal grant programs.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Which type of federal grant provides states with the MOST flexibility in how they spend the money?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s3', 25)">Categorical grants</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1s3', 25)">Block grants</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s3', 25)">Project grants</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s3', 25)">Formula grants</div>
+                <div class="feedback-box" id="feedback-q1s3"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>📉 Creeping Categorization</h3>
+                <p>Another noteworthy characteristic of block grants is that their flexibility has been undermined over time as a result of <strong>creeping categorization</strong>, a process in which the national government places new administrative requirements on state and local governments or supplants block grants with new categorical grants.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📉 Creeping Categorization</div>
+                    <div>A process in which the national government attaches new administrative requirements to block grants or supplants them with new categorical grants.</div>
+                </div>
+
+                <p>Among the more common measures used to restrict block grants' programmatic flexibility are:</p>
+                <ul>
+                    <li><strong>Set-asides:</strong> Requiring a certain share of grant funds to be designated for a specific purpose</li>
+                    <li><strong>Cost ceilings:</strong> Placing a cap on funding other purposes</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>⚠️ Unfunded Mandates</h3>
+                <p><strong>Unfunded mandates</strong> are federal laws and regulations that impose obligations on state and local governments without fully compensating them for the administrative costs they incur. The federal government has used mandates increasingly since the 1960s to promote national objectives in policy areas such as the environment, civil rights, education, and homeland security.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚠️ Unfunded Mandates</div>
+                    <div>Federal laws and regulations that impose obligations on state and local governments without fully compensating them for the costs of implementation.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'mandates1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Types of Federal Mandates</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about federal mandates!</p>
+                        
+                        <h4>Crosscutting Mandates</h4>
+                        <p>One type of mandate threatens civil and criminal penalties for state and local authorities that fail to comply with them across the board in all programs. Another provides for the suspension of federal grant money if the mandate is not followed.</p>
+                        <p>Failure to fully comply with crosscutting mandates can result in punishments that normally include:</p>
+                        <ul>
+                            <li>Reduction of or suspension of federal grants</li>
+                            <li>Prosecution of officials</li>
+                            <li>Fines</li>
+                            <li>Some combination of these penalties</li>
+                        </ul>
+                        <p>If only one requirement is not met, state or local governments may not get any money at all.</p>
+                        
+                        <h4>Partial Preemption Regulations</h4>
+                        <p>Some mandates come in the form of partial preemption regulations, whereby the federal government sets national regulatory standards but delegates the enforcement to state and local governments.</p>
+                        <p><strong>Example:</strong> The Clean Air Act sets air quality regulations but instructs states to design implementation plans to achieve such standards.</p>
+                        
+                        <h4>Example: Title VI of the Civil Rights Act of 1964</h4>
+                        <p>Authorizes the federal government to withhold federal grants as well as file lawsuits against state and local officials for practicing racial discrimination.</p>
+                    </div>
+                </div>
+
+                <p>The widespread use of federal mandates in the 1970s and 1980s provoked a backlash among state and local authorities, which culminated in the <strong>Unfunded Mandates Reform Act (UMRA) in 1995</strong>. The UMRA's main objective has been to restrain the national government's use of mandates by subjecting rules that impose unfunded requirements on state and local governments to greater procedural scrutiny. However, since the act's implementation, states and local authorities have obtained limited relief.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🆔 The Real ID Act: A Case Study</h3>
+                <p>The number of mandates has continued to rise, and some have been especially costly to states and local authorities. Consider the Real ID Act of 2005, a federal law designed to beef up homeland security.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'realid', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Real ID Act Challenge</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about a major unfunded mandate!</p>
+                        <p>The law requires driver's licenses and state-issued identification cards (DL/IDs) to contain:</p>
+                        <ul>
+                            <li>Standardized anti-fraud security features</li>
+                            <li>Specific data</li>
+                            <li>Machine-readable technology</li>
+                        </ul>
+                        <p>It also requires states to verify the identity of everyone being reissued DL/IDs.</p>
+                        <p><strong>The Cost:</strong> The cost to states of re-issuing DL/IDs, implementing new identity verification procedures, and redesigning DL/IDs is estimated to be <strong>$11 billion</strong>, and the federal government stands to reimburse only a small fraction.</p>
+                        <p>Compliance with the federal law has been onerous for many states; numerous extensions have been granted since 2016. Only thirty-eight were in full compliance with Real ID as of December 2018. Ultimately, all fifty states and the District of Columbia were certified as compliant.</p>
+                    </div>
+                </div>
+
+                <p>The continued use of unfunded mandates clearly contradicts new federalism's call for giving states and local governments more flexibility in carrying out national goals. The temptation to use them appears to be difficult for the federal government to resist, however, as the UMRA's poor track record illustrates. This is because mandates allow the federal government to fulfill its national priorities while passing most of the cost to the states, an especially attractive strategy for national lawmakers trying to cut federal spending.</p>
+
+                <p>Some leading federalism scholars have used the term <strong>coercive federalism</strong> to capture this aspect of contemporary U.S. federalism. In other words, Washington has been as likely to use the stick of mandates as the carrot of grants to accomplish its national objectives. As a result, there have been more instances of confrontational interactions between the states and the federal government.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📚 The Clery Act: A Milestone in Campus Security</h3>
+                <p>The Clery Act of 1990, formally the Jeanne Clery Disclosure of Campus Security Policy and Campus Crime Statistics Act, requires public and private colleges and universities that participate in federal student aid programs to disclose information about campus crime. The Act is named after Jeanne Clery, who in 1986 was raped and murdered by a fellow student in her Lehigh University dorm room.</p>
+
+                <p>The U.S. Department of Education's Clery Act Compliance Division is responsible for enforcing the 1990 Act. Specifically, to remain eligible for federal financial aid funds and avoid penalties, colleges and universities must comply with the following provisions:</p>
+                <ul>
+                    <li>Publish an annual security report and make it available to current and prospective students and employees</li>
+                    <li>Keep a public crime log that documents each crime on campus and is accessible to the public</li>
+                    <li>Disclose information about incidents of criminal homicide, sex offenses, robbery, aggravated assault, burglary, motor vehicle theft, arson, and hate crimes that occurred on or near campus</li>
+                    <li>Issue warnings about Clery Act crimes that pose a threat to students and employees</li>
+                    <li>Develop a campus community emergency response and notification strategy that is subject to annual testing</li>
+                    <li>Gather and report fire data to the federal government and publish an annual fire safety report</li>
+                    <li>Devise procedures to address reports of missing students living in on-campus housing</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What was the main purpose of the Unfunded Mandates Reform Act (UMRA) of 1995?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s3', 25)">To increase federal mandates on states</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2s3', 25)">To restrain the national government's use of unfunded mandates</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s3', 25)">To eliminate all federal grants</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s3', 25)">To increase state taxes</div>
+                <div class="feedback-box" id="feedback-q2s3"></div>
+            </div>
+
+            <table class="data-table">
+                <tr>
+                    <th>Grant/Mandate Type</th>
+                    <th>Characteristics</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td><strong>Categorical Grants</strong></td>
+                    <td>Strict federal oversight, limited recipient discretion, often requires matching funds</td>
+                    <td>Medicaid, Food Stamps</td>
+                </tr>
+                <tr>
+                    <td><strong>Block Grants</strong></td>
+                    <td>Less stringent conditions, more flexibility for recipients</td>
+                    <td>TANF, Workforce Investment Act</td>
+                </tr>
+                <tr>
+                    <td><strong>General Revenue Sharing</strong></td>
+                    <td>Minimal restrictions, abolished in 1986</td>
+                    <td>Historical (1972-1986)</td>
+                </tr>
+                <tr>
+                    <td><strong>Unfunded Mandates</strong></td>
+                    <td>Federal requirements without full compensation for costs</td>
+                    <td>Real ID Act, Clean Air Act</td>
+                </tr>
+                <tr>
+                    <td><strong>Crosscutting Mandates</strong></td>
+                    <td>Requirements that apply across all programs, penalties for non-compliance</td>
+                    <td>Title VI of Civil Rights Act</td>
+                </tr>
+            </table>
+
+            <button class="complete-section-btn" onclick="completeSection(3)">✓ Complete Section 3</button>
+        </div>
+
+        <!-- SECTION 4: Competitive Federalism Today -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="showPage('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🏁 Section 4: Competitive Federalism Today</h2>
+                <p>Examining contemporary issues in federal-state relations</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Introduction</h3>
+                <p>Certain functions clearly belong to the federal government, the state governments, and local governments. National security is a federal matter, the issuance of licenses is a state matter, and garbage collection is a local matter.</p>
+                
+                <p>One aspect of competitive federalism today is that some policy issues, such as immigration and the marital rights of LGBTQ people, have been redefined as the roles that states and the federal government play in them have changed. Another aspect of competitive federalism is that interest groups seeking to change the status quo can take a policy issue up to the federal government or down to the states if they feel it is to their advantage. Interest groups have used this strategy to promote their views on such issues as abortion, gun control, and the legal drinking age.</p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Learning Objectives:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Explain the dynamic of competitive federalism</li>
+                        <li>Analyze some issues over which the states and federal government have contended</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🛂 Immigration Federalism</h3>
+                <p>Immigration and marriage equality have not been the subject of much contention between states and the federal government until recent decades. Before that, it was understood that the federal government handled immigration and states determined the legality of marriage, whether between people of different races or the same sex. This understanding of exclusive responsibilities has changed; today both levels of government play roles in these two policy areas.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🛂 Immigration Federalism</div>
+                    <div>The gradual movement of states into the immigration policy domain traditionally handled by the federal government.</div>
+                </div>
+
+                <p>Since the late 1990s, states have asserted a right to make immigration policy on the grounds that they are enforcing, not supplanting, the nation's immigration laws, and they are exercising their jurisdictional authority by restricting undocumented immigrants' access to education, health care, and welfare benefits, areas that fall under the states' responsibilities.</p>
+
+                <p>In 2005, twenty-five states had enacted a total of thirty-nine laws related to immigration; by 2014, forty-three states and Washington, DC, had passed a total of 288 immigration-related laws and resolutions. In 2020, thirty-two different states enacted a total of 206 new measures, including many related to COVID-19.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'arizona', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Arizona v. United States (2012)</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about this landmark immigration case!</p>
+                        <p>Arizona has been one of the states at the forefront of immigration federalism. In 2010, it passed Senate Bill 1070, which sought to make it so difficult for undocumented immigrants to live in the state that they would return to their native country, a strategy referred to as "attrition by enforcement."</p>
+                        <p>The federal government filed suit to block the Arizona law, contending that it conflicted with federal immigration laws. According to a poll of Latino voters in the state by Arizona State University researchers, 81 percent opposed this bill.</p>
+                        <p>In 2012, in <em>Arizona v. United States</em>, the Supreme Court affirmed federal supremacy on immigration. The court struck down three of the four central provisions of the Arizona law:</p>
+                        <ul>
+                            <li>Allowing police officers to arrest an undocumented immigrant without a warrant if they had probable cause to think the immigrant had committed a crime that could lead to deportation</li>
+                            <li>Making it a crime to seek a job without proper immigration documentation</li>
+                            <li>Making it a crime to be in Arizona without valid immigration papers</li>
+                        </ul>
+                        <p>The court upheld the "show me your papers" provision, which authorizes police officers to check the immigration status of anyone they stop or arrest who they suspect is an undocumented immigrant. However, the court warned Arizona and other states with similar laws that they could face civil rights lawsuits if police officers applied it based on racial profiling.</p>
+                        <p>Justice Anthony Kennedy's opinion embraced an expansive view of the U.S. government's authority to regulate immigration, describing it as broad and undoubted. That authority derived from the legislative power of Congress to "establish a uniform Rule of Naturalization," enumerated in the Constitution.</p>
+                    </div>
+                </div>
+
+                <p>During the COVID-19 pandemic, California moved in the opposite direction. The California Immigrant Resilience Fund led to the provision of $75 million for undocumented Californians not eligible for other COVID-19 programs.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>💍 LGBTQ Marital Rights</h3>
+                <p>LGBTQ marital rights have also significantly changed in recent years. By passing the Defense of Marriage Act (DOMA) in 1996, the federal government stepped into this policy issue. Not only did DOMA allow states to choose whether to recognize same-sex marriages, it also defined marriage as a union between a man and a woman, which meant that same-sex couples were denied various federal provisions and benefits—such as the right to file joint tax returns and receive Social Security survivor benefits.</p>
+
+                <p>In 1997, more than half the states in the union had passed some form of legislation banning same-sex marriage. By 2006, two years after Massachusetts became the first state to recognize marriage equality, twenty-seven states had passed constitutional bans on same-sex marriage.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'windsor', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Edith Windsor's Fight for Marriage Equality</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about this civil rights icon!</p>
+                        <p>Edith Windsor, the plaintiff in the landmark Supreme Court case <em>United States v. Windsor</em>, became an icon of the marriage equality movement for her successful effort to force repeal of the DOMA provision that denied married same-sex couples a host of federal provisions and protections.</p>
+                        <p>In 2007, after having lived together since the late 1960s, Windsor and her partner Thea Spyer were married in Canada, where same-sex marriage was legal. After Spyer died in 2009, Windsor received a $363,053 federal tax bill on the estate Spyer had left her. Because her marriage was not valid under federal law, her request for the estate-tax exemption that applies to surviving spouses was denied.</p>
+                        <p>With the counsel of her lawyer, Roberta Kaplan, Windsor sued the federal government and won. The <em>Windsor</em> decision meant that federal laws could no longer discriminate against same-sex married couples.</p>
+                        <p>James Esseks, director of the ACLU's Lesbian Gay Bisexual Transgender & AIDS Project, summarized the significance: "Part of what's gotten us to this exciting moment in American culture is not just Edie's lawsuit but the story of her life. The love at the core of that story, as well as the injustice at its end, is part of what has moved America on this issue so profoundly."</p>
+                    </div>
+                </div>
+
+                <p>In <em>United States v. Windsor</em>, the Supreme Court changed the dynamic established by DOMA by ruling that the federal government had no authority to define marriage. The Court held that states possess the "historic and essential authority to define the marital relation," and that the federal government's involvement in this area "departs from this history and tradition of reliance on state law to define marriage."</p>
+
+                <p>Following the Windsor decision, the number of states that recognized same-sex marriages increased rapidly. In 2015, marriage equality was recognized in thirty-six states plus Washington, DC, up from seventeen in 2013. Then, in 2015, the <em>Obergefell v. Hodges</em> case had a sweeping effect when the Supreme Court clearly identified a constitutional right to marriage based on the Fourteenth Amendment.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Which Supreme Court case established a constitutional right to same-sex marriage nationwide?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s4', 25)">United States v. Windsor</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1s4', 25)">Obergefell v. Hodges</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s4', 25)">Arizona v. United States</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s4', 25)">McCulloch v. Maryland</div>
+                <div class="feedback-box" id="feedback-q1s4"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Venue Shopping</h3>
+                <p>Mothers Against Drunk Driving (MADD) was established in 1980 by a woman whose thirteen-year-old daughter had been killed by a drunk driver. The organization lobbied state legislators to raise the drinking age and impose tougher penalties, but without success. States with lower drinking ages had an economic interest in maintaining them because they lured youths from neighboring states with restricted consumption laws.</p>
+
+                <p>So MADD decided to redirect its lobbying efforts at Congress, hoping to find sympathetic representatives willing to take action. In 1984, the federal government passed the National Minimum Drinking Age Act (NMDAA), a crosscutting mandate that gradually reduced federal highway grant money to any state that failed to increase the legal age for alcohol purchase and possession to twenty-one. After losing a legal battle against the NMDAA, all states were in compliance by 1988.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Venue Shopping</div>
+                    <div>A strategy in which interest groups select the level and branch of government (legislature, judiciary, or executive) they calculate will be most receptive to their policy goals.</div>
+                </div>
+
+                <p>By creating two institutional access points—the federal and state governments—the U.S. federal system enables interest groups such as MADD to strategize about how best to achieve their policy objectives. The term <strong>venue shopping</strong> refers to a strategy in which interest groups select the level and branch of government (legislature, judiciary, or executive) they calculate will be most advantageous for them. If one institutional venue proves unreceptive to an advocacy group's policy goal, as state legislators were to MADD, the group will attempt to steer its issue to a more responsive venue.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'venue1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Venue Shopping in Action - Abortion Rights</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned how interest groups use venue shopping!</p>
+                        <p>The strategy anti-abortion advocates have used in recent years is another example of venue shopping. In their attempts to limit abortion rights in the wake of the 1973 <em>Roe v. Wade</em> Supreme Court decision making abortion legal nationwide, anti-abortion advocates initially targeted Congress in hopes of obtaining restrictive legislation.</p>
+                        <p>Lack of progress at the national level prompted them to shift their focus to state legislators, where their advocacy efforts have been more successful. By 2015, for example:</p>
+                        <ul>
+                            <li>Thirty-eight states required some form of parental involvement in a minor's decision to have an abortion</li>
+                            <li>Forty-six states allowed individual health-care providers to refuse to participate in abortions</li>
+                            <li>Thirty-two states prohibited the use of public funds to carry out an abortion except when the woman's life is in danger or the pregnancy is the result of rape or incest</li>
+                        </ul>
+                        <p>While 31 percent of U.S. women of childbearing age resided in one of the thirteen states that had passed restrictive abortion laws in 2000, by 2013, about 56 percent of such women resided in one of the twenty-seven states where abortion is restricted.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What is "venue shopping" in the context of federalism?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s4', 25)">Shopping at different stores in different states</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s4', 25)">Moving from state to state to avoid laws</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2s4', 25)">Interest groups selecting the level of government most receptive to their policy goals</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s4', 25)">The federal government choosing which states to fund</div>
+                <div class="feedback-box" id="feedback-q2s4"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(4)">✓ Complete Section 4</button>
+        </div>
+
+        <!-- SECTION 5: Advantages and Disadvantages of Federalism -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="showPage('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>⚖️ Section 5: Advantages and Disadvantages of Federalism</h2>
+                <p>Weighing the benefits and drawbacks of the American federal system</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Introduction</h3>
+                <p>The federal design of our Constitution has had a profound effect on U.S. politics. Several positive and negative attributes of federalism have manifested themselves in the U.S. political system.</p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Learning Objectives:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Discuss the advantages of federalism</li>
+                        <li>Explain the disadvantages of federalism</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>✅ The Benefits of Federalism</h3>
+                <p>Among the merits of federalism are that it promotes policy innovation and political participation and accommodates diversity of opinion.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'benefits1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: States as "Laboratories of Democracy"</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> You've learned about policy innovation!</p>
+                        <p>On the subject of policy innovation, Supreme Court Justice Louis Brandeis observed in 1932 that <strong>"a single courageous state may, if its citizens choose, serve as a laboratory; and try novel social and economic experiments without risk to the rest of the country."</strong></p>
+                        <p>What Brandeis meant was that states could harness their constitutional authority to engage in policy innovations that might eventually be diffused to other states and at the national level.</p>
+                        <p><strong>Examples of state-led innovations:</strong></p>
+                        <ul>
+                            <li>A number of New Deal breakthroughs, such as child labor laws, were inspired by state policies</li>
+                            <li>Prior to the passage of the Nineteenth Amendment, women already had the right to vote in several states</li>
+                            <li>California has led the way in establishing standards for fuel emissions and other environmental policies</li>
+                            <li>The California Air Resources Board was established in 1967, before passage of the federal Clean Air Act</li>
+                            <li>The federal EPA has adopted California emissions standards nationally, starting with the 2016 model year</li>
+                            <li>Recently, the health insurance exchanges run by Connecticut, Kentucky, Rhode Island, and Washington have served as models for other states seeking to improve the performance of their exchanges</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Key Benefits of Federalism:</h4>
+                <ol>
+                    <li><strong>Policy Innovation:</strong> States can experiment with new policies without risk to the rest of the country. Successful innovations can be adopted by other states or the federal government.</li>
+                    <li><strong>Multiple Access Points:</strong> Because our federal system creates two levels of government with the capacity to take action, failure to attain a desired policy goal at one level can be offset by successfully securing the support of elected representatives at another level. Thus, individuals, groups, and social movements are encouraged to actively participate and help shape public policy.</li>
+                    <li><strong>Accommodates Diversity:</strong> The system of checks and balances in our political system often prevents the federal government from imposing uniform policies across the country. As a result, states and local communities have the latitude to address policy issues based on the specific needs and interests of their citizens. The diversity of public viewpoints across states is manifested by differences in the way states handle access to abortion, distribution of alcohol, gun control, and social welfare benefits.</li>
+                </ol>
+
+                <div class="key-concept">
+                    <h4>🗳️ Federalism and Political Office</h4>
+                    <p>There are a total of <strong>510,682 elected offices</strong> at the federal, state, and local levels in the United States. Elected representatives in municipal and township governments account for a little more than half the total number of elected officials.</p>
+                    <p>Political careers rarely start at the national level. In fact, a very small share of politicians at the subnational level transition to the national stage as representatives, senators, vice presidents, or presidents.</p>
+                    <p><strong>Public Trust:</strong> Whereas only 35 percent of U.S. adults trusted Congress in 2018, according to Gallup, about 63 percent trusted their state governments and 72 percent had confidence in their local governments.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Justice Louis Brandeis famously described states as:</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1s5', 25)">Laboratories of democracy where policy experiments can be tried</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s5', 25)">Obstacles to national progress</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s5', 25)">Subordinates to federal power</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1s5', 25)">Unnecessary levels of government</div>
+                <div class="feedback-box" id="feedback-q1s5"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>❌ The Drawbacks of Federalism</h3>
+                <p>Federalism also comes with drawbacks. Chief among them are economic disparities across states, race-to-the-bottom dynamics (i.e., states compete to attract business by lowering taxes and regulations), and the difficulty of taking action on issues of national importance.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📉 Race-to-the-Bottom</div>
+                    <div>A dynamic in which states compete to attract business by lowering taxes and regulations, often to workers' detriment.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'disparities', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Economic Disparities Across States</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> You've learned about state-level inequalities!</p>
+                        <p>Stark economic differences across states have a profound effect on the well-being of citizens:</p>
+                        <ul>
+                            <li><strong>Income Disparities:</strong> In 2017, Maryland had the highest median household income ($80,776), while West Virginia had the lowest ($43,469).</li>
+                            <li><strong>Education Spending:</strong> In 2016, New York spent $22,366 per student for elementary and secondary education, while Utah spent $6,953.</li>
+                            <li><strong>Health Care:</strong> Health-care access, costs, and quality vary greatly across states.</li>
+                        </ul>
+                        <p>Proponents of social justice contend that federalism has tended to obstruct national efforts to effectively even out these disparities. When national policy-making is stymied, and policy advocates move to the state level, it takes fifty-one different advocacy efforts to bring about change, compared to one effort were the national government to take the lead.</p>
+                    </div>
+                </div>
+
+                <h4>Key Drawbacks of Federalism:</h4>
+                <ol>
+                    <li><strong>Economic Disparities:</strong> Stark economic differences across states have a profound effect on the well-being of citizens in areas like income, education funding, and healthcare access.</li>
+                    <li><strong>Race-to-the-Bottom:</strong> The economic strategy of using race-to-the-bottom tactics in order to compete with other states in attracting new business growth also carries a social cost. Workers' safety and pay can suffer as workplace regulations are lifted, and the reduction in payroll taxes for employers has led a number of states to end up with underfunded unemployment insurance programs.</li>
+                    <li><strong>Medicaid Expansion Resistance:</strong> As of March 2021, twelve states have opted not to expand Medicaid, as encouraged by the Patient Protection and Affordable Care Act in 2010, for fear it will raise state public spending and increase employers' cost of employee benefits, despite provisions that the federal government will pick up nearly all cost of the expansion. More than half of these states are in the South.</li>
+                    <li><strong>Difficulty Addressing National Issues:</strong> The federal design of our Constitution and the system of checks and balances has jeopardized or outright blocked federal responses to important national issues:
+                        <ul>
+                            <li>President Roosevelt's efforts to combat the Great Depression were initially struck down by the Supreme Court</li>
+                            <li>President Obama's Affordable Care Act immediately ran into legal challenges from some states</li>
+                            <li>In 2013, the Supreme Court struck down a key provision of the Voting Rights Act of 1965</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="highlight-box">
+                    <h4>⚠️ Voting Rights Example</h4>
+                    <p>The federal government's ability to defend the voting rights of citizens suffered a major setback when the Supreme Court in 2013 struck down a key provision of the Voting Rights Act of 1965. No longer are the nine states with histories of racial discrimination in their voting processes required to submit plans for changes to the federal government for approval.</p>
+                    <p>After a tumultuous 2020 election, many states in 2021 advanced legislation to make voting rules and processes more rigorous, a move many said was an effort to limit voting access. For example, elected leaders in Georgia passed a law making voter ID requirements much stricter and also significantly limited options to vote outside of Election Day itself.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What is a "race to the bottom" in the context of federalism?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s5', 25)">States competing to provide the best public services</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2s5', 25)">States competing to attract business by lowering taxes and regulations, often harming workers</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s5', 25)">A political campaign strategy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2s5', 25)">A type of federal grant</div>
+                <div class="feedback-box" id="feedback-q2s5"></div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ Weighing the Pros and Cons</h3>
+                
+                <table class="data-table">
+                    <tr>
+                        <th>Advantages of Federalism</th>
+                        <th>Disadvantages of Federalism</th>
+                    </tr>
+                    <tr>
+                        <td>States serve as "laboratories of democracy" for policy innovation</td>
+                        <td>Economic disparities across states affect citizen well-being</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple access points for citizens and interest groups</td>
+                        <td>Race-to-the-bottom dynamics harm workers</td>
+                    </tr>
+                    <tr>
+                        <td>Accommodates diverse viewpoints and local needs</td>
+                        <td>Difficulty taking action on national problems</td>
+                    </tr>
+                    <tr>
+                        <td>Encourages political participation at multiple levels</td>
+                        <td>Requires 51 separate advocacy efforts vs. one national effort</td>
+                    </tr>
+                    <tr>
+                        <td>Higher public trust in state and local governments</td>
+                        <td>States can block or delay federal initiatives</td>
+                    </tr>
+                </table>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(5)">✓ Complete Section 5</button>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>% Complete</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="showPage('homePage')">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 3: American Federalism</p>
+                        
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">95%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>📋 Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Student Name:</span>
+                                    <span id="reportStudentName">Not Entered</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span id="reportDate"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span id="reportTime"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Level Achieved:</span>
+                                    <span id="reportLevel">Explorer</span>
+                                </div>
+                            </div>
+                            
+                            <div class="performance-section">
+                                <h3>📊 Section Performance</h3>
+                                <div class="info-row">
+                                    <span>Section 1: Division of Powers</span>
+                                    <span id="section1Status">⭕ Not Complete</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Section 2: Evolution of Federalism</span>
+                                    <span id="section2Status">⭕ Not Complete</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Section 3: Intergovernmental Relations</span>
+                                    <span id="section3Status">⭕ Not Complete</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Section 4: Competitive Federalism</span>
+                                    <span id="section4Status">⭕ Not Complete</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Section 5: Advantages & Disadvantages</span>
+                                    <span id="section5Status">⭕ Not Complete</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/5</div>
+                                <div class="metric-label">Sections Complete</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="instructor-note">
+                            <strong>📝 Instructor Note:</strong> This report documents the student's completion of the interactive Chapter 3: American Federalism module as part of the TCC Federal Government Trailblazer Trek series. Points are awarded for exploring interactive content and correctly answering knowledge check questions. The module covers federalism concepts, the evolution of federal-state relations, intergovernmental grants and mandates, competitive federalism, and the advantages and disadvantages of the American federal system.
+                        </div>
+
+                        <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            score: 0,
+            totalPossible: 1000,
+            level: 'Explorer',
+            sectionsCompleted: [false, false, false, false, false],
+            revealedCards: new Set(),
+            answeredQuestions: new Set(),
+            correctAnswers: 0,
+            totalQuestions: 10,
+            interactionsTotal: 0,
+            interactionsCompleted: 0
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Federalism Sage'
+        };
+
+        // Update level based on score
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, levelName] of Object.entries(levels)) {
+                if (gameState.score >= parseInt(threshold)) {
+                    newLevel = levelName;
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('currentLevel').textContent = newLevel;
+        }
+
+        // Show points popup
+        function showPointsPopup(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = `+${points} points!`;
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Update score display
+        function updateScore(points) {
+            gameState.score += points;
+            document.getElementById('currentScore').textContent = gameState.score;
+            showPointsPopup(points);
+            updateLevel();
+            updateProgress();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const completed = gameState.sectionsCompleted.filter(Boolean).length;
+            const percentage = Math.round((completed / 5) * 100);
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+        }
+
+        // Show page function
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+
+            if (pageId === 'reportPage') {
+                generateReport();
+            }
+        }
+
+        // Reveal card function
+        function revealCard(element, cardId, points) {
+            if (gameState.revealedCards.has(cardId)) return;
+            
+            element.classList.add('revealed');
+            gameState.revealedCards.add(cardId);
+            gameState.interactionsCompleted++;
+            updateScore(points);
+        }
+
+        // Handle knowledge check answer
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+            
+            gameState.answeredQuestions.add(questionId);
+            const options = element.parentElement.querySelectorAll('.kc-option');
+            options.forEach(opt => opt.classList.add('disabled'));
+            
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedbackBox.textContent = '✓ Correct! Great job!';
+                feedbackBox.classList.add('correct');
+                gameState.correctAnswers++;
+                updateScore(points);
+            } else {
+                element.classList.add('incorrect');
+                feedbackBox.textContent = '✗ Incorrect. Review the material and try again on the next question.';
+                feedbackBox.classList.add('incorrect');
+                // Highlight correct answer
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        // Complete section function
+        function completeSection(sectionNum) {
+            if (!gameState.sectionsCompleted[sectionNum - 1]) {
+                gameState.sectionsCompleted[sectionNum - 1] = true;
+                
+                // Update section card
+                const card = document.querySelectorAll('.section-card')[sectionNum - 1];
+                card.classList.add('completed');
+                document.getElementById('check' + sectionNum).textContent = '✓';
+                
+                updateProgress();
+            }
+            showPage('homePage');
+        }
+
+        // Generate report
+        function generateReport() {
+            const studentName = document.getElementById('studentName').value || 'Not Entered';
+            const now = new Date();
+            
+            // Update student info
+            document.getElementById('reportStudentName').textContent = studentName;
+            document.getElementById('reportDate').textContent = now.toLocaleDateString();
+            document.getElementById('reportTime').textContent = now.toLocaleTimeString();
+            document.getElementById('reportLevel').textContent = gameState.level;
+            
+            // Calculate percentages
+            const percentage = Math.round((gameState.score / gameState.totalPossible) * 100);
+            const completion = gameState.sectionsCompleted.filter(Boolean).length;
+            const quizPercentage = gameState.answeredQuestions.size > 0 ? 
+                Math.round((gameState.correctAnswers / gameState.answeredQuestions.size) * 100) : 0;
+            const engagementPercentage = Math.round((gameState.revealedCards.size / 20) * 100);
+            
+            // Update header scores
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((completion / 5) * 100);
+            
+            // Calculate and display grade
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = gradeColor;
+            
+            // Update section statuses
+            for (let i = 1; i <= 5; i++) {
+                const statusEl = document.getElementById('section' + i + 'Status');
+                if (gameState.sectionsCompleted[i - 1]) {
+                    statusEl.textContent = '✅ Complete';
+                    statusEl.style.color = '#1B5E20';
+                } else {
+                    statusEl.textContent = '⭕ Not Complete';
+                    statusEl.style.color = '#B71C1C';
+                }
+            }
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = completion + '/5';
+            document.getElementById('metricQuiz').textContent = quizPercentage + '%';
+            document.getElementById('metricEngagement').textContent = Math.min(engagementPercentage, 100) + '%';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

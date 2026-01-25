@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 17: Foreign Policy - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .section-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            opacity: 0.9;
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-block h4 {
+            color: var(--primary-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box {
+            background: var(--highlight-yellow);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box h4 {
+            color: #5D4037;
+            margin-top: 0;
+        }
+
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--secondary-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .interactive-card.revealed {
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        .kc-option.correct {
+            background: #C8E6C9;
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFCDD2;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #C8E6C9;
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFCDD2;
+            color: var(--error);
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding-left: 50px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .complete-section-btn:disabled {
+            background: #9E9E9E;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-header-bar h1 {
+            font-size: 1.5rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th, .performance-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .performance-table th {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .print-report-button {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: static;
+            }
+            .container {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+            .hero-icons {
+                gap: 2rem;
+            }
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            .report-header-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 Chapter 17: Foreign Policy</h1>
+        <div class="score-display">
+            <span>⭐ <span id="totalPoints">0</span> pts</span>
+            <span>🏆 <span id="currentLevel">Explorer</span></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Points Popup -->
+        <div class="points-popup" id="pointsPopup">+0 points!</div>
+
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>🌍 Foreign Policy 🌐</h2>
+                <p class="hero-subtitle">Explore how the United States manages its relationships with other nations, from diplomacy and trade to military engagement and international cooperation. Discover the goals, instruments, and approaches that shape America's role on the world stage.</p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">🤝</div>
+                        <div class="label">Diplomacy</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">⚔️</div>
+                        <div class="label">Defense</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">🌐</div>
+                        <div class="label">International Relations</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">🏛️</div>
+                        <div class="label">Congress & President</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your Name" maxlength="50">
+                <button onclick="saveName()">Start Learning</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" id="section1Card" onclick="goToSection('section1')">
+                    <div class="badge">1</div>
+                    <h4>🎯 Defining Foreign Policy</h4>
+                    <p>Learn the basics of foreign policy, its main objectives, types, and the unique challenges facing the United States.</p>
+                    <div class="points">🌟 Up to 275 points</div>
+                </div>
+
+                <div class="section-card" id="section2Card" onclick="goToSection('section2')">
+                    <div class="badge">2</div>
+                    <h4>🔧 Foreign Policy Instruments</h4>
+                    <p>Discover the tools of foreign policy—from public laws and international agreements to military force and presidential summits.</p>
+                    <div class="points">🌟 Up to 275 points</div>
+                </div>
+
+                <div class="section-card" id="section3Card" onclick="goToSection('section3')">
+                    <div class="badge">3</div>
+                    <h4>🏛️ Institutional Relations</h4>
+                    <p>Explore how the president and Congress share power in foreign policy, and the role of the executive branch agencies.</p>
+                    <div class="points">🌟 Up to 275 points</div>
+                </div>
+
+                <div class="section-card" id="section4Card" onclick="goToSection('section4')">
+                    <div class="badge">4</div>
+                    <h4>🌐 Approaches to Foreign Policy</h4>
+                    <p>Compare classic and contemporary schools of thought, from isolationism to liberal internationalism to neoconservatism.</p>
+                    <div class="points">🌟 Up to 275 points</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="complete-section-btn" onclick="goToReport()" id="viewReportBtn" disabled>📋 View Completion Report</button>
+            </div>
+        </div>
+
+        <!-- SECTION 1: DEFINING FOREIGN POLICY -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🎯 Section 1: Defining Foreign Policy</h2>
+                <p class="subtitle">Understanding the goals, types, and challenges of U.S. foreign policy</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🌍 What is Foreign Policy?</h3>
+                <p>When we consider policy as our chapter focus, we are looking broadly at the actions the U.S. government carries out for particular purposes. In the case of <strong>foreign policy</strong>, that purpose is to manage its relationships with other nations of the world. Policy results from a course of action or a pattern of actions over time, rather than from a single action or decision.</p>
+                
+                <p>For example, U.S. foreign policy with Russia has been forged by several presidents, as well as by cabinet secretaries, House and Senate members, and foreign policy agency bureaucrats. Policy is also purposive, or intended to do something—that is, policymaking is not random. When the United States enters into an international agreement with other countries on aims such as free trade or nuclear disarmament, it does so for specific reasons.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Foreign Policy</div>
+                    <div>The goals that a state's officials seek to attain abroad, the values that give rise to those objectives, and the means or instruments used to pursue them. Foreign policy is externally focused, while domestic policy sets strategies internal to the United States.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'fp_domestic', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Foreign vs. Domestic Policy</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Great exploration!</p>
+                        <p>We distinguish <strong>foreign policy</strong>, which is externally focused, from <strong>domestic policy</strong>, which sets strategies internal to the United States. However, the two types of policies can become quite intertwined.</p>
+                        <p>For example, one might talk about Latino politics as a domestic issue when considering educational policies designed to increase the number of Hispanic Americans who attend and graduate from a U.S. college or university. However, Latino politics can quickly become a foreign policy matter when considering topics such as immigration from and foreign trade with countries in Central America and South America.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 The Four Main Objectives of U.S. Foreign Policy</h3>
+                <p>While the goals of a nation's foreign policy are always open to debate and revision, there are nonetheless four main goals to which we can attribute much of what the U.S. government does in the foreign policy realm:</p>
+
+                <div class="key-concept-box">
+                    <h4>The Four Goals:</h4>
+                    <ol>
+                        <li><strong>Protection of the U.S. and its citizens</strong> - Including protection of allies and responding to military and economic threats</li>
+                        <li><strong>Maintenance of access to key resources and markets</strong> - Ensuring access to natural resources, foreign investment, and international trade</li>
+                        <li><strong>Preservation of a balance of power in the world</strong> - Promoting stability and preventing any one nation or region from becoming too powerful</li>
+                        <li><strong>Protection of human rights and democracy</strong> - Supporting international peace and participating in organizations like the United Nations</li>
+                    </ol>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'goal1', 25)">
+                    <div class="card-prompt">🔍 Click to learn more: Goal 1 - Protection</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding U.S. security!</p>
+                        <p>The first goal is the protection of the United States and the lives of its citizens, both while they are in the United States and when they travel abroad. Related to this security goal is the aim of protecting the country's allies, or countries with which the United States is friendly and mutually supportive.</p>
+                        <p>In the international sphere, threats and dangers can take several forms, including military threats from other nations or terrorist groups and economic threats from boycotts and high tariffs on trade.</p>
+                        <p>An <strong>economic sanction</strong> occurs when a country or multiple countries suspend trade or other financial relationships with another country to signal their displeasure with the behavior of that country.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'goal2', 25)">
+                    <div class="card-prompt">🔍 Click to learn more: Goal 2 - Resources & Markets</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding economic interests!</p>
+                        <p>The second main goal of U.S. foreign policy is to ensure the nation maintains access to key resources and markets across the world. Resources include natural resources, such as oil, and economic resources, including the infusion of foreign capital investment for U.S. domestic infrastructure projects.</p>
+                        <p>Of course, access to the international marketplace also means access to goods that American consumers might want, such as Swiss chocolate and Australian wine. U.S. foreign policy also seeks to advance the interests of U.S. business, to both sell domestic products in the international marketplace and support general economic development around the globe.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'goal3', 25)">
+                    <div class="card-prompt">🔍 Click to learn more: Goal 3 - Balance of Power</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding global stability!</p>
+                        <p>A third main goal is the preservation of a <strong>balance of power</strong> in the world. A balance of power means no one nation or region is much more powerful militarily than are the countries of the rest of the world.</p>
+                        <p>During the Cold War era that followed World War II, stability was achieved by the existence of dual superpowers, the United States and the Soviet Union, and by the real fear of the nuclear annihilation of which both were capable.</p>
+                        <p>Today, in the post–Cold War era, many parts of Europe are politically more free, but carefully planned acts of terrorism have introduced a new type of enemy—<strong>nonstate or nongovernmental organizations</strong>, such as al-Qaeda and ISIS, consisting of various terrorist cells located in many different countries.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'goal4', 25)">
+                    <div class="card-prompt">🔍 Click to learn more: Goal 4 - Human Rights & Democracy</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding humanitarian goals!</p>
+                        <p>The fourth main goal of U.S. foreign policy is the protection of human rights and democracy. The payoff of stability that comes from other U.S. foreign policy goals is peace and tranquility.</p>
+                        <p>While certainly looking out for its own strategic interests, the United States nonetheless attempts to support international peace through many aspects of its foreign policy, such as foreign aid, and through its support of and participation in international organizations such as the United Nations, NATO (the North Atlantic Treaty Organization), and the Organization of American States.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🌐 The United Nations</h3>
+                <p>The <strong>United Nations (UN)</strong> is perhaps the foremost international organization in the world today. The main institutional bodies of the UN are the General Assembly and the Security Council.</p>
+                
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ UN Structure</div>
+                    <ul>
+                        <li><strong>General Assembly:</strong> Includes all member nations and admits new members and approves the UN budget by a two-thirds majority</li>
+                        <li><strong>Security Council:</strong> Includes fifteen countries, five permanent members (including the United States) and ten non-permanent rotating members. Makes all decisions related to international peace and security.</li>
+                        <li><strong>International Court of Justice:</strong> Located in The Hague (Netherlands)</li>
+                        <li><strong>UN Secretariat:</strong> Includes the Secretary-General and UN staff</li>
+                    </ul>
+                </div>
+
+                <div class="milestone-box">
+                    <h4>📜 Milestone: The Creation of the United Nations</h4>
+                    <p>After the failed attempt to formalize a "League of Nations" in the wake of World War I, and on the heels of a worldwide depression that began in 1929, came World War II, history's deadliest military conflict. The scope of the conflict and Hitler's nearly successful attempt to take over Europe entirely struck fear in minds and hearts.</p>
+                    <p>The war brought about a sea change in international relations and governance, from the Marshall Plan to rebuild Europe, to NATO that created a cross-national military shield for Western Europe, to the creation of the UN in 1945, when the representatives of fifty countries met and signed the Charter of the United Nations in San Francisco, California.</p>
+                    <p>Today, the United Nations, headquartered in New York City, includes 193 of the 195 nations of the world.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Types of Foreign Policy</h3>
+                <p>The United States pursues its four main foreign policy goals through several different foreign policy types, or distinct substantive areas of foreign policy:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Policy Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Trade Policy</strong></td>
+                            <td>How the U.S. interacts with other countries to ease the flow of commerce and goods. Ranges from protectionism to free trade.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diplomacy</strong></td>
+                            <td>The establishment and maintenance of formal relationships between countries through ambassadors and embassies.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sanctions</strong></td>
+                            <td>Economic penalties imposed on countries to signal displeasure with their behavior. Includes trade restrictions and asset freezes.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Military/Defense</strong></td>
+                            <td>Using military power to achieve foreign policy objectives, from deterrence to active engagement.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intelligence</strong></td>
+                            <td>Overt and covert gathering of information from foreign sources that might be of strategic interest.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Foreign Aid</strong></td>
+                            <td>Providing material and economic assistance to other countries, especially developing nations.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Global Environmental Policy</strong></td>
+                            <td>Addressing world-level environmental matters such as climate change, ozone depletion, and ocean pollution.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="definition-box">
+                    <div class="definition-term">💡 Hard Power vs. Soft Power</div>
+                    <p><strong>Soft power</strong> refers to nonmilitary tools to influence another country, like economic sanctions and diplomacy.</p>
+                    <p><strong>Hard power</strong> refers to the use of military power.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚠️ Unique Challenges in Foreign Policy</h3>
+                <p>U.S. foreign policy is a massive and complex enterprise. Here are its unique challenges:</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'challenge1', 25)">
+                    <div class="card-prompt">🔍 Challenge 1: No World-Level Authority</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding the global challenge!</p>
+                        <p>There exists no true world-level authority dictating how the nations of the world should relate to one another. If one nation negotiates in bad faith or lies to another, there is no central government authority to sanction that country.</p>
+                        <p>The European Union is the single supranational entity with some real and significant authority over its member nations, but even it has enforcement issues, as evidenced by struggles within its ranks.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'challenge2', 25)">
+                    <div class="card-prompt">🔍 Challenge 2: Differing Views on Government's Role</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding diverse governance!</p>
+                        <p>A second challenge is the widely differing views among countries about the role of government in people's lives. The government of hardline communist North Korea regulates everything in its people's lives every day. At the other end of the spectrum are countries with little government activity at all.</p>
+                        <p>This domestic relationship between a government and its people can often become intertwined with foreign policy.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'challenge3', 25)">
+                    <div class="card-prompt">🔍 Challenge 3: Varying Forms of Government</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding government diversity!</p>
+                        <p>A third unique challenge is other countries' varying ideas about the appropriate form of government. These forms range from democracies on one side to various authoritarian forms on the other.</p>
+                        <p>Relations between the United States and democratic states tend to operate more smoothly, proceeding from the shared core assumption that government's authority comes from the people. Monarchies and nondemocratic forms of government do not share this assumption.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'challenge4', 25)">
+                    <div class="card-prompt">🔍 Challenge 4: Transnational Issues</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding modern challenges!</p>
+                        <p>A fourth challenge is that many new foreign policy issues transcend borders. There are no longer simply friendly states and enemy states. Problems around the world that might affect the United States, such as terrorism, the international slave trade, and climate change, originate with groups and issues that are not country-specific. They are <strong>transnational</strong>.</p>
+                        <p>The U.S. war against terrorism has been aimed at terrorist groups that do not fit neatly within the borders of any one country with which the United States could quickly interact to solve the problem.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'challenge5', 25)">
+                    <div class="card-prompt">🔍 Challenge 5: Varying Country Conditions</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding development disparities!</p>
+                        <p>The fifth and final unique challenge is the varying conditions of the countries in the world and their effect on what is possible in terms of foreign policy and diplomatic relations.</p>
+                        <p>Relations between the United States and a stable industrial democracy are going to be easier than between the United States and an unstable developing country being run by a military junta. An unstable country will be more focused on establishing internal stability than on broader world concerns.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What is NOT one of the four main objectives of U.S. foreign policy?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1_1', 0)">A) Protection of the U.S. and its citizens</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1_1', 0)">B) Preservation of a balance of power in the world</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc1_1', 25)">C) Spreading American culture worldwide</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1_1', 0)">D) Protection of human rights and democracy</div>
+                <div class="feedback-box" id="feedback-kc1_1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Which term refers to nonmilitary tools used to influence another country?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1_2', 0)">A) Hard power</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc1_2', 25)">B) Soft power</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1_2', 0)">C) Military engagement</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1_2', 0)">D) Unilateralism</div>
+                <div class="feedback-box" id="feedback-kc1_2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section1')">✅ Complete Section 1</button>
+        </div>
+
+        <!-- SECTION 2: FOREIGN POLICY INSTRUMENTS -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🔧 Section 2: Foreign Policy Instruments</h2>
+                <p class="subtitle">The tools and mechanisms of U.S. foreign policy</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Broadly vs. Sharply Focused Outputs</h3>
+                <p>The decisions or outputs of U.S. foreign policy vary from presidential directives about conducting drone strikes to the size of the overall foreign relations budget passed by Congress. These outputs can be categorized into two types:</p>
+
+                <div class="key-concept-box">
+                    <h4>Two Types of Foreign Policy Outputs:</h4>
+                    <p><strong>Broadly Focused Outputs:</strong></p>
+                    <ul>
+                        <li>Span multiple topics and organizations</li>
+                        <li>Require large-scale spending</li>
+                        <li>Take longer to implement</li>
+                        <li>Are harder to reverse</li>
+                        <li>Tend to have lasting impact</li>
+                    </ul>
+                    <p><strong>Sharply Focused Outputs:</strong></p>
+                    <ul>
+                        <li>Processed quickly</li>
+                        <li>Often unilateral moves by the president</li>
+                        <li>Have a shorter time horizon</li>
+                        <li>Easier for subsequent decision-makers to reverse</li>
+                        <li>Do not usually have lasting impact</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 Broadly Focused Foreign Policy Outputs</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'broad1', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Public Laws</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding legislation!</p>
+                        <p><strong>Public laws</strong> (sometimes called statutes) are policies that affect more than a single individual. All policies enacted by Congress and the president are public laws.</p>
+                        <p>Many statutes affect what the government can do in the foreign policy realm, including:</p>
+                        <ul>
+                            <li><strong>The National Security Act:</strong> Governs how the government shares and stores information</li>
+                            <li><strong>The Patriot Act:</strong> Clarifies what the government may do in collecting information about people in the name of protecting the country</li>
+                            <li><strong>The Homeland Security Act of 2002:</strong> Authorized creation of the Department of Homeland Security</li>
+                            <li><strong>The War Powers Resolution:</strong> Passed in 1973 to reassert Congress in war-making</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ The War Powers Resolution</div>
+                    <p>Passed in 1973 by a congressional override of President Richard Nixon's veto, the War Powers Resolution requires presidents to get approval from Congress to continue any military campaign beyond sixty days.</p>
+                    <p>While intended to rein in executive power, the law effectively gave presidents two months to wage war however they wish before needing congressional authorization.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'broad2', 25)">
+                    <div class="card-prompt">🔍 Click to explore: International Agreements</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding treaties and agreements!</p>
+                        <p><strong>International agreements</strong> represent another broad-based foreign policy instrument. The United States enters into international agreements with other countries for a variety of reasons and on a variety of subjects.</p>
+                        <p>The U.S. Constitution outlines the treaty process in Article II: The president negotiates a treaty, the Senate consents by a two-thirds vote, and finally the president ratifies it.</p>
+                        <p>However, today over 90 percent of international agreements are not treaties but rather <strong>executive agreements</strong>:</p>
+                        <ul>
+                            <li><strong>Sole executive agreements:</strong> Negotiated and approved by the president</li>
+                            <li><strong>Congressional-executive agreements:</strong> Negotiated by the president and approved by a simple majority of both houses (like NAFTA)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'broad3', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Appointments</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding appointments!</p>
+                        <p>The last broad type of foreign policy output consists of the <strong>foreign policy appointments</strong> made when a new president takes office.</p>
+                        <p>Most foreign policy–related appointments, such as secretary of state and various undersecretaries, as well as all ambassadors, must be confirmed by a majority vote of the Senate.</p>
+                        <p>Presidents seek to nominate people who know the area to which they're being appointed and who will be loyal to the president rather than to the bureaucracy in which they might work.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Sharply Focused Foreign Policy Outputs</h3>
+                <p>In addition to broadly focused outputs, many sharply focused decisions are primarily the province of the president. These demonstrate what Alexander Hamilton, writing in the Federalist Papers, called the "energy and dispatch" inherent in the presidency.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'sharp1', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Military Crises - The Cuban Missile Crisis</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding crisis response!</p>
+                        <p>Perhaps the most famous foreign policy emergency was the <strong>Cuban Missile Crisis in 1962</strong>. With the Soviet Union placing nuclear missiles in Cuba, just a few hundred miles from Florida, a Cold War standoff with the United States escalated.</p>
+                        <p>The Soviets at first denied the existence of the missiles, but U.S. reconnaissance flights proved they were there. Some in the military pushed for aggressive action, while State Department officials favored a diplomatic route.</p>
+                        <p>President John F. Kennedy took the recommendation of a special committee, implementing a <strong>naval blockade</strong> of Cuba that subtly forced the Soviets' hands. The Soviets agreed to remove their Cuban missiles, and the United States agreed six months later to remove its missiles from Turkey.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'sharp2', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Presidential Summits</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding high-level diplomacy!</p>
+                        <p><strong>Presidential summits</strong> are another form of focused foreign policy output. Often held at Camp David, Maryland, these meetings bring together the president and other heads of state to address important issues.</p>
+                        <p>Examples include:</p>
+                        <ul>
+                            <li><strong>Camp David Accords (1978):</strong> President Jimmy Carter, Egyptian President Anwar El Sadat, and Israeli Prime Minister Menachem Begin met privately for twelve days negotiating a peace process</li>
+                            <li><strong>Malta Summit (1989):</strong> President George H. W. Bush and Soviet leader Mikhail Gorbachev met, symbolizing the end of the Cold War</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'sharp3', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Military Use of Force</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding military action!</p>
+                        <p>Since the 1941 Pearl Harbor attacks and the immediate declaration of war by Congress, all initial uses of military force have been authorized by the president. Congress has never acted to reverse presidential action in this area.</p>
+                        <p>Military engagement can be:</p>
+                        <ul>
+                            <li><strong>Offensive:</strong> Such as the Iraq War in 2003 or the 1989 removal of Panamanian leader Manuel Noriega</li>
+                            <li><strong>Defensive:</strong> Responding to aggression, like the Persian Gulf War in 1991 (Operation Desert Storm)</li>
+                        </ul>
+                        <p>A recent example was the U.S. role in enforcing a no-fly zone over Libya in 2011, which included kinetic strikes to protect anti-government forces.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Comparison of Policy Output Types</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Broadly Focused</th>
+                            <th>Sharply Focused</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Decision Time</td>
+                            <td>Longer</td>
+                            <td>Faster</td>
+                        </tr>
+                        <tr>
+                            <td>Primary Actors</td>
+                            <td>Congress and President</td>
+                            <td>President</td>
+                        </tr>
+                        <tr>
+                            <td>Reversibility</td>
+                            <td>Difficult to reverse</td>
+                            <td>Easier to reverse</td>
+                        </tr>
+                        <tr>
+                            <td>Impact Duration</td>
+                            <td>Long-lasting</td>
+                            <td>Shorter-term</td>
+                        </tr>
+                        <tr>
+                            <td>Examples</td>
+                            <td>Treaties, Budget, Appointments</td>
+                            <td>Military strikes, Summits</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: The War Powers Resolution requires presidents to get congressional approval to continue military campaigns beyond how many days?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2_1', 0)">A) 30 days</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc2_1', 25)">B) 60 days</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2_1', 0)">C) 90 days</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2_1', 0)">D) 120 days</div>
+                <div class="feedback-box" id="feedback-kc2_1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: What percentage of international agreements today are executive agreements rather than formal treaties?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2_2', 0)">A) About 50%</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2_2', 0)">B) About 70%</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc2_2', 25)">C) Over 90%</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2_2', 0)">D) About 25%</div>
+                <div class="feedback-box" id="feedback-kc2_2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section2')">✅ Complete Section 2</button>
+        </div>
+
+        <!-- SECTION 3: INSTITUTIONAL RELATIONS IN FOREIGN POLICY -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🏛️ Section 3: Institutional Relations in Foreign Policy</h2>
+                <p class="subtitle">How the branches of government share power in foreign affairs</p>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ Foreign Policy and Shared Power</h3>
+                <p>Institutional relationships in foreign policy constitute a paradox. On the one hand, aspects of foreign policymaking engage multiple branches of government and a multiplicity of actors. On the other hand, foreign policymaking can sometimes call for nothing more than for the president to make a formal decision, quickly endorsed by the legislative branch.</p>
+
+                <div class="key-concept-box">
+                    <h4>The Constitutional Framework:</h4>
+                    <p>While presidents are more empowered by the Constitution in foreign than in domestic policy, they nonetheless must seek approval from Congress on a variety of matters. Chief among these is the basic budgetary authority needed to run foreign policy programs.</p>
+                    <p>Even a sole executive agreement often requires subsequent funding from Congress in order to be carried out, and funding calls for majority support from the House and Senate.</p>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Policy Output</th>
+                            <th>Presidential Role</th>
+                            <th>Congressional Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Public Laws</td>
+                            <td>Proposes, signs into law</td>
+                            <td>Proposes, approves for passage</td>
+                        </tr>
+                        <tr>
+                            <td>Treaties</td>
+                            <td>Negotiates, ratifies</td>
+                            <td>Senate consents (⅔ vote)</td>
+                        </tr>
+                        <tr>
+                            <td>Sole Executive Agreements</td>
+                            <td>Negotiates, approves</td>
+                            <td>None (unless funding required)</td>
+                        </tr>
+                        <tr>
+                            <td>Declaration of War</td>
+                            <td>Proposes</td>
+                            <td>Approves by majority vote</td>
+                        </tr>
+                        <tr>
+                            <td>Military Use of Force</td>
+                            <td>Carries out (60 days)</td>
+                            <td>Approves beyond 60 days</td>
+                        </tr>
+                        <tr>
+                            <td>Appointments</td>
+                            <td>Nominates candidates</td>
+                            <td>Senate approves by majority</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 The Two Presidencies Thesis</h3>
+                
+                <div class="interactive-card" onclick="revealCard(this, 'twopres1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Two Presidencies Theory</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding presidential power!</p>
+                        <p>The <strong>Two Presidencies Thesis</strong> was developed by Professor Aaron Wildavsky. It suggests that there are two distinct presidencies—one for foreign policy and one for domestic policy—and that presidents are more successful in foreign than domestic policy.</p>
+                        <p><strong>Reasons for stronger foreign policy presidency:</strong></p>
+                        <ul>
+                            <li>The Constitution names the president as commander-in-chief, negotiator of treaties, and nominating authority for ambassadors</li>
+                            <li>Presidents were gradually given authority to enter executive agreements without Senate consent</li>
+                            <li>The War Powers Resolution effectively gave presidents two months to wage war</li>
+                            <li>During the Cold War, Congress was willing to let the president lead as a single voice for the country</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'twopres2', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Changes Since the Cold War</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding modern changes!</p>
+                        <p>The governing context has changed in two key ways since the Cold War:</p>
+                        <p><strong>1. End of the Cold War (1989-1990):</strong> The demolition of the Berlin Wall and disintegration of the Soviet Union removed the competitive superpower dynamic. This led to less of a "rally-behind-the-president" effect in foreign policy.</p>
+                        <p><strong>2. Political Polarization:</strong> Beginning in the 1980s and escalating in the 1990s, Democrats and Republicans became more polarized. The moderate members who could work together were edged out, making it more likely that the opposing party would challenge presidential initiatives.</p>
+                        <p>Today, presidents are opposed more often in Congress, even on foreign policy votes they win. Still, because of their formal powers, presidents remain overall more successful on foreign policy than on domestic policy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>👥 The Many Actors in Foreign Policy</h3>
+                <p>A variety of actors carry out the various and complex activities of U.S. foreign policy:</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'actors1', 25)">
+                    <div class="card-prompt">🔍 Click to explore: White House Staff</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding White House foreign policy!</p>
+                        <p>White House staff members engaged in foreign policy have regular contact with the president:</p>
+                        <ul>
+                            <li><strong>National Security Advisor:</strong> Heads the National Security Council, the president's top foreign policy advisor</li>
+                            <li><strong>Director of National Intelligence:</strong> Oversees the entire intelligence community (created after 9/11)</li>
+                            <li><strong>Director of the CIA:</strong> Reports directly to the president</li>
+                            <li><strong>Chair of the Joint Chiefs of Staff:</strong> The president's top uniformed military officer</li>
+                            <li><strong>U.S. Trade Representative:</strong> Develops and directs international trade agenda</li>
+                            <li><strong>OMB Director:</strong> Develops the president's budget, including foreign policy funding</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'actors2', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Cabinet Officials</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding cabinet roles!</p>
+                        <p>Several important officials work in the broader executive branch:</p>
+                        <ul>
+                            <li><strong>Secretary of State:</strong> The nation's chief diplomat, serves in the president's cabinet, and oversees the Foreign Service</li>
+                            <li><strong>Secretary of Defense:</strong> Civilian (nonmilitary) head of the armed services at the Department of Defense</li>
+                            <li><strong>Secretary of Homeland Security:</strong> Oversees the massive Department of Homeland Security, critically important in foreign policy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'actors3', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Congressional Leaders</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding Congress's role!</p>
+                        <p>In Congress, several leaders play key roles in foreign policy:</p>
+                        <ul>
+                            <li>Speaker of the House and minority leader</li>
+                            <li>Senate majority and minority leaders</li>
+                            <li>Committee chairs and ranking members of key committees:</li>
+                        </ul>
+                        <p><strong>Key Committees:</strong></p>
+                        <ul>
+                            <li><strong>House:</strong> Foreign Affairs Committee, Committee on Armed Services</li>
+                            <li><strong>Senate:</strong> Committee on Foreign Relations, Armed Services Committee</li>
+                        </ul>
+                        <p>These committees hold regular hearings, consider budget authorizations, and debate the future of U.S. foreign policy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Why Congress Members Rarely Focus on Foreign Policy</h3>
+                <p>While key leaders monitor foreign policy matters, individual representatives and senators do so much less often. Unless there is a foreign policy crisis, legislators tend to focus on domestic matters.</p>
+
+                <div class="key-concept-box">
+                    <h4>Why the Focus on Domestic Policy?</h4>
+                    <p>There is not much to be gained with constituents by pursuing foreign policy matters. Domestic policy matters resonate more strongly with voters at home. A sluggish economy, increasing health care costs, and crime matter more to them than U.S. policy toward North Korea.</p>
+                    <p>In polls about the "most important problem" in the United States, fewer than 10 percent of respondents typically name a foreign policy topic.</p>
+                </div>
+
+                <p>However, some members do engage in foreign policy for several reasons:</p>
+                <ul>
+                    <li>Congressional party leaders speak on behalf of their party on all issues</li>
+                    <li>Members with military bases in their districts have constituency reasons</li>
+                    <li>Some have personal interest in foreign policy matters</li>
+                    <li>Some have ambitions to move into executive branch foreign policy positions</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: According to the Two Presidencies Thesis, in which area are presidents generally MORE successful?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc3_1', 25)">A) Foreign policy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3_1', 0)">B) Domestic policy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3_1', 0)">C) Both equally</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3_1', 0)">D) Neither - Congress controls both</div>
+                <div class="feedback-box" id="feedback-kc3_1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Which official is the nation's chief diplomat and oversees the Foreign Service?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3_2', 0)">A) National Security Advisor</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc3_2', 25)">B) Secretary of State</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3_2', 0)">C) Secretary of Defense</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3_2', 0)">D) Director of National Intelligence</div>
+                <div class="feedback-box" id="feedback-kc3_2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section3')">✅ Complete Section 3</button>
+        </div>
+
+        <!-- SECTION 4: APPROACHES TO FOREIGN POLICY -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🌐 Section 4: Approaches to Foreign Policy</h2>
+                <p class="subtitle">Classic and contemporary schools of thought</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📚 Classic Approaches to Foreign Policy</h3>
+                <p>A variety of traditional concepts of foreign policy remain helpful today as we consider the proper role of the United States in foreign affairs. These include isolationism, the idealism versus realism debate, liberal internationalism, hard versus soft power, and the grand strategy.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'classic1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Isolationism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding isolationism!</p>
+                        <p><strong>Isolationism</strong> is an approach whereby a country stays out of foreign entanglements and keeps to itself. From the end of the Revolutionary War until the early twentieth century, this was a popular stance in U.S. foreign policy.</p>
+                        <p>Among the founders, <strong>Thomas Jefferson</strong> especially advocated for isolationism, believing the United States stood a better chance of becoming truly free by keeping to itself. In his farewell address, President George Washington famously warned against "entangling alliances."</p>
+                        <p>The United States was pulled into world affairs with World War I, but isolationist sentiment returned between the wars. After World War II, the U.S. engaged as a superpower, though isolationist ideas never fully disappeared.</p>
+                        <p>Modern isolationists like Senator Jesse Helms (R-NC) opposed the U.S. being the "policeman" of the world, while Ron Paul and Rand Paul ran isolationist presidential campaigns.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'classic2', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Liberal Internationalism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding internationalism!</p>
+                        <p>At the other end of the spectrum is <strong>liberal internationalism</strong>, which advocates a foreign policy approach in which the United States becomes proactively engaged in world affairs.</p>
+                        <p>Its adherents assume that liberal democracies must take the lead in creating a peaceful world by cooperating as a community of nations and creating effective world structures such as the United Nations.</p>
+                        <p>A classic example is President Woodrow Wilson, who sought a League of Nations to voluntarily save the world after World War I.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'classic3', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Idealism vs. Realism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding the great debate!</p>
+                        <p><strong>Idealists</strong> assume the best in others and see it as possible for countries to run the world together, with open diplomacy, freedom of the seas, free trade, and no militaries. Everyone will take care of each other.</p>
+                        <p><strong>Realists</strong> assume that others will act in their own self-interest and hence cannot necessarily be trusted. They want a healthy military and contracts between countries in case others want to wiggle out of their commitments.</p>
+                        <p>Liberal internationalism contains elements of both: idealism because the U.S. assumes other countries will put their best foot forward, and realism because the U.S. approaches foreign relationships with open eyes and emphasis on self-preservation.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Grand Strategy</div>
+                    <p><strong>Grand strategy</strong> involves employing all available diplomatic, economic, and military resources to advance the national interest. It relies on developing clear strategic directions for U.S. foreign policy and the methods to achieve those goals, often with military capability attached.</p>
+                    <p>The U.S. foreign policy plan in Europe and Asia after World War II reflects this approach. The United States built military bases in Italy, Germany, Spain, England, Belgium, Japan, Guam, and Korea, often under multinational arrangements like NATO.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔄 More Recent Schools of Thought</h3>
+                <p>Two events caused many to rethink traditional approaches: the debacle of U.S. involvement in Vietnam and the rise of new enemies like terrorist organizations.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'recent1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Neoconservatism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding neoconservatism!</p>
+                        <p><strong>Neoconservatives</strong> believe that rather than exercising restraint and always using international organizations, the United States should aggressively use its might to promote its values and ideals around the world.</p>
+                        <p>The aggressive use (or threat) of <strong>hard power</strong> is the core value of neoconservatism. Acting <strong>unilaterally</strong> is acceptable, as is adopting a <strong>preemptive strategy</strong> in which the United States intervenes militarily before the enemy can make its move.</p>
+                        <p>Examples include:</p>
+                        <ul>
+                            <li>1980s U.S. campaigns in Central America under President Reagan</li>
+                            <li>The Iraq War of 2003 led by President George W. Bush and Vice President Dick Cheney</li>
+                            <li>The use of drones as counterterrorism weapons during the Obama administration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'recent2', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Neo-Isolationism & Selective Engagement</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Understanding modern approaches!</p>
+                        <p><strong>Neo-isolationism</strong> advocates keeping free of foreign entanglements, though no advanced industrial democracy completely separates itself from the rest of the world. In the twenty-first century, neo-isolationism means distancing the United States from international organizations that get in the way.</p>
+                        <p><strong>Selective engagement</strong> is the strategy of retaining a strong military presence and remaining engaged across the world through alliances and formal installations to protect national security interests, while seeking to avoid being the world's police officer.</p>
+                        <p>A <strong>hybrid approach</strong> that uses multiple schools of thought as circumstances warrant may be the wave of the future. President Obama often took a hybrid approach—internationalist when building coalitions, but neoconservative when sending drones to take out terrorist targets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🌏 U.S. Foreign Policy with Russia and China</h3>
+
+                <div class="interactive-card" onclick="revealCard(this, 'russia', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Relations with Russia</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding U.S.-Russia relations!</p>
+                        <p>The Soviet Union dissolved into many component parts after the Cold War, including Russia and various former Soviet republics. The U.S. approach has been to encourage the adoption of democracy and economic reforms in these former Eastern bloc countries.</p>
+                        <p>Many now align with the EU and even NATO. Under President Vladimir Putin, Russia is again trying to strengthen its power on the country's western border, testing expansionism while invoking Russian nationalism.</p>
+                        <p>U.S.-Russia relations have been frosty since Putin ascended, save for President Trump's efforts to befriend him. President Biden has taken a more emphatic stand with Russia on issues of wrongdoing and questions regarding Russian influence in U.S. elections.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'china', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Relations with China</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Understanding U.S.-China relations!</p>
+                        <p>China is the potential rival superpower of the future. A communist state that has encouraged economic development, China has been growing and modernizing for more than thirty years. Its nearly 1.4 billion citizens are stepping onto the world economic stage.</p>
+                        <p>Chinese investors lend money to the U.S. government regularly, as U.S. domestic borrowing capacity is pushed to the limit.</p>
+                        <p>The <strong>Tiananmen Square massacre</strong> in 1989, where thousands of pro-democracy protestors were arrested and many killed, raised concerns about human rights in China.</p>
+                        <p>President Trump imposed tariffs on Chinese goods, straining the relationship. President Biden has continued tough stances on China. This souring relationship has affected U.S. universities where several Confucius Institutes have been shut down.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-box">
+                    <h4>📜 Vietnam and the Change in Foreign Policy Thinking</h4>
+                    <p><strong>Containment</strong> was the U.S. foreign policy goal of limiting the spread of communism during the Cold War. In Vietnam, the United States supported democratic South Vietnam, while the Soviet Union supported communist North Vietnam.</p>
+                    <p>The U.S. military approach of battlefield engagement did not translate well to the jungles of Vietnam, where "guerilla warfare" predominated. U.S. forces withdrew from South Vietnam in 1973, and Saigon fell to the communists eighteen months later.</p>
+                    <p>The Vietnam debacle caused many skeptics to become pessimistic about liberal internationalism, leading them to become neoconservatives on foreign policy.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Comparison of Foreign Policy Approaches</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Approach</th>
+                            <th>Key Characteristics</th>
+                            <th>View on Military</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Isolationism</strong></td>
+                            <td>Avoid foreign entanglements, focus on domestic issues</td>
+                            <td>Minimal foreign deployment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Liberal Internationalism</strong></td>
+                            <td>Proactive engagement, cooperation through international organizations</td>
+                            <td>Collective security through alliances</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Neoconservatism</strong></td>
+                            <td>Aggressive promotion of values, willing to act unilaterally</td>
+                            <td>Preemptive use of hard power</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Selective Engagement</strong></td>
+                            <td>Strong presence through alliances, but not world police</td>
+                            <td>Strategic deployment for national interests</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Which approach to foreign policy advocates staying out of foreign entanglements entirely?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc4_1', 25)">A) Isolationism</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4_1', 0)">B) Liberal internationalism</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4_1', 0)">C) Neoconservatism</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4_1', 0)">D) Selective engagement</div>
+                <div class="feedback-box" id="feedback-kc4_1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Knowledge Check: Neoconservatism is characterized by which of the following?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4_2', 0)">A) Always working through the United Nations</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4_2', 0)">B) Avoiding all military engagement</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc4_2', 25)">C) Aggressive use of hard power and willingness to act unilaterally</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4_2', 0)">D) Complete isolationism from world affairs</div>
+                <div class="feedback-box" id="feedback-kc4_2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section4')">✅ Complete Section 4</button>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>👤 TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="goHome()">← Back to Home</button>
+                    
+                    <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                    <p class="report-subtitle">Chapter 17: Foreign Policy</p>
+                    
+                    <div class="report-grade-display" id="gradeDisplay">
+                        <div class="letter-grade" id="letterGrade">A</div>
+                        <div class="grade-percentage" id="gradePercentage">95%</div>
+                    </div>
+
+                    <div class="report-sections">
+                        <div class="student-info-section">
+                            <h3>Student Information</h3>
+                            <div class="info-row">
+                                <span class="info-label">Name:</span>
+                                <span id="reportStudentName">Student</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Date:</span>
+                                <span id="reportDate">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Time:</span>
+                                <span id="reportTime">-</span>
+                            </div>
+                        </div>
+
+                        <div class="performance-section">
+                            <h3>Section Performance</h3>
+                            <table class="performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sectionPerformance">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricPoints">0</div>
+                            <div class="metric-label">Points Earned</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricSections">0/4</div>
+                            <div class="metric-label">Sections Completed</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricQuiz">0%</div>
+                            <div class="metric-label">Quiz Score</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricEngagement">0%</div>
+                            <div class="metric-label">Engagement</div>
+                        </div>
+                    </div>
+
+                    <div class="instructor-note">
+                        <p><strong>Instructor Note:</strong> This completion report documents the student's engagement with Chapter 17: Foreign Policy interactive learning module. Points are awarded for exploring content and answering knowledge check questions correctly.</p>
+                    </div>
+
+                    <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            studentName: '',
+            totalPoints: 0,
+            maxPoints: 1100,
+            currentLevel: 'Explorer',
+            sectionsCompleted: {
+                section1: false,
+                section2: false,
+                section3: false,
+                section4: false
+            },
+            sectionPoints: {
+                section1: 0,
+                section2: 0,
+                section3: 0,
+                section4: 0
+            },
+            revealedCards: new Set(),
+            answeredQuestions: new Set(),
+            correctAnswers: 0,
+            totalQuestions: 8
+        };
+
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Foreign Policy Sage'
+        };
+
+        // Save name
+        function saveName() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput.value.trim()) {
+                gameState.studentName = nameInput.value.trim();
+                showPointsPopup('Welcome, ' + gameState.studentName + '!');
+            }
+        }
+
+        // Navigation
+        function goHome() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            updateProgress();
+        }
+
+        function goToSection(sectionId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goToReport() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('reportPage').classList.add('active');
+            generateReport();
+            window.scrollTo(0, 0);
+        }
+
+        // Reveal cards
+        function revealCard(element, cardId, points) {
+            if (gameState.revealedCards.has(cardId)) return;
+            
+            gameState.revealedCards.add(cardId);
+            element.classList.add('revealed');
+            element.querySelector('.card-content').classList.add('show');
+            
+            addPoints(points);
+            
+            // Determine which section this card belongs to
+            const section = element.closest('.page').id;
+            if (section && gameState.sectionPoints[section] !== undefined) {
+                gameState.sectionPoints[section] += points;
+            }
+        }
+
+        // Handle quiz answers
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+            
+            gameState.answeredQuestions.add(questionId);
+            
+            const options = element.parentElement.querySelectorAll('.kc-option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === element) {
+                    opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            });
+            
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            if (isCorrect) {
+                gameState.correctAnswers++;
+                addPoints(points);
+                feedbackBox.textContent = '✓ Correct! +' + points + ' points';
+                feedbackBox.className = 'feedback-box show correct';
+                
+                // Add points to section
+                const section = element.closest('.page').id;
+                if (section && gameState.sectionPoints[section] !== undefined) {
+                    gameState.sectionPoints[section] += points;
+                }
+            } else {
+                feedbackBox.textContent = '✗ Not quite. Review the material above for the correct answer.';
+                feedbackBox.className = 'feedback-box show incorrect';
+            }
+        }
+
+        // Add points
+        function addPoints(points) {
+            gameState.totalPoints += points;
+            updateLevel();
+            updateDisplay();
+            showPointsPopup('+' + points + ' points!');
+        }
+
+        // Update level
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (gameState.totalPoints >= parseInt(threshold)) {
+                    newLevel = level;
+                }
+            }
+            gameState.currentLevel = newLevel;
+        }
+
+        // Update display
+        function updateDisplay() {
+            document.getElementById('totalPoints').textContent = gameState.totalPoints;
+            document.getElementById('currentLevel').textContent = gameState.currentLevel;
+        }
+
+        // Show points popup
+        function showPointsPopup(message) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = message;
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Complete section
+        function completeSection(sectionId) {
+            gameState.sectionsCompleted[sectionId] = true;
+            document.getElementById(sectionId + 'Card').classList.add('completed');
+            updateProgress();
+            goHome();
+            showPointsPopup('Section completed!');
+        }
+
+        // Update progress
+        function updateProgress() {
+            const completed = Object.values(gameState.sectionsCompleted).filter(v => v).length;
+            const total = Object.keys(gameState.sectionsCompleted).length;
+            const percentage = Math.round((completed / total) * 100);
+            
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+            
+            // Enable report button if all sections complete
+            const reportBtn = document.getElementById('viewReportBtn');
+            if (completed === total) {
+                reportBtn.disabled = false;
+            }
+        }
+
+        // Generate report
+        function generateReport() {
+            const now = new Date();
+            
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Student';
+            document.getElementById('reportDate').textContent = now.toLocaleDateString();
+            document.getElementById('reportTime').textContent = now.toLocaleTimeString();
+            
+            document.getElementById('reportTotalPoints').textContent = gameState.totalPoints;
+            
+            const percentage = Math.round((gameState.totalPoints / gameState.maxPoints) * 100);
+            document.getElementById('reportPercentage').textContent = percentage;
+            
+            const completed = Object.values(gameState.sectionsCompleted).filter(v => v).length;
+            const completionPercentage = Math.round((completed / 4) * 100);
+            document.getElementById('reportCompletion').textContent = completionPercentage;
+            
+            // Grade calculation
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = gradeColor;
+            
+            // Section performance table
+            const sectionNames = {
+                section1: 'Defining Foreign Policy',
+                section2: 'Foreign Policy Instruments',
+                section3: 'Institutional Relations',
+                section4: 'Approaches to Foreign Policy'
+            };
+            
+            let tableHTML = '';
+            for (const [id, name] of Object.entries(sectionNames)) {
+                const status = gameState.sectionsCompleted[id] ? '✅' : '⭕';
+                const points = gameState.sectionPoints[id] || 0;
+                tableHTML += `<tr><td>${name}</td><td>${status}</td><td>${points}</td></tr>`;
+            }
+            document.getElementById('sectionPerformance').innerHTML = tableHTML;
+            
+            // Metrics
+            document.getElementById('metricPoints').textContent = gameState.totalPoints;
+            document.getElementById('metricSections').textContent = completed + '/4';
+            
+            const quizPercentage = gameState.totalQuestions > 0 ? 
+                Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) : 0;
+            document.getElementById('metricQuiz').textContent = quizPercentage + '%';
+            
+            const engagementPercentage = Math.round((gameState.revealedCards.size / 20) * 100);
+            document.getElementById('metricEngagement').textContent = Math.min(engagementPercentage, 100) + '%';
+        }
+
+        // Initialize
+        updateDisplay();
+        updateProgress();
+    </script>
+</body>
+</html>

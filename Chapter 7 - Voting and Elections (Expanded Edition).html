@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Voting and Elections - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 300px;
+            max-width: 100%;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-container h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card.completed {
+            border: 3px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .section-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .content-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .section-header .icon {
+            font-size: 2.5rem;
+        }
+
+        .section-header h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-card {
+            background: linear-gradient(135deg, var(--bg-section), #B2DFDB);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-green);
+        }
+
+        .interactive-card.revealed {
+            cursor: default;
+            background: linear-gradient(135deg, var(--highlight-green), #C8E6C9);
+            border-color: var(--success);
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--primary-green);
+        }
+
+        .interactive-card.revealed .card-content {
+            display: block;
+        }
+
+        .interactive-card.revealed .card-prompt::before {
+            content: '✓ ';
+            color: var(--success);
+        }
+
+        .knowledge-check {
+            background: white;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .kc-option {
+            background: var(--bg-light);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            transform: translateX(5px);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFEBEE;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .feedback-box {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            display: none;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: var(--highlight-green);
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFEBEE;
+            color: var(--error);
+        }
+
+        .highlight-box {
+            background: var(--highlight-yellow);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .highlight-box strong {
+            color: var(--primary-blue);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            background: white;
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--highlight-blue);
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 30px);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 30px);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 20px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: auto;
+            left: -10px;
+            border-color: transparent white transparent transparent;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            top: 20px;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 2000;
+        }
+
+        .points-popup.show {
+            transform: translateX(0);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .report-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .report-score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            padding: 2rem;
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .report-grade-display .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .report-grade-display .percentage {
+            font-size: 1.5rem;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .report-info-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .report-info-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th {
+            background: var(--secondary-blue);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .performance-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .report-footer {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .complete-section-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-icons {
+                gap: 2rem;
+            }
+
+            .name-input-card input {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                padding-left: 50px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -10px;
+                right: auto;
+                border-color: transparent white transparent transparent;
+            }
+
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            .header {
+                position: relative;
+            }
+
+            .report-container {
+                box-shadow: none;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        /* Sub-section styling */
+        .subsection-header {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-blue);
+        }
+
+        .content-paragraph {
+            margin: 1rem 0;
+            text-align: justify;
+        }
+
+        .bullet-list {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .bullet-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .case-study-box {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .case-study-box h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <h1>🗳️ TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            ⭐ <span id="totalPoints">0</span> pts | 
+            🎯 Level: <span id="currentLevel">Explorer</span>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div id="pointsPopup" class="points-popup">+0 points!</div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>🗳️ Chapter 7: Voting and Elections 🏛️</h2>
+                <p class="hero-subtitle">Master the democratic process from registration to Election Day, and discover how citizens shape American government through their votes!</p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">📝</div>
+                        <div class="label">Voter Registration</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">📊</div>
+                        <div class="label">Electoral Systems</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">🎯</div>
+                        <div class="label">Campaign Strategies</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card" id="nameCard">
+                <h3>👤 Enter Your Name to Begin Your Trek</h3>
+                <input type="text" id="studentName" placeholder="Your name here">
+                <button onclick="startModule()">Start Trek! 🚀</button>
+            </div>
+
+            <div class="progress-container">
+                <h3>📈 Your Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="sections-grid">
+                <div class="section-card" id="section1Card" onclick="navigateToSection(1)">
+                    <div class="section-number">1</div>
+                    <h3>Voter Registration</h3>
+                    <p>Explore registration requirements, the Voting Rights Act, and how states manage voter rolls.</p>
+                    <div class="points">🌟 220 points available</div>
+                </div>
+
+                <div class="section-card" id="section2Card" onclick="navigateToSection(2)">
+                    <div class="section-number">2</div>
+                    <h3>Voter Turnout</h3>
+                    <p>Discover what drives people to vote and why many citizens stay home on Election Day.</p>
+                    <div class="points">🌟 220 points available</div>
+                </div>
+
+                <div class="section-card" id="section3Card" onclick="navigateToSection(3)">
+                    <div class="section-number">3</div>
+                    <h3>Elections</h3>
+                    <p>Learn about campaign finance, the nomination process, and the Electoral College.</p>
+                    <div class="points">🌟 220 points available</div>
+                </div>
+
+                <div class="section-card" id="section4Card" onclick="navigateToSection(4)">
+                    <div class="section-number">4</div>
+                    <h3>Campaigns and Voting</h3>
+                    <p>Understand campaign strategies, technology's role, and how voters make decisions.</p>
+                    <div class="points">🌟 220 points available</div>
+                </div>
+
+                <div class="section-card" id="section5Card" onclick="navigateToSection(5)">
+                    <div class="section-number">5</div>
+                    <h3>Direct Democracy</h3>
+                    <p>Examine initiatives, referendums, recalls, and citizen-driven lawmaking.</p>
+                    <div class="points">🌟 220 points available</div>
+                </div>
+
+                <div class="section-card" onclick="showReport()">
+                    <div class="section-number">📊</div>
+                    <h3>Completion Report</h3>
+                    <p>Generate your completion certificate and review your achievements.</p>
+                    <div class="points">🏆 View Your Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Voter Registration -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span class="icon">📝</span>
+                    <h2>Section 1: Voter Registration</h2>
+                </div>
+
+                <p class="content-paragraph">Before most voters are allowed to cast a ballot, they must register to vote in their state. This process may be as simple as checking a box on a driver's license application or as difficult as filling out a long form with complicated questions. Registration allows governments to determine which citizens are allowed to vote and, in some cases, from which list of candidates they may select a party nominee. Ironically, while government wants to increase voter turnout, the registration process may prevent various groups of citizens and non-citizens from participating in the electoral process.</p>
+
+                <h3 class="subsection-header">Voter Registration Across the United States</h3>
+
+                <p class="content-paragraph">Elections are state-by-state contests. They include general elections for president and statewide offices (e.g., governor and U.S. senator), and they are often organized and paid for by the states. Because political cultures vary from state to state, the process of voter registration similarly varies. For example, suppose an 85-year-old retiree with an expired driver's license wants to register to vote. He or she might be able to register quickly in California or Florida, but a current government ID might be required prior to registration in Texas or Indiana.</p>
+
+                <div class="highlight-box">
+                    <strong>Historical Context:</strong> The varied registration and voting laws across the United States have long caused controversy. In the aftermath of the Civil War, southern states enacted literacy tests, grandfather clauses, and other requirements intended to disenfranchise Black voters in Alabama, Georgia, and Mississippi. Literacy tests were long and detailed exams on local and national politics, history, and more. They were often administered arbitrarily with more African Americans required to take them than White people. Poll taxes required voters to pay a fee to vote. Grandfather clauses exempted individuals from taking literacy tests or paying poll taxes if they or their fathers or grandfathers had been permitted to vote prior to a certain point in time.
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Literacy Tests</div>
+                    <div>Long and detailed examinations on local and national politics, history, and more that were administered arbitrarily—with more African Americans required to take them than White people—as a way to prevent minority voting.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">💰 Poll Taxes</div>
+                    <div>A fee that voters were required to pay in order to vote, used primarily in Southern states to disenfranchise poor voters, particularly African Americans.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">👴 Grandfather Clauses</div>
+                    <div>Rules that exempted individuals from taking literacy tests or paying poll taxes if they or their fathers or grandfathers had been permitted to vote prior to a certain point in time, effectively allowing only White voters to bypass voting restrictions.</div>
+                </div>
+
+                <p class="content-paragraph">While the Supreme Court determined that grandfather clauses were unconstitutional in 1915, states continued to use poll taxes and literacy tests to deter potential voters from registering. States also ignored instances of violence and intimidation against African Americans wanting to register or vote.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'vra1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Voting Rights Act of 1965</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The ratification of the Twenty-Fourth Amendment in 1964 ended poll taxes, but the passage of the Voting Rights Act (VRA) in 1965 had a more profound effect.</p>
+                        <p>The act protected the rights of minority voters by prohibiting state laws that denied voting rights based on race. The VRA gave the attorney general of the United States authority to order federal examiners to areas with a history of discrimination. These examiners had the power to oversee and monitor voter registration and elections. States found to violate provisions of the VRA were required to get any changes in their election laws approved by the U.S. attorney general or by going through the court system.</p>
+                        <p><strong>Dramatic Results:</strong> In Mississippi, only 6.7 percent of Black people were registered to vote in 1965; however, by the fall of 1967, nearly 60 percent were registered. Alabama experienced similar effects, with African American registration increasing from 19.3 percent to 51.6 percent.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'shelby1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Shelby County v. Holder (2013)</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> In Shelby County v. Holder (2013), the Supreme Court, in a 5–4 decision, threw out the standards and process of the VRA, effectively gutting the landmark legislation.</p>
+                        <p>This decision effectively pushed decision-making and discretion for election policy in VRA states to the state and local level. Several such states subsequently made changes to their voter ID laws and North Carolina changed its plans for how many polling places were available in certain areas.</p>
+                        <p>This is the legal avenue through which legislators in scores of U.S. states in 2021 have introduced legislation to make voter registration requirements more stringent and to limit options in terms of voting methods. The extent to which such changes will violate equal protection is unknown in advance, but such changes often do not have a neutral effect.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-header">Modern Registration Methods</h3>
+
+                <p class="content-paragraph">Following the implementation of the VRA, many states have sought other methods of increasing voter registration. Several states make registering to vote relatively easy for citizens who have government documentation. Oregon has few requirements for registering and registers many of its voters automatically. North Dakota has no registration at all.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Registration Method</th>
+                            <th>Description</th>
+                            <th>Key Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Online Registration</strong></td>
+                            <td>Register via state websites using driver's license information</td>
+                            <td>First offered by Arizona in 2002; over 18 states now offer this. Cost: $250,000-$750,000 to implement.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Same-Day Registration</strong></td>
+                            <td>Register and vote on Election Day with proof of residency</td>
+                            <td>Maine first implemented in 1973; 14 states + D.C. now allow it. Results in 4% higher turnout.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Automatic Registration</strong></td>
+                            <td>Citizens automatically registered when they turn 18 or interact with state agencies</td>
+                            <td>Oregon pioneered this approach using DMV records; updates occur when licenses are updated.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Motor Voter (1993)</strong></td>
+                            <td>Register when applying for driver's license or Social Security benefits</td>
+                            <td>Increased registrations by 7% but didn't dramatically increase turnout initially.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'motorvoter1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The National Voter Registration Act (Motor Voter)</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The National Voter Registration Act (1993), often referred to as Motor Voter, was enacted to expedite the registration process and make it as simple as possible for voters.</p>
+                        <p>The act required states to allow citizens to register to vote when they sign up for driver's licenses and Social Security benefits. On each government form, the citizen need only mark an additional box to also register to vote.</p>
+                        <p>Unfortunately, while increasing registrations by 7 percent between 1992 and 2012, Motor Voter did not dramatically increase voter turnout. In fact, for two years following the passage of the act, voter turnout decreased slightly. It appears that the main users of the expedited system were those already intending to vote. One study, however, found that preregistration may have a different effect on youth—in Florida, it increased turnout of young voters by 13 percent.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Which constitutional amendment ended poll taxes in federal elections?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Fifteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Nineteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">Twenty-Fourth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Twenty-Sixth Amendment</div>
+                    <div class="feedback-box" id="feedback-q1-1"></div>
+                </div>
+
+                <h3 class="subsection-header">How Does Someone Register to Vote?</h3>
+
+                <p class="content-paragraph">The National Commission on Voting Rights completed a study in September 2015 that found state registration laws can either raise or reduce voter turnout rates, especially among citizens who are young or whose income falls below the poverty line. States with simple voter registration had more registered citizens.</p>
+
+                <p class="content-paragraph">In all states except North Dakota, a citizen wishing to vote must complete an application. Whether the form is online or on paper, prospective voters will list their name, residency address, and in many cases party identification (with Independent as an option) and affirm that they are competent to vote.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏠 Residency Requirement</div>
+                    <div>A stipulation that establishes how long a citizen must live in a state before becoming eligible to register to vote—often thirty days. This requirement helps ensure voters are familiar with local candidates and issues.</div>
+                </div>
+
+                <p class="content-paragraph">Beyond these requirements, there may be an oath administered or more questions asked, such as about felony convictions. If the application is completely online and the citizen has government documents (e.g., driver's license or state identification card), the system will compare the application to other state records and accept an online signature or affidavit if everything matches up correctly.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'hava1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Help America Vote Act (2002)</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> During the 2000 election, in which George W. Bush won Florida's electoral votes by a slim majority, attention turned to the state's election procedures and voter registration rolls. Journalists found that many states, including Florida, had large numbers of phantom voters on their rolls—voters who had moved or died but remained on the states' voter registration rolls.</p>
+                        <p>The Help America Vote Act of 2002 (HAVA) was passed in order to reform voting across the states and reduce these problems. As part of the Act, states were required to:</p>
+                        <ul>
+                            <li>Update voting equipment</li>
+                            <li>Make voting more accessible to people with disabilities</li>
+                            <li>Maintain computerized voter rolls that could be updated regularly</li>
+                            <li>Implement provisional ballot systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="subsection-header">Who Is Allowed to Register?</h3>
+
+                <p class="content-paragraph">In order to be eligible to vote in the United States, a person must be a citizen, resident, and eighteen years old. But states often place additional requirements on the right to vote. The most common requirement is that voters must be deemed competent and not currently serving time in jail.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Felon Disenfranchisement</div>
+                    <div>Various state policies that restrict or permanently bar individuals with felony convictions from voting. Policies vary widely: Vermont allows prisoners to vote, Maine citizens serving in Maine prisons may vote, Kentucky permanently bars felons unless they obtain a pardon from the governor, while Florida voters approved a 2018 initiative to reinstate voting rights for felons after their sentences are completed.</div>
+                </div>
+
+                <p class="content-paragraph">Beyond those jailed, some citizens have additional expectations placed on them when they register to vote. Wisconsin requires that voters "not wager on an election," and Vermont citizens must recite the "Voter's Oath" before they register, swearing to cast votes with a conscience and "without fear or favor of any person."</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What was the primary purpose of the National Voter Registration Act (Motor Voter)?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">To require voters to show photo identification</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">To make voter registration simpler by allowing registration at DMV offices</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">To eliminate same-day voter registration</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">To prevent non-citizens from voting</div>
+                    <div class="feedback-box" id="feedback-q1-2"></div>
+                </div>
+
+                <div class="case-study-box">
+                    <h4>🎓 Where to Register? The College Student Dilemma</h4>
+                    <p>Across the United States, over twenty million college and university students begin classes each fall, many away from home. The simple act of moving away to college presents a voter registration problem. Elections are local—each citizen lives in a district with state legislators, city council or other local elected representatives, a U.S. House of Representatives member, and more.</p>
+                    <p><strong>Voting Back Home:</strong> Legal in most states if student holds only temporary residency at school. Students are likely more familiar with local politicians and issues. But it requires either going home to vote or applying for an absentee ballot. One study found students living more than two hours from home were less likely to vote than students living within thirty minutes of campus.</p>
+                    <p><strong>Voting Near Campus:</strong> Makes it easier to vote but requires an extra step. In many states, registration takes place in October, just when students are acclimating to the semester. Students must become familiar with local candidates and issues. But they won't have to travel to vote, and their vote is more likely to affect their college and local town.</p>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(1)">✓ Complete Section 1</button>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Voter Turnout -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span class="icon">📊</span>
+                    <h2>Section 2: Voter Turnout</h2>
+                </div>
+
+                <p class="content-paragraph">Campaign managers worry about who will show up at the polls on Election Day. Will more Republicans come? More Democrats? Will a surge in younger voters occur this year, or will an older population cast ballots? We can actually predict with strong accuracy who is likely to vote each year, based on identified influence factors such as age, education, and income. Campaigns will often target each group of voters in different ways, spending precious campaign dollars on the groups already most likely to show up at the polls rather than trying to persuade citizens who are highly unlikely to vote.</p>
+
+                <h3 class="subsection-header">Counting Voters</h3>
+
+                <p class="content-paragraph">Low voter turnout has long caused the media and others to express concern and frustration. A healthy democratic society is expected to be filled with citizens who vote regularly and participate in the electoral process. People like Stacey Abrams, who founded Fair Fight Action in 2018, and organizations such as the League of Women Voters and Project Vote Smart work hard to increase voter turnout in all age groups across the United States. But just how low is voter turnout? The answer depends on who is calculating it and how.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📈 Voting-Age Population (VAP)</div>
+                    <div>The number of persons who are eighteen and older. Some of these persons may not be eligible to vote in their state (such as non-citizens or those ineligible due to incarceration), but they are included because they are of age to do so.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">✅ Voting-Eligible Population (VEP)</div>
+                    <div>Citizens eighteen and older who, whether they have registered or not, are eligible to vote because they are citizens, not imprisoned, and meet any other state requirements. This is a more accurate but harder-to-measure figure.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'turnout2024', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Understanding Turnout Statistics</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> How we measure turnout matters! In the 2024 presidential election:</p>
+                        <ul>
+                            <li><strong>83%</strong> of registered voters voted</li>
+                            <li><strong>64%</strong> of the voting-eligible population (VEP) voted</li>
+                            <li><strong>59%</strong> of the voting-age population (VAP) voted</li>
+                            <li><strong>46%</strong> of the total U.S. population voted</li>
+                        </ul>
+                        <p>Those who argue that a healthy democracy needs high voter turnout will look at the voting-age population or voting-eligible population as proof that the United States has a problem. Those who believe only informed and active citizens should vote point to the registered voter turnout numbers instead.</p>
+                        <p><strong>Comparison Caution:</strong> If one compares the percentage of registered voters who voted in 2024 (84%) versus 2020 (77%), it would seem as if voter turnout had increased significantly. However, looking at VEP percentages (64% in 2024 vs. 67% in 2020) shows that is not the case—the pool of registered voters was smaller, and total votes cast actually decreased by over 3.4 million.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-header">What Factors Drive Voter Turnout?</h3>
+
+                <p class="content-paragraph">Political parties and campaign managers approach every population of voters differently, based on what they know about factors that influence turnout. Everyone targets <strong>likely voters</strong>—the category of registered voters who vote regularly. Most campaigns also target registered voters in general, because they are more likely to vote than unregistered citizens.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Impact on Turnout</th>
+                            <th>Key Statistics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Age</strong></td>
+                            <td>Older voters much more likely to vote</td>
+                            <td>18-24: ~39% turnout; 65-74: ~68% turnout (2016)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Education</strong></td>
+                            <td>Higher education = higher turnout</td>
+                            <td>College graduates: 80%; No college degree: 60% (2020)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Income</strong></td>
+                            <td>Higher income = higher turnout</td>
+                            <td>$150,000+: over 80%; Under $25,000: 55%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Race</strong></td>
+                            <td>White voters have highest turnout historically</td>
+                            <td>White: 71%; Black: 63%; Asian: 59%; Hispanic: 54% (2020)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gender</strong></td>
+                            <td>Women vote at slightly higher rates</td>
+                            <td>Women: 63.3%; Men: 59.3% (2016)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'youth1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Why Don't Young People Vote?</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Those between eighteen and twenty-five are least likely to vote. Several factors explain this:</p>
+                        <ul>
+                            <li><strong>Mobility:</strong> Young people move frequently, requiring re-registration each time</li>
+                            <li><strong>Circular neglect:</strong> Youth are less active in government, so parties neglect them; when neglected, they're less likely to engage</li>
+                            <li><strong>Limited government interaction:</strong> Young people are unlikely to be receiving government benefits beyond Pell Grants or loans, and unlikely to be paying high taxes</li>
+                            <li><strong>Distant concept:</strong> Government is a distant concept rather than a daily concern</li>
+                        </ul>
+                        <p><strong>Efforts to Engage Youth:</strong> Rock the Vote began in 1990, bringing music, art, and pop culture together to encourage youth participation. In 2018, former first lady Michelle Obama founded "When We All Vote" with co-chairs including Tom Hanks, Selena Gomez, Lin-Manuel Miranda, and Chris Paul.</p>
+                    </div>
+                </div>
+
+                <div class="case-study-box">
+                    <h4>📱 Making a Difference: Obama's 2008 Campaign</h4>
+                    <p>In 2008, for the first time since 1972, a presidential candidate intrigued America's youth and persuaded them to flock to the polls in record numbers. Barack Obama not only spoke to young people's concerns but his campaign also connected with them via technology, wielding texts and tweets to bring together a new generation of voters.</p>
+                    <p>Since the 1971 passage of the Twenty-Sixth Amendment, which lowered the voting age from 21 to 18, voter turnout in the under-25 range has been low. While opposition to the Vietnam War sent 50.9 percent of 21- to 24-year-old voters to the polls in 1964, after 1972, turnout dropped below 40 percent. In 2008, it briefly increased to 45 percent from only 32 percent in 2000. Yet, despite high interest, only 38 percent showed up in 2012.</p>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Which demographic group has historically had the highest voter turnout rates?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">18-24 year olds</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">65-74 year olds</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">First-time voters</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">Citizens without college degrees</div>
+                    <div class="feedback-box" id="feedback-q2-1"></div>
+                </div>
+
+                <h3 class="subsection-header">What Factors Decrease Voter Turnout?</h3>
+
+                <p class="content-paragraph">Over the years, studies have explored why a citizen might not vote. The reasons range from the obvious excuse of being too busy (19 percent) to more complex answers, such as transportation problems (3.3 percent) and restrictive registration laws (5.5 percent).</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'compulsory1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Compulsory Voting Around the World</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> One prominent reason for low national voter turnout is that participation is not mandated in the U.S. Some countries have compulsory voting laws:</p>
+                        <ul>
+                            <li><strong>Belgium:</strong> 87% VAP turnout</li>
+                            <li><strong>Turkey:</strong> 86% VAP turnout</li>
+                            <li><strong>Sweden (auto-registration):</strong> 83% turnout</li>
+                            <li><strong>Germany (auto-registration):</strong> 66% turnout</li>
+                            <li><strong>United States:</strong> 54% turnout</li>
+                        </ul>
+                        <p><strong>Cautionary Example:</strong> Chile's decision to move from compulsory voting to voluntary voting caused a dramatic drop in participation from 87 percent to 46 percent!</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'voterid1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Voter ID Laws and Their Effects</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Low turnout also occurs when some citizens are not allowed to vote. One method of limiting voter access is the requirement to show identification at polling places.</p>
+                        <p><strong>Crawford v. Marion County (2008):</strong> The Supreme Court decided that Indiana's strict photo identification law was constitutional, though left open the possibility that another case might meet the burden of proof required to overturn such laws.</p>
+                        <p><strong>Texas's Law:</strong> In 2011, Texas passed a strict photo identification law allowing concealed-handgun permits as identification but not student identification. The law was initially blocked by the Obama administration before Shelby County v. Holder removed preclearance requirements.</p>
+                        <p><strong>Impact Research:</strong> A Reuters study found that requiring a photo ID would disproportionally prevent citizens aged 18–24, Hispanics, and those without a college education from voting. 4 percent of households with yearly incomes under $25,000 said they did not have valid voting ID.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Early Voting and Mail-In Voting:</strong> Another reason for not voting is that polling places may be open only on Election Day, making it difficult for voters juggling school, work, and child care. Many states have tried to address this with early voting, which opens polling places as much as two weeks early. Texas opened polling places on weekdays and weekends in 1988. Colorado, Hawaii, Oregon, Utah, and Washington have moved to mail-in voting systems, with Colorado's numbers increasing from 1.8 million votes in 2010 congressional elections to 2.6 million in 2018. In 2020, over 100 million votes were cast early across 44 states.
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is one criticism of strict voter ID laws?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">They make voting too fast and efficient</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">They increase turnout among young voters</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">They may disproportionately affect certain demographic groups</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">They are too expensive for states to implement</div>
+                    <div class="feedback-box" id="feedback-q2-2"></div>
+                </div>
+
+                <h3 class="subsection-header">Other Factors Affecting Turnout</h3>
+
+                <p class="content-paragraph"><strong>Apathy:</strong> Some people avoid voting because their vote is unlikely to make a difference or the election is not competitive. Democrats in Utah and Republicans in California are so outnumbered that they are unlikely to affect the outcome of an election. These citizens, as well as those who vote for third parties like the Green Party or the Libertarian Party, are sometimes referred to as the <strong>chronic minority</strong>.</p>
+
+                <p class="content-paragraph"><strong>Voter Fatigue:</strong> In many states, due to our federal structure with elections at many levels of government, voters may vote many times per year on ballots filled with candidates and issues to research. The less time there is between elections, the lower the turnout.</p>
+
+                <p class="content-paragraph"><strong>Social Protest and Volunteering:</strong> Some voters may view non-voting as a means of social protest or may see volunteering as a better way to spend their time. Younger voters are more likely to volunteer their time rather than vote, believing that serving others is more important than voting.</p>
+
+                <button class="complete-section-btn" onclick="completeSection(2)">✓ Complete Section 2</button>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Elections -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span class="icon">🗳️</span>
+                    <h2>Section 3: Elections</h2>
+                </div>
+
+                <p class="content-paragraph">Elections offer American voters the opportunity to participate in their government with little investment of time or personal effort. Yet voters should make decisions carefully. The electoral system allows them the chance to pick party nominees as well as office-holders, although not every citizen will participate in every step. The presidential election is often criticized as a choice between two evils, yet citizens can play a prominent part in every stage of the race and influence who the final candidates actually are.</p>
+
+                <h3 class="subsection-header">Deciding to Run</h3>
+
+                <p class="content-paragraph">Running for office can be as easy as collecting one hundred signatures on a city election form or paying a registration fee of several thousand dollars to run for governor of a state. However, a potential candidate still needs to meet state-specific requirements covering length of residency, voting status, and age. Potential candidates must also consider competitors, family obligations, and the likelihood of drawing financial backing.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Competitive Seat</div>
+                    <div>A race where a challenger runs against the incumbent—the current office holder. Incumbents who run for reelection are very likely to win. In the U.S. Congress in 2014, 95 percent of representatives and 82 percent of senators were reelected.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🪑 Open Seat</div>
+                    <div>A seat whose incumbent is not running for reelection. When an incumbent retires, the seat is open and more candidates will run for that position.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">💰 War Chest</div>
+                    <div>Campaign accounts registered with the Federal Election Commission that candidates are allowed to keep from earlier donations if they intend to run for office again. Those with early money are hard to beat because they appear more viable to potential donors.</div>
+                </div>
+
+                <h3 class="subsection-header">Campaign Finance Laws</h3>
+
+                <p class="content-paragraph">In the 2024 presidential election cycle, candidates for all parties raised a total of 5.5 billion dollars for campaigns. Congressional candidates raised $10.3 billion. Political action committees (PACs) raised approximately $2.7 billion.</p>
+
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">1867</span>
+                            <h4>First Campaign Finance Law</h4>
+                            <p>Federal law prohibited government employees from asking Naval Yard employees for donations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">1907</span>
+                            <h4>Tillman Act</h4>
+                            <p>Prohibited corporations from contributing money to candidates running in federal elections.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">1971</span>
+                            <h4>Federal Election Campaign Act (FECA)</h4>
+                            <p>Required candidates to report all contributions and expenditures. Created rules for organizations and companies contributing to federal campaigns, allowing the creation of PACs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">1974</span>
+                            <h4>Federal Election Commission Created</h4>
+                            <p>An amendment to FECA created the FEC, which operates independently of government and enforces election laws.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2002</span>
+                            <h4>McCain-Feingold Act (BCRA)</h4>
+                            <p>Restricted soft money to political parties, prohibited coordination between candidates and PAC campaigns, required personal endorsements in ads, and limited union/corporate ads before elections.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2010</span>
+                            <h4>Citizens United v. FEC</h4>
+                            <p>Supreme Court ruled that corporate funding of independent political expenditures is protected speech, leading to the creation of Super PACs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'superpac1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Super PACs and Campaign Finance</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> The Citizens United ruling allowed corporations to place unlimited money into Super PACs (Independent Expenditure-Only Committees).</p>
+                        <p><strong>Super PAC Rules:</strong></p>
+                        <ul>
+                            <li>Cannot contribute directly to a candidate</li>
+                            <li>Cannot strategize with a candidate's campaign</li>
+                            <li>Can raise and spend unlimited money to support or attack candidates</li>
+                            <li>Can run advertisements and host events</li>
+                        </ul>
+                        <p><strong>2020 Statistics:</strong> The Senate Leadership Fund (conservative) spent $293.7 million; the Senate Majority PAC (liberal) spent $230.4 million. Total Super PAC expenditure was $2.13 billion.</p>
+                        <p><strong>Current Limits:</strong> Individuals may contribute up to $3,300 per candidate per election. PACs contributing to multiple candidates may give $5,000 per candidate per election and up to $15,000 to a national party.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What did Citizens United v. FEC (2010) establish?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Limits on how much individuals can contribute to campaigns</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">A ban on all corporate involvement in elections</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">That corporate funding of independent political expenditures is protected speech</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Requirements for candidates to disclose all donors</div>
+                    <div class="feedback-box" id="feedback-q3-1"></div>
+                </div>
+
+                <h3 class="subsection-header">The Nomination Process</h3>
+
+                <p class="content-paragraph">Although the Constitution explains how candidates for national office are elected, it is silent on how those candidates are nominated. Political parties have taken on the role of promoting nominees for offices. Because there are no national guidelines, there is much variation in the nomination process.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Primary Election</div>
+                    <div>An election where registered voters select a candidate that they believe should be a political party's nominee for elected office. The most common method of picking party nominees.</div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Primary Type</th>
+                            <th>Who Can Vote</th>
+                            <th>Key Features</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Closed Primary</strong></td>
+                            <td>Only members of the political party selecting nominees</td>
+                            <td>Parties prefer this; ensures nominees are picked by legitimate party supporters</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Open Primary</strong></td>
+                            <td>All registered voters regardless of party</td>
+                            <td>More inclusive but may allow "strategic voting" by opposing party members</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Top-Two Primary</strong></td>
+                            <td>All voters vote for any candidate</td>
+                            <td>Top two vote-getters advance; can result in same-party general election (e.g., California)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="definition-box">
+                    <div class="definition-term">👥 Caucus</div>
+                    <div>A meeting of party members in which nominees are selected informally through methods such as dropping marbles in a jar, placing names in a hat, standing under a sign bearing the candidate's name, or taking a voice vote. Less expensive than primaries but typically has 20% lower turnout.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'caucus1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Iowa Caucus Experience</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The Iowa Democratic Caucus is well-known for its spirited nature:</p>
+                        <ul>
+                            <li>Party voters align themselves into preference groups—often standing in designated areas of a room</li>
+                            <li>Voters then argue and discuss the candidates, sometimes in animated fashion</li>
+                            <li>After a set time, party members may realign before the final count</li>
+                            <li>The caucus leader determines how many members support each candidate, which determines delegate allocation</li>
+                        </ul>
+                        <p><strong>Pros:</strong> More interesting than primaries, brings out more sophisticated voters, more transparent, local party members see the election outcome and pick delegates directly.</p>
+                        <p><strong>Cons:</strong> Takes 2-3 hours, intimidating to less experienced voters, typically 20% lower turnout than primaries.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is the main difference between a primary and a caucus?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">Primaries are only for presidential elections</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">Primaries use secret ballots while caucuses involve public gatherings and discussions</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">Caucuses are more expensive than primaries</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">Only Democrats use caucuses</div>
+                    <div class="feedback-box" id="feedback-q3-2"></div>
+                </div>
+
+                <h3 class="subsection-header">The Electoral College</h3>
+
+                <p class="content-paragraph">Once the voters have cast ballots in November and all the election season madness comes to a close, races for governors and local representatives may be over, but the constitutional process of electing a president has only begun. The electors of the Electoral College travel to their respective state capitols and cast their votes in mid-December.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Electoral College</div>
+                    <div>The body that formally elects the president and vice president. Each state has electors equal to its total representatives and senators. For the 2024 election, there are 538 total electors, requiring 270 to win. In 48 states plus D.C., the winner takes all electoral votes; Nebraska and Maine use a district system.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'faithless1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Faithless Electors</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> While rare, there are examples of faithless electors who don't vote as expected:</p>
+                        <ul>
+                            <li><strong>2000:</strong> One D.C. elector cast a blank ballot instead of voting for Al Gore, reportedly to protest the District's unequal representation</li>
+                            <li><strong>2004:</strong> One Minnesota elector voted for John Edwards (the VP nominee) for president, and misspelled his name—possibly due to confusion</li>
+                            <li><strong>2016:</strong> Seven faithless electors total—four in Washington, two in Texas, one in Hawaii—following a campaign to encourage them after controversial results</li>
+                        </ul>
+                        <p>Electors' names and votes are publicly available on electoral certificates, scanned and documented by the National Archives.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>January 6, 2021:</strong> Based on the erroneous assumption that the 2020 election had been stolen, thousands of Trump supporters stormed the U.S. Capitol building to prevent the House and Senate from completing a final tabulation of Biden's victory. While many protesters remained outside and undertook no violent actions, some organized groups donned paramilitary gear. The attempt did not succeed, and the votes were finalized in the early overnight hours of January 7th with Vice President Mike Pence presiding.
+                </div>
+
+                <h3 class="subsection-header">Midterm Elections</h3>
+
+                <p class="content-paragraph">Presidential elections garner the most attention from the media and political elites. Yet they are not the only important elections. The even-numbered years between presidential years are reserved for congressional elections—sometimes referred to as <strong>midterm elections</strong> because they are in the middle of the president's term.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">👔 Coattail Effect</div>
+                    <div>During presidential election years, members of Congress from a popular presidential candidate's party get an increase in popularity and higher odds of retaining office.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📉 Reverse-Coattail Effect</div>
+                    <div>During midterm elections, the president's party is often blamed for the president's actions or inaction. Representatives and senators from the sitting president's party are more likely to lose their seats. Example: The 2018 election, in which control of the House returned to Democrats after eight years of Republican control.</div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(3)">✓ Complete Section 3</button>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Campaigns and Voting -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span class="icon">📢</span>
+                    <h2>Section 4: Campaigns and Voting</h2>
+                </div>
+
+                <p class="content-paragraph">Campaign managers know that to win an election, they must do two things: reach voters with their candidate's information and get voters to show up at the polls. To accomplish these goals, candidates and their campaigns will often try to target those most likely to vote. Unfortunately, these voters change from election to election and sometimes from year to year. Primary and caucus voters are different from voters who vote only during presidential general elections. Some years see an increase in younger voters turning out to vote. Elections are unpredictable, and campaigns must adapt to be effective.</p>
+
+                <h3 class="subsection-header">Fundraising</h3>
+
+                <p class="content-paragraph">Even with a carefully planned and orchestrated presidential run, early fundraising is vital for candidates. Money helps them win, and the ability to raise money identifies those who are viable. In fact, the more money a candidate raises, the more they will continue to raise.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">💵 EMILY's List Principle</div>
+                    <div>"Early Money Is Like Yeast" (it makes the dough rise). This political action group, founded on this principle, helps progressive women candidates gain early campaign contributions, which in turn helps them get further donations.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'fundraising1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: 2020 Democratic Primary Fundraising</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The Democratic field in 2020 was crowded before winnowing down early in March. Here were the cash-on-hand amounts when candidates dropped out:</p>
+                        <ul>
+                            <li><strong>Michael Bloomberg:</strong> $11,179,565</li>
+                            <li><strong>Pete Buttigieg:</strong> $6,011,814</li>
+                            <li><strong>Elizabeth Warren:</strong> $4,534,180</li>
+                            <li><strong>Amy Klobuchar:</strong> $2,281,636</li>
+                            <li><strong>Tulsi Gabbard:</strong> $640,210</li>
+                        </ul>
+                        <p>Bernie Sanders dropped out on April 8 with $16,176,082 remaining, leaving Biden to sail to the nomination.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-header">Comparing Primary and General Campaigns</h3>
+
+                <p class="content-paragraph">Primary elections are more difficult for the voter. There are more candidates vying to become their party's nominee, and party identification is not a useful cue because each party has many candidates rather than just one. Voters must find more information about each candidate to decide which is closest to their preferred issue positions.</p>
+
+                <div class="highlight-box">
+                    <strong>Primary Campaign Priorities:</strong>
+                    <ul class="bullet-list">
+                        <li><strong>Name Recognition:</strong> Voters are unlikely to cast a vote for an unknown. Hillary Clinton, Joe Biden, and Donald Trump had massive name recognition from prior roles.</li>
+                        <li><strong>Visibility:</strong> Candidates try to get media attention and pick up momentum. Media coverage is considered more reliable than campaign materials.</li>
+                        <li><strong>Issue Positioning:</strong> Primary ads rarely mention political parties—they focus on issue positions instead.</li>
+                    </ul>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'generalcampaign1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: General Election Campaign Strategies</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> By the general election, each party has only one candidate, and campaign ads must accomplish different goals with different voters:</p>
+                        <ul>
+                            <li>About 50% of voters decide based on party membership alone</li>
+                            <li>Campaigns focus on winning independent and undecided voters</li>
+                            <li>Campaigns visit states where the election is close</li>
+                            <li>Some ads focus on issue and policy positions; others remind party loyalists why it's important to vote</li>
+                        </ul>
+                        <p><strong>Famous Example:</strong> President Lyndon B. Johnson's "Daisy Girl" ad cut from a little girl counting daisy petals to an atomic bomb, implying that if voters stayed home, opponent Barry Goldwater might start atomic war. The ad aired once as a paid ad before being pulled, but gained massive news coverage.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Why is name recognition particularly important in primary elections?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">Because primaries have fewer candidates than general elections</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">Because voters can't use party identification as a shortcut when choosing among same-party candidates</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">Because primary voters are less informed than general election voters</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">Because the media ignores primary elections</div>
+                    <div class="feedback-box" id="feedback-q4-1"></div>
+                </div>
+
+                <h3 class="subsection-header">Technology and Campaigns</h3>
+
+                <p class="content-paragraph">Campaigns have always been expensive—and sometimes negative and nasty. The 1828 "Coffin Handbill" that John Quincy Adams ran listed the names and circumstances of executions Andrew Jackson had ordered, in addition to gossip against Jackson's wife.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'tv1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Television's Impact on Campaigns</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Once television became a fixture in homes, campaign advertising moved to the airwaves. Television allowed candidates to connect with voters through video, appealing directly and emotionally.</p>
+                        <p><strong>The Kennedy-Nixon Debate (1960):</strong></p>
+                        <ul>
+                            <li>Kennedy worked on delivery: accent, tone, facial displays, body movements, and appearance</li>
+                            <li>Nixon was ill before the debate, appeared sweaty and gaunt, and chose not to wear makeup</li>
+                            <li>People who watched the debate thought Kennedy won</li>
+                            <li>Those listening on radio saw the debate as more of a draw</li>
+                        </ul>
+                        <p>This demonstrated that answering questions well is not the only way to impress voters—appearance and delivery matter enormously.</p>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'internet1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Internet Revolution in Campaigning</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The Internet has given candidates new platforms to target voters:</p>
+                        <ul>
+                            <li><strong>2000:</strong> Campaigns created websites to distribute information</li>
+                            <li><strong>2004:</strong> Howard Dean's campaign posted footage of him eating a turkey sandwich, raising over $200,000 in donations and showing commitment to being down-to-earth</li>
+                            <li><strong>Social Media Era:</strong> Candidates use Facebook, Twitter, and YouTube to interact with supporters and reach younger voters</li>
+                            <li><strong>Misinformation Concerns:</strong> Social media's influence led Facebook and Twitter to monitor for untruths, sometimes deleting accounts of violators, including President Trump</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="subsection-header">Voter Decision Making</h3>
+
+                <p class="content-paragraph">When citizens do vote, how do they make their decisions? The election environment is complex and most voters don't have time to research everything about the candidates and issues. Yet they will need to make a fully rational assessment of the choices for an elected office. To meet this goal, they tend to take shortcuts.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Straight-Ticket Voting</div>
+                    <div>Choosing every Republican or Democratic Party member on the ballot. In some states (like Texas or Michigan), selecting one box at the top of the ballot gives a single party all the votes. However, this can cause problems with non-partisan positions at the bottom of the ballot.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">😴 Ballot Fatigue</div>
+                    <div>When someone votes only for the top or important ballot positions (like president or governor) and stops voting rather than continue to the bottom of a long ballot. In 2012 Colorado, 70% voted for president but only 54% voted on retaining a state supreme court justice.</div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Voting Approach</th>
+                            <th>Definition</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Retrospective Voting</strong></td>
+                            <td>Looking at candidate's past actions and past economic climate to decide</td>
+                            <td>Holding politicians accountable during economic downturns or after scandals</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pocketbook Voting</strong></td>
+                            <td>Looking at personal finances and circumstances to decide</td>
+                            <td>Voting against incumbents when having trouble finding employment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prospective Voting</strong></td>
+                            <td>Applying information about past behavior to predict future performance</td>
+                            <td>Evaluating whether a candidate's record suggests they can handle an economic downturn</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Strategic Voting</strong></td>
+                            <td>Voting for second or third choice to prevent another candidate from winning</td>
+                            <td>Green Party voters in Florida voting Democrat to prevent Republican wins</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is the "incumbency advantage"?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">Current office holders have significantly higher reelection rates due to name recognition, franking privileges, war chests, and gerrymandering</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">New candidates have an advantage because voters want change</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">Third-party candidates have advantages over major party candidates</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">Presidents have advantages over congressional candidates</div>
+                    <div class="feedback-box" id="feedback-q4-2"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'incumbency1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Why Do Incumbents Win?</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> In congressional and local elections, incumbents win reelection up to 90% of the time! Why?</p>
+                        <ul>
+                            <li><strong>Name Recognition:</strong> Media more likely to interview them; established voting records</li>
+                            <li><strong>War Chests:</strong> PACs and interest groups prefer giving to likely winners</li>
+                            <li><strong>Franking Privileges:</strong> Limited free mail to communicate with voters (60 days before election for senators, 90 for House members)</li>
+                            <li><strong>Existing Organizations:</strong> Already have campaign infrastructure while challengers must build from scratch</li>
+                            <li><strong>Gerrymandering:</strong> District lines drawn to favor one party create "safe seats"</li>
+                        </ul>
+                        <p><strong>2020 Statistics:</strong> House members won reelection 95% of the time; Senators only 84%—because senators can't benefit from gerrymandering.</p>
+                    </div>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(4)">✓ Complete Section 4</button>
+            </div>
+        </div>
+
+        <!-- SECTION 5: Direct Democracy -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span class="icon">📋</span>
+                    <h2>Section 5: Direct Democracy</h2>
+                </div>
+
+                <p class="content-paragraph">The majority of elections in the United States are held to facilitate indirect democracy. Elections allow the people to pick representatives to serve in government and make decisions on the citizens' behalf. Representatives pass laws, implement taxes, and carry out decisions. Although direct democracy had been used in some of the colonies, the framers of the Constitution granted voters no legislative or executive powers, because they feared the masses would make poor decisions and be susceptible to whims.</p>
+
+                <p class="content-paragraph">During the Progressive Era, however, governments began granting citizens more direct political power. States that formed and joined the United States after the Civil War often assigned their citizens some methods of directly implementing laws or removing corrupt politicians. Citizens now use these powers at the ballot to change laws and direct public policy in their states.</p>
+
+                <h3 class="subsection-header">Direct Democracy Defined</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Direct Democracy</div>
+                    <div>When policy questions go directly to the voters for a decision. These decisions include funding, budgets, candidate removal, candidate approval, policy changes, and constitutional amendments. Not all states allow direct democracy, nor does the United States government.</div>
+                </div>
+
+                <p class="content-paragraph"><strong>Local Direct Democracy</strong> allows citizens to propose and pass laws that affect local towns or counties. Towns in Massachusetts, for example, may choose to use <strong>town meetings</strong>—meetings comprised of the town's eligible voters—to make decisions on budgets, salaries, and local laws.</p>
+
+                <p class="content-paragraph"><strong>Statewide Direct Democracy</strong> allows citizens to propose and pass laws that affect state constitutions, state budgets, and more. Most states in the western half of the country allow citizens all forms of direct democracy, while most states on the eastern and southern regions allow few or none of these forms. States that joined the United States after the Civil War are more likely to have direct democracy, possibly due to the influence of Progressives during the late 1800s and early 1900s.</p>
+
+                <h3 class="subsection-header">Forms of Direct Democracy</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Form</th>
+                            <th>Definition</th>
+                            <th>Key Features</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Legislative Referendum</strong></td>
+                            <td>Legislature passes a law or constitutional amendments and presents them to voters for ratification</td>
+                            <td>Voters confirm or repeal with yes/no vote; includes judicial confirmations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Popular Referendum</strong></td>
+                            <td>Citizens petition to place a referendum on ballot to repeal legislation enacted by state government</td>
+                            <td>Gives citizens limited power; cannot overhaul policy or circumvent government</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Initiative/Proposition</strong></td>
+                            <td>Law or constitutional amendment proposed and passed by citizens</td>
+                            <td>Completely bypasses legislatures and governors; most common form; subject to court review</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recall</strong></td>
+                            <td>Allows voters to decide whether to remove a government official from office</td>
+                            <td>Less common; can be contentious and expensive</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'initiative1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Initiative Process</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The process to pass an initiative is not easy and varies from state to state:</p>
+                        <ol>
+                            <li><strong>File Paperwork:</strong> Petitioners file with the state including proposed text. State estimates cost and determines legality.</li>
+                            <li><strong>Gather Signatures:</strong> Organizers collect registered voters' signatures. Required number is often a percentage of votes from a past election.</li>
+                            <li><strong>Verification:</strong> Signatures verified by state or county elections office.</li>
+                            <li><strong>Placement:</strong> If approved, initiative placed on next ballot.</li>
+                            <li><strong>Campaign:</strong> Organization campaigns to voters.</li>
+                        </ol>
+                        <p><strong>California Example:</strong> Requires 5% of last gubernatorial election votes for a law (623,212 signatures through 2022) or 8% for an amendment (997,139 signatures). California had 12 ballot measures on the 2020 general election ballot.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is the most common form of direct democracy in the United States?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">Recall elections</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">Legislative referendums</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 25)">Initiatives (propositions)</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">Town meetings</div>
+                    <div class="feedback-box" id="feedback-q5-1"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'recall1', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Famous Recall Elections</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> The recall is one of the more unusual forms of direct democracy:</p>
+                        <p><strong>California 2003:</strong> Governor Gray Davis was recalled and replaced by Arnold Schwarzenegger in perhaps the most famous recall election. Representative Darrell Issa (R-CA) donated $2 million to help the organization attain nearly one million signatures during the signature collection phase.</p>
+                        <p><strong>Wisconsin 2012:</strong> The attempt by voters to recall Governor Scott Walker shows how contentious and expensive a recall can be. Walker spent over $60 million in the election to retain his seat.</p>
+                        <p>This example shows that direct democracy is not always a process "by the people," but rather can be a process used by the wealthy and business interests.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-header">Policymaking Through Direct Democracy</h3>
+
+                <p class="content-paragraph">Politicians are often unwilling to wade into highly political waters if they fear it will harm their chances for reelection. When a legislature refuses to act or change current policy, initiatives allow citizens to take part in the policy process and end the impasse.</p>
+
+                <div class="case-study-box">
+                    <h4>🌿 Marijuana Legalization: Too Much Democracy?</h4>
+                    <p>California was the first state to allow medical marijuana use after Proposition 215 in 1996. In Gonzales v. Raich (2005), the Supreme Court ruled the U.S. government had authority to criminalize marijuana use. In 2009, Attorney General Eric Holder said the federal government would not prosecute patients using marijuana medically.</p>
+                    <p>Colorado voters approved recreational marijuana use in 2012. Since then, 42 states and D.C. now have laws legalizing marijuana to varying degrees—in many cases through initiatives and direct democracy.</p>
+                    <p><strong>The Problem:</strong> While citizens of these states believe marijuana should be legal, the U.S. government does not. The Controlled Substances Act (1970) declares marijuana a dangerous drug. States have a legal obligation to enforce state laws, yet also must follow federal laws. Citizens using marijuana legally in their state are not using it legally in their country.</p>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is one significant criticism of direct democracy?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">It allows politicians too much power over voters</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">It never leads to meaningful policy changes</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 25)">It can be used by wealthy individuals and special interests to push personal projects</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">It is only available in eastern states</div>
+                    <div class="feedback-box" id="feedback-q5-2"></div>
+                </div>
+
+                <h3 class="subsection-header">Drawbacks of Direct Democracy</h3>
+
+                <div class="highlight-box">
+                    <strong>Challenges with Direct Democracy:</strong>
+                    <ul class="bullet-list">
+                        <li><strong>Requires more of voters:</strong> Instead of voting based on party, voters must become informed about complex issues</li>
+                        <li><strong>Voter confusion:</strong> In 2008, California's Proposition 8 ("Eliminates Rights of Same-Sex Couples to Marry") confused many voters about what a "yes" or "no" vote meant</li>
+                        <li><strong>Lower participation:</strong> Direct democracy ballot items regularly earn fewer votes than the choice of a governor or president</li>
+                        <li><strong>Special interest influence:</strong> Any group can create an organization to spearhead an initiative, and wealthy donors can fund signature collection</li>
+                    </ul>
+                </div>
+
+                <button class="complete-section-btn" onclick="completeSection(5)">✓ Complete Section 5</button>
+            </div>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header">
+                    <h1>🗳️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="report-score-badge">⭐ <span id="reportPoints">0</span> pts</span>
+                        <span class="report-score-badge">✓ <span id="reportPercent">0</span>%</span>
+                        <span class="report-score-badge">📊 <span id="reportCompletion">0</span>/5</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
+
+                    <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                    <p class="report-subtitle">Chapter 7: Voting and Elections</p>
+
+                    <div class="report-grade-display" id="gradeDisplay">
+                        <div class="letter-grade" id="letterGrade">-</div>
+                        <div class="percentage" id="gradePercent">0%</div>
+                    </div>
+
+                    <div class="report-sections">
+                        <div class="report-info-section">
+                            <h3>📋 Student Information</h3>
+                            <div class="info-row">
+                                <span>Name:</span>
+                                <strong id="reportName">-</strong>
+                            </div>
+                            <div class="info-row">
+                                <span>Date:</span>
+                                <strong id="reportDate">-</strong>
+                            </div>
+                            <div class="info-row">
+                                <span>Time:</span>
+                                <strong id="reportTime">-</strong>
+                            </div>
+                        </div>
+
+                        <div class="report-info-section">
+                            <h3>📊 Section Performance</h3>
+                            <table class="performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sectionPerformance">
+                                    <!-- Filled by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricPoints">0</div>
+                            <div class="metric-label">Points Earned</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricSections">0/5</div>
+                            <div class="metric-label">Sections Complete</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricQuiz">0%</div>
+                            <div class="metric-label">Quiz Accuracy</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricEngagement">0%</div>
+                            <div class="metric-label">Engagement</div>
+                        </div>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>📝 Instructor Note:</strong> This report verifies the student's completion of Chapter 7: Voting and Elections in the TCC Federal Government Trailblazer Trek module. The student engaged with interactive content covering voter registration, voter turnout, elections, campaigns, and direct democracy.
+                    </div>
+
+                    <div class="report-footer">
+                        <button class="print-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            studentName: '',
+            totalPoints: 0,
+            currentLevel: 'Explorer',
+            sectionsCompleted: [],
+            revealedCards: [],
+            answeredQuestions: [],
+            correctAnswers: 0,
+            totalQuestions: 0,
+            sectionPoints: {
+                1: 0,
+                2: 0,
+                3: 0,
+                4: 0,
+                5: 0
+            },
+            maxSectionPoints: {
+                1: 220,
+                2: 220,
+                3: 220,
+                4: 220,
+                5: 220
+            }
+        };
+
+        const totalMaxPoints = 1100;
+
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Citizen',
+            600: 'Advocate',
+            800: 'Democracy Expert',
+            1000: 'Voting Rights Champion'
+        };
+
+        // Start Module
+        function startModule() {
+            const nameInput = document.getElementById('studentName');
+            const name = nameInput.value.trim();
+            
+            if (!name) {
+                alert('Please enter your name to begin the trek!');
+                return;
+            }
+            
+            gameState.studentName = name;
+            document.getElementById('nameCard').style.display = 'none';
+            updateDisplay();
+        }
+
+        // Navigation
+        function navigateToSection(sectionNum) {
+            if (!gameState.studentName) {
+                alert('Please enter your name first!');
+                return;
+            }
+            
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(`section${sectionNum}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goHome() {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            window.scrollTo(0, 0);
+            updateDisplay();
+        }
+
+        // Interactive Cards
+        function revealCard(cardElement, cardId, points) {
+            if (gameState.revealedCards.includes(cardId)) return;
+            
+            cardElement.classList.add('revealed');
+            gameState.revealedCards.push(cardId);
+            
+            // Determine section and add points
+            const sectionNum = getCurrentSection();
+            if (sectionNum) {
+                gameState.sectionPoints[sectionNum] += points;
+            }
+            
+            addPoints(points);
+        }
+
+        // Knowledge Checks
+        function handleAnswer(optionElement, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.includes(questionId)) return;
+            
+            gameState.answeredQuestions.push(questionId);
+            gameState.totalQuestions++;
+            
+            // Disable all options in this question
+            const parent = optionElement.closest('.knowledge-check');
+            const options = parent.querySelectorAll('.kc-option');
+            options.forEach(opt => opt.classList.add('disabled'));
+            
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            if (isCorrect) {
+                optionElement.classList.add('correct');
+                feedback.textContent = '✓ Correct! Excellent work!';
+                feedback.classList.add('correct', 'show');
+                gameState.correctAnswers++;
+                
+                const sectionNum = getCurrentSection();
+                if (sectionNum) {
+                    gameState.sectionPoints[sectionNum] += points;
+                }
+                
+                addPoints(points);
+            } else {
+                optionElement.classList.add('incorrect');
+                // Find and highlight correct answer
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+                feedback.textContent = '✗ Not quite. Review the correct answer above.';
+                feedback.classList.add('incorrect', 'show');
+            }
+        }
+
+        // Complete Section
+        function completeSection(sectionNum) {
+            if (gameState.sectionsCompleted.includes(sectionNum)) {
+                goHome();
+                return;
+            }
+            
+            gameState.sectionsCompleted.push(sectionNum);
+            document.getElementById(`section${sectionNum}Card`).classList.add('completed');
+            
+            // Bonus points for completion
+            addPoints(50);
+            
+            goHome();
+        }
+
+        // Helper Functions
+        function getCurrentSection() {
+            for (let i = 1; i <= 5; i++) {
+                const section = document.getElementById(`section${i}`);
+                if (section && section.classList.contains('active')) {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        function addPoints(points) {
+            gameState.totalPoints += points;
+            updateLevel();
+            updateDisplay();
+            showPointsPopup(points);
+        }
+
+        function updateLevel() {
+            const thresholds = Object.keys(levels).map(Number).sort((a, b) => b - a);
+            for (const threshold of thresholds) {
+                if (gameState.totalPoints >= threshold) {
+                    gameState.currentLevel = levels[threshold];
+                    break;
+                }
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('totalPoints').textContent = gameState.totalPoints;
+            document.getElementById('currentLevel').textContent = gameState.currentLevel;
+            
+            // Update progress bar
+            const progress = (gameState.sectionsCompleted.length / 5) * 100;
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = `${Math.max(progress, 5)}%`;
+            progressFill.textContent = `${Math.round(progress)}%`;
+        }
+
+        function showPointsPopup(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = `+${points} points!`;
+            popup.classList.add('show');
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2000);
+        }
+
+        // Report Functions
+        function showReport() {
+            if (!gameState.studentName) {
+                alert('Please enter your name and complete some sections first!');
+                return;
+            }
+            
+            // Calculate metrics
+            const percentage = Math.round((gameState.totalPoints / totalMaxPoints) * 100);
+            const grade = calculateGrade(percentage);
+            
+            // Update report page
+            document.getElementById('reportPoints').textContent = gameState.totalPoints;
+            document.getElementById('reportPercent').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = gameState.sectionsCompleted.length;
+            
+            document.getElementById('reportName').textContent = gameState.studentName;
+            document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            document.getElementById('letterGrade').textContent = grade.letter;
+            document.getElementById('gradePercent').textContent = `${percentage}%`;
+            
+            const gradeDisplay = document.getElementById('gradeDisplay');
+            gradeDisplay.style.background = grade.color;
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.totalPoints;
+            document.getElementById('metricSections').textContent = `${gameState.sectionsCompleted.length}/5`;
+            
+            const quizAccuracy = gameState.totalQuestions > 0 
+                ? Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) 
+                : 0;
+            document.getElementById('metricQuiz').textContent = `${quizAccuracy}%`;
+            
+            const totalInteractions = gameState.revealedCards.length + gameState.answeredQuestions.length;
+            const maxInteractions = 25; // Approximate total interactive elements
+            const engagement = Math.min(100, Math.round((totalInteractions / maxInteractions) * 100));
+            document.getElementById('metricEngagement').textContent = `${engagement}%`;
+            
+            // Update section performance table
+            const sectionNames = [
+                'Voter Registration',
+                'Voter Turnout',
+                'Elections',
+                'Campaigns and Voting',
+                'Direct Democracy'
+            ];
+            
+            const tbody = document.getElementById('sectionPerformance');
+            tbody.innerHTML = '';
+            
+            sectionNames.forEach((name, index) => {
+                const sectionNum = index + 1;
+                const isComplete = gameState.sectionsCompleted.includes(sectionNum);
+                const points = gameState.sectionPoints[sectionNum];
+                const maxPoints = gameState.maxSectionPoints[sectionNum];
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${name}</td>
+                    <td>${isComplete ? '✅' : '⏳'}</td>
+                    <td>${points}/${maxPoints}</td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // Show report page
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('reportPage').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function calculateGrade(percentage) {
+            if (percentage >= 90) return { letter: 'A', color: '#1B5E20' };
+            if (percentage >= 80) return { letter: 'B', color: '#00695C' };
+            if (percentage >= 70) return { letter: 'C', color: '#F57C00' };
+            if (percentage >= 60) return { letter: 'D', color: '#E65100' };
+            return { letter: 'F', color: '#B71C1C' };
+        }
+    </script>
+</body>
+</html>

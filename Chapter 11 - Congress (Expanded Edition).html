@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Congress - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .section-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            opacity: 0.9;
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-block h4 {
+            color: var(--primary-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box {
+            background: var(--highlight-yellow);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box h4 {
+            color: #5D4037;
+            margin-top: 0;
+        }
+
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--secondary-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .interactive-card.revealed {
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        .kc-option.correct {
+            background: #C8E6C9;
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFCDD2;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #C8E6C9;
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFCDD2;
+            color: var(--error);
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-green);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .performance-table {
+            width: 100%;
+        }
+
+        .performance-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .report-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: static;
+            }
+            .container {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .hero-icons {
+                gap: 2rem;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            <span>⭐ <span id="currentScore">0</span> pts</span>
+            <span>🎯 <span id="currentLevel">Explorer</span></span>
+        </div>
+    </header>
+
+    <div id="pointsPopup" class="points-popup"></div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>🏛️ Chapter 6: Congress 📜</h2>
+                <p class="hero-subtitle">Explore the First Branch of Government - the cornerstone of American democracy where laws are made, budgets are controlled, and the people's voice is heard through their elected representatives.</p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">🏛️</div>
+                        <div class="label">Capitol Hill</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">⚖️</div>
+                        <div class="label">Bicameralism</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">📜</div>
+                        <div class="label">Legislation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your name here..." onchange="saveProgress()">
+                <button onclick="saveProgress()">Save Progress</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%">
+                        <span id="progressText">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" onclick="goToSection('section1')">
+                    <div class="badge">1</div>
+                    <h4>🏛️ The Institutional Design of Congress</h4>
+                    <p>The Great Compromise, bicameralism, apportionment, gerrymandering, and congressional powers</p>
+                    <div class="points">⭐ 225 points available</div>
+                </div>
+
+                <div class="section-card" onclick="goToSection('section2')">
+                    <div class="badge">2</div>
+                    <h4>🗳️ Congressional Elections</h4>
+                    <p>House and Senate differences, campaign funding, incumbency advantage, and nationalized elections</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" onclick="goToSection('section3')">
+                    <div class="badge">3</div>
+                    <h4>🎭 Congressional Representation</h4>
+                    <p>Delegate, trustee, and politico models; descriptive and collective representation</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" onclick="goToSection('section4')">
+                    <div class="badge">4</div>
+                    <h4>👥 House and Senate Organizations</h4>
+                    <p>Party leadership structure, committee system, and how Congress divides its work</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" onclick="goToSection('section5')">
+                    <div class="badge">5</div>
+                    <h4>📋 The Legislative Process</h4>
+                    <p>How a bill becomes a law, the filibuster, cloture, and modern legislation</p>
+                    <div class="points">⭐ 225 points available</div>
+                </div>
+
+                <div class="section-card" onclick="generateReport()">
+                    <div class="badge">📊</div>
+                    <h4>📄 Completion Report</h4>
+                    <p>View your final score, achievements, and print your completion certificate</p>
+                    <div class="points">Generate your report</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: The Institutional Design of Congress -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🏛️ Section 1: The Institutional Design of Congress</h2>
+                <p class="subtitle">Understanding the origins and structure of America's first branch</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Introduction: Congress as the Cornerstone</h3>
+                <p>When U.S. citizens think of governmental power, they most likely think of the presidency. The framers of the Constitution, however, clearly intended that <strong>Congress would be the cornerstone of the new republic</strong>. After years of tyranny under a king, they had little interest in creating another system with an overly powerful single individual at the top.</p>
+                
+                <p>Instead, while recognizing the need for centralization in terms of a stronger national government with an elected executive wielding its own authority, those at the Constitutional Convention wanted a <strong>strong representative assembly at the national level</strong> that would use careful consideration, deliberate action, and constituent representation to carefully draft legislation to meet the needs of the new republic.</p>
+                
+                <p>Thus, <strong>Article I of the Constitution</strong> grants several key powers to Congress, which include overseeing the budget and all financial matters, introducing legislation, confirming or rejecting judicial and executive nominations, and even declaring war.</p>
+
+                <div class="key-concept-box">
+                    <strong>🎯 Key Insight:</strong> Congress is often called "the first branch" of government because it is described in Article I of the Constitution, reflecting the founders' intent that it be the most important branch.
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ The Great Compromise and the Basics of Bicameralism</h3>
+                
+                <p>The origins of the U.S. Constitution and the convention that brought it into existence are rooted in failure—<strong>the failure of the Articles of Confederation</strong>. After only a handful of years, the states of the union decided that the Articles were simply unworkable. In order to save the young republic, a convention was called, and delegates were sent to assemble and revise the Articles.</p>
+
+                <p>Only a few years after the adoption of the Articles of Confederation, the republican experiment seemed on the verge of failure. States deep in debt were printing increasingly worthless paper currency, many were mired in interstate trade battles with each other, and in western Massachusetts, a small group of Revolutionary War veterans angry over the prospect of losing their farms broke into armed open revolt against the state, in what came to be known as <strong>Shays' Rebellion</strong>.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'shays', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Shays' Rebellion and Its Impact</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Great discovery!</p>
+                        <p>Shays' Rebellion (1786-1787) was an armed uprising in western Massachusetts led by Daniel Shays, a Revolutionary War veteran. Farmers were facing high taxes and debt, and many were losing their farms. When Shays and about 4,000 rebels attempted to seize a federal armory, it alarmed national leaders. The conclusion many reached was that the Articles of Confederation were simply not strong enough to keep the young republic together. This crisis was instrumental in convincing the states to send delegates to what became the Constitutional Convention of 1787.</p>
+                    </div>
+                </div>
+
+                <h4>The Constitutional Convention of 1787</h4>
+                <p>The meeting these delegates convened became known as the <strong>Constitutional Convention of 1787</strong>. Although its prescribed purpose was to revise the Articles of Confederation, a number of delegates charted a path toward disposing of the Articles entirely. Under the Articles, the national legislature had been made up of a single chamber composed of an equal number of delegates from each of the states.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Bicameralism</div>
+                    <p>The division of legislators into two separate assemblies, chambers, or houses. The U.S. Congress consists of two chambers: the House of Representatives and the Senate.</p>
+                </div>
+
+                <p>Large states, like Virginia, felt it would be unfair to continue with this style of legislative institution. As a result, Virginia's delegates proposed a plan that called for <strong>bicameralism</strong>, or the division of legislators into two separate assemblies. In this proposed two-chamber Congress, states with larger populations would have more representatives in each chamber.</p>
+
+                <p>Predictably, smaller states like New Jersey were unhappy with this proposal. In response, they issued their own plan, which called for a single-chamber Congress with equal representation and more state authority.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'plans', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Virginia Plan vs. The New Jersey Plan</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Excellent research!</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Feature</th>
+                                <th>Virginia Plan (Large States)</th>
+                                <th>New Jersey Plan (Small States)</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Legislature</strong></td>
+                                <td>Two chambers (bicameral)</td>
+                                <td>One chamber (unicameral)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Representation</strong></td>
+                                <td>Based on population in both houses</td>
+                                <td>Equal representation for all states</td>
+                            </tr>
+                            <tr>
+                                <td><strong>State Power</strong></td>
+                                <td>Stronger national government</td>
+                                <td>More state authority</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Supporters</strong></td>
+                                <td>Large states (VA, PA, MA)</td>
+                                <td>Small states (NJ, CT, DE)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>The Connecticut Compromise (Great Compromise)</h4>
+                <p>The storm of debate over how to allocate power between large and small states was eventually calmed by a third proposal. The <strong>Connecticut Compromise</strong>, also called the <strong>Great Compromise</strong>, proposed a bicameral congress with members apportioned differently in each house:</p>
+                
+                <ul>
+                    <li><strong>The upper house (Senate)</strong> was to have two members from each state. This soothed the fears of the small states.</li>
+                    <li><strong>The lower house (House of Representatives)</strong> membership would be proportional to the population in each state. This measure protected the interests of the large states.</li>
+                </ul>
+
+                <div class="milestone-box">
+                    <h4>🏆 Historical Milestone: The Great Compromise (1787)</h4>
+                    <p>The Great Compromise resolved one of the most contentious debates at the Constitutional Convention. By creating a bicameral legislature with different methods of representation, the framers found middle ground that satisfied both large and small states. This compromise was essential to the Constitution's ratification.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 Constitutional Powers and Purposes of Bicameralism</h3>
+                
+                <p>In the final draft of the U.S. Constitution, the bicameral Congress established by the convention of 1787 was given a number of powers and limitations. These are outlined in <strong>Article I</strong>:</p>
+                
+                <ul>
+                    <li><strong>Section 2:</strong> Describes the minimum age of congresspersons</li>
+                    <li><strong>Section 4:</strong> Requires that Congress meet at least once a year</li>
+                    <li><strong>Section 6:</strong> Guarantees members' pay</li>
+                    <li><strong>Section 8:</strong> Gives Congress the power to levy taxes, borrow money, and regulate commerce</li>
+                </ul>
+
+                <p>Although the basic design of the House and Senate resulted from a political deal between large and small states, the bicameral legislature established by the convention did not emerge from thin air. The concept had existed in Europe as far back as the medieval era. At that time, the two chambers of a legislature were divided based on class and designed to reflect different types of representation. The names of the two houses in the United Kingdom's bicameral parliament still reflect this older distinction today: <strong>the House of Lords and the House of Commons</strong>.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'purposes', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Three Key Purposes of Bicameralism</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Constitutional wisdom unlocked!</p>
+                        <p>The framers intended there to be a complex and difficult process for legislation to become law. This challenge serves several important functions:</p>
+                        <ol>
+                            <li><strong>Deliberation:</strong> The difficulty of passing legislation through both houses makes it less likely that Congress will act on fleeting instincts or without the necessary deliberation.</li>
+                            <li><strong>Stability:</strong> The bicameral system ensures that large-scale dramatic reform is exceptionally difficult to pass and that the status quo is more likely to win the day. This maintains a level of conservatism in government.</li>
+                            <li><strong>Protection Against Faction:</strong> The bicameral system makes it difficult for a single faction or interest group to enact laws and restrictions that would unfairly favor it.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <p>The bicameral system established at the Constitutional Convention and still followed today requires the two houses to <strong>pass identical bills</strong>, or proposed items of legislation. This ensures that after all amending and modifying has occurred, the two houses ultimately reach an agreement about the legislation they send to the president. Passing the same bill in both houses is no easy feat, and this is by design.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🗺️ Senate Representation and House Apportionment</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Apportionment</div>
+                    <p>The process by which seats in the House of Representatives are distributed among the fifty states based on population data from the U.S. Census Bureau.</p>
+                </div>
+
+                <p>The Constitution specifies that every state will have <strong>two senators</strong> who each serve a <strong>six-year term</strong>. Therefore, with fifty states in the Union, there are currently <strong>one hundred seats in the U.S. Senate</strong>. Senators were originally appointed by state legislatures, but in 1913, the <strong>Seventeenth Amendment</strong> was approved, which allowed for senators to be elected by popular vote in each state.</p>
+
+                <p>Seats in the House of Representatives are distributed among the states based on each state's population, and each member of the House is elected by voters in a specific congressional district. Each state is guaranteed at least one seat in the House.</p>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Feature</th>
+                        <th>House of Representatives</th>
+                        <th>Senate</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Members</strong></td>
+                        <td>435</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Members per State</strong></td>
+                        <td>1 or more, based on population</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Term Length</strong></td>
+                        <td>2 years</td>
+                        <td>6 years</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minimum Age</strong></td>
+                        <td>25</td>
+                        <td>30</td>
+                    </tr>
+                </table>
+
+                <h4>The History of House Apportionment</h4>
+                <p>Congressional apportionment today is achieved through the <strong>equal proportions method</strong>, which uses a mathematical formula to allocate seats based on U.S. Census Bureau population data, gathered every ten years as required by the Constitution.</p>
+
+                <p>At the close of the first U.S. Congress in 1791, there were sixty-five representatives, each representing approximately thirty thousand citizens. The roster of the House continued to grow until it reached 435 members after the 1910 census. Ten years later, following the 1920 census and with urbanization changing populations across the country, Congress failed to reapportion membership because it became deadlocked on the issue. In <strong>1929, an agreement was reached to permanently cap the number of seats in the House at 435</strong>.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'redistrict', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Redistricting and Modern Challenges</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Demographics expert!</p>
+                        <p><strong>Redistricting</strong> occurs every ten years, after the U.S. Census has established how many persons live in the United States and where. The boundaries of legislative districts are redrawn as needed to maintain similar numbers of voters in each while still maintaining a total number of 435 districts.</p>
+                        <p>Currently, there are <strong>seven states with only one representative</strong> (Alaska, Delaware, Montana, North Dakota, South Dakota, Vermont, and Wyoming), whereas the most populous state, <strong>California, has the most congressional districts</strong>.</p>
+                        <p><strong>Modern Challenges:</strong></p>
+                        <ul>
+                            <li>The average number of citizens in a congressional district now tops 700,000 (George Washington advocated for 30,000)</li>
+                            <li>Washington, DC's approximately 675,000 residents do not have voting representation—only a non-voting delegate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🗺️ Gerrymandering: Drawing District Lines</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Gerrymandering</div>
+                    <p>The manipulation of legislative district boundaries as a way of favoring a particular candidate or party. The term combines the word "salamander" (a reference to the strange shape of these districts) with the name of Massachusetts governor Elbridge Gerry, who in 1812 signed a redistricting plan designed to benefit his party.</p>
+                </div>
+
+                <p>Despite the questionable ethics behind gerrymandering, the practice is legal, and both major parties have used it to their benefit. It is only when political redistricting appears to <strong>dilute the votes of racial minorities</strong> that gerrymandering efforts can be challenged under the Voting Rights Act.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'gerrymander', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Paradox of Majority-Minority Districts</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Political strategy revealed!</p>
+                        <p>Following the Voting Rights Act of 1965, many Democrats led the charge to create congressional districts that would enhance the power of African American voters. The idea was to create <strong>majority-minority districts</strong>—districts in which African Americans became the majority and thus gained the electoral power to send representatives to Congress.</p>
+                        <p>While these strangely drawn districts succeeded in nearly quintupling the number of African American representatives in Congress in just over two decades, they revealed a <strong>disturbing paradox</strong>: Congress as a whole has become less enthusiastic about minority-specific issues. How is this possible?</p>
+                        <p>By creating districts with high percentages of minority constituents, strategists made the other districts less diverse. The representatives in those districts are under very little pressure to consider the interests of minority groups—and typically do not.</p>
+                    </div>
+                </div>
+
+                <h4>The Historical Context: The Three-Fifths Compromise</h4>
+                <p>The first reapportionment controversy took place before any apportionment had even occurred, while the process was being discussed at the Constitutional Convention. Representatives from large slaveholding states believed that enslaved people should be counted as part of their total population. States with few or no enslaved people predictably argued against this.</p>
+                
+                <p>The compromise eventually reached allowed for each enslaved person (who could not vote) to count as <strong>three-fifths of a person</strong> for purposes of congressional representation. Following the abolition of slavery and the end of Reconstruction, the former slaveholding states took numerous steps to prevent formerly enslaved people from voting—yet because these people were now free, they were counted fully toward the states' congressional representation.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>⚡ Congressional Powers: Enumerated, Implied, and Inherent</h3>
+                
+                <p>The authority to introduce and pass legislation is a very strong power. But it is only one of the many that Congress possesses. Congressional powers can be divided into three types:</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Enumerated Powers</div>
+                    <p>Powers explicitly stated in the Constitution. Article I, Section 8 lists these powers, including the power to levy taxes, declare war, raise an army and navy, coin money, borrow money, regulate commerce among the states and with foreign nations, establish federal courts and bankruptcy rules, establish rules for immigration and naturalization, and issue patents and copyrights.</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Implied Powers</div>
+                    <p>Powers not specifically detailed in the Constitution but inferred as necessary to achieve the objectives of the national government. The "necessary and proper clause" directs Congress "to make all Laws which shall be necessary and proper for carrying into Execution the foregoing Powers." Laws that regulate banks, establish a minimum wage, and allow for the construction of interstate highways are all possible because of implied powers.</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Inherent Powers</div>
+                    <p>Powers neither enumerated nor implied but assumed to exist as a direct result of the country's existence. These include the power to control borders, expand the territory of the state, and defend itself from internal revolution. The general assumption is that these powers were deemed so essential that the framers saw no need to spell them out.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'purse', 25)">
+                    <div class="card-prompt">🔍 Click to explore: The Power of the Purse</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Financial power understood!</p>
+                        <p>The first of the enumerated powers, to levy taxes, is quite possibly <strong>the most important power Congress possesses</strong>. Without it, most of the others would be largely theoretical. The power to levy and collect taxes, along with the appropriations power, gives Congress what is typically referred to as <strong>"the power of the purse."</strong></p>
+                        <p>This means Congress controls the money—a fundamental check on both the executive and judicial branches.</p>
+                    </div>
+                </div>
+
+                <h4>Congressional Checks on Other Branches</h4>
+                <p>Some enumerated powers were included specifically to serve as checks on the other powerful branches:</p>
+                <ul>
+                    <li><strong>Sole power to introduce legislation:</strong> Limits the president's ability to develop laws</li>
+                    <li><strong>Senate confirmation power:</strong> Final say on presidential nominations and treaties</li>
+                    <li><strong>Impeachment power:</strong> The House can impeach (formally accuse) the president or other federal officials; the Senate conducts the trial</li>
+                    <li><strong>Oversight:</strong> The right to review and monitor other bodies such as the executive branch</li>
+                </ul>
+
+                <div class="interactive-card" onclick="revealCard(this, 'commerce', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Commerce Clause and Its Evolution</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Legal evolution explored!</p>
+                        <p>One of the most important constitutional anchors for Congress's implicit power to regulate all manner of activities is the short clause in Article I, Section 8, which empowers Congress <strong>"to regulate Commerce with foreign Nations, and among the several States, and with Indian Tribes."</strong></p>
+                        <p>The Supreme Court's broad interpretation of this commerce clause has greatly expanded Congress's power over the centuries. From the earliest days of the republic until the end of the nineteenth century, the Supreme Court consistently handed down decisions that broadened Congress's power to regulate interstate and intrastate commerce.</p>
+                        <p>However, in <strong>United States v. Lopez (1995)</strong>, the Court struck down a law as an unconstitutional overstepping of the commerce clause—the first time it had done so in half a century. When the Affordable Care Act came before the Supreme Court in 2012, many believed the Court would strike it down. Instead, the justices upheld the law based on Congress's enumerated power to tax, rather than the commerce clause.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What was the primary purpose of the Great Compromise at the Constitutional Convention?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc1-1', 25)">To resolve the conflict between large and small states over representation in Congress</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-1', 25)">To determine how enslaved people would be counted for representation</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-1', 25)">To establish the power of judicial review</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-1', 25)">To create the Bill of Rights</div>
+                <div class="feedback-box" id="feedback-kc1-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: Which type of congressional power includes the authority to establish a minimum wage?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-2', 25)">Enumerated powers</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc1-2', 25)">Implied powers</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-2', 25)">Inherent powers</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-2', 25)">Reserved powers</div>
+                <div class="feedback-box" id="feedback-kc1-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section1')">✓ Complete Section 1</button>
+        </div>
+
+        <!-- SECTION 2: Congressional Elections -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🗳️ Section 2: Congressional Elections</h2>
+                <p class="subtitle">Understanding how members of Congress get elected and stay elected</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Understanding the House and Senate</h3>
+                
+                <p>The U.S. Constitution is very clear about who can be elected as a member of the House or Senate. A House member must be a U.S. citizen of at least <strong>seven years' standing</strong> and at least <strong>twenty-five years old</strong>. Senators are required to have <strong>nine years' standing as citizens</strong> and be at least <strong>thirty years old</strong> when sworn in.</p>
+
+                <p>Representatives serve <strong>two-year terms</strong>, whereas senators serve <strong>six-year terms</strong>. Per the Supreme Court decision in <strong>U.S. Term Limits v. Thornton (1995)</strong>, there are currently no term limits for either senators or representatives, despite efforts by many states to impose them in the mid-1990s.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'structural', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Structural Differences Between the Chambers</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Chamber dynamics unlocked!</p>
+                        <p>The structural differences between the House and Senate create real differences in the actions of their members:</p>
+                        <ul>
+                            <li><strong>The House</strong> has developed a stronger and more structured leadership than the Senate. Because its members serve short, two-year terms, they must regularly answer to the demands of their constituency. Even House members of the same party in the same state will occasionally disagree because of different district interests. The House can be highly partisan at times.</li>
+                            <li><strong>The Senate</strong> is furthest from the demands and scrutiny of constituents. Because of longer six-year terms, senators see every House member face constituents multiple times before they themselves must seek reelection. Senators must maintain broader appeal across their entire state.</li>
+                        </ul>
+                        <p>The heat of popular, sometimes fleeting, demands from constituents often glows red hot in the House. The Senate has the flexibility to allow these passions to cool.</p>
+                    </div>
+                </div>
+
+                <p>Originally, when a state's two U.S. senators were appointed by the state legislature, the Senate chamber's distance from the electorate was even greater. Unlike members of the House who can seek the narrower interests of their district, senators must maintain a broader appeal in order to earn a majority of the votes across their entire state.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>💰 Congressional Campaign Funding</h3>
+                
+                <p>Modern political campaigns in the United States are expensive, and they have been growing more so. In 2020, the average Senate incumbent raised approximately <strong>$28.6 million</strong>, whereas the average challenger raised only about <strong>$5.3 million</strong>.</p>
+
+                <p>Raising this amount of money takes quite a bit of time and effort. Indeed, a presentation for incoming Democratic representatives suggested a daily Washington schedule of <strong>five hours reaching out to donors</strong>, while only three or four were to be used for actual congressional work!</p>
+
+                <div class="milestone-box">
+                    <h4>📜 A Brief History of Campaign Finance Reform</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Late 1800s - 1917</div>
+                            <div class="timeline-content">First wave of reforms: Made it illegal to solicit contributions from civil service workers, banned corporate contributions, and required disclosure of fundraising.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1970s</div>
+                            <div class="timeline-content"><strong>Federal Election Campaign Act</strong> created the Federal Election Commission (FEC), required disclosure, limited individual contributions, and provided for public financing of presidential campaigns.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2002</div>
+                            <div class="timeline-content"><strong>Bipartisan Campaign Reform Act (McCain-Feingold)</strong> limited "soft money" donations and prohibited certain election-time ads by unions and corporations.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2010</div>
+                            <div class="timeline-content"><strong>Citizens United v. FEC</strong> - Supreme Court ruled that limiting corporate spending on elections violated free speech rights, leading to the rise of super PACs.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'superpac', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Rise of Super PACs</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Campaign finance expert!</p>
+                        <p>In the wake of the <strong>Citizens United</strong> decision, a new type of advocacy group emerged: the <strong>super PAC</strong>.</p>
+                        <p>A traditional PAC is an organization designed to raise "hard money" to elect or defeat candidates. They are highly regulated in regard to the amount of money they can take in and spend.</p>
+                        <p><strong>Super PACs</strong> aren't bound by these regulations. While they cannot give money directly to a candidate or a candidate's party, they can:</p>
+                        <ul>
+                            <li>Raise unlimited funds</li>
+                            <li>Spend unlimited amounts independently of a campaign or party</li>
+                        </ul>
+                        <p>In the 2020 election cycle, super PACs spent over <strong>$2 billion</strong> and raised about <strong>$1.3 billion</strong> more.</p>
+                    </div>
+                </div>
+
+                <h4>Current Contribution Limits</h4>
+                <p>Several limits on campaign contributions have been upheld by the courts and remain in place:</p>
+                <ul>
+                    <li>Individuals may contribute up to <strong>$2,900 per candidate per election</strong></li>
+                    <li>Individuals may give <strong>$5,000 to PACs</strong> and <strong>$36,500 to a national party committee</strong></li>
+                    <li>PACs that contribute to more than one candidate may contribute <strong>$5,000 per candidate per election</strong></li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Incumbency Effects</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Incumbency Advantage</div>
+                    <p>The historical difficulty of unseating an incumbent in the House or Senate. Incumbents—elected officials who currently hold an office—typically have significant advantages over challengers in fundraising, name recognition, and access to state power.</p>
+                </div>
+
+                <p>In the House, the percentage of incumbents winning reelection has hovered between <strong>85 and 100 percent</strong> for the last half century. In the Senate, there is only slightly more variation, but it is still a very high majority of incumbents who win reelection.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'incumbent', 25)">
+                    <div class="card-prompt">🔍 Click to explore: Sources of Incumbent Advantage</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Electoral strategy revealed!</p>
+                        <p><strong>Key Sources of Incumbent Advantage:</strong></p>
+                        <ol>
+                            <li><strong>Fundraising:</strong> Incumbents attract more money because donors want to give to a winner. In 2020, average Senate incumbents raised $28.6 million vs. $5.3 million for challengers.</li>
+                            <li><strong>Name Recognition:</strong> Voters are far more likely to select the name of someone they've seen on television and heard on the radio for years.</li>
+                            <li><strong>Safe Seats:</strong> A large percentage of congressional districts are "safe seats" in uncompetitive districts. The real decision occurs in the primary, not the general election.</li>
+                            <li><strong>Party Support:</strong> Political parties generally prefer to support incumbents because they are proven candidates with records of success.</li>
+                            <li><strong>Constituent Casework:</strong> Sitting congresspersons help constituents solve complex problems with federal benefits, immigration, and more. They publicize these efforts effectively.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="milestone-box">
+                    <h4>🏆 Case Study: The End of Incumbency Advantage?</h4>
+                    <p>At the start of 2014, House majority whip <strong>Eric Cantor</strong> of Virginia was at the top of his game—popular with powerful insiders, an impressive fundraiser, and apparently destined to become Speaker of the House. Four months later, Cantor lost his own congressional primary in a stunning upset that shook the Washington establishment.</p>
+                    <p>What happened? Cantor's strengths—his ambition, political skill, and deep connections to insiders—became weaknesses in the political environment of 2014, when conservative voices criticized the party for ignoring the people and catering to Washington insiders.</p>
+                    <p>Yet between 1946 and 2012, only <strong>5 percent of incumbent senators</strong> and <strong>2 percent of House incumbents</strong> lost their party primaries. The incumbency advantage remains alive and well—Cantor's case may be the exception that proves the rule.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🗺️ Local and National Elections</h3>
+                
+                <p>"All politics is local." This phrase, attributed to former Speaker of the House <strong>Tip O'Neill (D-MA)</strong>, essentially means that the most important motivations directing voters are rooted in local concerns—the quality of roads, availability of jobs, and cost of public education.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Surge-and-Decline Theory</div>
+                    <p>A theory proposed by political scientist Angus Campbell in 1960 to explain why the president's party has consistently lost seats in Congress during midterm elections since the Civil War (with rare exceptions). Presidential elections create a "surge" of political stimulation that brings out voters who favor the president's party. Midterm elections witness a "decline" in turnout of less-interested voters, benefiting the opposition party.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'national', 30)">
+                    <div class="card-prompt">🔍 Click to explore: When National Issues Override Local Politics</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Election dynamics expert!</p>
+                        <p>Evidence suggests that national concerns can function as powerful motivators at the polls. Consider the <strong>Iraq War's role</strong> in bringing about a Democratic takeover of the House in 2006 and Senate in 2008.</p>
+                        <p>Unlike previous wars, the Iraq War was fought by a very small percentage of the population. Most citizens were not soldiers, few had relatives fighting, and most didn't know anyone who directly suffered. Yet voters in large numbers were motivated by the political and economic disaster of the war to vote for politicians who would end it.</p>
+                        <p>Congressional elections may be increasingly driven by national issues. Just two decades ago, straight-ticket, party-line voting was still relatively rare. In much of the South, which voted overwhelmingly Republican in presidential elections, Democrats were still commonly elected to Congress. This began changing in the 1980s and 1990s. The 2014 midterm election was the most nationalized election in many decades, and that trend has continued.</p>
+                    </div>
+                </div>
+
+                <p>Only in exceptional years has the midterm pattern been broken:</p>
+                <ul>
+                    <li><strong>1998:</strong> During President Bill Clinton's second term and the Monica Lewinsky scandal, exit polls indicated most voters opposed impeaching the president.</li>
+                    <li><strong>2002:</strong> Following the 9/11 terrorist attacks and the Bush administration's "War on Terror."</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What is the primary reason incumbents have an advantage in congressional elections?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-1', 25)">They are always more qualified than challengers</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-1', 25)">The Constitution gives them special protections</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc2-1', 25)">They have advantages in fundraising, name recognition, and access to state power</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-1', 25)">Voters are legally required to vote for incumbents first</div>
+                <div class="feedback-box" id="feedback-kc2-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What did the Citizens United v. FEC decision allow?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-2', 25)">Direct corporate contributions to candidates</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc2-2', 25)">Unlimited independent spending by corporations on elections</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-2', 25)">Public financing of all congressional campaigns</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-2', 25)">Term limits for members of Congress</div>
+                <div class="feedback-box" id="feedback-kc2-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section2')">✓ Complete Section 2</button>
+        </div>
+
+        <!-- SECTION 3: Congressional Representation -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🎭 Section 3: Congressional Representation</h2>
+                <p class="subtitle">Exploring how representatives serve their constituents and the nation</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Types of Representation: Looking Out for Constituents</h3>
+                
+                <p>By definition and title, senators and House members are <strong>representatives</strong>. This means they are intended to be drawn from local populations around the country so they can speak for and make decisions for those local populations—their <strong>constituents</strong>—while serving in their respective legislative houses.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Representation</div>
+                    <p>An elected leader's looking out for constituents while carrying out the duties of the office. The process of constituents voting regularly and reaching out to their representatives helps these congresspersons better represent them.</p>
+                </div>
+
+                <p>In reality, the job of representing in Congress is often quite complicated. Elected leaders do not always know where their constituents stand, nor do constituents always agree on everything. Navigating their sometimes contradictory demands and balancing them with the demands of the party, powerful interest groups, ideological concerns, the legislative body, their own personal beliefs, and the country as a whole can be a complicated and frustrating process.</p>
+
+                <h4>Three Models of Representation</h4>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Delegate Model of Representation</div>
+                    <p>A model in which representatives feel compelled to act on the specific stated wishes of their constituents. Delegates must employ some means to identify the views of their constituents and then vote accordingly. They are not permitted the liberty of employing their own reason and judgment.</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Trustee Model of Representation</div>
+                    <p>A model in which representatives believe they are entrusted by the constituents with the power to use good judgment to make decisions on the constituents' behalf. In the words of eighteenth-century British philosopher Edmund Burke, "Parliament is not a congress of ambassadors from different and hostile interests... [it is rather] a deliberative assembly of one nation, with one interest, that of the whole."</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Politico Model of Representation</div>
+                    <p>A model in which members of Congress act as either trustee or delegate based on rational political calculations about who is best served—the constituency or the nation. This is the approach most representatives actually use.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'models', 30)">
+                    <div class="card-prompt">🔍 Click to explore: When to Be a Delegate vs. Trustee</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Representation strategy unlocked!</p>
+                        <p>Every representative must remain firm in support of some ideologies and resistant to others:</p>
+                        <ul>
+                            <li><strong>On the political right:</strong> An issue that demands support might be gun rights</li>
+                            <li><strong>On the left:</strong> It might be a woman's right to an abortion</li>
+                        </ul>
+                        <p>For votes related to such issues, representatives will likely pursue a <strong>delegate approach</strong>.</p>
+                        <p>For other issues, especially complex questions the public has little patience for (such as subtle economic reforms), representatives will tend to follow a <strong>trustee approach</strong>. This doesn't mean their decisions run contrary to public opinion—it merely means they are not acutely aware of or cannot adequately measure their constituents' views on these matters.</p>
+                        <p>Congress works on hundreds of different issues each year, and constituents are likely not aware of the particulars of most of them.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>👥 Descriptive Representation in Congress</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Descriptive Representation</div>
+                    <p>The extent to which a body of representatives represents the descriptive characteristics of their constituencies, such as class, race, ethnicity, gender, and sexuality. This form of representation considers whether the racial, ethnic, socioeconomic, gender, and sexual identity of representatives reflects the population they serve.</p>
+                </div>
+
+                <p>At one time, there was relatively little concern about descriptive representation in Congress. A major reason is that until well into the twentieth century, White men of European background constituted an overwhelming majority of the voting population. African Americans were routinely deprived of the opportunity to participate in democracy, and Hispanics and other minority groups were excluded by the states.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'women', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Women in Congress</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Gender representation revealed!</p>
+                        <p>While women in many western states could vote sooner, all women were not able to exercise their right to vote nationwide until passage of the <strong>Nineteenth Amendment in 1920</strong>, and they began to make up more than 5 percent of either chamber only in the 1990s.</p>
+                        <p>Many advances in women's rights have been the result of women's greater engagement in politics:</p>
+                        <ul>
+                            <li>The <strong>National Organization for Women</strong> was founded in 1966</li>
+                            <li>The <strong>National Women's Political Caucus (NWPC)</strong> was formed in 1971 by Bella Abzug, Gloria Steinem, Shirley Chisholm, and other leading feminists</li>
+                            <li><strong>Patsy Mink (D-HI)</strong>, the first Asian American woman elected to Congress, was coauthor of the Education Amendments Act of 1972, Title IX of which prohibits sex discrimination in education</li>
+                            <li><strong>EMILY's List</strong>, a PAC founded in 1985 to help elect pro-choice Democratic women, plays a major role in fundraising for female candidates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'cbc', 25)">
+                    <div class="card-prompt">🔍 Click to explore: The Congressional Black Caucus</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Caucus history unlocked!</p>
+                        <p>In the wake of the Civil Rights Movement, African American representatives began to enter Congress in increasing numbers. In <strong>1971</strong>, to better represent their interests, these representatives founded the <strong>Congressional Black Caucus (CBC)</strong>, an organization that grew out of a Democratic select committee formed in 1969.</p>
+                        <p>Founding members included:</p>
+                        <ul>
+                            <li><strong>Ralph Metcalfe (D-IL)</strong> - A former sprinter from Chicago who had medaled at both the Los Angeles (1932) and Berlin (1936) Olympic Games</li>
+                            <li><strong>Shirley Chisholm</strong> - A founder of the NWPC and the first African American woman to be elected to the House of Representatives</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Congress Today: Still Not Fully Representative</h4>
+                <p>In recent decades, Congress has become much more descriptively representative of the United States. However, demographically speaking, Congress as a whole is still a long way from where the country is:</p>
+                <ul>
+                    <li>Although more than half the U.S. population is female, only about <strong>25 percent of Congress is female</strong></li>
+                    <li>Congress remains largely <strong>White male and wealthy</strong></li>
+                    <li>Congress is overwhelmingly <strong>Christian</strong> (approximately 88 percent)</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>🥓 Representing Constituents: Pork-Barrel Politics</h3>
+                
+                <p>Congress members' most important function as lawmakers is writing, supporting, and passing bills. And as representatives of their constituents, they are charged with addressing those constituents' interests.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Pork-Barrel Politics</div>
+                    <p>Federal spending on projects designed to benefit a particular district or set of constituents. The term has been around since the nineteenth century, when barrels of salt pork were both a sign of wealth and a system of reward.</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Earmarks</div>
+                    <p>Marks in a bill that direct some of the bill's funds to be spent on specific projects or for specific tax exemptions. Since the 1980s, earmarks became a common vehicle for sending money to various projects around the country. In 2011, after Republicans took over the House, they outlawed earmarks.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'aca', 25)">
+                    <div class="card-prompt">🔍 Click to explore: The ACA Battle and Budget Allocations</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Legislative politics revealed!</p>
+                        <p>Consider the passage of the <strong>Affordable Care Act (ACA)</strong> in 2010. The desire for comprehensive universal health care had been a driving position of Democrats since the 1960s. When Democrats took control of Congress and the presidency in 2009, they began putting together their plan.</p>
+                        <p>To pass the ACA, Democrats:</p>
+                        <ul>
+                            <li>Offered sympathetic Republican members valuable budgetary concessions</li>
+                            <li>Attempted to include allocations they hoped the opposition might support</li>
+                            <li>Drafted the bill in a purposely complex manner to avoid future challenges</li>
+                        </ul>
+                        <p>These efforts had the opposite effect. The Republican Party's constituency interpreted the allocations as bribery and felt the bill should be scrapped entirely. During the 112th and 113th Congresses, Republicans voted <strong>more than sixty times</strong> to either repeal or severely limit the ACA—understanding these efforts had little chance of reaching the president's desk, but demonstrating to constituents that they understood their wishes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Collective Representation and Congressional Approval</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Collective Representation</div>
+                    <p>The relationship between Congress and the United States as a whole—whether the institution itself represents the American people, not just whether a particular member represents their district.</p>
+                </div>
+
+                <p>It is far more difficult for Congress to maintain collective representation than for individual members to represent their own constituents. Congress is a mixture of different ideologies, interests, and party affiliations, and the collective constituency of the United States has an even-greater level of diversity.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'approval', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Congressional Approval Paradox</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Approval ratings analyzed!</p>
+                        <p>After many years of deadlocks and bickering on Capitol Hill, the national perception of Congress has tended to run <strong>under 20 percent approval</strong> in recent years. Yet incumbent reelections remain largely unaffected!</p>
+                        <p>This is because of the remarkable ability of many Americans to <strong>separate their distaste for Congress from their appreciation for their own representative</strong>. Paradoxically, this tendency to hate the group but love one's own representative actually perpetuates the problem—it blunts voters' natural desire to replace those earning low approval ratings.</p>
+                        <p><strong>When do approval ratings spike?</strong></p>
+                        <ul>
+                            <li><strong>1998:</strong> 57% - Rise accompanied similar increases in President Clinton's approval and general satisfaction with the economy</li>
+                            <li><strong>2001:</strong> 84% - After the September 11 terrorist attacks and the "War on Terror"</li>
+                        </ul>
+                        <p>War has the power to bring majorities of voters to view their Congress and president in an overwhelmingly positive way.</p>
+                    </div>
+                </div>
+
+                <p>Citizens tend to rate Congress more highly when things get done and more poorly when things do not. For example, during the first half of President Obama's first term, Congress's approval rating reached about 40 percent as both houses passed stimulus packages and worked on finance reform. Approval began to fade during debates over Obamacare and reached a low of <strong>9 percent</strong> following the federal government shutdown in October 2013.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: A representative who votes based on what they believe is best for their constituents, regardless of constituent opinion polls, is following which model?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-1', 25)">Delegate model</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc3-1', 25)">Trustee model</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-1', 25)">Partisan model</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-1', 25)">Constituent model</div>
+                <div class="feedback-box" id="feedback-kc3-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What is the paradox regarding congressional approval ratings?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-2', 25)">Congress's approval is always higher than the president's</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-2', 25)">Voters approve of Congress but not their own representative</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc3-2', 25)">Voters disapprove of Congress but like their own representative, perpetuating the problem</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-2', 25)">Congressional approval always increases during election years</div>
+                <div class="feedback-box" id="feedback-kc3-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section3')">✓ Complete Section 3</button>
+        </div>
+
+        <!-- SECTION 4: House and Senate Organizations -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>👥 Section 4: House and Senate Organizations</h2>
+                <p class="subtitle">Understanding party leadership and the committee system</p>
+            </div>
+
+            <div class="content-block">
+                <h3>👔 Party Leadership</h3>
+                
+                <p>The party leadership in Congress controls the actions of Congress. Leaders are elected by the two-party conferences in each chamber—in the House, these are the <strong>House Democratic Conference</strong> and the <strong>House Republican Conference</strong>. These conferences meet regularly and separately to elect their leaders and discuss important issues and strategies.</p>
+
+                <h4>The Speaker of the House</h4>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📚 Speaker of the House</div>
+                    <p>The presiding officer, the administrative head of the House, the partisan leader of the majority party in the House, and an elected representative of a single congressional district. The Speaker is the only House officer mentioned in the Constitution. Since 1947, the Speaker has been second in line to succeed the president in an emergency, after the vice president.</p>
+                </div>
+
+                <p>The Constitution does not require the Speaker to be a member of the House, although to date, all Speakers have been. The Speaker is invested with quite a bit of power:</p>
+                <ul>
+                    <li>Ability to assign bills to committees</li>
+                    <li>Decide when a bill will be presented to the floor for a vote</li>
+                    <li>Rule on House procedures</li>
+                    <li>Appoint members and chairs to committees</li>
+                    <li>Create select committees</li>
+                    <li>Select a member to be speaker pro tempore</li>
+                    <li>Preside over joint sessions with the Senate</li>
+                </ul>
+
+                <div class="interactive-card" onclick="revealCard(this, 'leadership', 30)">
+                    <div class="card-prompt">🔍 Click to explore: House and Senate Leadership Hierarchy</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Leadership structure revealed!</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Position</th>
+                                <th>House</th>
+                                <th>Senate</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Top Leader</strong></td>
+                                <td>Speaker of the House</td>
+                                <td>Majority Leader</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Constitutional Presiding Officer</strong></td>
+                                <td>Speaker of the House</td>
+                                <td>Vice President (rarely present)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Second in Command</strong></td>
+                                <td>Majority Leader</td>
+                                <td>President Pro Tempore</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Party Discipline</strong></td>
+                                <td>Majority & Minority Whips</td>
+                                <td>Majority & Minority Whips</td>
+                            </tr>
+                        </table>
+                        <p><strong>Key Difference:</strong> In the Senate, the constitutional president is the elected vice president of the United States, who may vote only in case of a tie. The real power is in the hands of the majority leader.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Whip</div>
+                    <p>A high leadership position whose primary duty is to "whip up" votes and otherwise enforce party discipline. Whips make the rounds in Congress, telling members the position of the leadership and the collective voting strategy, and sometimes wave various carrots and sticks in front of recalcitrant members to bring them in line.</p>
+                </div>
+
+                <h4>Senate Leadership</h4>
+                <p>Unlike the House, the Senate doesn't have a Speaker. The duties held by the Speaker in the House fall to the <strong>majority leader</strong> in the Senate. According to the Constitution, the Senate's president is the <strong>vice president of the United States</strong>, but this is largely ceremonial—the VP may vote only in case of a tie.</p>
+
+                <p>The Constitution allows for the Senate to choose a <strong>president pro tempore</strong>—usually the most senior senator of the majority party—who presides over the Senate. Despite the title, this job is largely formal and powerless.</p>
+
+                <p>Because of the traditions of unlimited debate and the filibuster, the majority and minority leaders often occupy the floor together in an attempt to keep things moving along. For the Senate to get things done, they must cooperate to get the <strong>sixty votes</strong> needed to run this super-majority legislative institution.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 The Committee System</h3>
+                
+                <p>With 535 members in Congress and a seemingly infinite number of issues to deal with, the two chambers must divide their work based on specialization. Congress does this through the <strong>committee system</strong>. Specialized committees in both chambers are where bills originate and most of the work that sets the congressional agenda takes place.</p>
+
+                <p>There are well over <strong>two hundred committees, subcommittees, select committees, and joint committees</strong> in Congress. The core committees are called <strong>standing committees</strong>. There are twenty standing committees in the House and sixteen in the Senate.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'committee-types', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Types of Congressional Committees</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Committee expert!</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Examples</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Standing Committees</strong></td>
+                                <td>Permanent committees that are the first call for proposed bills. Fewer than 10% of bills are reported out of committee to the floor.</td>
+                                <td>Appropriations, Judiciary, Armed Services</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Joint Committees</strong></td>
+                                <td>Members from both House and Senate; explore key issues but have no bill-referral authority—informational only.</td>
+                                <td>Joint Economic Committee</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Conference Committees</strong></td>
+                                <td>Appointed ad hoc to reconcile different bills passed in House and Senate.</td>
+                                <td>Tax Cuts and Jobs Act Conference (2017)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Select/Special Committees</strong></td>
+                                <td>Temporary committees set up for specific purposes, often investigations.</td>
+                                <td>House Select Committee on Benghazi</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <h4>Committee Chairs: Power and Process</h4>
+                <p>Committee chairs are very powerful. They control:</p>
+                <ul>
+                    <li>The committee's budget</li>
+                    <li>When the committee will meet</li>
+                    <li>When it will hold hearings</li>
+                    <li>Whether it will consider a bill at all</li>
+                </ul>
+
+                <p>A chair can convene a meeting when members of the minority are absent or adjourn when things aren't progressing as the majority wishes. Chairs can hear a bill even when the rest of the committee objects.</p>
+
+                <div class="key-concept-box">
+                    <strong>🎯 Key Insight:</strong> In the House, rules prevent committee chairs from serving more than six consecutive years and from serving as the chair of a subcommittee at the same time. A senator may serve only six years as chair of a committee but may, in some instances, also serve as chair or ranking member of another committee.
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'committee-work', 25)">
+                    <div class="card-prompt">🔍 Click to explore: How Committee Work Gets Done</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Legislative process revealed!</p>
+                        <p>When a committee is eager to develop legislation, it takes methodical steps:</p>
+                        <ol>
+                            <li><strong>Reach out</strong> to relevant agencies for comment on resolutions</li>
+                            <li><strong>Hold hearings</strong> with experts to collect information</li>
+                            <li>In the Senate, hold <strong>confirmation hearings</strong> for presidential appointments</li>
+                            <li><strong>Meet to discuss</strong> amendments and legislative language</li>
+                            <li><strong>Send the bill</strong> to the full chamber along with a committee report</li>
+                        </ol>
+                        <p>The report provides the majority opinion about why the bill should be passed, a minority view to the contrary, and estimates of the proposed law's cost and impact.</p>
+                    </div>
+                </div>
+
+                <p>Because the Senate is much smaller than the House, senators hold more committee assignments than House members. House members historically defer to the decisions of committees, while senators tend to view committee decisions as recommendations, often seeking additional discussion that could lead to changes.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: Who is second in line to succeed the president after the vice president?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc4-1', 25)">The Speaker of the House</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-1', 25)">The Senate Majority Leader</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-1', 25)">The President Pro Tempore of the Senate</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-1', 25)">The Secretary of State</div>
+                <div class="feedback-box" id="feedback-kc4-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What type of committee is used to reconcile different versions of a bill passed by the House and Senate?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-2', 25)">Standing committee</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-2', 25)">Joint committee</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc4-2', 25)">Conference committee</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-2', 25)">Select committee</div>
+                <div class="feedback-box" id="feedback-kc4-2"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section4')">✓ Complete Section 4</button>
+        </div>
+
+        <!-- SECTION 5: The Legislative Process -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="goHome()">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📋 Section 5: The Legislative Process</h2>
+                <p class="subtitle">How a bill becomes a law—the classic and modern processes</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 The Classic Legislative Process</h3>
+                
+                <p>The traditional process by which a bill becomes a law is called the <strong>classic legislative process</strong>. First, legislation must be drafted. Theoretically, anyone can do this—much successful legislation has been initially drafted by think tanks, advocacy groups, or the president. However, <strong>only a bill introduced by a member of Congress can hope to become law</strong>.</p>
+
+                <div class="key-concept-box">
+                    <strong>🎯 Constitutional Requirement:</strong> Bills that raise revenue, like tax bills, must begin in the House. This is encoded in Article I, Section 7: "All Bills for raising Revenue shall originate in the House of Representatives; but the Senate may propose or concur with amendments as on other Bills."
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'bill-process', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Step-by-Step Bill Process</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Legislative process mastered!</p>
+                        <ol>
+                            <li><strong>Introduction:</strong> A member of Congress introduces a bill</li>
+                            <li><strong>Committee Referral:</strong> The majority leadership consults with the parliamentarian about which committee to send it to</li>
+                            <li><strong>Committee Hearing:</strong> If the chair decides to hold a hearing, experts testify (if not, the bill is effectively killed)</li>
+                            <li><strong>Markup Stage:</strong> The bill is debated, amended, and voted on in committee</li>
+                            <li><strong>Rules Committee (House only):</strong> Establishes rules of debate, time limits, and amendment limits</li>
+                            <li><strong>Floor Debate:</strong> The bill is debated and amended on the chamber floor</li>
+                            <li><strong>Vote:</strong> A simple majority (50% + 1) advances the bill</li>
+                            <li><strong>Other Chamber:</strong> The process repeats in the Senate (or House)</li>
+                            <li><strong>Conference Committee:</strong> If versions differ, a joint committee reconciles them</li>
+                            <li><strong>Final Vote:</strong> Both chambers must pass the identical bill</li>
+                            <li><strong>Presidential Action:</strong> President signs or vetoes; Congress can override with 2/3 vote in both chambers</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <h4>Committee Action: Where Bills Live or Die</h4>
+                <p>Once a committee has been selected, the committee chair is empowered to move the bill through the committee process. This occasionally means the chair will refer the bill to one of the committee's subcommittees.</p>
+
+                <p>If the chair decides <strong>not to hold a hearing</strong>, this is tantamount to <strong>killing the bill in committee</strong>. Most bills die in committee. The hearing provides an opportunity for the committee to hear and evaluate expert opinions on the bill from officials, bill sponsors, industry lobbyists, interest groups, and academic experts.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Markup</div>
+                    <p>The amending and voting process in a congressional committee. In the end, with or without amendments, the committee or subcommittee will vote. If the committee decides not to advance the bill, it is "tabled"—which typically means the bill is dead, though it can potentially be brought back up for a vote.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🗣️ The Filibuster and Cloture</h3>
+                
+                <p>Once a bill reaches the Senate, the chamber's flexibility about speaking gave rise to a unique tactic: the <strong>filibuster</strong>.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Filibuster</div>
+                    <p>A parliamentary maneuver used in the Senate to extend debate on a piece of legislation as long as possible, typically with the intended purpose of obstructing or killing it. The word comes from the Dutch word "vrijbuiter," which means pirate—appropriate since a filibustering senator virtually hijacks the floor.</p>
+                </div>
+
+                <p>The tactic was perfected in the 1850s as Congress wrestled with the complicated issue of slavery. After the Civil War, use of the filibuster became even more common.</p>
+
+                <div class="milestone-box">
+                    <h4>📜 The Evolution of Cloture</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">1917</div>
+                            <div class="timeline-content">Senate passed <strong>Rule 22</strong>, allowing a <strong>cloture vote</strong> to end debate. Required a two-thirds majority.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1957</div>
+                            <div class="timeline-content">Senator <strong>Strom Thurmond</strong> conducted a record <strong>24-hour filibuster</strong> of the Civil Rights Act.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1964</div>
+                            <div class="timeline-content">Southern senators staged a <strong>57-day filibuster</strong> trying to kill the Civil Rights Act. The bill passed anyway.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1975</div>
+                            <div class="timeline-content">Senate reduced cloture requirement from two-thirds to <strong>three-fifths (60 votes)</strong>, where it remains today for most legislation.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2013</div>
+                            <div class="timeline-content">Senator <strong>Ted Cruz (R-TX)</strong> filibustered ACA-related legislation, including reading "Green Eggs and Ham."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Cloture</div>
+                    <p>A parliamentary process to end debate in the Senate, as a measure against the filibuster. Invoked when three-fifths of senators (60) vote for the motion. For judicial nominations, only 51 votes are needed.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'filibuster-modern', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Modern Filibuster</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Senate procedure expert!</p>
+                        <p>Unlike the traditional filibuster, in which a senator took the floor and held it for as long as possible, the <strong>modern filibuster</strong> is actually a perversion of the cloture rules. When partisanship is high, senators can request cloture before any bill gets a vote.</p>
+                        <p>This has the effect of increasing the number of votes needed for a bill to advance from a <strong>simple majority of 51 to a super majority of 60</strong>. The effect is to give the Senate minority great power to obstruct.</p>
+                        <p><strong>Exceptions:</strong> Filibusters are not permitted on the annual budget reconciliation act. This is how:</p>
+                        <ul>
+                            <li>The implementing legislation for Obamacare was passed (Reconciliation Act of 2010)</li>
+                            <li>Republicans passed the Tax Cuts and Jobs Act of 2017</li>
+                            <li>Democrats passed the American Rescue Plan Act of 2021 (COVID relief)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔄 Modern Legislation Is Different</h3>
+                
+                <p>For much of the nation's history, the classic process was the standard method by which a bill became law. Over the last few decades, however, changes in rules and procedure have created alternate routes—what political scientists describe as <strong>a new but unorthodox legislative process</strong>.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'modern-leg', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Transformation of the Legislative Process</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Modern Congress revealed!</p>
+                        <p>According to political scientist <strong>Barbara Sinclair</strong>, the primary trigger for the shift was the <strong>budget reforms of the 1970s</strong>. The 1974 Budget and Impoundment Control Act gave Congress a mechanism for making large, all-encompassing budget decisions.</p>
+                        <p>A large step occurred in 1981 when <strong>President Reagan's administration</strong> suggested using the budget to push through economic reforms. The benefit was forcing an up-or-down vote on an entire package—an <strong>omnibus bill</strong>.</p>
+                        <p><strong>Key Features of Modern Legislating:</strong></p>
+                        <ol>
+                            <li><strong>Expanded leadership power:</strong> Party leadership now exercises greater control over bills due to heightened partisanship</li>
+                            <li><strong>Special rules:</strong> The House leadership uses special rules to guide bills toward particular outcomes, restricting debate and focusing member attention</li>
+                            <li><strong>Multiple referrals:</strong> Bills or portions are referred to more than one committee, weakening committee specialization monopolies</li>
+                            <li><strong>Floor action:</strong> Leadership may sometimes avoid committees altogether, working things out on the floor</li>
+                            <li><strong>Modern filibuster:</strong> Senators can request cloture before any bill gets a vote, effectively requiring 60 votes for everything</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📚 Omnibus Bill</div>
+                    <p>A packaged bill that allows Congress to quickly accomplish policy changes that would have taken many votes and great political capital over a long period of time. Creating and voting for an omnibus bill forces an up-or-down vote on the whole package.</p>
+                </div>
+
+                <h4>The Shift in Power</h4>
+                <p>An important characteristic of modern legislating is the <strong>greatly expanded power of party leadership</strong> over the control of bills. With high political stakes, the leadership is reluctant to simply allow committees to work things out on their own.</p>
+
+                <p>The practice of <strong>multiple referrals</strong>—where entire bills or portions are referred to more than one committee—greatly weakened the specialization monopolies committees had held, primarily in the House. With less control over bills, committees naturally reached out to the leadership for assistance.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>⚖️ The Balance of Power: Congress and the President</h3>
+                
+                <p>In the early days of the republic, Congress's role was rarely disputed. However, with <strong>Marbury v. Madison (1803)</strong>, the Supreme Court asserted its authority over judicial review. Initially, the presidency was also fairly weak compared to the legislature. But presidents have sought to increase their power almost from the beginning, typically at the expense of Congress.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'power-shift', 25)">
+                    <div class="card-prompt">🔍 Click to explore: The Expansion of Presidential Power</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong> Power dynamics revealed!</p>
+                        <p>By the nature of enumerated powers, the president is most powerful—and Congress least powerful—<strong>during wartime</strong>.</p>
+                        <p><strong>Key moments in the power shift:</strong></p>
+                        <ul>
+                            <li><strong>Civil War:</strong> President Lincoln stretched his legal authority in numerous ways, including issuing the Emancipation Proclamation</li>
+                            <li><strong>1930s-40s:</strong> The Great Depression and World War II provided FDR a powerful platform to expand presidential power. Congress responded by proposing the Twenty-Second Amendment (term limits)</li>
+                            <li><strong>Cold War:</strong> The seemingly endless conflict allowed the presidency to assert more authority in foreign affairs</li>
+                            <li><strong>1950s:</strong> President Truman sent troops to Korea without a congressional declaration of war</li>
+                            <li><strong>1960s:</strong> By the Kennedy administration, the presidency had assumed nearly all responsibility for creating foreign policy</li>
+                            <li><strong>1970s:</strong> The War Powers Resolution was intended to strengthen congressional war powers but ended up clarifying presidential authority in the first 60 days of a military conflict</li>
+                            <li><strong>Post-9/11:</strong> The war on terrorism further strengthened the president's hand</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>Today, the seemingly endless bickering between the president and Congress is a reminder of the ongoing struggle for power between the branches, and between the parties, in Washington, DC. Presidential use of <strong>executive orders</strong> on domestic policy and <strong>executive agreements</strong> on foreign policy have furthered this trend—when used in areas where Congress has delegated authority, they replace legislation and treaties.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What is the purpose of cloture in the Senate?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc5-1', 25)">To end debate and bring a measure to a vote</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-1', 25)">To introduce a new bill to the floor</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-1', 25)">To remove a bill from committee consideration</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-1', 25)">To override a presidential veto</div>
+                <div class="feedback-box" id="feedback-kc5-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: How many Senate votes are typically needed to invoke cloture and end a filibuster on regular legislation?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-2', 25)">51 votes (simple majority)</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc5-2', 25)">60 votes (three-fifths)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-2', 25)">67 votes (two-thirds)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-2', 25)">75 votes</div>
+                <div class="feedback-box" id="feedback-kc5-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">🧠 Knowledge Check: What was a key change in modern legislating according to political scientist Barbara Sinclair?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-3', 25)">Committees gained more independence from party leadership</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-3', 25)">The filibuster was completely eliminated</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc5-3', 25)">The budget process became a vehicle for comprehensive policy changes</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-3', 25)">Presidents lost all influence over legislation</div>
+                <div class="feedback-box" id="feedback-kc5-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection('section5')">✓ Complete Section 5</button>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
+                    
+                    <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                    <p class="report-subtitle">Chapter 6: Congress</p>
+
+                    <div class="report-grade-display" id="gradeDisplay">
+                        <div class="letter-grade" id="letterGrade">A</div>
+                        <div class="grade-percentage" id="gradePercentage">95%</div>
+                    </div>
+
+                    <div class="report-sections">
+                        <div class="student-info-section">
+                            <h3>👤 Student Information</h3>
+                            <div class="info-row">
+                                <span class="info-label">Name:</span>
+                                <span id="reportName">Not Entered</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Date:</span>
+                                <span id="reportDate"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Time:</span>
+                                <span id="reportTime"></span>
+                            </div>
+                        </div>
+
+                        <div class="performance-section">
+                            <h3>📊 Section Performance</h3>
+                            <table class="performance-table">
+                                <tr>
+                                    <td>Section 1: Institutional Design</td>
+                                    <td id="section1Status">⭕</td>
+                                </tr>
+                                <tr>
+                                    <td>Section 2: Congressional Elections</td>
+                                    <td id="section2Status">⭕</td>
+                                </tr>
+                                <tr>
+                                    <td>Section 3: Representation</td>
+                                    <td id="section3Status">⭕</td>
+                                </tr>
+                                <tr>
+                                    <td>Section 4: Organizations</td>
+                                    <td id="section4Status">⭕</td>
+                                </tr>
+                                <tr>
+                                    <td>Section 5: Legislative Process</td>
+                                    <td id="section5Status">⭕</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricPoints">0</div>
+                            <div class="metric-label">Points Earned</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricSections">0/5</div>
+                            <div class="metric-label">Sections Completed</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricQuiz">0%</div>
+                            <div class="metric-label">Quiz Score</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" id="metricEngagement">0%</div>
+                            <div class="metric-label">Engagement</div>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>🎓 Key Concepts Mastered</h3>
+                        <ul>
+                            <li>The Great Compromise and bicameral legislature design</li>
+                            <li>Differences between House and Senate structure, rules, and elections</li>
+                            <li>Congressional powers: enumerated, implied, and inherent</li>
+                            <li>Gerrymandering and the apportionment process</li>
+                            <li>Campaign finance regulations and the rise of super PACs</li>
+                            <li>The incumbency advantage and its sources</li>
+                            <li>Models of representation: delegate, trustee, and politico</li>
+                            <li>Descriptive and collective representation in Congress</li>
+                            <li>Congressional leadership structure and the committee system</li>
+                            <li>The legislative process from bill introduction to presidential signature</li>
+                            <li>The filibuster, cloture, and Senate procedures</li>
+                            <li>Modern legislative processes and omnibus bills</li>
+                        </ul>
+                    </div>
+
+                    <div class="report-footer">
+                        <p class="instructor-note">
+                            <strong>📝 Instructor Note:</strong> This report confirms the student's completion of Chapter 6: Congress in the TCC Federal Government Trailblazer Trek module. The score reflects engagement with interactive content and knowledge check questions.
+                        </p>
+                        <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                        <button class="print-report-button no-print" onclick="goHome()">🏠 Return Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            studentName: '',
+            currentScore: 0,
+            maxScore: 1050,
+            currentLevel: 'Explorer',
+            completedSections: new Set(),
+            earnedPoints: new Set(),
+            answeredQuestions: new Set(),
+            correctAnswers: 0,
+            totalQuestions: 13
+        };
+
+        // Level Thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Researcher',
+            600: 'Expert',
+            800: 'Master',
+            1000: 'Congressional Sage'
+        };
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateDisplay();
+        });
+
+        // Save Progress to localStorage
+        function saveProgress() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput) {
+                gameState.studentName = nameInput.value;
+            }
+            
+            const saveData = {
+                ...gameState,
+                completedSections: Array.from(gameState.completedSections),
+                earnedPoints: Array.from(gameState.earnedPoints),
+                answeredQuestions: Array.from(gameState.answeredQuestions)
+            };
+            
+            localStorage.setItem('congressChapterProgress', JSON.stringify(saveData));
+            updateDisplay();
+        }
+
+        // Load Progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('congressChapterProgress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                gameState = {
+                    ...data,
+                    completedSections: new Set(data.completedSections || []),
+                    earnedPoints: new Set(data.earnedPoints || []),
+                    answeredQuestions: new Set(data.answeredQuestions || [])
+                };
+                
+                const nameInput = document.getElementById('studentName');
+                if (nameInput && gameState.studentName) {
+                    nameInput.value = gameState.studentName;
+                }
+
+                // Mark completed sections
+                gameState.completedSections.forEach(sectionId => {
+                    const card = document.querySelector(`.section-card[onclick*="${sectionId}"]`);
+                    if (card) {
+                        card.classList.add('completed');
+                    }
+                });
+            }
+        }
+
+        // Navigation
+        function goToSection(sectionId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goHome() {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Points System
+        function addPoints(points) {
+            gameState.currentScore += points;
+            updateLevel();
+            updateDisplay();
+            showPointsPopup(points);
+            saveProgress();
+        }
+
+        function updateLevel() {
+            for (let threshold in levels) {
+                if (gameState.currentScore >= parseInt(threshold)) {
+                    gameState.currentLevel = levels[threshold];
+                }
+            }
+        }
+
+        function showPointsPopup(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Interactive Cards
+        function revealCard(card, id, points) {
+            if (gameState.earnedPoints.has(id)) return;
+            
+            const content = card.querySelector('.card-content');
+            content.classList.add('show');
+            card.classList.add('revealed');
+            
+            gameState.earnedPoints.add(id);
+            addPoints(points);
+        }
+
+        // Knowledge Check Handler
+        function handleAnswer(option, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+            
+            gameState.answeredQuestions.add(questionId);
+            
+            // Disable all options
+            const parent = option.parentElement;
+            parent.querySelectorAll('.kc-option').forEach(opt => {
+                opt.classList.add('disabled');
+            });
+            
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            if (isCorrect) {
+                option.classList.add('correct');
+                feedback.textContent = '✅ Correct! Excellent work!';
+                feedback.classList.add('correct', 'show');
+                gameState.correctAnswers++;
+                addPoints(points);
+            } else {
+                option.classList.add('incorrect');
+                feedback.textContent = '❌ Not quite. Review the content and try to understand why.';
+                feedback.classList.add('incorrect', 'show');
+                
+                // Show correct answer
+                parent.querySelectorAll('.kc-option').forEach(opt => {
+                    if (opt.getAttribute('onclick')?.includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            saveProgress();
+        }
+
+        // Complete Section
+        function completeSection(sectionId) {
+            if (!gameState.completedSections.has(sectionId)) {
+                gameState.completedSections.add(sectionId);
+                
+                // Mark the card as completed
+                const cards = document.querySelectorAll('.section-card');
+                const sectionNum = parseInt(sectionId.replace('section', ''));
+                if (cards[sectionNum - 1]) {
+                    cards[sectionNum - 1].classList.add('completed');
+                }
+                
+                saveProgress();
+            }
+            
+            goHome();
+        }
+
+        // Update Display
+        function updateDisplay() {
+            document.getElementById('currentScore').textContent = gameState.currentScore;
+            document.getElementById('currentLevel').textContent = gameState.currentLevel;
+            
+            // Update progress bar
+            const progress = Math.min(100, Math.round((gameState.currentScore / gameState.maxScore) * 100));
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            if (progressFill && progressText) {
+                progressFill.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+            }
+        }
+
+        // Generate Report
+        function generateReport() {
+            const percentage = Math.round((gameState.currentScore / gameState.maxScore) * 100);
+            const sectionsCompleted = gameState.completedSections.size;
+            
+            // Calculate grade
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            // Update report elements
+            document.getElementById('reportTotalPoints').textContent = gameState.currentScore;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((sectionsCompleted / 5) * 100);
+            
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = gradeColor;
+            
+            document.getElementById('reportName').textContent = gameState.studentName || 'Not Entered';
+            document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            // Section statuses
+            for (let i = 1; i <= 5; i++) {
+                const status = gameState.completedSections.has(`section${i}`) ? '✅' : '⭕';
+                document.getElementById(`section${i}Status`).textContent = status;
+            }
+            
+            // Metrics
+            document.getElementById('metricPoints').textContent = gameState.currentScore;
+            document.getElementById('metricSections').textContent = `${sectionsCompleted}/5`;
+            
+            const quizScore = gameState.answeredQuestions.size > 0 
+                ? Math.round((gameState.correctAnswers / gameState.answeredQuestions.size) * 100) 
+                : 0;
+            document.getElementById('metricQuiz').textContent = quizScore + '%';
+            
+            const engagementScore = Math.round((gameState.earnedPoints.size / 20) * 100);
+            document.getElementById('metricEngagement').textContent = Math.min(100, engagementScore) + '%';
+            
+            goToSection('reportPage');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Critical Thinking and the American Political System - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* ADA Compliant Colors - Blue-Green Theme */
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+            --accent-orange: #E65100;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-light);
+        }
+
+        /* Fixed Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .header-title {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .score-display {
+            display: flex;
+            gap: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Points Popup */
+        #pointsPopup {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Page Management */
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Home Page Hero */
+        .hero-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .hero-title { font-size: 2.5em; margin-bottom: 10px; }
+        .hero-subtitle { font-size: 1.2em; opacity: 0.95; }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .hero-stat { text-align: center; }
+        .hero-stat-icon { font-size: 3em; margin-bottom: 5px; }
+
+        /* Student Name Input */
+        .student-input {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .student-input label {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .student-input input {
+            padding: 8px 15px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            font-size: 1em;
+            width: 250px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            height: 100%;
+            width: 0%;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Section Grid */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: var(--primary-blue);
+        }
+
+        .section-card.completed {
+            border-color: var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .section-number {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .section-card-title {
+            font-size: 1.2em;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .section-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .section-points {
+            background: var(--highlight-green);
+            color: var(--success);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Content Page Styles */
+        .back-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .content-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-green);
+        }
+
+        .section-main-title {
+            font-size: 2em;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-main-title span { font-size: 1.2em; }
+
+        /* Interactive Cards */
+        .interactive-card {
+            background: var(--highlight-blue);
+            border-radius: 12px;
+            margin: 20px 0;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .interactive-card.revealed {
+            cursor: default;
+            background: white;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1em;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .card-content.show { display: block; animation: fadeIn 0.5s ease; }
+
+        /* Knowledge Check */
+        .knowledge-check {
+            background: var(--bg-section);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .kc-question {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .kc-option {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #ffebee;
+            border-color: var(--error);
+        }
+
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .feedback-box.show { display: block; }
+        .feedback-box.correct { background: var(--highlight-green); color: var(--success); }
+        .feedback-box.incorrect { background: #ffebee; color: var(--error); }
+
+        /* Definition Boxes */
+        .definition-box {
+            background: linear-gradient(135deg, #fff9c4, #ffeb3b);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--warning);
+        }
+
+        .definition-term {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        /* Key Concepts */
+        .key-concept {
+            background: var(--bg-section);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .key-concept-title {
+            font-size: 1.3em;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Important Box */
+        .important-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .important-box-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover { background: var(--highlight-blue); }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 100%;
+            background: var(--primary-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            width: calc(50% - 30px);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .timeline-item:nth-child(odd) { margin-left: auto; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border: 3px solid white;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::before { left: -40px; }
+        .timeline-item:nth-child(even)::before { right: -40px; }
+
+        .timeline-date {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Achievement Badge */
+        .achievement {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(255,193,7,0.3);
+            animation: glow 2s ease-in-out infinite;
+            display: none;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 12px rgba(255,193,7,0.3); }
+            50% { box-shadow: 0 8px 20px rgba(255,193,7,0.5); }
+        }
+
+        /* Report Section */
+        .report-button {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 30px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .report-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Report Container Styles */
+        .report-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .report-header-bar h1 { font-size: 1.3em; }
+
+        .report-scores { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        .score-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content { padding: 30px; }
+
+        .report-back-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .report-main { text-align: center; }
+
+        .report-title {
+            font-size: 1.8em;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .report-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .letter-grade { font-size: 4em; font-weight: bold; }
+        .grade-percentage { font-size: 1.2em; }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child { border-bottom: none; }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th, .performance-table td { padding: 10px; text-align: left; }
+        .performance-table th { background: var(--primary-blue); color: white; }
+        .performance-table tr:nth-child(even) { background: white; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .metric-box {
+            background: var(--bg-section);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .report-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .instructor-note {
+            background: linear-gradient(135deg, #fff9c4, #ffeb3b);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--warning);
+            text-align: left;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .back-button, #pointsPopup, .no-print { display: none !important; }
+            .main-container { margin-top: 0; }
+            .report-container { box-shadow: none; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.8em; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .section-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 30px; }
+            .timeline-item { width: calc(100% - 60px); margin-left: 60px !important; }
+            .timeline-item::before { left: -40px !important; }
+            .report-sections { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .header-content { flex-direction: column; gap: 10px; text-align: center; }
+        }
+
+        /* Content Paragraph Styling */
+        .content-paragraph {
+            font-size: 1.05em;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* List Styling */
+        .content-list {
+            margin: 15px 0 15px 30px;
+        }
+
+        .content-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #7b1fa2;
+            font-style: italic;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+            font-style: normal;
+        }
+
+        /* Example Box */
+        .example-box {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--success);
+        }
+
+        .example-box-title {
+            font-weight: bold;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="header-title">🏛️ TCC Federal Government Trailblazer Trek</div>
+            <div class="score-display">
+                <div>⭐ Score: <span id="currentScore">0</span></div>
+                <div>🎯 Level: <span id="currentLevel">Explorer</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div id="pointsPopup">+0 points!</div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- HOME PAGE -->
+        <div class="page active" id="home">
+            <div class="hero-section">
+                <h1 class="hero-title">🧠 Chapter 1: Critical Thinking and the American Political System 🗳️</h1>
+                <p class="hero-subtitle">Explore how government works, who really governs, and why your participation matters</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">🏛️</div>
+                        <div>Government</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">🗳️</div>
+                        <div>Democracy</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">🤔</div>
+                        <div>Critical Thinking</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-input">
+                <label for="studentName">👤 Enter Your Name:</label>
+                <input type="text" id="studentName" placeholder="Your name here">
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-track">
+                    <div class="progress-bar" id="progressBar">0% Complete</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" onclick="showPage('section1')">
+                    <div class="section-number">1</div>
+                    <h3 class="section-card-title">What is Government?</h3>
+                    <p class="section-card-desc">Explore how societies organize themselves, allocate authority, and provide for citizens through different governmental systems.</p>
+                    <span class="section-points">⭐ 200 points available</span>
+                </div>
+
+                <div class="section-card" onclick="showPage('section2')">
+                    <div class="section-number">2</div>
+                    <h3 class="section-card-title">Types of Goods & Government Services</h3>
+                    <p class="section-card-desc">Learn about public goods, private goods, common goods, toll goods, and how capitalism and democracy interact.</p>
+                    <span class="section-points">⭐ 200 points available</span>
+                </div>
+
+                <div class="section-card" onclick="showPage('section3')">
+                    <div class="section-number">3</div>
+                    <h3 class="section-card-title">Who Governs? Elitism vs. Pluralism</h3>
+                    <p class="section-card-desc">Examine competing theories about who really holds power in America and how political decisions are made.</p>
+                    <span class="section-points">⭐ 200 points available</span>
+                </div>
+
+                <div class="section-card" onclick="showPage('section4')">
+                    <div class="section-number">4</div>
+                    <h3 class="section-card-title">Engagement in a Democracy</h3>
+                    <p class="section-card-desc">Discover why civic engagement matters, how citizens participate, and factors affecting political involvement.</p>
+                    <span class="section-points">⭐ 200 points available</span>
+                </div>
+
+                <div class="section-card" onclick="showPage('section5')">
+                    <div class="section-number">5</div>
+                    <h3 class="section-card-title">Critical Thinking & Political Culture</h3>
+                    <p class="section-card-desc">Master critical thinking skills and explore America's core political values: liberty, equality, and self-government.</p>
+                    <span class="section-points">⭐ 200 points available</span>
+                </div>
+
+                <div class="section-card" onclick="showPage('section6')">
+                    <div class="section-number">6</div>
+                    <h3 class="section-card-title">Governing Systems & Power</h3>
+                    <p class="section-card-desc">Understand democratic, constitutional, and free-market systems and the balance of power in American society.</p>
+                    <span class="section-points">⭐ 200 points available</span>
+                </div>
+            </div>
+
+            <button class="report-button" onclick="showPage('report')">📊 View Your Progress Report</button>
+        </div>
+
+        <!-- SECTION 1: What is Government? -->
+        <div class="page" id="page-section1">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-main-title">
+                        <span>🏛️</span>
+                        What is Government?
+                    </h2>
+                </div>
+
+                <p class="content-paragraph">
+                    Since its founding, the United States has relied on citizen participation to govern at the local, state, and national levels. This <strong>civic engagement</strong> ensures that representative democracy will continue to flourish and that people will continue to influence government. The right of citizens to participate in government is an important feature of democracy, and over the centuries many have fought to acquire and defend this right.
+                </p>
+
+                <p class="content-paragraph">
+                    During the <strong>American Revolution (1775–1783)</strong>, British colonists fought for the right to govern themselves. In the early nineteenth century, agitated citizens called for the removal of property requirements for voting so poor White men could participate in government just as wealthy men could. Throughout the late nineteenth and twentieth centuries, women, African Americans, Native Americans, and many other groups fought for the right to vote and hold office.
+                </p>
+
+                <div class="important-box">
+                    <div class="important-box-title">📢 Why This Matters</div>
+                    <p>The purpose of voting and other forms of political engagement is to ensure that <strong>government serves the people</strong>, and not the other way around. Government affects all aspects of people's lives—what we eat, where we go to school, what kind of education we receive, how our tax money is spent, and what we do in our free time.</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Government</div>
+                    <div>The means by which a society organizes itself and how it allocates authority in order to accomplish collective goals and provide benefits that the society as a whole needs. Among the goals that governments around the world seek to accomplish are economic prosperity, secure national borders, and the safety and well-being of citizens.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Politics</div>
+                    <div>The process of gaining and exercising control within a government for the purpose of setting and achieving particular goals, especially those related to the division of resources within a nation. Put more simply, politics is the process of who gets what and how.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'locke', 30)">
+                    <div class="card-prompt">🔍 Click to explore: John Locke and Natural Rights</div>
+                    <div class="card-content">
+                        <h4>The Foundation of American Political Thought</h4>
+                        <p>According to <strong>John Locke</strong>, an English political philosopher of the seventeenth century, all people have <strong>natural rights to life, liberty, and property</strong>. From this came the idea that people should be free to consent to being governed.</p>
+                        <p style="margin-top: 15px;">In the eighteenth century, in Great Britain's North American colonies and later in France, this developed into the idea that:</p>
+                        <ul class="content-list">
+                            <li>People should govern themselves through elected representatives</li>
+                            <li>Only representatives chosen by the people had the right to make laws to govern them</li>
+                            <li>The idea of <strong>liberty</strong> became an important concept</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding the philosophical foundations of democracy!</p>
+                    </div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📖 Adam Smith and Capitalism</div>
+                    <p><strong>Adam Smith</strong>, a Scottish philosopher, believed that all people should be free to acquire property in any way they wished. In his 1776 book <em>The Wealth of Nations</em>, published the same year as the Declaration of Independence, Smith argued:</p>
+                    <ul class="content-list">
+                        <li>Business and industry should operate without government control</li>
+                        <li>People should keep the proceeds of their work</li>
+                        <li>Competition would ensure that prices remained low and faulty goods disappeared from the market</li>
+                        <li>Businesses would reap profits, consumers would have their needs satisfied, and society would prosper</li>
+                    </ul>
+                    <p style="margin-top: 15px;">These ideas formed the basis for <strong>industrial capitalism</strong>.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'democracy_capitalism', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Democracy and Capitalism Connection</div>
+                    <div class="card-content">
+                        <h4>Two Systems That Developed Together</h4>
+                        <p>Representative government and capitalism developed together in the United States, and many Americans tend to equate <strong>democracy</strong> (a political system in which people govern themselves) with <strong>capitalism</strong>.</p>
+                        <p style="margin-top: 15px;"><strong>In theory:</strong></p>
+                        <ul class="content-list">
+                            <li>Democratic government promotes individualism and freedom to act</li>
+                            <li>Capitalism relies on individualism</li>
+                            <li>Successful capitalists prefer political systems they can influence to maintain liberty</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>The critique:</strong> Although Smith theorized capitalism would lead to prosperity for all, great gaps in wealth exist between owners of major businesses and those who work for wages. Great wealth may give a small minority greater influence over government than the majority of the population.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding the relationship between economic and political systems!</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔴 Socialism</div>
+                    <div>An alternative economic system where the means of generating wealth (factories, large farms, banks) are owned by the government, not private individuals. The government accumulates wealth and redistributes it to citizens through social programs providing free or inexpensive health care, education, and childcare. In socialist countries, the government usually owns and controls utilities, transportation systems, and telecommunications. In many socialist countries, the government is an <strong>oligarchy</strong>: only members of a certain political party or ruling elite can participate. Example: In China, the government is run by members of the Chinese Communist Party.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What term describes the means by which a society organizes itself and allocates authority to accomplish collective goals?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1a', 0)">
+                        Politics
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1a', 25)">
+                        Government
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1a', 0)">
+                        Capitalism
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1a', 0)">
+                        Socialism
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q1a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">According to John Locke, what are the natural rights that all people possess?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">
+                        Freedom, justice, and democracy
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">
+                        Speech, religion, and assembly
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1b', 25)">
+                        Life, liberty, and property
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">
+                        Education, healthcare, and security
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q1b"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'civic_engagement', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Forms of Civic Engagement</div>
+                    <div class="card-content">
+                        <h4>How Citizens Participate in Government</h4>
+                        <p><strong>Civic engagement</strong>, or the participation that connects citizens to government, is a vital ingredient of politics. Americans play an important role in influencing:</p>
+                        <ul class="content-list">
+                            <li>What policies are pursued</li>
+                            <li>What values the government chooses to support</li>
+                            <li>What initiatives are granted funding</li>
+                            <li>Who gets to make the final decisions</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Forms of political engagement include:</strong></p>
+                        <ul class="content-list">
+                            <li>Reading about politics and listening to news reports</li>
+                            <li>Discussing politics with others</li>
+                            <li>Attending political debates (in person or televised)</li>
+                            <li>Donating money to political campaigns</li>
+                            <li>Handing out campaign materials</li>
+                            <li>Voting</li>
+                            <li>Joining protest marches</li>
+                            <li>Writing letters to elected representatives</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding how citizens can make their voices heard!</p>
+                    </div>
+                </div>
+
+                <div class="achievement" id="section1-complete">
+                    🏆 Section 1 Complete! You've mastered the fundamentals of government!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Types of Goods & Government Services -->
+        <div class="page" id="page-section2">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-main-title">
+                        <span>📦</span>
+                        Types of Goods & Government Services
+                    </h2>
+                </div>
+
+                <p class="content-paragraph">
+                    In the United States, the democratic government works closely with its capitalist economic system. The interconnectedness of the two affects the way goods and services are distributed. The market provides many goods and services needed by Americans—food, clothing, and housing are provided by private businesses that earn a profit in return.
+                </p>
+
+                <p class="content-paragraph">
+                    However, the market cannot provide everything in enough quantity or at low enough costs to meet everyone's needs. Therefore, some goods are provided by the government. Understanding the different types of goods helps us understand what role government plays in our lives.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'goods_types', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Four Types of Goods</div>
+                    <div class="card-content">
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Examples</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Private Goods</strong></td>
+                                <td>Goods provided by private businesses that earn profit; people can purchase what they need in the quantity they need it</td>
+                                <td>Food, clothing, housing, electronics</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Public Goods</strong></td>
+                                <td>Goods or services available to all without charge, funded by taxes</td>
+                                <td>National security, public education, police/fire departments, mail delivery</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Common Goods</strong></td>
+                                <td>Goods all people may use free of charge but are of limited supply; must be protected so a few don't take everything</td>
+                                <td>Fish in the sea, clean drinking water, public lands, wildlife</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Toll Goods</strong></td>
+                                <td>Goods available to many people who can pay the price; middle ground between public and private goods</td>
+                                <td>Private schools, toll roads, cable TV</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;"><strong>+35 points!</strong> Understanding the different types of goods in society!</p>
+                    </div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">🏛️ Why Government Provides Public Goods</div>
+                    <p>Some goods and services are best provided by government because:</p>
+                    <ul class="content-list">
+                        <li><strong>National Security:</strong> It's difficult to see how private business could protect the country. How would it build armies, create defense plans, or gather intelligence? Only government can tax, draw upon national resources, and compel citizen compliance.</li>
+                        <li><strong>Public Education:</strong> Public schools provide education for all children regardless of religion, race, ethnicity, socioeconomic class, or academic ability—from kindergarten through twelfth grade. Private schools charge tuition that many families cannot afford.</li>
+                        <li><strong>Infrastructure:</strong> Roads, bridges, and public transportation systems benefit everyone and are most efficiently provided collectively.</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-box-title">🐟 Finding a Middle Ground: Fishing Regulations</div>
+                    <p>One important thing government does is regulate public access to <strong>common goods</strong> like natural resources. Unlike public goods, which government can multiply if needed, common goods are in limited supply.</p>
+                    <p style="margin-top: 10px;">Fish are a common good that government regulates to ensure species are not fished into extinction, protecting future generations' food sources and livelihoods. This is called <strong>sustainability</strong>.</p>
+                    <p style="margin-top: 10px;"><strong>The tradeoff:</strong> Environmentalists want strict fishing limits, while commercial fishers resist these limits, claiming they would drive them out of business. Currently, fishing limits are set by scientists, politicians, local resource managers, and fishing industry representatives working together.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'gov_services', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Government Services at Every Level</div>
+                    <div class="card-content">
+                        <h4>What Government Provides at Each Level</h4>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Level</th>
+                                <th>Services Provided</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Local</strong></td>
+                                <td>Education, police, fire departments, parks maintenance, local courts, zoning</td>
+                            </tr>
+                            <tr>
+                                <td><strong>State</strong></td>
+                                <td>State colleges/universities, state roads and bridges, wildlife management, state courts, professional licensing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>National</strong></td>
+                                <td>Defense, Social Security, veterans' pensions, federal courts and prisons, national parks, interstate highways</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;">At each level, representatives elected by the people try to secure funding for things that benefit their constituents.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding how different levels of government serve you!</p>
+                    </div>
+                </div>
+
+                <div class="important-box">
+                    <div class="important-box-title">⚖️ Government's Additional Roles</div>
+                    <p>Besides providing goods and services, government also:</p>
+                    <ul class="content-list">
+                        <li><strong>Maintains order</strong> through laws and enforcement</li>
+                        <li><strong>Regulates the marketplace</strong> for fair operation of business</li>
+                        <li><strong>Checks the actions of business</strong> (unlike Adam Smith's vision of unregulated capitalism)</li>
+                        <li><strong>Protects citizens' freedoms</strong> including speech and press</li>
+                        <li><strong>Allows citizen participation</strong> through voting and other means</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which type of good is available to all without charge and funded by taxes?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2a', 0)">
+                        Private goods
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2a', 25)">
+                        Public goods
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2a', 0)">
+                        Common goods
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2a', 0)">
+                        Toll goods
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q2a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Fish in the ocean are an example of what type of good?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2b', 0)">
+                        Private goods
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2b', 0)">
+                        Public goods
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2b', 25)">
+                        Common goods
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2b', 0)">
+                        Toll goods
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q2b"></div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'gov_types', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Types of Government</div>
+                    <div class="card-content">
+                        <h4>Different Forms of Government Around the World</h4>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Examples</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Republic/Representative Democracy</strong></td>
+                                <td>Citizens elect representatives to make decisions and pass laws on their behalf; favors majority rule while protecting minority rights</td>
+                                <td>United States, France, Germany</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Direct Democracy</strong></td>
+                                <td>People participate directly in making government decisions</td>
+                                <td>Ancient Athens; some U.S. referendums; New England town meetings</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monarchy</strong></td>
+                                <td>One ruler, usually hereditary, holds political power (may be limited or absolute)</td>
+                                <td>Saudi Arabia (absolute); United Kingdom (constitutional)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Oligarchy</strong></td>
+                                <td>A handful of elite members of society hold all political power</td>
+                                <td>Cuba, China (Communist Party rule)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Totalitarianism</strong></td>
+                                <td>Government is more important than citizens; controls all aspects of citizens' lives; no political criticism allowed</td>
+                                <td>North Korea</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;"><strong>+35 points!</strong> Understanding the spectrum of governmental systems!</p>
+                    </div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">🗳️ Majority Rule with Minority Rights</div>
+                    <p>In the United States, most representative governments favor <strong>majority rule</strong>: the opinions of the majority of the people have more influence with government than those of the minority. However, <strong>minority rights are protected</strong>—people cannot be deprived of certain rights even if an overwhelming number think they should be.</p>
+                    <p style="margin-top: 15px;"><strong>Example:</strong> Even though atheists account for only about 7% of the population, they would be protected from persecution by minority rights protections, regardless of how the majority felt.</p>
+                </div>
+
+                <div class="achievement" id="section2-complete">
+                    🏆 Section 2 Complete! You understand how government provides for citizens!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Who Governs? Elitism vs. Pluralism -->
+        <div class="page" id="page-section3">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-main-title">
+                        <span>👥</span>
+                        Who Governs? Elitism vs. Pluralism
+                    </h2>
+                </div>
+
+                <p class="content-paragraph">
+                    The United States allows its citizens to participate in government in many ways. It also has many different levels and branches of government that any citizen or group might approach. Many people take this as evidence that U.S. citizens, especially as represented by competing groups, are able to influence government actions. Some political theorists, however, argue that this is not the case. They claim that only a handful of economic and political elites have any influence over government.
+                </p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎩 Elite Theory of Government</div>
+                    <div>The belief that a set of elite citizens is really in charge of government and that others have no influence. The foremost supporter was <strong>C. Wright Mills</strong>, who argued in his book <em>The Power Elite</em> that government was controlled by a combination of business, military, and political elites. According to this theory, the wealthy use their power to control the nation's economy so that those below them cannot advance economically. Their wealth allows the elite to secure important positions in politics, where they make decisions and allocate resources in ways that benefit themselves.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'elite_evidence', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Evidence for Elite Theory</div>
+                    <div class="card-content">
+                        <h4>Do the Elite Really Govern?</h4>
+                        <p>Consider these statistics about who holds power in America:</p>
+                        <ul class="content-list">
+                            <li><strong>One-third of U.S. presidents</strong> have attended Ivy League schools</li>
+                            <li><strong>95% of House members</strong> and <strong>100% of Senators</strong> have bachelor's degrees</li>
+                            <li>Fewer than <strong>40% of U.S. adults</strong> have even an associate's degree</li>
+                            <li>Majority of Congress members were businesspeople or practiced law before being elected</li>
+                            <li>Approximately <strong>73% of Congress members are men</strong>, and about <strong>76% are White</strong></li>
+                            <li>About <strong>half of Congress members are millionaires</strong></li>
+                            <li>As of 2022, approximately <strong>34% of House members</strong> and <strong>33% of Senators</strong> sent their children to private schools (compared to only 11% of the general population)</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>The argument:</strong> A Congress dominated by millionaires who send their children to private schools may be more likely to believe that a flat tax is fair and that increased funding for public education is not a necessity—views that don't reflect the experience of average Americans.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding the evidence for elite theory!</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🌐 Pluralist Theory of Government</div>
+                    <div>The belief that political power rests with competing interest groups who share influence in government. Pluralists argue that although there are elite members of society, they do not control government. Instead, political power is distributed throughout society. Rather than resting in the hands of individuals, a variety of organized groups hold power, with some groups having more influence on certain issues than others. <strong>Robert Dahl</strong>, author of <em>Who Governs?</em>, was one of the first to advance this theory.</div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">🔗 How Pluralism Works</div>
+                    <p>According to pluralist theory:</p>
+                    <ul class="content-list">
+                        <li><strong>Thousands of interest groups</strong> exist in the United States</li>
+                        <li>Approximately <strong>70-90% of Americans</strong> report belonging to at least one group</li>
+                        <li>People with shared interests form groups to make their desires known to politicians</li>
+                        <li>These groups include environmental advocates, unions, and business organizations</li>
+                        <li>Because most people lack time or expertise for political issues, these groups speak for them</li>
+                        <li>As groups compete and conflict, <strong>government policy begins to take shape from the bottom up</strong></li>
+                    </ul>
+                    <p style="margin-top: 15px;">Dahl argued that politicians seeking an "electoral payoff" are attentive to politically active citizens and, through them, become acquainted with the needs of ordinary people.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'tradeoffs', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Tradeoffs Perspective</div>
+                    <div class="card-content">
+                        <h4>Reality: A Series of Tradeoffs</h4>
+                        <p>Although elitists and pluralists present political influence as a tug-of-war, in reality government action and public policy are influenced by an ongoing series of <strong>tradeoffs or compromises</strong>:</p>
+                        <ul class="content-list">
+                            <li>An action that meets the needs of many people may not be favored by elite members</li>
+                            <li>Giving the elite what they want may interfere with plans to help the poor</li>
+                            <li>Public policy is created as a result of competition among groups</li>
+                            <li>Interests of both the elite and the people influence government action</li>
+                            <li>Compromises often attempt to please both sides</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Historical example:</strong> Since the framing of the U.S. Constitution, tradeoffs have been made between those who favor the supremacy of the central government and those who believe state governments should be more powerful.</p>
+                        <p style="margin-top: 15px;"><strong>+35 points!</strong> Understanding the reality of political compromise!</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-box-title">⛽ Tradeoffs Example: Fracking</div>
+                    <p>Many Americans believe the U.S. must become less dependent on foreign energy sources. Many also want access to inexpensive energy. Such people might support <strong>fracking</strong> (hydraulic fracturing):</p>
+                    <ul class="content-list">
+                        <li><strong>Benefits:</strong> Produces abundant, inexpensive natural gas; creates jobs; helps heat homes cheaply</li>
+                        <li><strong>Concerns:</strong> May contaminate drinking water, cause air pollution, increase earthquake risk; one study linked it to cancer</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Those who want jobs and cheap energy are in conflict with those who wish to protect the environment and human health. Both sides are well-intentioned but disagree over what is best for people.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'congress_tradeoffs', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Tradeoffs in Congress</div>
+                    <div class="card-content">
+                        <h4>How Tradeoffs Work in the Legislative Process</h4>
+                        <p>Members of the Senate and House of Representatives usually vote according to the concerns of people who live in their districts. This often:</p>
+                        <ul class="content-list">
+                            <li>Pits interests of people in different parts of the country against one another</li>
+                            <li>Favors certain groups over others within the same state</li>
+                            <li>Example: Allowing offshore drilling may please those needing jobs but anger those wanting to preserve coastal lands</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Party vs. Constituents:</strong> Sometimes legislators ignore voters in their home states to follow party leaders' dictates. However, House members facing re-election (with two-year terms) are more likely to buck their party in favor of their constituents.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding congressional dynamics!</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which theory argues that a small group of wealthy elites controls government?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3a', 25)">
+                        Elite Theory
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3a', 0)">
+                        Pluralist Theory
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3a', 0)">
+                        Democratic Theory
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3a', 0)">
+                        Federalist Theory
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q3a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Who wrote "The Power Elite" arguing that business, military, and political elites control government?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">
+                        Robert Dahl
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3b', 25)">
+                        C. Wright Mills
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">
+                        John Locke
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">
+                        Adam Smith
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q3b"></div>
+                </div>
+
+                <div class="achievement" id="section3-complete">
+                    🏆 Section 3 Complete! You understand the debate over who really governs!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Engagement in a Democracy -->
+        <div class="page" id="page-section4">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-main-title">
+                        <span>🗳️</span>
+                        Engagement in a Democracy
+                    </h2>
+                </div>
+
+                <p class="content-paragraph">
+                    Participation in government matters. Although people may not get all that they want, they can achieve many goals and improve their lives through <strong>civic engagement</strong>. According to the pluralist theory, government cannot function without active participation by at least some citizens. Even if we believe the elite make political decisions, participation in government through the act of voting can change who the members of the elite are.
+                </p>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📉 Is Civic Engagement Declining?</div>
+                    <p>Political scientist <strong>Robert Putnam</strong> has argued that civic engagement is declining:</p>
+                    <ul class="content-list">
+                        <li>Many Americans report belonging to groups, but these are usually large, impersonal ones with thousands of members</li>
+                        <li>People joining groups like Amnesty International or Greenpeace may share values but don't actually interact with other members</li>
+                        <li>These organizations differ from traditional groups like church groups or bowling leagues</li>
+                        <li>People are more interested in working individually or joining large organizations with little opportunity for interaction</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Reasons for decline:</strong> Increased workforce participation by women, fewer marriages and more divorces, and technology (like the internet) that allows people to feel connected without actual presence.</p>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🤝 Social Capital</div>
+                    <div>According to Putnam, this is "the collective value of all 'social networks' [those whom people know] and the inclinations that arise from these networks to do things for each other." It includes networks of individuals, a sense of being part of something larger than oneself, concern for the collective good, willingness to help others, and ability to trust others and work with them to solve problems. Putnam argues that declining social capital has hurt people's willingness and ability to engage in representative government.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'counterarguments', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Counterarguments to Putnam</div>
+                    <div class="card-content">
+                        <h4>Is Participation Really Declining?</h4>
+                        <p>Some scholars have countered Putnam's thesis:</p>
+                        <ul class="content-list">
+                            <li><strong>Everett Ladd</strong> shows many positive trends in social involvement in American communities</li>
+                            <li>Example: While bowling league participation is down, <strong>soccer league participation has proliferated</strong></li>
+                            <li><strong>April Clark</strong> analyzes social capital data and disputes the erosion thesis</li>
+                            <li>Others suggest technology has <strong>increased connectedness</strong>, though Putnam critiques this as not as deep as in-person connections</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding both sides of the civic engagement debate!</p>
+                    </div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">💪 Why Civic Engagement Matters</div>
+                    <p>Civic engagement can increase the power of ordinary people to influence government actions. Even those without money or connections can influence policies that affect their lives and change the direction taken by government.</p>
+                    <p style="margin-top: 15px;"><strong>Historical Examples of Success:</strong></p>
+                    <ul class="content-list">
+                        <li><strong>Abolitionists</strong> (including ordinary men and women of both races) ended slavery</li>
+                        <li>The <strong>15th Amendment</strong> gave African American men the vote</li>
+                        <li>The <strong>19th Amendment</strong> extended voting rights to women</li>
+                        <li>The <strong>Voting Rights Act of 1965</strong> made voting a reality for Black citizens in the South</li>
+                        <li>Activists achieved greater <strong>reproductive freedom for women</strong>, better wages, and access to credit</li>
+                        <li><strong>LGBTQ+ rights</strong> including legal same-sex marriage and protection against employment discrimination</li>
+                    </ul>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'pathways', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Pathways to Political Engagement</div>
+                    <div class="card-content">
+                        <h4>Ways Citizens Can Get Involved</h4>
+                        <p><strong>Individual Actions:</strong></p>
+                        <ul class="content-list">
+                            <li>Stay informed about debates and events from reputable news sources</li>
+                            <li>Write or email political representatives</li>
+                            <li>File complaints with city council</li>
+                            <li>Respond to public opinion polls</li>
+                            <li>Contribute to political blogs or start one</li>
+                            <li>Engage on social media (though be aware of bias and fake news)</li>
+                            <li><strong>VOTE!</strong> Individual votes do matter for city councils, mayors, state legislators, governors, and Congress</li>
+                            <li>Attend political rallies</li>
+                            <li>Donate money to campaigns</li>
+                            <li>Sign or start petitions</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Group Actions:</strong></p>
+                        <ul class="content-list">
+                            <li>Host a book club or discussion group about politics</li>
+                            <li>Work for political campaigns</li>
+                            <li>Help register voters</li>
+                            <li>Drive voters to polls on Election Day</li>
+                            <li>Join interest groups that promote causes you favor</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>+35 points!</strong> Knowing multiple pathways to engagement!</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-box-title">📜 Milestone: Votes for Eighteen-Year-Olds</div>
+                    <p>Today's college students can vote because of the activism of college students in the 1960s. Most states then required citizens to be 21 before they could vote. Young men who could be drafted to fight in Vietnam argued it was unfair to deny 18-year-olds the right to vote for those who could send them to war.</p>
+                    <p style="margin-top: 10px;">As a result, the <strong>Twenty-Sixth Amendment</strong>, which lowered the voting age to 18 in national elections, was ratified and went into effect in <strong>1971</strong>.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'youth_turnout', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Youth Political Participation</div>
+                    <div class="card-content">
+                        <h4>Young Americans and Politics</h4>
+                        <p><strong>Historical patterns:</strong></p>
+                        <ul class="content-list">
+                            <li>Americans aged 18-29 have been less likely to engage in traditional political activity than older Americans</li>
+                            <li>2018 poll: Only 24% of young adults claimed to be politically engaged; fewer than 35% had voted in a primary</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Recent changes:</strong></p>
+                        <ul class="content-list">
+                            <li>2018 midterms: Estimated <strong>31% of Americans under 30</strong> voted—highest youth engagement in decades</li>
+                            <li>2020 election: <strong>Record youth turnout of 53%</strong>—greater than the historic 2008 contest</li>
+                            <li>Young vote swung heavily toward Biden in swing states</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Why youth are sometimes disengaged:</strong></p>
+                        <ul class="content-list">
+                            <li><strong>Partisanship</strong> alienates many young people who prefer representatives vote in the nation's best interests</li>
+                            <li>Many identify as <strong>Independents</strong> rather than Democrats or Republicans</li>
+                            <li>Focus on <strong>specific issues</strong> (like same-sex marriage) rather than party loyalty</li>
+                            <li>Candidates often don't tackle issues relevant to young people's lives (though this changed with Bernie Sanders' free college tuition platform)</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding youth engagement patterns!</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Latent vs. Intense Preferences</div>
+                    <div><strong>Latent preferences</strong> are not deeply held and may not remain the same over time. They may not even represent a person's true feelings, since they may be formed on the spot when asked a question about which someone has no real opinion. <strong>Intense preferences</strong> are based on strong feelings regarding an issue that someone adheres to over time. People with intense preferences tend to become more engaged in politics—more likely to donate time and money to campaigns or attend political rallies. The more money one has and the more highly educated one is, the more likely one will form intense preferences and take political action.</div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What term did Robert Putnam use to describe the collective value of social networks and the inclinations to do things for each other?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4a', 0)">
+                        Civic engagement
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4a', 25)">
+                        Social capital
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4a', 0)">
+                        Pluralism
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4a', 0)">
+                        Political culture
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q4a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which amendment lowered the voting age to 18?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4b', 0)">
+                        15th Amendment
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4b', 0)">
+                        19th Amendment
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4b', 0)">
+                        24th Amendment
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4b', 25)">
+                        26th Amendment
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q4b"></div>
+                </div>
+
+                <div class="achievement" id="section4-complete">
+                    🏆 Section 4 Complete! You understand why civic engagement matters!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: Critical Thinking & Political Culture -->
+        <div class="page" id="page-section5">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-main-title">
+                        <span>🤔</span>
+                        Critical Thinking & Political Culture
+                    </h2>
+                </div>
+
+                <p class="content-paragraph">
+                    <strong>Critical thinking</strong> is essential for a healthy democracy. As citizens, we must be able to evaluate political claims, understand different perspectives, and make informed decisions about the issues that affect our lives. Political scientists offer tools and insights for developing these critical thinking skills.
+                </p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🧠 Critical Thinking</div>
+                    <div>The objective analysis and evaluation of an issue in order to form a judgment. In politics, this means examining claims carefully, considering evidence from multiple sources, understanding different perspectives, and reaching conclusions based on reason rather than emotion or bias. Critical thinking is essential for distinguishing between facts and opinions, identifying logical fallacies, and recognizing propaganda.</div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">🔬 Political Science as a Framework for Critical Thinking</div>
+                    <p>Political scientists provide help and insight for critical thinking by:</p>
+                    <ul class="content-list">
+                        <li><strong>Using empirical methods</strong> to study political behavior and institutions</li>
+                        <li><strong>Developing theories</strong> that explain how politics works</li>
+                        <li><strong>Testing hypotheses</strong> about political phenomena</li>
+                        <li><strong>Analyzing data</strong> to understand trends and patterns</li>
+                        <li><strong>Comparing different political systems</strong> to understand what works</li>
+                    </ul>
+                    <p style="margin-top: 15px;">Remember: The systems we have were <strong>deliberately designed</strong>. Understanding why they were created this way helps us evaluate whether they still serve their intended purposes.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'core_values', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Core American Political Values</div>
+                    <div class="card-content">
+                        <h4>The Foundation of American Political Culture</h4>
+                        <p>American political culture is built on several <strong>core values</strong> that have shaped our institutions and continue to influence political debates:</p>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Value</th>
+                                <th>Definition</th>
+                                <th>Significance</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Liberty</strong></td>
+                                <td>The state of being free from oppressive restrictions imposed by authority on one's way of life, behavior, or political views</td>
+                                <td>Fostered by unprecedented economic opportunities in the New World; Tocqueville noted Americans' chief aim "is to remain their own masters"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Equality</strong></td>
+                                <td>The notion that all individuals are equal in their moral worth and entitled to equal treatment under the law</td>
+                                <td>Perplexing ideal in early years when some were free while others were enslaved; differing opinions persist</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Self-Government</strong></td>
+                                <td>The principle that the people are the ultimate source of governing authority and should have a voice in their governing</td>
+                                <td>American colonials had substantial self-determination; vision of "just powers [derived] from the consent of the governed"</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;"><strong>+35 points!</strong> Understanding America's core political values!</p>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    <p>"We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.—That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed."</p>
+                    <p class="quote-author">— Declaration of Independence, 1776</p>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">⚠️ The Limits and Power of Americans' Ideals</div>
+                    <p>Americans' cultural beliefs are <strong>idealistic</strong>—and we have not always lived up to them. Failures to meet these high ideals include:</p>
+                    <ul class="content-list">
+                        <li><strong>Slavery</strong> – Direct contradiction of liberty and equality</li>
+                        <li><strong>Post-slavery Jim Crow era</strong> – Legal segregation and discrimination</li>
+                        <li><strong>Racial immigration restrictions</strong></li>
+                        <li><strong>Limited voting rights</strong> (initially only for White male property owners)</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>But ideals also inspire change:</strong></p>
+                    <ul class="content-list">
+                        <li>The struggle to build a more equal society is ongoing</li>
+                        <li>Civil rights movements have expanded rights over time</li>
+                        <li>Previous: abolition and expanded suffrage</li>
+                        <li>Ongoing: equal treatment for minorities, LGBTQ+ community, and religious minorities</li>
+                    </ul>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'equality_debate', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Equality Debate</div>
+                    <div class="card-content">
+                        <h4>What Does Equality Mean?</h4>
+                        <p><strong>Equality has never been an American birthright.</strong> Different people have different ideas about what equality means:</p>
+                        <ul class="content-list">
+                            <li><strong>Equality of opportunity:</strong> Everyone should have the same chance to succeed, regardless of their background</li>
+                            <li><strong>Equality of outcome:</strong> Society should ensure more equal results, not just equal chances</li>
+                            <li><strong>Legal equality:</strong> Everyone should be treated the same under the law</li>
+                            <li><strong>Political equality:</strong> Every citizen should have an equal voice in government (one person, one vote)</li>
+                            <li><strong>Social equality:</strong> No one should be treated as inferior based on characteristics like race, gender, or class</li>
+                        </ul>
+                        <p style="margin-top: 15px;">These different conceptions of equality lead to very different policy positions on issues like affirmative action, taxation, and welfare programs.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding the complexity of equality!</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">Which core American value emphasizes that people are the ultimate source of governing authority?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5a', 0)">
+                        Liberty
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5a', 0)">
+                        Equality
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5a', 25)">
+                        Self-Government
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5a', 0)">
+                        Federalism
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q5a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What is the objective analysis and evaluation of an issue in order to form a judgment?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5b', 0)">
+                        Political science
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5b', 0)">
+                        Civic engagement
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5b', 25)">
+                        Critical thinking
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5b', 0)">
+                        Political culture
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q5b"></div>
+                </div>
+
+                <div class="achievement" id="section5-complete">
+                    🏆 Section 5 Complete! You've mastered critical thinking and political culture!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 6: Governing Systems & Power -->
+        <div class="page" id="page-section6">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-main-title">
+                        <span>⚖️</span>
+                        Governing Systems & Power
+                    </h2>
+                </div>
+
+                <p class="content-paragraph">
+                    Understanding how power operates in America requires examining three interconnected systems: democratic, constitutional, and free-market. Each system has its own logic, participants, and implications for who gets what from government.
+                </p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'three_systems', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Three Governing Systems</div>
+                    <div class="card-content">
+                        <h4>How America's Governing Systems Work</h4>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>System</th>
+                                <th>Description</th>
+                                <th>Who Has Power?</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Democratic</strong></td>
+                                <td>A system of majority rule through elections</td>
+                                <td>Majorities (majoritarianism), Groups (pluralism), Officials (authority)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Constitutional</strong></td>
+                                <td>A system based on rule of law, including legal protections for individuals</td>
+                                <td>Courts, citizens exercising rights through legal action</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Free Market</strong></td>
+                                <td>An economic system that centers on transactions between private parties</td>
+                                <td>Business firms (corporate power), the wealthy (elitism)</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;"><strong>+35 points!</strong> Understanding America's interconnected governing systems!</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Democracy</div>
+                    <div>A system in which the people govern, either directly or through elected representatives. In practice, it has come to mean <strong>majority rule</strong> through the free and open election of representatives.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📊 Majoritarianism</div>
+                    <div>The principle that the majority effectively determines what government does. In a democratic system, policies reflect the preferences of more than half of those voting.</div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📜 A Constitutional System</div>
+                    <p>The writers of the U.S. Constitution devised an elaborate system of <strong>checks and balances</strong> and added a <strong>Bill of Rights</strong>. Key concepts include:</p>
+                    <ul class="content-list">
+                        <li><strong>Constitutionalism:</strong> The idea that there are lawful restrictions on government's power</li>
+                        <li><strong>Restraints on the power of the majority:</strong> Even if most people want something, they cannot violate constitutional protections</li>
+                        <li><strong>Legal action:</strong> The use of the courts as a means of asserting rights and interests—a channel through which ordinary citizens can exercise power</li>
+                    </ul>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'freemarket', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Free-Market System</div>
+                    <div class="card-content">
+                        <h4>Capitalism and Political Power</h4>
+                        <p>A <strong>free-market system</strong> operates mainly on private transactions, with some government intervention through regulatory, taxing, and spending policies.</p>
+                        <p style="margin-top: 15px;"><strong>Key power dynamics:</strong></p>
+                        <ul class="content-list">
+                            <li><strong>Corporate power:</strong> The influence business firms have on public policy. Large corporations can lobby government, fund campaigns, and shape public opinion</li>
+                            <li><strong>Elitism:</strong> The power exercised by well-positioned and highly influential individuals. The wealthy may have disproportionate influence over political decisions</li>
+                        </ul>
+                        <p style="margin-top: 15px;">This creates tension: democratic ideals suggest equal political power, but economic inequality can translate into unequal political influence.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding free-market power dynamics!</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">👔 Authority</div>
+                    <div>The recognized right of officials to exercise power. Unlike raw power (the ability to force compliance), authority is power that people accept as legitimate. In a democracy, authority comes from the consent of the governed—elected officials have authority because they were chosen by the people.</div>
+                </div>
+
+                <div class="important-box">
+                    <div class="important-box-title">⚠️ Authoritarian Government</div>
+                    <p>In contrast to democratic systems, <strong>authoritarian government</strong> openly represses its political opponents. Characteristics include:</p>
+                    <ul class="content-list">
+                        <li>Restriction of political rights and civil liberties</li>
+                        <li>Suppression of political criticism and opposition</li>
+                        <li>Use of intimidation, imprisonment, and physical abuse</li>
+                        <li>Control of media and information</li>
+                    </ul>
+                    <p style="margin-top: 10px;">The United States operates by a different standard based on <strong>democracy, constitutionalism, and a free market</strong>—though critics argue that each of these systems has limitations and contradictions.</p>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'power_balance', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Balancing Power in America</div>
+                    <div class="card-content">
+                        <h4>The Ongoing Tension</h4>
+                        <p>American governance involves constant tension between different sources of power:</p>
+                        <ul class="content-list">
+                            <li><strong>Majority vs. Minority:</strong> Democracy empowers majorities, but constitutionalism protects minorities</li>
+                            <li><strong>Federal vs. State:</strong> Power is divided between national and state governments</li>
+                            <li><strong>Branches of Government:</strong> Legislative, executive, and judicial branches check each other</li>
+                            <li><strong>Elites vs. People:</strong> Economic elites have resources, but numbers matter in elections</li>
+                            <li><strong>Individual vs. Collective:</strong> Liberty emphasizes individual freedom, but some goals require collective action</li>
+                        </ul>
+                        <p style="margin-top: 15px;">These tensions are not flaws—they were deliberately designed into the system to prevent any single group from dominating.</p>
+                        <p style="margin-top: 15px;"><strong>+30 points!</strong> Understanding the deliberate balance of power!</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What term describes the influence business firms have on public policy?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6a', 0)">
+                        Elitism
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6a', 25)">
+                        Corporate power
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6a', 0)">
+                        Majoritarianism
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6a', 0)">
+                        Pluralism
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q6a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">What is the idea that there are lawful restrictions on government's power?</div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6b', 0)">
+                        Democracy
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6b', 25)">
+                        Constitutionalism
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6b', 0)">
+                        Capitalism
+                    </div>
+                    
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6b', 0)">
+                        Federalism
+                    </div>
+                    
+                    <div class="feedback-box" id="feedback-q6b"></div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📝 Key Terminology</div>
+                    <p>Make sure you understand these commonly confused terms:</p>
+                    <ul class="content-list">
+                        <li><strong>Legislature:</strong> The legislative body of a country or state. Example: Congress</li>
+                        <li><strong>Legislator:</strong> A person who makes laws; a member of a legislative body. Example: Congressman Smith</li>
+                        <li><strong>Legislation:</strong> A bill or resolution under consideration by a legislature. Example: House Bill 123</li>
+                    </ul>
+                </div>
+
+                <div class="achievement" id="section6-complete">
+                    🏆 Section 6 Complete! You understand America's governing systems!
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div class="page" id="page-report">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>👤 TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="showPage('home')">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 1: Critical Thinking and the American Political System</p>
+                        
+                        <!-- Grade Display -->
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">F</div>
+                            <div class="grade-percentage" id="gradePercentage">0%</div>
+                        </div>
+
+                        <!-- Two-column layout for info and performance -->
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>Student Information</h3>
+                                <div class="info-row">
+                                    <span>Name:</span>
+                                    <span id="reportName">Not entered</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Date:</span>
+                                    <span id="reportDate">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Time:</span>
+                                    <span id="reportTime">-</span>
+                                </div>
+                            </div>
+                            <div class="performance-section">
+                                <h3>Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1. What is Government?</td>
+                                        <td id="s1Status">⭕ Not Started</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. Types of Goods & Services</td>
+                                        <td id="s2Status">⭕ Not Started</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Elitism vs. Pluralism</td>
+                                        <td id="s3Status">⭕ Not Started</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Engagement in Democracy</td>
+                                        <td id="s4Status">⭕ Not Started</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. Critical Thinking & Culture</td>
+                                        <td id="s5Status">⭕ Not Started</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6. Governing Systems & Power</td>
+                                        <td id="s6Status">⭕ Not Started</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Metrics Grid -->
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/6</div>
+                                <div class="metric-label">Sections</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This report documents the student's completion of Chapter 1: Critical Thinking and the American Political System in the TCC Federal Government Trailblazer Trek learning module. Points are earned through interactive exploration cards and knowledge check questions. A score of 90% or higher indicates mastery of the material.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            score: 0,
+            level: 'Explorer',
+            completedSections: [],
+            revealedCards: new Set(),
+            answeredQuestions: new Set(),
+            correctAnswers: 0,
+            totalQuestions: 12
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Civic Sage'
+        };
+
+        // Total available points
+        const totalPoints = 1200;
+
+        // Show page function
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show requested page
+            if (pageId === 'home') {
+                document.getElementById('home').classList.add('active');
+                updateProgress();
+            } else if (pageId === 'report') {
+                document.getElementById('page-report').classList.add('active');
+                updateReport();
+            } else {
+                document.getElementById('page-' + pageId).classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Handle knowledge check answers
+        function handleAnswer(element, isCorrect, questionId, points) {
+            // Check if already answered
+            if (gameState.answeredQuestions.has(questionId)) {
+                return;
+            }
+            
+            gameState.answeredQuestions.add(questionId);
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                gameState.score += points;
+                gameState.correctAnswers++;
+                showPoints(points);
+                updateScore();
+                
+                // Show correct feedback
+                const feedback = document.getElementById('feedback-' + questionId);
+                feedback.textContent = '✅ Correct! Well done!';
+                feedback.className = 'feedback-box show correct';
+            } else {
+                element.classList.add('incorrect');
+                
+                // Show incorrect feedback
+                const feedback = document.getElementById('feedback-' + questionId);
+                feedback.textContent = '❌ Not quite. Try reviewing the material above.';
+                feedback.className = 'feedback-box show incorrect';
+            }
+            
+            // Disable all options for this question
+            element.parentElement.querySelectorAll('.kc-option').forEach(option => {
+                option.style.cursor = 'default';
+                option.onclick = null;
+            });
+            
+            // Check for section completion
+            checkSectionCompletion();
+        }
+
+        // Reveal interactive cards
+        function revealCard(element, contentId, points) {
+            // Check if already revealed
+            if (gameState.revealedCards.has(contentId)) {
+                return;
+            }
+            
+            gameState.revealedCards.add(contentId);
+            
+            // Add points
+            gameState.score += points;
+            showPoints(points);
+            updateScore();
+            
+            // Show content
+            element.classList.add('revealed');
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+            
+            // Disable further clicks
+            element.onclick = null;
+            element.style.cursor = 'default';
+            
+            // Check for section completion
+            checkSectionCompletion();
+        }
+
+        // Show points popup
+        function showPoints(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Update score display
+        function updateScore() {
+            document.getElementById('currentScore').textContent = gameState.score;
+            
+            // Update level
+            let newLevel = 'Explorer';
+            for (let threshold in levels) {
+                if (gameState.score >= threshold) {
+                    newLevel = levels[threshold];
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('currentLevel').textContent = newLevel;
+        }
+
+        // Check section completion
+        function checkSectionCompletion() {
+            const sectionCompleteScore = {
+                'section1': 200,
+                'section2': 400,
+                'section3': 600,
+                'section4': 800,
+                'section5': 1000,
+                'section6': 1200
+            };
+            
+            for (let section in sectionCompleteScore) {
+                if (gameState.score >= sectionCompleteScore[section] && 
+                    !gameState.completedSections.includes(section)) {
+                    gameState.completedSections.push(section);
+                    markSectionComplete(section);
+                }
+            }
+        }
+
+        // Mark section as complete
+        function markSectionComplete(sectionId) {
+            const cards = document.querySelectorAll('.section-card');
+            const sectionMap = {
+                'section1': 0,
+                'section2': 1,
+                'section3': 2,
+                'section4': 3,
+                'section5': 4,
+                'section6': 5
+            };
+            
+            if (sectionMap[sectionId] !== undefined && cards[sectionMap[sectionId]]) {
+                cards[sectionMap[sectionId]].classList.add('completed');
+            }
+            
+            // Show achievement if on that section
+            const achievement = document.getElementById(sectionId + '-complete');
+            if (achievement) {
+                achievement.style.display = 'block';
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const totalSections = 6;
+            const completed = gameState.completedSections.length;
+            const percentage = (completed / totalSections) * 100;
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '% Complete';
+        }
+
+        // Calculate letter grade
+        function calculateLetterGrade(percentage) {
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) { 
+                letterGrade = 'A'; 
+                gradeColor = '#1B5E20'; 
+            }
+            else if (percentage >= 80) { 
+                letterGrade = 'B'; 
+                gradeColor = '#00695C'; 
+            }
+            else if (percentage >= 70) { 
+                letterGrade = 'C'; 
+                gradeColor = '#F57C00'; 
+            }
+            else if (percentage >= 60) { 
+                letterGrade = 'D'; 
+                gradeColor = '#E65100'; 
+            }
+            
+            return { letter: letterGrade, color: gradeColor };
+        }
+
+        // Update report
+        function updateReport() {
+            // Update student name
+            const studentName = document.getElementById('studentName').value || 'Not entered';
+            document.getElementById('reportName').textContent = studentName;
+            
+            // Update date and time
+            const now = new Date();
+            document.getElementById('reportDate').textContent = now.toLocaleDateString();
+            document.getElementById('reportTime').textContent = now.toLocaleTimeString();
+            
+            // Calculate percentage
+            const percentage = Math.round((gameState.score / totalPoints) * 100);
+            const grade = calculateLetterGrade(percentage);
+            
+            // Update grade display
+            document.getElementById('letterGrade').textContent = grade.letter;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = grade.color;
+            
+            // Update header scores
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.completedSections.length / 6) * 100);
+            
+            // Update section statuses
+            for (let i = 1; i <= 6; i++) {
+                const statusEl = document.getElementById('s' + i + 'Status');
+                if (gameState.completedSections.includes('section' + i)) {
+                    statusEl.textContent = '✅ Completed';
+                    statusEl.style.color = '#1B5E20';
+                } else if (gameState.score > (i - 1) * 200) {
+                    statusEl.textContent = '🔄 In Progress';
+                    statusEl.style.color = '#F57C00';
+                } else {
+                    statusEl.textContent = '⭕ Not Started';
+                    statusEl.style.color = '#B71C1C';
+                }
+            }
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = gameState.completedSections.length + '/6';
+            
+            // Quiz score
+            const quizPercentage = gameState.totalQuestions > 0 
+                ? Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) 
+                : 0;
+            document.getElementById('metricQuiz').textContent = quizPercentage + '%';
+            
+            // Engagement (based on revealed cards)
+            const totalCards = 14; // Total interactive cards
+            const engagementPercentage = Math.round((gameState.revealedCards.size / totalCards) * 100);
+            document.getElementById('metricEngagement').textContent = engagementPercentage + '%';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateScore();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 16: Domestic Policy - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .section-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            opacity: 0.9;
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-block h4 {
+            color: var(--primary-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box {
+            background: var(--highlight-yellow);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box h4 {
+            color: #5D4037;
+            margin-top: 0;
+        }
+
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--secondary-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .interactive-card.revealed {
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        .kc-option.correct {
+            background: #C8E6C9;
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFCDD2;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #C8E6C9;
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFCDD2;
+            color: var(--error);
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding-left: 50px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-header-bar h1 {
+            font-size: 1.5rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            padding: 2rem;
+        }
+
+        .report-main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .performance-table {
+            width: 100%;
+        }
+
+        .performance-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .report-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: static;
+            }
+            .container {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .hero-icons {
+                gap: 2rem;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-header-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            <span>⭐ <span id="score">0</span> pts</span>
+            <span>🏆 <span id="level">Explorer</span></span>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div class="points-popup" id="pointsPopup">
+        <span id="pointsMessage">+25 points!</span>
+    </div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>📜 Chapter 16: Domestic Policy 💰</h2>
+                <p class="hero-subtitle">Explore how the U.S. government develops and implements domestic policy. From social welfare programs to economic regulation, discover how policy shapes American life and how the budget process determines national priorities.</p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">📊</div>
+                        <div class="label">Public Policy</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">🛡️</div>
+                        <div class="label">Social Welfare</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">💵</div>
+                        <div class="label">Budgeting & Taxes</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your name here...">
+                <button onclick="saveName()">Start Learning!</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" id="card1" onclick="navigateTo('section1')">
+                    <div class="badge">1</div>
+                    <h4>📜 What Is Public Policy?</h4>
+                    <p>Discover the definition of public policy, how it develops, and the difference between policy intentions and outcomes.</p>
+                    <div class="points">🌟 Up to 220 points</div>
+                </div>
+
+                <div class="section-card" id="card2" onclick="navigateTo('section2')">
+                    <div class="badge">2</div>
+                    <h4>📦 Categorizing Public Policy</h4>
+                    <p>Learn about different types of goods, distributive, regulatory, and redistributive policies, and how policy affects society.</p>
+                    <div class="points">🌟 Up to 240 points</div>
+                </div>
+
+                <div class="section-card" id="card3" onclick="navigateTo('section3')">
+                    <div class="badge">3</div>
+                    <h4>🛡️ Policy Arenas</h4>
+                    <p>Explore key domestic policy areas: social welfare, science and technology, education, and business regulation.</p>
+                    <div class="points">🌟 Up to 230 points</div>
+                </div>
+
+                <div class="section-card" id="card4" onclick="navigateTo('section4')">
+                    <div class="badge">4</div>
+                    <h4>👥 Policymakers</h4>
+                    <p>Understand the roles of policy advocates and analysts, and learn about the four stages of the policy process.</p>
+                    <div class="points">🌟 Up to 220 points</div>
+                </div>
+
+                <div class="section-card" id="card5" onclick="navigateTo('section5')">
+                    <div class="badge">5</div>
+                    <h4>💰 Budgeting and Tax Policy</h4>
+                    <p>Master economic theories, mandatory vs. discretionary spending, tax policy, and the role of the Federal Reserve.</p>
+                    <div class="points">🌟 Up to 240 points</div>
+                </div>
+
+                <div class="section-card" id="card6" onclick="navigateTo('reportPage')">
+                    <div class="badge">📋</div>
+                    <h4>📊 View Your Report</h4>
+                    <p>Check your completion status and see your final grade for this chapter.</p>
+                    <div class="points">🎯 See Your Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: What Is Public Policy? -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📜 Section 1: What Is Public Policy?</h2>
+                <p class="subtitle">Understanding the broad strategy government uses to address society's concerns</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Chapter Introduction: The Standing Rock Case</h3>
+                <p>On August 4, 2016, the Standing Rock Sioux Tribe sued the U.S. Army Corps of Engineers seeking an injunction on the construction of a 1200-mile-long oil pipeline running through four states from North Dakota to Illinois. The tribe argued that building the pipeline near federally governed waters would harm important tribal cultural sites.</p>
+                <p>Protests ensued, which grew in size and effectively blocked the pipeline company from completing its work. The company countersued the tribe. Numerous other actors became involved, including multiple federal judges, two presidents (Obama and Trump), and the governor, who called in the National Guard.</p>
+                <p>While the initial outcome was that the pipeline was halted by the Obama administration, officials in the Trump administration quickly reactivated the project in early 2017. It was completed and is currently in operation. This scenario illustrates well the <strong>complexity of public policymaking</strong> as it actually occurs and how particular instances of policy can cut across many different domains, including the environment, energy policy, tribal sovereignty, and transportation issues.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📖 Public Policy Defined</h3>
+                <p>One approach to thinking about public policy is to see it as the broad strategy government uses to do its job. More formally, it is the <strong>relatively stable set of purposive governmental actions that address matters of concern to some part of society</strong>.</p>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📋 Public Policy</div>
+                    <div>The broad strategy government uses to do its job; the relatively stable set of purposive governmental behaviors that address matters of concern to some part of society.</div>
+                </div>
+
+                <p>This description is useful in that it helps to explain both what public policy is and what it isn't:</p>
+                <ul>
+                    <li><strong>Long-term focus:</strong> Public policy is a guide to legislative action that is more or less fixed for long periods of time, not just short-term fixes or single legislative acts.</li>
+                    <li><strong>Intentional:</strong> Policy doesn't happen by accident, and it is rarely formed simply as the result of the campaign promises of a single elected official, even the president.</li>
+                    <li><strong>Result of debate:</strong> Most policy outcomes are the result of considerable debate, compromise, and refinement that happen over years and are finalized only after input from multiple institutions within government as well as from interest groups and the public.</li>
+                </ul>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-1', 30)">
+                <div class="card-prompt">🔎 Click to explore: Health Care Reform - A Policy Example</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Consider the example of health care expansion. A follower of politics in the news media may come away thinking the reforms implemented in 2010 were as sudden as they were sweeping, having been developed in the final weeks before they were enacted.</p>
+                    <p>The reality is that expanding health care access had actually been a priority of the Democratic Party for several decades. What may have seemed like a policy developed over a period of months was in fact formed after years of analysis, reflection upon existing policy, and even trial implementation of similar types of programs at the state level.</p>
+                    <p>Even before passage of the ACA (2010), more than 50 percent of all health care expenditures in the United States already came from federal government programs such as Medicare and Medicaid. Several House and Senate members from both parties along with First Lady Hillary Clinton had proposed significant expansions in federal health care policy during the Clinton administration, providing a number of different options for any eventual health care overhaul.</p>
+                    <p>Much of what became the ACA was drawn from proposals originally developed at the state level, by none other than Obama's 2012 Republican presidential opponent Mitt Romney when he was governor of Massachusetts.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Key Characteristics of Public Policy</h3>
+                <p>In addition to being thoughtful and generally stable, public policy deals with <strong>issues of concern to some large segment of society</strong>, as opposed to matters of interest only to individuals or a small group of people. Governments frequently interact with individual actors like citizens, corporations, or other countries. They may even pass highly specialized pieces of legislation, known as private bills, which confer specific privileges on individual entities. But public policy covers only those issues that are of interest to larger segments of society or that directly or indirectly affect society as a whole.</p>
+                <p>For example, paying off the loans of a specific individual would not be public policy, but creating a process for loan forgiveness available to certain types of borrowers (such as those who provide a public service by becoming teachers) would certainly rise to the level of public policy.</p>
+                <p>A final important characteristic of public policy is that it is more than just the actions of government; it also includes the behaviors or outcomes that government action creates. Policy can even be made when government <strong>refuses to act</strong> in ways that would change the status quo when circumstances or public opinion begin to shift.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-2', 30)">
+                <div class="card-prompt">🔎 Click to explore: Policy Through Inaction - Gun Policy Example</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Much of the debate over gun safety policy in the United States has centered on the unwillingness of Congress to act, even in the face of public opinion that supports some changes to gun policy.</p>
+                    <p>In fact, one of the last major changes occurred in 2004, when lawmakers' inaction resulted in the expiration of a piece of legislation known as the <strong>Federal Assault Weapons Ban (1994)</strong>.</p>
+                    <p>This demonstrates that policy can be created not just through action, but also through deliberate inaction—choosing to let existing laws expire or declining to pass new legislation even when there appears to be public support for change.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Public Policy as Outcomes</h3>
+                <p>Governments rarely want to keep their policies a secret. Elected officials want to be able to take credit for the things they have done to help their constituents, and their opponents are all too willing to cast blame when policy initiatives fail. We can therefore think of policy as the formal expression of what elected or appointed officials are trying to accomplish.</p>
+                
+                <div class="key-concept-box">
+                    <h4>🗂️ Ways Policy Can Be Expressed</h4>
+                    <ul>
+                        <li><strong>Congressional Acts:</strong> In passing the HCERA (2010), Congress declared its policy through an act that directed how it would appropriate money.</li>
+                        <li><strong>Executive Orders:</strong> The president can implement or change policy through an executive order, which offers instructions about how to implement law under the president's discretion.</li>
+                        <li><strong>Court Opinions:</strong> Policy changes can come as a result of court actions or opinions, such as <em>Brown v. Board of Education of Topeka</em> (1954), which formally ended school segregation in the United States.</li>
+                    </ul>
+                </div>
+
+                <p>Typically, elected and even high-ranking appointed officials lack either the specific expertise or tools needed to successfully create and implement public policy on their own. They turn instead to the vast government bureaucracy to provide policy guidance.</p>
+                <p>For example, when Congress passed the Clean Water Act (1972), it dictated that steps should be taken to improve water quality throughout the country. But it ultimately left it to the bureaucracy to figure out exactly how 'clean' water needed to be. In doing so, Congress provided the Environmental Protection Agency (EPA) with discretion to determine how much pollution is allowed in U.S. waterways.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: Winners and Losers in Policy</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> There is one more way of thinking about policy outcomes: in terms of <strong>winners and losers</strong>. Almost by definition, public policy promotes certain types of behavior while punishing others. So, the individuals or corporations that a policy favors are most likely to benefit, or win, whereas those the policy ignores or punishes are likely to lose.</p>
+                    <p>Even the best-intended policies can have unintended consequences and may even ultimately harm someone, if only those who must pay for the policy through higher taxes. Consider these examples:</p>
+                    <ul>
+                        <li>A policy designed to encourage students to go to liberal arts colleges may cause trade school enrollment to decline.</li>
+                        <li>Strategies to promote diversity in higher education may make it more difficult for qualified White or male applicants to get accepted into competitive programs.</li>
+                        <li>Efforts to clean up drinking water supplies may make companies less competitive and cost employees their livelihood.</li>
+                        <li>Even something that seems to help everyone, such as promoting charitable giving through tax incentives, runs the risk of lowering tax revenues from the rich (who contribute a greater share of their income to charity) and shifting tax burdens to the poor.</li>
+                    </ul>
+                    <p>It is whether a given policy helps or hurts constituents (or is perceived to do so) that ultimately determines how voters will react toward the government in future elections.</p>
+                </div>
+            </div>
+
+            <div class="milestone-box">
+                <h4>🛡️ Finding a Middle Ground: The Social Safety Net</h4>
+                <p>During the Great Depression of the 1930s, the United States created a set of policies and programs that constituted a <strong>social safety net</strong> for the millions who had lost their jobs, their homes, and their savings.</p>
+                <p>Under President Franklin Delano Roosevelt, the federal government began programs like the Work Progress Administration and Civilian Conservation Corps to combat unemployment and the Home Owners' Loan Corporation to refinance Depression-related mortgage debts. As the effects of the Depression eased, the government phased out many of these programs. Other programs, like Social Security or the minimum wage, remain an important part of the way the government takes care of the vulnerable members of its population.</p>
+                <p>In recent decades, however, some have criticized these safety net programs for inefficiency and for incentivizing welfare dependence. They deride "government leeches" who use food stamps to buy lobster or other seemingly inappropriate items. Critics deeply resent the use of taxpayer money to relieve social problems like unemployment and poverty; workers who may themselves be struggling to put food on the table or pay the mortgage feel their hard-earned money should not support other families.</p>
+                <p><strong>The key question:</strong> Where is the middle ground in the public policy argument over the social safety net? How can the government protect its most vulnerable citizens without placing an undue burden on others?</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which of the following is NOT an example of a public policy outcome?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 25)">The creation of a program to combat drug trafficking</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 25)">The passage of the Affordable Care Act (Obamacare)</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 25)">The passage of tax cuts during the George W. Bush administration</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">None of the above; all are public policy outcomes</div>
+                <div class="feedback-box" id="feedback-q1-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Public policy ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">Is more of a theory than a reality</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">Is typically made by one branch of government acting alone</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">Requires multiple actors and branches to carry out</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">Focuses on only a few special individuals</div>
+                <div class="feedback-box" id="feedback-q1-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What best explains why public policies are considered thoughtful and deliberate rather than spontaneous?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 30)">They are created by a single politician making quick decisions</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-3', 30)">They result from years of debate, compromise, and refinement involving multiple institutions</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 30)">They are always passed within a single legislative session</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 30)">They only address short-term problems</div>
+                <div class="feedback-box" id="feedback-q1-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(1); navigateTo('homePage')">
+                ✓ Complete Section 1 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 2: Categorizing Public Policy -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📦 Section 2: Categorizing Public Policy</h2>
+                <p class="subtitle">Understanding different types of goods and policy approaches in society</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Why Does Government Get Involved?</h3>
+                <p>The idea of public policy is by its very nature a politically contentious one. Among the differences between American liberals and conservatives are the policy preferences prevalent in each group.</p>
+                <ul>
+                    <li><strong>Modern liberals</strong> tend to feel very comfortable with the idea of the government shepherding progressive social and economic reforms, believing that these will lead to outcomes more equitable and fair for all members of society.</li>
+                    <li><strong>Conservatives</strong>, on the other hand, often find government involvement onerous and overreaching. They feel society would function more efficiently if oversight of most "public" matters were returned to the private sphere.</li>
+                </ul>
+                <p>Before digging too deeply into a discussion of the nature of public policy in the United States, let us look first at why so many aspects of society come under the umbrella of public policy to begin with.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Different Types of Goods</h3>
+                <p>Economists use the term <strong>goods</strong> to describe the range of commodities, services, and systems that help us satisfy our wants or needs. This term can certainly apply to the food you eat or the home you live in, but it can also describe the systems of transportation or public safety used to protect them.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏠 Private Goods</div>
+                    <div>Goods that can be owned by a particular person or group of people, and are excluded from use by others, typically by means of a price. Private goods are finite and can run out if overused. Examples include your home, car, or personal belongings.</div>
+                </div>
+
+                <p>Proponents of <strong>free-market economics</strong> believe that the market forces of supply and demand, working without any government involvement, are the most effective way for markets to operate. One of the basic principles of free-market economics is that for just about any good that can be privatized, the most efficient means for exchange is the marketplace.</p>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📈 Free-Market Economics</div>
+                    <div>A school of thought that believes the forces of supply and demand, working without any government intervention, are the most effective way for markets to operate.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-1', 30)">
+                <div class="card-prompt">🔎 Click to explore: Libertarians and the Private Sector</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Some people in the United States argue that the self-monitoring and self-regulating incentives provided by the existence of private goods mean that sound public policy requires very little government action.</p>
+                    <p>Known as <strong>libertarians</strong>, these individuals believe government almost always operates less efficiently than the private sector (the segment of the economy run for profit and not under government control), and that government actions should therefore be kept to a minimum.</p>
+                    <p>A second basic principle of free-market economics is that it is largely unnecessary for the government to protect the value of private goods:</p>
+                    <ul>
+                        <li>Farmers who own land used for growing food have a vested interest in protecting their land to ensure its continued production.</li>
+                        <li>Business owners must protect the reputation of their business or no one will buy from them.</li>
+                        <li>To the degree that producers need to ensure the quality of their product or industry, they can accomplish that by creating a group or association that operates outside government control.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🌍 Public and Common Goods</h3>
+                <p>Not all goods can be classified as strictly private. Can you really consider the air you breathe to be private? Air is a difficult good to privatize because it is not excludable—everyone can get access to it at all times—and no matter how much of it you breathe, there is still plenty to go around.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🌐 Public Goods (Collective Goods)</div>
+                    <div>Goods that are not excludable and are essentially infinite. Examples include air, national defense, and public safety. Since no one owns them, no one has a financial interest in protecting their long-term value.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🌳 Common Goods</div>
+                    <div>A type of public good that is not excludable but may be finite. Examples include forests, water, and fisheries. These can be depleted if overused.</div>
+                </div>
+
+                <p>The problem with both public and common goods is that since no one owns them, no one has a financial interest in protecting their long-term or future value. Without government regulation, factory owners can feel free to pollute the air or water, since they will have no responsibility for the pollution once the winds or waves carry it somewhere else.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-2', 30)">
+                <div class="card-prompt">🔎 Click to explore: The Tragedy of the Commons</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Without government regulation, someone can hunt all the migratory birds or deplete a fishery by taking all the fish, eliminating future breeding stocks that would maintain the population.</p>
+                    <p>The situation in which individuals exhaust a common resource by acting in their own immediate self-interest is called the <strong>tragedy of the commons</strong>.</p>
+                    <p>This concept explains why government regulation is often necessary for common goods—individual actors have no incentive to preserve resources for others or for the future, even though society as a whole would benefit from sustainable use.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🚗 Toll Goods</h3>
+                <p>A second problem with strict adherence to free-market economics is that some goods are too large, or too expensive, for individuals to provide them for themselves. Consider the need for a marketplace: Where does the marketplace come from? How do we get the goods to market? Who provides the roads and bridges? Who patrols the waterways? Who provides security? Who ensures the regulation of the currency? No individual buyer or seller could accomplish this.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🛣️ Toll Goods</div>
+                    <div>Goods similar to public goods in that they are open to all and theoretically infinite if maintained, but they are paid for or provided by some outside (nongovernment) entity. Many people can make use of them, but only if they can pay the price. Examples include cable TV, cellphone service, and private schools.</div>
+                </div>
+
+                <p>The name "toll goods" comes from the fact that, early on, many toll roads were in fact privately owned commodities. Even today, states from Virginia to California have allowed private companies to build public roads in exchange for the right to profit by charging tolls.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Classic Types of Policy</h3>
+                <p>Public policy, then, ultimately boils down to determining the distribution, allocation, and enjoyment of public, common, and toll goods within a society. While the specifics of policy often depend on the circumstances, two broad questions all policymakers must consider are: (a) who pays the costs of creating and maintaining the goods, and (b) who receives the benefits of the goods?</p>
+                <p>In 1964, Theodore Lowi argued that it was possible to categorize policy based upon the degree to which costs and benefits were concentrated on the few or diffused across the many.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-3', 35)">
+                <div class="card-prompt">🔎 Click to explore: Distributive Policy</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> <strong>Distributive policy</strong> tends to collect payments or resources from many but concentrates direct benefits on relatively few.</p>
+                    <p>Highways are often developed through distributive policy. Distributive policy is also common when society feels there is a social benefit to individuals obtaining private goods such as higher education that offer long-term benefits, but the upfront cost may be too high for the average citizen.</p>
+                    <p><strong>Example: The Transcontinental Railroad</strong></p>
+                    <p>In the 1860s, the U.S. government chartered two private corporations—the Central Pacific and Union Pacific Railroads—and provided them with resources and land grants to facilitate the construction of the railroads. Through these grants, publicly owned land was distributed to private citizens, who could then use it for their own gain. However, a broader public gain was simultaneously being provided in the form of a nationwide transportation network.</p>
+                </div>
+            </div>
+
+            <div class="milestone-box">
+                <h4>🏗️ Milestone: The Hoover Dam</h4>
+                <p>As westward expansion led to development of the American Southwest, settlers increasingly realized that they needed a way to control the frequent floods and droughts that made agriculture difficult in the region. As early as 1890, land speculators had tried diverting the Colorado River for this purpose.</p>
+                <p>It wasn't until 1922 that the U.S. Bureau of Reclamation chose the Black Canyon as a good location for a dam to divert the river. Since it would affect seven states (as well as Mexico), the federal government took the lead on the project, which eventually cost $49 million and more than one hundred lives.</p>
+                <p>The dam faced significant opposition from members of other states, who felt its massive price tag benefitted only a small group, not the whole nation. However, in 1928, Congress passed the Boulder Canyon Project Act. The Hoover Dam, completed in 1935, served the dual purpose of generating hydroelectric power and irrigating two million acres of land from the resulting reservoir (Lake Mead).</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-4', 35)">
+                <div class="card-prompt">🔎 Click to explore: Regulatory Policy</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> While distributive policy has diffuse costs and concentrated benefits, <strong>regulatory policy</strong> features the opposite arrangement, with concentrated costs and diffuse benefits.</p>
+                    <p>A relatively small number of groups or individuals bear the costs of regulatory policy, but its benefits are expected to be distributed broadly across society. Regulatory policy is most effective for controlling or protecting public or common resources.</p>
+                    <p>Among the best-known examples are policies designed to protect public health and safety, and the environment. These regulatory policies prevent manufacturers or businesses from maximizing their profits by excessively polluting the air or water, selling products they know to be harmful, or compromising the health of their employees during production.</p>
+                    <p><strong>The Jungle and Food Safety:</strong> In 1906, Upton Sinclair's novel <em>The Jungle</em> exposed unsanitary working conditions and unsavory business practices in the meat-packing industry. This work and others like it helped to spur the passage of the Pure Food and Drug Act (1906) and ultimately led to the creation of the U.S. Food and Drug Administration (FDA).</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-5', 35)">
+                <div class="card-prompt">🔎 Click to explore: Redistributive Policy</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> A final type of policy is <strong>redistributive policy</strong>, so named because it redistributes resources in society from one group to another. According to Lowi, the costs are concentrated and so are the benefits, but different groups bear the costs and enjoy the benefits.</p>
+                    <p>Most redistributive policies are intended to have a sort of "Robin Hood" effect; their goal is to transfer income and wealth from one group to another such that everyone enjoys at least a minimal standard of living.</p>
+                    <p>Typically, the wealthy and middle class pay into the federal tax base, which then funds need-based programs that support low-income individuals and families. A few examples of redistributive policies are:</p>
+                    <ul>
+                        <li><strong>Head Start</strong> (education)</li>
+                        <li><strong>Pell Grants</strong> (higher education)</li>
+                        <li><strong>Medicaid</strong> (health care)</li>
+                        <li><strong>Temporary Assistance for Needy Families (TANF)</strong> (income support)</li>
+                        <li><strong>Supplementary Nutritional Aid Program (SNAP)</strong> (food programs)</li>
+                    </ul>
+                    <p>The government also uses redistribution to incentivize specific behaviors or aid small groups of people, such as Pell grants to encourage college attendance and tax credits to encourage home ownership.</p>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Policy Type</th>
+                    <th>Who Pays (Costs)</th>
+                    <th>Who Benefits</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td><strong>Distributive</strong></td>
+                    <td>Many (diffuse)</td>
+                    <td>Few (concentrated)</td>
+                    <td>Highways, railroads, farm subsidies</td>
+                </tr>
+                <tr>
+                    <td><strong>Regulatory</strong></td>
+                    <td>Few (concentrated)</td>
+                    <td>Many (diffuse)</td>
+                    <td>Environmental protection, food safety</td>
+                </tr>
+                <tr>
+                    <td><strong>Redistributive</strong></td>
+                    <td>Some groups (concentrated)</td>
+                    <td>Other groups (concentrated)</td>
+                    <td>SNAP, Medicaid, Pell Grants</td>
+                </tr>
+            </table>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Toll goods differ from public goods in that ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 25)">They provide special access to some and not all</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">They require the payment of a fee up front</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 25)">They provide a service for only the wealthy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 25)">They are free and available to all</div>
+                <div class="feedback-box" id="feedback-q2-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which type of policy directly benefits the most citizens?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">Regulatory policy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Distributive policy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Redistributive policy</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Self-regulatory policy</div>
+                <div class="feedback-box" id="feedback-q2-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ The "tragedy of the commons" refers to ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 30)">Government failure to provide public goods</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 30)">Individuals exhausting a common resource by acting in their own immediate self-interest</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 30)">The inability of private markets to produce consumer goods</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 30)">Excessive government regulation of businesses</div>
+                <div class="feedback-box" id="feedback-q2-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(2); navigateTo('homePage')">
+                ✓ Complete Section 2 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 3: Policy Arenas -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🛡️ Section 3: Policy Arenas</h2>
+                <p class="subtitle">Key domestic areas of public policy and major government programs</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Overview of Domestic Policy Arenas</h3>
+                <p>In practice, public policy consists of specific programs that provide resources to members of society, create regulations that protect U.S. citizens, and attempt to equitably fund the government. We can broadly categorize most policies based on their goals or the sector of society they affect, although many, such as food stamps, serve multiple purposes.</p>
+                <p>Implementing these policies costs hundreds of billions of dollars each year, and understanding the goals of this spending and where the money goes is of vital importance to citizens and students of politics alike.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🛡️ Social Welfare Policy</h3>
+                <p>The U.S. government began developing a social welfare policy during the Great Depression of the 1930s. By the 1960s, social welfare had become a major function of the federal government—one to which most public policy funds are devoted—and had developed to serve several overlapping functions:</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🛡️ Safety Net</div>
+                    <div>A way to provide for members of society experiencing economic hardship. The social safety net creates an automatic stimulus for a society by catching members who are suffering economic hardship through no fault of their own.</div>
+                </div>
+
+                <ul>
+                    <li><strong>First:</strong> Social welfare policy is designed to ensure some level of equity in a democratic political system based on competitive, free-market economics. During the Great Depression, many politicians came to fear that the high unemployment and low-income levels plaguing society could threaten the stability of democracy.</li>
+                    <li><strong>Second:</strong> Social welfare policy creates an automatic stimulus for a society by building a safety net. For an individual family, this safety net makes the difference between eating and starving; for an entire economy, it could prevent an economic recession from sliding into a broader and more damaging depression.</li>
+                </ul>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-1', 35)">
+                <div class="card-prompt">🔎 Click to explore: Social Security</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> One of the oldest and largest pieces of social welfare policy is <strong>Social Security</strong>, which cost the United States about $845 billion in 2014 alone. These costs are offset by a 12.4 percent payroll tax on all wages up to $118,500; employers and workers who are not self-employed split the bill for each worker.</p>
+                    
+                    <div class="definition-box">
+                        <div class="definition-term">👴 Social Security</div>
+                        <div>A social welfare policy for people who no longer receive an income from employment.</div>
+                    </div>
+
+                    <p>Social Security was conceived as a solution to several problems inherent to the Industrial Era economy:</p>
+                    <ul>
+                        <li><strong>Problem 1:</strong> By the 1920s and 1930s, an increasing number of workers were earning their living through manual or day-wage labor. As their bodies weakened with age or if they were injured, their ability to provide for themselves was compromised.</li>
+                        <li><strong>Problem 2:</strong> Urban widows. Most American women stayed home while their husbands provided income. Should their husbands die or become injured, these women had no wage-earning skills.</li>
+                    </ul>
+                    <p>Social Security addresses these concerns with three important tools:</p>
+                    <ol>
+                        <li><strong>Retirement benefit</strong> - A form of pension claimed upon reaching retirement age (originally 65, now 67 for those born after 1959)</li>
+                        <li><strong>Disability payout</strong> - Distributed to workers who become unable to work due to disability lasting at least twelve months</li>
+                        <li><strong>Supplemental Security Income (SSI)</strong> - Provides supplemental income to adults or children with considerable disability or to the elderly who fall below an income threshold</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>⚠️ Social Security's Long-Term Challenges</h3>
+                <p>During the George W. Bush administration, Social Security became a highly politicized topic as the Republican Party sought to find a way of preventing what experts predicted would be the impending collapse of the Social Security system.</p>
+                <p>In 1950, the ratio of workers paying into the program to beneficiaries receiving payments was <strong>16.5 to 1</strong>. In 2020, that number stood at <strong>2.8 to 1</strong>, and is expected to fall to <strong>2.3 to 1</strong> by 2035.</p>
+                <p>Most predictions suggest that, due to continuing demographic changes including slower population growth and an aging population, by 2033, the amount of revenue generated from payroll taxes will no longer be sufficient to cover costs.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-2', 35)">
+                <div class="card-prompt">🔎 Click to explore: Medicare and Medicaid</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> While Social Security was designed to provide cash payments to sustain elderly people and some people with disabilities, <strong>Medicare</strong> and <strong>Medicaid</strong> were intended to ensure that vulnerable populations have access to health care.</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">🏥 Medicare</div>
+                        <div>An entitlement health insurance program for older people and retirees who no longer get health insurance through their work.</div>
+                    </div>
+
+                    <p>Medicare, like Social Security, is an entitlement program funded through payroll taxes. Its purpose is to make sure that senior citizens and retirees have access to low-cost health care they might not otherwise have. Medicare provides three major forms of coverage:</p>
+                    <ul>
+                        <li>A guaranteed insurance benefit that helps cover major hospitalization</li>
+                        <li>Fee-based supplemental coverage that retirees can use to lower costs for doctor visits</li>
+                        <li>A prescription drug benefit</li>
+                    </ul>
+                    <p>In 2019, Medicare cost the federal government approximately <strong>$796 billion</strong>.</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">💊 Medicaid</div>
+                        <div>A health insurance program for low-income citizens. It is a formula-based program, meaning beneficiaries must demonstrate they fall within a particular income category.</div>
+                    </div>
+
+                    <p>Medicaid differs dramatically from Medicare in that it is partially funded by states, many of which have reduced access to the program by setting the income threshold so low that few people qualify. Total costs for Medicaid in 2020 were about <strong>$627 billion</strong>, about $405 billion of which was paid by the federal government.</p>
+                </div>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>📊 The Big Picture on Social Welfare Spending</h4>
+                <p>Collectively, <strong>Social Security, Medicare, and Medicaid make up almost 48 percent of total federal government spending</strong> (as of 2019). Several other smaller programs also provide income support to families, including:</p>
+                <ul>
+                    <li>Temporary Assistance for Needy Families (TANF)</li>
+                    <li>Supplemental Nutrition Assistance Program (SNAP/food stamps)</li>
+                    <li>Unemployment insurance program</li>
+                    <li>Various housing assistance programs</li>
+                </ul>
+                <p>Collectively, these additional programs add up to a little over <strong>$361 billion</strong>.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🔬 Science, Technology, and Education</h3>
+                <p>After World War II ended, the United States quickly realized that it had to address two problems to secure its fiscal and national security future:</p>
+                <ol>
+                    <li>More than ten million servicemen and women needed to be reintegrated into the workforce, and many lacked appreciable work skills.</li>
+                    <li>The United States' success in its new conflict with the Soviet Union depended on the rapid development of a new, highly technical military-industrial complex.</li>
+                </ol>
+                <p>To confront these challenges, the U.S. government passed several important pieces of legislation to provide education assistance to workers and research dollars to industry.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: Science and Technology Policy</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Much of the nation's science and technology policy benefits its military, in the form of research and development funding for a range of defense projects. The federal government still promotes research for civilian uses, mostly through:</p>
+                    <ul>
+                        <li><strong>National Science Foundation</strong></li>
+                        <li><strong>National Institutes of Health</strong></li>
+                        <li><strong>National Aeronautics and Space Administration (NASA)</strong></li>
+                        <li><strong>National Oceanic and Atmospheric Administration</strong></li>
+                    </ul>
+                    <p>Recent debate over these agencies has focused on whether government funding is necessary or if private entities would be better suited. For example, although NASA continues to develop a replacement for the now-defunct U.S. space shuttle program, much of its workload is currently being performed by private companies working to develop their own space launch, resupply, and tourism programs.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📚 Education Policy</h3>
+                <p>The problem of trying to direct and fund the education of a modern U.S. workforce is familiar to many students of American government. Educational systems exist to carry out two distinct and lofty goals:</p>
+                <ol>
+                    <li>Educate and provide opportunity to a learned society of individuals who can together govern society and run communities.</li>
+                    <li>Provide practical training for students to make a living.</li>
+                </ol>
+                <p>Historically, education has largely been the job of the states. While they have provided a very robust K–12 public education system, the national government has never moved to create an equivalent system of national higher education academies or universities as many other countries have done.</p>
+                <p>The overwhelming portion of the federal government's higher education money is spent on <strong>student loans, grants, and work-study programs</strong>. Resources are also set aside to cover job-retraining programs for individuals who lack private-sector skills or who need to be retrained to meet changes in the economy's demands for the labor force.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏭 Business Stimulus and Regulation</h3>
+                <p>A final key aspect of domestic policy is the growth and regulation of business. The size and strength of the economy is very important to politicians whose jobs depend on citizens' believing in their own future prosperity. At the same time, people in the United States want to live in a world where they feel safe from unfair or environmentally damaging business practices.</p>
+                <p>These desires have forced the government to perform a delicate balancing act between programs that help grow the economy by providing benefits to the business sector and those that protect consumers, often by curtailing or regulating the business sector.</p>
+                <p>Two of the largest recipients of government aid to business are <strong>agriculture</strong> and <strong>energy</strong>. Both are multi-billion dollar industries concentrated in rural and/or electorally influential states. Government subsidies also protect these industries' profitability.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-4', 30)">
+                <div class="card-prompt">🔎 Click to explore: Key Regulatory Agencies</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> When it comes to regulation, the federal government has created several agencies responsible for protecting the public:</p>
+                    <ul>
+                        <li><strong>OSHA (Occupational Safety and Health Administration)</strong> - Worker safety</li>
+                        <li><strong>FDA (Food and Drug Administration)</strong> - Food safety</li>
+                        <li><strong>Bureau of Consumer Protection</strong> - Ensures that businesses do not mislead consumers with deceptive or manipulative practices</li>
+                        <li><strong>EPA (Environmental Protection Agency)</strong> - Charged with ensuring that businesses do not excessively pollute the nation's air or waterways</li>
+                    </ul>
+                    <p>A complex array of additional regulatory agencies governs specific industries such as banking and finance.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Social Security and Medicare are notable for their assistance to which group?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 25)">The poor</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 25)">Young families starting out</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 25)">Those in urban areas</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">The elderly</div>
+                <div class="feedback-box" id="feedback-q3-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Setting aside Social Security and Medicare, other entitlement programs in the U.S. government ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">Constitute over half the budget</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">Constitute well under one-quarter of the budget</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">Are paid for by the states with no cost to the Federal government</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">Have been eliminated in recent years</div>
+                <div class="feedback-box" id="feedback-q3-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which agency is responsible for ensuring food safety in the United States?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 30)">EPA</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-3', 30)">FDA</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 30)">OSHA</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 30)">Bureau of Consumer Protection</div>
+                <div class="feedback-box" id="feedback-q3-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(3); navigateTo('homePage')">
+                ✓ Complete Section 3 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 4: Policymakers -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>👥 Section 4: Policymakers</h2>
+                <p class="subtitle">Understanding policy advocates, analysts, and the policy process</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏥 Introduction: The ACA Debate</h3>
+                <p>Many Americans were concerned when Congress began debating the Affordable Care Act (ACA). As the program took shape, some people felt the changes it proposed were being debated too hastily, would be implemented too quickly, or would summarily give the government control over an important piece of the U.S. economy—the health care industry.</p>
+                <p>Ironically, the government had been heavily engaged in providing health care for decades. More than 50 percent of all health care dollars spent were being spent by the U.S. government well before the ACA was enacted. Despite protesters' resistance to government involvement in health care, there is no keeping government out of Medicare; <strong>the government IS Medicare</strong>.</p>
+                <p>What many did not realize is that few if any of the proposals that eventually became part of the ACA were original. While the country was worried about problems like terrorism, the economy, and conflicts over LGBTQ rights, armies of individuals were debating the best ways to fix the nation's health care delivery.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📢 Policy Advocates</h3>
+                <p>Most people have some policy position or issue they would like to see altered. One of the reasons the news media are so enduring is that citizens have a range of opinions on public policy, and they are very interested in debating how a given change would improve their lives or the country's. But despite their interests, most people do little more than vote or occasionally contribute to a political campaign. A few people, however, become <strong>policy advocates</strong> by actively working to propose or maintain public policy.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📢 Policy Advocates</div>
+                    <div>People who actively work to propose or maintain public policy. They hold a normative position on an issue—a conviction about what should or ought to be done.</div>
+                </div>
+
+                <p>One way to think about policy advocates is to recognize that they hold a <strong>normative position</strong> on an issue, that is, they have a conviction about what should or ought to be done. The best public policy, in their view, is one that accomplishes a specific goal or outcome. For this reason, advocates often begin with an objective and then try to shape or create proposals that help them accomplish that goal.</p>
+                <p>The most effective advocates are usually hired professionals who form <strong>lobbying groups</strong> or <strong>think tanks</strong> to promote their agenda.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-1', 35)">
+                <div class="card-prompt">🔎 Click to explore: AARP as a Policy Advocate</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> A lobbying group that frequently takes on advocacy roles is <strong>AARP</strong> (formerly the American Association of Retired Persons). AARP's primary job is to convince the government to provide more public resources and services to senior citizens, often through regulatory or redistributive politics.</p>
+                    <p>Chief among its goals are lower health care costs and the safety of Social Security pension payments. These aims put AARP in the Democratic Party's electoral coalition, since Democrats have historically been stronger advocates for Medicare's creation and expansion.</p>
+                    <p><strong>Case Study: Medicare Part D (2002)</strong></p>
+                    <p>In 2002, Democrats and Republicans were debating a major change to Medicare. The Democratic Party supported expanding Medicare to include free or low-cost prescription drugs, while the Republicans preferred a plan that would require seniors to purchase drug insurance through a private insurer. To the surprise of many, AARP supported the Republican proposal.</p>
+                    <p>While Democrats argued that their position would have provided a better deal for individuals, AARP reasoned that the Republican plan had a much better chance of passing. AARP had done its job as an advocate for seniors by <strong>creating a new benefit it hoped could later be expanded</strong>, rather than fighting for an extreme position that would have left it with nothing.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔬 Policy Analysts</h3>
+                <p>A second approach to creating public policy is a bit more objective. Rather than starting with what ought to happen and seeking ways to make it so, <strong>policy analysts</strong> try to identify all the possible choices available to a decision maker and then gauge their impacts if implemented.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔬 Policy Analysts</div>
+                    <div>People who identify all possible choices available to a decision maker and assess the potential impact of each. Their goal is to inform decision makers, not to advocate for any particular option.</div>
+                </div>
+
+                <p>The goal of the analyst isn't really to encourage the implementation of any of the options; rather, it is to make sure decision makers are fully informed about the implications of the decisions they do make.</p>
+                <p>Understanding the financial and other costs and benefits of policy choices requires analysts to make strategic guesses about how the public and governmental actors will respond.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-2', 30)">
+                <div class="card-prompt">🔎 Click to explore: Policy Analysis Think Tanks</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Because advocates have an incentive to understate costs and overstate benefits, policy analysis tends to be a highly politicized aspect of government. It is critical for policymakers and voters that policy analysts provide the most accurate analysis possible.</p>
+                    <p>A number of independent or semi-independent think tanks have sprung up in Washington, DC, to provide assessments of policy options. Most businesses or trade organizations also employ their own policy-analysis wings to help them understand proposed changes or even offer some of their own.</p>
+                    <p><strong>Example: The Cato Institute</strong></p>
+                    <p>The Cato Institute is a well known and highly respected policy analysis group that both liberal and conservative politicians have turned to when considering policy options. But the Cato Institute has a known libertarian bias; most of the problems it selects for analysis have the potential for private sector solutions.</p>
+                    <p>Other analysis organizations include the <strong>RAND Corporation</strong>, which has conducted objective policy analysis for corporate, nonprofit, and government clients since the mid-twentieth century.</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: Congressional Budget Office (CBO)</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Both the Congress and the president have tried to reduce the bias in policy analysis by creating their own theoretically nonpartisan policy branches.</p>
+                    <p>In Congress, the best known of these is the <strong>Congressional Budget Office, or CBO</strong>. Authorized in the 1974 Congressional Budget and Impoundment Control Act, the CBO was formally created in 1975 as a way of increasing Congress's independence from the executive branch.</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">📊 Congressional Budget Office</div>
+                        <div>The congressional office that scores the spending or revenue impact of all proposed legislation to assess its net effect on the budget.</div>
+                    </div>
+
+                    <p>The CBO is responsible for <strong>scoring</strong> the spending or revenue impact of all proposed legislation to assess its net effect on the budget. In recent years, it has been the CBO's responsibility to provide Congress with guidance on how to best balance the budget.</p>
+                    <p>In the executive branch, each individual department and agency is technically responsible for its own policy analysis. The <strong>Office of Management and Budget (OMB)</strong> was created to "serve the President of the United States in implementing his [or her] vision" of policy.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🔄 The Policy Process</h3>
+                <p>The policy process contains four sequential stages: (1) agenda setting, (2) policy enactment, (3) policy implementation, and (4) evaluation. Given the sheer number of issues already processed by the government, called the <strong>continuing agenda</strong>, and the large number of new proposals being pushed at any one time, it is typically quite difficult to move a new policy all the way through the process.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">Stage 1</span>
+                    <div class="timeline-content">
+                        <strong>Agenda Setting</strong> - Has two subphases: (1) Problem identification - identifies issues that merit discussion, and (2) Alternative specification - considers solutions to fix the difficulty. One of the more important tasks for a policy advocate is to frame the issue in a compelling way.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Stage 2</span>
+                    <div class="timeline-content">
+                        <strong>Policy Enactment</strong> - The elected branches of government consider one specific solution to a problem and decide whether to pass it. This is the most visible stage that usually garners the most press coverage.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Stage 3</span>
+                    <div class="timeline-content">
+                        <strong>Policy Implementation</strong> - Government agencies do the work of actually implementing the policy. Can be either <strong>top-down</strong> (federal government dictates specifics) or <strong>bottom-up</strong> (federal government allows local flexibility).
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Stage 4</span>
+                    <div class="timeline-content">
+                        <strong>Evaluation</strong> - Asks "How well did this policy do what we designed it to do?" Information from evaluation feeds back into other stages, creating a <strong>public policy cycle</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-4', 30)">
+                <div class="card-prompt">🔎 Click to explore: Policy Implementation Approaches</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> On a national level, policy implementation can be either <strong>top-down</strong> or <strong>bottom-up</strong>:</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">⬇️ Top-Down Implementation</div>
+                        <div>A strategy in which the federal government dictates the specifics of the policy, and each state implements it the same exact way.</div>
+                    </div>
+
+                    <div class="definition-box">
+                        <div class="definition-term">⬆️ Bottom-Up Implementation</div>
+                        <div>A strategy in which the federal government allows local areas some flexibility to meet their specific challenges and needs in implementing policy.</div>
+                    </div>
+
+                    <p><strong>Evaluation Example: Abstinence-Only Education</strong></p>
+                    <p>The United States funded abstinence-only sex education for teens with the goal of reducing teen pregnancy. A 2011 study published in the journal PLoS One, however, found that abstinence-only education actually <strong>increased</strong> teen pregnancy rates—demonstrating why systematic evaluation is crucial to determining policy effectiveness.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which stage of the public policy process includes identification of problems in need of fixing?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">Agenda setting</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 25)">Enactment</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 25)">Implementation</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 25)">Evaluation</div>
+                <div class="feedback-box" id="feedback-q4-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Policy analysts seek ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">Evidence</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">Their chosen outputs</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">Influence</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">Money</div>
+                <div class="feedback-box" id="feedback-q4-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ In bottom-up implementation, the federal government ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 30)">Dictates exactly how states must implement a policy</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-3', 30)">Allows local areas some flexibility to meet their specific challenges</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 30)">Does not get involved in policy implementation at all</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 30)">Requires all states to have identical outcomes</div>
+                <div class="feedback-box" id="feedback-q4-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(4); navigateTo('homePage')">
+                ✓ Complete Section 4 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 5: Budgeting and Tax Policy -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>💰 Section 5: Budgeting and Tax Policy</h2>
+                <p class="subtitle">Economic theories, fiscal policy, taxation, and the Federal Reserve</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 The Federal Budget</h3>
+                <p>A country spends, raises, and regulates money in accordance with its values. In all, the federal government's budget for 2020 was <strong>$6.55 trillion</strong>, and for 2024 was <strong>$6.8 trillion</strong>.</p>
+                <p>Policymakers make considerable effort to ensure that long-term priorities are protected from the heat of the election cycle and short-term changes in public opinion. The decision to put some policymaking functions out of the reach of Congress also reflects economic philosophies about the best ways to grow, stimulate, and maintain the economy.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Approaches to the Economy</h3>
+                <p>Until the 1930s, most policy advocates argued that the best way for the government to interact with the economy was through a hands-off approach formally known as <strong>laissez-faire economics</strong>.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🤲 Laissez-Faire</div>
+                    <div>An economic policy that assumes the key to economic growth and development is for the government to allow private markets to operate efficiently without interference.</div>
+                </div>
+
+                <p>Proponents of laissez-faire believed private investors were better equipped than governments to figure out which sectors of the economy were most likely to grow and which new products were most likely to be successful. They also felt that keeping government out of the business of business would create an automatic cycle of economic growth and contraction.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📉 Recession</div>
+                    <div>A temporary contraction of the economy in which there is no economic growth for two consecutive quarters.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-1', 35)">
+                <div class="card-prompt">🔎 Click to explore: Keynesian Economics</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> The Great Depression challenged the laissez-faire view. When President Franklin Roosevelt came to office in 1933, the United States had already been in the depths of the Great Depression for several years. Roosevelt sought to implement a new approach to economic regulation known as <strong>Keynesianism</strong>.</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">📈 Keynesian Economics</div>
+                        <div>An economic policy based on the idea that economic growth is closely tied to the ability of individuals to consume goods. Named for economist John Maynard Keynes.</div>
+                    </div>
+
+                    <p>Keynes suggested that economic growth was closely tied to the ability of individuals to consume goods. It didn't matter how or where investors wanted to invest their money if no one could afford to buy the products they wanted to make.</p>
+                    <p>Keynesianism counters this problem by <strong>increasing government spending</strong> in ways that improve consumption. Some of the proposals Keynes suggested were:</p>
+                    <ul>
+                        <li>Payments or pension for the unemployed and retired</li>
+                        <li>Tax incentives to encourage consumption in the middle class</li>
+                    </ul>
+                    <p>Keynesianism dominated U.S. fiscal or spending policy from the 1930s to the 1970s.</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-2', 35)">
+                <div class="card-prompt">🔎 Click to explore: Supply-Side Economics</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> By the 1970s, high inflation began to slow economic growth. Some economists, such as Arthur Laffer, began to argue that the social welfare and high tax policies created in the name of Keynesianism were overstimulating the economy.</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">📦 Supply-Side Economics</div>
+                        <div>An economic policy that assumes economic growth is largely a function of a country's productive capacity. Supply-siders argue that increased regulation and higher taxes reduce the incentive to invest new money into the economy.</div>
+                    </div>
+
+                    <p>Supply-siders have advocated reducing taxes and regulations to spur economic growth. They argue that when businesses and wealthy individuals keep more of their money, they will invest it in ways that create jobs and economic growth.</p>
+                    <p>The debate between Keynesian and supply-side approaches continues to shape economic policy discussions today.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>💵 Mandatory vs. Discretionary Spending</h3>
+                <p>The federal budget is divided into two broad categories: <strong>mandatory</strong> and <strong>discretionary</strong> spending.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔒 Mandatory Spending</div>
+                    <div>Government spending earmarked for entitlement programs guaranteeing support to those who meet certain qualifications. About $4.1 trillion of the 2024 budget (roughly 60 percent of all federal expenditures).</div>
+                </div>
+
+                <p>The overwhelming portion of mandatory spending is earmarked for <strong>entitlement programs</strong> guaranteed to those who meet certain qualifications, usually based on age, income, or disability. These include:</p>
+                <ul>
+                    <li>Medicare and Medicaid</li>
+                    <li>Social Security</li>
+                    <li>Major income security programs (unemployment insurance, SNAP)</li>
+                </ul>
+                <p>About 18 percent is devoted to benefits designated for former federal employees, including military retirement and Veterans Administration programs.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Discretionary Spending</div>
+                    <div>Government spending that Congress must pass legislation to authorize each year. Covers government operations, science and technology, foreign affairs, education, transportation, and military spending.</div>
+                </div>
+
+                <p>About 53 percent of the approximately $1.8 trillion set aside for discretionary spending each year pays for most government operations. The other 47 percent is devoted to the military—the second-largest component of the total budget (only Social Security is larger).</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📈 Deficits and Debt</h3>
+                <p>In theory, the amount of revenue raised by the national government should be equal to expenses, but with the exception of a brief period from 1998 to 2000, that has not been the case.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📉 Deficit</div>
+                    <div>The annual amount by which expenditures are greater than revenues.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">💳 Debt</div>
+                    <div>The total amount the government owes across all years. As of March 2021, the total debt was $28 trillion.</div>
+                </div>
+
+                <p>Balancing the budget has been a major goal of both the Republican and Democratic parties for the past several decades, although the parties tend to disagree on the best way to accomplish the task.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: Tax Policy</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> All governments must raise revenue in order to operate. The most common way is by applying some sort of tax on residents. In 2020, the United States raised about <strong>$3.4 trillion</strong> in revenue.</p>
+                    <p>The major sources of federal revenue include:</p>
+                    <ul>
+                        <li><strong>Income taxes:</strong> $1.61 trillion</li>
+                        <li><strong>Payroll taxes</strong> (Social Security and Medicare): $1.31 trillion</li>
+                        <li><strong>Corporate income taxes:</strong> $212 billion</li>
+                        <li><strong>Excise taxes:</strong> $87 billion</li>
+                    </ul>
+                    <p>These four tax streams make up about 95 percent of total government revenue.</p>
+
+                    <div class="definition-box">
+                        <div class="definition-term">📈 Progressive Tax</div>
+                        <div>A tax that tends to increase the effective tax rate as the wealth or income of the taxpayer increases. Supported by Keynesians.</div>
+                    </div>
+
+                    <div class="definition-box">
+                        <div class="definition-term">📉 Regressive Tax</div>
+                        <div>A tax applied at a lower overall rate as individuals' income rises. Examples include excise taxes ("sin taxes") on goods like alcohol, tobacco, and gasoline.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-4', 30)">
+                <div class="card-prompt">🔎 Click to explore: The Federal Reserve Board</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Financial panics arise when too many people, worried about the solvency of their investments, try to withdraw their money at the same time. Such panics plagued U.S. banks until 1913, when Congress enacted the <strong>Federal Reserve Act</strong>.</p>
+                    <p>The act established the <strong>Federal Reserve System</strong>, also known as the Fed, as the central bank of the United States. The Fed's three original goals were to promote:</p>
+                    <ol>
+                        <li>Maximum employment</li>
+                        <li>Stable prices</li>
+                        <li>Moderate long-term interest rates</li>
+                    </ol>
+                    <p>The Fed's role now includes influencing <strong>monetary policy</strong> (the means by which the nation controls the size and growth of the money supply), supervising and regulating banks, and providing them with financial services like loans.</p>
+                    <p>The Federal Reserve System is overseen by a <strong>board of governors</strong>, known as the Federal Reserve Board. The president appoints the seven governors, each of whom serves a fourteen-year term. A chair and vice chair lead the board for terms of four years each.</p>
+                    <p>By raising or lowering banks' interest rates, the chair has the ability to reduce inflation or stimulate growth. The Fed's dual mandate is to keep inflation low (under 2 percent) and unemployment low (below 5 percent).</p>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Economic Approach</th>
+                    <th>Key Principle</th>
+                    <th>Policy Preference</th>
+                </tr>
+                <tr>
+                    <td><strong>Laissez-Faire</strong></td>
+                    <td>Markets self-regulate</td>
+                    <td>Minimal government intervention</td>
+                </tr>
+                <tr>
+                    <td><strong>Keynesian</strong></td>
+                    <td>Consumption drives growth</td>
+                    <td>Government spending to stimulate demand</td>
+                </tr>
+                <tr>
+                    <td><strong>Supply-Side</strong></td>
+                    <td>Production capacity drives growth</td>
+                    <td>Tax cuts and deregulation</td>
+                </tr>
+            </table>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ A deficit is ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 25)">The overall amount owed by government for past borrowing</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 25)">The annual budget shortfall between revenues and expenditures</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 25)">The cancellation of an entitlement program</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 25)">All the above</div>
+                <div class="feedback-box" id="feedback-q5-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Entitlement (or mandatory) spending is ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 25)">Formula-based spending that goes to individual citizens</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 25)">A program of contracts to aerospace companies</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 25)">Focused on children</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 25)">Concentrated on education</div>
+                <div class="feedback-box" id="feedback-q5-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Keynesian economics argues that economic growth is tied to ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 30)">The productive capacity of a country</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-3', 30)">The ability of individuals to consume goods</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 30)">Tax cuts for businesses</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 30)">Government staying out of the economy</div>
+                <div class="feedback-box" id="feedback-q5-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(5); navigateTo('homePage')">
+                ✓ Complete Section 5 & Return Home
+            </button>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>👤 TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✔ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateTo('homePage')">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 16: Domestic Policy</p>
+                        
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">95%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>📋 Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Name:</span>
+                                    <span id="reportStudentName">Anonymous</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span id="reportCompletionDate">--</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span id="reportTime">--</span>
+                                </div>
+                            </div>
+
+                            <div class="performance-section">
+                                <h3>📊 Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <td>Section 1: What Is Public Policy?</td>
+                                        <td id="status1">⭕</td>
+                                        <td id="points1">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 2: Categorizing Public Policy</td>
+                                        <td id="status2">⭕</td>
+                                        <td id="points2">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 3: Policy Arenas</td>
+                                        <td id="status3">⭕</td>
+                                        <td id="points3">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 4: Policymakers</td>
+                                        <td id="status4">⭕</td>
+                                        <td id="points4">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 5: Budgeting and Tax Policy</td>
+                                        <td id="status5">⭕</td>
+                                        <td id="points5">0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/5</div>
+                                <div class="metric-label">Sections Complete</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This report documents the student's engagement with Chapter 16: Domestic Policy of the TCC Federal Government Trailblazer Trek. The percentage reflects interactive content completion and quiz performance. Students should aim for 80% or higher for full participation credit.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            score: 0,
+            level: 'Explorer',
+            studentName: '',
+            completedSections: new Set(),
+            earnedPoints: new Set(),
+            answeredQuestions: new Set()
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Policy Sage'
+        };
+
+        // Total possible points
+        const maxPoints = 1150;
+
+        // Navigation
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            if (sectionId === 'reportPage') {
+                updateReportPage();
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Save student name
+        function saveName() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput.value.trim()) {
+                gameState.studentName = nameInput.value.trim();
+                showPoints(0, 'Welcome, ' + gameState.studentName + '!');
+            }
+        }
+
+        // Reveal card
+        function revealCard(element, cardId, points) {
+            if (element.classList.contains('revealed')) return;
+            
+            element.classList.add('revealed');
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+            
+            if (!gameState.earnedPoints.has(cardId)) {
+                gameState.earnedPoints.add(cardId);
+                addPoints(points);
+                showPoints(points);
+            }
+            
+            checkSectionCompletion(element);
+        }
+
+        // Handle answer
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+            
+            gameState.answeredQuestions.add(questionId);
+            
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.kc-option');
+            
+            options.forEach(option => {
+                option.classList.add('disabled');
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                addPoints(points);
+                showPoints(points);
+                showFeedback(questionId, true, '✅ Correct! +' + points + ' points!');
+            } else {
+                element.classList.add('incorrect');
+                showFeedback(questionId, false, '❌ Not quite. The correct answer is highlighted.');
+                options.forEach(option => {
+                    if (option.onclick && option.onclick.toString().includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+            
+            checkSectionCompletion(element);
+        }
+
+        // Show feedback
+        function showFeedback(questionId, isCorrect, message) {
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            feedbackBox.textContent = message;
+            feedbackBox.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+        }
+
+        // Points system
+        function addPoints(points) {
+            gameState.score += points;
+            updateScore();
+            updateLevel();
+            updateProgress();
+        }
+
+        function showPoints(points, customMessage = null) {
+            const popup = document.getElementById('pointsPopup');
+            const message = document.getElementById('pointsMessage');
+            
+            message.textContent = customMessage || `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (gameState.score >= parseInt(threshold)) {
+                    newLevel = level;
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('level').textContent = newLevel;
+        }
+
+        function updateProgress() {
+            const percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Complete section
+        function completeSection(sectionNumber) {
+            gameState.completedSections.add(sectionNumber.toString());
+            const card = document.getElementById('card' + sectionNumber);
+            if (card) {
+                card.classList.add('completed');
+            }
+        }
+
+        // Check section completion
+        function checkSectionCompletion(element) {
+            let section = element.closest('.page');
+            if (!section) return;
+            
+            const sectionId = section.id;
+            const sectionNumber = sectionId.replace('section', '');
+            
+            const cards = section.querySelectorAll('.interactive-card');
+            const questions = section.querySelectorAll('.knowledge-check');
+            
+            let allCardsRevealed = true;
+            cards.forEach(card => {
+                if (!card.classList.contains('revealed')) {
+                    allCardsRevealed = false;
+                }
+            });
+            
+            let allQuestionsAnswered = true;
+            questions.forEach(question => {
+                const hasAnswer = question.querySelector('.kc-option.correct, .kc-option.incorrect');
+                if (!hasAnswer) {
+                    allQuestionsAnswered = false;
+                }
+            });
+            
+            if (allCardsRevealed && allQuestionsAnswered && sectionNumber) {
+                gameState.completedSections.add(sectionNumber);
+                const card = document.getElementById('card' + sectionNumber);
+                if (card) {
+                    card.classList.add('completed');
+                }
+            }
+        }
+
+        // Update report page
+        function updateReportPage() {
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Anonymous';
+            document.getElementById('reportCompletionDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            const percentage = Math.round((gameState.score / maxPoints) * 100);
+            
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.completedSections.size / 5) * 100);
+            
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            const gradeDisplay = document.getElementById('gradeDisplay');
+            gradeDisplay.style.background = gradeColor;
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            
+            const sectionPoints = {
+                1: 220, 2: 240, 3: 230, 4: 220, 5: 240
+            };
+            
+            for (let i = 1; i <= 5; i++) {
+                const isComplete = gameState.completedSections.has(i.toString());
+                const statusEl = document.getElementById('status' + i);
+                const pointsEl = document.getElementById('points' + i);
+                
+                if (isComplete) {
+                    statusEl.innerHTML = '✅';
+                    statusEl.style.color = '#1B5E20';
+                    const earned = Math.round(sectionPoints[i] * (gameState.score / maxPoints));
+                    pointsEl.textContent = earned;
+                } else {
+                    statusEl.innerHTML = '⭕';
+                    statusEl.style.color = '#B71C1C';
+                    pointsEl.textContent = '0';
+                }
+            }
+            
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = gameState.completedSections.size + '/5';
+            
+            const totalQuestions = 15;
+            const correctAnswers = Math.round((gameState.score / maxPoints) * totalQuestions);
+            const quizScore = Math.round((correctAnswers / totalQuestions) * 100);
+            document.getElementById('metricQuiz').textContent = Math.min(100, quizScore) + '%';
+            
+            const engagementScore = Math.min(100, Math.round((gameState.earnedPoints.size / 17) * 100));
+            document.getElementById('metricEngagement').textContent = engagementScore + '%';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateScore();
+            updateLevel();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: The Presidency - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .section-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            opacity: 0.9;
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-block h4 {
+            color: var(--primary-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box {
+            background: var(--highlight-yellow);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box h4 {
+            color: #5D4037;
+            margin-top: 0;
+        }
+
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--secondary-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .interactive-card.revealed {
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        .kc-option.correct {
+            background: #C8E6C9;
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFCDD2;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #C8E6C9;
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFCDD2;
+            color: var(--error);
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .bullet-list {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .bullet-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 1.5rem;
+            width: 15px;
+            height: 15px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-date {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-buttons button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .nav-buttons .prev-btn {
+            background: var(--text-secondary);
+            color: white;
+        }
+
+        .nav-buttons .next-btn {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+        }
+
+        .nav-buttons button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-header-bar h1 {
+            font-size: 1.3rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .report-content {
+            padding: 2rem;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-main {
+            text-align: center;
+        }
+
+        .report-title {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .performance-table {
+            width: 100%;
+            font-size: 0.95rem;
+        }
+
+        .performance-table td {
+            padding: 0.5rem;
+        }
+
+        .status-complete {
+            color: var(--success);
+        }
+
+        .status-incomplete {
+            color: var(--error);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .report-footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .instructor-note {
+            background: #FFF9C4;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: relative;
+            }
+            .report-container {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.75rem;
+            }
+
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 1rem;
+                margin-top: 100px;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-icons {
+                gap: 2rem;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .report-header-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏛️ Chapter 12: The Presidency</h1>
+        <div class="score-display">
+            <span>⭐ <span id="score">0</span> pts</span>
+            <span>🎖️ <span id="level">Explorer</span></span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>🏛️ The Presidency 🦅</h2>
+                <p class="hero-subtitle">
+                    Explore the most visible position in the U.S. government. Learn how the presidency was designed, 
+                    how presidents are elected, and how they exercise power through persuasion, direct action, and public appeal.
+                </p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">⚖️</div>
+                        <div class="label">Constitutional Design</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">🗳️</div>
+                        <div class="label">Electoral Process</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">📜</div>
+                        <div class="label">Executive Power</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your Name">
+                <button onclick="saveName()">Start Journey</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" id="card1" onclick="navigateToSection('section1')">
+                    <div class="badge">1</div>
+                    <h4>📜 Design & Evolution of the Presidency</h4>
+                    <p>How the framers created the executive branch and how it has grown over time</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" id="card2" onclick="navigateToSection('section2')">
+                    <div class="badge">2</div>
+                    <h4>🗳️ The Presidential Election Process</h4>
+                    <p>From primaries and caucuses to the Electoral College</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" id="card3" onclick="navigateToSection('section3')">
+                    <div class="badge">3</div>
+                    <h4>🏢 Organizing to Govern</h4>
+                    <p>Transition, appointments, and setting the presidential agenda</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" id="card4" onclick="navigateToSection('section4')">
+                    <div class="badge">4</div>
+                    <h4>📺 The Public Presidency</h4>
+                    <p>How presidents communicate with and persuade the public</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" id="card5" onclick="navigateToSection('section5')">
+                    <div class="badge">5</div>
+                    <h4>⚡ Direct Presidential Action</h4>
+                    <p>Executive orders, war powers, and unilateral authority</p>
+                    <div class="points">⭐ 200 points available</div>
+                </div>
+
+                <div class="section-card" id="card6" onclick="navigateToSection('reportPage')">
+                    <div class="badge">📊</div>
+                    <h4>📋 Your Completion Report</h4>
+                    <p>View your progress and achievements</p>
+                    <div class="points">View Certificate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Design and Evolution -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+            <div class="section-header">
+                <h2>📜 12.1 The Design and Evolution of the Presidency</h2>
+                <p class="subtitle">Understanding how the executive branch was created and grew over time</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Learning Objectives</h3>
+                <ul class="bullet-list">
+                    <li>Explain the reason for the design of the executive branch and its plausible alternatives</li>
+                    <li>Analyze the way presidents have expanded presidential power and why</li>
+                    <li>Identify the limitations on a president's power</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Introduction to the Presidency</h3>
+                <p>
+                    The presidency is the most visible position in the U.S. government. During the Constitutional Convention of 1787, 
+                    delegates accepted the need to empower a relatively strong and vigorous chief executive. But they also wanted this 
+                    chief executive to be bound by checks from the other branches of the federal government as well as by the 
+                    Constitution itself.
+                </p>
+                <p>
+                    Over time, the power of the presidency has grown in response to circumstances and challenges. However, to this day, 
+                    a president must still work with the other branches to be most effective. Unilateral actions, in which the president 
+                    acts alone on important and consequential matters, such as President Barack Obama's strategy on the Iran nuclear deal, 
+                    are bound to be controversial and suggest potentially serious problems within the federal government.
+                </p>
+                <p>
+                    Effective presidents, especially in peacetime, are those who work with the other branches through persuasion and 
+                    compromise to achieve policy objectives.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: What are the key questions about presidential power?</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Key Questions About the Presidency:</p>
+                    <ul class="bullet-list">
+                        <li>What are the powers, opportunities, and limitations of the presidency?</li>
+                        <li>How does the chief executive lead in our contemporary political system?</li>
+                        <li>What guides the chief executive's actions, including unilateral actions?</li>
+                        <li>If it is most effective to work with others to get things done, how does the president do so?</li>
+                        <li>What can get in the way of this goal?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Inventing the Presidency</h3>
+                <p>
+                    Since its invention at the Constitutional Convention of 1787, the presidential office has gradually become more 
+                    powerful, giving its occupants a far-greater chance to exercise leadership at home and abroad. The role of the 
+                    chief executive has changed over time, as various presidents have confronted challenges in domestic and foreign 
+                    policy in times of war as well as peace, and as the power of the federal government has grown.
+                </p>
+                <p>
+                    The Articles of Confederation made no provision for an executive branch, although they did use the term "president" 
+                    to designate the presiding officer of the Confederation Congress, who also handled other administrative duties.
+                </p>
+                <p>
+                    The presidency was proposed early in the Constitutional Convention in Philadelphia by Virginia's Edmund Randolph, 
+                    as part of James Madison's proposal for a federal government, which became known as the Virginia Plan. Madison 
+                    offered a rather sketchy outline of the executive branch, leaving open whether what he termed the "national executive" 
+                    would be an individual or a set of people. He proposed that Congress select the executive, whose powers and authority, 
+                    and even length of term of service, were left largely undefined.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🏛️ Council of Revision</div>
+                <div>Madison also proposed a "council of revision" consisting of the national executive and members of the national 
+                judiciary, which would review laws passed by the legislature and have the power of veto. This proposal was ultimately 
+                rejected in favor of giving the veto power solely to the president.</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-2', 30)">
+                <div class="card-prompt">🔍 Click to explore: The different plans for the presidency</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Competing Plans for the Executive Branch:</p>
+                    <p><strong>Virginia Plan (Madison):</strong> A single executive chosen by Congress for a seven-year term, 
+                    empowered to veto legislation, subject to impeachment.</p>
+                    <p><strong>New Jersey Plan (Paterson):</strong> An executive committee elected by a unicameral Congress for a 
+                    single term, which could be removed by a majority of state governors—a particularly weak executive.</p>
+                    <p><strong>Hamilton's Plan:</strong> A single individual chosen by electors, serving for life, with broad powers 
+                    including the ability to veto legislation, negotiate treaties, grant pardons, and serve as commander-in-chief.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Creating the Electoral College</h4>
+                <p>
+                    Debate and discussion continued throughout the summer. Delegates eventually settled upon a single executive, 
+                    but they remained at a loss for how to select that person. Pennsylvania's James Wilson, who had triumphed on 
+                    the issue of a single executive, at first proposed the direct election of the president. When delegates rejected 
+                    that idea, he responded with the suggestion that electors, chosen throughout the nation, should select the executive.
+                </p>
+                <p>
+                    Over time, Wilson's idea gained ground with delegates who were uneasy at the idea of an election by the legislature, 
+                    which presented the opportunity for intrigue and corruption. The idea of a shorter term of service combined with 
+                    eligibility for reelection also became more attractive to delegates. The framers of the Constitution struggled to 
+                    find the proper balance between giving the president the power to perform the job on one hand and opening the way 
+                    for a president to abuse power and act like a monarch on the other.
+                </p>
+                <p>
+                    By early September, the Electoral College had emerged as the way to select a president for four years who was 
+                    eligible for reelection. Today, the Electoral College consists of a body of 538 people called electors, each 
+                    representing one of the fifty states or the District of Columbia, who formally cast votes for the election of 
+                    the president and vice president.
+                </p>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>📊 Electoral College Basics</h4>
+                <p>In forty-eight states and the District of Columbia, the candidate who wins the popular vote in November receives 
+                all the state's electoral votes. In two states, Nebraska and Maine, the electoral votes are divided: The candidate 
+                who wins the popular vote in the state gets two electoral votes, but the winner of each congressional district also 
+                receives an electoral vote.</p>
+            </div>
+
+            <div class="content-block">
+                <h4>The Original Electoral System and Its Problems</h4>
+                <p>
+                    In the original design implemented for the first four presidential elections (1788–89, 1792, 1796, and 1800), 
+                    the electors cast two ballots (but only one could go to a candidate from the elector's state), and the person 
+                    who received a majority won the election. The second-place finisher became vice president. Should no candidate 
+                    receive a majority of the votes cast, the House of Representatives would select the president, with each state 
+                    casting a single vote, while the Senate chose the vice president.
+                </p>
+                <p>
+                    While George Washington was elected president twice with this approach, the design resulted in controversy in 
+                    both the 1796 and 1800 elections. In 1796, John Adams won the presidency, while his opponent and political rival 
+                    Thomas Jefferson was elected vice president. In 1800, Thomas Jefferson and his running mate Aaron Burr finished 
+                    tied in the Electoral College. Jefferson was elected president in the House of Representatives on the thirty-sixth 
+                    ballot.
+                </p>
+                <p>
+                    These controversies led to the proposal and ratification of the Twelfth Amendment, which couples a particular 
+                    presidential candidate with that candidate's running mate in a unified ticket.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: The 2000 election residency controversy</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The 2000 Election Almost Got More Complicated!</p>
+                    <p>The Twelfth Amendment states that electors' two votes cannot both be for "an inhabitant of the same state 
+                    with themselves." In the 2000 election, both George W. Bush and Dick Cheney were living in Texas. Bush and 
+                    Cheney won with just 271 electoral votes—barely over the 270 required.</p>
+                    <p>If both had been Texas residents, Texas's 32 electoral votes could have gone to only one of them! Cheney 
+                    anticipated this problem and registered to vote in Wyoming, where he had served as a representative years earlier, 
+                    avoiding a potential constitutional crisis.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Vice Presidency</h4>
+                <p>
+                    Despite provisions for the election of a vice president (to serve in case of the president's death, resignation, 
+                    or removal through the impeachment process), and apart from the suggestion that the vice president should be 
+                    responsible for presiding over the Senate, the framers left the vice president's role undeveloped.
+                </p>
+                <p>
+                    As a result, the influence of the vice presidency has varied dramatically, depending on how much of a role the 
+                    vice president is given by the president. Some vice presidents, such as Dan Quayle under President George H. W. Bush, 
+                    serve a mostly ceremonial function, while others, like Dick Cheney under President George W. Bush, become a partner 
+                    in governance and rival the White House chief of staff in terms of influence.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>Presidential Eligibility and Impeachment</h4>
+                <p>
+                    Article II of the Constitution lays out the agreed-upon requirements—the chief executive must be at least 
+                    thirty-five years old and a "natural born" citizen of the United States (or a citizen at the time of the 
+                    Constitution's adoption) who has been an inhabitant of the United States for at least fourteen years.
+                </p>
+                <p>
+                    While Article II also states that the term of office is four years and does not expressly limit the number of 
+                    times a person might be elected president, after Franklin D. Roosevelt was elected four times (from 1932 to 1944), 
+                    the Twenty-Second Amendment was proposed and ratified, limiting the presidency to two four-year terms.
+                </p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Impeachment</div>
+                    <div>Impeachment is the act of charging a government official with serious wrongdoing; the Constitution calls 
+                    this wrongdoing "high crimes and misdemeanors." The House of Representatives can impeach the president by a 
+                    simple majority vote. The Senate can then remove the president from office by a two-thirds majority, with the 
+                    Chief Justice of the Supreme Court presiding over the trial.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-4', 30)">
+                <div class="card-prompt">🔍 Click to explore: History of Presidential Impeachments</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Four Presidents Have Faced Impeachment:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Andrew Johnson (1868):</strong> Impeached for violating the Tenure of Office Act during 
+                        Reconstruction. Acquitted in Senate by one vote.</li>
+                        <li><strong>Richard Nixon (1974):</strong> Faced overwhelming likelihood of impeachment for Watergate 
+                        cover-up. Resigned before House could vote.</li>
+                        <li><strong>Bill Clinton (1998):</strong> Impeached for lying about an extramarital affair. Acquitted in Senate.</li>
+                        <li><strong>Donald Trump (2019, 2021):</strong> First president impeached twice. First for "abuse of power" 
+                        and "obstruction of Congress" related to Ukraine. Second for "incitement of insurrection" related to 
+                        January 6, 2021. Acquitted both times.</li>
+                    </ul>
+                    <p>No president has ever been both impeached by the House AND removed by the Senate.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Constitutional Powers of the President</h3>
+                <p>
+                    The Constitution that emerged from the deliberations in Philadelphia treated the powers of the presidency in 
+                    concise fashion. The president was to be:
+                </p>
+                <ul class="bullet-list">
+                    <li>Commander-in-chief of the armed forces of the United States</li>
+                    <li>Empowered to negotiate treaties with the advice and consent of the Senate</li>
+                    <li>Responsible for receiving representatives of foreign nations</li>
+                    <li>Charged to "take care that the laws be faithfully executed"</li>
+                    <li>Given broad power to pardon those convicted of federal offenses (except impeachment cases)</li>
+                    <li>Required to present to Congress information about the state of the union</li>
+                    <li>Able to call Congress into session when needed</li>
+                    <li>Empowered to veto legislation (subject to override by two-thirds supermajority)</li>
+                    <li>Responsible for nominating federal judges, including Supreme Court justices, and other federal officials</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>The Evolving Executive Branch</h3>
+                <p>
+                    No sooner had the presidency been established than the occupants of the office, starting with George Washington, 
+                    began acting in ways that expanded both its formal and informal powers. For example, Washington established a 
+                    cabinet or group of advisors to help him administer his duties, consisting of the most senior appointed officers 
+                    of the executive branch. Today, the heads of the fifteen executive departments serve as the president's advisers.
+                </p>
+                <p>
+                    And, in 1793, when it became important for the United States to take a stand in the evolving European conflicts 
+                    between France and other European powers, especially Great Britain, Washington issued a neutrality proclamation 
+                    that extended his rights as diplomat-in-chief far more broadly than had at first been conceived.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🏛️ Cabinet</div>
+                <div>A group of advisors to the president, consisting of the most senior appointed officers of the executive 
+                branch who head the fifteen executive departments (State, Treasury, Defense, Justice, Interior, Agriculture, 
+                Commerce, Labor, Health and Human Services, Housing and Urban Development, Transportation, Energy, Education, 
+                Veterans Affairs, and Homeland Security).</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-5', 30)">
+                <div class="card-prompt">🔍 Click to explore: How early presidents expanded executive power</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Presidential Power Expansion by Early Presidents:</p>
+                    <ul class="bullet-list">
+                        <li><strong>John Adams:</strong> Waged undeclared war against France in the Quasi-War (1798–1800)</li>
+                        <li><strong>Thomas Jefferson:</strong> Negotiated the Louisiana Purchase from France, later rationalizing 
+                        that Congress's failure to impeach him constituted tacit approval</li>
+                        <li><strong>James Monroe:</strong> Used his 1823 annual message to declare the Monroe Doctrine, warning 
+                        European powers against intervention in the Western Hemisphere</li>
+                        <li><strong>Andrew Jackson:</strong> Employed the veto as a policy tool—his 12 vetoes were more than all 
+                        prior presidents combined, and he issued them due to policy disagreements rather than constitutional concerns</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Expansion of Presidential War Powers</h4>
+                <p>
+                    Of the many ways in which the chief executive's power grew over the first several decades, the most significant 
+                    was the expansion of presidential war powers. While Washington, Adams, and Jefferson led the way in waging 
+                    undeclared wars, it was President James K. Polk who truly set the stage for the broad growth of this authority.
+                </p>
+                <p>
+                    In 1846, as the United States and Mexico were bickering over the messy issue of where Texas's southern border lay, 
+                    Polk purposely raised anxieties through his envoy in Mexico. He then responded by sending U.S. troops to the 
+                    Rio Grande, the border Texan expansionists claimed for Texas. Mexico sent troops in response, and the 
+                    Mexican-American War began soon afterward.
+                </p>
+                <p>
+                    Abraham Lincoln, a member of Congress at the time, was critical of Polk's actions. Later, however, as president 
+                    himself, Lincoln used presidential war powers and the concepts of military necessity and national security to 
+                    undermine the Confederate effort. In suspending the privilege of the writ of habeas corpus, Lincoln blurred the 
+                    boundaries between acceptable dissent and unacceptable disloyalty. He also famously used a unilateral proclamation 
+                    to issue the Emancipation Proclamation.
+                </p>
+            </div>
+
+            <div class="milestone-box">
+                <h4>📅 The Budget and Accounting Act of 1921</h4>
+                <p>
+                    Developing a budget in the nineteenth century was chaotic. Federal agencies independently submitted budget 
+                    requests to Congress. Following World War I, when federal spending and debt skyrocketed, reformers proposed 
+                    putting the executive branch in charge of developing a budget.
+                </p>
+                <p>
+                    The Budget and Accounting Act of 1921, signed by President Warren Harding, gave the president first-mover 
+                    advantage in the budget process via the first "executive budget." It also created the Bureau of the Budget 
+                    (later renamed the Office of Management and Budget). With this act, Congress willingly delegated significant 
+                    authority to the executive and made the president the chief budget agenda setter.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>Twentieth Century Expansion</h4>
+                <p>
+                    Over the course of the twentieth century, presidents expanded and elaborated upon these powers. The rather 
+                    vague wording in Article II, which says that the "executive power shall be vested" in the president, has been 
+                    subject to broad and sweeping interpretation in order to justify actions beyond those specifically enumerated 
+                    in the document.
+                </p>
+                <p>
+                    As the federal bureaucracy expanded, so too did the president's power to grow agencies like the Secret Service 
+                    and the Federal Bureau of Investigation. Presidents also further developed the concept of executive privilege, 
+                    the right to withhold information from Congress, the judiciary, or the public. This right, not enumerated in 
+                    the Constitution, was first asserted by George Washington to curtail inquiry into the actions of the executive branch.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">📋 Executive Orders</div>
+                <div>Rules that bypass Congress but still have the force of law if the courts do not overturn them. Presidents 
+                have increasingly made use of these unilateral powers to achieve policy goals without congressional cooperation.</div>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🤝 Executive Agreements</div>
+                <div>Formal agreements negotiated between the president and foreign powers that formalize international relations 
+                without requiring Senate ratification as treaties do. Congress has permitted their widespread use so long as 
+                important matters still come through the Senate as treaties.</div>
+            </div>
+
+            <div class="content-block">
+                <h4>Factors Contributing to Presidential Power Growth</h4>
+                <p>
+                    The growth of presidential power is also attributable to the growth of the United States and the power of the 
+                    national government. Whereas most important decisions were once made at the state and local levels, the increasing 
+                    complexity and size of the domestic economy have led people in the United States to look to the federal government 
+                    more often for solutions.
+                </p>
+                <p>
+                    At the same time, the rising profile of the United States on the international stage has meant that the president 
+                    is a far more important figure as leader of the nation, as diplomat-in-chief, and as commander-in-chief. Finally, 
+                    with the rise of electronic mass media, a president who once depended on newspapers and official documents to 
+                    distribute information can now bring that message directly to the people via radio, television, and social media.
+                </p>
+                <p>
+                    Major events and crises, such as the Great Depression, two world wars, the Cold War, and the war on terrorism, 
+                    have further contributed to presidential stature.
+                </p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What amendment limits presidents to two terms in office?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-1', 25)">A) The Twelfth Amendment</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-1', 25)">B) The Twentieth Amendment</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc1-1', 25)">C) The Twenty-Second Amendment</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-1', 25)">D) The Twenty-Fifth Amendment</div>
+                <div class="feedback-box" id="feedback-kc1-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What is required to remove a president from office after impeachment?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-2', 25)">A) A simple majority vote in the Senate</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc1-2', 25)">B) A two-thirds majority vote in the Senate</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-2', 25)">C) A unanimous vote in the Senate</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc1-2', 25)">D) A three-fourths majority vote in the Senate</div>
+                <div class="feedback-box" id="feedback-kc1-2"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="prev-btn" onclick="navigateToSection('homePage')">← Home</button>
+                <button class="next-btn" onclick="navigateToSection('section2')">Next: Election Process →</button>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Presidential Election Process -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+            <div class="section-header">
+                <h2>🗳️ 12.2 The Presidential Election Process</h2>
+                <p class="subtitle">From primaries to the Electoral College</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Learning Objectives</h3>
+                <ul class="bullet-list">
+                    <li>Describe changes over time in the way the president and vice president are selected</li>
+                    <li>Identify the stages in the modern presidential selection process</li>
+                    <li>Assess the advantages and disadvantages of the Electoral College</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Evolution of Presidential Selection</h3>
+                <p>
+                    The process of electing a president every four years has evolved over time. This evolution has resulted from 
+                    attempts to correct the cumbersome procedures first offered by the framers of the Constitution and as a result 
+                    of political parties' rising power to act as gatekeepers to the presidency.
+                </p>
+                <p>
+                    Over the last several decades, the manner by which parties have chosen candidates has trended away from 
+                    congressional caucuses and conventions and towards a drawn-out series of state contests, called primaries 
+                    and caucuses, which begin in the winter prior to the November general election.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>Selecting the Candidate: The Party Process</h3>
+                <p>
+                    The framers of the Constitution made no provision in the document for the establishment of political parties. 
+                    Indeed, parties were not necessary to select the first president, since George Washington ran unopposed.
+                </p>
+                <p>
+                    Following the first election of Washington, the political party system gained steam and power in the electoral 
+                    process, creating separate nomination and general election stages. Early on, the power to nominate presidents 
+                    for office bubbled up from the party operatives in the various state legislatures and toward what was known 
+                    as the king caucus or congressional caucus.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">👑 King Caucus</div>
+                <div>An informal meeting held in the nineteenth century, sometimes called a congressional caucus, made up of 
+                legislators in Congress who met to decide on presidential nominees for their respective parties. This system 
+                gave enormous power to party insiders.</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: The election of 1824 and the rise of party control</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The Critical Election of 1824:</p>
+                    <p>By the presidential election of 1824, many states were using popular elections to choose their electors. 
+                    This became important when Andrew Jackson won the popular vote AND the largest number of electors, but 
+                    the presidency was given to John Quincy Adams instead (by the House of Representatives).</p>
+                    <p>Out of the frustration of Jackson's supporters emerged a powerful two-party system that took control 
+                    of the selection process, leading to the convention system we know today.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Rise of Primaries</h4>
+                <p>
+                    In the decades that followed, party organizations, party leaders, and workers met in national conventions to 
+                    choose their nominees, sometimes after long struggles that took place over multiple ballots. In this way, the 
+                    political parties kept a tight control on the selection of a candidate.
+                </p>
+                <p>
+                    In the early twentieth century, however, some states began to hold primaries, elections in which candidates 
+                    vied for the support of state delegations to the party's nominating convention. Over the course of the century, 
+                    the primaries gradually became a far more important part of the process, though the party leadership still 
+                    controlled the route to nomination through the convention system.
+                </p>
+                <p>
+                    This has changed in recent decades, and now a majority of the delegates are chosen through primary elections, 
+                    and the party conventions themselves are little more than a widely publicized rubber-stamping event.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🗳️ Primaries</div>
+                <div>Elections in which candidates vie for the support of state delegations to the party's nominating convention. 
+                Primary voters directly choose delegates who are pledged to support a particular candidate.</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-2', 30)">
+                <div class="card-prompt">🔍 Click to explore: Consequences of the primary system</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Consequences of the Primary System:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Longer campaigns:</strong> JFK declared his candidacy just 11 months before the 1960 election; 
+                        Hillary Clinton announced nearly 2 years before 2008</li>
+                        <li><strong>More debates:</strong> 2016 saw so many Republican candidates that two debates were held—one 
+                        for front-runners, one for lower-polling candidates</li>
+                        <li><strong>Party outsiders can rise:</strong> Neither Ronald Reagan nor Bill Clinton was popular with 
+                        party leadership at the outset</li>
+                        <li><strong>More expensive campaigns:</strong> The need to campaign in multiple states drives up costs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Outsider Phenomenon</h4>
+                <p>
+                    The process of going straight to the people through primaries and caucuses has created some opportunities for 
+                    party outsiders to rise. Neither Ronald Reagan nor Bill Clinton was especially popular with the party leadership 
+                    of the Republicans or the Democrats (respectively) at the outset.
+                </p>
+                <p>
+                    The outsider phenomenon has been most clearly demonstrated, however, in the 2016 presidential nominating process, 
+                    as those distrusted by the party establishment, such as Senator Ted Cruz and Donald Trump, who never before held 
+                    political office, raced ahead of party favorites like Jeb Bush early in the primary process.
+                </p>
+                <p>
+                    The rise of the primary system during the Progressive Era came at the cost of party regulars' control of the 
+                    process of candidate selection. Some party primaries even allow registered independents or members of the 
+                    opposite party to vote. Even so, the process tends to attract the party faithful at the expense of independent 
+                    voters, who often hold the key to victory in the fall contest.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>Primary Types and Delegate Allocation</h4>
+                <p>
+                    Primaries offer tests of candidates' popular appeal, while state caucuses testify to their ability to mobilize 
+                    and organize grassroots support among committed followers. Primaries also reward candidates in different ways, 
+                    with some giving the winner all the state's convention delegates, while others distribute delegates proportionately 
+                    according to the distribution of voter support.
+                </p>
+                <p>
+                    Finally, the order in which the primary elections and caucus selections are held shape the overall race. Currently, 
+                    the Iowa caucuses and the New Hampshire primary occur first. These early contests tend to shrink the field as 
+                    candidates who perform poorly leave the race.
+                </p>
+                <p>
+                    At other times in the campaign process, some states will maximize their impact on the race by holding their 
+                    primaries on the same day that other states do. The media has dubbed these critical groupings "Super Tuesdays," 
+                    "Super Saturdays," and so on. They tend to occur later in the nominating process as parties try to force the 
+                    voters to coalesce around a single nominee.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>The Decline of Convention Drama</h4>
+                <p>
+                    The rise of the primary has also displaced the convention itself as the place where party regulars choose their 
+                    standard bearer. Once true contests in which party leaders fought it out to elect a candidate, by the 1970s, 
+                    party conventions more often than not simply served to rubber-stamp the choice of the primaries.
+                </p>
+                <p>
+                    By the 1980s, the convention drama was gone, replaced by a long, televised commercial designed to extol the 
+                    party's greatness. Without the drama and uncertainty, major news outlets have steadily curtailed their coverage 
+                    of the conventions, convinced that few people are interested.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>Electing the President: The General Election</h3>
+                <p>
+                    Early presidential elections, conducted along the lines of the original process outlined in the Constitution, 
+                    proved unsatisfactory. So long as George Washington was a candidate, his election was a foregone conclusion. 
+                    But it took some manipulation of the votes of electors to ensure that the second-place winner (and thus the 
+                    vice president) did not receive the same number of votes.
+                </p>
+                <p>
+                    When Washington declined to run again after two terms, matters worsened. In 1796, political rivals John Adams 
+                    and Thomas Jefferson were elected president and vice president, respectively. Yet the two men failed to work 
+                    well together during Adams's administration.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: Electoral College controversies</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> When the Popular Vote and Electoral College Diverge:</p>
+                    <ul class="bullet-list">
+                        <li><strong>1876:</strong> Rutherford B. Hayes won the Electoral College despite losing the popular vote</li>
+                        <li><strong>1888:</strong> Benjamin Harrison won the Electoral College despite losing the popular vote</li>
+                        <li><strong>2000:</strong> Al Gore won the popular vote, but George W. Bush won the Electoral College 
+                        and the presidency</li>
+                        <li><strong>2016:</strong> Hillary Clinton won the popular vote by nearly 2.9 million votes, but Donald Trump 
+                        won the Electoral College comfortably</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Electoral College Debate</h4>
+                <p>
+                    Not everyone is satisfied with how the Electoral College fundamentally shapes the election, especially in cases 
+                    when a candidate with a minority of the popular vote claims victory over a candidate who drew more popular support. 
+                    Yet movements for electoral reform, including proposals for a straightforward nationwide direct election by 
+                    popular vote, have gained little traction.
+                </p>
+                <p>
+                    <strong>Supporters of the current system</strong> defend it as a manifestation of federalism, arguing that it 
+                    also guards against the chaos inherent in a multiparty environment by encouraging the current two-party system. 
+                    They point out that under a system of direct election, candidates would focus their efforts on more populous 
+                    regions and ignore others.
+                </p>
+                <p>
+                    <strong>Critics</strong>, on the other hand, charge that the current system negates the one-person, one-vote 
+                    basis of U.S. elections, subverts majority rule, works against political participation in states deemed safe 
+                    for one party, and might lead to chaos should an elector desert a candidate, thus thwarting the popular will.
+                </p>
+                <p>
+                    Despite all this, the system remains in place. It appears that many people are more comfortable with the 
+                    problems of a flawed system than with the uncertainty of change.
+                </p>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>📊 Electoral College Reform Proposals</h4>
+                <ul class="bullet-list">
+                    <li><strong>Direct popular vote:</strong> Replace Electoral College entirely with nationwide popular vote</li>
+                    <li><strong>Proportional allocation:</strong> States assign electoral votes based on popular vote percentage</li>
+                    <li><strong>National Popular Vote Interstate Compact:</strong> States pledge their electoral votes to the 
+                    national popular vote winner once states representing 270+ electoral votes join (currently 15 states + DC 
+                    with 196 electoral votes have signed)</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h4>The General Election Process</h4>
+                <p>
+                    The general election usually features a series of debates between the presidential contenders as well as a 
+                    debate among vice presidential candidates. Because the stakes are high, quite a bit of money and resources 
+                    are expended on all sides.
+                </p>
+                <p>
+                    Attempts to rein in the mounting costs of modern general-election campaigns have proven ineffective. Nor has 
+                    public funding helped to solve the problem. Indeed, starting with Barack Obama's 2008 decision to forfeit 
+                    public funding so as to skirt the spending limitations imposed, candidates now regularly opt to raise more 
+                    money rather than to take public funding.
+                </p>
+                <p>
+                    In addition, political action committees (PACs), supposedly focused on issues rather than specific candidates, 
+                    seek to influence the outcome of the race by supporting or opposing a candidate according to the PAC's own interests.
+                </p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Which states currently split their electoral votes by congressional district?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-1', 25)">A) California and Texas</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc2-1', 25)">B) Nebraska and Maine</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-1', 25)">C) Florida and Ohio</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-1', 25)">D) New York and Pennsylvania</div>
+                <div class="feedback-box" id="feedback-kc2-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What is the minimum number of electoral votes needed to win the presidency?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-2', 25)">A) 218</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-2', 25)">B) 250</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc2-2', 25)">C) 270</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc2-2', 25)">D) 300</div>
+                <div class="feedback-box" id="feedback-kc2-2"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="prev-btn" onclick="navigateToSection('section1')">← Previous</button>
+                <button class="next-btn" onclick="navigateToSection('section3')">Next: Organizing to Govern →</button>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Organizing to Govern -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+            <div class="section-header">
+                <h2>🏢 12.3 Organizing to Govern</h2>
+                <p class="subtitle">Transition, appointments, and the presidential agenda</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Learning Objectives</h3>
+                <ul class="bullet-list">
+                    <li>Explain how incoming and outgoing presidents peacefully transfer power</li>
+                    <li>Describe how new presidents fill positions in the executive branch</li>
+                    <li>Discuss how incoming presidents use their early popularity to advance larger policy solutions</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>The Challenge of Governing</h3>
+                <p>
+                    It is one thing to win an election; it is quite another to govern, as many frustrated presidents have discovered. 
+                    Critical to a president's success in office is the ability to make a deft transition from the previous 
+                    administration, including naming a cabinet and filling other offices.
+                </p>
+                <p>
+                    The new chief executive must also fashion an agenda, which they will often preview in general terms in an 
+                    inaugural address. Presidents usually embark upon their presidency benefitting from their own and the nation's 
+                    renewed hope and optimism, although often unrealistic expectations set the stage for subsequent disappointment.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>Transition and Appointments</h3>
+                <p>
+                    In the immediate aftermath of the election, the incoming and outgoing administrations work together to help 
+                    facilitate the transfer of power. While the General Services Administration oversees the logistics of the process, 
+                    such as office assignments, information technology, and the assignment of keys, prudent candidates typically 
+                    prepare for a possible victory by appointing members of a transition team during the lead-up to the general election.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🔄 Transition of Power</div>
+                <div>The success of the transition team's actions becomes apparent on inauguration day, when the transition of 
+                power takes place in what is often a seamless fashion, with people evacuating their offices (and the White House) 
+                for their successors.</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: Cabinet selection considerations</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> What Presidents Consider When Selecting a Cabinet:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Ability and expertise:</strong> Knowledge of the department they will lead</li>
+                        <li><strong>Influence and reputation:</strong> Standing in their field or political circles</li>
+                        <li><strong>Political representation:</strong> Balancing different factions of the party</li>
+                        <li><strong>Demographic representation:</strong> Gender, race, religion, and geography to produce a 
+                        cabinet that is "descriptively representative" of the U.S. population</li>
+                    </ul>
+                    <p>Bill Clinton explicitly stated an "E.G.G. strategy" for appointments: Ethnicity, Gender, and Geography.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Cabinet</h4>
+                <p>
+                    Among the president-elect's more important tasks is the selection of a cabinet. George Washington's cabinet 
+                    was made up of only four people: the attorney general and the secretaries of the Departments of War, State, 
+                    and the Treasury.
+                </p>
+                <p>
+                    Currently, however, there are fifteen members of the cabinet. The most important members—the heads of the 
+                    Departments of Defense, Justice, State, and the Treasury (echoing Washington's original cabinet)—receive the 
+                    most attention from the president, the Congress, and the media. These four departments have been referred to 
+                    as the <strong>inner cabinet</strong>, while the others are called the <strong>outer cabinet</strong>.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>Senate Confirmation</h4>
+                <p>
+                    Once the new president has been inaugurated and can officially nominate people to fill cabinet positions, 
+                    the Senate confirms or rejects these nominations. At times, though rarely, cabinet nominations have failed 
+                    to be confirmed or have even been withdrawn because of questions raised about the past behavior of the nominee.
+                </p>
+                <p>
+                    Prominent examples of such failures were Senator John Tower for defense secretary (George H. W. Bush) and 
+                    Zoe Baird for attorney general (Bill Clinton): Senator Tower's indiscretions involving alcohol and womanizing 
+                    led to concerns about his fitness to head the military and his rejection by the Senate, whereas Zoe Baird 
+                    faced controversy and withdrew her nomination when it was revealed, through what the press dubbed "Nannygate," 
+                    that house staff of hers were undocumented workers.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-2', 30)">
+                <div class="card-prompt">🔍 Click to explore: Other presidential appointments requiring Senate confirmation</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Beyond Cabinet Secretaries:</p>
+                    <ul class="bullet-list">
+                        <li>Heads of the Internal Revenue Service</li>
+                        <li>Director of the Central Intelligence Agency</li>
+                        <li>Director of the Office of Management and Budget</li>
+                        <li>Chair of the Federal Reserve</li>
+                        <li>Commissioner of Social Security Administration</li>
+                        <li>Administrator of the Environmental Protection Agency</li>
+                        <li>Members of the National Labor Relations Board</li>
+                        <li>Commissioners of the Equal Employment Opportunity Commission</li>
+                        <li>Ambassadors</li>
+                        <li>Federal judges, including Supreme Court justices</li>
+                    </ul>
+                    <p>New presidents make thousands of new appointments in their first two years in office!</p>
+                </div>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">💼 Office of Management and Budget (OMB)</div>
+                <div>The president's own budget department. In addition to preparing the executive budget proposal and overseeing 
+                its implementation during the federal fiscal year, the OMB oversees the actions of the executive bureaucracy.</div>
+            </div>
+
+            <div class="content-block">
+                <h4>Historical Confirmation Challenges</h4>
+                <p>
+                    Throughout much of the history of the republic, the Senate has closely guarded its constitutional duty to 
+                    consent to the president's nominees, although in the end it nearly always confirms them. Still, the Senate 
+                    does occasionally hold up a nominee.
+                </p>
+                <p>
+                    Benjamin Fishbourn, President George Washington's nomination for a minor naval post, was rejected largely 
+                    because he had insulted a particular senator. Other rejected nominees included Clement Haynsworth and 
+                    G. Harrold Carswell, nominated for the U.S. Supreme Court by President Nixon; Theodore Sorensen, nominated 
+                    by President Carter for director of the Central Intelligence Agency; and John Tower, discussed earlier.
+                </p>
+            </div>
+
+            <div class="milestone-box">
+                <h4>📅 The Garland Nomination (2016)</h4>
+                <p>
+                    More recently, the Senate has attempted a new strategy, refusing to hold hearings at all, a strategy of defeat 
+                    that scholars have referred to as "malign neglect." When Associate Justice Antonin Scalia died unexpectedly 
+                    in early 2016, Senate majority leader Mitch McConnell declared that the Senate would not hold hearings on a 
+                    nominee until after the upcoming presidential election.
+                </p>
+                <p>
+                    President Obama nominated Merrick Garland, longtime chief judge of the federal Circuit Court of Appeals for 
+                    the DC Circuit, who was highly respected by senators from both parties. When Republican Donald Trump was elected, 
+                    this strategy appeared to pay off. Trump's nominee, Neil Gorsuch, was confirmed in April 2017.
+                </p>
+                <p>
+                    Senator McConnell later reversed his "proximity to the next election" explanation when Justice Ruth Bader 
+                    Ginsburg passed away just prior to the 2020 election, and Republicans quickly confirmed Justice Amy Coney Barrett.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>Recess Appointments</h4>
+                <p>
+                    The Constitution allows for a small presidential loophole called the recess appointment. Article II, Section 2, 
+                    states: "The President shall have Power to fill up all Vacancies that may happen during the Recess of the Senate, 
+                    by granting Commissions which shall expire at the End of their next Session."
+                </p>
+                <p>
+                    The purpose of the provision was to give the president the power to temporarily fill vacancies during times 
+                    when the Senate was not in session and could not act. But presidents have typically used this loophole to get 
+                    around a Senate that's inclined to obstruct. Presidents Bill Clinton and George W. Bush made 139 and 171 
+                    recess appointments, respectively.
+                </p>
+                <p>
+                    To counter this, the Senate began using "pro forma sessions"—short meetings held with the understanding that 
+                    no work will be done, keeping the Senate officially in session while functionally in recess. In 2014, the 
+                    Supreme Court ruled that "the Senate is in session when it says it is," effectively limiting the president's 
+                    recess appointment power.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>The Vice President</h4>
+                <p>
+                    The most visible, though arguably the least powerful, member of a president's cabinet is the vice president. 
+                    Throughout most of the nineteenth and into the twentieth century, the vast majority of vice presidents took 
+                    very little action in the office unless fate intervened. Few presidents consulted with their running mates.
+                </p>
+                <p>
+                    Indeed, until the twentieth century, many presidents had little to do with the naming of their running mate 
+                    at the nominating convention. The office was seen as a form of political exile, and that motivated Republicans 
+                    to name Theodore Roosevelt as William McKinley's running mate in 1900. The strategy was to get the ambitious 
+                    politician out of the way while still taking advantage of his popularity. This scheme backfired when McKinley 
+                    was assassinated and Roosevelt became president.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: The modern vice presidency</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Evolution of the Vice Presidency:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Jimmy Carter era:</strong> Made a conscious effort to make the VP part of the governing team</li>
+                        <li><strong>Bill Clinton & Al Gore:</strong> Appeared to have a smooth partnership</li>
+                        <li><strong>George W. Bush & Dick Cheney:</strong> Cheney was so influential that observers speculated 
+                        whether the VP exercised too much influence</li>
+                        <li><strong>Barack Obama & Joe Biden:</strong> Biden picked for experience, especially in foreign policy</li>
+                        <li><strong>Donald Trump & Mike Pence:</strong> Pence led initiatives on healthcare and COVID-19</li>
+                        <li><strong>Joe Biden & Kamala Harris:</strong> Harris involved in every important policy discussion, 
+                        charged with leading border control matters</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Other Presidential Selections</h4>
+                <p>
+                    Other presidential selections are not subject to Senate approval, including the president's personal staff 
+                    (whose most important member is the White House chief of staff) and various advisers (most notably the 
+                    national security adviser).
+                </p>
+                <p>
+                    The Executive Office of the President, created by Franklin D. Roosevelt (FDR), contains a number of advisory 
+                    bodies, including the Council of Economic Advisers, the National Security Council, the OMB, and the Office 
+                    of the Vice President.
+                </p>
+                <p>
+                    Presidents also choose political advisers, speechwriters, and a press secretary to manage the politics and 
+                    the message of the administration. In recent years, the president's staff has become identified by the name 
+                    of the place where many of its members work: the West Wing of the White House.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🏛️ Executive Office of the President</div>
+                <div>The administrative organization that reports directly to the president, made up of important offices, 
+                units, and staff of the current president and headed by the White House chief of staff. Under Abraham Lincoln, 
+                the staff numbered just a handful of private secretaries. A recent report pegged the number at over 450 employees 
+                working within the White House, with the number increasing four-fold when nearby executive buildings are included.</div>
+            </div>
+
+            <div class="content-block">
+                <h3>Forging an Agenda</h3>
+                <p>
+                    Having secured election, the incoming president must soon decide how to deliver upon what was promised during 
+                    the campaign. The chief executive must set priorities, choose what to emphasize, and formulate strategies to 
+                    get the job done.
+                </p>
+                <p>
+                    He or she labors under the shadow of a measure of presidential effectiveness known as the <strong>first hundred 
+                    days in office</strong>, a concept popularized during Franklin Roosevelt's first term in the 1930s. While one 
+                    hundred days is possibly too short a time for any president to boast of any real accomplishments, most presidents 
+                    do recognize that they must address their major initiatives during their first two years in office.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-4', 30)">
+                <div class="card-prompt">🔍 Click to explore: The honeymoon period and political time</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Understanding Presidential Timing:</p>
+                    <p><strong>The Honeymoon Period:</strong> This is the time when the president is most powerful and is given 
+                    the benefit of the doubt by the public and the media, especially if entering the White House with a politically 
+                    aligned Congress, as Barack Obama did.</p>
+                    <p><strong>Political Time:</strong> Presidents must be sensitive to the circumstances under which they assume 
+                    power. Sometimes, the nation is prepared for drastic proposals to solve deep and pressing problems (like FDR 
+                    during the Great Depression). Most times, however, the country is far less inclined to accept revolutionary change.</p>
+                    <p>Being an effective president means recognizing the difference between these circumstances.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Inaugural Address</h4>
+                <p>
+                    The first act undertaken by the new president—the delivery of an inaugural address—can do much to set the 
+                    tone for what is intended to follow. While such an address may be an exercise in rhetorical inspiration, 
+                    it also allows the president to set forth priorities within the overarching vision of what they intend to do.
+                </p>
+                <ul class="bullet-list">
+                    <li><strong>Abraham Lincoln:</strong> Used his inaugural addresses to calm rising concerns in the South that 
+                    he would act to overturn slavery (though this attempt at appeasement fell on deaf ears)</li>
+                    <li><strong>Franklin Roosevelt:</strong> Used his first inaugural address to boldly proclaim that the country 
+                    need not fear the change that would deliver it from the Great Depression</li>
+                    <li><strong>John F. Kennedy:</strong> Made an appeal to talented young people to help make the world a better 
+                    place, following up with new institutions like the Peace Corps</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Which departments make up the "inner cabinet"?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc3-1', 25)">A) Defense, Justice, State, and Treasury</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-1', 25)">B) Education, Labor, Energy, and Interior</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-1', 25)">C) Agriculture, Commerce, Transportation, and HUD</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-1', 25)">D) Veterans Affairs, HHS, Homeland Security, and Energy</div>
+                <div class="feedback-box" id="feedback-kc3-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What is the "first hundred days" concept?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-2', 25)">A) The period before a president takes office</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc3-2', 25)">B) A measure of presidential effectiveness popularized by FDR</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-2', 25)">C) The time needed to fill all cabinet positions</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc3-2', 25)">D) The constitutional requirement for transition</div>
+                <div class="feedback-box" id="feedback-kc3-2"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="prev-btn" onclick="navigateToSection('section2')">← Previous</button>
+                <button class="next-btn" onclick="navigateToSection('section4')">Next: The Public Presidency →</button>
+            </div>
+        </div>
+
+        <!-- SECTION 4: The Public Presidency -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+            <div class="section-header">
+                <h2>📺 12.4 The Public Presidency</h2>
+                <p class="subtitle">Presidential communication and the power to persuade</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Learning Objectives</h3>
+                <ul class="bullet-list">
+                    <li>Explain how technological innovations have empowered presidents</li>
+                    <li>Identify ways in which presidents appeal to the public for approval</li>
+                    <li>Explain how the role of first ladies changed over the course of the twentieth century</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Introduction</h3>
+                <p>
+                    With the advent of motion picture newsreels and voice recordings in the 1920s, presidents began to broadcast 
+                    their message to the general public. Franklin Roosevelt, while not the first president to use the radio, 
+                    adopted this technology to great effect.
+                </p>
+                <p>
+                    Over time, as radio gave way to newer and more powerful technologies like television, the Internet, and 
+                    social media, other presidents have been able to magnify their voices to an even-larger degree. Presidents 
+                    now have far more tools at their disposal to shape public opinion and build support for policies.
+                </p>
+                <p>
+                    However, the choice to "go public" does not always lead to political success; it is difficult to convert 
+                    popularity in public opinion polls into political power. Moreover, the modern era of information and social 
+                    media empowers opponents at the same time that it provides opportunities for presidents.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>The Shaping of the Modern Presidency</h3>
+                <p>
+                    From the days of the early republic through the end of the nineteenth century, presidents were limited in 
+                    the ways they could reach the public to convey their perspective and shape policy. Inaugural addresses and 
+                    messages to Congress, while circulated in newspapers, proved clumsy devices to attract support, even when 
+                    a president used plain, blunt language.
+                </p>
+                <p>
+                    Some presidents undertook tours of the nation, notably George Washington and Rutherford B. Hayes. Others 
+                    promoted good relationships with newspaper editors and reporters, sometimes going so far as to sanction a 
+                    pro-administration newspaper. One president, Ulysses S. Grant, cultivated political cartoonist Thomas Nast 
+                    to present the president's perspective in the pages of Harper's Weekly.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: Lincoln's communication innovations</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Abraham Lincoln's Media Strategies:</p>
+                    <ul class="bullet-list">
+                        <li>Experimented with public meetings recorded by newspaper reporters</li>
+                        <li>Wrote public letters that would appear in the press, sometimes after being read at public gatherings</li>
+                        <li>Was the first president to use photography to enhance his power as president and commander-in-chief</li>
+                        <li>Most presidents gave speeches, although few proved to have much immediate impact—including Lincoln's 
+                        memorable Gettysburg Address!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Limited Tools of Early Presidents</h4>
+                <p>
+                    Most presidents exercised the power of patronage (or appointing people who are loyal and help them out 
+                    politically) and private deal-making to get what they wanted at a time when Congress usually held the upper 
+                    hand in such transactions. But even that presidential power began to decline with the emergence of civil 
+                    service reform in the later nineteenth century, which led to most government officials being hired on their 
+                    merit instead of through patronage.
+                </p>
+                <p>
+                    Only when it came to diplomacy and war were presidents able to exercise authority on their own, and even 
+                    then, institutional as well as political restraints limited their independence of action.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">📢 Bully Pulpit</div>
+                <div>Theodore Roosevelt came to the presidency in 1901, at a time when movie newsreels were becoming popular. 
+                Roosevelt, who had always excelled at cultivating good relationships with the print media, eagerly exploited 
+                this new opportunity. He took his case to the people with the concept of the presidency as a "bully pulpit"—a 
+                platform from which the president could push an agenda to the public.</div>
+            </div>
+
+            <div class="content-block">
+                <h4>The Evolution of Presidential Media</h4>
+                <p>
+                    His successors followed suit, discovering and employing new ways of transmitting their message to the people 
+                    to gain public support for policy initiatives. With the popularization of radio in the early twentieth century, 
+                    it became possible to broadcast the president's voice into many of the nation's homes. Most famously, FDR 
+                    used the radio to broadcast his thirty "fireside chats" to the nation between 1933 and 1944.
+                </p>
+                <p>
+                    In the post–World War II era, television began to replace radio as the medium through which presidents 
+                    reached the public. This technology enhanced the reach of the handsome young president John F. Kennedy 
+                    and the trained actor Ronald Reagan.
+                </p>
+                <p>
+                    At the turn of the twentieth century, the new technology was the Internet. In the twenty-first century, 
+                    presidents face a paradox. While there are more ways than ever to get their message out, be it television 
+                    channels or social media networks, the complexity of modern media makes the prospects for presidents of 
+                    directly reaching the public less certain.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-2', 30)">
+                <div class="card-prompt">🔍 Click to explore: Trump and social media</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Presidential Communication in the Social Media Age:</p>
+                    <p>Former president Donald Trump took going public to the extreme, some days sending dozens of tweets to 
+                    both promote his agenda and attack political opponents. Even his allies and senior officials would be 
+                    surprised by some of the tweets.</p>
+                    <p>This represented a dramatic evolution in how presidents communicate directly with the public, bypassing 
+                    traditional media gatekeepers entirely. However, it also raised questions about the risks and benefits of 
+                    such direct, unfiltered communication.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Transportation and Presidential Reach</h4>
+                <p>
+                    Other presidents have used advances in transportation to take their case to the people. Woodrow Wilson 
+                    traveled the country to advocate formation of the League of Nations. However, he fell short of his goal 
+                    when he suffered a stroke in 1919 and cut his tour short.
+                </p>
+                <p>
+                    Both Franklin Roosevelt in the 1930s and 1940s and Harry S. Truman in the 1940s and 1950s used air travel 
+                    to conduct diplomatic and military business. Under President Dwight D. Eisenhower, a specific plane, 
+                    commonly called Air Force One, began carrying the president around the country and the world. This gives 
+                    the president the ability to take their message directly to the far corners of the nation at any time.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>Going Public: Promise and Pitfalls</h3>
+                <p>
+                    The concept of going public involves the president delivering a major television address in the hope that 
+                    Americans watching the address will be compelled to contact their House and Senate member and that such 
+                    public pressure will result in the legislators supporting the president on a major piece of legislation.
+                </p>
+                <p>
+                    Technological advances have made it more efficient for presidents to take their messages directly to the 
+                    people than was the case before mass media. Presidential visits can build support for policy initiatives 
+                    or serve political purposes, helping the president reward supporters, campaign for candidates, and seek 
+                    reelection.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">📺 Going Public</div>
+                <div>A term for when the president delivers a major television address in the hope that public pressure will 
+                result in legislators supporting the president on a major piece of legislation. While powerful in theory, 
+                research suggests it may be more effective in rallying supporters than in gaining additional support or 
+                changing minds.</div>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>⚠️ The Risks of Going Public</h4>
+                <p>Political scientist George C. Edwards argues that taking a president's position public serves to:</p>
+                <ul class="bullet-list">
+                    <li>Polarize political debate</li>
+                    <li>Increase public opposition to the president</li>
+                    <li>Complicate the chances to get something done</li>
+                    <li>Replace deliberation and compromise with confrontation and campaigning</li>
+                </ul>
+                <p>Edwards believes the best way for presidents to achieve change is to keep issues private and negotiate 
+                resolutions that preclude partisan combat.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>The First Lady: A Secret Weapon?</h3>
+                <p>
+                    The president is not the only member of the First Family who often attempts to advance an agenda by going 
+                    public. First ladies increasingly exploited the opportunity to gain public support for an issue of deep 
+                    interest to them.
+                </p>
+                <p>
+                    Before 1933, most first ladies served as private political advisers to their husbands. In the 1910s, 
+                    Edith Bolling Wilson took a more active but still private role assisting her husband, President Woodrow Wilson, 
+                    afflicted by a stroke, in the last years of his presidency.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: Eleanor Roosevelt's groundbreaking role</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Eleanor Roosevelt: Transforming the First Lady Role:</p>
+                    <p>As the niece of one president and the wife of another, Eleanor Roosevelt in the 1930s and 1940s opened 
+                    the door for first ladies to do something more. She:</p>
+                    <ul class="bullet-list">
+                        <li>Took an active role in championing civil rights</li>
+                        <li>Coordinated meetings between FDR and members of the NAACP</li>
+                        <li>Championed antilynching legislation</li>
+                        <li>Openly defied segregation laws</li>
+                        <li>Pushed the Army Nurse Corps to allow Black women in its ranks</li>
+                        <li>Wrote a newspaper column and had a weekly radio show</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Post-Eleanor First Ladies</h4>
+                <p>
+                    Her immediate successors returned to the less visible role held by her predecessors, although in the early 
+                    1960s, Jacqueline Kennedy gained attention for her efforts to refurbish the White House along historical lines, 
+                    and Lady Bird Johnson in the mid- and late 1960s endorsed an effort to beautify public spaces and highways 
+                    in the United States. She also established the foundations of what came to be known as the Office of the 
+                    First Lady, complete with a news reporter, Liz Carpenter, as her press secretary.
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1974-1977</div>
+                    <h4>Betty Ford</h4>
+                    <p>Became an avid advocate of women's rights, proclaiming she was pro-choice on abortion and lobbying for 
+                    ratification of the Equal Rights Amendment (ERA). Shared with the public news of her breast cancer diagnosis 
+                    and subsequent mastectomy.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1977-1981</div>
+                    <h4>Rosalynn Carter</h4>
+                    <p>Attended several cabinet meetings and pushed for ratification of the ERA as well as legislation addressing 
+                    mental health issues.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1981-1989</div>
+                    <h4>Nancy Reagan</h4>
+                    <p>Led the "Just Say No" antidrug campaign.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1989-1993</div>
+                    <h4>Barbara Bush</h4>
+                    <p>Championed literacy efforts.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1993-2001</div>
+                    <h4>Hillary Clinton</h4>
+                    <p>Put in charge of health care reform effort (dubbed "Hillarycare" by opponents). Represented the most 
+                    politically active first lady role since Eleanor Roosevelt.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2001-2009</div>
+                    <h4>Laura Bush</h4>
+                    <p>Advocated literacy and education.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2009-2017</div>
+                    <h4>Michelle Obama</h4>
+                    <p>Emphasized physical fitness and healthy diet and exercise through the "Let's Move!" campaign.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What is the "bully pulpit"?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-1', 25)">A) A platform where the president addresses Congress</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc4-1', 25)">B) Theodore Roosevelt's concept of the presidency as a platform to push an agenda to the public</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-1', 25)">C) The podium in the Oval Office</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-1', 25)">D) A congressional hearing room</div>
+                <div class="feedback-box" id="feedback-kc4-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 Which first lady dramatically expanded the role by championing civil rights?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-2', 25)">A) Jacqueline Kennedy</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc4-2', 25)">B) Eleanor Roosevelt</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-2', 25)">C) Hillary Clinton</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc4-2', 25)">D) Michelle Obama</div>
+                <div class="feedback-box" id="feedback-kc4-2"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="prev-btn" onclick="navigateToSection('section3')">← Previous</button>
+                <button class="next-btn" onclick="navigateToSection('section5')">Next: Direct Presidential Action →</button>
+            </div>
+        </div>
+
+        <!-- SECTION 5: Direct Presidential Action -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+            <div class="section-header">
+                <h2>⚡ 12.5 Presidential Governance: Direct Presidential Action</h2>
+                <p class="subtitle">Executive orders, war powers, and the power of persuasion</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Learning Objectives</h3>
+                <ul class="bullet-list">
+                    <li>Identify the power presidents have to effect change without congressional cooperation</li>
+                    <li>Analyze how different circumstances influence the way presidents use unilateral authority</li>
+                    <li>Explain how presidents persuade others in the political system to support their initiatives</li>
+                    <li>Describe how historians and political scientists evaluate the effectiveness of a presidency</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>Two Categories of Presidential Power</h3>
+                <p>
+                    A president's powers can be divided into two categories: <strong>direct actions</strong> the chief executive 
+                    can take by employing the formal institutional powers of the office and <strong>informal powers of persuasion 
+                    and negotiation</strong> essential to working with the legislative branch.
+                </p>
+                <p>
+                    When a president governs alone through direct action, it may break a policy deadlock or establish new grounds 
+                    for action, but it may also spark opposition that might have been handled differently through negotiation and 
+                    discussion. Moreover, such decisions are subject to court challenge, legislative reversal, or revocation by 
+                    a successor.
+                </p>
+                <p>
+                    What may seem to be a sign of strength is often more properly understood as independent action undertaken 
+                    in the wake of a failure to achieve a solution through the legislative process, or an admission that such 
+                    an effort would prove futile.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h3>Domestic Policy</h3>
+                <p>
+                    Presidents may not be able to appoint key members of their administration without Senate confirmation, 
+                    but they can demand the resignation or removal of cabinet officers, high-ranking appointees (such as ambassadors), 
+                    and members of the presidential staff.
+                </p>
+                <p>
+                    During Reconstruction, Congress tried to curtail the president's removal power with the Tenure of Office Act (1867), 
+                    which required Senate concurrence to remove presidential nominees who took office upon Senate confirmation. 
+                    Andrew Johnson's violation of that legislation provided the grounds for his impeachment in 1868. Subsequent 
+                    presidents secured modifications of the legislation before the Supreme Court ruled in 1926 that the Senate 
+                    had no right to impair the president's removal power.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>The Power of Pardon</h4>
+                <p>
+                    The president also exercises the power of pardon without conditions. Once used fairly sparingly—apart from 
+                    Andrew Johnson's wholesale pardons of former Confederates during the Reconstruction period—the pardon power 
+                    has become more visible in recent decades.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">⚖️ Pardon</div>
+                <div>The president's constitutional power to forgive those convicted of federal offenses, except for officials 
+                removed through the impeachment process. This power requires no congressional approval and cannot be overturned.</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-1', 30)">
+                <div class="card-prompt">🔍 Click to explore: Notable presidential pardons</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Presidential Pardon History:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Harry S. Truman:</strong> Issued over 2,000 pardons and commutations—more than any other 
+                        post–World War II president</li>
+                        <li><strong>Gerald Ford:</strong> Only president to pardon another president (Richard Nixon after Watergate)</li>
+                        <li><strong>Jimmy Carter:</strong> Issued pardons for draft dodging during the Vietnam War</li>
+                        <li><strong>Donald Trump:</strong> Used the pardon for controversial cases including former Sheriff 
+                        Joe Arpaio and Scooter Libby; granted 237 pardons total, with many coming at the end of his term</li>
+                        <li><strong>Barack Obama:</strong> Granted 212 pardons (6% of petitions received)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>Executive Orders and Proclamations</h4>
+                <p>
+                    Presidents may choose to issue executive orders or proclamations to achieve policy goals. Usually, 
+                    executive orders direct government agencies to pursue a certain course in the absence of congressional action. 
+                    A more subtle version pioneered by recent presidents is the executive memorandum, which tends to attract 
+                    less attention.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">📋 Executive Order</div>
+                <div>A rule or order issued by the president without the cooperation of Congress and having the force of law 
+                if the courts do not overturn them. Many of the most famous executive orders have come in times of war or 
+                invoke the president's authority as commander-in-chief.</div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-2', 30)">
+                <div class="card-prompt">🔍 Click to explore: Famous executive orders</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Historic Executive Orders:</p>
+                    <ul class="bullet-list">
+                        <li><strong>Franklin Roosevelt (1942):</strong> Order permitting the internment of Japanese Americans</li>
+                        <li><strong>Harry Truman (1948):</strong> Directive desegregating the armed forces</li>
+                        <li><strong>Abraham Lincoln (1863):</strong> The Emancipation Proclamation, which declared enslaved people 
+                        in Confederate-controlled territory to be free</li>
+                    </ul>
+                    <p>Executive orders are subject to court rulings or changes in policy enacted by Congress. During the 
+                    Korean War, the Supreme Court revoked Truman's order seizing the steel industry. Recent presidents can 
+                    also reverse orders of their predecessors.</p>
+                </div>
+            </div>
+
+            <div class="milestone-box">
+                <h4>📅 Executive Order 9066: Japanese American Internment</h4>
+                <p>
+                    Following the Japanese attack on Pearl Harbor in 1941, President Franklin D. Roosevelt signed Executive 
+                    Order 9066, which authorized the removal of people from military areas. When the military designated the 
+                    entire West Coast a military area, it effectively allowed for the removal of more than 110,000 Japanese 
+                    Americans from their homes. Many of these people were U.S. citizens.
+                </p>
+                <p>
+                    In 1944, Fred Korematsu's case was heard by the Supreme Court, which ruled 6-3 against him, arguing the 
+                    administration had constitutional power to sign the order due to national security concerns. Forty-four 
+                    years later, President Reagan issued an official apology and provided compensation to survivors. In 2011, 
+                    the Justice Department officially recognized that the solicitor general had acted in error in arguing to 
+                    uphold the order.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <h4>Line-Item Veto and Signing Statements</h4>
+                <p>
+                    Presidents have also used the line-item veto and signing statements to alter or influence the application 
+                    of the laws they sign. A line-item veto is a type of veto that keeps the majority of a spending bill 
+                    unaltered but nullifies certain lines of spending within it.
+                </p>
+                <p>
+                    While a number of states allow their governors the line-item veto, the president acquired this power only 
+                    in 1996 after Congress passed a law permitting it. President Clinton used the tool sparingly. However, the 
+                    Supreme Court heard challenges and just sixteen months later declared the act unconstitutional.
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">📝 Signing Statement</div>
+                <div>A statement a president issues with the intent to influence the way a specific bill the president signs 
+                should be enforced. While less powerful than vetoes, congressional opponents have complained that they derail 
+                legislative intent. Signing statements have been used by presidents since at least James Monroe.</div>
+            </div>
+
+            <div class="content-block">
+                <h3>National Security, Foreign Policy, and War</h3>
+                <p>
+                    Presidents are more likely to justify the use of executive orders in cases of national security or as part 
+                    of their war powers. In addition to mandating emancipation and the internment of Japanese Americans, 
+                    presidents have issued orders to protect the homeland from internal threats.
+                </p>
+                <p>
+                    Most notably, Lincoln ordered the suspension of the privilege of the writ of habeas corpus in 1861 and 1862 
+                    before seeking congressional legislation to undertake such an act. Presidents hire and fire military commanders; 
+                    they also use their power as commander-in-chief to aggressively deploy U.S. military force.
+                </p>
+                <p>
+                    Congress rarely has taken the lead over the course of history, with the War of 1812 being the lone exception. 
+                    Pearl Harbor was a salient case where Congress did make a clear and formal declaration when asked by FDR. 
+                    However, since World War II, it has been the president and not Congress who has taken the lead in engaging 
+                    the United States in military action outside the nation's boundaries, most notably in Korea, Vietnam, and 
+                    the Persian Gulf.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-3', 30)">
+                <div class="card-prompt">🔍 Click to explore: Executive agreements vs. treaties</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Executive Agreements:</p>
+                    <p>Presidents also issue executive agreements with foreign powers. These are formal agreements negotiated 
+                    between two countries but <strong>not ratified by a legislature</strong> as a treaty must be. As such, 
+                    they are not treaties under U.S. law, which require two-thirds of the Senate for ratification.</p>
+                    <p>Treaties, presidents have found, are particularly difficult to get ratified. With the fast pace and 
+                    complex demands of modern foreign policy, concluding treaties can be tiresome and burdensome.</p>
+                    <p>Some executive agreements do require some legislative approval, such as those that commit the United 
+                    States to make payments. But for the most part, executive agreements require no congressional action and 
+                    are enforceable as long as their provisions don't conflict with current domestic law.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>The Power of Persuasion</h3>
+                <p>
+                    The framers of the Constitution, concerned about the excesses of British monarchial power, made sure to 
+                    design the presidency within a network of checks and balances controlled by the other branches of the 
+                    federal government. Such checks and balances encourage consultation, cooperation, and compromise in policymaking.
+                </p>
+                <p>
+                    This is most evident at home, where the Constitution makes it difficult for either Congress or the chief 
+                    executive to prevail unilaterally, at least when it comes to constructing policy. Although much is made of 
+                    political stalemate and obstructionism in national political deliberations today, the framers did not want 
+                    to make it too easy to get things done without a great deal of support for such initiatives.
+                </p>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>📖 Neustadt's "Presidential Power is the Power to Persuade"</h4>
+                <p>In 1960, political scientist Richard Neustadt put forward the thesis that presidential power is the power 
+                to persuade. Successful employment of this technique can lead to significant and durable successes. Legislative 
+                achievements tend to be of greater duration because they are more difficult to overturn or replace.</p>
+                <p>According to Neustadt, presidents who seek to prevail through persuasion target: Congress, members of their 
+                own party, the public, the bureaucracy, and when appropriate, the international community and foreign leaders.</p>
+            </div>
+
+            <div class="content-block">
+                <h4>Working with Congress</h4>
+                <p>
+                    Much depends on the balance of power within Congress: Should the opposition party hold control of both houses, 
+                    it will be difficult indeed for the president to realize their own objectives, especially if the opposition 
+                    is intent on frustrating all initiatives.
+                </p>
+                <p>
+                    However, even control of both houses by the president's own party is no guarantee of success or even of 
+                    productive policymaking. For example, neither Barack Obama nor Donald Trump achieved all they desired 
+                    despite having favorable conditions for the first two years of their presidencies.
+                </p>
+                <p>
+                    In times of divided government (when one party controls the presidency and the other controls one or both 
+                    chambers of Congress), it is up to the president to cut deals and make compromises that will attract support 
+                    from at least some members of the opposition party without excessively alienating members of their own party. 
+                    Both Ronald Reagan and Bill Clinton proved effective in dealing with divided government—indeed, Clinton 
+                    scored more successes with Republicans in control of Congress than he did with Democrats in charge.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-4', 30)">
+                <div class="card-prompt">🔍 Click to explore: The Hidden-Hand Presidency</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Greenstein's Hidden-Hand Presidency:</p>
+                    <p>Political scientist Fred Greenstein touted the advantages of a "hidden hand presidency," in which the 
+                    chief executive did most of the work behind the scenes, wielding both the carrot and the stick.</p>
+                    <p>Greenstein singled out President Dwight Eisenhower as particularly skillful in such endeavors. This 
+                    approach contrasts with the "going public" strategy, emphasizing private negotiation over public pressure.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>Opportunity and Legacy</h3>
+                <p>
+                    What often shapes a president's performance, reputation, and ultimately legacy depends on circumstances 
+                    that are largely out of their control. Did the president prevail in a landslide or was it a closely contested 
+                    election? Did they come to office as the result of death, assassination, or resignation? How much support 
+                    does the president's party enjoy, and is that support reflected in the composition of both houses of Congress, 
+                    just one, or neither?
+                </p>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">⏰ Political Time</div>
+                <div>Political scientist Stephen Skowronek's concept that the circumstances under which presidents assume power 
+                greatly affect their options. Some presidents take office at times of great stability with few concerns and 
+                limited options. Other presidents take office at a time of crisis, creating both pressure and opportunity for 
+                responding to challenges. Theodore Roosevelt openly bemoaned the lack of any such crisis, which he deemed 
+                essential for achieving greatness.</div>
+            </div>
+
+            <div class="definition-box">
+                <div class="definition-term">🎖️ Rally Around the Flag Effect</div>
+                <div>A spike in presidential popularity during international crises. National emergencies and war offer 
+                presidents far more opportunity to act vigorously and at times independently than domestic policymaking, 
+                which requires far more give-and-take.</div>
+            </div>
+
+            <div class="content-block">
+                <h4>Presidential Legacy</h4>
+                <p>
+                    Presidents often leave a legacy that lasts far beyond their time in office. Sometimes, this is due to the 
+                    long-term implications of policy decisions. Critical to the notion of legacy is the shaping of the Supreme 
+                    Court as well as other federal judges.
+                </p>
+                <p>
+                    Long after John Adams left the White House in 1801, his appointment of John Marshall as chief justice 
+                    shaped American jurisprudence for over three decades. No wonder confirmation hearings have grown more 
+                    contentious in the cases of highly visible nominees.
+                </p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-5', 30)">
+                <div class="card-prompt">🔍 Click to explore: Enduring presidential legacies</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Presidents Who Cast Long Shadows:</p>
+                    <ul class="bullet-list">
+                        <li><strong>George Washington:</strong> It was a tough act to follow</li>
+                        <li><strong>Abraham Lincoln:</strong> Presidential stature grew to extreme heights after his death</li>
+                        <li><strong>Theodore & Franklin Roosevelt:</strong> Offered models of vigorous executive leadership</li>
+                        <li><strong>John F. Kennedy & Ronald Reagan:</strong> Their image and style influenced and at times 
+                        haunted or frustrated successors</li>
+                        <li><strong>Lyndon Johnson's Vietnam:</strong> Created "Vietnam syndrome" as a cautionary tale</li>
+                        <li><strong>Richard Nixon's Watergate:</strong> Left behind the tendency to add "-gate" to scandals</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What is Neustadt's famous thesis about presidential power?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-1', 25)">A) Presidential power comes from the Constitution</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc5-1', 25)">B) Presidential power is the power to persuade</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-1', 25)">C) Presidential power is unlimited in foreign affairs</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-1', 25)">D) Presidential power increases during economic crises</div>
+                <div class="feedback-box" id="feedback-kc5-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">📝 What is the "rally around the flag effect"?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-2', 25)">A) Increased patriotism during elections</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'kc5-2', 25)">B) A spike in presidential popularity during international crises</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-2', 25)">C) Congress supporting the president on all war measures</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'kc5-2', 25)">D) Increased voter turnout during wartime</div>
+                <div class="feedback-box" id="feedback-kc5-2"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="prev-btn" onclick="navigateToSection('section4')">← Previous</button>
+                <button class="next-btn" onclick="navigateToSection('reportPage')">View Your Report →</button>
+            </div>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateToSection('homePage')">← Back to Home</button>
+
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 12: The Presidency</p>
+
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">95%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>📋 Student Information</h3>
+                                <div class="info-row">
+                                    <span>Name:</span>
+                                    <span id="reportName">Not provided</span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Date:</span>
+                                    <span id="reportDate"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span>Time:</span>
+                                    <span id="reportTime"></span>
+                                </div>
+                            </div>
+
+                            <div class="performance-section">
+                                <h3>📊 Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <td>12.1 Design & Evolution</td>
+                                        <td id="sec1Status" class="status-incomplete">⭕</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12.2 Election Process</td>
+                                        <td id="sec2Status" class="status-incomplete">⭕</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12.3 Organizing to Govern</td>
+                                        <td id="sec3Status" class="status-incomplete">⭕</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12.4 The Public Presidency</td>
+                                        <td id="sec4Status" class="status-incomplete">⭕</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12.5 Direct Presidential Action</td>
+                                        <td id="sec5Status" class="status-incomplete">⭕</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/5</div>
+                                <div class="metric-label">Sections</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>📚 Key Concepts Mastered</h3>
+                            <ul class="bullet-list">
+                                <li>Constitutional design and evolution of the presidency</li>
+                                <li>Electoral College system and presidential elections</li>
+                                <li>Cabinet formation and executive branch organization</li>
+                                <li>Presidential communication and the bully pulpit</li>
+                                <li>Executive orders and direct presidential action</li>
+                                <li>War powers and foreign policy authority</li>
+                                <li>The power of persuasion in presidential leadership</li>
+                                <li>Presidential legacy and historical evaluation</li>
+                            </ul>
+                        </div>
+
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This report documents the student's engagement with 
+                                Chapter 12: The Presidency interactive learning module. The score reflects completion of 
+                                interactive activities and knowledge check questions. This module covers the constitutional 
+                                design of the executive branch, presidential elections, cabinet organization, public 
+                                communication, and direct presidential powers.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="points-popup" id="pointsPopup">
+        <div id="pointsMessage">+0 points!</div>
+    </div>
+
+    <script>
+        // Game state management
+        const gameState = {
+            score: 0,
+            level: 'Explorer',
+            studentName: '',
+            completedSections: new Set(),
+            earnedPoints: new Set(),
+            answeredQuestions: new Set(),
+            correctAnswers: 0,
+            totalQuestions: 10
+        };
+
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Presidential Sage'
+        };
+
+        const maxPoints = 1020;
+
+        // Navigation functions
+        function navigateToSection(sectionId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+
+            if (sectionId === 'reportPage') {
+                updateReportPage();
+            }
+        }
+
+        // Save student name
+        function saveName() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput.value.trim()) {
+                gameState.studentName = nameInput.value.trim();
+                showPoints(20, "Welcome " + gameState.studentName + "! +20 bonus points!");
+            }
+        }
+
+        // Interactive card handling
+        function revealCard(element, cardId, points) {
+            if (gameState.earnedPoints.has(cardId)) return;
+
+            element.classList.add('revealed');
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+
+            gameState.earnedPoints.add(cardId);
+            addPoints(points);
+            showPoints(points);
+
+            checkSectionCompletion(element);
+        }
+
+        // Knowledge check handling
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+
+            gameState.answeredQuestions.add(questionId);
+
+            const options = element.parentElement.querySelectorAll('.kc-option');
+            options.forEach(option => {
+                option.classList.add('disabled');
+                option.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                gameState.correctAnswers++;
+                addPoints(points);
+                showPoints(points);
+                showFeedback(questionId, true, "✓ Correct! Great job!");
+            } else {
+                element.classList.add('incorrect');
+                showFeedback(questionId, false, "✗ Not quite. The correct answer has been highlighted.");
+                options.forEach(option => {
+                    if (option.getAttribute('onclick') && option.getAttribute('onclick').includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+
+            checkSectionCompletion(element);
+        }
+
+        function showFeedback(questionId, isCorrect, message) {
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            feedbackBox.textContent = message;
+            feedbackBox.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+        }
+
+        function addPoints(points) {
+            gameState.score += points;
+            updateScore();
+            updateLevel();
+            updateProgress();
+        }
+
+        function showPoints(points, customMessage = null) {
+            const popup = document.getElementById('pointsPopup');
+            const message = document.getElementById('pointsMessage');
+
+            message.textContent = customMessage || `+${points} points!`;
+            popup.style.display = 'block';
+
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (gameState.score >= parseInt(threshold)) {
+                    newLevel = level;
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('level').textContent = newLevel;
+        }
+
+        function updateProgress() {
+            const percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        function checkSectionCompletion(element) {
+            let section = element.closest('.page');
+            if (!section) return;
+
+            const sectionId = section.id;
+            const sectionNumber = sectionId.replace('section', '');
+
+            const cards = section.querySelectorAll('.interactive-card');
+            const questions = section.querySelectorAll('.knowledge-check');
+
+            let allCardsRevealed = true;
+            cards.forEach(card => {
+                if (!card.classList.contains('revealed')) {
+                    allCardsRevealed = false;
+                }
+            });
+
+            let allQuestionsAnswered = true;
+            questions.forEach(question => {
+                const hasAnswer = question.querySelector('.kc-option.correct, .kc-option.incorrect');
+                if (!hasAnswer) {
+                    allQuestionsAnswered = false;
+                }
+            });
+
+            if (allCardsRevealed && allQuestionsAnswered && sectionNumber) {
+                gameState.completedSections.add(sectionNumber);
+                const card = document.getElementById('card' + sectionNumber);
+                if (card) {
+                    card.classList.add('completed');
+                }
+            }
+        }
+
+        function calculateLetterGrade(percentage) {
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+
+            if (percentage >= 90) {
+                letterGrade = 'A';
+                gradeColor = '#1B5E20';
+            } else if (percentage >= 80) {
+                letterGrade = 'B';
+                gradeColor = '#00695C';
+            } else if (percentage >= 70) {
+                letterGrade = 'C';
+                gradeColor = '#F57C00';
+            } else if (percentage >= 60) {
+                letterGrade = 'D';
+                gradeColor = '#E65100';
+            }
+
+            return { letter: letterGrade, color: gradeColor };
+        }
+
+        function updateReportPage() {
+            const percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
+            const grade = calculateLetterGrade(percentage);
+            const completedCount = gameState.completedSections.size;
+            const quizPercentage = gameState.totalQuestions > 0 ? 
+                Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) : 0;
+            const engagementPercentage = Math.round((gameState.earnedPoints.size / 20) * 100);
+
+            document.getElementById('reportName').textContent = gameState.studentName || 'Not provided';
+            document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+
+            document.getElementById('letterGrade').textContent = grade.letter;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.backgroundColor = grade.color;
+
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((completedCount / 5) * 100);
+
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = completedCount + '/5';
+            document.getElementById('metricQuiz').textContent = quizPercentage + '%';
+            document.getElementById('metricEngagement').textContent = Math.min(100, engagementPercentage) + '%';
+
+            for (let i = 1; i <= 5; i++) {
+                const statusEl = document.getElementById('sec' + i + 'Status');
+                if (gameState.completedSections.has(String(i))) {
+                    statusEl.textContent = '✅';
+                    statusEl.className = 'status-complete';
+                } else {
+                    statusEl.textContent = '⭕';
+                    statusEl.className = 'status-incomplete';
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateScore();
+            updateLevel();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

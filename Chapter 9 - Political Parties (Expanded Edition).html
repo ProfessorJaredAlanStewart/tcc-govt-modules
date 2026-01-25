@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Political Parties - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-icons {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-icon {
+            text-align: center;
+        }
+
+        .stat-icon span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .name-input-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .name-input {
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            width: 300px;
+            margin: 1rem;
+        }
+
+        .start-button, .complete-section-btn, .report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .start-button:hover, .complete-section-btn:hover, .report-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-fill {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill-inner {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card.completed {
+            background: var(--highlight-green);
+            border: 2px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✅';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+        }
+
+        .section-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .section-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .points-indicator {
+            color: var(--warning);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-blue);
+        }
+
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .section-header span {
+            font-size: 2.5rem;
+        }
+
+        .section-header h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 5px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-card {
+            background: var(--bg-section);
+            border: 2px dashed var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .interactive-card:hover:not(.revealed) {
+            background: var(--highlight-blue);
+            transform: scale(1.02);
+        }
+
+        .interactive-card.revealed {
+            cursor: default;
+            background: var(--highlight-green);
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 1rem;
+        }
+
+        .interactive-card.revealed .card-content {
+            max-height: 3000px;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            transform: translateX(5px);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #ffebee;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: var(--highlight-green);
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #ffebee;
+            color: var(--error);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .bullet-list {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .bullet-list li {
+            margin: 0.5rem 0;
+            position: relative;
+            list-style: none;
+        }
+
+        .bullet-list li::before {
+            content: '→';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .timeline-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 3px;
+            height: 100%;
+            background: var(--primary-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 60px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 22px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            top: 0;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-box {
+            background: linear-gradient(135deg, #fff9c4, #ffecb3);
+            border: 2px solid #f9a825;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+
+        .milestone-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background: var(--highlight-yellow);
+            border-left: 5px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        #pointsPopup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: none;
+            z-index: 2000;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .report-scores {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            padding: 2rem;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+        }
+
+        .report-main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.5rem;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th, .performance-table td {
+            padding: 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .performance-table th {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .print-report-button {
+            display: block;
+            margin: 2rem auto;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: relative;
+            }
+            .container {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .hero-section h2 {
+                font-size: 1.8rem;
+            }
+            .stat-icons {
+                gap: 1.5rem;
+            }
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .name-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <h1>🏛️ TCC Federal Government Trailblazer Trek: Political Parties</h1>
+        <div class="score-display">
+            ⭐ Score: <span id="totalPoints">0</span> | 🎯 Level: <span id="currentLevel">Explorer</span>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div id="pointsPopup">+0 points!</div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>🗳️ Chapter 9: Political Parties 🏛️</h2>
+                <p>Explore the essential role of political parties in American democracy</p>
+                <div class="stat-icons">
+                    <div class="stat-icon">
+                        <span>🐘</span>
+                        <div>Republicans</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span>🐴</span>
+                        <div>Democrats</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span>🗳️</span>
+                        <div>Elections</div>
+                    </div>
+                    <div class="stat-icon">
+                        <span>⚖️</span>
+                        <div>Polarization</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-section">
+                <h3>Welcome, Trailblazer! 🎯</h3>
+                <p>Enter your name to begin your journey through Political Parties</p>
+                <input type="text" id="studentName" class="name-input" placeholder="Enter your name">
+                <br>
+                <button class="start-button" onclick="startModule()">Begin Your Trek 🚀</button>
+            </div>
+
+            <div id="moduleContent" style="display: none;">
+                <div class="progress-bar">
+                    <h3>📊 Your Progress</h3>
+                    <div class="progress-fill">
+                        <div class="progress-fill-inner" id="progressBar">0%</div>
+                    </div>
+                </div>
+
+                <div class="section-grid">
+                    <div class="section-card" id="section1Card" onclick="navigateToSection(1)">
+                        <div class="section-number">1</div>
+                        <h3>What Are Parties and How Did They Form?</h3>
+                        <p>Discover the origins and evolution of American political parties from the Founding era to today.</p>
+                        <div class="points-indicator">🌟 225 points available</div>
+                    </div>
+
+                    <div class="section-card" id="section2Card" onclick="navigateToSection(2)">
+                        <div class="section-number">2</div>
+                        <h3>The Two-Party System</h3>
+                        <p>Understand why the United States has been dominated by two major parties and how electoral rules shape this system.</p>
+                        <div class="points-indicator">🌟 225 points available</div>
+                    </div>
+
+                    <div class="section-card" id="section3Card" onclick="navigateToSection(3)">
+                        <div class="section-number">3</div>
+                        <h3>The Shape of Modern Political Parties</h3>
+                        <p>Explore party organization from local precincts to national conventions and the party-in-government.</p>
+                        <div class="points-indicator">🌟 225 points available</div>
+                    </div>
+
+                    <div class="section-card" id="section4Card" onclick="navigateToSection(4)">
+                        <div class="section-number">4</div>
+                        <h3>Divided Government and Partisan Polarization</h3>
+                        <p>Examine the challenges of divided government and the causes and consequences of party polarization.</p>
+                        <div class="points-indicator">🌟 225 points available</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <button class="report-button" onclick="generateReport()">📋 Generate Completion Report</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: What Are Parties and How Did They Form? -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🏛️</span>
+                    <h2>Section 1: What Are Parties and How Did They Form?</h2>
+                </div>
+
+                <p>At some point, most of us have found ourselves part of a group trying to solve a problem, like picking a restaurant or movie to attend, or completing a big project at school or work. Members of the group probably had various opinions about what should be done. Some may have even refused to help make the decision or to follow it once it had been made. Still others may have been willing to follow along but were less interested in contributing to a workable solution. Because of this disagreement, at some point, someone in the group had to find a way to make a decision, negotiate a compromise, and ultimately do the work needed for the group to accomplish its goals.</p>
+
+                <p>This kind of collective action problem is very common in societies, as groups and entire societies try to solve problems or distribute scarce resources. In modern U.S. politics, such problems are usually solved by two important types of organizations: interest groups and political parties. There are many interest groups, all with opinions about what should be done and a desire to influence policy. Because they are usually not officially affiliated with any political party, they generally have no trouble working with either of the major parties. But at some point, a society must find a way of taking all these opinions and turning them into solutions to real problems. That is where political parties come in.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Political Parties</div>
+                    <div>Groups of people with similar interests who work together to create and implement policies by gaining control over the government by winning elections. Party platforms guide members of Congress in drafting legislation. Parties guide proposed laws through Congress and inform party members how they should vote on important issues. Political parties also nominate candidates to run for state government, Congress, and the presidency. Finally, they coordinate political campaigns and mobilize voters.</div>
+                </div>
+
+                <h3>Political Parties as Unique Organizations</h3>
+
+                <p>In Federalist No. 10, written in the late eighteenth century, James Madison noted that the formation of self-interested groups, which he called factions, was inevitable in any society, as individuals started to work together to protect themselves from the government. Interest groups and political parties are two of the most easily identified forms of factions in the United States. These groups are similar in that they are both mediating institutions responsible for communicating public preferences to the government. They are not themselves government institutions in a formal sense. Neither is directly mentioned in the U.S. Constitution nor do they have any real, legal authority to influence policy.</p>
+
+                <p>But whereas interest groups often work indirectly to influence our leaders, political parties are organizations that try to directly influence public policy through its members who seek to win and hold public office. Parties accomplish this by identifying and aligning sets of issues that are important to voters in the hopes of gaining support during elections.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📜 Party Platform</div>
+                    <div>The collection of a party's positions on issues it considers politically important. These critical issue positions are presented in documents adopted at each party's presidential nominating convention every four years. If successful, a party can create a large enough electoral coalition to gain control of the government. Once in power, the party is then able to deliver the policy preferences they choose by electing its partisans to the government.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card1-1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: What makes parties different from interest groups?</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Excellent exploration of party distinctions!</p>
+                        <p>While both political parties and interest groups are forms of factions that communicate public preferences to government, they differ fundamentally in their approach to influence. Interest groups work <strong>indirectly</strong> to influence leaders through lobbying, advocacy, and public pressure campaigns. They focus on specific issues or industries without seeking to control government.</p>
+                        <p>Political parties, by contrast, work <strong>directly</strong> to influence policy by fielding candidates who seek to win and hold public office. Parties provide choices to the electorate by presenting distinct positions that contrast sharply with their opposition. Their goal is not just to influence policy, but to <strong>control the government</strong> by winning elections at all levels.</p>
+                    </div>
+                </div>
+
+                <h3>How Political Parties Formed</h3>
+
+                <p>Winning elections and implementing policy would be hard enough in simple political systems, but in a country as complex as the United States, political parties must take on great responsibilities to win elections and coordinate behavior across the many local, state, and national governing bodies. Indeed, political differences between states and local areas can contribute much complexity. If a party stakes out issue positions on which few people agree and therefore builds too narrow a coalition of voter support, that party may find itself marginalized. But if the party takes too broad a position on issues, it might find itself in a situation where the members of the party disagree with one another, making it difficult to pass legislation, even if the party can secure victory.</p>
+
+                <p>It should come as no surprise that the story of U.S. political parties largely mirrors the story of the United States itself. The United States has seen sweeping changes to its size, its relative power, and its social and demographic composition. These changes have been mirrored by the political parties as they have sought to shift their coalitions to establish and maintain power across the nation and as party leadership has changed.</p>
+
+                <p>National political parties as we understand them today did not really exist in the United States during the early years of the republic. Most politics during the time of the nation's founding were local in nature and based on elite politics, limited suffrage (or the ability to vote in elections), and property ownership. Residents of the various colonies, and later of the various states, were far more interested in events in their state legislatures than in those occurring at the national level.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card1-2', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The origins of the first political parties</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Great discovery about party origins!</p>
+                        <p>Soon after the United States emerged from the Revolutionary War, a rift began to emerge between two groups that had very different views about the future direction of U.S. politics. Thus, from the very beginning of its history, the United States has had a system of government dominated by two different philosophies:</p>
+                        <p><strong>Federalists</strong>, who were largely responsible for drafting and ratifying the U.S. Constitution, generally favored the idea of a stronger, more centralized republic that had greater control over regulating the economy. Led by Alexander Hamilton, they largely dominated the government in the years immediately after the Constitution was ratified. President George Washington was initially against the existence of parties.</p>
+                        <p><strong>Anti-Federalists</strong> (later Democratic-Republicans) preferred a more confederate system built on state equality and autonomy. When Washington decided to exit politics and leave office, he warned of the potential negative effects of parties in his farewell address, including their potentially divisive nature and the fact that they might not always focus on the common good.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-box">
+                    <div class="milestone-title">📜 MILESTONE: The "Revolution of 1800"</div>
+                    <p>When the U.S. Constitution was drafted, its authors hoped to avoid political parties. They felt the importance of states in the U.S. federal structure would make it difficult for national parties to form. They also hoped that having a college of electors vote for the executive branch, with the top two vote-getters becoming president and vice president, would discourage the formation of parties.</p>
+                    <p>Their system worked for the first two presidential elections, when essentially all the electors voted for George Washington. But by 1796, the Federalist and Anti-Federalist camps had organized into electoral coalitions. The Federalist John Adams won the Electoral College vote, but his authority was undermined when the vice presidency went to Democratic-Republican Thomas Jefferson, who finished second.</p>
+                    <p>Four years later, the Democratic-Republicans managed to coordinate electors to vote for their top two candidates. But when the vote ended in a tie between Thomas Jefferson and Aaron Burr, it was ultimately left to Congress to decide who would be the third president. This led to the <strong>Twelfth Amendment</strong> (1804), which changed the rules so the president and vice president would be selected through separate elections within the Electoral College.</p>
+                </div>
+
+                <h3>The Evolution of Political Parties</h3>
+
+                <p>Growing regional tensions eroded the Federalist Party's ability to coordinate elites, and it eventually collapsed following its opposition to the War of 1812. The Democratic-Republican Party, on the other hand, eventually divided over whether national resources should be focused on economic and mercantile development, such as tariffs on imported goods and government funding of internal improvements like roads and canals, or on promoting populist issues that would help the "common man."</p>
+
+                <p>In the election of 1824, numerous candidates contended for the presidency, all members of the Democratic-Republican Party. Andrew Jackson won more popular votes and more electoral votes than any other candidate. However, because he did not win the majority of available electoral votes, the election was decided by the House of Representatives. When Henry Clay gave his support to John Quincy Adams, who was chosen on the first ballot, Jackson referred to it as "the corrupt bargain."</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card1-3', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Second Party System</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Excellent understanding of party evolution!</p>
+                        <p>This marked the beginning of what historians call the <strong>Second Party System</strong>, with the splitting of the Democratic-Republicans and the formation of two new political parties:</p>
+                        <p><strong>The Democratic Party</strong> (party of Jackson) continued to advocate for the common people by championing westward expansion and opposing a national bank. The formation of the Democratic Party marked an important shift in U.S. politics. Rather than being built largely to coordinate elite behavior, it worked to organize the electorate by taking advantage of state-level laws that had extended suffrage from male property owners to nearly all White men.</p>
+                        <p><strong>The Whig Party</strong> (evolved from National Republicans) believed that the national government should encourage economic development. The Democrats emphasized <strong>personal politics</strong>, focusing on building direct relationships with voters rather than on promoting specific issues.</p>
+                        <p>The party also perfected the <strong>spoils system</strong>, in which support for the party during elections was rewarded with jobs in the government bureaucracy. Many positions were given to party bosses and leaders of <strong>political machines</strong>—organizations that secured votes for the party's candidates.</p>
+                    </div>
+                </div>
+
+                <p>The Democratic Party dominated national politics from Andrew Jackson's presidential victory in 1828 until the mid-1850s, when regional tensions began to threaten the nation's very existence. The growing power of industrialists, who preferred greater national authority, combined with increasing tensions between the northern and southern states over slavery, led to the rise of the Republican Party and its leader Abraham Lincoln in the election of 1860, while the Democratic Party dominated in the South.</p>
+
+                <h3>Third Parties in American History</h3>
+
+                <p>The Democratic and Republican parties have remained the two dominant players in the U.S. party system since the Civil War (1861–1865). That does not mean, however, that the system has been stagnant. At various points in the past 170 years, elites and voters have sought to create alternatives to the existing party system.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Third Parties (Minor Parties)</div>
+                    <div>Political parties formed as alternatives to the Republican and Democratic parties. They are typically formed by charismatic leaders, champion a relatively narrow set of causes, and fail to gain broad support among the electorate. Once their leaders have been defeated or discredited, the party structures collapse, and most supporters are eventually pulled back into one of the existing parties.</div>
+                </div>
+
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Third Party</th>
+                            <th>Year</th>
+                            <th>Key Issues/Platform</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Populist Party</td>
+                            <td>1892</td>
+                            <td>Regulation of railroads, income tax, popular election of senators</td>
+                        </tr>
+                        <tr>
+                            <td>Progressive Party (Bull Moose)</td>
+                            <td>1912</td>
+                            <td>Women's suffrage, eight-hour workday, workers' compensation, direct election of senators</td>
+                        </tr>
+                        <tr>
+                            <td>Progressive Party (Wallace)</td>
+                            <td>1948</td>
+                            <td>Racial desegregation, closer ties to Soviet Union, national healthcare</td>
+                        </tr>
+                        <tr>
+                            <td>States' Rights Democrats (Dixiecrats)</td>
+                            <td>1948</td>
+                            <td>Opposition to civil rights, support for segregation</td>
+                        </tr>
+                        <tr>
+                            <td>American Independent Party</td>
+                            <td>1968</td>
+                            <td>States' rights, opposition to desegregation</td>
+                        </tr>
+                        <tr>
+                            <td>Reform Party</td>
+                            <td>1992</td>
+                            <td>Balanced budget, campaign finance reform</td>
+                        </tr>
+                        <tr>
+                            <td>Green Party</td>
+                            <td>2000</td>
+                            <td>Environmental protection, social justice</td>
+                        </tr>
+                    </tbody>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card1-4', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Theodore Roosevelt and the Progressive Party</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Great exploration of Progressive history!</p>
+                        <p>In 1912, former Republican president Theodore Roosevelt attempted to form a third party, known as the <strong>Progressive Party</strong>, as an alternative to the more business-minded Republicans. The Progressives sought to correct the many problems that had arisen as the United States transformed from a rural, agricultural nation into an increasingly urbanized, industrialized country dominated by big business interests.</p>
+                        <p>In general, Progressives sought to make government more responsive to the will of the people and to end political corruption. They wished to break the power of party bosses and political machines, and called upon states to pass laws allowing voters to:</p>
+                        <ul class="bullet-list">
+                            <li>Vote directly on proposed legislation (initiative)</li>
+                            <li>Propose new laws (referendum)</li>
+                            <li>Recall incompetent or corrupt elected officials</li>
+                        </ul>
+                        <p>The Progressive Party largely disappeared after 1916, with most members returning to the Republican Party.</p>
+                    </div>
+                </div>
+
+                <p>None of these alternatives to the two major political parties had much success at the national level, and most are no longer viable parties. All faced the same fate. Some of these parties had an electoral impact. For example, the Progressive Party pulled enough votes away from the Republicans to hand the 1912 election to the Democrats. Thus, the third-party rival's principal accomplishment was helping its least-preferred major party win, usually at the short-term expense of the very issue it championed. In the long run, however, many third parties have brought important issues to the attention of the major parties, which then incorporated these issues into their platforms.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ According to James Madison in Federalist No. 10, what did he call the self-interested groups that would inevitably form in society?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">Factions</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Coalitions</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Caucuses</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Committees</div>
+                    <div class="feedback-box" id="feedback-q1-1"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What marked the beginning of the Second Party System?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">The ratification of the Constitution</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">George Washington's farewell address</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">The splitting of the Democratic-Republicans into Democrats and Whigs</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">Abraham Lincoln's election in 1860</div>
+                    <div class="feedback-box" id="feedback-q1-2"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What amendment changed the Electoral College rules so that the president and vice president would be selected through separate elections?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">Tenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-3', 25)">Twelfth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">Fourteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">Fifteenth Amendment</div>
+                    <div class="feedback-box" id="feedback-q1-3"></div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="complete-section-btn" onclick="completeSection(1)">Complete Section 1 ✓</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: The Two-Party System -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🗳️</span>
+                    <h2>Section 2: The Two-Party System</h2>
+                </div>
+
+                <p>One of the cornerstones of a vibrant democracy is citizens' ability to influence government through voting. In order for that influence to be meaningful, citizens must send clear signals to their leaders about what they wish the government to do. It only makes sense, then, that a democracy will benefit if voters have several clearly differentiated options available to them at the polls on Election Day. Having these options means voters can select a candidate who more closely represents their own preferences on the important issues of the day. It also gives individuals who are considering voting a reason to participate. After all, you are more likely to vote if you care about who wins and who loses.</p>
+
+                <p>The existence of two major parties, especially in our present era of strong parties, leads to sharp distinctions between the candidates and between the party organizations.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Two-Party System</div>
+                    <div>A system in which two major parties win all or almost all elections. The two-party system came into being because the structure of U.S. elections, with one seat tied to a geographic district, tends to lead to dominance by two major political parties. Even when there are other options on the ballot, most voters understand that minor parties have no real chance of winning even a single office. Hence, they vote for candidates of the two major parties in order to support a potential winner.</div>
+                </div>
+
+                <h3>Election Rules and the Two-Party System</h3>
+
+                <p>A number of reasons have been suggested to explain why the structure of U.S. elections has resulted in a two-party system. Most of the blame has been placed on the process used to select its representatives. First, most elections at the state and national levels are winner-take-all: The candidate who receives the greatest overall number of votes wins. Winner-take-all elections with one representative elected for one geographic district allow voters to develop a personal relationship with "their" representative to the government. They know exactly whom to blame, or thank, for the actions of that government.</p>
+
+                <p>But these elections also tend to limit the number of people who run for office. Otherwise-qualified candidates might not stand for election if they feel the incumbent or another candidate has an early advantage in the race. And since voters do not like to waste votes, third parties must convince voters they have a real chance of winning races before voters will take them seriously.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">📊 Plurality Voting (First-Past-the-Post)</div>
+                    <div>The election rule by which the candidate with the most votes wins, regardless of vote share. U.S. elections are based on plurality voting. This is based on the principle that the individual candidate with the most votes wins, whether or not they gain a majority (51 percent or greater) of the total votes cast. For instance, Abraham Lincoln won the presidency in 1860 with only 40 percent of the vote—not a majority, but more than any of the other three candidates received.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card2-1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: How plurality voting affects third parties</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Great insight into electoral mechanics!</p>
+                        <p>Plurality voting has been justified as the simplest and most cost-effective method for identifying a victor in a democracy. A single election can be held on a single day, and the victor of the competition is easily selected.</p>
+                        <p>In a system where individual candidates compete for individual seats representing unique geographic districts, a candidate must receive a fairly large number of votes to win. A political party that appeals to only a small percentage of voters will always lose to a party that is more popular. Because second-place (or lower) finishers receive no reward for their efforts, parties that do not attract enough supporters to finish first at least some of the time will eventually disappear.</p>
+                        <p>The failure of third parties to win and the possibility that they will draw votes away from the party the voter had favored before—resulting in a win for the party the voter liked least—makes people hesitant to vote for third party candidates a second time. This has been the fate of all U.S. third parties—the Populist Party, the Progressives, the Dixiecrats, the Reform Party, and others.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📈 Proportional Representation</div>
+                    <div>A party-based election rule in which the number of seats a party receives is a function of the share of votes it receives in an election. In a proportional system, parties advertise who is on their candidate list and voters pick a party. Then, legislative seats are doled out to the parties based on the proportion of support each party receives. For example, if the Green Party gets 7 percent of the vote, it would get 7 percent of the total number of legislative seats available.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card2-2', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The 2000 Election and the Spoiler Effect</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Excellent understanding of third-party impact!</p>
+                        <p>Third parties, often born of frustration with the current system, attract supporters from one or both of the existing parties during an election but fail to attract enough votes to win. After the election is over, supporters experience remorse when their least-favorite candidate wins instead.</p>
+                        <p>In the 2000 election, Ralph Nader ran for president as the candidate of the Green Party. Nader, a longtime consumer activist concerned with environmental issues and social justice, attracted many votes from people who usually voted for Democratic candidates. This has caused some to claim that Democratic nominee <strong>Al Gore lost the 2000 election to Republican George W. Bush</strong> because Nader won Democratic votes in Florida that might otherwise have gone to Gore.</p>
+                        <p>This demonstrates the <strong>spoiler effect</strong>—where a third-party candidate draws votes from a major party candidate, potentially causing that candidate to lose.</p>
+                    </div>
+                </div>
+
+                <h3>Alternative Voting Systems</h3>
+
+                <p>Abandoning plurality voting, even if the winner-take-all election were kept, would almost certainly increase the number of parties from which voters could choose.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Majoritarian Voting</div>
+                    <div>A type of election in which the winning candidate must receive at least 50 percent of the votes. If no candidate wins a majority in the first round of voting, a run-off election is held among the top contenders. Some states conduct their primary elections within the two major political parties in this way.</div>
+                </div>
+
+                <p>One possible way to implement proportional representation in the United States is to allocate legislative seats based on the national level of support for each party's presidential candidate, rather than on the results of individual races. If this method had been used in the 1996 elections, 8 percent of the seats in Congress would have gone to Ross Perot's Reform Party because he won 8 percent of the votes cast.</p>
+
+                <h3>Other Factors Supporting the Two-Party System</h3>
+
+                <p>Electoral rules are probably not the only reason the United States has a two-party system. We need only look at the number of parties in the British or Canadian systems, both of which are winner-take-all plurality systems like that in the United States, to see that it is possible to have more than two parties while still directly electing representatives.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card2-3', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Electoral College and Two-Party Dominance</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Excellent analysis of institutional factors!</p>
+                        <p>Scholars of voting behavior have suggested at least three other characteristics of the U.S. system that influence party outcomes:</p>
+                        <p><strong>The Electoral College:</strong> The United States has a presidential system in which the winner is selected not directly by the popular vote but indirectly by a group of electors. The winner-take-all system also applies in the Electoral College. In all but two states (Maine and Nebraska), the total of the state's electoral votes go to the candidate who wins the plurality of the popular vote in that state. Even if a new third party wins the support of many voters, it must be able to do so in several states to win enough electoral votes to have a chance of winning the presidency.</p>
+                        <p><strong>Demobilized Ethnicity:</strong> Political scientist Gary W. Cox has suggested that the relative prosperity of the United States and the relative unity of its citizens have prevented the formation of "large dissenting groups" that might give support to third parties. The U.S. does not have viable third parties because none of its regions is dominated by mobilized ethnic minorities that have created political parties to defend concerns solely of interest to that ethnic group.</p>
+                        <p><strong>Campaign and Election Laws:</strong> Rules have been written to make it easy for existing parties to secure a spot for their candidates in future elections. Some states create significant burdens for candidates who wish to run as independents or represent new parties, such as requiring thousands of signatures before a candidate's name can be placed on the ballot.</p>
+                    </div>
+                </div>
+
+                <p>The two-party system is also rooted in U.S. history. The first parties, the Federalists and the Jeffersonian Republicans, disagreed about how much power should be given to the federal government, and differences over other important issues further strengthened this divide. Over time, these parties evolved into others by inheriting, for the most part, the general ideological positions and constituents of their predecessors, but no more than two major parties ever formed. Instead of parties arising based on region or ethnicity, various regions and ethnic groups sought a place in one of the two major parties.</p>
+
+                <h3>Critical Elections and Realignment</h3>
+
+                <p>Political parties exist for the purpose of winning elections in order to influence public policy. This requires them to build coalitions across a wide range of voters who share similar preferences. Since most U.S. voters identify as moderates, the historical tendency has been for the two parties to compete for "the middle" while also trying to mobilize their more loyal bases.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔄 Party Realignment</div>
+                    <div>A shifting of party allegiances within the electorate. Realignment occurs when parties are unable or unwilling to adapt their positions to broader socio-demographic or economic forces. If leaders refuse to recognize that public opinion has changed, the party is unlikely to win in the next election.</div>
+                </div>
+
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Era</th>
+                            <th>Party Systems and Realignments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1796–1824</td>
+                            <td><strong>First Party System:</strong> Federalists (urban elites, southern planters, New England) oppose Democratic-Republicans (rural, small farmers and artisans, the South and the West)</td>
+                        </tr>
+                        <tr>
+                            <td>1828–1856</td>
+                            <td><strong>Second Party System:</strong> Democrats (the South, cities, farmers and artisans, immigrants) oppose Whigs (former Federalists, the North, middle class, native-born Americans)</td>
+                        </tr>
+                        <tr>
+                            <td>1860–1892</td>
+                            <td><strong>Third Party System:</strong> Republicans (former Whigs plus African Americans) control the presidency. Only one Democrat, Grover Cleveland, is elected president (1884, 1892)</td>
+                        </tr>
+                        <tr>
+                            <td>1896–1932</td>
+                            <td><strong>Fourth Party System:</strong> Republicans control the presidency. Only one Democrat, Woodrow Wilson, is elected president (1912, 1916). Challenges raised by Populists and Progressives</td>
+                        </tr>
+                        <tr>
+                            <td>1932–1964</td>
+                            <td><strong>Fifth Party System:</strong> Democrats control the presidency. Only one Republican, Dwight Eisenhower, is elected president (1952, 1956). Major party realignment as African Americans become part of the Democratic coalition</td>
+                        </tr>
+                        <tr>
+                            <td>1964–present</td>
+                            <td><strong>Sixth Party System:</strong> No one party controls the presidency. Ongoing realignment as southern White people and many northern working class begin to vote for Republicans. Latino and Asian people immigrate, most voting for Democrats</td>
+                        </tr>
+                    </tbody>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚡ Critical Election</div>
+                    <div>An election that represents a sudden, clear, and long-term shift in voter allegiances. The 1932 election is considered a critical election. Roosevelt won with almost 58 percent of the popular vote and 472 Electoral College votes. After this election, the political parties were largely identified as being divided by differences in their members' socio-economic status.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card2-4', 30)">
+                    <div class="card-prompt">🔍 Click to explore: FDR's New Coalition</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Excellent understanding of party realignment!</p>
+                        <p>One of the best-known party realignments occurred when Democrats moved to include African Americans and other minorities into their national coalition during the Great Depression. After the Civil War, Republicans, the party of Lincoln, were viewed as the party that had freed the enslaved. Their efforts to provide Black people with greater legal rights earned them the support of African Americans in both the South and the Northeast.</p>
+                        <p>From 1868 to 1931, Democratic candidates won just four of sixteen presidential elections. This rather-dismal success rate suggested that a change in the governing coalition would be needed if the party were to become a player on the national level again.</p>
+                        <p>That change began with the 1932 presidential campaign of <strong>Franklin Delano Roosevelt</strong>. FDR determined that his best path toward victory was to create a new coalition based not on region or ethnicity, but on the suffering of those hurt most during the Great Depression. This alignment sought to bring African American voters in as a means of shoring up support in major urban areas and the Midwest.</p>
+                        <p>Based on this alignment, the Democratic Party won the next five consecutive presidential elections and was able to build a political machine that dominated Congress into the 1990s, including holding an uninterrupted majority in the House of Representatives from 1954 until 1994.</p>
+                    </div>
+                </div>
+
+                <p>The realignment of the parties did have consequences for Democrats. African Americans became an increasingly important part of the Democratic coalition in the 1940s through the 1960s, as the party took steps to support civil rights. Southern Democrats became increasingly convinced that national efforts to provide social welfare and encourage racial integration were violating state sovereignty and social norms. By the 1970s, many had begun to shift their allegiance to the Republican Party, whose pro-business wing shared their opposition to the growing encroachment of the national government.</p>
+
+                <p>Almost fifty years after it had begun, the realignment of the two political parties resulted in the flipping of post-Civil War allegiances, with urban areas and the Northeast now solidly Democratic, and the South and rural areas overwhelmingly voting Republican.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What type of voting system does the United States use for most elections?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">Proportional representation</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">Plurality voting (first-past-the-post)</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">Ranked-choice voting</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">Runoff elections only</div>
+                    <div class="feedback-box" id="feedback-q2-1"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is a critical election?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">An election where the incumbent president loses</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">An election that is decided by the House of Representatives</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">An election that represents a sudden, clear, and long-term shift in voter allegiances</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">An election where a third party receives more than 5% of the vote</div>
+                    <div class="feedback-box" id="feedback-q2-2"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ Which third-party candidate is often blamed for costing Al Gore the 2000 presidential election?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">Ross Perot</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 25)">Ralph Nader</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">Pat Buchanan</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">John Anderson</div>
+                    <div class="feedback-box" id="feedback-q2-3"></div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="complete-section-btn" onclick="completeSection(2)">Complete Section 2 ✓</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: The Shape of Modern Political Parties -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>🏗️</span>
+                    <h2>Section 3: The Shape of Modern Political Parties</h2>
+                </div>
+
+                <p>We have discussed the two major political parties in the United States, how they formed, and some of the smaller parties that have challenged their dominance over time. However, what exactly do political parties do? If the purpose of political parties is to work together to create and implement policies by winning elections, how do they accomplish this task, and who actually participates in the process?</p>
+
+                <p>The answer was fairly straightforward in the early days of the republic when parties were little more than electoral coalitions of like-minded, elite politicians. But improvements in strategy and changes in the electorate forced the parties to become far more complex organizations that operate on several levels in the U.S. political arena.</p>
+
+                <p>Modern political parties consist of three components identified by political scientist V. O. Key:</p>
+
+                <ul class="bullet-list">
+                    <li><strong>The party in the electorate</strong> (the voters)</li>
+                    <li><strong>The party organization</strong> (which helps to coordinate everything the party does in its quest for office)</li>
+                    <li><strong>The party in office</strong> (the office holders)</li>
+                </ul>
+
+                <h3>The Party-in-the-Electorate</h3>
+
+                <p>A key fact about the U.S. political party system is that it's all about the votes. If voters do not show up to vote for a party's candidates on Election Day, the party has no chance of gaining office and implementing its preferred policies. As we have seen, for much of their history, the two parties have been adapting to changes in the size, composition, and preferences of the U.S. electorate.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗳️ Party-in-the-Electorate</div>
+                    <div>Members of the voting public who consider themselves to be part of a political party and/or who consistently prefer the candidates of one party over the other. By fostering a sense of loyalty, a party can insulate itself from changes in the system and improve its odds of winning elections.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">👥 Party Identifiers</div>
+                    <div>Individuals who represent themselves in public as being part of a party. They usually represent themselves as members of a party, may attend some party events or functions, and are more likely to provide financial support for the candidates of their party during election season. This does not mean self-identified Democrats will support all the party's positions or candidates, but it does mean that, on the whole, they feel their wants or needs are more likely to be met if their preferred party is successful.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card3-1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Party Identification by Generation</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Great insight into voter demographics!</p>
+                        <p>Party identifiers make up the majority of the voting public. Gallup, the polling agency, has been collecting data on voter preferences for decades. Its research suggests that historically, over half of American adults have called themselves "Republican" or "Democrat" when asked how they identify themselves politically.</p>
+                        <p>Even among self-proclaimed independents, the overwhelming majority claim to lean in the direction of one party or the other, suggesting they behave as if they identified with a party during elections even if they preferred not to publicly pick a side. In polls, about 88 percent of respondents said they either identified with or leaned toward one of the major political parties.</p>
+                        <p><strong>Generational Differences:</strong> Millennials (born between 1981 and 1996) are more likely to identify as or lean towards the Democratic Party and less likely to favor Republicans than are their Baby Boomer parents and grandparents (born between 1946 and 1964).</p>
+                    </div>
+                </div>
+
+                <p>Strictly speaking, party identification is not quite the same thing as party membership. People may call themselves Republicans or Democrats without being registered as a member of the party, and the Republican and Democratic parties do not require individuals to join their formal organization in the same way that parties in some other countries do.</p>
+
+                <p>Many states require voters to declare a party affiliation before participating in primaries, but primary participation is irregular and infrequent, and a voter may change identities long before changing party registration. For most voters, party identification is informal at best and often matters only in the weeks before an election.</p>
+
+                <h3>The Party Organization</h3>
+
+                <p>A significant subset of American voters views their party identification as something far beyond simply a shortcut to voting. These individuals get more energized by the political process and have chosen to become more active in the life of political parties.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Party Organization</div>
+                    <div>The formal structure of the political party, and its active members are responsible for coordinating party behavior and supporting party candidates. It is a vital component of any successful party because it bears most of the responsibility for building and maintaining the party "brand." It also plays a key role in helping select, and elect, candidates for public office.</div>
+                </div>
+
+                <h4>Local Organizations</h4>
+
+                <p>Since winning elections is the first goal of the political party, it makes sense that the formal party organization mirrors the local-state-federal structure of the U.S. political system.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏘️ Precinct</div>
+                    <div>The lowest level of party organization, usually organized around neighborhoods. While technically the lowest level of party organization, many of the operational responsibilities for local elections fall upon the county-level organization.</div>
+                </div>
+
+                <p>The county-level organization is in many ways the workhorse of the party system, especially around election time. This level of organization frequently takes on many of the most basic responsibilities of a democratic system, including:</p>
+
+                <ul class="bullet-list">
+                    <li>Identifying and mobilizing potential voters and donors</li>
+                    <li>Identifying and training potential candidates for public office</li>
+                    <li>Recruiting new members for the party</li>
+                    <li>Finding volunteers to serve as officials operating the polls on Election Day</li>
+                    <li>Serving as monitors responsible for ensuring elections are conducted honestly and fairly</li>
+                    <li>Holding regular meetings to provide members the opportunity to meet potential candidates and coordinate strategy</li>
+                </ul>
+
+                <h4>State Organizations</h4>
+
+                <p>Most of the county organizations' formal efforts are devoted to supporting party candidates running for county and city offices. But a fair amount of political power is held by individuals in statewide office or in state-level legislative or judicial bodies. Most of the coordination for them will take place in the state-level organizations.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card3-2', 35)">
+                    <div class="card-prompt">🔍 Click to explore: State Party Responsibilities</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Excellent understanding of state party functions!</p>
+                        <p>State-level organizations are responsible for key party functions, such as statewide candidate recruitment and campaign mobilization. Their efforts focus on electing high-ranking officials such as the governor, other statewide offices (treasurer, attorney general), and candidates for the U.S. Senate and House of Representatives.</p>
+                        <p><strong>Key Responsibilities:</strong></p>
+                        <ul class="bullet-list">
+                            <li><strong>Fundraising:</strong> State-level organizations accept greater fundraising responsibilities. The average cost of a successful House campaign was $2.4 million in 2020; for Senate races, it was $27.2 million.</li>
+                            <li><strong>Building Unity:</strong> Creating a sense of unity among members of the state party, especially as the party transitions from contentious nomination battles to the general election.</li>
+                            <li><strong>Primary Elections/Caucuses:</strong> Helping the party's candidates prepare for state primary elections or caucuses that allow voters to choose a nominee.</li>
+                            <li><strong>State Platform:</strong> Drafting a state platform that serves as a policy guide for partisans who are eventually selected to public office.</li>
+                            <li><strong>State Convention:</strong> Holding a statewide convention at which delegates from county organizations discuss the needs of their areas and select delegates to the national convention.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🗣️ Caucuses</div>
+                    <div>A form of town hall meeting at which voters in a precinct get together to voice their preferences, rather than voting individually throughout the day. Caucuses are held to select party nominees and delegates to higher-level conventions.</div>
+                </div>
+
+                <h4>National Party Organization</h4>
+
+                <p>The local and state-level party organizations are the workhorses of the political process. They take on most of the responsibility for party activities and are easily the most active participants in the party formation and electoral processes. They are also largely invisible to most voters.</p>
+
+                <p>But most people are aware of the presence and activity of the national party organizations for several reasons. First, many Americans, especially young people, are more interested in the topics discussed at the national level than at the state or local level. Presidential elections and the behavior of the U.S. Congress are also far more likely to make the news broadcasts than the activities of county commissioners.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card3-3', 35)">
+                    <div class="card-prompt">🔍 Click to explore: National Conventions and Their Evolution</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Great exploration of convention history!</p>
+                        <p>The national conventions, organized and sponsored by the national-level party, can dominate the national discussion for several weeks in late summer. These conventions are the definition of a media circus at which high-ranking politicians, party elites, and sometimes celebrities are brought before the public.</p>
+                        <p>In the past, national conventions were often the sites of high drama and political intrigue. As late as 1968, the identities of the presidential and/or vice-presidential nominees were still unknown to the general public when the convention opened. National media outlets would provide "gavel to gavel" coverage of the conventions.</p>
+                        <p><strong>How Conventions Have Changed:</strong></p>
+                        <ul class="bullet-list">
+                            <li>Between 1960 and 2004, viewership of both conventions declined by half</li>
+                            <li>Conventions have become highly sanitized, highly orchestrated media events</li>
+                            <li>Speakers are often required to have their speeches prescreened</li>
+                            <li>The outcome (the nominee) is typically known by all for several months before the convention</li>
+                            <li>Between 1976 and 1996, ABC and CBS cut their coverage from more than fifty hours to only five</li>
+                        </ul>
+                        <p>Most observers credit Barack Obama's speech at the 2004 Democratic National Convention with bringing him to national prominence, demonstrating that conventions can still serve as a platform for rising political stars.</p>
+                    </div>
+                </div>
+
+                <h3>The Party-in-Government</h3>
+
+                <p>One of the first challenges facing the party-in-government, or the party identifiers who have been elected or appointed to hold public office, is to achieve their policy goals.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Party-in-Government</div>
+                    <div>Party identifiers who have been elected to office and are responsible for fulfilling the party's promises. The means to achieve policy goals is chosen in meetings of the two major parties; Republican meetings are called party conferences and Democrat meetings are called party caucuses.</div>
+                </div>
+
+                <p>Members of each party meet in these closed sessions and discuss what items to place on the legislative agenda and make decisions about which party members should serve on the committees that draft proposed laws. Party members also elect the leaders of their respective parties in the House and the Senate, and their party whips.</p>
+
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Party Leaders</strong></td>
+                            <td>Serve as party managers and are the highest-ranking members of the party in each chamber of Congress</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Party Whip</strong></td>
+                            <td>Ensures that members are present when a piece of legislation is to be voted on and directs them how to vote. The whip is the second-highest ranking member of the party in each chamber</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Majority Leader/Whip</strong></td>
+                            <td>Leader and whip of the party that holds the majority of seats in each house</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minority Leader/Whip</strong></td>
+                            <td>Leader and whip of the party with fewer seats</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Speaker of the House</strong></td>
+                            <td>Elected by the party that controls the majority of seats in the House of Representatives</td>
+                        </tr>
+                    </tbody>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Majority Party</div>
+                    <div>The legislative party with over half the seats in a legislative body, and thus significant power to control the agenda.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📊 Minority Party</div>
+                    <div>The legislative party with less than half the seats in a legislative body.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card3-4', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Challenges of Party Unity in Government</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Great insight into governmental challenges!</p>
+                        <p>One problem facing the party-in-government relates to the design of the country's political system. The U.S. government is based on a complex principle of separation of powers, with power divided among the executive, legislative, and judiciary branches. The system is further complicated by federalism, which relegates some powers to the states.</p>
+                        <p>This complexity creates a number of problems for maintaining party unity. The biggest is that each level and unit of government has different constituencies that the office holder must satisfy. The person elected to the White House is more beholden to the national party organization than are members of the House or Senate, because members of Congress must be reelected by voters in very different states, each with its own state-level and county-level parties.</p>
+                        <p>Members of the legislature from the executive's party are under great pressure to make the executive look good, because a popular president or governor may help other party members win office. But legislators may serve a constituency that disagrees with the executive on key matters of policy. A good example occurred when the Civil Rights Act of 1964 was introduced: many Republicans voted in favor while many southern Democrats opposed it, despite it being supported by Democratic Presidents Kennedy and Johnson.</p>
+                    </div>
+                </div>
+
+                <p>A member of the minority party must occasionally work with the opposition on some issues in order to accomplish any of their constituency's goals. This is especially the case in the Senate, which is a super-majority institution. Sixty votes (of the 100 possible) are required to get anything accomplished, because Senate rules allow individual members to block legislation via holds and filibusters. The only way to block the blocking is to invoke cloture, a procedure calling for a vote on an issue, which takes 60 votes.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ According to political scientist V. O. Key, what are the three components of modern political parties?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">The executive, legislative, and judicial branches</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">The party in the electorate, party organization, and party in government</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">The local, state, and national levels</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">The donors, activists, and candidates</div>
+                    <div class="feedback-box" id="feedback-q3-1"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is the role of the party whip in Congress?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">To draft all legislation for the party</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">To serve as the spokesperson for the party</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">To ensure members are present for votes and direct them how to vote</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">To chair all committee meetings</div>
+                    <div class="feedback-box" id="feedback-q3-2"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ How many votes are needed in the Senate to invoke cloture and end a filibuster?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">51 votes (simple majority)</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-3', 25)">60 votes</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">67 votes (two-thirds)</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">75 votes (three-fourths)</div>
+                    <div class="feedback-box" id="feedback-q3-3"></div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="complete-section-btn" onclick="completeSection(3)">Complete Section 3 ✓</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Divided Government and Partisan Polarization -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateToHome()">← Back to Home</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <span>⚖️</span>
+                    <h2>Section 4: Divided Government and Partisan Polarization</h2>
+                </div>
+
+                <p>In 1950, the American Political Science Association's Committee on Political Parties (APSA) published an article offering a criticism of the current party system. The parties, it argued, were too similar. Distinct, cohesive political parties were critical for any well-functioning democracy.</p>
+
+                <p>The APSA article argued that distinct parties offer voters clear policy choices at election time, cohesive parties could deliver on their agenda, and the party that lost the election could serve as the "loyal opposition" to check the excesses of the party in power. The paper suggested that voters could signal whether they preferred the vision of the current leadership or of the opposition, keeping both parties accountable to the people.</p>
+
+                <p>While this description of the major parties as being too similar may have been accurate in the 1950s, that is no longer the case.</p>
+
+                <h3>The Problem of Divided Government</h3>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Divided Government</div>
+                    <div>A condition in which one or more houses of the legislature is controlled by the party in opposition to the executive. This poses considerable difficulties for both the operations of the party and the government as a whole. It makes fulfilling campaign promises extremely difficult, since the cooperation of both Congress and the president is typically needed to pass legislation.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Unified Government</div>
+                    <div>When the same party controls the executive and the legislature entirely.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card4-1', 35)">
+                    <div class="card-prompt">🔍 Click to explore: Government Shutdowns and Divided Government</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Great understanding of governmental dysfunction!</p>
+                        <p>Divided government can also be a threat to government operations. When the divide between the parties is too great, government may shut down. A 1976 dispute between Republican President Gerald Ford and a Democrat-controlled Congress over funding for certain cabinet departments led to a ten-day shutdown.</p>
+                        <p>Beginning in the 1980s, the interpretation that Reagan's attorney general gave to a nineteenth-century law required a complete shutdown of federal government operations until funding issues were resolved. During Reagan's presidency, the federal government shut down eight times, mostly caused by disagreements between Reagan and the Republican-controlled Senate on one hand and the Democrats in the House on the other.</p>
+                        <p><strong>Key Statistics:</strong></p>
+                        <ul class="bullet-list">
+                            <li>Since 1969, the U.S. electorate has sent the president a Congress of his own party in only seven of twenty-three congressional elections</li>
+                            <li>During Jimmy Carter's presidency (1977–1980), despite Democratic majorities in both houses of Congress, the government was shut down five times</li>
+                            <li>The longest government shutdown in U.S. history began in December 2018</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🤝 Bipartisanship</div>
+                    <div>A process of cooperation through compromise. For the first few decades of the current pattern of divided government, the threat it posed to the government appears to have been muted by a high degree of bipartisanship. Many pieces of legislation were passed in the 1960s and 1970s with reasonably high levels of support from both parties.</div>
+                </div>
+
+                <p>Until the 1980s, northern and midwestern Republicans were often fairly progressive, supporting racial equality, workers' rights, and farm subsidies. Southern Democrats were frequently quite socially and racially conservative and were strong supporters of states' rights. Cross-party cooperation on these issues was fairly frequent.</p>
+
+                <p>However, beginning in the 1990s, the parties began to diverge and moderates began to disappear in Congress. The era of bipartisanship seems to have ended as the parties now compete bitterly with one another and cross-party socialization or international trips across party lines no longer happen.</p>
+
+                <h3>The Implications of Polarization</h3>
+
+                <p>The past thirty years have brought a dramatic change in the relationship between the two parties as fewer conservative Democrats and liberal Republicans have been elected to office.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🌐 Moderates</div>
+                    <div>Individuals with ideologies in the middle of the ideological spectrum. As political moderates leave the political parties at all levels, the parties have grown farther apart ideologically.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📊 Party Polarization</div>
+                    <div>The shift of party positions from moderate towards ideological extremes. In the party-in-government, this means fewer members of Congress have mixed voting records; instead they vote far more consistently on issues and are far more likely to side with their party leadership.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card4-2', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Tea Party and Political Factions</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Excellent exploration of modern party factions!</p>
+                        <p>The Republican Party (or the GOP, standing for Grand Old Party) has historically been a coalition of two key and overlapping factions: <strong>pro-business rightists</strong> and <strong>social conservatives</strong>. The GOP held this coalition together by opposing programs designed to redistribute wealth while arguing for laws preferred by conservative Christians.</p>
+                        <p>Recently, however, a new voice emerged that allied itself with the Republican Party. Born in part from the older Libertarian Party, the <strong>Tea Party</strong> was more hostile to government and viewed government intervention in all forms, especially taxation and business regulation, as a threat to capitalism and democracy.</p>
+                        <p><strong>Tea Party Impact:</strong></p>
+                        <ul class="bullet-list">
+                            <li>86 percent of Tea Party members who voted in 2012 cast their votes for Republicans</li>
+                            <li>Tea Party activist Grover Norquist exacted promises from many Republicans that they would oppose any bill that sought to raise taxes</li>
+                            <li>The inflexibility of Tea Party members led to tense floor debates</li>
+                            <li>Ultimately responsible for the 2014 primary defeat of Republican majority leader Eric Cantor</li>
+                            <li>Led to the 2015 resignation of Speaker of the House John Boehner</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card4-3', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Occupy Movement and Black Lives Matter</div>
+                    <div class="card-content">
+                        <p><strong>+35 points!</strong> Great understanding of left-wing movements!</p>
+                        <p>Movements on the left have also arisen. The <strong>Occupy Wall Street movement</strong> was born of the government's response to the Great Recession of 2008 and its assistance to endangered financial institutions through TARP (Troubled Asset Relief Program). The Occupy Movement believed the recession was caused by a failure of the government to properly regulate the banking industry and that the government protected banking while largely failing to protect the average person, thereby worsening growing economic inequality.</p>
+                        <p>While the Occupy Movement itself has largely fizzled, the anti-business sentiment continues within the Democratic Party. Champions like <strong>Senator Bernie Sanders</strong> and <strong>Senator Elizabeth Warren</strong> have ensured that calls for more social spending and higher taxes on the wealthy remain prominent in the national debate.</p>
+                        <p>The <strong>Black Lives Matter movement</strong>, which began in 2013 after the acquittal of George Zimmerman in the shooting death of Trayvon Martin, expanded significantly after the murder of George Floyd on May 25, 2020. Black Lives Matter protests took place in record numbers in 2020, demonstrating how social movements can influence partisan politics.</p>
+                    </div>
+                </div>
+
+                <h3>Effects of Polarization on Government</h3>
+
+                <p>By most measures, the U.S. government in general and Congress in particular have become less effective in recent years. Congress has passed fewer pieces of legislation, confirmed fewer appointees, and been less effective at handling the national purse than in recent memory.</p>
+
+                <div class="info-box">
+                    <strong>📊 Legislative Productivity Decline:</strong>
+                    <ul class="bullet-list">
+                        <li>The 106th Congress (1999–2000) passed 463 pieces of substantive legislation</li>
+                        <li>The 107th Congress (2000–2001) passed 294 pieces</li>
+                        <li>By 2013–2014, the total had fallen to 212 pieces</li>
+                    </ul>
+                </div>
+
+                <p>Perhaps the clearest sign of Congress' ineffectiveness is that the threat of government shutdown has become a constant. Shutdowns occur when Congress and the president are unable to authorize and appropriate funds before the current budget runs out. This is now an annual problem. Relations between the two parties became so bad that financial markets were sent into turmoil in 2014 when Congress failed to increase the government's line of credit before a key deadline, thus threatening a U.S. government default on its loans.</p>
+
+                <p>Public approval ratings for Congress have been low for decades, typically lower than presidential approval. Congressional approval dipped to single digits in November 2013. Levels early in 2021 were in the mid-30s, with disapproval greater than 60 percent.</p>
+
+                <h3>The Causes of Polarization</h3>
+
+                <p>Scholars agree that some degree of polarization is occurring in the United States, even if some contend it is only at the elite level. But they are less certain about exactly why, or how, polarization has become such a mainstay of American politics.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🔄 Sorting</div>
+                    <div>The process in which voters change party allegiances in response to shifts in party position. According to the sorting thesis, before the 1950s, voters were mostly concerned with state-level party positions rather than national party concerns. Since parties are bottom-up institutions, local issues dominated elections. But over the past several decades, voters have started identifying more with national-level party politics.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card4-4', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Gerrymandering and Polarization</div>
+                    <div class="card-content">
+                        <p><strong>+30 points!</strong> Excellent analysis of redistricting effects!</p>
+                        <p><strong>Gerrymandering</strong> is the manipulation of legislative districts in an attempt to favor a particular candidate. According to the gerrymandering thesis, the more moderate or heterogeneous a voting district, the more moderate the politician's behavior once in office. But if the district has been drawn to favor a particular group, the elected official only needs to serve the portion of the constituency that dominates.</p>
+                        <p><strong>Key developments in gerrymandering:</strong></p>
+                        <ul class="bullet-list">
+                            <li>The Supreme Court's 1962 "one-person-one-vote" decision in <em>Reynolds v. Simms</em> (1964) required districts to have roughly equal populations</li>
+                            <li>This led map designers to create <strong>safe seats</strong>—districts drawn so members of a party can be assured of winning by a comfortable margin (55 percent or better)</li>
+                            <li>Computer-aided map making has transformed gerrymandering from a crude art into a science</li>
+                            <li>Refined computing technology and advanced algorithms have given map makers good certainty about where to place district boundaries</li>
+                        </ul>
+                        <p><strong>Counterargument:</strong> Political scientist Nolan McCarty argues there is little evidence to support the redistricting hypothesis alone. The Senate has become polarized just as the House has, but people vote for Senators on a statewide basis—there are no gerrymandered voting districts in elections for senators.</p>
+                    </div>
+                </div>
+
+                <p>A second possible culprit in increased polarization is the impact of technology on the public square. Before the 1950s, most people got their news from regional newspapers and local radio stations. The advent of television changed that—television was a powerful tool with national news and editorial content that provided the same message across the country. The information explosion that followed through cable, the Internet, and blogs has furthered this nationalization trend, making it much more difficult for politicians to run away from their votes.</p>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is divided government?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">When Congress cannot agree on any legislation</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">When one or more houses of the legislature is controlled by the party in opposition to the executive</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">When the Supreme Court overturns executive orders</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">When there are more than two major political parties</div>
+                    <div class="feedback-box" id="feedback-q4-1"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is party polarization?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">When both parties agree on most issues</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">When a party changes its platform entirely</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">The shift of party positions from moderate towards ideological extremes</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">When voters switch party allegiances frequently</div>
+                    <div class="feedback-box" id="feedback-q4-2"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">❓ What is gerrymandering?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-3', 25)">The manipulation of legislative districts to favor a particular candidate or party</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">The process of removing a politician from office</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">A type of filibuster used in the Senate</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">The practice of trading votes between legislators</div>
+                    <div class="feedback-box" id="feedback-q4-3"></div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="complete-section-btn" onclick="completeSection(4)">Complete Section 4 ✓</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Page -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✓ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateToHome()">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 9: Political Parties</p>
+                        
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage2">95%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Name:</span>
+                                    <span id="reportStudentName">Not Entered</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span id="reportDate"></span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span id="reportTime"></span>
+                                </div>
+                            </div>
+
+                            <div class="performance-section">
+                                <h3>Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <th>Section</th>
+                                        <th>Status</th>
+                                        <th>Points</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1. What Are Parties?</td>
+                                        <td id="status1">⭕</td>
+                                        <td id="points1">0/225</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. Two-Party System</td>
+                                        <td id="status2">⭕</td>
+                                        <td id="points2">0/225</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Modern Parties</td>
+                                        <td id="status3">⭕</td>
+                                        <td id="points3">0/225</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Polarization</td>
+                                        <td id="status4">⭕</td>
+                                        <td id="points4">0/225</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/4</div>
+                                <div class="metric-label">Sections</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="instructor-note">
+                            <strong>Instructor Note:</strong> This report was generated upon completion of the Chapter 9: Political Parties interactive module. The student engaged with all content sections, interactive exploration cards, and knowledge check questions.
+                        </div>
+
+                        <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            studentName: '',
+            totalPoints: 0,
+            currentLevel: 'Explorer',
+            sectionsCompleted: [],
+            cardsRevealed: [],
+            questionsAnswered: [],
+            quizCorrect: 0,
+            quizTotal: 0,
+            sectionPoints: {
+                1: { earned: 0, max: 225 },
+                2: { earned: 0, max: 225 },
+                3: { earned: 0, max: 225 },
+                4: { earned: 0, max: 225 }
+            }
+        };
+
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Political Analyst',
+            600: 'Party Strategist',
+            800: 'Campaign Expert',
+            900: 'Democracy Champion'
+        };
+
+        function startModule() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            if (!nameInput) {
+                alert('Please enter your name to begin!');
+                return;
+            }
+            gameState.studentName = nameInput;
+            document.getElementById('moduleContent').style.display = 'block';
+            document.querySelector('.name-input-section').style.display = 'none';
+        }
+
+        function navigateToSection(sectionNum) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('section' + sectionNum).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function navigateToHome() {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('homePage').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showPointsPopup(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = '+' + points + ' points!';
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function addPoints(points, section) {
+            gameState.totalPoints += points;
+            if (section) {
+                gameState.sectionPoints[section].earned += points;
+            }
+            updateScore();
+            updateLevel();
+            showPointsPopup(points);
+        }
+
+        function updateScore() {
+            document.getElementById('totalPoints').textContent = gameState.totalPoints;
+        }
+
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (gameState.totalPoints >= parseInt(threshold)) {
+                    newLevel = level;
+                }
+            }
+            gameState.currentLevel = newLevel;
+            document.getElementById('currentLevel').textContent = newLevel;
+        }
+
+        function revealCard(card, cardId, points) {
+            if (gameState.cardsRevealed.includes(cardId)) return;
+            
+            card.classList.add('revealed');
+            gameState.cardsRevealed.push(cardId);
+            
+            const section = parseInt(cardId.split('-')[0].replace('card', ''));
+            addPoints(points, section);
+        }
+
+        function handleAnswer(option, isCorrect, questionId, points) {
+            if (gameState.questionsAnswered.includes(questionId)) return;
+            
+            gameState.questionsAnswered.push(questionId);
+            gameState.quizTotal++;
+            
+            const section = parseInt(questionId.split('-')[0].replace('q', ''));
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            
+            const allOptions = option.parentElement.querySelectorAll('.kc-option');
+            allOptions.forEach(opt => opt.classList.add('disabled'));
+            
+            if (isCorrect) {
+                option.classList.add('correct');
+                feedbackBox.textContent = '✓ Correct! +' + points + ' points';
+                feedbackBox.className = 'feedback-box show correct';
+                gameState.quizCorrect++;
+                addPoints(points, section);
+            } else {
+                option.classList.add('incorrect');
+                feedbackBox.textContent = '✗ Incorrect. Review the content above for the correct answer.';
+                feedbackBox.className = 'feedback-box show incorrect';
+                allOptions.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        function completeSection(sectionNum) {
+            if (gameState.sectionsCompleted.includes(sectionNum)) {
+                navigateToHome();
+                return;
+            }
+            
+            gameState.sectionsCompleted.push(sectionNum);
+            addPoints(50, sectionNum);
+            
+            document.getElementById('section' + sectionNum + 'Card').classList.add('completed');
+            updateProgress();
+            navigateToHome();
+        }
+
+        function updateProgress() {
+            const totalSections = Object.keys(gameState.sectionPoints).length;
+            const completedCount = gameState.sectionsCompleted.length;
+            const percentage = Math.round((completedCount / totalSections) * 100);
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        function generateReport() {
+            // Update student info
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Not Entered';
+            document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            // Calculate percentage
+            const maxPoints = Object.values(gameState.sectionPoints).reduce((sum, section) => sum + section.max, 0);
+            const percentage = Math.round((gameState.totalPoints / maxPoints) * 100);
+            
+            // Calculate letter grade
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) {
+                letterGrade = 'A';
+                gradeColor = '#1B5E20';
+            } else if (percentage >= 80) {
+                letterGrade = 'B';
+                gradeColor = '#00695C';
+            } else if (percentage >= 70) {
+                letterGrade = 'C';
+                gradeColor = '#F57C00';
+            } else if (percentage >= 60) {
+                letterGrade = 'D';
+                gradeColor = '#E65100';
+            }
+            
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage2').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = gradeColor;
+            
+            // Update report scores
+            document.getElementById('reportTotalPoints').textContent = gameState.totalPoints;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.sectionsCompleted.length / 4) * 100);
+            
+            // Update section statuses
+            for (let i = 1; i <= 4; i++) {
+                const statusCell = document.getElementById('status' + i);
+                const pointsCell = document.getElementById('points' + i);
+                
+                if (gameState.sectionsCompleted.includes(i)) {
+                    statusCell.textContent = '✅';
+                    statusCell.style.color = '#1B5E20';
+                } else {
+                    statusCell.textContent = '⭕';
+                    statusCell.style.color = '#B71C1C';
+                }
+                
+                pointsCell.textContent = gameState.sectionPoints[i].earned + '/' + gameState.sectionPoints[i].max;
+            }
+            
+            // Update metrics
+            document.getElementById('metricPoints').textContent = gameState.totalPoints;
+            document.getElementById('metricSections').textContent = gameState.sectionsCompleted.length + '/4';
+            document.getElementById('metricQuiz').textContent = gameState.quizTotal > 0 ? 
+                Math.round((gameState.quizCorrect / gameState.quizTotal) * 100) + '%' : '0%';
+            document.getElementById('metricEngagement').textContent = 
+                Math.round((gameState.cardsRevealed.length / 12) * 100) + '%';
+            
+            // Navigate to report
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('reportPage').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize
+        updateScore();
+        updateLevel();
+        updateProgress();
+    </script>
+</body>
+</html>

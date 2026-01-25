@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: The Constitution and Its Origins - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* ADA Compliant Colors - All meet WCAG AA standards */
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-light);
+        }
+
+        /* Fixed Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .header-title {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .score-display {
+            display: flex;
+            gap: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Points Popup */
+        #pointsPopup {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Page Management */
+        .page { display: none; }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Home Page Hero */
+        .hero-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .hero-stat { text-align: center; }
+
+        .hero-stat-icon {
+            font-size: 3em;
+            margin-bottom: 5px;
+        }
+
+        /* Student Name Input */
+        .student-input {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .student-input label {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .student-input input {
+            padding: 8px 15px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 5px;
+            font-size: 1em;
+            width: 250px;
+        }
+
+        /* Section Grid */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-color: var(--primary-blue);
+        }
+
+        .section-card.completed {
+            border-color: var(--success);
+            background: linear-gradient(135deg, #ffffff 85%, #e8f5e9 100%);
+        }
+
+        .section-card.completed::after {
+            content: '✔';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--success);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .section-points {
+            background: var(--highlight-yellow);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: var(--text-primary);
+            display: inline-block;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+
+        /* Back Button */
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.05);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-main-title {
+            font-size: 2.2em;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .section-main-title span {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        /* Interactive Cards */
+        .interactive-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-blue);
+            box-shadow: 0 6px 15px rgba(0,90,135,0.2);
+        }
+
+        .interactive-card.revealed {
+            background: white;
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-size: 1.1em;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Knowledge Checks */
+        .knowledge-check {
+            background: var(--highlight-blue);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .kc-question {
+            font-size: 1.2em;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .kc-option.correct {
+            background: var(--highlight-green);
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #ffebee;
+            border-color: var(--error);
+        }
+
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .feedback-box.show { display: block; }
+
+        .feedback-box.correct {
+            background: var(--highlight-green);
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #ffebee;
+            color: var(--error);
+        }
+
+        /* Definition Boxes */
+        .definition-box {
+            background: linear-gradient(135deg, #fff9c4, #fff59d);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--warning);
+        }
+
+        .definition-term {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        /* Key Concepts */
+        .key-concept {
+            background: var(--bg-section);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .key-concept-title {
+            font-size: 1.3em;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 100%;
+            background: var(--primary-blue);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            width: calc(50% - 30px);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .timeline-item:nth-child(odd) { margin-left: auto; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border: 3px solid white;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::before { left: -40px; }
+        .timeline-item:nth-child(even)::before { right: -40px; }
+
+        .timeline-date {
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Achievement Badge */
+        .achievement {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(255,193,7,0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 12px rgba(255,193,7,0.3); }
+            50% { box-shadow: 0 8px 20px rgba(255,193,7,0.5); }
+        }
+
+        /* Report Section */
+        .report-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            margin: -40px -40px 30px -40px;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .letter-grade {
+            font-size: 4em;
+            font-weight: bold;
+        }
+
+        .grade-percentage {
+            font-size: 1.2em;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-box {
+            background: var(--bg-section);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s ease;
+        }
+
+        .print-report-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .back-button, #pointsPopup, .no-print { display: none !important; }
+            .main-container { margin-top: 0; }
+            .report-container { box-shadow: none; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.8em; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .section-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 30px; }
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            .timeline-item::before { left: -40px !important; }
+            .content-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="header-title">📜 TCC Federal Government Trailblazer Trek</div>
+            <div class="score-display">
+                <span>⭐ Score: <span id="currentScore">0</span></span>
+                <span>🏆 Level: <span id="currentLevel">Explorer</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div id="pointsPopup"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- HOME PAGE -->
+        <div class="page active" id="page-home">
+            <div class="hero-section">
+                <h1 class="hero-title">📜 Chapter 2: The Constitution and Its Origins 📜</h1>
+                <p class="hero-subtitle">Discover How America's Foundational Document Came to Be</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">🗽</div>
+                        <div>Revolution</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">⚖️</div>
+                        <div>Compromise</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-icon">🏛️</div>
+                        <div>Foundation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-input">
+                <label for="studentName">👤 Student Name:</label>
+                <input type="text" id="studentName" placeholder="Enter your name">
+            </div>
+
+            <div class="progress-section">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar" style="width: 0%;">0% Complete</div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: var(--primary-blue); margin: 30px 0;">🎯 Choose Your Learning Quest</h2>
+            
+            <div class="section-grid">
+                <div class="section-card" id="card1" onclick="showPage('section1')">
+                    <div class="section-number">1</div>
+                    <h3 class="section-title">Pre-Revolutionary Roots</h3>
+                    <p class="section-description">Explore the political ideas and events that sparked American independence</p>
+                    <span class="section-points">🎯 200 points</span>
+                </div>
+
+                <div class="section-card" id="card2" onclick="showPage('section2')">
+                    <div class="section-number">2</div>
+                    <h3 class="section-title">Articles of Confederation</h3>
+                    <p class="section-description">Examine America's first attempt at national government and its failures</p>
+                    <span class="section-points">🎯 200 points</span>
+                </div>
+
+                <div class="section-card" id="card3" onclick="showPage('section3')">
+                    <div class="section-number">3</div>
+                    <h3 class="section-title">Constitutional Convention</h3>
+                    <p class="section-description">Discover the debates, compromises, and design of the Constitution</p>
+                    <span class="section-points">🎯 250 points</span>
+                </div>
+
+                <div class="section-card" id="card4" onclick="showPage('section4')">
+                    <div class="section-number">4</div>
+                    <h3 class="section-title">Ratification Battle</h3>
+                    <p class="section-description">Follow the Federalists vs. Anti-Federalists debate</p>
+                    <span class="section-points">🎯 200 points</span>
+                </div>
+
+                <div class="section-card" id="card5" onclick="showPage('section5')">
+                    <div class="section-number">5</div>
+                    <h3 class="section-title">Constitutional Change</h3>
+                    <p class="section-description">Learn about the amendment process and key changes over time</p>
+                    <span class="section-points">🎯 200 points</span>
+                </div>
+
+                <div class="section-card" onclick="showPage('report')">
+                    <div class="section-number">📊</div>
+                    <h3 class="section-title">Completion Report</h3>
+                    <p class="section-description">View your complete learning journey and final grade</p>
+                    <span class="section-points">🎯 Final Score</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Pre-Revolutionary Period -->
+        <div class="page" id="page-section1">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h1 class="section-main-title"><span>🗽</span> The Pre-Revolutionary Period and Roots of American Political Tradition</h1>
+                    <p style="font-size: 1.1em; color: var(--text-secondary);">Discover the philosophical foundations and events that led to American independence</p>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📚 Learning Objectives</div>
+                    <ul>
+                        <li>Identify the origins of core values in American political thought</li>
+                        <li>Understand ideas regarding representational government</li>
+                        <li>Summarize Great Britain's actions leading to the American Revolution</li>
+                    </ul>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Political Thought in the American Colonies</h2>
+                
+                <p>American political ideas regarding liberty and self-government did not suddenly emerge full-blown at the moment the colonists declared their independence from Britain. The varied strands of what became the American republic had many roots, reaching far back in time and across the Atlantic Ocean to Europe. Indeed, it was not new ideas but old ones that led the colonists to revolt and form a new nation.</p>
+
+                <p>The beliefs and attitudes that led to the call for independence had long been an important part of colonial life. Of all the political thinkers who influenced American beliefs about government, the most important is surely <strong>John Locke</strong>. The most significant contributions of Locke, a seventeenth-century English philosopher, were his ideas regarding the relationship between government and <strong>natural rights</strong>, which were believed to be God-given rights to life, liberty, and property.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'locke-content', 30)">
+                    <div class="card-prompt">🔍 Click to explore: John Locke's Revolutionary Ideas</div>
+                    <div class="card-content" id="locke-content">
+                        <p><strong>+30 points!</strong> Excellent exploration!</p>
+                        <p>Locke was not the first Englishman to suggest that people had rights. The British government had recognized its duty to protect the lives, liberties, and property of English citizens long before the settling of its North American colonies.</p>
+                        
+                        <p>In <strong>1215</strong>, King John signed <strong>Magna Carta</strong>—a promise to his subjects that he and future monarchs would refrain from certain actions that harmed, or had the potential to harm, the people of England. Prominent in Magna Carta's many provisions are protections for life, liberty, and property. One of its most famous clauses promises: "No freemen shall be taken, imprisoned... or in any way destroyed... except by the lawful judgment of his peers or by the law of the land."</p>
+                        
+                        <p>The rights protected by Magna Carta had been granted by the king, and in theory, a future king could take them away. The natural rights Locke described, however, had been granted by <strong>God</strong> and thus could never be abolished by human beings, even royal ones, or by the institutions they created.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📖 Social Contract</div>
+                    <div>Locke's most important idea: Human beings, not God, created government. People sacrificed a small portion of their freedom and consented to be ruled in exchange for the government's protection of their lives, liberty, and property. Should government deprive people of their rights by abusing the power given to it, the contract was broken and the people were no longer bound by its terms.</div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'english-bill-content', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The English Bill of Rights (1689)</div>
+                    <div class="card-content" id="english-bill-content">
+                        <p><strong>+30 points!</strong> Historical connection unlocked!</p>
+                        <p>So committed were the British to the protection of natural rights that when the royal Stuart dynasty began to intrude upon them in the seventeenth century, Parliament removed King James II (already disliked because he was Roman Catholic) in the <strong>Glorious Revolution</strong> and invited his Protestant daughter and her husband to rule the nation.</p>
+                        
+                        <p>Before offering the throne to William and Mary, Parliament passed the <strong>English Bill of Rights in 1689</strong>. Heavily influenced by Locke's ideas, this document enumerated the rights of English citizens and explicitly guaranteed rights to life, liberty, and property. This document would profoundly influence the U.S. Constitution and Bill of Rights.</p>
+                        
+                        <p>American colonists also shared Locke's concept of property rights. In the colonists' eyes, all free White males should have the right to acquire property, and once it had been acquired, government had the duty to protect it.</p>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Self-Government Traditions</h2>
+                
+                <p>The desire to limit the power of government is closely related to the belief that people should govern themselves. This core tenet of American political thought was rooted in a variety of traditions.</p>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">🏛️ Colonial Self-Government</div>
+                    <p>The British government did allow for a degree of self-government. Laws were made by Parliament, and property-owning males were allowed to vote for representatives. Americans were accustomed to the idea of representative government from the beginning:</p>
+                    <ul>
+                        <li><strong>Virginia House of Burgesses (1619)</strong> - America's first representative assembly</li>
+                        <li><strong>Mayflower Compact (1620)</strong> - English Separatists agreed to govern themselves according to laws created by male voters</li>
+                        <li>By the 18th century, all colonies had established legislatures</li>
+                    </ul>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Road to Revolution</h2>
+                
+                <p>The American Revolution began when a small and vocal group of colonists became convinced the king and Parliament were abusing them and depriving them of their rights. For more than a century, England had treated the colonies with <strong>benign neglect</strong>. Each colony had its own legislature. Taxes were low, and property ownership was widespread. People readily proclaimed their loyalty to the king and were proud to be British citizens.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'revolution-timeline', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Chain of Events Leading to Revolution</div>
+                    <div class="card-content" id="revolution-timeline">
+                        <p><strong>+30 points!</strong> Timeline mastered!</p>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">1763</div>
+                                <strong>Proclamation of 1763</strong> - After the Seven Years War, Parliament forbade colonists from purchasing land or settling west of the Appalachian Mountains.
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1765</div>
+                                <strong>Stamp Act</strong> - Required revenue stamps on paper goods (diplomas, deeds, newspapers). The outcry was so great the tax was quickly withdrawn.
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1767</div>
+                                <strong>Townshend Acts</strong> - Imposed taxes on everyday objects like glass, tea, and paint. Massachusetts petitioned the king and requested a boycott of British goods.
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1770</div>
+                                <strong>Boston Massacre</strong> - British soldiers fired into a crowd outside the customs house, killing several colonists. Britain had now taken colonists' lives.
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1773</div>
+                                <strong>Boston Tea Party</strong> - Colonists threw tea into Boston harbor to protest British policies, including the tea monopoly.
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">1774</div>
+                                <strong>Coercive Acts</strong> - Parliament's punishment of Boston virtually abolished town meetings and interfered with Massachusetts' ability to govern itself.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ "No Taxation Without Representation"</div>
+                    <div>The colonists' primary objection to direct taxes was that it reduced their status as free men. The right of the people or their representatives to consent to taxation was enshrined in both Magna Carta and the English Bill of Rights. Since colonists could not vote for representatives to Parliament, they believed taxation by Parliament was a denial of their rights. Parliament argued that non-voters had "virtual representation"—but colonists insisted on direct representation.</div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Declaration of Independence</h2>
+                
+                <p>The First Continental Congress formed in 1774 to create unified opposition to Great Britain. After fighting began at Lexington and Concord in 1775, the Second Continental Congress declared American independence on <strong>July 2, 1776</strong>, and signed the <strong>Declaration of Independence</strong> two days later.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'declaration-content', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Thomas Jefferson's Revolutionary Document</div>
+                    <div class="card-content" id="declaration-content">
+                        <p><strong>+30 points!</strong> Foundation document explored!</p>
+                        <p>Drafted by <strong>Thomas Jefferson</strong>, the Declaration officially proclaimed the colonies' separation from Britain and eloquently laid out the reasons for rebellion:</p>
+                        <ul>
+                            <li>God had given everyone the rights of life, liberty, and the pursuit of happiness</li>
+                            <li>People created governments to protect these rights</li>
+                            <li>When government becomes destructive of these ends, it is the right of the people to alter or abolish it</li>
+                            <li>The king had "establish[ed]... an absolute Tyranny over these States"</li>
+                        </ul>
+                        <p>Jefferson listed the king's abuses: taxing without consent, interfering with trade, denying trial by jury, and depriving colonists of self-government.</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: According to John Locke, what gives people the right to overthrow their government?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1a', 0)">When taxes become too high</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1a', 25)">When government breaks the social contract by violating natural rights</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1a', 0)">When the king dies without an heir</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1a', 0)">When citizens vote for revolution in an election</div>
+                    <div class="feedback-box" id="feedback-q1a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: What was the colonists' main objection to the Stamp Act and other British taxes?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">The taxes were too expensive for colonists to pay</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">The taxes funded the British army</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1b', 25)">They were taxed without representation in Parliament</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">The taxes only applied to certain colonies</div>
+                    <div class="feedback-box" id="feedback-q1b"></div>
+                </div>
+
+                <div class="achievement" id="section1-complete" style="display: none;">
+                    🎉 SECTION COMPLETE! 🎉<br>
+                    You've mastered the roots of American political tradition!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Articles of Confederation -->
+        <div class="page" id="page-section2">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h1 class="section-main-title"><span>📋</span> The Articles of Confederation</h1>
+                    <p style="font-size: 1.1em; color: var(--text-secondary);">America's first attempt at national government and why it failed</p>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📚 Learning Objectives</div>
+                    <ul>
+                        <li>Describe the steps taken during and after the Revolution to create a government</li>
+                        <li>Identify the main features of the Articles of Confederation</li>
+                        <li>Describe the crises resulting from key features of the Articles</li>
+                    </ul>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Creating a New Government</h2>
+                
+                <p>Waging a successful war against Great Britain required that the individual colonies, now sovereign states that often distrusted one another, form a unified nation with a central government capable of directing the country's defense. Gaining recognition and aid from foreign nations would also be easier if the new United States had a national government able to borrow money and negotiate treaties.</p>
+
+                <p>The Second Continental Congress called upon its delegates to create a new government strong enough to win the country's independence but <strong>not so powerful</strong> that it would deprive people of the very liberties for which they were fighting.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'articles-creation', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Birth of the Articles of Confederation</div>
+                    <div class="card-content" id="articles-creation">
+                        <p><strong>+30 points!</strong> Historical milestone discovered!</p>
+                        <p>The final draft of the <strong>Articles of Confederation</strong> was accepted by Congress in <strong>November 1777</strong> and submitted to the states for ratification. It would not become law until all thirteen states approved it.</p>
+                        
+                        <p>Within two years, all except <strong>Maryland</strong> had done so. Maryland argued that all territory west of the Appalachians, to which some states had laid claim, should instead be held by the national government as public land for the benefit of all states.</p>
+                        
+                        <p>When Virginia relinquished its land claims in early <strong>1781</strong>, Maryland approved the Articles. A few months later, the British surrendered at Yorktown.</p>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Republic vs. Confederation</div>
+                    <div>
+                        <p><strong>Republic:</strong> A regime in which the people, not a monarch, hold power and elect representatives to govern according to the rule of law.</p>
+                        <p><strong>Confederation:</strong> An entity in which independent, self-governing states form a union for the purpose of acting together in areas such as defense. Fearful of replacing one oppressive national government with another, the framers of the Articles created an alliance of sovereign states held together by a <strong>weak central government</strong>.</p>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Structure Under the Articles</h2>
+                
+                <p>Following the Declaration of Independence, each of the thirteen states had drafted and ratified a constitution providing for a republican form of government. Each state had a governor and an elected legislature. The states remained free to govern their residents as they wished.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'articles-powers', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Powers of the Confederation Congress</div>
+                    <div class="card-content" id="articles-powers">
+                        <p><strong>+30 points!</strong> Government structure analyzed!</p>
+                        <p>Powers given to the central government were severely limited:</p>
+                        <ul>
+                            <li>Exchange ambassadors and make treaties with foreign governments and Indian tribes</li>
+                            <li>Declare war</li>
+                            <li>Coin currency and borrow money</li>
+                            <li>Settle disputes between states</li>
+                        </ul>
+                        <p><strong>Key limitations:</strong></p>
+                        <ul>
+                            <li>Each state had only <strong>one vote</strong> regardless of size</li>
+                            <li>Delegates could serve no more than three consecutive years</li>
+                            <li>No independent chief executive or judiciary</li>
+                            <li><strong>Nine votes</strong> required before government could act</li>
+                            <li><strong>Unanimous approval</strong> needed to change the Articles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">What Went Wrong?</h2>
+                
+                <p>The Articles satisfied those who wanted a weak central government with limited power. Ironically, their very success led to their undoing. It soon became apparent that while they protected state sovereignty, the Articles had created a central government <strong>too weak to function effectively</strong>.</p>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Weakness</th>
+                        <th>Why It Was a Problem</th>
+                    </tr>
+                    <tr>
+                        <td>Could not impose taxes</td>
+                        <td>Had to request money from states; could not pay debts or fund national defense</td>
+                    </tr>
+                    <tr>
+                        <td>Could not regulate foreign trade or interstate commerce</td>
+                        <td>Could not protect American businesses from foreign competition or prevent interstate trade wars</td>
+                    </tr>
+                    <tr>
+                        <td>Could not raise an army</td>
+                        <td>Had to request troops from states; could not defend the nation</td>
+                    </tr>
+                    <tr>
+                        <td>Each state had one vote regardless of size</td>
+                        <td>Populous states were underrepresented</td>
+                    </tr>
+                    <tr>
+                        <td>Unanimous vote required to change Articles</td>
+                        <td>Problems could not be easily fixed</td>
+                    </tr>
+                    <tr>
+                        <td>No national judicial system</td>
+                        <td>Could not enforce national laws</td>
+                    </tr>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'economic-problems', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Economic Chaos Under the Articles</div>
+                    <div class="card-content" id="economic-problems">
+                        <p><strong>+30 points!</strong> Economic crisis examined!</p>
+                        <p><strong>Currency Problems:</strong></p>
+                        <ul>
+                            <li>The <strong>Continental</strong> currency issued by Congress was largely worthless</li>
+                            <li>States were allowed to issue their own banknotes, creating confusion</li>
+                            <li>People often refused to accept unfamiliar currencies</li>
+                        </ul>
+                        <p><strong>Trade Problems:</strong></p>
+                        <ul>
+                            <li>British merchants flooded the U.S. market with low-priced goods</li>
+                            <li>States imposed tariffs on products from other states</li>
+                            <li>Interstate commerce was chaotic and unpredictable</li>
+                        </ul>
+                        <p><strong>Foreign Relations:</strong></p>
+                        <ul>
+                            <li>British refused to evacuate western lands because U.S. couldn't pay debts</li>
+                            <li>American ships were attacked by Barbary pirates</li>
+                            <li>Foreign nations reluctant to loan money to a government that couldn't tax</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Shays' Rebellion: The Breaking Point</h2>
+                
+                <p>The weaknesses of the Articles became apparent to all as a result of an uprising of Massachusetts farmers, led by <strong>Daniel Shays</strong>.</p>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">⚔️ Shays' Rebellion (1786-1787)</div>
+                    <p>In the summer of 1786, farmers in western Massachusetts were heavily in debt, facing imprisonment and the loss of their lands. They owed taxes that had gone unpaid while they were fighting in the Revolution. The Continental Congress had promised to pay them for their service, but the national government didn't have the money.</p>
+                    <ul>
+                        <li>Led by Daniel Shays, heavily indebted farmers marched to a courthouse demanding relief</li>
+                        <li>Governor James Bowdoin called upon the national government for help</li>
+                        <li><strong>The national government had no army to send</strong></li>
+                        <li>Massachusetts eventually crushed the uprising with private militias and privately funded armies</li>
+                        <li>Wealthy people were frightened by this display of unrest</li>
+                    </ul>
+                    <p>To find a solution, members of Congress called for a revision of the Articles of Confederation.</p>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: What important power did the national government lack under the Articles of Confederation?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2a', 0)">It could not coin money</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2a', 0)">It could not declare war</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2a', 25)">It could not impose taxes</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2a', 0)">It could not conduct foreign affairs</div>
+                    <div class="feedback-box" id="feedback-q2a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: How did Shays' Rebellion reveal the weaknesses of the Articles of Confederation?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2b', 0)">It showed states couldn't collect their own taxes</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2b', 25)">The national government had no army to help Massachusetts</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2b', 0)">Congress voted against helping Massachusetts</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q2b', 0)">Foreign nations refused to help suppress the rebellion</div>
+                    <div class="feedback-box" id="feedback-q2b"></div>
+                </div>
+
+                <div class="achievement" id="section2-complete" style="display: none;">
+                    🎉 SECTION COMPLETE! 🎉<br>
+                    You understand why America's first government failed!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Development of the Constitution -->
+        <div class="page" id="page-section3">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h1 class="section-main-title"><span>⚖️</span> The Development of the Constitution</h1>
+                    <p style="font-size: 1.1em; color: var(--text-secondary);">Debates, compromises, and the creation of our governing document</p>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📚 Learning Objectives</div>
+                    <ul>
+                        <li>Identify the conflicts present and the compromises reached in drafting the Constitution</li>
+                        <li>Summarize the core features of the structure of U.S. government under the Constitution</li>
+                    </ul>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Road to Philadelphia</h2>
+                
+                <p>In 1786, Virginia and Maryland invited delegates from the other eleven states to meet in Annapolis, Maryland, to revise the Articles of Confederation. However, only five states sent representatives. Because all thirteen states had to agree to any alteration of the Articles, the convention could not accomplish its goal.</p>
+
+                <p>Two delegates, <strong>Alexander Hamilton</strong> and <strong>James Madison</strong>, requested that all states send delegates to a convention in Philadelphia the following year. Because the shortcomings of the Articles proved impossible to overcome, the convention decided to create <strong>an entirely new government</strong>.</p>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Points of Contention</h2>
+                
+                <p><strong>Fifty-five delegates</strong> arrived in Philadelphia in May 1787 for what became known as the <strong>Constitutional Convention</strong>. Notable absences included John Adams and Thomas Jefferson, who were overseas as diplomats. The only decision all could agree on was the election of <strong>George Washington</strong> as president of the convention.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'delegate-concerns', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Delegates' Competing Concerns</div>
+                    <div class="card-content" id="delegate-concerns">
+                        <p><strong>+30 points!</strong> Convention dynamics revealed!</p>
+                        <p>The delegates had many competing concerns:</p>
+                        <ul>
+                            <li><strong>Strengthen government</strong> vs. <strong>Fear of too much power</strong></li>
+                            <li><strong>Preserve state autonomy</strong> vs. <strong>Need for national unity</strong></li>
+                            <li><strong>Protect individual rights</strong> vs. <strong>Maintain law and order</strong></li>
+                            <li><strong>Give political rights to all free men</strong> vs. <strong>Fear mob rule</strong></li>
+                            <li><strong>Large states</strong> wanted representation by population</li>
+                            <li><strong>Small states</strong> wanted equal representation</li>
+                            <li><strong>Northern states</strong> were abolishing slavery</li>
+                            <li><strong>Southern states</strong> wanted to protect slavery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Virginia Plan vs. The New Jersey Plan</h2>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Virginia Plan (Large States)</th>
+                        <th>New Jersey Plan (Small States)</th>
+                    </tr>
+                    <tr>
+                        <td>Bicameral (two-house) legislature</td>
+                        <td>Unicameral (one-house) legislature</td>
+                    </tr>
+                    <tr>
+                        <td>Representation based on population in both houses</td>
+                        <td>Each state gets one vote (equal representation)</td>
+                    </tr>
+                    <tr>
+                        <td>Lower house elected by popular vote</td>
+                        <td>Legislature appointed by state governments</td>
+                    </tr>
+                    <tr>
+                        <td>Upper house chosen by lower house</td>
+                        <td>Congress can regulate commerce and compel state compliance</td>
+                    </tr>
+                    <tr>
+                        <td>Strong national government can veto state laws</td>
+                        <td>States retain significant power over national government</td>
+                    </tr>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'great-compromise', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Great Compromise</div>
+                    <div class="card-content" id="great-compromise">
+                        <p><strong>+35 points!</strong> Key compromise mastered!</p>
+                        <p>Suggested by <strong>Roger Sherman of Connecticut</strong>, the Great Compromise (also called the Connecticut Compromise) created our current Congress:</p>
+                        <ul>
+                            <li><strong>Senate:</strong> Two senators per state, regardless of population (satisfies small states)</li>
+                            <li><strong>House of Representatives:</strong> Representation based on population (satisfies large states)</li>
+                            <li>Senators were originally appointed by state legislatures</li>
+                            <li>House members directly elected by voters</li>
+                            <li>House terms: 2 years; Senate terms: 6 years</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Slavery Question</h2>
+                
+                <p>The Great Compromise led to another debate: When counting population for House representation, should enslaved people be counted?</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'three-fifths', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Three-Fifths Compromise</div>
+                    <div class="card-content" id="three-fifths">
+                        <p><strong>+35 points!</strong> Critical compromise examined!</p>
+                        <p><strong>Southern states</strong> wanted enslaved people counted for representation (more House seats)</p>
+                        <p><strong>Northern states</strong> argued representatives couldn't truly represent enslaved people</p>
+                        <p><strong>The Three-Fifths Compromise:</strong></p>
+                        <ul>
+                            <li>Count all free population PLUS 60% (three-fifths) of enslaved population</li>
+                            <li>This applied to both representation AND federal taxation</li>
+                            <li>Gave slaveholding states more political power</li>
+                        </ul>
+                        <p><strong>Additional compromises on slavery:</strong></p>
+                        <ul>
+                            <li>Congress could not ban the foreign slave trade until 1808</li>
+                            <li>No restrictions on the domestic slave trade</li>
+                            <li><strong>Fugitive slave clause:</strong> States had to return escaped enslaved people to their enslavers</li>
+                        </ul>
+                        <p>No serious effort was made to abolish slavery because South Carolina and Georgia threatened to leave the convention.</p>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Separation of Powers and Checks and Balances</h2>
+                
+                <p>The chief concern was increasing federal authority while ensuring it didn't become too powerful. The framers solved this through <strong>separation of powers</strong> and <strong>checks and balances</strong>.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Key Constitutional Principles</div>
+                    <div>
+                        <p><strong>Separation of Powers:</strong> Dividing government into three branches with different responsibilities:</p>
+                        <ul>
+                            <li><strong>Legislative (Congress):</strong> Makes laws</li>
+                            <li><strong>Executive (President):</strong> Enforces laws</li>
+                            <li><strong>Judicial (Courts):</strong> Interprets laws</li>
+                        </ul>
+                        <p><strong>Checks and Balances:</strong> Each branch can limit the actions of the others:</p>
+                        <ul>
+                            <li>President can <strong>veto</strong> legislation</li>
+                            <li>Congress can <strong>override</strong> vetoes with 2/3 vote</li>
+                            <li>Senate must <strong>approve</strong> presidential appointments and treaties</li>
+                            <li>Congress can <strong>impeach</strong> and remove the president</li>
+                            <li>Supreme Court can declare laws <strong>unconstitutional</strong> (judicial review, established later)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'federal-system', 30)">
+                    <div class="card-prompt">🔍 Click to explore: The Federal System</div>
+                    <div class="card-content" id="federal-system">
+                        <p><strong>+30 points!</strong> Federalism foundations understood!</p>
+                        <p>The framers created a <strong>federal system</strong> dividing power between national and state governments:</p>
+                        <p><strong>Enumerated Powers</strong> (given explicitly to the federal government):</p>
+                        <ul>
+                            <li>Declare war, maintain army and navy</li>
+                            <li>Impose taxes, coin money, borrow money</li>
+                            <li>Regulate foreign and interstate commerce</li>
+                            <li>Maintain post office, grant patents and copyrights</li>
+                            <li>Make treaties and regulate naturalization</li>
+                        </ul>
+                        <p><strong>Reserved Powers</strong> (left to the states):</p>
+                        <ul>
+                            <li>Intrastate commerce, marriage, education</li>
+                            <li>Public health and safety</li>
+                            <li>Most criminal and civil law</li>
+                        </ul>
+                        <p><strong>Supremacy Clause:</strong> The Constitution, federal laws, and treaties are the "supreme Law of the Land"</p>
+                        <p><strong>Necessary and Proper Clause:</strong> Congress can make all laws "necessary and proper" to carry out its enumerated powers</p>
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: According to the Great Compromise, how would representation in Congress be apportioned?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3a', 0)">Equal representation in both houses</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3a', 0)">Population-based representation in both houses</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3a', 30)">Population-based in the House; equal representation in the Senate</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3a', 0)">Unicameral legislature with equal representation</div>
+                    <div class="feedback-box" id="feedback-q3a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: What was the purpose of separation of powers and checks and balances?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">To make government more efficient</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3b', 30)">To prevent any one branch from becoming too powerful</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">To give states more power than the federal government</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">To allow the president to make laws directly</div>
+                    <div class="feedback-box" id="feedback-q3b"></div>
+                </div>
+
+                <div class="achievement" id="section3-complete" style="display: none;">
+                    🎉 SECTION COMPLETE! 🎉<br>
+                    You've mastered the Constitutional Convention!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Ratification of the Constitution -->
+        <div class="page" id="page-section4">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h1 class="section-main-title"><span>📜</span> The Ratification of the Constitution</h1>
+                    <p style="font-size: 1.1em; color: var(--text-secondary);">The fierce debate between Federalists and Anti-Federalists</p>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📚 Learning Objectives</div>
+                    <ul>
+                        <li>Identify the steps required to ratify the Constitution</li>
+                        <li>Describe arguments the framers raised in support of a strong national government</li>
+                        <li>Understand counterpoints raised by the Anti-Federalists</li>
+                    </ul>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Ratification Process</h2>
+                
+                <p>On <strong>September 17, 1787</strong>, the delegates voted to approve the Constitution. But before it could become law, it faced another hurdle: ratification by the states.</p>
+
+                <p><strong>Article VII</strong> required that <strong>nine of the thirteen states</strong> ratify the Constitution before it could take effect. Eleven days after approval, copies were sent to each state for ratifying conventions.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'ratification-strategy', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Why Ratification Conventions?</div>
+                    <div class="card-content" id="ratification-strategy">
+                        <p><strong>+30 points!</strong> Strategic thinking revealed!</p>
+                        <p>This approach to ratification was unusual and strategic:</p>
+                        <ul>
+                            <li>Changes to the Articles <em>should</em> have been ratified by state legislatures</li>
+                            <li>But state legislators would have to give up some of their own power</li>
+                            <li>Instead, elected convention delegates would vote</li>
+                            <li>These delegates were not giving up their own power—they were limiting state legislators' power</li>
+                            <li>If delegates chosen by popular vote approved, the new government could claim it ruled with the <strong>consent of the people</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Federalists vs. Anti-Federalists</h2>
+                
+                <p>Citizens quickly separated into two groups on the question of ratification.</p>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Federalists (Supported Constitution)</th>
+                        <th>Anti-Federalists (Opposed Constitution)</th>
+                    </tr>
+                    <tr>
+                        <td>Elite members: wealthy landowners, businessmen, military commanders</td>
+                        <td>Many distrusted the elite; believed small farmers should hold power</td>
+                    </tr>
+                    <tr>
+                        <td>Strong government needed for national defense and economic growth</td>
+                        <td>Feared federal government would favor the rich</td>
+                    </tr>
+                    <tr>
+                        <td>National currency would ease business transactions</td>
+                        <td>Worried strong government would become tyrannical</td>
+                    </tr>
+                    <tr>
+                        <td>Federal tariffs would protect from foreign competition</td>
+                        <td>Believed state legislatures better protected freedoms</td>
+                    </tr>
+                    <tr>
+                        <td>Strong support in New England</td>
+                        <td>Strongest in the South; feared taxes on farmers</td>
+                    </tr>
+                    <tr>
+                        <td>Large republic could work with proper safeguards</td>
+                        <td>Large republic couldn't maintain virtue needed for self-government</td>
+                    </tr>
+                </table>
+
+                <div class="interactive-card" onclick="revealCard(this, 'anti-fed-concerns', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Anti-Federalist Concerns</div>
+                    <div class="card-content" id="anti-fed-concerns">
+                        <p><strong>+30 points!</strong> Opposition arguments understood!</p>
+                        <p><strong>Patrick Henry</strong> of Virginia feared:</p>
+                        <ul>
+                            <li>The office of president would place excessive power in one person</li>
+                            <li>Federal government's new ability to tax citizens</li>
+                        </ul>
+                        <p><strong>Edmund Randolph</strong> worried about:</p>
+                        <ul>
+                            <li>The new federal judicial system</li>
+                            <li>Federal courts would be too far from where people lived</li>
+                        </ul>
+                        <p><strong>Greatest concern:</strong> No protection of individual liberties!</p>
+                        <ul>
+                            <li>State governments gave jury trials and allowed weapons possession</li>
+                            <li>Some practiced religious tolerance</li>
+                            <li>The Constitution contained no such guarantees</li>
+                            <li>Many called for a <strong>bill of rights</strong> and refused to ratify without one</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Federalist Papers</h2>
+                
+                <p>Facing considerable opposition to the Constitution, especially in New York, <strong>Alexander Hamilton</strong>, <strong>James Madison</strong>, and <strong>John Jay</strong> wrote a series of essays arguing for a strong federal government.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'federalist-papers', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Federalist Papers</div>
+                    <div class="card-content" id="federalist-papers">
+                        <p><strong>+35 points!</strong> Essential documents explored!</p>
+                        <p>These <strong>85 essays</strong> were published in newspapers under the name "<strong>Publius</strong>" (a supporter of the Roman Republic). Key arguments included:</p>
+                        <p><strong>Federalist No. 10 (Madison):</strong></p>
+                        <ul>
+                            <li>Americans need not fear factions or special interests</li>
+                            <li>The republic is too big and diverse for large, powerful political parties to form</li>
+                            <li>Elected representatives will possess "the most attractive merit"</li>
+                        </ul>
+                        <p><strong>Federalist No. 51 (Madison):</strong></p>
+                        <ul>
+                            <li>The federal system divides power between national and state governments</li>
+                            <li>Separation into three branches prevents tyranny</li>
+                            <li>"Ambition must be made to counteract ambition"</li>
+                        </ul>
+                        <p><strong>Federalist No. 70 (Hamilton):</strong></p>
+                        <ul>
+                            <li>A single executive is not dangerous—it's easier to control one person than many</li>
+                            <li>One person can act with "energy" and speed when needed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Path to Ratification</h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">December 1787</div>
+                        <strong>Delaware, New Jersey, Pennsylvania</strong> ratify quickly. Small states favored the Constitution—equal Senate representation would give them more power.
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 1788</div>
+                        <strong>Connecticut, Georgia</strong> ratify. Momentum builds for the new Constitution.
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">June 21, 1788</div>
+                        <strong>New Hampshire</strong> becomes the 9th state to ratify—the Constitution is now technically law!
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">June 25, 1788</div>
+                        <strong>Virginia</strong> ratifies. James Madison's support and the promise of a bill of rights convinced delegates.
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">July 26, 1788</div>
+                        <strong>New York</strong> ratifies after intense debate and The Federalist Papers campaign.
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1789-1790</div>
+                        <strong>North Carolina</strong> (Nov 1789) and <strong>Rhode Island</strong> (May 1790) finally join. Rhode Island, the last holdout, realized it couldn't survive alone.
+                    </div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: Why did Anti-Federalists oppose the Constitution?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4a', 0)">They wanted a stronger national government</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4a', 25)">They feared the federal government was too powerful and lacked a bill of rights</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4a', 0)">They supported the Virginia Plan over the New Jersey Plan</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4a', 0)">They wanted to abolish the states entirely</div>
+                    <div class="feedback-box" id="feedback-q4a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: What was the primary purpose of The Federalist Papers?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4b', 0)">To oppose the Constitution</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4b', 0)">To explain why states should remain independent</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4b', 25)">To argue for ratification and a strong federal government</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4b', 0)">To demand immediate inclusion of a bill of rights</div>
+                    <div class="feedback-box" id="feedback-q4b"></div>
+                </div>
+
+                <div class="achievement" id="section4-complete" style="display: none;">
+                    🎉 SECTION COMPLETE! 🎉<br>
+                    You understand the ratification battle!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: Constitutional Change -->
+        <div class="page" id="page-section5">
+            <button class="back-button" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="content-section">
+                <div class="section-header">
+                    <h1 class="section-main-title"><span>📝</span> Constitutional Change</h1>
+                    <p style="font-size: 1.1em; color: var(--text-secondary);">How the Constitution evolves through amendments</p>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📚 Learning Objectives</div>
+                    <ul>
+                        <li>Describe how the Constitution can be formally amended</li>
+                        <li>Explain the contents and significance of the Bill of Rights</li>
+                        <li>Discuss the importance of the Thirteenth, Fourteenth, Fifteenth, and Nineteenth Amendments</li>
+                    </ul>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Amendment Process</h2>
+                
+                <p>A major problem with the Articles of Confederation was the difficulty of changing them without unanimous consent. The framers learned this lesson and built into the Constitution the ability to amend it—but made the process difficult enough that it wouldn't be changed repeatedly.</p>
+
+                <p>Since ratification in 1789, the Constitution has been amended only <strong>27 times</strong>. The first ten amendments were added in 1791, and only seventeen have been added since.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'amendment-process', 30)">
+                    <div class="card-prompt">🔍 Click to explore: How Amendments Are Made</div>
+                    <div class="card-content" id="amendment-process">
+                        <p><strong>+30 points!</strong> Amendment process mastered!</p>
+                        <p><strong>Article V</strong> outlines two methods for proposing amendments:</p>
+                        <p><strong>Method 1 (used for all 27 amendments):</strong></p>
+                        <ul>
+                            <li>Proposed by Congress</li>
+                            <li>Requires <strong>two-thirds majority</strong> in both House and Senate</li>
+                        </ul>
+                        <p><strong>Method 2 (never used):</strong></p>
+                        <ul>
+                            <li>Two-thirds of state legislatures petition Congress</li>
+                            <li>Congress must call a national convention</li>
+                        </ul>
+                        <p><strong>Ratification (two methods):</strong></p>
+                        <ul>
+                            <li><strong>Three-quarters</strong> of state legislatures approve, OR</li>
+                            <li><strong>Three-quarters</strong> of state-ratifying conventions approve</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">The Bill of Rights</h2>
+                
+                <p><strong>James Madison</strong>, now a member of Congress from Virginia, drafted nineteen potential amendments. Congress approved twelve, and the states ratified ten. In 1791, these became the <strong>Bill of Rights</strong>.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'bill-of-rights', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The First Ten Amendments</div>
+                    <div class="card-content" id="bill-of-rights">
+                        <p><strong>+35 points!</strong> Foundational rights understood!</p>
+                        <p>Many were based on the English Bill of Rights and Virginia Declaration of Rights:</p>
+                        <table class="comparison-table">
+                            <tr><th>Amendment</th><th>Protection</th></tr>
+                            <tr><td>1st</td><td>Religion, speech, press, assembly, petition</td></tr>
+                            <tr><td>2nd</td><td>Right to bear arms</td></tr>
+                            <tr><td>3rd</td><td>No quartering soldiers in peacetime</td></tr>
+                            <tr><td>4th</td><td>Protection from unreasonable search and seizure</td></tr>
+                            <tr><td>5th</td><td>Due process, self-incrimination, double jeopardy, eminent domain</td></tr>
+                            <tr><td>6th</td><td>Right to speedy, public trial by jury</td></tr>
+                            <tr><td>7th</td><td>Right to jury trial in civil cases</td></tr>
+                            <tr><td>8th</td><td>No excessive bail, fines, or cruel punishment</td></tr>
+                            <tr><td>9th</td><td>Rights not listed are still retained by the people</td></tr>
+                            <tr><td>10th</td><td>Powers not given to federal government are reserved to states</td></tr>
+                        </table>
+                        <p>The 1st and 4th Amendments did not come from English precedent—they were new American innovations!</p>
+                    </div>
+                </div>
+
+                <h2 style="color: var(--primary-blue); margin: 30px 0;">Key Later Amendments</h2>
+                
+                <p>Four amendments are of especially great significance—the result of long-fought campaigns by supporters of abolition and the expansion of voting rights.</p>
+
+                <div class="interactive-card" onclick="revealCard(this, 'civil-war-amendments', 35)">
+                    <div class="card-prompt">🔍 Click to explore: The Civil War Amendments (13th, 14th, 15th)</div>
+                    <div class="card-content" id="civil-war-amendments">
+                        <p><strong>+35 points!</strong> Reconstruction amendments explored!</p>
+                        <p><strong>13th Amendment (1865):</strong></p>
+                        <ul>
+                            <li>Abolished slavery in the United States</li>
+                        </ul>
+                        <p><strong>14th Amendment (1868):</strong></p>
+                        <ul>
+                            <li>Granted citizenship to African Americans</li>
+                            <li>Guaranteed equal protection under the law regardless of race</li>
+                            <li>Prohibited states from depriving residents of life, liberty, or property without due process</li>
+                            <li>Over the years, used to apply most Bill of Rights protections to state governments</li>
+                        </ul>
+                        <p><strong>15th Amendment (1870):</strong></p>
+                        <ul>
+                            <li>Gave men the right to vote regardless of race or color</li>
+                            <li>Women were still prohibited from voting in most states</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'voting-amendments', 30)">
+                    <div class="card-prompt">🔍 Click to explore: Amendments Expanding Voting Rights</div>
+                    <div class="card-content" id="voting-amendments">
+                        <p><strong>+30 points!</strong> Democratic expansion traced!</p>
+                        <p><strong>19th Amendment (1920):</strong></p>
+                        <ul>
+                            <li>Gave women the right to vote</li>
+                            <li>After decades of campaigns by suffragists like Susan B. Anthony and Ida B. Wells</li>
+                        </ul>
+                        <p><strong>23rd Amendment (1961):</strong></p>
+                        <ul>
+                            <li>Allowed Washington, D.C. residents to vote for president</li>
+                        </ul>
+                        <p><strong>24th Amendment (1964):</strong></p>
+                        <ul>
+                            <li>Abolished poll taxes</li>
+                            <li>Southern states had used poll taxes to prevent poor African Americans from voting</li>
+                        </ul>
+                        <p><strong>26th Amendment (1971):</strong></p>
+                        <ul>
+                            <li>Lowered voting age from 21 to 18</li>
+                            <li>Passed during Vietnam War—young men fighting should be able to vote</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="key-concept">
+                    <div class="key-concept-title">📋 Other Important Amendments</div>
+                    <ul>
+                        <li><strong>17th Amendment (1913):</strong> Direct election of senators by voters (instead of state legislatures)</li>
+                        <li><strong>20th Amendment (1933):</strong> Moved presidential inauguration from March to January</li>
+                        <li><strong>21st Amendment (1933):</strong> Repealed Prohibition (18th Amendment)—the only amendment to repeal another</li>
+                        <li><strong>22nd Amendment (1951):</strong> Limited presidents to two terms</li>
+                        <li><strong>27th Amendment (1992):</strong> Regulates congressional salary changes (originally proposed in 1789!)</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: What fraction of states must ratify an amendment for it to become part of the Constitution?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5a', 0)">One-half</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5a', 0)">Two-thirds</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5a', 25)">Three-fourths</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5a', 0)">All thirteen original states</div>
+                    <div class="feedback-box" id="feedback-q5a"></div>
+                </div>
+
+                <div class="knowledge-check">
+                    <div class="kc-question">📝 Knowledge Check: Which amendment granted citizenship and equal protection to African Americans?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5b', 0)">13th Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5b', 25)">14th Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5b', 0)">15th Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5b', 0)">19th Amendment</div>
+                    <div class="feedback-box" id="feedback-q5b"></div>
+                </div>
+
+                <div class="achievement" id="section5-complete" style="display: none;">
+                    🎉 SECTION COMPLETE! 🎉<br>
+                    You've mastered Constitutional change!
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div class="page" id="page-report">
+            <button class="back-button no-print" onclick="showPage('home')">← Back to Menu</button>
+            
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1 style="text-align: center; margin: 0;">📊 TCC Federal Government Trailblazer Trek</h1>
+                    <p style="text-align: center; margin: 10px 0 0 0; opacity: 0.9;">Chapter 2: The Constitution and Its Origins - Completion Report</p>
+                </div>
+                
+                <div class="report-grade-display" id="gradeDisplay" style="background: #1B5E20;">
+                    <div class="letter-grade" id="letterGrade">A</div>
+                    <div class="grade-percentage" id="gradePercentage">100%</div>
+                </div>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <p><strong>Student Name:</strong> <span id="reportName">Not entered</span></p>
+                    <p><strong>Date:</strong> <span id="reportDate"></span></p>
+                    <p><strong>Time:</strong> <span id="reportTime"></span></p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value" id="reportPoints">0</div>
+                        <div class="metric-label">Points Earned</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="reportSections">0/5</div>
+                        <div class="metric-label">Sections Visited</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="reportQuizScore">0%</div>
+                        <div class="metric-label">Quiz Accuracy</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value" id="reportEngagement">0%</div>
+                        <div class="metric-label">Engagement</div>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--primary-blue); margin: 30px 0 20px;">Section Performance</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Section</th>
+                        <th>Status</th>
+                        <th>Points</th>
+                    </tr>
+                    <tbody id="sectionDetails">
+                    </tbody>
+                </table>
+
+                <div class="instructor-note">
+                    <strong>📋 Instructor Note:</strong> This report documents the student's completion of the interactive Chapter 2: The Constitution and Its Origins learning module. The grade reflects points earned from exploring interactive content and completing knowledge check questions.
+                </div>
+
+                <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            score: 0,
+            level: 'Explorer',
+            visitedSections: new Set(),
+            completedSections: [],
+            answeredQuestions: new Set(),
+            correctAnswers: 0,
+            totalAnswers: 0,
+            revealedCards: new Set(),
+            sectionPoints: {}
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Constitution Sage'
+        };
+
+        const totalPossiblePoints = 1050;
+
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // Track section visits
+            if (pageId.startsWith('section')) {
+                const sectionNum = pageId.replace('section', '');
+                gameState.visitedSections.add(sectionNum);
+                if (!gameState.sectionPoints[sectionNum]) {
+                    gameState.sectionPoints[sectionNum] = 0;
+                }
+            }
+            
+            if (pageId === 'home') {
+                updateProgress();
+            }
+            
+            if (pageId === 'report') {
+                updateReport();
+            }
+        }
+
+        // Handle knowledge check answers
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) {
+                return;
+            }
+            
+            gameState.answeredQuestions.add(questionId);
+            gameState.totalAnswers++;
+            
+            // Get section number
+            const page = element.closest('.page');
+            const sectionNum = page.id.replace('page-section', '');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                gameState.score += points;
+                gameState.correctAnswers++;
+                gameState.sectionPoints[sectionNum] = (gameState.sectionPoints[sectionNum] || 0) + points;
+                showPoints(points);
+                updateScore();
+                
+                const feedback = document.getElementById('feedback-' + questionId);
+                feedback.textContent = '✅ Correct! Well done!';
+                feedback.className = 'feedback-box show correct';
+            } else {
+                element.classList.add('incorrect');
+                
+                const feedback = document.getElementById('feedback-' + questionId);
+                feedback.textContent = '❌ Not quite. Review the material and try again next time.';
+                feedback.className = 'feedback-box show incorrect';
+            }
+            
+            element.parentElement.querySelectorAll('.kc-option').forEach(option => {
+                option.style.cursor = 'default';
+                option.onclick = null;
+            });
+            
+            checkSectionCompletion(sectionNum);
+        }
+
+        // Reveal interactive cards
+        function revealCard(element, contentId, points) {
+            if (gameState.revealedCards.has(contentId)) {
+                return;
+            }
+            
+            gameState.revealedCards.add(contentId);
+            
+            // Get section number
+            const page = element.closest('.page');
+            const sectionNum = page.id.replace('page-section', '');
+            
+            gameState.score += points;
+            gameState.sectionPoints[sectionNum] = (gameState.sectionPoints[sectionNum] || 0) + points;
+            showPoints(points);
+            updateScore();
+            
+            element.classList.add('revealed');
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+            
+            element.onclick = null;
+            element.style.cursor = 'default';
+            
+            checkSectionCompletion(sectionNum);
+        }
+
+        // Show points popup
+        function showPoints(points) {
+            const popup = document.getElementById('pointsPopup');
+            popup.textContent = `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Update score display
+        function updateScore() {
+            document.getElementById('currentScore').textContent = gameState.score;
+            
+            let newLevel = 'Explorer';
+            for (let threshold in levels) {
+                if (gameState.score >= threshold) {
+                    newLevel = levels[threshold];
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('currentLevel').textContent = newLevel;
+        }
+
+        // Check section completion
+        function checkSectionCompletion(sectionNum) {
+            const thresholds = {
+                '1': 150, '2': 150, '3': 200, '4': 150, '5': 150
+            };
+            
+            if (gameState.sectionPoints[sectionNum] >= thresholds[sectionNum] && 
+                !gameState.completedSections.includes(sectionNum)) {
+                gameState.completedSections.push(sectionNum);
+                markSectionComplete(sectionNum);
+            }
+        }
+
+        // Mark section as complete
+        function markSectionComplete(sectionNum) {
+            const card = document.getElementById('card' + sectionNum);
+            if (card) {
+                card.classList.add('completed');
+            }
+            
+            const achievement = document.getElementById('section' + sectionNum + '-complete');
+            if (achievement) {
+                achievement.style.display = 'block';
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const totalSections = 5;
+            const completed = gameState.completedSections.length;
+            const percentage = (completed / totalSections) * 100;
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '% Complete';
+        }
+
+        // Calculate letter grade
+        function calculateLetterGrade(percentage) {
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            return { letter: letterGrade, color: gradeColor };
+        }
+
+        // Update report
+        function updateReport() {
+            const studentName = document.getElementById('studentName').value || 'Not entered';
+            document.getElementById('reportName').textContent = studentName;
+            
+            const now = new Date();
+            document.getElementById('reportDate').textContent = now.toLocaleDateString();
+            document.getElementById('reportTime').textContent = now.toLocaleTimeString();
+            
+            document.getElementById('reportPoints').textContent = gameState.score;
+            document.getElementById('reportSections').textContent = gameState.visitedSections.size + '/5';
+            
+            const quizScore = gameState.totalAnswers > 0 
+                ? Math.round((gameState.correctAnswers / gameState.totalAnswers) * 100) 
+                : 0;
+            document.getElementById('reportQuizScore').textContent = quizScore + '%';
+            
+            const totalCards = 15;
+            const engagement = Math.round((gameState.revealedCards.size / totalCards) * 100);
+            document.getElementById('reportEngagement').textContent = Math.min(engagement, 100) + '%';
+            
+            // Calculate grade
+            const percentage = Math.round((gameState.score / totalPossiblePoints) * 100);
+            const grade = calculateLetterGrade(percentage);
+            
+            document.getElementById('letterGrade').textContent = grade.letter;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            document.getElementById('gradeDisplay').style.background = grade.color;
+            
+            // Build section details
+            const sectionNames = [
+                'Pre-Revolutionary Roots',
+                'Articles of Confederation',
+                'Constitutional Convention',
+                'Ratification Battle',
+                'Constitutional Change'
+            ];
+            
+            let sectionHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const visited = gameState.visitedSections.has(i.toString());
+                const completed = gameState.completedSections.includes(i.toString());
+                const points = gameState.sectionPoints[i.toString()] || 0;
+                sectionHTML += `
+                    <tr>
+                        <td>${sectionNames[i-1]}</td>
+                        <td style="text-align: center;">
+                            ${completed ? '<span style="color: #1B5E20;">✅ Complete</span>' : 
+                              visited ? '<span style="color: #F57C00;">⭕ In Progress</span>' : 
+                              '<span style="color: #B71C1C;">❌ Not Started</span>'}
+                        </td>
+                        <td style="text-align: center;">${points}</td>
+                    </tr>
+                `;
+            }
+            document.getElementById('sectionDetails').innerHTML = sectionHTML;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateScore();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

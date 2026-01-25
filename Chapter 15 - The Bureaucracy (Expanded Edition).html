@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 15: The Bureaucracy - TCC Federal Government Trailblazer Trek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #005A87;
+            --primary-green: #00695C;
+            --secondary-blue: #0277BD;
+            --secondary-green: #00897B;
+            --success: #1B5E20;
+            --error: #B71C1C;
+            --warning: #F57C00;
+            --text-primary: #212121;
+            --text-secondary: #424242;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F5F5;
+            --bg-section: #E0F2F1;
+            --highlight-yellow: #FFD54F;
+            --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-light);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .score-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+        }
+
+        .icon-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-item .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .name-input-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .name-input-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .name-input-card input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-right: 1rem;
+        }
+
+        .name-input-card button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .name-input-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-card .badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .section-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-card .points {
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .section-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .section-card.completed::after {
+            content: '✔';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .back-button:hover {
+            transform: translateX(-3px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            opacity: 0.9;
+        }
+
+        .content-block {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .content-block h4 {
+            color: var(--primary-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .content-block ul, .content-block ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-box {
+            background: var(--highlight-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .definition-term {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept-box {
+            background: var(--highlight-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box {
+            background: var(--highlight-yellow);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .milestone-box h4 {
+            color: #5D4037;
+            margin-top: 0;
+        }
+
+        .interactive-card {
+            background: white;
+            border: 2px solid var(--secondary-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .interactive-card.revealed {
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .card-prompt {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .card-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .knowledge-check {
+            background: var(--bg-section);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .kc-question {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .kc-option {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .kc-option:hover:not(.disabled) {
+            background: var(--highlight-blue);
+            border-color: var(--secondary-blue);
+        }
+
+        .kc-option.correct {
+            background: #C8E6C9;
+            border-color: var(--success);
+        }
+
+        .kc-option.incorrect {
+            background: #FFCDD2;
+            border-color: var(--error);
+        }
+
+        .kc-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .feedback-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.correct {
+            background: #C8E6C9;
+            color: var(--success);
+        }
+
+        .feedback-box.incorrect {
+            background: #FFCDD2;
+            color: var(--error);
+        }
+
+        .points-popup {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--highlight-blue);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding-left: 50px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .complete-section-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Report Page Styles */
+        .report-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-header-bar {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-header-bar h1 {
+            font-size: 1.5rem;
+        }
+
+        .report-scores {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .report-content {
+            padding: 2rem;
+        }
+
+        .report-main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .report-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-grade-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .letter-grade {
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .grade-percentage {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .report-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-info-section, .performance-section {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .student-info-section h3, .performance-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .performance-table {
+            width: 100%;
+        }
+
+        .performance-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: var(--highlight-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .report-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .instructor-note {
+            background: var(--highlight-yellow);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .print-report-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .report-back-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .header {
+                position: static;
+            }
+            .container {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .hero-icons {
+                gap: 2rem;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-header-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <div class="header">
+        <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+        <div class="score-display">
+            <span>⭐ <span id="score">0</span> pts</span>
+            <span>🏆 <span id="level">Explorer</span></span>
+        </div>
+    </div>
+
+    <!-- Points Popup -->
+    <div class="points-popup" id="pointsPopup">
+        <span id="pointsMessage">+25 points!</span>
+    </div>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="hero-section">
+                <h2>🏛️ Chapter 15: The Bureaucracy 📋</h2>
+                <p class="hero-subtitle">Explore the "fourth branch of government" - the federal bureaucracy that implements policies and programs. Learn how civil servants are hired, how bureaucracies function, and how they are controlled in our democratic system.</p>
+                <div class="hero-icons">
+                    <div class="icon-item">
+                        <div class="icon">📜</div>
+                        <div class="label">Civil Service</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">⚙️</div>
+                        <div class="label">Public Administration</div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon">🔍</div>
+                        <div class="label">Oversight & Control</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="name-input-card">
+                <h3>👤 Enter Your Name to Begin</h3>
+                <input type="text" id="studentName" placeholder="Your name here...">
+                <button onclick="saveName()">Start Learning!</button>
+            </div>
+
+            <div class="progress-bar">
+                <h3>📊 Your Progress</h3>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="section-card" id="card1" onclick="navigateTo('section1')">
+                    <div class="badge">1</div>
+                    <h4>📜 Evolution of Public Administration</h4>
+                    <p>Discover the origins of American bureaucracy, the spoils system, and how public administration evolved from Washington to modern times.</p>
+                    <div class="points">🌟 Up to 230 points</div>
+                </div>
+
+                <div class="section-card" id="card2" onclick="navigateTo('section2')">
+                    <div class="badge">2</div>
+                    <h4>⚖️ Toward a Merit-Based Civil Service</h4>
+                    <p>Learn about the Pendleton Act, Civil Service Commission, and how the merit system replaced political patronage.</p>
+                    <div class="points">🌟 Up to 220 points</div>
+                </div>
+
+                <div class="section-card" id="card3" onclick="navigateTo('section3')">
+                    <div class="badge">3</div>
+                    <h4>🏢 Understanding Bureaucracies</h4>
+                    <p>Explore the Weberian, acquisitive, and monopolistic models of bureaucracy, plus the four types of federal agencies.</p>
+                    <div class="points">🌟 Up to 240 points</div>
+                </div>
+
+                <div class="section-card" id="card4" onclick="navigateTo('section4')">
+                    <div class="badge">4</div>
+                    <h4>🔍 Controlling the Bureaucracy</h4>
+                    <p>Understand rulemaking, congressional and presidential oversight, FOIA, and privatization efforts.</p>
+                    <div class="points">🌟 Up to 230 points</div>
+                </div>
+
+                <div class="section-card" id="card5" onclick="navigateTo('section5')">
+                    <div class="badge">5</div>
+                    <h4>📝 Key Terms & Review</h4>
+                    <p>Test your knowledge with comprehensive review questions and critical thinking exercises on the bureaucracy.</p>
+                    <div class="points">🌟 Up to 180 points</div>
+                </div>
+
+                <div class="section-card" id="card6" onclick="navigateTo('reportPage')">
+                    <div class="badge">📊</div>
+                    <h4>📋 Completion Report</h4>
+                    <p>View your final score, completed sections, and print your completion certificate.</p>
+                    <div class="points">🎯 View Your Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: Bureaucracy and the Evolution of Public Administration -->
+        <div id="section1" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📜 Section 1: Bureaucracy and the Evolution of Public Administration</h2>
+                <p class="subtitle">From the founding era through the modern civil service</p>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Introduction to Bureaucracy</h3>
+                <p>What does the word "bureaucracy" conjure in your mind? For many, it evokes inefficiency, corruption, red tape, and government overreach. For others, it triggers very different images—of professionalism, helpful and responsive service, and government management. Your experience with bureaucrats and the administration of government probably informs your response to the term. The ability of bureaucracy to inspire both revulsion and admiration is one of several features that make it a fascinating object of study.</p>
+                
+                <p>More than that, the many arms of the federal bureaucracy, often considered the <strong>fourth branch of government</strong>, are valuable components of the federal system. Without this administrative structure, staffed by nonelected workers who possess particular expertise to carry out their jobs, government could not function the way citizens need it to.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">🏛️ Bureaucracy</div>
+                    <div>An administrative group of nonelected officials charged with carrying out functions connected to a series of policies and programs.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">👥 Bureaucrats (Civil Servants)</div>
+                    <div>The individuals who work in the bureaucracy. They fill nonelected positions in government and make up the bureaucracy. They are hired, or sometimes appointed, for their expertise in carrying out the functions and programs of the government.</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">📋 Public Administration</div>
+                    <div>Both the implementation of public policy in government bureaucracies and the academic study that prepares civil servants for work in those organizations.</div>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-1', 30)">
+                <div class="card-prompt">🔎 Click to explore: What Does a Bureaucracy Do?</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Modern society relies on the effective functioning of government to provide public goods, enhance quality of life, and stimulate economic growth. The activities by which government achieves these functions include—but are not limited to—taxation, homeland security, immigration, foreign affairs, and education.</p>
+                    <p>The more society grows and the need for government services expands, the more challenging bureaucratic management and public administration becomes. The classic version of a bureaucracy is hierarchical and can be described by an organizational chart that outlines the separation of tasks and worker specialization while also establishing a clear unity of command by assigning each employee to only one boss.</p>
+                    <p>Moreover, the classic bureaucracy employs a <strong>division of labor</strong> under which work is separated into smaller tasks assigned to different people or groups. Bureaucracy is not unique to government but is also found in the private and nonprofit sectors.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📜 The Historical Roots of Bureaucracy</h3>
+                <p>Bureaucracy may seem like a modern invention, but bureaucrats have served in governments for nearly as long as governments have existed. Archaeologists and historians point to the sometimes elaborate bureaucratic systems of the ancient world, from the Egyptian scribes who recorded inventories to the biblical tax collectors who kept the wheels of government well greased.</p>
+                
+                <p>In Europe, government bureaucracy and its study emerged before democracies did. In contrast, in the United States, a democracy and the Constitution came first, followed by the development of national governmental organizations as needed, and then finally the study of U.S. government bureaucracies and public administration emerged.</p>
+
+                <p>Modern bureaucratic management emerged in the eighteenth century from Scottish economist <strong>Adam Smith's</strong> support for the efficiency of the division of labor and from Welsh reformer <strong>Robert Owen's</strong> belief that employees are vital instruments in the functioning of an organization. However, it was not until the mid-1800s that the German scholar <strong>Lorenz von Stein</strong> argued for public administration as both a theory and a practice since its knowledge is generated and evaluated through the process of gathering evidence. Credited with being the father of the science of public administration, von Stein opened the path of administrative enlightenment for other scholars in industrialized nations.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-2', 30)">
+                <div class="card-prompt">🔎 Click to explore: The Origins of the U.S. Bureaucracy</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> In the early U.S. republic, the bureaucracy was quite small. This is understandable since the American Revolution was largely a revolt against executive power and the British imperial administrative order.</p>
+                    <p>Nevertheless, while neither the word "bureaucracy" nor its synonyms appear in the text of the Constitution, the document does establish a few broad channels through which the emerging government could develop the necessary bureaucratic administration:</p>
+                    <ul>
+                        <li><strong>Article II, Section 2:</strong> Provides the president the power to appoint officers and department heads</li>
+                        <li><strong>Article II, Section 3:</strong> Empowers the president to see that the laws are "faithfully executed"</li>
+                        <li><strong>Article I, Section 8:</strong> Empowers Congress to establish a post office, build roads, regulate commerce, coin money, and regulate the value of money</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Washington's Early Bureaucracy</h3>
+                <p>Under President George Washington, the bureaucracy remained small enough to accomplish only the necessary tasks at hand. Washington's tenure saw the creation of:</p>
+                <ul>
+                    <li><strong>Department of State</strong> - to oversee international issues</li>
+                    <li><strong>Department of the Treasury</strong> - to control coinage</li>
+                    <li><strong>Department of War</strong> - to administer the armed forces</li>
+                </ul>
+                <p>The employees within these three departments, in addition to the growing postal service, constituted the major portion of the federal bureaucracy for the first three decades of the republic. Two developments, however, contributed to the growth of the bureaucracy well beyond these humble beginnings.</p>
+            </div>
+
+            <div class="content-block">
+                <h3>⚠️ The Rise of the Spoils System</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">🎯 Spoils System</div>
+                    <div>A system that rewards political loyalties or party support during elections with bureaucratic appointments after victory. As the saying goes, "to the victor go the spoils."</div>
+                </div>
+
+                <div class="definition-box">
+                    <div class="definition-term">🤝 Political Patronage</div>
+                    <div>The use of state resources to reward individuals for their political support.</div>
+                </div>
+
+                <p>The first development was the rise of centralized party politics in the 1820s. Under President <strong>Andrew Jackson</strong>, many thousands of party loyalists filled the ranks of the bureaucratic offices around the country. This was the beginning of the spoils system, in which political appointments were transformed into political patronage doled out by the president on the basis of party loyalty.</p>
+                
+                <p>It was assumed that government would work far more efficiently if the key federal posts were occupied by those already supportive of the president and his policies. This system served to enforce party loyalty by tying the livelihoods of the party faithful to the success or failure of the party. The number of federal posts the president sought to use as appropriate rewards for supporters swelled over the following decades.</p>
+
+                <p>The second development was <strong>industrialization</strong>, which in the late nineteenth century significantly increased both the population and economic size of the United States. These changes in turn brought about urban growth in a number of places across the East and Midwest. Railroads and telegraph lines drew the country together and increased the potential for federal centralization.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: The Fall of Political Patronage</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Patronage had the advantage of putting political loyalty to work by making the government quite responsive to the electorate and keeping election turnout robust because so much was at stake. However, the spoils system also had obvious disadvantages.</p>
+                    <p>It was a reciprocal system. Clients who wanted positions in the civil service pledged their political loyalty to a particular patron who then provided them with their desired positions. These arrangements directed the power and resources of government toward perpetuating the reward system.</p>
+                    <p>They replaced the system that early presidents like Thomas Jefferson had fostered, in which the country's intellectual and economic elite rose to the highest levels of the federal bureaucracy based on their relative merit. Criticism of the spoils system grew, especially in the mid-1870s, after numerous scandals rocked the administration of President Ulysses S. Grant.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 The Pendleton Act and Civil Service Reform</h3>
+                <p>As the negative aspects of political patronage continued to infect bureaucracy in the late nineteenth century, calls for civil service reform grew louder. Those supporting the patronage system held that their positions were well earned; those who condemned it argued that federal legislation was needed to ensure jobs were awarded on the basis of merit.</p>
+                
+                <p>Eventually, after <strong>President James Garfield had been assassinated by a disappointed office seeker</strong>, Congress responded to cries for reform with the <strong>Pendleton Act</strong>, also called the <strong>Civil Service Reform Act of 1883</strong>. The act established the <strong>Civil Service Commission</strong>, a centralized agency charged with ensuring that the federal government's selection, retention, and promotion practices were based on open, competitive examinations in a merit system.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card1-4', 30)">
+                <div class="card-prompt">🔎 Click to explore: Woodrow Wilson and Public Administration</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> As an active member and leader of the Progressive movement, President <strong>Woodrow Wilson</strong> is often considered the father of U.S. public administration. Born in Virginia and educated in history and political science at Johns Hopkins University, Wilson became a respected intellectual in his fields with an interest in public service and a profound sense of moralism.</p>
+                    <p>Wilson felt it was getting harder to run a constitutional government than to actually frame one. His stance was that "It is the object of administrative study to discover, first, what government can properly and successfully do, and, secondly, how it can do these proper things with the utmost efficiency..."</p>
+                    <p>Wilson advocated separating politics from administration by three key means:</p>
+                    <ul>
+                        <li>Making comparative analyses of public and private organizations</li>
+                        <li>Improving efficiency with business-like practices</li>
+                        <li>Increasing effectiveness through management and training</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📈 The Bureaucracy Comes of Age</h3>
+                <p>The late nineteenth and early twentieth centuries were a time of great bureaucratic growth in the United States:</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-date">1887</span>
+                        <div class="timeline-content">
+                            <strong>Interstate Commerce Commission</strong> - First regulatory agency
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">1913</span>
+                        <div class="timeline-content">
+                            <strong>Federal Reserve Board</strong> - Banking regulation
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">1914</span>
+                        <div class="timeline-content">
+                            <strong>Federal Trade Commission</strong> - Trade regulation
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">1920</span>
+                        <div class="timeline-content">
+                            <strong>Federal Power Commission</strong> - Energy regulation
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-date">1930s</span>
+                        <div class="timeline-content">
+                            <strong>New Deal Agencies:</strong> FDIC, NLRB, SEC, Civil Aeronautics Board, Social Security Administration
+                        </div>
+                    </div>
+                </div>
+                
+                <p>With the onset of the Great Depression in 1929, the United States faced record levels of unemployment and the associated fall into poverty, food shortages, and general desperation. President <strong>Franklin D. Roosevelt</strong> and the U.S. Congress rapidly reorganized the government's problem-solving efforts into a series of programs designed to revive the economy, stimulate economic development, and generate employment opportunities.</p>
+                
+                <p>By 1940, approximately <strong>700,000 U.S. workers</strong> were employed in the federal bureaucracy. Under President <strong>Lyndon B. Johnson</strong> in the 1960s, that number reached <strong>2.2 million</strong>, and the federal budget increased to $332 billion. This growth came as a result of what Johnson called his <strong>Great Society</strong> program, intended to use the power of government to relieve suffering and accomplish social good.</p>
+            </div>
+
+            <div class="milestone-box">
+                <h4>🏛️ Milestone: "The Nine Most Terrifying Words in the English Language"</h4>
+                <p>The two periods of increased bureaucratic growth in the United States, the 1930s and the 1960s, accomplished far more than expanding the size of government. They transformed politics in ways that continue to shape political debate today.</p>
+                <p>In his first and unsuccessful presidential bid in 1976, <strong>Ronald Reagan</strong>, a skilled politician and governor of California, stoked working-class anxieties by directing voters' discontent at the bureaucratic dragon he proposed to slay. Even as late as 1986, he continued to rail against the Washington bureaucracy, once declaring famously that <em>"the nine most terrifying words in the English language are: I'm from the government, and I'm here to help."</em></p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ During George Washington's administration, there were ________ cabinet positions.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 25)">Three</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">Four</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 25)">Five</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 25)">Six</div>
+                <div class="feedback-box" id="feedback-q1-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ The "spoils system" allocated political appointments on the basis of ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">Merit</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">Background</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">Party loyalty</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 25)">Specialized education</div>
+                <div class="feedback-box" id="feedback-q1-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Two recent periods of large-scale bureaucratic expansion were ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q1-3', 30)">The 1930s and the 1960s</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 30)">The 1920s and the 1980s</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 30)">The 1910s and the 1990s</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 30)">The 1930s and the 1950s</div>
+                <div class="feedback-box" id="feedback-q1-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(1); navigateTo('homePage')">
+                ✔ Complete Section 1 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 2: Toward a Merit-Based Civil Service -->
+        <div id="section2" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>⚖️ Section 2: Toward a Merit-Based Civil Service</h2>
+                <p class="subtitle">From patronage to professionalism in government employment</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 The Civil Service Commission</h3>
+                <p>While the federal bureaucracy grew by leaps and bounds during the twentieth century, it also underwent a very different evolution. Beginning with the Pendleton Act in the 1880s, the bureaucracy shifted away from the spoils system toward a <strong>merit system</strong>. The distinction between these two forms of bureaucracy is crucial.</p>
+
+                <div class="definition-box">
+                    <div class="definition-term">⚖️ Merit System</div>
+                    <div>A system of filling civil service positions by using competitive examinations to value experience and competence over political loyalties.</div>
+                </div>
+
+                <p>The <strong>Pendleton Act of 1883</strong> was not merely an important piece of reform legislation; it also established the foundations for the merit-based system that emerged in the decades that followed. It accomplished this through several important changes:</p>
+                
+                <ol>
+                    <li>The law attempted to <strong>reduce the impact of politics</strong> on the civil service sector by making it illegal to fire or otherwise punish government workers for strictly political reasons.</li>
+                    <li>The law <strong>raised the qualifications for employment</strong> in civil service positions by requiring applicants to pass exams designed to test their competence in important skill and knowledge areas.</li>
+                    <li>It allowed for the creation of the <strong>United States Civil Service Commission (CSC)</strong>, which was charged with enforcing the elements of the law.</li>
+                </ol>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-1', 30)">
+                <div class="card-prompt">🔎 Click to explore: The Civil Service Commission's Powers</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The CSC, as created by the Pendleton Act, was to be made up of three commissioners, only two of whom could be from the same political party. These commissioners were given important responsibilities:</p>
+                    <ul>
+                        <li>Developing and applying competitive examinations for civil service positions</li>
+                        <li>Ensuring that civil service appointments were apportioned among the several states based on population</li>
+                        <li>Seeing to it that no person in the public service is obligated to contribute to any political cause</li>
+                        <li>Ensuring that all civil servants wait for a probationary period before being appointed</li>
+                        <li>Making sure no appointee uses their official authority to affect political changes through coercion or influence</li>
+                    </ul>
+                    <p>Both Congress and the president oversaw the CSC by requiring the commission to supply an annual report on its activities first to the president and then to Congress.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>📈 Growth of Civil Service</h3>
+                <p>In 1883, civil servants under the control of the commission amounted to about <strong>10 percent</strong> of the entire government workforce. However, over the next few decades, this percentage increased dramatically. The effects on the government itself of both the law and the increase in the size of the civil service were huge.</p>
+                
+                <p>Presidents and representatives were no longer spending their days doling out or terminating appointments. Consequently, the many members of the civil service could no longer count on their political patrons for job security. One of the most important ways they did this was by creating civil service organizations such as the <strong>National Association of All Civil Service Employees</strong>, formed in 1896.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-2', 30)">
+                <div class="card-prompt">🔎 Click to explore: Key Civil Service Legislation</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Over the next few decades, civil servants gravitated to labor unions in much the same way that employees in the private sector did. Important legislation shaped the civil service:</p>
+                    <ul>
+                        <li><strong>Lloyd–La Follette Act of 1912</strong> - Removed many of the penalties civil servants faced when joining a union</li>
+                        <li><strong>Hatch Act of 1939</strong> (Political Activities Act) - Prohibits bureaucrats from actively engaging in political campaigns and from using their federal authority to influence nominations and elections</li>
+                        <li><strong>Civil Service Reform Act of 1978</strong> - Abolished the Civil Service Commission and created two new agencies:
+                            <ul>
+                                <li><strong>Office of Personnel Management (OPM)</strong> - Responsible for recruiting, interviewing, and testing potential government employees</li>
+                                <li><strong>Merit Systems Protection Board (MSPB)</strong> - Responsible for investigating charges of agency wrongdoing and hearing appeals when corrective actions are ordered</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🎯 Merit-Based Selection</h3>
+                <p>The general trend from the 1880s to today has been toward a civil service system that is increasingly based on merit. In this system, the large majority of jobs in individual bureaucracies are tied to the needs of the organization rather than to the political needs of the party bosses or political leaders.</p>
+                
+                <p>A general civil service position announcement will describe:</p>
+                <ul>
+                    <li>The government agency or office seeking an employee</li>
+                    <li>An explanation of what the agency or office does</li>
+                    <li>An explanation of what the position requires</li>
+                    <li>A list of the <strong>knowledge, skills, and abilities (KSAs)</strong> deemed especially important for fulfilling the role</li>
+                </ul>
+
+                <p>Many years ago, the merit system would have required all applicants to also test well on a civil service exam, as was stipulated by the Pendleton Act. This mandatory testing has since been abandoned, and now approximately <strong>eighty-five percent</strong> of all federal government jobs are filled through an examination of the applicant's education, background, knowledge, skills, and abilities.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card2-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: Categories of Federal Employment</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> There are three general categories of work in the federal government:</p>
+                    <ul>
+                        <li><strong>Competitive Service:</strong> Closely regulated by Congress through the Office of Personnel Management to ensure jobs are filled fairly. Qualifications include work history, education, and grades on civil service exams.</li>
+                        <li><strong>Excepted Service:</strong> Exempt from normal hiring restrictions. Either require a far more rigorous hiring process (like the CIA) or call for very specific skills (like the Nuclear Regulatory Commission). Employers can set their own pay rates and requirements.</li>
+                        <li><strong>Senior Executive Service:</strong> Filled by men and women who can demonstrate experience in executive positions. These leadership positions require demonstrating Executive Core Qualifications (ECQs): leading change, being results-driven, demonstrating business acumen, and building better coalitions.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>💰 The General Schedule Pay System</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📊 Pay Schedule</div>
+                    <div>A chart that shows salary ranges for different levels (grades) of positions vertically and for different ranks (steps) of seniority horizontally.</div>
+                </div>
+
+                <p>Civil servants receive pay based on the <strong>U.S. Federal General Schedule</strong>. The modern General Schedule includes <strong>fifteen grades</strong>, each with <strong>ten steps</strong>:</p>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Grade Level</th>
+                        <th>Requirements</th>
+                        <th>Pay Range (2024)</th>
+                    </tr>
+                    <tr>
+                        <td>GS-1 to GS-2</td>
+                        <td>Very little education, experience, and skills</td>
+                        <td>$22,360 - $31,638</td>
+                    </tr>
+                    <tr>
+                        <td>GS-3 to GS-7</td>
+                        <td>Ascending levels of education</td>
+                        <td>$27,434 - $55,486</td>
+                    </tr>
+                    <tr>
+                        <td>GS-8 to GS-12</td>
+                        <td>Higher education and experience</td>
+                        <td>$47,265 - $98,422</td>
+                    </tr>
+                    <tr>
+                        <td>GS-13 to GS-15</td>
+                        <td>Specific, specialized experience and education</td>
+                        <td>$90,025 - $162,672</td>
+                    </tr>
+                </table>
+
+                <p>When hired into a position at a specific grade, employees are typically paid at the first step of that grade. Over time, assuming they receive satisfactory assessment ratings, they will progress through the various levels. Many careers allow for the civil servants to ascend through the grades as well.</p>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>🔑 Key Takeaway: Benefits and Drawbacks of the Merit System</h4>
+                <p>The intention behind these hiring practices and structured pay systems is to create an environment in which those most likely to succeed are in fact those who are ultimately appointed. These systems almost naturally result in organizations composed of experts who dedicate their lives to their work and their agency.</p>
+                <p><strong>Drawbacks:</strong></p>
+                <ul>
+                    <li>Permanent employees can become too independent of elected leaders</li>
+                    <li>While a degree of separation is intentional and desired, too much can result in bureaucracies that are insufficiently responsive to political change</li>
+                    <li>The accepted expertise of individual bureaucrats can sometimes hide their own chauvinistic impulses</li>
+                    <li>The merit system encouraged bureaucrats to turn to each other and their bureaucracies for support and stability, creating potential for bureaucrats to steer actions toward their own preferences</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ The Civil Service Commission was created by the ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">Pendleton Act of 1883</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 25)">Lloyd–La Follette Act of 1912</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 25)">Hatch Act of 1939</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 25)">Political Activities Act of 1939</div>
+                <div class="feedback-box" id="feedback-q2-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ The Civil Service Reform Act of 1978 created the Office of Personnel Management and the ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Civil Service Commission</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">Merit Systems Protection Board</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">Spoils system</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 25)">General Schedule</div>
+                <div class="feedback-box" id="feedback-q2-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What act prohibits bureaucrats from actively engaging in political campaigns?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 30)">Pendleton Act</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 30)">Lloyd-La Follette Act</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 30)">Hatch Act of 1939</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 30)">Civil Service Reform Act</div>
+                <div class="feedback-box" id="feedback-q2-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(2); navigateTo('homePage')">
+                ✔ Complete Section 2 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 3: Understanding Bureaucracies and their Types -->
+        <div id="section3" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🏢 Section 3: Understanding Bureaucracies and their Types</h2>
+                <p class="subtitle">Models of bureaucracy and the four types of federal organizations</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📊 Models of Bureaucracy</h3>
+                <p>Turning a spoils system bureaucracy into a merit-based civil service, while desirable, comes with a number of different consequences. The patronage system tied the livelihoods of civil service workers to their party loyalty and discipline. Severing these ties, as has occurred in the United States over the last century and a half, has transformed the way bureaucracies operate.</p>
+                
+                <p>Without the patronage network, bureaucracies form their own motivations. These motivations, sociologists have discovered, are designed to benefit and perpetuate the bureaucracies themselves. Bureaucracies are complex institutions designed to accomplish specific tasks. This complexity, and the fact that they are organizations composed of human beings, can make it challenging for us to understand how bureaucracies work.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-1', 35)">
+                <div class="card-prompt">🔎 Click to explore: The Weberian Model</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> The classic model of bureaucracy is typically called the <strong>ideal Weberian model</strong>, and it was developed by <strong>Max Weber</strong>, an early German sociologist.</p>
+                    <p>Weber argued that the increasing complexity of life would simultaneously increase the demands of citizens for government services. Therefore, the ideal type of bureaucracy was one in which agencies are:</p>
+                    <ul>
+                        <li><strong>Apolitical</strong> - separate from partisan influences</li>
+                        <li><strong>Hierarchically organized</strong> - clear chain of command</li>
+                        <li><strong>Governed by formal procedures</strong> - consistent rules for all</li>
+                    </ul>
+                    <p>Furthermore, specialized bureaucrats would be better able to solve problems through logical reasoning. Such efforts would eliminate entrenched patronage, stop problematic decision-making by those in charge, provide a system for managing repetitive tasks, impose order and efficiency, create a clear understanding of services provided, reduce arbitrariness, ensure accountability, and limit discretion.</p>
+                    <p>For Weber, the bureaucracy was not only necessary but also a <strong>positive human development</strong>.</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-2', 35)">
+                <div class="card-prompt">🔎 Click to explore: The Acquisitive Model</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> Later sociologists have not always looked so favorably upon bureaucracies. One alternate model is called the <strong>acquisitive model of bureaucracy</strong>.</p>
+                    <p>The acquisitive model proposes that bureaucracies are <strong>naturally competitive and power-hungry</strong>. This means bureaucrats, especially at the highest levels, recognize that limited resources are available to feed bureaucracies, so they will work to enhance the status of their own bureaucracy to the detriment of others.</p>
+                    <p>This effort can sometimes take the form of merely emphasizing to Congress the value of their bureaucratic task, but it also means the bureaucracy will attempt to <strong>maximize its budget</strong> by depleting all its allotted resources each year. This ploy makes it more difficult for legislators to cut the bureaucracy's future budget—a strategy that succeeds at the expense of thrift.</p>
+                    <p>In this way, the bureaucracy will eventually grow far beyond what is necessary and create <strong>bureaucratic waste</strong> that would otherwise be spent more efficiently among other bureaucracies.</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-3', 35)">
+                <div class="card-prompt">🔎 Click to explore: The Monopolistic Model</div>
+                <div class="card-content">
+                    <p><strong>+35 points!</strong> Other theorists have come to the conclusion that the extent to which bureaucracies compete for scarce resources is not what provides the greatest insight into how a bureaucracy functions. Rather, it is the <strong>absence of competition</strong>. The model that emerged from this observation is the <strong>monopolistic model</strong>.</p>
+                    <p>Proponents of the monopolistic model recognize the similarities between a bureaucracy like the IRS and a private monopoly like a regional power company that has no competitors. Such organizations are frequently criticized for <strong>waste, poor service, and a low level of client responsiveness</strong>.</p>
+                    <p>Consider the Bureau of Consular Affairs (BCA), the federal bureaucracy charged with issuing passports. There is no other organization from which a U.S. citizen can legitimately request and receive a passport, a process that normally takes ten to twelve weeks. Thus there is <strong>no reason for the BCA to become more efficient or more responsive</strong>.</p>
+                    <p>Apart from rare exceptions like intelligence agencies that compete for presidential favor, bureaucracies have little reason to adopt cost-saving or performance measurement systems since they are neither rewarded for efficiency nor penalized for inefficiency.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Types of Bureaucratic Organizations</h3>
+                <p>A bureaucracy is a particular government unit established to accomplish a specific set of goals and objectives as authorized by a legislative body. In the United States, the federal bureaucracy enjoys a great degree of autonomy compared to those of other countries. This is in part due to the sheer size of the federal budget, approximately <strong>$4.48 trillion as of 2019</strong>.</p>
+                
+                <p>In the U.S. government, there are <strong>four general types</strong> of bureaucratic organizations:</p>
+            </div>
+
+            <div class="content-block">
+                <h4>1️⃣ Cabinet Departments</h4>
+                <p>There are currently <strong>fifteen cabinet departments</strong> in the federal government. Cabinet departments are major executive offices that are <strong>directly accountable to the president</strong>. They include the Departments of State, Defense, Education, Treasury, and several others.</p>
+                
+                <p>Each cabinet department has a head called a <strong>secretary</strong>, appointed by the president and confirmed by the Senate. These secretaries report directly to the president and oversee a huge network of offices and agencies that make up the department. The Department of Justice is structured differently—it has an <strong>attorney general</strong>, an associate attorney general, and various bureau and division heads.</p>
+
+                <table class="comparison-table">
+                    <tr>
+                        <th>Department</th>
+                        <th>Year Created</th>
+                        <th>Primary Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td>1789</td>
+                        <td>Oversees foreign policy and international issues</td>
+                    </tr>
+                    <tr>
+                        <td>Treasury</td>
+                        <td>1789</td>
+                        <td>Prints currency, collects taxes, manages debt</td>
+                    </tr>
+                    <tr>
+                        <td>Defense</td>
+                        <td>1947</td>
+                        <td>Oversees the U.S. armed forces</td>
+                    </tr>
+                    <tr>
+                        <td>Justice</td>
+                        <td>1870</td>
+                        <td>Enforces U.S. laws, public safety, crime prevention</td>
+                    </tr>
+                    <tr>
+                        <td>Homeland Security</td>
+                        <td>2002</td>
+                        <td>Protects U.S. territory from natural and human threats</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card3-4', 30)">
+                <div class="card-prompt">🔎 Click to explore: Independent Executive Agencies</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Like cabinet departments, <strong>independent executive agencies</strong> report directly to the president, with heads appointed by the president. Unlike the larger cabinet departments, however, independent agencies are assigned far more focused tasks.</p>
+                    <p>These agencies are considered <strong>independent</strong> because they are not subject to the regulatory authority of any specific department. They perform vital functions and are a major part of the bureaucratic landscape. Some prominent examples:</p>
+                    <ul>
+                        <li><strong>Central Intelligence Agency (CIA)</strong> - Collects and manages intelligence vital to national interests</li>
+                        <li><strong>National Aeronautics and Space Administration (NASA)</strong> - Develops technological innovation for space exploration</li>
+                        <li><strong>Environmental Protection Agency (EPA)</strong> - Enforces laws aimed at protecting environmental sustainability</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h4>3️⃣ Regulatory Agencies</h4>
+                <p>An important subset of the independent agency category is the <strong>regulatory agency</strong>. Regulatory agencies emerged in the late nineteenth century as a product of the progressive push to control the benefits and costs of industrialization.</p>
+                
+                <p>The first regulatory agency was the <strong>Interstate Commerce Commission (ICC)</strong>, charged with regulating the railroad—that most identifiable and prominent symbol of nineteenth-century industrialism. Other regulatory agencies, such as the Commodity Futures Trading Commission, the Federal Communications Commission, and the Securities and Exchange Commission (SEC), have largely been created in the image of the ICC.</p>
+                
+                <p>These independent regulatory agencies <strong>cannot be influenced as readily by partisan politics</strong> as typical agencies and can therefore develop a good deal of power and authority.</p>
+            </div>
+
+            <div class="content-block">
+                <h4>4️⃣ Government Corporations</h4>
+                
+                <div class="definition-box">
+                    <div class="definition-term">🏢 Government Corporation</div>
+                    <div>A corporation that fulfills an important public interest and is therefore overseen by government authorities to a much larger degree than private businesses. They exist because the services they provide are partly subject to market forces and tend to generate enough profit to be self-sustaining, but they also fulfill a vital service the government has an interest in maintaining.</div>
+                </div>
+
+                <p>Unlike a private corporation, a government corporation does not have stockholders. Instead, it has a board of directors and managers. Whereas a private corporation's profits are distributed as dividends, a government corporation's profits are dedicated to perpetuating the enterprise. Unlike private businesses, which pay taxes on their profits, government corporations are exempt from taxes.</p>
+                
+                <p>Examples include:</p>
+                <ul>
+                    <li><strong>U.S. Postal Service</strong> - Once a cabinet department, transformed into a government corporation in the early 1970s</li>
+                    <li><strong>Amtrak (National Railroad Passenger Corporation)</strong> - Government's response to the decline in passenger rail travel in the 1950s and 1960s</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 The Role of Bureaucrats</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">📜 Red Tape</div>
+                    <div>The mechanisms, procedures, and rules that must be followed to get something done. Citizens frequently criticize the seemingly endless networks of red tape they must navigate to effectively utilize bureaucratic services, although these devices are really meant to ensure the bureaucracies function as intended.</div>
+                </div>
+
+                <p>Bureaucrats must implement and administer a wide range of policies and programs as established by congressional acts or presidential orders. Depending upon the agency's mission, a bureaucrat's roles and responsibilities vary greatly, from regulating corporate business and protecting the environment to printing money and purchasing office supplies.</p>
+                
+                <p>A <strong>regulation</strong> is a rule that permits government to restrict or prohibit certain behaviors among individuals and corporations. Bureaucratic rulemaking is a complex process that typically creates procedural guidelines, or more formally, <strong>standard operating procedures</strong>. These are the rules that lower-level bureaucrats must abide by regardless of the situations they face.</p>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which describes the ideal bureaucracy according to Max Weber?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">An apolitical, hierarchically organized agency</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 25)">An organization that competes with other bureaucracies for funding</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 25)">A wasteful, poorly organized agency</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 25)">An agency that shows clear electoral responsiveness</div>
+                <div class="feedback-box" id="feedback-q3-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which of the following models of bureaucracy best accounts for the way bureaucracies tend to push Congress for more funding each year?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">The Weberian model</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">The acquisitive model</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">The monopolistic model</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 25)">The ideal model</div>
+                <div class="feedback-box" id="feedback-q3-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ An example of a government corporation is ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 30)">NASA</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 30)">The State Department</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q3-3', 30)">Amtrak</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 30)">The CIA</div>
+                <div class="feedback-box" id="feedback-q3-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(3); navigateTo('homePage')">
+                ✔ Complete Section 3 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 4: Controlling the Bureaucracy -->
+        <div id="section4" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>🔍 Section 4: Controlling the Bureaucracy</h2>
+                <p class="subtitle">Oversight, rulemaking, and accountability in public administration</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📋 Bureaucratic Rulemaking</h3>
+                <p>Historically, at least since the end of the spoils system, elected leaders have struggled to maintain control over their bureaucracies. This challenge arises partly due to the fact that elected leaders tend to have partisan motivations, while bureaucracies are designed to avoid partisanship.</p>
+                
+                <p>Once the particulars of implementation have been spelled out in the legislation authorizing a new program, bureaucracies move to enact it. When they encounter grey areas, many follow the federal <strong>negotiated rulemaking process</strong> to propose a solution—detailing how particular new federal policies, regulations, and/or programs will be implemented in the agencies. Congress cannot possibly legislate on that level of detail, so the experts in the bureaucracy do so.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-1', 30)">
+                <div class="card-prompt">🔎 Click to explore: Negotiated Rulemaking</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong></p>
+                    
+                    <div class="definition-box">
+                        <div class="definition-term">📋 Negotiated Rulemaking</div>
+                        <div>A rulemaking process in which neutral advisors convene a committee of those who have vested interests in the proposed rules and help the committee reach a consensus on them.</div>
+                    </div>
+                    
+                    <p><strong>Notice-and-Comment Rulemaking</strong> (the traditional approach) required agencies attempting to adopt rules to publish their proposal in the <strong>Federal Register</strong>, the official publication for all federal rules and proposed rules. But rather than encouraging productive interchange of ideas, the comment period had the effect of creating an adversarial environment in which different groups tended to make extreme arguments.</p>
+                    
+                    <p><strong>Negotiated Rulemaking</strong> (or "reg-neg") was codified in the Negotiated Rulemaking Acts of 1990 and 1996. In this process:</p>
+                    <ul>
+                        <li>Neutral advisors (convenors) put together a committee of those with vested interests</li>
+                        <li>The convenors devise procedures for reaching consensus</li>
+                        <li>The committee uses these procedures to discuss the merits and demerits of proposals</li>
+                        <li>With the help of neutral mediators, the committee eventually reaches general consensus</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Congressional Oversight</h3>
+                <p>Congress is particularly empowered to apply oversight of the federal bureaucracy because of its power to <strong>control funding</strong> and <strong>approve presidential appointments</strong>. The various bureaucratic agencies submit annual summaries of their activities and budgets for the following year, and committees and subcommittees in both chambers regularly hold hearings to question the leaders of the various bureaucracies.</p>
+                
+                <p>These hearings are often tame, practical, fact-finding missions. Occasionally, however, when a particular bureaucracy has committed or contributed to a blunder of some magnitude, the hearings can become quite animated and testy.</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-2', 30)">
+                <div class="card-prompt">🔎 Click to explore: The Government Accountability Office</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> Perhaps Congress's most powerful oversight tool is the <strong>Government Accountability Office (GAO)</strong>. The GAO is an agency that provides Congress, its committees, and the heads of the executive agencies with auditing, evaluation, and investigative services.</p>
+                    <p>It is designed to operate in a <strong>fact-based and nonpartisan manner</strong> to deliver important oversight information where and when it is needed. The GAO's role is to produce reports, mostly at the insistence of Congress.</p>
+                    <p>In the approximately <strong>nine hundred reports</strong> it completes per year, the GAO sends Congress information about budgetary issues for everything from education, health care, and housing to defense, homeland security, and natural resource management.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🏛️ Presidential Oversight</h3>
+                <p>Apart from Congress, the president also executes oversight over the extensive federal bureaucracy through a number of different avenues:</p>
+                
+                <ul>
+                    <li><strong>Appointment Power:</strong> The president controls the bureaucracies by appointing the heads of the fifteen cabinet departments and of many independent executive agencies. These appointees serve at the pleasure of the president and carry out initiatives on behalf of the president.</li>
+                    <li><strong>Office of Management and Budget (OMB):</strong> The primary responsibility of the OMB is to produce the president's annual budget. With this comes several other responsibilities:
+                        <ul>
+                            <li>Reporting to the president on actions of executive departments and agencies</li>
+                            <li>Overseeing the performance levels of the bureaucracies</li>
+                            <li>Coordinating and reviewing federal regulations for the president</li>
+                            <li>Delivering executive orders and presidential directives to agency heads</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>👥 Citizen Bureaucratic Oversight</h3>
+                <p>A number of laws passed in the decades between the end of the Second World War and the late 1970s have created a framework through which citizens can exercise their own bureaucratic oversight. The two most important laws are:</p>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-3', 30)">
+                <div class="card-prompt">🔎 Click to explore: Freedom of Information Act (FOIA)</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The <strong>Freedom of Information Act of 1966 (FOIA)</strong> emerged in the early years of the Johnson presidency as the United States was conducting secret Cold War missions around the world, becoming increasingly mired in Vietnam, and questions swirled around the Kennedy assassination.</p>
+                    <p>FOIA provides <strong>journalists and the general public the right to request records</strong> from various federal agencies. These agencies are required by law to release that information unless it qualifies for one of <strong>nine exemptions</strong> citing sensitive issues related to:</p>
+                    <ul>
+                        <li>National security or foreign policy</li>
+                        <li>Internal personnel rules</li>
+                        <li>Trade secrets</li>
+                        <li>Violations of personnel privacy rights</li>
+                        <li>Law enforcement information</li>
+                        <li>Oil well data</li>
+                    </ul>
+                    <p>In fiscal year 2020, the government received <strong>772,869 FOIA requests</strong>, with just three departments—Defense, Homeland Security, and Justice—accounting for more than half those queries.</p>
+                </div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card4-4', 30)">
+                <div class="card-prompt">🔎 Click to explore: Government in Sunshine Act</div>
+                <div class="card-content">
+                    <p><strong>+30 points!</strong> The <strong>Government in Sunshine Act of 1976</strong> is different from FOIA in that it requires all multi-headed federal agencies to hold their meetings in a <strong>public forum on a regular basis</strong>.</p>
+                    <p>The name "Sunshine Act" is derived from the old adage that <em>"sunlight is the best disinfectant"</em>—the implication being that governmental and bureaucratic corruption thrive in secrecy but shrink when exposed to the light of public scrutiny.</p>
+                    <p>The act defines a meeting as any gathering of agency members in person or by phone, whether in a formal or informal manner. Like FOIA, the Sunshine Act allows for exceptions, including meetings where classified information is discussed, proprietary data has been submitted for review, employee privacy matters are discussed, or criminal matters are brought up.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>💼 Government Privatization</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">🏢 Privatization</div>
+                    <div>Measures that incorporate the market forces of the private sector into the function of government to varying degrees.</div>
+                </div>
+
+                <p>When those in government speak of privatization, they are often referring to one of a host of different models:</p>
+                
+                <ul>
+                    <li><strong>Contracting:</strong> Using contractors to supply goods and/or services</li>
+                    <li><strong>Vouchers:</strong> Distributing government vouchers with which citizens can purchase formerly government-controlled services on the private market</li>
+                    <li><strong>Grants:</strong> Supplying government grants to private organizations to administer government programs</li>
+                    <li><strong>Public-Private Partnerships:</strong> Collaborating with a private entity to finance a government program</li>
+                    <li><strong>Divestiture (Full Privatization):</strong> Government services are transferred, usually through sale, from government bureaucratic control into an entirely market-based, private environment</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h3>🔔 Whistleblowers</h3>
+                
+                <div class="definition-box">
+                    <div class="definition-term">🔔 Whistleblower</div>
+                    <div>A person who publicizes misdeeds committed within a bureaucracy or other organization.</div>
+                </div>
+
+                <p>One of the most important forms of bureaucratic oversight comes from inside the bureaucracy itself. Those within are in the best position to recognize and report on misconduct. But bureaucracies tend to jealously guard their reputations and are generally resistant to criticism from without and from within.</p>
+                
+                <p>When Congress drafted the <strong>Civil Service Reform Act of 1978</strong>, it specifically included rights for federal whistleblowers and set up protection from reprisals. The act's <strong>Merit Systems Protection Board</strong> is a quasi-juridical institutional board that hears complaints, conducts investigations into possible abuses, and institutes protections for bureaucrats who speak out.</p>
+                
+                <p>Additional protections include:</p>
+                <ul>
+                    <li><strong>Whistleblower Protection Act of 1989</strong></li>
+                    <li><strong>Whistleblower Protection Enhancement Act of 2012</strong></li>
+                </ul>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ The Freedom of Information Act of 1966 helps citizens exercise oversight over the bureaucracy by ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 25)">Empowering Congress</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">Opening government records to citizen scrutiny</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 25)">Requiring annual evaluations by the president</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 25)">Forcing agencies to hold public meetings</div>
+                <div class="feedback-box" id="feedback-q4-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ When reformers speak of bureaucratic privatization, they mean all the following processes EXCEPT ________.</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">Divestiture</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">Government grants</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">Whistleblowing</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 25)">Third-party financing</div>
+                <div class="feedback-box" id="feedback-q4-2"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ Which law requires multi-headed federal agencies to hold their meetings in public?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 30)">Freedom of Information Act</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-3', 30)">Government in Sunshine Act</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 30)">Whistleblower Protection Act</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 30)">Pendleton Act</div>
+                <div class="feedback-box" id="feedback-q4-3"></div>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(4); navigateTo('homePage')">
+                ✔ Complete Section 4 & Return Home
+            </button>
+        </div>
+
+        <!-- SECTION 5: Key Terms & Review -->
+        <div id="section5" class="page">
+            <button class="back-button" onclick="navigateTo('homePage')">← Back to Home</button>
+            
+            <div class="section-header">
+                <h2>📝 Section 5: Key Terms & Review</h2>
+                <p class="subtitle">Comprehensive review and critical thinking questions</p>
+            </div>
+
+            <div class="content-block">
+                <h3>📚 Key Terms Summary</h3>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Term</th>
+                        <th>Definition</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Bureaucracy</strong></td>
+                        <td>An administrative group of nonelected officials charged with carrying out functions connected to a series of policies and programs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bureaucrats/Civil Servants</strong></td>
+                        <td>The individuals who fill nonelected positions in government and make up the bureaucracy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Merit System</strong></td>
+                        <td>A system of filling civil service positions by using competitive examinations to value experience and competence over political loyalties</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spoils System</strong></td>
+                        <td>A system that rewards political loyalties or party support during elections with bureaucratic appointments after victory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Patronage</strong></td>
+                        <td>The use of government positions to reward individuals for their political support</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Public Administration</strong></td>
+                        <td>The implementation of public policy as well as the academic study that prepares civil servants to work in government</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pay Schedule</strong></td>
+                        <td>A chart that shows salary ranges for different levels of positions vertically and for different ranks of seniority horizontally</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Government Corporation</strong></td>
+                        <td>A corporation that fulfills an important public interest and is overseen by government authorities to a much larger degree than private businesses</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Red Tape</strong></td>
+                        <td>The mechanisms, procedures, and rules that must be followed to get something done</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Negotiated Rulemaking</strong></td>
+                        <td>A rulemaking process in which neutral advisors convene a committee of those with vested interests in the proposed rules and help them reach consensus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Privatization</strong></td>
+                        <td>Measures that incorporate the market forces of the private sector into the function of government to varying degrees</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Whistleblower</strong></td>
+                        <td>A person who publicizes misdeeds committed within a bureaucracy or other organization</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-1', 25)">
+                <div class="card-prompt">🔎 Click to explore: Chapter Summary</div>
+                <div class="card-content">
+                    <p><strong>+25 points!</strong></p>
+                    <h4>15.1 Bureaucracy and the Evolution of Public Administration</h4>
+                    <p>During the post-Jacksonian era of the nineteenth century, the common charge against the bureaucracy was that it was overly political and corrupt. This changed in the 1880s as the United States began to create a modern civil service. The civil service grew once again in Franklin D. Roosevelt's administration as he expanded government programs to combat the effects of the Great Depression. The most recent criticisms of the federal bureaucracy, notably under Ronald Reagan, emerged following the second great expansion of the federal government under Lyndon B Johnson in the 1960s.</p>
+                    
+                    <h4>15.2 Toward a Merit-Based Civil Service</h4>
+                    <p>The merit-based system of filling jobs in the government bureaucracy elevates ability and accountability over political loyalties. Unfortunately, this system also has its downsides. The most common complaint is that the bureaucrats are no longer as responsive to elected public officials as they once had been. This, however, may be a necessary tradeoff for the level of efficiency and specialization necessary in the modern world.</p>
+                    
+                    <h4>15.3 Understanding Bureaucracies and their Types</h4>
+                    <p>To understand why some bureaucracies act the way they do, sociologists have developed a handful of models. With the exception of the ideal bureaucracy described by Max Weber, these models see bureaucracies as self-serving. One of the ways elected officials have tried to grapple with this problem is by designing different types of bureaucracies with different functions: cabinet departments, independent regulatory agencies, independent executive agencies, and government corporations.</p>
+                    
+                    <h4>15.4 Controlling the Bureaucracy</h4>
+                    <p>To reduce the intra-institutional disagreements the traditional rulemaking process seemed to bring, the negotiated rulemaking process was designed to encourage consensus. Both Congress and the president exercise direct oversight over the bureaucracy by holding hearings, making appointments, and setting budget allowances. Citizens exercise their oversight powers through their use of the Freedom of Information Act (FOIA) and by voting. Finally, bureaucrats also exercise oversight over their own institutions by using the channels carved out for whistleblowers.</p>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3>🤔 Critical Thinking Questions</h3>
+                
+                <div class="interactive-card" onclick="revealCard(this, 'card5-2', 25)">
+                    <div class="card-prompt">💭 Critical Thinking #1: The Fourth Branch of Government</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong></p>
+                        <p><strong>Question:</strong> What concerns might arise when Congress delegates decision-making authority to unelected leaders, sometimes called the fourth branch of government?</p>
+                        <p><strong>Consider:</strong></p>
+                        <ul>
+                            <li>Democratic accountability - bureaucrats are not elected</li>
+                            <li>Expertise vs. representation in policymaking</li>
+                            <li>The potential for "agency capture" by special interests</li>
+                            <li>The constitutional implications of delegating legislative authority</li>
+                            <li>The balance between efficiency and democratic control</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card5-3', 25)">
+                    <div class="card-prompt">💭 Critical Thinking #2: Models of Bureaucracy</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong></p>
+                        <p><strong>Question:</strong> Which model of bureaucracy best explains the way the government currently operates? Why?</p>
+                        <p><strong>Consider:</strong></p>
+                        <ul>
+                            <li>The Weberian model emphasizes hierarchy, rules, and professionalism</li>
+                            <li>The acquisitive model suggests bureaucracies seek to expand their budgets and power</li>
+                            <li>The monopolistic model highlights inefficiencies from lack of competition</li>
+                            <li>Different agencies may fit different models</li>
+                            <li>External factors like political environment and public pressure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="interactive-card" onclick="revealCard(this, 'card5-4', 25)">
+                    <div class="card-prompt">💭 Critical Thinking #3: Whistleblower Protection</div>
+                    <div class="card-content">
+                        <p><strong>+25 points!</strong></p>
+                        <p><strong>Question:</strong> Do you think Congress and the president have done enough to protect bureaucratic whistleblowers? Why or why not?</p>
+                        <p><strong>Consider:</strong></p>
+                        <ul>
+                            <li>Existing protections: Whistleblower Protection Act, Merit Systems Protection Board</li>
+                            <li>High-profile cases where whistleblowers faced retaliation</li>
+                            <li>The chilling effect on potential whistleblowers</li>
+                            <li>Balance between protecting legitimate disclosures and preventing leaks of classified information</li>
+                            <li>The role of whistleblowers in exposing waste, fraud, and abuse</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What was a primary underlying reason for the emergence of the spoils system?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 25)">It was required by the Constitution</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 25)">Party loyalty and making government responsive to election winners</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 25)">To ensure only qualified people filled positions</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 25)">European bureaucratic traditions</div>
+                <div class="feedback-box" id="feedback-q5-1"></div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">❓ What is a primary advantage of negotiated rulemaking over traditional notice-and-comment rulemaking?</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 30)">It is faster</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 30)">It encourages consensus and reduces adversarial conflict</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 30)">It eliminates public input</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 30)">It requires fewer agency resources</div>
+                <div class="feedback-box" id="feedback-q5-2"></div>
+            </div>
+
+            <div class="key-concept-box">
+                <h4>🔑 Final Takeaway</h4>
+                <p>The federal bureaucracy, sometimes called the "fourth branch of government," is essential to implementing the policies and programs enacted by Congress and the president. While the spoils system once dominated federal employment, the merit system established by the Pendleton Act and subsequent reforms has created a more professional civil service.</p>
+                <p>Understanding how bureaucracies function—through models like Weber's ideal type, the acquisitive model, and the monopolistic model—helps us appreciate both their strengths and weaknesses. Various oversight mechanisms, including congressional hearings, the GAO, presidential appointments, FOIA, and whistleblower protections, work to ensure bureaucratic accountability in our democratic system.</p>
+            </div>
+
+            <button class="complete-section-btn" onclick="completeSection(5); navigateTo('homePage')">
+                ✔ Complete Section 5 & Return Home
+            </button>
+        </div>
+
+        <!-- REPORT PAGE -->
+        <div id="reportPage" class="page">
+            <div class="report-container">
+                <div class="report-header-bar">
+                    <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
+                    <div class="report-scores">
+                        <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
+                        <span class="score-badge">✔ <span id="reportPercentage">0</span>%</span>
+                        <span class="score-badge">📊 <span id="reportCompletion">0</span>%</span>
+                    </div>
+                </div>
+
+                <div class="report-content">
+                    <button class="report-back-button no-print" onclick="navigateTo('homePage')">← Back to Home</button>
+                    
+                    <div class="report-main">
+                        <h2 class="report-title">TCC Trailblazer Trek - Completion Report</h2>
+                        <p class="report-subtitle">Chapter 15: The Bureaucracy</p>
+                        
+                        <div class="report-grade-display" id="gradeDisplay">
+                            <div class="letter-grade" id="letterGrade">A</div>
+                            <div class="grade-percentage" id="gradePercentage">95%</div>
+                        </div>
+
+                        <div class="report-sections">
+                            <div class="student-info-section">
+                                <h3>📋 Student Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Name:</span>
+                                    <span id="reportStudentName">Anonymous</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date:</span>
+                                    <span id="reportCompletionDate">-</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Time:</span>
+                                    <span id="reportTime">-</span>
+                                </div>
+                            </div>
+
+                            <div class="performance-section">
+                                <h3>📊 Section Performance</h3>
+                                <table class="performance-table">
+                                    <tr>
+                                        <td>Section 1: Evolution of Public Administration</td>
+                                        <td id="status1">⭕</td>
+                                        <td id="points1">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 2: Merit-Based Civil Service</td>
+                                        <td id="status2">⭕</td>
+                                        <td id="points2">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 3: Understanding Bureaucracies</td>
+                                        <td id="status3">⭕</td>
+                                        <td id="points3">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 4: Controlling the Bureaucracy</td>
+                                        <td id="status4">⭕</td>
+                                        <td id="points4">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section 5: Key Terms & Review</td>
+                                        <td id="status5">⭕</td>
+                                        <td id="points5">0</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricPoints">0</div>
+                                <div class="metric-label">Points Earned</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricSections">0/5</div>
+                                <div class="metric-label">Sections</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricQuiz">0%</div>
+                                <div class="metric-label">Quiz Score</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="metricEngagement">0%</div>
+                                <div class="metric-label">Engagement</div>
+                            </div>
+                        </div>
+
+                        <div class="report-footer">
+                            <p class="instructor-note">
+                                <strong>Instructor Note:</strong> This report documents the student's completion of Chapter 15: The Bureaucracy interactive learning module. The score reflects engagement with interactive reveal cards, knowledge check questions, and section completion. This module covers the evolution of public administration, the merit-based civil service, models and types of bureaucracies, and bureaucratic oversight and control mechanisms.
+                            </p>
+                            <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            score: 0,
+            level: 'Explorer',
+            studentName: '',
+            completedSections: new Set(),
+            earnedPoints: new Set(),
+            answeredQuestions: new Set()
+        };
+
+        // Level thresholds
+        const levels = {
+            0: 'Explorer',
+            200: 'Scholar',
+            400: 'Expert',
+            600: 'Master',
+            800: 'Champion',
+            1000: 'Bureaucracy Sage'
+        };
+
+        // Total possible points
+        const maxPoints = 1100;
+
+        // Navigation
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            if (sectionId === 'reportPage') {
+                updateReportPage();
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Save student name
+        function saveName() {
+            const nameInput = document.getElementById('studentName');
+            if (nameInput.value.trim()) {
+                gameState.studentName = nameInput.value.trim();
+                showPoints(0, 'Welcome, ' + gameState.studentName + '!');
+            }
+        }
+
+        // Reveal card
+        function revealCard(element, cardId, points) {
+            if (element.classList.contains('revealed')) return;
+            
+            element.classList.add('revealed');
+            const content = element.querySelector('.card-content');
+            content.classList.add('show');
+            
+            if (!gameState.earnedPoints.has(cardId)) {
+                gameState.earnedPoints.add(cardId);
+                addPoints(points);
+                showPoints(points);
+            }
+            
+            checkSectionCompletion(element);
+        }
+
+        // Handle answer
+        function handleAnswer(element, isCorrect, questionId, points) {
+            if (gameState.answeredQuestions.has(questionId)) return;
+            
+            gameState.answeredQuestions.add(questionId);
+            
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.kc-option');
+            
+            options.forEach(option => {
+                option.classList.add('disabled');
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                addPoints(points);
+                showPoints(points);
+                showFeedback(questionId, true, '✅ Correct! +' + points + ' points!');
+            } else {
+                element.classList.add('incorrect');
+                showFeedback(questionId, false, '❌ Not quite. The correct answer is highlighted.');
+                options.forEach(option => {
+                    if (option.onclick && option.onclick.toString().includes('true')) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+            
+            checkSectionCompletion(element);
+        }
+
+        // Show feedback
+        function showFeedback(questionId, isCorrect, message) {
+            const feedbackBox = document.getElementById('feedback-' + questionId);
+            feedbackBox.textContent = message;
+            feedbackBox.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+        }
+
+        // Points system
+        function addPoints(points) {
+            gameState.score += points;
+            updateScore();
+            updateLevel();
+            updateProgress();
+        }
+
+        function showPoints(points, customMessage = null) {
+            const popup = document.getElementById('pointsPopup');
+            const message = document.getElementById('pointsMessage');
+            
+            message.textContent = customMessage || `+${points} points!`;
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        function updateLevel() {
+            let newLevel = 'Explorer';
+            for (const [threshold, level] of Object.entries(levels)) {
+                if (gameState.score >= parseInt(threshold)) {
+                    newLevel = level;
+                }
+            }
+            gameState.level = newLevel;
+            document.getElementById('level').textContent = newLevel;
+        }
+
+        function updateProgress() {
+            const percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Complete section
+        function completeSection(sectionNumber) {
+            gameState.completedSections.add(sectionNumber.toString());
+            const card = document.getElementById('card' + sectionNumber);
+            if (card) {
+                card.classList.add('completed');
+            }
+        }
+
+        // Check section completion
+        function checkSectionCompletion(element) {
+            let section = element.closest('.page');
+            if (!section) return;
+            
+            const sectionId = section.id;
+            const sectionNumber = sectionId.replace('section', '');
+            
+            const cards = section.querySelectorAll('.interactive-card');
+            const questions = section.querySelectorAll('.knowledge-check');
+            
+            let allCardsRevealed = true;
+            cards.forEach(card => {
+                if (!card.classList.contains('revealed')) {
+                    allCardsRevealed = false;
+                }
+            });
+            
+            let allQuestionsAnswered = true;
+            questions.forEach(question => {
+                const hasAnswer = question.querySelector('.kc-option.correct, .kc-option.incorrect');
+                if (!hasAnswer) {
+                    allQuestionsAnswered = false;
+                }
+            });
+            
+            if (allCardsRevealed && allQuestionsAnswered && sectionNumber) {
+                gameState.completedSections.add(sectionNumber);
+                const card = document.getElementById('card' + sectionNumber);
+                if (card) {
+                    card.classList.add('completed');
+                }
+            }
+        }
+
+        // Update report page
+        function updateReportPage() {
+            document.getElementById('reportStudentName').textContent = gameState.studentName || 'Anonymous';
+            document.getElementById('reportCompletionDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+            
+            const percentage = Math.round((gameState.score / maxPoints) * 100);
+            
+            document.getElementById('reportTotalPoints').textContent = gameState.score;
+            document.getElementById('reportPercentage').textContent = percentage;
+            document.getElementById('reportCompletion').textContent = Math.round((gameState.completedSections.size / 5) * 100);
+            
+            let letterGrade = 'F';
+            let gradeColor = '#B71C1C';
+            if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
+            else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
+            else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
+            else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
+            
+            const gradeDisplay = document.getElementById('gradeDisplay');
+            gradeDisplay.style.background = gradeColor;
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gradePercentage').textContent = percentage + '%';
+            
+            const sectionPoints = {
+                1: 230, 2: 220, 3: 240, 4: 230, 5: 180
+            };
+            
+            for (let i = 1; i <= 5; i++) {
+                const isComplete = gameState.completedSections.has(i.toString());
+                const statusEl = document.getElementById('status' + i);
+                const pointsEl = document.getElementById('points' + i);
+                
+                if (isComplete) {
+                    statusEl.innerHTML = '✅';
+                    statusEl.style.color = '#1B5E20';
+                    const earned = Math.round(sectionPoints[i] * (gameState.score / maxPoints));
+                    pointsEl.textContent = earned;
+                } else {
+                    statusEl.innerHTML = '⭕';
+                    statusEl.style.color = '#B71C1C';
+                    pointsEl.textContent = '0';
+                }
+            }
+            
+            document.getElementById('metricPoints').textContent = gameState.score;
+            document.getElementById('metricSections').textContent = gameState.completedSections.size + '/5';
+            
+            const totalQuestions = 11;
+            const correctAnswers = Math.round((gameState.score / maxPoints) * totalQuestions);
+            const quizScore = Math.round((correctAnswers / totalQuestions) * 100);
+            document.getElementById('metricQuiz').textContent = Math.min(100, quizScore) + '%';
+            
+            const engagementScore = Math.min(100, Math.round((gameState.earnedPoints.size / 17) * 100));
+            document.getElementById('metricEngagement').textContent = engagementScore + '%';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateScore();
+            updateLevel();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
