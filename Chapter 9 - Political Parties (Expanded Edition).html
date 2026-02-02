@@ -818,28 +818,28 @@
                         <div class="section-number">1</div>
                         <h3>What Are Parties and How Did They Form?</h3>
                         <p>Discover the origins and evolution of American political parties from the Founding era to today.</p>
-                        <div class="points-indicator">🌟 225 points available</div>
+                        <div class="points-indicator">🌟 260 points available</div>
                     </div>
 
                     <div class="section-card" id="section2Card" onclick="navigateToSection(2)">
                         <div class="section-number">2</div>
                         <h3>The Two-Party System</h3>
                         <p>Understand why the United States has been dominated by two major parties and how electoral rules shape this system.</p>
-                        <div class="points-indicator">🌟 225 points available</div>
+                        <div class="points-indicator">🌟 260 points available</div>
                     </div>
 
                     <div class="section-card" id="section3Card" onclick="navigateToSection(3)">
                         <div class="section-number">3</div>
                         <h3>The Shape of Modern Political Parties</h3>
                         <p>Explore party organization from local precincts to national conventions and the party-in-government.</p>
-                        <div class="points-indicator">🌟 225 points available</div>
+                        <div class="points-indicator">🌟 260 points available</div>
                     </div>
 
                     <div class="section-card" id="section4Card" onclick="navigateToSection(4)">
                         <div class="section-number">4</div>
                         <h3>Divided Government and Partisan Polarization</h3>
                         <p>Examine the challenges of divided government and the causes and consequences of party polarization.</p>
-                        <div class="points-indicator">🌟 225 points available</div>
+                        <div class="points-indicator">🌟 260 points available</div>
                     </div>
                 </div>
 
@@ -1665,22 +1665,22 @@
                                     <tr>
                                         <td>1. What Are Parties?</td>
                                         <td id="status1">⭕</td>
-                                        <td id="points1">0/225</td>
+                                        <td id="points1">0/260</td>
                                     </tr>
                                     <tr>
                                         <td>2. Two-Party System</td>
                                         <td id="status2">⭕</td>
-                                        <td id="points2">0/225</td>
+                                        <td id="points2">0/260</td>
                                     </tr>
                                     <tr>
                                         <td>3. Modern Parties</td>
                                         <td id="status3">⭕</td>
-                                        <td id="points3">0/225</td>
+                                        <td id="points3">0/260</td>
                                     </tr>
                                     <tr>
                                         <td>4. Polarization</td>
                                         <td id="status4">⭕</td>
-                                        <td id="points4">0/225</td>
+                                        <td id="points4">0/260</td>
                                     </tr>
                                 </table>
                             </div>
@@ -1728,10 +1728,10 @@
             quizCorrect: 0,
             quizTotal: 0,
             sectionPoints: {
-                1: { earned: 0, max: 225 },
-                2: { earned: 0, max: 225 },
-                3: { earned: 0, max: 225 },
-                4: { earned: 0, max: 225 }
+                1: { earned: 0, max: 260 },
+                2: { earned: 0, max: 260 },
+                3: { earned: 0, max: 260 },
+                4: { earned: 0, max: 260 }
             }
         };
 
@@ -1924,7 +1924,7 @@
             document.getElementById('metricQuiz').textContent = gameState.quizTotal > 0 ? 
                 Math.round((gameState.quizCorrect / gameState.quizTotal) * 100) + '%' : '0%';
             document.getElementById('metricEngagement').textContent = 
-                Math.round((gameState.cardsRevealed.length / 12) * 100) + '%';
+                Math.round((gameState.cardsRevealed.length / 16) * 100) + '%';
             
             // Navigate to report
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));

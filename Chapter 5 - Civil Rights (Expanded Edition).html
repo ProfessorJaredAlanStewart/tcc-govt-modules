@@ -974,35 +974,35 @@
                     <div class="section-number">1</div>
                     <h3>What Are Civil Rights?</h3>
                     <p>Define civil rights, understand legal standards for discrimination, and learn how to identify civil rights issues.</p>
-                    <div class="points-badge">⭐ 200 points available</div>
+                    <div class="points-badge">⭐ 195 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection('section2')" id="card-section2">
                     <div class="section-number">2</div>
                     <h3>African American Civil Rights</h3>
                     <p>From slavery through Reconstruction to the modern civil rights movement and continuing challenges today.</p>
-                    <div class="points-badge">⭐ 250 points available</div>
+                    <div class="points-badge">⭐ 240 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection('section3')" id="card-section3">
                     <div class="section-number">3</div>
                     <h3>Women's Rights Movement</h3>
                     <p>The fight for suffrage, the Equal Rights Amendment, and continuing challenges women face today.</p>
-                    <div class="points-badge">⭐ 220 points available</div>
+                    <div class="points-badge">⭐ 205 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection('section4')" id="card-section4">
                     <div class="section-number">4</div>
                     <h3>Indigenous Peoples' Rights</h3>
                     <p>Native Americans, Alaska Natives, and Native Hawaiians—their history of discrimination and fight for rights.</p>
-                    <div class="points-badge">⭐ 200 points available</div>
+                    <div class="points-badge">⭐ 115 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection('section5')" id="card-section5">
                     <div class="section-number">5</div>
                     <h3>Equal Protection for Other Groups</h3>
                     <p>Hispanic/Latino, Asian American, LGBTQ+, disability rights, and religious minorities.</p>
-                    <div class="points-badge">⭐ 250 points available</div>
+                    <div class="points-badge">⭐ 205 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection('report')" id="card-report">
@@ -2053,7 +2053,7 @@
 
                         <div class="report-footer">
                             <p class="instructor-note">
-                                <strong>Instructor Note:</strong> This report was generated upon completion of the TCC Federal Government Trailblazer Trek - Chapter 5: Civil Rights module. The score reflects the student's engagement with interactive content and performance on knowledge check questions. Total possible points: 1120.
+                                <strong>Instructor Note:</strong> This report was generated upon completion of the TCC Federal Government Trailblazer Trek - Chapter 5: Civil Rights module. The score reflects the student's engagement with interactive content and performance on knowledge check questions. Total possible points: 960.
                             </p>
                             <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
                         </div>
@@ -2068,7 +2068,7 @@
         const gameState = {
             studentName: '',
             score: 0,
-            maxScore: 1120,
+            maxScore: 960,
             sectionsCompleted: [],
             cardsRevealed: [],
             questionsAnswered: [],
@@ -2295,7 +2295,7 @@
                 : 0;
             document.getElementById('metricQuiz').textContent = quizPercent + '%';
             
-            const engagementPercent = Math.round((gameState.cardsRevealed.length / 14) * 100); // 14 total cards
+            const engagementPercent = Math.round((gameState.cardsRevealed.length / 17) * 100); // 17 total cards
             document.getElementById('metricEngagement').textContent = Math.min(engagementPercent, 100) + '%';
         }
     </script>

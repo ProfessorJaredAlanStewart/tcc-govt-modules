@@ -887,35 +887,35 @@
                     <div class="badge">1</div>
                     <h4>📜 What Is Public Policy?</h4>
                     <p>Discover the definition of public policy, how it develops, and the difference between policy intentions and outcomes.</p>
-                    <div class="points">🌟 Up to 220 points</div>
+                    <div class="points">🌟 Up to 170 points</div>
                 </div>
 
                 <div class="section-card" id="card2" onclick="navigateTo('section2')">
                     <div class="badge">2</div>
                     <h4>📦 Categorizing Public Policy</h4>
                     <p>Learn about different types of goods, distributive, regulatory, and redistributive policies, and how policy affects society.</p>
-                    <div class="points">🌟 Up to 240 points</div>
+                    <div class="points">🌟 Up to 245 points</div>
                 </div>
 
                 <div class="section-card" id="card3" onclick="navigateTo('section3')">
                     <div class="badge">3</div>
                     <h4>🛡️ Policy Arenas</h4>
                     <p>Explore key domestic policy areas: social welfare, science and technology, education, and business regulation.</p>
-                    <div class="points">🌟 Up to 230 points</div>
+                    <div class="points">🌟 Up to 210 points</div>
                 </div>
 
                 <div class="section-card" id="card4" onclick="navigateTo('section4')">
                     <div class="badge">4</div>
                     <h4>👥 Policymakers</h4>
                     <p>Understand the roles of policy advocates and analysts, and learn about the four stages of the policy process.</p>
-                    <div class="points">🌟 Up to 220 points</div>
+                    <div class="points">🌟 Up to 205 points</div>
                 </div>
 
                 <div class="section-card" id="card5" onclick="navigateTo('section5')">
                     <div class="badge">5</div>
                     <h4>💰 Budgeting and Tax Policy</h4>
                     <p>Master economic theories, mandatory vs. discretionary spending, tax policy, and the role of the Federal Reserve.</p>
-                    <div class="points">🌟 Up to 240 points</div>
+                    <div class="points">🌟 Up to 210 points</div>
                 </div>
 
                 <div class="section-card" id="card6" onclick="navigateTo('reportPage')">
@@ -1938,7 +1938,7 @@
         };
 
         // Total possible points
-        const maxPoints = 1150;
+        const maxPoints = 1040;
 
         // Navigation
         function navigateTo(sectionId) {
@@ -2129,7 +2129,7 @@
             document.getElementById('gradePercentage').textContent = percentage + '%';
             
             const sectionPoints = {
-                1: 220, 2: 240, 3: 230, 4: 220, 5: 240
+                1: 170, 2: 245, 3: 210, 4: 205, 5: 210
             };
             
             for (let i = 1; i <= 5; i++) {
@@ -2157,7 +2157,7 @@
             const quizScore = Math.round((correctAnswers / totalQuestions) * 100);
             document.getElementById('metricQuiz').textContent = Math.min(100, quizScore) + '%';
             
-            const engagementScore = Math.min(100, Math.round((gameState.earnedPoints.size / 17) * 100));
+            const engagementScore = Math.min(100, Math.round((gameState.earnedPoints.size / 20) * 100)); // 20 total reveal cards
             document.getElementById('metricEngagement').textContent = engagementScore + '%';
         }
 

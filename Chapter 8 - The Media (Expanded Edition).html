@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Media - TCC Federal Government Trailblazer Trek</title>
+    <title>Chapter 8: The Media - TCC Federal Government Trailblazer Trek</title>
     <style>
         * {
             margin: 0;
@@ -577,69 +577,6 @@
             border-bottom: none;
         }
 
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary-blue), var(--primary-green));
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin: 2rem 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            background: var(--secondary-blue);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            border: 4px solid white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .timeline-content {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 45%;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: 5%;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: auto;
-            margin-right: 5%;
-        }
-
-        .timeline-date {
-            background: var(--primary-green);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            display: inline-block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
         /* Report Page Styles */
         .report-page {
             background: white;
@@ -860,19 +797,6 @@
         }
 
         @media (max-width: 768px) {
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px !important;
-            }
-            
-            .timeline-item::before {
-                left: 30px;
-            }
-            
             .stats-container {
                 flex-direction: column;
                 gap: 1rem;
@@ -965,33 +889,34 @@
                 </div>
             </div>
 
+            <!-- CORRECTED POINT VALUES: Section 1=255, Section 2=345, Section 3=340, Section 4=370, Total=1310 -->
             <div class="section-grid">
                 <div class="section-card" id="card1" onclick="navigateToSection('section1')">
                     <div class="badge">1</div>
                     <h3>What Is the Media?</h3>
                     <p class="description">Understanding mass media, types, functions, and conglomerates</p>
-                    <p class="points">⭐ 275 points available</p>
+                    <p class="points">⭐ 255 points available</p>
                 </div>
 
                 <div class="section-card" id="card2" onclick="navigateToSection('section2')">
                     <div class="badge">2</div>
                     <h3>Evolution of the Media</h3>
                     <p class="description">From colonial newspapers to social media revolution</p>
-                    <p class="points">⭐ 300 points available</p>
+                    <p class="points">⭐ 345 points available</p>
                 </div>
 
                 <div class="section-card" id="card3" onclick="navigateToSection('section3')">
                     <div class="badge">3</div>
                     <h3>Regulating the Media</h3>
                     <p class="description">First Amendment, FCC, and media transparency</p>
-                    <p class="points">⭐ 275 points available</p>
+                    <p class="points">⭐ 340 points available</p>
                 </div>
 
                 <div class="section-card" id="card4" onclick="navigateToSection('section4')">
                     <div class="badge">4</div>
                     <h3>The Impact of the Media</h3>
                     <p class="description">Bias, framing, campaigns, and societal effects</p>
-                    <p class="points">⭐ 300 points available</p>
+                    <p class="points">⭐ 370 points available</p>
                 </div>
             </div>
 
@@ -999,6 +924,7 @@
         </div>
 
         <!-- Section 1: What Is the Media? -->
+        <!-- Points: 6 cards × 30 = 180 + 3 questions × 25 = 75 = 255 total -->
         <div id="section1" class="page">
             <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
             
@@ -1032,6 +958,7 @@
                     <div>The collection of all forms of media that communicate information to the general public, including television, print, radio, and Internet. One of the primary reasons citizens turn to the media is for news. We expect the media to cover important political and social events and information in a concise and neutral manner.</div>
                 </div>
 
+                <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'media-roles', 30)">
                     <div class="card-prompt">🔍 Click to explore: Key Roles in Media Organizations</div>
                     <div class="card-content">
@@ -1057,6 +984,7 @@
                     Each form of media has its own complexities and is used by different demographics. <strong>Millennials</strong> (born 1981-1996) and <strong>Generation Z</strong> (born 1997-2012) are more likely to get news and information from social media, such as Instagram, TikTok, Twitter, and YouTube, while <strong>Baby Boomers</strong> (born 1946-1964) are most likely to get their news from television, either national broadcasts or local news.
                 </p>
 
+                <!-- Card 2: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'tv-types', 30)">
                     <div class="card-prompt">🔍 Click to explore: Television Programming Types</div>
                     <div class="card-content">
@@ -1114,6 +1042,7 @@
                     </tbody>
                 </table>
 
+                <!-- Card 3: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'cable-internet', 30)">
                     <div class="card-prompt">🔍 Click to explore: Cable and Internet News</div>
                     <div class="card-content">
@@ -1129,6 +1058,7 @@
                     </div>
                 </div>
 
+                <!-- Question 1: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What is the primary characteristic that distinguishes social media from traditional media?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">
@@ -1153,6 +1083,7 @@
                     Most media are controlled by a limited number of conglomerates. A <strong>conglomerate</strong> is a corporation made up of a number of companies, organizations, and media networks. In the 1980s, more than fifty companies owned the majority of television and radio stations and networks. By 2011, six conglomerates controlled most of the broadcast media in the United States.
                 </p>
 
+                <!-- Card 4: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'conglomerate-history', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Shrinking Media Landscape</div>
                     <div class="card-content">
@@ -1167,6 +1098,7 @@
                     </div>
                 </div>
 
+                <!-- Question 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What is a potential problem with media conglomerates controlling most of the media?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">
@@ -1200,6 +1132,7 @@
                     The media exist to fill a number of functions. Whether the medium is a newspaper, radio, or television newscast, a corporation behind the scenes must bring in revenue and pay for the cost of the product. Revenue comes from advertising and sponsors. But corporations will not pay for advertising if there are no viewers or readers. So all programs and publications need to entertain, inform, or interest the public.
                 </p>
 
+                <!-- Card 5: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'fourth-estate', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Fourth Estate</div>
                     <div class="card-content">
@@ -1230,6 +1163,7 @@
                     </p>
                 </div>
 
+                <!-- Card 6: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'media-public-good', 30)">
                     <div class="card-prompt">🔍 Click to explore: Media and the Public Good</div>
                     <div class="card-content">
@@ -1244,6 +1178,7 @@
                     </div>
                 </div>
 
+                <!-- Question 3: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ When the media engage in "agenda setting," they are:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">
@@ -1264,6 +1199,7 @@
         </div>
 
         <!-- Section 2: Evolution of the Media -->
+        <!-- Points: 8 cards (7×30 + 1×35 = 245) + 4 questions × 25 = 100 = 345 total -->
         <div id="section2" class="page">
             <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
             
@@ -1288,6 +1224,7 @@
                     Early news was presented to local populations through the print press. While several colonies had printers and occasional newspapers, high literacy rates combined with the desire for self-government made Boston a perfect location for the creation of a newspaper, and the first continuous press was started there in 1704.
                 </p>
 
+                <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'revolutionary-press', 30)">
                     <div class="card-prompt">🔍 Click to explore: Newspapers and the Revolutionary War</div>
                     <div class="card-content">
@@ -1307,6 +1244,7 @@
                     <div>Period during the 1780s in which newspaper content was biased by political partisanship. The publication of The Federalist Papers, as well as the Anti-Federalist Papers, moved the nation into this era where party loyalty dominated editorial content. Subscriptions and advertisements did not fully cover printing costs, so political parties stepped in to support presses that aided their policies. Papers began printing party propaganda and messages, even publicly attacking political leaders like George Washington.</div>
                 </div>
 
+                <!-- Card 2: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'print-evolution', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Penny Press and Yellow Journalism</div>
                     <div class="card-content">
@@ -1326,6 +1264,7 @@
                     <div>News coverage focusing on exposing corrupt business and government practices. With the arrival of the Progressive Era, the media began this investigative journalism. Upton Sinclair's serialized novel The Jungle led to changes in how industrial workers were treated. The Pure Food and Drug Act and other laws were passed to protect consumers from unsafe food processing practices.</div>
                 </div>
 
+                <!-- Question 1: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What was "yellow journalism"?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">
@@ -1354,6 +1293,7 @@
                     Radio news made its appearance in the 1920s. The National Broadcasting Company (NBC) and the Columbia Broadcasting System (CBS) began running sponsored news programs and radio dramas. Comedy programs like Amos 'n' Andy and Easy Aces became popular during the 1930s as listeners sought humor during the Depression.
                 </p>
 
+                <!-- Card 3: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'radio-golden-age', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Golden Age of Radio</div>
                     <div class="card-content">
@@ -1381,6 +1321,7 @@
                     </p>
                 </div>
 
+                <!-- Card 4: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'wwii-radio', 30)">
                     <div class="card-prompt">🔍 Click to explore: Radio During World War II</div>
                     <div class="card-content">
@@ -1394,6 +1335,7 @@
                     </div>
                 </div>
 
+                <!-- Question 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ Why were Franklin D. Roosevelt's radio addresses called "fireside chats"?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">
@@ -1426,6 +1368,7 @@
                     Television combined the best attributes of radio and pictures and changed media forever. The first official broadcast in the United States was President Franklin Roosevelt's speech at the opening of the 1939 World's Fair in New York. By the 1950s, the price of television sets had dropped, more stations were being created, and advertisers were buying spots.
                 </p>
 
+                <!-- Card 5: 35 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'tv-politics', 35)">
                     <div class="card-prompt">🔍 Click to explore: Television and Political Campaigns</div>
                     <div class="card-content">
@@ -1445,6 +1388,7 @@
                     <p>Visit <strong>American Rhetoric</strong> for free access to speeches, video, and audio of famous presidential and political speeches.</p>
                 </div>
 
+                <!-- Card 6: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'golden-age-tv', 30)">
                     <div class="card-prompt">🔍 Click to explore: The "Golden Age of Presidential Television"</div>
                     <div class="card-content">
@@ -1460,6 +1404,7 @@
                     </div>
                 </div>
 
+                <!-- Question 3: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What lesson did the 1960 Kennedy-Nixon debate demonstrate about television?</div>
                     <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 25)">
@@ -1484,6 +1429,7 @@
                     The invention of cable in the 1980s and the expansion of the Internet in the 2000s opened up more options for media consumers than ever before. Viewers can watch nearly anything at the click of a button, bypass commercials, and record programs. The resulting <strong>saturation</strong>, or inundation of information, may lead viewers to abandon the news entirely or become more suspicious and fatigued about politics.
                 </p>
 
+                <!-- Card 7: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'declining-viewership', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Decline of Presidential TV Audiences</div>
                     <div class="card-content">
@@ -1511,6 +1457,7 @@
                     </p>
                 </div>
 
+                <!-- Card 8: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'social-media-politics', 30)">
                     <div class="card-prompt">🔍 Click to explore: Social Media and Modern Politics</div>
                     <div class="card-content">
@@ -1530,6 +1477,7 @@
                     <div>News presented in an entertaining and approachable manner, painlessly introducing a variety of topics. Shows like The Daily Show with Trevor Noah, the Late Show with Stephen Colbert, and Full Frontal with Samantha Bee demonstrate that news, even political news, can win young viewers if delivered well. While the depth or quality of reporting may be less than ideal, these shows can sound an alarm as needed to raise citizen awareness.</div>
                 </div>
 
+                <!-- Question 4: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What is "citizen journalism"?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-4', 0)">
@@ -1563,6 +1511,7 @@
         </div>
 
         <!-- Section 3: Regulating the Media -->
+        <!-- Points: 9 cards (8×30 + 1×25 = 265) + 3 questions × 25 = 75 = 340 total -->
         <div id="section3" class="page">
             <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
             
@@ -1591,6 +1540,7 @@
                     <div class="quote-attribution">— First Amendment to the U.S. Constitution</div>
                 </div>
 
+                <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'zenger-trial', 30)">
                     <div class="card-prompt">🔍 Click to explore: John Peter Zenger and Press Freedom</div>
                     <div class="card-content">
@@ -1610,6 +1560,7 @@
                     The media do not have the right to commit <strong>slander</strong> (speaking false information with intent to harm a person or entity) or <strong>libel</strong> (printing false information with intent to harm). These acts constitute defamation of character that can cause loss of reputation and income.
                 </p>
 
+                <!-- Card 2: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'libel-standards', 30)">
                     <div class="card-prompt">🔍 Click to explore: Standards for Libel and Slander</div>
                     <div class="card-content">
@@ -1635,6 +1586,7 @@
                     <div>A government action that stops someone from doing something before they are able to do it (e.g., forbidding someone to publish a book they plan to release). The Supreme Court has ruled that while the government can impose prior restraint on the media, that right is very limited.</div>
                 </div>
 
+                <!-- Card 3: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'pentagon-papers', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Pentagon Papers Case</div>
                     <div class="card-content">
@@ -1649,6 +1601,7 @@
                     </div>
                 </div>
 
+                <!-- Question 1: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ Under what circumstances can the government exercise prior restraint over the media?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">
@@ -1673,6 +1626,7 @@
                     The liberties enjoyed by newspapers are overseen by the U.S. court system, while television and radio broadcasters are monitored by both the courts and a government regulatory commission.
                 </p>
 
+                <!-- Card 4: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'fcc-history', 30)">
                     <div class="card-prompt">🔍 Click to explore: History of Broadcast Regulation</div>
                     <div class="card-content">
@@ -1692,6 +1646,7 @@
                     <div>An FCC policy that all candidates running for office must be given the same radio and television airtime opportunities. If WBNS in Columbus, Ohio agrees to sell Senator Marco Rubio thirty seconds of airtime, the station must also sell all other candidates in that race thirty seconds at the same price. This rate cannot be more than the station charges favored commercial advertisers.</div>
                 </div>
 
+                <!-- Card 5: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'equal-time-examples', 30)">
                     <div class="card-prompt">🔍 Click to explore: Equal-Time Rule in Practice</div>
                     <div class="card-content">
@@ -1710,6 +1665,7 @@
                     <div>A 1949 FCC policy that required holders of broadcast licenses to cover controversial issues in a balanced manner by providing listeners with information about all perspectives. The fairness doctrine ended in the 1980s after courts ruled it limited debate of controversial topics and placed the government in the role of editor. The FCC repealed it in 1987.</div>
                 </div>
 
+                <!-- Card 6: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'indecency-rules', 30)">
                     <div class="card-prompt">🔍 Click to explore: Indecency Regulations</div>
                     <div class="card-content">
@@ -1724,6 +1680,7 @@
                     </div>
                 </div>
 
+                <!-- Question 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What was the "fairness doctrine" and why was it eliminated?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">
@@ -1753,6 +1710,7 @@
                     <div>A federal statute passed in 1966 and signed by President Lyndon B. Johnson that requires the executive branch of the U.S. government to provide information requested by citizens. It was intended to increase openness in the executive branch, which had been criticized for hiding information. Citizens wishing to obtain information may request documents from agencies, which may charge fees for collection and copying.</div>
                 </div>
 
+                <!-- Card 7: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'foia-details', 30)">
                     <div class="card-prompt">🔍 Click to explore: FOIA in Practice</div>
                     <div class="card-content">
@@ -1777,6 +1735,7 @@
                     Because White House limitations on the press are not unusual, many journalists rely on confidential sources. The practice of granting anonymity to sources is sometimes referred to as <strong>reporter's privilege</strong>.
                 </p>
 
+                <!-- Card 8: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'deep-throat', 30)">
                     <div class="card-prompt">🔍 Click to explore: "Deep Throat" and Watergate</div>
                     <div class="card-content">
@@ -1791,6 +1750,7 @@
                     </div>
                 </div>
 
+                <!-- Question 3: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ In Branzburg v. Hayes (1972), what did the Supreme Court determine about reporter's privilege?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">
@@ -1812,6 +1772,7 @@
                     The line between journalists' expectation of openness and the government's willingness to be open has continued to be a point of contention. Some administrations use the media to increase public support; others limit the media to limit dissent.
                 </p>
 
+                <!-- Card 9: 25 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'press-relations', 25)">
                     <div class="card-prompt">🔍 Click to explore: Presidential Press Relations</div>
                     <div class="card-content">
@@ -1829,6 +1790,7 @@
         </div>
 
         <!-- Section 4: The Impact of the Media -->
+        <!-- Points: 9 cards × 30 = 270 + 4 questions × 25 = 100 = 370 total -->
         <div id="section4" class="page">
             <button class="back-button" onclick="navigateToSection('homePage')">← Back to Home</button>
             
@@ -1853,6 +1815,7 @@
                     Concerns about the effects of media on consumers and the existence and extent of media bias go back to the 1920s. Reporter and commentator Walter Lippmann noted that citizens have limited personal experience with government and the world and posited that the media, through their stories, place ideas in citizens' minds.
                 </p>
 
+                <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'media-theories', 30)">
                     <div class="card-prompt">🔍 Click to explore: Theories of Media Effects</div>
                     <div class="card-content">
@@ -1871,6 +1834,7 @@
                     <div>The process of giving a news story a specific context or background. The news often uses frames to place a story in context so the reader understands its importance or relevance. Yet, at the same time, framing affects the way the reader or viewer processes the story.</div>
                 </div>
 
+                <!-- Card 2: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'framing-types', 30)">
                     <div class="card-prompt">🔍 Click to explore: Episodic vs. Thematic Framing</div>
                     <div class="card-content">
@@ -1888,6 +1852,7 @@
                     <div>The process of predisposing readers or viewers to think a particular way. When media coverage focuses on certain issues, it predisposes the viewer to a particular perspective. If a newspaper article focuses on unemployment, struggling industries, and jobs moving overseas, the reader will have a negative opinion about the economy. If then asked about the president's job performance, the reader is primed to say no.</div>
                 </div>
 
+                <!-- Question 1: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What is the difference between "framing" and "priming" in media coverage?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">
@@ -1912,6 +1877,7 @@
                     When it is spotty, the media's coverage of campaigns and government can sometimes affect the way government operates and the success of candidates. In 1972, the McGovern-Fraser reforms created a voter-controlled primary system, so party leaders no longer pick the presidential candidates. Now the media are seen as <strong>kingmakers</strong> and play a strong role in influencing who will become the nominees.
                 </p>
 
+                <!-- Card 3: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'campaign-bubble', 30)">
                     <div class="card-prompt">🔍 Click to explore: Campaign Control and the "Bubble"</div>
                     <div class="card-content">
@@ -1931,6 +1897,7 @@
                     <div>When modern journalists analyze campaigns and blunders or the overall race, rather than interviewing candidates or discussing their issue positions. Campaign coverage now focuses on the spectacle of the season—colorful personalities, strange comments, lapses of memory, and embarrassing revelations are more likely to get air time than candidates' issue positions.</div>
                 </div>
 
+                <!-- Card 4: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'sound-bites', 30)">
                     <div class="card-prompt">🔍 Click to explore: The Shrinking Sound Bite</div>
                     <div class="card-content">
@@ -1950,6 +1917,7 @@
                     <div>When journalists follow one another rather than digging for their own stories. Television news discusses strategies and blunders with colorful examples. Newspapers focus on polls. This shallow press coverage has become common today.</div>
                 </div>
 
+                <!-- Question 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ What has happened to the average length of sound bites from presidential candidates over time?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">
@@ -1967,6 +1935,7 @@
                     <div class="feedback-box" id="feedback-q4-2"></div>
                 </div>
 
+                <!-- Card 5: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'cable-bias', 30)">
                     <div class="card-prompt">🔍 Click to explore: Media Bias in Cable News</div>
                     <div class="card-content">
@@ -1985,6 +1954,7 @@
                     </div>
                 </div>
 
+                <!-- Card 6: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'trump-media', 30)">
                     <div class="card-prompt">🔍 Click to explore: Trump, Social Media, and the Press</div>
                     <div class="card-content">
@@ -2006,6 +1976,7 @@
                     The media choose what they want to discuss. This agenda setting creates a reality for voters and politicians that affects the way people think, act, and vote. Even if the crime rate is going down, citizens accustomed to reading stories about assault and other offenses still perceive crime to be an issue.
                 </p>
 
+                <!-- Card 7: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'racial-framing', 30)">
                     <div class="card-prompt">🔍 Click to explore: Racial Framing in Media</div>
                     <div class="card-content">
@@ -2019,6 +1990,7 @@
                     </div>
                 </div>
 
+                <!-- Question 3: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ How does "racial framing" in media coverage affect viewers' perceptions?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">
@@ -2040,6 +2012,7 @@
                     Racial framing, even if unintentional, affects perceptions and policies. The perception that most recipients of welfare are working-age African Americans may have led some citizens to vote for candidates who promised to reduce welfare benefits. When survey respondents were shown a story of a White unemployed individual, 71% listed unemployment as one of the top three problems facing the United States, while only 53% did so if the story was about an unemployed African American.
                 </p>
 
+                <!-- Card 8: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'women-coverage', 30)">
                     <div class="card-prompt">🔍 Click to explore: Media Coverage of Women</div>
                     <div class="card-content">
@@ -2054,6 +2027,7 @@
                     </div>
                 </div>
 
+                <!-- Card 9: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'palin-coverage', 30)">
                     <div class="card-prompt">🔍 Click to explore: Media and Women Candidates' Families</div>
                     <div class="card-content">
@@ -2067,6 +2041,7 @@
                     </div>
                 </div>
 
+                <!-- Question 4: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">❓ According to research, why might a woman decide not to run for office?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-4', 0)">
@@ -2248,7 +2223,7 @@
                 </div>
 
                 <div class="instructor-note">
-                    <strong>📝 Instructor Note:</strong> This completion report documents the student's engagement with the Chapter 8: The Media interactive module. The module covers essential content including media types and functions, the evolution from print to digital media, FCC regulations and First Amendment protections, and the impact of media on campaigns and society.
+                    <strong>📝 Instructor Note:</strong> This completion report documents the student's engagement with the Chapter 8: The Media interactive module. The module covers essential content including media types and functions, the evolution from print to digital media, FCC regulations and First Amendment protections, and the impact of media on campaigns and society. Maximum points available: 1310.
                 </div>
 
                 <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
@@ -2277,14 +2252,14 @@
             }
         };
 
-        // Levels
+        // Levels - adjusted for 1310 max points
         const levels = {
             0: 'Explorer',
-            200: 'Scholar',
-            400: 'Expert',
-            600: 'Master',
-            800: 'Champion',
-            1000: 'Media Sage'
+            250: 'Scholar',
+            500: 'Expert',
+            750: 'Master',
+            1000: 'Champion',
+            1200: 'Media Sage'
         };
 
         // Save student name
@@ -2460,7 +2435,7 @@
             progressBar.textContent = percentage + '%';
         }
 
-        // Generate report
+        // Generate report - CORRECTED maxPoints to 1310
         function generateReport() {
             // Update date and time
             const now = new Date();
@@ -2468,8 +2443,8 @@
             document.getElementById('reportTime').textContent = now.toLocaleTimeString();
             document.getElementById('reportStudentName').textContent = gameState.studentName || 'Not Provided';
             
-            // Calculate scores
-            const maxPoints = 1150;
+            // Calculate scores - CORRECTED: Total = 255 + 345 + 340 + 370 = 1310
+            const maxPoints = 1310;
             const percentage = Math.round((gameState.score / maxPoints) * 100);
             
             // Update report scores
@@ -2513,24 +2488,25 @@
                 : 0;
             document.getElementById('metricEngagement').textContent = engagementPercentage + '%';
             
-            // Update section performance table
+            // Update section performance table with CORRECTED point totals
             const tbody = document.querySelector('#sectionPerformanceTable tbody');
             tbody.innerHTML = '';
             
             const sections = [
-                { name: 'What Is the Media?', id: 'section1' },
-                { name: 'Evolution of the Media', id: 'section2' },
-                { name: 'Regulating the Media', id: 'section3' },
-                { name: 'The Impact of the Media', id: 'section4' }
+                { name: 'What Is the Media?', id: 'section1', maxPts: 255 },
+                { name: 'Evolution of the Media', id: 'section2', maxPts: 345 },
+                { name: 'Regulating the Media', id: 'section3', maxPts: 340 },
+                { name: 'The Impact of the Media', id: 'section4', maxPts: 370 }
             ];
             
             sections.forEach((section, index) => {
                 const isCompleted = gameState.completedSections.includes(section.id);
+                const earnedPts = gameState.sectionPoints[section.id] || 0;
                 const row = tbody.insertRow();
                 
                 row.insertCell(0).textContent = section.name;
                 row.insertCell(1).innerHTML = isCompleted ? '✅ Complete' : '❌ Incomplete';
-                row.insertCell(2).textContent = (gameState.sectionPoints[section.id] || 0) + ' pts';
+                row.insertCell(2).textContent = earnedPts + '/' + section.maxPts + ' pts';
             });
         }
 

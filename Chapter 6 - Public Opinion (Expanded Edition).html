@@ -946,42 +946,42 @@
                     <div class="section-number">1</div>
                     <h3>The Nature of Public Opinion</h3>
                     <p>Learn how political views are formed through socialization and experience</p>
-                    <div class="points-indicator">🌟 240 points available</div>
+                    <div class="points-indicator">🌟 270 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection(2)">
                     <div class="section-number">2</div>
                     <h3>Political Socialization & Ideology</h3>
                     <p>Discover the agents that shape our political beliefs from childhood</p>
-                    <div class="points-indicator">🌟 255 points available</div>
+                    <div class="points-indicator">🌟 335 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection(3)">
                     <div class="section-number">3</div>
                     <h3>Measuring Public Opinion</h3>
                     <p>Explore polling methods, sampling techniques, and margin of error</p>
-                    <div class="points-indicator">🌟 245 points available</div>
+                    <div class="points-indicator">🌟 215 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection(4)">
                     <div class="section-number">4</div>
                     <h3>Polling Problems & Technology</h3>
                     <p>Understand the problems and biases in public opinion polling</p>
-                    <div class="points-indicator">🌟 235 points available</div>
+                    <div class="points-indicator">🌟 210 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection(5)">
                     <div class="section-number">5</div>
                     <h3>What the Public Thinks</h3>
                     <p>Examine American opinions on politics, policies, and institutions</p>
-                    <div class="points-indicator">🌟 250 points available</div>
+                    <div class="points-indicator">🌟 185 points available</div>
                 </div>
 
                 <div class="section-card" onclick="navigateToSection(6)">
                     <div class="section-number">6</div>
                     <h3>Effects of Public Opinion</h3>
                     <p>Learn how polls influence elections, politicians, and policy</p>
-                    <div class="points-indicator">🌟 240 points available</div>
+                    <div class="points-indicator">🌟 245 points available</div>
                 </div>
             </div>
 
@@ -2090,12 +2090,12 @@
             currentLevel: 'Explorer',
             sectionsCompleted: [],
             sectionPoints: {
-                1: { earned: 0, max: 240 },
-                2: { earned: 0, max: 255 },
-                3: { earned: 0, max: 245 },
-                4: { earned: 0, max: 235 },
-                5: { earned: 0, max: 250 },
-                6: { earned: 0, max: 240 }
+                1: { earned: 0, max: 220 },
+                2: { earned: 0, max: 285 },
+                3: { earned: 0, max: 165 },
+                4: { earned: 0, max: 160 },
+                5: { earned: 0, max: 135 },
+                6: { earned: 0, max: 195 }
             },
             cardsRevealed: [],
             questionsAnswered: [],
@@ -2270,7 +2270,7 @@
             document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
             
             // Calculate percentage
-            const maxPoints = 1465; // Updated total with all content
+            const maxPoints = 1460; // 1160 (cards/quizzes) + 300 (6 completion bonuses × 50)
             const percentage = Math.round((gameState.totalPoints / maxPoints) * 100);
             
             // Update scores in header
@@ -2325,7 +2325,7 @@
                 : 0;
             document.getElementById('metricQuiz').textContent = quizPercentage + '%';
             
-            const engagementPercentage = Math.round((gameState.cardsRevealed.length / 20) * 100); // Updated for more cards
+            const engagementPercentage = Math.round((gameState.cardsRevealed.length / 28) * 100); // 28 total reveal cards
             document.getElementById('metricEngagement').textContent = engagementPercentage + '%';
             
             // Navigate to report

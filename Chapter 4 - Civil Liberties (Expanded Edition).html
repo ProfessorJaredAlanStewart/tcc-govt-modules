@@ -755,6 +755,7 @@
             </div>
 
             <div class="sections-grid">
+                <!-- Section 1: 200 points (5 cards × 25 + 3 KCs × 25 = 125 + 75 = 200) -->
                 <div class="section-card" onclick="goToSection('section1')" id="card1">
                     <span class="section-number">Section 1</span>
                     <h3 class="section-title">📜 What Are Civil Liberties?</h3>
@@ -762,13 +763,15 @@
                     <p class="section-points">🎯 200 points available</p>
                 </div>
 
+                <!-- Section 2: 200 points (5 cards × 25 + 3 KCs × 25 = 125 + 75 = 200) -->
                 <div class="section-card" onclick="goToSection('section2')" id="card2">
                     <span class="section-number">Section 2</span>
                     <h3 class="section-title">🗣️ First Amendment Freedoms</h3>
                     <p class="section-description">Freedom of religion, speech, press, assembly, and petition.</p>
-                    <p class="section-points">🎯 225 points available</p>
+                    <p class="section-points">🎯 200 points available</p>
                 </div>
 
+                <!-- Section 3: 200 points (5 cards × 25 + 3 KCs × 25 = 125 + 75 = 200) -->
                 <div class="section-card" onclick="goToSection('section3')" id="card3">
                     <span class="section-number">Section 3</span>
                     <h3 class="section-title">🛡️ Securing Basic Freedoms</h3>
@@ -776,13 +779,15 @@
                     <p class="section-points">🎯 200 points available</p>
                 </div>
 
+                <!-- Section 4: 200 points (5 cards × 25 + 3 KCs × 25 = 125 + 75 = 200) -->
                 <div class="section-card" onclick="goToSection('section4')" id="card4">
                     <span class="section-number">Section 4</span>
                     <h3 class="section-title">⚖️ Rights of the Accused</h3>
                     <p class="section-description">Fifth through Eighth Amendment protections in criminal justice.</p>
-                    <p class="section-points">🎯 225 points available</p>
+                    <p class="section-points">🎯 200 points available</p>
                 </div>
 
+                <!-- Section 5: 200 points (5 cards × 25 + 3 KCs × 25 = 125 + 75 = 200) -->
                 <div class="section-card" onclick="goToSection('section5')" id="card5">
                     <span class="section-number">Section 5</span>
                     <h3 class="section-title">🔒 Interpreting the Bill of Rights</h3>
@@ -790,11 +795,12 @@
                     <p class="section-points">🎯 200 points available</p>
                 </div>
 
+                <!-- Section 6: 200 points (5 cards × 25 + 3 KCs × 25 = 125 + 75 = 200) -->
                 <div class="section-card" onclick="goToSection('section6')" id="card6">
                     <span class="section-number">Section 6</span>
                     <h3 class="section-title">📚 Review & Application</h3>
                     <p class="section-description">Key terms, landmark cases, and contemporary issues in civil liberties.</p>
-                    <p class="section-points">🎯 150 points available</p>
+                    <p class="section-points">🎯 200 points available</p>
                 </div>
             </div>
 
@@ -803,7 +809,7 @@
             </div>
         </div>
 
-        <!-- SECTION 1: What Are Civil Liberties? -->
+        <!-- SECTION 1: What Are Civil Liberties? (200 points: 5×25 cards + 3×25 KCs) -->
         <div id="section1" class="page">
             <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
             
@@ -817,9 +823,7 @@
                     <h3>Introduction</h3>
                     <p>Black Lives Matter demonstrations across the nation provided an example of the freedom of assembly protected by the Bill of Rights. This right may now be in jeopardy as bills in several state legislatures threaten peaceful gatherings and even shield citizens who attack such protesters. Fights like this—in the streets, courts, legislatures, and public opinion—are hardly unique in U.S. history. In fact, they are the main driver of political change.</p>
                     
-                    <p>The framers of the Constitution wanted a government that would not repeat the abuses of individual liberties and rights that caused them to declare independence from Britain. However, laws and other "parchment barriers" (or written documents) alone have not protected freedoms over the years; instead, citizens have learned the truth of the old saying (often attributed to Thomas Jefferson but actually said by Irish politician John Philpot Curran), <strong>"Eternal vigilance is the price of liberty."</strong> The actions of ordinary citizens, lawyers, and politicians have been at the core of a vigilant effort to protect constitutional liberties.</p>
-                    
-                    <p>But what are those freedoms? And how should we balance them against the interests of society and other individuals? These are the key questions we will tackle in this chapter.</p>
+                    <p>The framers of the Constitution wanted a government that would not repeat the abuses of individual liberties and rights that caused them to declare independence from Britain. However, laws and other "parchment barriers" (or written documents) alone have not protected freedoms over the years; instead, citizens have learned the truth of the old saying (often attributed to Thomas Jefferson but actually said by Irish politician John Philpot Curran), <strong>"Eternal vigilance is the price of liberty."</strong></p>
                 </div>
 
                 <div class="content-block">
@@ -836,13 +840,14 @@
                         <div>Guarantees that government officials will treat people equally and that decisions will be made on the basis of merit rather than race, gender, or other personal characteristics. Civil rights tell the government what it <strong>must</strong> do to ensure equality.</div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'liberty-vs-rights', 30)">
+                    <!-- Card 1: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's1-card1', 25)">
                         <div class="card-prompt">🔍 Click to explore: The Key Difference Between Civil Liberties and Civil Rights</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Great discovery!</p>
-                            <p>For example, the First Amendment denies the government the power to prohibit "the free exercise" of religion. This means that neither states nor the national government can forbid people to follow a religion of their choice, even if politicians and judges think the religion is misguided, blasphemous, or otherwise inappropriate.</p>
-                            <p>Unlike most of the rest of the world at the time, U.S. citizens could even create their own faiths and recruit followers to them, even if both society and government disapprove of its tenets. That said, the way you practice your religion, like any other practice, may be regulated if it impinges on the rights of others.</p>
-                            <p>The Eighth Amendment says the government cannot impose "cruel and unusual punishments" on individuals for their criminal acts—this is a civil liberty limiting what government can do.</p>
+                            <p><strong>+25 points!</strong> Great discovery!</p>
+                            <p>For example, the First Amendment denies the government the power to prohibit "the free exercise" of religion. This means that neither states nor the national government can forbid people to follow a religion of their choice. The Eighth Amendment says the government cannot impose "cruel and unusual punishments"—this is a civil liberty limiting what government can do.</p>
+                            <p><strong>Civil liberties = What government CANNOT do</strong></p>
+                            <p><strong>Civil rights = What government MUST do for equality</strong></p>
                         </div>
                     </div>
                 </div>
@@ -850,10 +855,9 @@
                 <div class="content-block">
                     <h3>The Declaration of Independence and Natural Rights</h3>
                     <p>The idea that Americans—indeed, people in general—have fundamental rights and liberties was at the core of the arguments in favor of their independence. In writing the Declaration of Independence in 1776, Thomas Jefferson drew on the ideas of English philosopher John Locke to express the colonists' belief that they had certain <strong>inalienable or natural rights</strong> that no ruler had the power or authority to deny to their subjects.</p>
-                    
-                    <p>It was a scathing legal indictment of King George III for violating the colonists' liberties. Although the Declaration of Independence does not guarantee specific freedoms, its language was instrumental in inspiring many of the states to adopt protections for civil liberties and rights in their own constitutions, and in expressing principles of the founding era that have resonated in the United States since its independence. In particular, Jefferson's words "all men are created equal" became the centerpiece of struggles for the rights of women and minorities.</p>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'aclu-history', 25)">
+                    <!-- Card 2: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's1-card2', 25)">
                         <div class="card-prompt">🔍 Click to learn: The American Civil Liberties Union (ACLU)</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong> Important organization discovered!</p>
@@ -865,167 +869,139 @@
 
                 <div class="content-block">
                     <h3>Civil Liberties and the Constitution</h3>
-                    <p>The Constitution as drafted in 1787 did not include a Bill of Rights, although the idea of including one was proposed and, after brief discussion, dismissed in the final week of the Constitutional Convention. The framers of the Constitution believed they faced much more pressing concerns than the protection of civil rights and liberties—most notably keeping the fragile union together in the light of internal unrest and external threats.</p>
-                    
-                    <p>Moreover, the framers thought that they had adequately covered rights issues in the main body of the document. Indeed, the Federalists did include in the Constitution some protections against legislative acts that might restrict the liberties of citizens, based on the history of real and perceived abuses by both British kings and parliaments as well as royal governors.</p>
-
-                    <p>In Article I, Section 9, the Constitution limits the power of Congress in three ways:</p>
+                    <p>The Constitution as drafted in 1787 did not include a Bill of Rights, although the idea of including one was proposed and, after brief discussion, dismissed in the final week of the Constitutional Convention. In Article I, Section 9, the Constitution limits the power of Congress in three ways: prohibiting bills of attainder, prohibiting ex post facto laws, and limiting the ability of Congress to suspend the writ of habeas corpus.</p>
 
                     <div class="definition-box">
                         <div class="definition-term">📜 Bill of Attainder</div>
-                        <div>A law that convicts or punishes someone for a crime without a trial. This tactic was used fairly frequently in England against the king's enemies. Prohibition of such laws means that the U.S. Congress cannot simply punish people who are unpopular or who seem to be guilty of crimes.</div>
+                        <div>A law that convicts or punishes someone for a crime without a trial. The Constitution prohibits Congress from passing such laws.</div>
                     </div>
 
                     <div class="definition-box">
                         <div class="definition-term">⏮️ Ex Post Facto Law</div>
-                        <div>A law with retroactive effect that can be used to punish crimes that were not crimes at the time they were committed, or to increase the severity of punishment after the fact. Such laws are prohibited by the Constitution.</div>
+                        <div>A law with retroactive effect that can be used to punish crimes that were not crimes at the time they were committed. Such laws are prohibited.</div>
                     </div>
 
                     <div class="definition-box">
                         <div class="definition-term">⚖️ Writ of Habeas Corpus</div>
-                        <div>A legal action demanding that a neutral judge decide whether someone has been lawfully detained. It protects people from being held indefinitely without charges. The Constitution limits Congress's ability to suspend this right.</div>
+                        <div>A legal action demanding that a neutral judge decide whether someone has been lawfully detained. It protects people from being held indefinitely without charges.</div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'national-security', 30)">
+                    <!-- Card 3: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's1-card3', 25)">
                         <div class="card-prompt">🔍 Click to explore: Civil Liberties vs. National Security</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Historical tension revealed!</p>
-                            <p>Particularly in times of war, the government has held suspected enemy agents without access to civilian courts, often without access to lawyers or a defense:</p>
+                            <p><strong>+25 points!</strong> Historical tension revealed!</p>
+                            <p>Particularly in times of war, the government has held suspected enemy agents without access to civilian courts:</p>
                             <ul>
-                                <li><strong>Civil War:</strong> President Lincoln detained suspected Confederate saboteurs and sympathizers, leading to <em>Ex parte Milligan</em></li>
+                                <li><strong>Civil War:</strong> President Lincoln detained suspected Confederate saboteurs (<em>Ex parte Milligan</em>)</li>
                                 <li><strong>World War II:</strong> The Roosevelt administration interned Japanese Americans (<em>Ex parte Quirin</em>)</li>
                                 <li><strong>Post-9/11:</strong> Bush and Obama administrations detained suspected terrorists and surveilled U.S. citizens</li>
                             </ul>
-                            <p>Hence, there have been times in our history when national security issues trumped individual liberties.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>The Federalist-Anti-Federalist Debate</h3>
-                    <p>The Federalists reasoned that the limited set of named or enumerated powers of Congress, along with the limitations in Article I, Section 9, would suffice, and that no separate bill of rights was needed. Writing as Publius in <em>Federalist No. 84</em>, Alexander Hamilton argued that the Constitution was "merely intended to regulate the general political interests of the nation" rather than contend with "the regulation of every species of personal and private concerns."</p>
-                    
-                    <p>Hamilton went on to argue that listing some rights might actually be dangerous, because it would provide a pretext for people to claim that rights not included in such a list were not protected.</p>
+                    <p>The Federalists reasoned that the limited set of enumerated powers of Congress would suffice, and that no separate bill of rights was needed. Writing as Publius in <em>Federalist No. 84</em>, Alexander Hamilton argued that listing some rights might actually be dangerous, because it would provide a pretext for people to claim that rights not included were not protected.</p>
 
-                    <p>Anti-Federalists argued that the Federalists' position was incorrect and perhaps even insincere. The Anti-Federalists believed provisions such as the so-called elastic clause in Article I, Section 8 would allow Congress to legislate on matters well beyond those foreseen by the Constitution's authors. Thus, they held that a bill of rights was necessary.</p>
+                    <p>Anti-Federalists believed the national government would prove adept at expanding its powers and that citizens couldn't depend on the good judgment of Congress alone to protect their rights.</p>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'brutus-quote', 25)">
-                        <div class="card-prompt">🔍 Click to discover: Brutus's Warning</div>
+                    <!-- Card 4: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's1-card4', 25)">
+                        <div class="card-prompt">🔍 Click to discover: The Alien and Sedition Acts</div>
                         <div class="card-content">
-                            <p><strong>+25 points!</strong> Anti-Federalist perspective revealed!</p>
-                            <p>One of the Anti-Federalists, Brutus (believed to be Robert Yates), wrote:</p>
-                            <p><em>"The powers, rights, and authority, granted to the general government by this Constitution, are as complete, with respect to every object to which they extend, as that of any state government—It reaches to every thing which concerns human happiness—Life, liberty, and property, are under its controul [sic]."</em></p>
-                            <p>The experience of the past two centuries has suggested that the Anti-Federalists may have been correct—the scope and powers of the national government are much broader today than in 1787.</p>
+                            <p><strong>+25 points!</strong> Historical example revealed!</p>
+                            <p>In 1798, at the behest of President John Adams, Congress passed the Alien and Sedition Acts. These laws:</p>
+                            <ul>
+                                <li>Allowed the president to imprison or deport foreign citizens deemed "dangerous"</li>
+                                <li>Restricted speech and newspaper articles critical of the federal government</li>
+                                <li>Were primarily used against the opposition Democratic-Republican Party</li>
+                            </ul>
+                            <p>This proved the Anti-Federalists' concerns about government overreach were well-founded!</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>The Bill of Rights</h3>
-                    <p>The struggle to have rights clearly delineated and the decision of the framers to omit a bill of rights from the Constitution nearly derailed the ratification process. While some states were willing to ratify without any further guarantees, in some of the larger states—New York and Virginia in particular—the Constitution's lack of specified rights became a serious point of contention.</p>
-                    
-                    <p>To secure majorities in favor of ratification in New York and Virginia, as well as Massachusetts, the Federalists agreed to consider incorporating provisions suggested by the ratifying states as amendments to the Constitution.</p>
-
-                    <p>Ultimately, James Madison delivered on this promise by proposing a package of amendments in the First Congress, drawing from the Declaration of Rights in the Virginia state constitution, suggestions from the ratification conventions, and other sources. Ten of the amendments were successfully ratified and became known as the Bill of Rights.</p>
+                    <p>To secure majorities for ratification in New York and Virginia, the Federalists agreed to consider amendments. James Madison proposed a package of amendments in the First Congress. Ten were ratified and became the Bill of Rights.</p>
 
                     <table class="amendment-table">
-                        <tr>
-                            <th>Amendment</th>
-                            <th>Rights Protected</th>
-                        </tr>
-                        <tr>
-                            <td><strong>First Amendment</strong></td>
-                            <td>Right to freedoms of religion and speech; right to assemble and to petition the government for redress of grievances; right to a free press</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Second Amendment</strong></td>
-                            <td>Right to keep and bear arms to maintain a well-regulated militia</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Third Amendment</strong></td>
-                            <td>Right to not house soldiers during time of war</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fourth Amendment</strong></td>
-                            <td>Right to be secure from unreasonable search and seizure</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fifth Amendment</strong></td>
-                            <td>Rights in criminal cases, including due process and indictment by grand jury for capital crimes, as well as the right not to testify against oneself</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sixth Amendment</strong></td>
-                            <td>Right to a speedy trial by an impartial jury</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Seventh Amendment</strong></td>
-                            <td>Right to a jury trial in civil cases</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Eighth Amendment</strong></td>
-                            <td>Right to not face excessive bail, excessive fines, or cruel and unusual punishment</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ninth Amendment</strong></td>
-                            <td>Rights retained by the people, even if they are not specifically enumerated by the Constitution</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tenth Amendment</strong></td>
-                            <td>States' rights to powers not specifically delegated to the federal government</td>
-                        </tr>
+                        <tr><th>Amendment</th><th>Rights Protected</th></tr>
+                        <tr><td><strong>First</strong></td><td>Religion, speech, press, assembly, petition</td></tr>
+                        <tr><td><strong>Second</strong></td><td>Right to keep and bear arms</td></tr>
+                        <tr><td><strong>Third</strong></td><td>No quartering of soldiers</td></tr>
+                        <tr><td><strong>Fourth</strong></td><td>Protection from unreasonable search and seizure</td></tr>
+                        <tr><td><strong>Fifth</strong></td><td>Grand jury, double jeopardy, self-incrimination, due process, takings</td></tr>
+                        <tr><td><strong>Sixth</strong></td><td>Speedy trial, impartial jury, right to counsel</td></tr>
+                        <tr><td><strong>Seventh</strong></td><td>Jury trial in civil cases</td></tr>
+                        <tr><td><strong>Eighth</strong></td><td>No excessive bail, fines, or cruel/unusual punishment</td></tr>
+                        <tr><td><strong>Ninth</strong></td><td>Rights retained by the people</td></tr>
+                        <tr><td><strong>Tenth</strong></td><td>Powers reserved to states/people</td></tr>
                     </table>
                 </div>
 
                 <div class="content-block">
                     <h3>Extending the Bill of Rights to the States</h3>
-                    <p>In the decades following the Constitution's ratification, the Supreme Court declined to expand the Bill of Rights to curb the power of the states, most notably in the 1833 case of <em>Barron v. Baltimore</em>. In this case, which dealt with property rights under the Fifth Amendment, the Supreme Court unanimously decided that the Bill of Rights applied only to actions by the federal government, not state or local governments.</p>
-
-                    <p>The festering issue of the rights of enslaved persons and the convulsions of the Civil War and its aftermath forced a reexamination of this thinking. Soon after slavery was abolished by the Thirteenth Amendment, state governments—particularly those in the former Confederacy—began to pass "Black codes" that restricted the rights of formerly enslaved people, including the right to hold office, own land, or vote, relegating them to second-class citizenship.</p>
-
-                    <div class="definition-box">
-                        <div class="definition-term">📜 Fourteenth Amendment (1868)</div>
-                        <div>"No State shall make or enforce any law which shall abridge the privileges or immunities of citizens of the United States... nor shall any State deprive any person of life, liberty, or property, without due process of law."</div>
-                    </div>
+                    <p>In <em>Barron v. Baltimore</em> (1833), the Supreme Court ruled that the Bill of Rights applied only to the federal government, not the states. After the Civil War, the Fourteenth Amendment changed this through <strong>selective incorporation</strong>.</p>
 
                     <div class="definition-box">
                         <div class="definition-term">🔄 Selective Incorporation</div>
-                        <div>The process by which the Supreme Court has applied most Bill of Rights protections to the states through the Fourteenth Amendment's due process clause. This has been an ongoing, case-by-case process.</div>
+                        <div>The process by which the Supreme Court has applied most Bill of Rights protections to the states through the Fourteenth Amendment's due process clause, on a case-by-case basis.</div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'selective-inc-examples', 30)">
+                    <!-- Card 5: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's1-card5', 25)">
                         <div class="card-prompt">🔍 Click to explore: Examples of Selective Incorporation</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Key process revealed!</p>
-                            <p>The Supreme Court has ruled that states don't have to use grand juries as long as they ensure people accused of crimes are indicted using an equally fair process.</p>
-                            <p>When the Supreme Court initially decided in 2008 that the Second Amendment protects an individual's right to keep and bear arms (<em>District of Columbia v. Heller</em>), it did not decide then that it was a fundamental liberty the states must uphold as well. It was only in the <em>McDonald v. Chicago</em> case two years later (2010) that the Supreme Court incorporated the Second Amendment into state law.</p>
-                            <p>In <em>Near v. Minnesota</em> (1931), the Court disagreed with state courts regarding censorship and ruled it unconstitutional except in rare cases.</p>
+                            <p><strong>+25 points!</strong> Key process revealed!</p>
+                            <ul>
+                                <li><em>Near v. Minnesota</em> (1931): Freedom of press incorporated</li>
+                                <li><em>Mapp v. Ohio</em> (1961): Exclusionary rule incorporated</li>
+                                <li><em>Gideon v. Wainwright</em> (1963): Right to counsel incorporated</li>
+                                <li><em>McDonald v. Chicago</em> (2010): Second Amendment incorporated</li>
+                            </ul>
+                            <p>Not all provisions have been incorporated—the grand jury requirement still applies only to federal cases.</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- KC 1: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">The Bill of Rights was added to the Constitution because:</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 30)">Key states refused to ratify the Constitution unless it was added</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-1', 25)">Key states refused to ratify the Constitution unless it was added</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">Alexander Hamilton believed it was necessary</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">It was part of the Articles of Confederation</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-1', 0)">It was originally part of the Declaration of Independence</div>
                     <div class="feedback-box" id="feedback-q1-1"></div>
                 </div>
 
+                <!-- KC 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">The Fourteenth Amendment was critically important for civil liberties because it:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">Guaranteed freed men the right to vote</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">Outlawed slavery</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 30)">Helped start the process of selective incorporation of the Bill of Rights</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-2', 25)">Helped start the process of selective incorporation of the Bill of Rights</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1-2', 0)">Allowed the states to continue to enact Black codes</div>
                     <div class="feedback-box" id="feedback-q1-2"></div>
+                </div>
+
+                <!-- KC 3: 25 points -->
+                <div class="knowledge-check">
+                    <div class="kc-question">Civil liberties are best defined as:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q1-3', 25)">Limitations on government power to protect individual freedoms</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">Guarantees that government will treat people equally</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">Powers reserved to the states</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q1-3', 0)">Rights granted by state constitutions</div>
+                    <div class="feedback-box" id="feedback-q1-3"></div>
                 </div>
 
                 <button class="complete-section-btn" onclick="completeSection('section1', 'card1')">✓ Complete Section 1</button>
             </div>
         </div>
 
-        <!-- SECTION 2: First Amendment Freedoms -->
+        <!-- SECTION 2: First Amendment Freedoms (200 points: 5×25 cards + 3×25 KCs) -->
         <div id="section2" class="page">
             <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
             
@@ -1037,58 +1013,50 @@
             <div class="section-content">
                 <div class="content-block">
                     <h3>The First Amendment</h3>
-                    <p>The First Amendment is perhaps the most famous provision of the Bill of Rights. It is arguably also the most extensive, because it guarantees both religious freedoms and the right to express your views in public. Specifically, the First Amendment says:</p>
+                    <p>The First Amendment is perhaps the most famous provision of the Bill of Rights, guaranteeing both religious freedoms and the right to express your views in public:</p>
 
                     <div class="quote-box">
                         "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances."
                     </div>
-
-                    <p>Given the broad scope of this amendment, it is helpful to break it into its two major parts. The first portion deals with religious freedom, and the second deals with freedom of expression.</p>
                 </div>
 
                 <div class="content-block">
                     <h3>The Establishment Clause</h3>
-                    <p>The first of the two religious freedoms is known as the establishment clause. Congress is prohibited from creating or promoting a state-sponsored religion. When the United States was founded, most countries around the world had an established church or religion—an officially sponsored set of religious beliefs and values.</p>
-
-                    <p>In Europe, bitter wars were fought between and within states, often because the established church of one territory was in conflict with that of another. Many settlers in the United States found themselves on this continent as refugees from such wars; others came to find a place where they could follow their own religious beliefs and practices without interference.</p>
+                    <p>Congress is prohibited from creating or promoting a state-sponsored religion. When the United States was founded, most countries had an established church. In Europe, bitter religious wars were fought for centuries.</p>
 
                     <div class="definition-box">
                         <div class="definition-term">⛪ Establishment Clause</div>
-                        <div>The provision of the First Amendment that prohibits the government from creating or sponsoring an official religion. The government cannot prefer one religion over another or promote religion over non-religion.</div>
+                        <div>The provision prohibiting the government from creating or sponsoring an official religion. Government cannot prefer one religion over another or religion over non-religion.</div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'lemon-test', 30)">
+                    <!-- Card 1: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's2-card1', 25)">
                         <div class="card-prompt">🔍 Click to explore: The Lemon Test</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Key legal test discovered!</p>
-                            <p>In <em>Lemon v. Kurtzman</em> (1971), the Supreme Court established a three-part test to determine if a law violates the establishment clause:</p>
+                            <p><strong>+25 points!</strong> Key legal test discovered!</p>
+                            <p>In <em>Lemon v. Kurtzman</em> (1971), the Supreme Court established a three-part test:</p>
                             <ul>
                                 <li>The law must have a <strong>secular (non-religious) purpose</strong></li>
-                                <li>The law must neither advance nor inhibit religion (neutral in effect)</li>
+                                <li>The law must neither advance nor inhibit religion</li>
                                 <li>The law must not create <strong>excessive government entanglement</strong> with religion</li>
                             </ul>
-                            <p>Laws that fail any of these three prongs are unconstitutional under the establishment clause.</p>
                         </div>
                     </div>
 
-                    <p>The use of education as an example is not an accident; in fact, many of the court's cases dealing with the establishment clause have involved education, particularly public education, because school-age children are considered a special and vulnerable population. Perhaps no subject affected by the First Amendment has been more controversial than the issue of prayer in public schools.</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'school-prayer', 25)">
+                    <!-- Card 2: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's2-card2', 25)">
                         <div class="card-prompt">🔍 Click to explore: Prayer in Public Schools</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong> Important distinction clarified!</p>
-                            <p>Discussion about school prayer has been particularly fraught because in many ways it appears to bring the two religious liberty clauses into conflict with each other.</p>
                             <p><strong>What IS prohibited:</strong></p>
                             <ul>
-                                <li>A teacher, athletic coach, or student reciting a prayer in front of a class</li>
-                                <li>Leading students in prayer as part of organized school activities</li>
+                                <li>Teacher or coach leading students in prayer</li>
                                 <li>Official endorsement of religion by school authorities</li>
                             </ul>
                             <p><strong>What IS allowed:</strong></p>
                             <ul>
-                                <li>Voluntary, non-disruptive prayer by students</li>
+                                <li>Voluntary, non-disruptive student prayer</li>
                                 <li>Student religious clubs meeting after school</li>
-                                <li>Students expressing religious views in assignments</li>
                             </ul>
                         </div>
                     </div>
@@ -1096,88 +1064,84 @@
 
                 <div class="content-block">
                     <h3>The Free Exercise Clause</h3>
-                    <p>The second provision, known as the free exercise clause, limits the government's ability to control or restrict religious practices. While the establishment clause means the government may not promote religion, the free exercise clause means the government may not restrict your ability to practice your religion.</p>
-
                     <div class="definition-box">
                         <div class="definition-term">🙏 Free Exercise Clause</div>
-                        <div>The provision of the First Amendment that protects individuals' rights to practice their religion without government interference. However, religious practices that harm others or violate neutral laws may still be regulated.</div>
+                        <div>Protects individuals' rights to practice their religion without government interference. However, religious practices that harm others may be regulated.</div>
                     </div>
 
                     <div class="case-box">
                         <div class="case-title">Employment Division v. Smith (1990)</div>
-                        <div class="case-year">Key Free Exercise Case</div>
-                        <p>Two drug counselors were fired and denied unemployment benefits after using peyote (an illegal drug) as part of Native American religious rituals. The Supreme Court ruled that neutral, generally applicable laws that incidentally burden religious practice do not violate the free exercise clause.</p>
-                        <p>This means that while you cannot be specifically targeted for your religious beliefs, you are not exempt from following laws that apply to everyone, even if those laws conflict with your religious practices.</p>
+                        <p>The Court ruled that neutral, generally applicable laws that incidentally burden religious practice do not violate the free exercise clause. You are not exempt from laws applying to everyone just because of religious beliefs.</p>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>Freedom of Speech</h3>
-                    <p>Freedom of speech and of the press are two of the key liberties at the heart of the First Amendment. Protection of free expression is essential to democratic self-government because democracy depends on an informed and engaged citizenry. Without the freedom to express and communicate ideas, a democracy cannot function effectively.</p>
+                    <p>Protection of free expression is essential to democratic self-government because democracy depends on an informed and engaged citizenry.</p>
 
-                    <p>The right to freedom of expression is not absolute; several key restrictions limit our ability to speak or publish opinions under certain circumstances:</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'speech-limits', 30)">
+                    <!-- Card 3: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's2-card3', 25)">
                         <div class="card-prompt">🔍 Click to explore: Limits on Free Speech</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Important limitations revealed!</p>
+                            <p><strong>+25 points!</strong> Important limitations revealed!</p>
                             <ul>
-                                <li><strong>Incitement:</strong> "Fighting words" and genuine threats are not protected. You can't point at someone in front of an angry crowd and shout, "Let's beat up that guy!"</li>
-                                <li><strong>Obscenity:</strong> Sexually explicit material that appeals to prurient interest and lacks serious literary, artistic, political, or scientific value</li>
-                                <li><strong>Defamation:</strong> Libel (written) or slander (spoken) that damages someone's reputation with false statements</li>
-                                <li><strong>Time, Place, and Manner:</strong> Government can regulate when, where, and how speech occurs (but not the content)</li>
-                                <li><strong>Clear and Present Danger:</strong> Speech that creates immediate lawless action can be restricted</li>
+                                <li><strong>Incitement:</strong> "Fighting words" and genuine threats not protected</li>
+                                <li><strong>Obscenity:</strong> Material lacking serious value</li>
+                                <li><strong>Defamation:</strong> Libel (written) or slander (spoken) false statements</li>
+                                <li><strong>Time, Place, Manner:</strong> Government can regulate when/where/how speech occurs</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="case-box">
                         <div class="case-title">Brandenburg v. Ohio (1969)</div>
-                        <div class="case-year">Modern Free Speech Standard</div>
-                        <p>The Supreme Court ruled that the government cannot punish inflammatory speech unless it is "directed to inciting or producing imminent lawless action and is likely to incite or produce such action." This replaced the earlier "clear and present danger" test with a much more speech-protective standard.</p>
+                        <p>Government cannot punish inflammatory speech unless it is "directed to inciting or producing imminent lawless action and is likely to incite or produce such action."</p>
                     </div>
 
                     <div class="case-box">
                         <div class="case-title">New York Times v. Sullivan (1964)</div>
-                        <div class="case-year">Public Figure Defamation Standard</div>
-                        <p>The Supreme Court decided that public figures needed to demonstrate not only that a negative press statement about them was untrue but also that the statement was made with either malicious intent or "reckless disregard" for the truth. This ruling made it much harder for politicians to silence potential critics or to bankrupt their political opponents through the courts.</p>
+                        <p>Public figures must prove "actual malice"—that the statement was made with knowledge of falsity or "reckless disregard" for truth—to win defamation cases.</p>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>Freedom of the Press</h3>
-                    <p>Freedom of the press is related to freedom of speech in that it concerns the right of a medium of communication (written, broadcast, or spoken) to communicate ideas without undue government interference. Like freedom of speech, it is not an absolute right.</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'prior-restraint', 30)">
+                    <!-- Card 4: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's2-card4', 25)">
                         <div class="card-prompt">🔍 Click to explore: Prior Restraint and the Pentagon Papers</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Landmark press case revealed!</p>
-                            <p><strong>Prior restraint</strong> is government action to prevent publication of material before it is printed. The Supreme Court has said this is almost always unconstitutional.</p>
-                            <p>In <em>New York Times v. United States</em> (1971) (the Pentagon Papers case), the Court ruled that the government could not prevent the New York Times from publishing classified documents about the Vietnam War. The government must prove that publication would cause "grave and irreparable" danger—a very high standard.</p>
-                            <p>Although people who leak secret information to the media can still be prosecuted, this protection generally extends to reporters and news outlets that pass that information on to the public.</p>
+                            <p><strong>+25 points!</strong> Landmark press case revealed!</p>
+                            <p><strong>Prior restraint</strong> is government action to prevent publication before it occurs—almost always unconstitutional.</p>
+                            <p>In <em>New York Times v. United States</em> (1971), the Court ruled the government could not stop publication of classified Vietnam War documents. The government must prove "grave and irreparable" danger.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>Freedom of Assembly and Petition</h3>
-                    <p>The final two clauses of the First Amendment protect the right of individuals to gather peacefully and to request that government take action or refrain from taking action.</p>
-
                     <div class="definition-box">
                         <div class="definition-term">👥 Freedom of Assembly</div>
-                        <div>The right to gather peacefully for protests, demonstrations, and meetings. Government can regulate the time, place, and manner of assemblies but not their content.</div>
+                        <div>The right to gather peacefully for protests and demonstrations. Government can regulate time, place, and manner but not content.</div>
                     </div>
 
-                    <div class="definition-box">
-                        <div class="definition-term">📋 Right to Petition</div>
-                        <div>The right to make complaints to or seek assistance from government without fear of punishment or reprisals. This includes contacting elected officials, lobbying, and filing lawsuits.</div>
+                    <!-- Card 5: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's2-card5', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Free Speech Zones Controversy</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong> Contemporary issue explored!</p>
+                            <p>Government agencies have established "free-speech zones" for protesters during political conventions and presidential visits, often in areas selected to:</p>
+                            <ul>
+                                <li>Minimize the protesters' public audience</li>
+                                <li>Ensure subjects of protests don't encounter demonstrators</li>
+                            </ul>
+                            <p>Critics argue this effectively limits the impact of protected speech while technically allowing it.</p>
+                        </div>
                     </div>
-
-                    <p>There have been controversial situations in which government agencies have established free-speech zones for protesters during political conventions, presidential visits, and international meetings in areas that are arguably selected to minimize their public audience or to ensure that the subjects of the protests do not have to encounter the protesters.</p>
                 </div>
 
+                <!-- KC 1: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">Which of the following provisions is NOT part of the First Amendment?</div>
+                    <div class="kc-question">Which provision is NOT part of the First Amendment?</div>
                     <div class="kc-option" onclick="handleAnswer(this, true, 'q2-1', 25)">The right to keep and bear arms</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">The right to peaceably assemble</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-1', 0)">The right to free speech</div>
@@ -1185,8 +1149,9 @@
                     <div class="feedback-box" id="feedback-q2-1"></div>
                 </div>
 
+                <!-- KC 2: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">The "establishment clause" of the First Amendment means:</div>
+                    <div class="kc-question">The "establishment clause" means:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">Citizens must establish a religion</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-2', 0)">The government must support all religions equally</div>
                     <div class="kc-option" onclick="handleAnswer(this, true, 'q2-2', 25)">The government cannot establish an official religion</div>
@@ -1194,10 +1159,11 @@
                     <div class="feedback-box" id="feedback-q2-2"></div>
                 </div>
 
+                <!-- KC 3: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">In New York Times v. Sullivan, the Supreme Court ruled that public figures must prove what to win a defamation case?</div>
+                    <div class="kc-question">In New York Times v. Sullivan, the Supreme Court ruled that public figures must prove:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">Only that a statement was false</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 25)">That the statement was false AND made with malicious intent or reckless disregard for truth</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q2-3', 25)">Actual malice or reckless disregard for truth</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">That they suffered financial damages</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q2-3', 0)">That the newspaper was politically biased</div>
                     <div class="feedback-box" id="feedback-q2-3"></div>
@@ -1207,7 +1173,7 @@
             </div>
         </div>
 
-        <!-- SECTION 3: Securing Basic Freedoms -->
+        <!-- SECTION 3: Securing Basic Freedoms (200 points: 5×25 cards + 3×25 KCs) -->
         <div id="section3" class="page">
             <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
             
@@ -1218,143 +1184,119 @@
 
             <div class="section-content">
                 <div class="content-block">
-                    <h3>Categories of Rights</h3>
-                    <p>We can broadly divide the provisions of the Bill of Rights into three categories:</p>
-                    <ul>
-                        <li><strong>First through Fourth Amendments:</strong> Protect basic individual freedoms</li>
-                        <li><strong>Fourth through Eighth Amendments:</strong> Protect people suspected or accused of criminal activity or facing civil litigation</li>
-                        <li><strong>Ninth and Tenth Amendments:</strong> Indicate that the Bill of Rights is not an exhaustive list and guarantee a role for state governments</li>
-                    </ul>
-                </div>
-
-                <div class="content-block">
                     <h3>The Second Amendment</h3>
-                    <p>There has been increased conflict over the Second Amendment in recent years due to school shootings and gun violence. As a result, gun rights have become a highly charged political issue. The text of the Second Amendment is among the shortest of those included in the Constitution:</p>
-
                     <div class="quote-box">
                         "A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed."
                     </div>
 
-                    <p>But the relative simplicity of its text has not kept it from controversy. The key debate: Is this amendment merely a protection of the right of the states to organize and arm a "well regulated militia" for civil defense, or is it a protection of a "right of the people" as a whole to individually bear arms?</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'second-views', 30)">
-                        <div class="card-prompt">🔍 Click to explore: Two Views of the Second Amendment</div>
+                    <!-- Card 1: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's3-card1', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Collective vs. Individual Rights Views</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Constitutional debate revealed!</p>
-                            <p><strong>Collective Rights View:</strong></p>
-                            <ul>
-                                <li>The Second Amendment protects the right of states to maintain militias</li>
-                                <li>"The people" refers to citizens in their collective capacity as militia members</li>
-                                <li>Individual gun ownership may be regulated</li>
-                            </ul>
-                            <p><strong>Individual Rights View:</strong></p>
-                            <ul>
-                                <li>The Second Amendment protects an individual right to own firearms</li>
-                                <li>"The people" means individual citizens, just as in other amendments</li>
-                                <li>Gun ownership is a personal right, not dependent on militia service</li>
-                            </ul>
+                            <p><strong>+25 points!</strong> Constitutional debate revealed!</p>
+                            <p><strong>Collective Rights View:</strong> Protects the right of states to maintain militias; "the people" = citizens in collective capacity</p>
+                            <p><strong>Individual Rights View:</strong> Protects individual right to own firearms; "the people" means individual citizens</p>
                         </div>
                     </div>
 
                     <div class="case-box">
                         <div class="case-title">District of Columbia v. Heller (2008)</div>
-                        <div class="case-year">Landmark Second Amendment Decision</div>
-                        <p>The Supreme Court ruled for the first time that the Second Amendment protects an <strong>individual right</strong> to keep and bear arms for personal defense in the home, unconnected to militia service. The Court struck down Washington D.C.'s handgun ban.</p>
-                        <p>However, Justice Scalia's majority opinion noted that this right is "not unlimited" and that certain regulations remain constitutional, such as prohibitions on felons possessing firearms or laws against carrying guns in sensitive places like schools.</p>
+                        <p>The Supreme Court ruled that the Second Amendment protects an <strong>individual right</strong> to keep and bear arms for self-defense in the home. However, the right is "not unlimited."</p>
                     </div>
 
-                    <div class="case-box">
-                        <div class="case-title">McDonald v. Chicago (2010)</div>
-                        <div class="case-year">Incorporation to the States</div>
-                        <p>Two years after <em>Heller</em>, the Supreme Court incorporated the Second Amendment to apply to state and local governments through the Fourteenth Amendment's due process clause. This meant that Chicago's handgun ban was also unconstitutional.</p>
+                    <!-- Card 2: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's3-card2', 25)">
+                        <div class="card-prompt">🔍 Click to explore: McDonald v. Chicago (2010)</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong> Incorporation case revealed!</p>
+                            <p>Two years after <em>Heller</em>, the Supreme Court incorporated the Second Amendment to apply to state and local governments through the Fourteenth Amendment. Chicago's handgun ban was struck down.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>The Third Amendment</h3>
-                    <p>The Third Amendment prohibits the government from commandeering people's homes to house soldiers, particularly in peacetime:</p>
-
                     <div class="quote-box">
-                        "No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner, nor in time of war, but in a manner to be prescribed by law."
+                        "No Soldier shall, in time of peace be quartered in any house, without the consent of the Owner..."
                     </div>
 
-                    <p>This amendment reflected the colonists' grievances against British troops being quartered in private homes. While rarely litigated today, the Third Amendment forms part of a broader conception of privacy in the home that is also protected by the Second and Fourth Amendments.</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'third-importance', 25)">
+                    <!-- Card 3: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's3-card3', 25)">
                         <div class="card-prompt">🔍 Click to explore: Modern Relevance of the Third Amendment</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong> Constitutional connection discovered!</p>
-                            <p>Though the Third Amendment is rarely invoked directly, courts have recognized it as supporting:</p>
+                            <p>Though rarely invoked directly, the Third Amendment supports:</p>
                             <ul>
-                                <li>The principle that the government cannot intrude into private homes without justification</li>
+                                <li>The principle that government cannot intrude into private homes</li>
                                 <li>A broader right to privacy in one's home</li>
                                 <li>Limits on military power over civilians</li>
                             </ul>
-                            <p>Together with the Second and Fourth Amendments, it establishes that Americans have a protected sphere of private life where government cannot easily intrude.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>The Fourth Amendment</h3>
-                    <p>The Fourth Amendment prevents the government from searching one's person or property or taking evidence without a warrant issued by a judge:</p>
-
                     <div class="quote-box">
-                        "The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated, and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, and particularly describing the place to be searched, and the persons or things to be seized."
+                        "The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated..."
                     </div>
 
                     <div class="definition-box">
                         <div class="definition-term">🔍 Probable Cause</div>
-                        <div>The reasonable belief, based on facts, that a crime has been, is being, or will be committed. This is required before police can obtain a search warrant.</div>
+                        <div>The reasonable belief, based on facts, that a crime has been committed. Required before police can obtain a search warrant.</div>
                     </div>
 
                     <div class="definition-box">
                         <div class="definition-term">⛔ Exclusionary Rule</div>
-                        <div>Evidence obtained in violation of the Fourth Amendment cannot be used against the defendant in a criminal trial. This rule is designed to deter police misconduct.</div>
+                        <div>Evidence obtained in violation of the Fourth Amendment cannot be used in a criminal trial. Designed to deter police misconduct.</div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'warrant-exceptions', 30)">
+                    <!-- Card 4: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's3-card4', 25)">
                         <div class="card-prompt">🔍 Click to explore: Exceptions to the Warrant Requirement</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Important exceptions revealed!</p>
-                            <p>Courts have recognized several situations where police may search without a warrant:</p>
+                            <p><strong>+25 points!</strong> Important exceptions revealed!</p>
                             <ul>
-                                <li><strong>Consent:</strong> If you voluntarily agree to a search</li>
+                                <li><strong>Consent:</strong> Voluntary agreement to search</li>
                                 <li><strong>Plain View:</strong> Evidence visible during lawful presence</li>
-                                <li><strong>Search Incident to Arrest:</strong> Searching the person and immediate area when making an arrest</li>
-                                <li><strong>Automobile Exception:</strong> Cars have a lower expectation of privacy; police can search with probable cause</li>
-                                <li><strong>Exigent Circumstances:</strong> Emergency situations like hot pursuit or risk of evidence destruction</li>
-                                <li><strong>Stop and Frisk:</strong> Brief detention and pat-down based on reasonable suspicion</li>
+                                <li><strong>Search Incident to Arrest:</strong> Person and immediate area</li>
+                                <li><strong>Automobile Exception:</strong> Cars have lower privacy expectation</li>
+                                <li><strong>Exigent Circumstances:</strong> Hot pursuit, evidence destruction</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="case-box">
-                        <div class="case-title">Riley v. California (2014)</div>
-                        <div class="case-year">Cell Phone Privacy</div>
-                        <p>The Supreme Court unanimously ruled that police need a warrant to search a cell phone, even when the phone is seized incident to arrest. Chief Justice Roberts wrote that cell phones contain "the privacies of life" and are fundamentally different from physical items like wallets or cigarette packs.</p>
-                        <p>This decision recognized that Fourth Amendment protections must evolve with technology.</p>
+                    <!-- Card 5: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's3-card5', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Riley v. California (2014)</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong> Digital privacy case revealed!</p>
+                            <p>The Supreme Court unanimously ruled that police need a warrant to search a cell phone, even when seized incident to arrest. Chief Justice Roberts wrote that phones contain "the privacies of life" and are fundamentally different from physical items.</p>
+                        </div>
                     </div>
                 </div>
 
+                <!-- KC 1: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">The Fourth Amendment's requirement for a warrant:</div>
+                    <div class="kc-question">The Fourth Amendment's warrant requirement:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Applies only to searches of the home</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Applies only to the seizure of property as evidence</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Does not protect people who rent or lease property</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">Does not apply when there is a serious risk that evidence will be destroyed before a warrant can be issued</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Has no exceptions</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-1', 0)">Does not protect renters</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-1', 25)">Does not apply when evidence may be destroyed before a warrant is obtained</div>
                     <div class="feedback-box" id="feedback-q3-1"></div>
                 </div>
 
+                <!-- KC 2: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">The Supreme Court's decision in District of Columbia v. Heller:</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">Upheld the collective rights view of the Second Amendment</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">Recognized an individual right to keep and bear arms for self-defense</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">Applied the Second Amendment to the states</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">Banned all gun regulations</div>
+                    <div class="kc-question">District of Columbia v. Heller established:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">The collective rights view of the Second Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q3-2', 25)">An individual right to keep and bear arms for self-defense</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">That all gun regulations are unconstitutional</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q3-2', 0)">That the Second Amendment applies to the states</div>
                     <div class="feedback-box" id="feedback-q3-2"></div>
                 </div>
 
+                <!-- KC 3: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">The exclusionary rule means:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q3-3', 0)">Certain groups are excluded from Fourth Amendment protections</div>
@@ -1368,7 +1310,7 @@
             </div>
         </div>
 
-        <!-- SECTION 4: Rights of the Accused -->
+        <!-- SECTION 4: Rights of the Accused (200 points: 5×25 cards + 3×25 KCs) -->
         <div id="section4" class="page">
             <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
             
@@ -1379,65 +1321,46 @@
 
             <div class="section-content">
                 <div class="content-block">
-                    <h3>Introduction</h3>
-                    <p>In addition to protecting the personal freedoms of individuals, the Bill of Rights protects those suspected or accused of crimes from various forms of unfair or unjust treatment. The prominence of these protections in the Bill of Rights may seem surprising. Given the colonists' experience of what they believed to be unjust rule by British authorities, however, and the use of the legal system to punish rebels and their sympathizers for political offenses, the impetus to ensure fair, just, and impartial treatment to everyone accused of a crime—no matter how unpopular—is perhaps more understandable.</p>
-                </div>
-
-                <div class="content-block">
                     <h3>The Fifth Amendment</h3>
-                    <p>Many of the provisions dealing with the rights of the accused are included in the Fifth Amendment; accordingly, it is one of the longest in the Bill of Rights:</p>
-
-                    <div class="quote-box">
-                        "No person shall be held to answer for a capital, or otherwise infamous crime, unless on a presentment or indictment of a Grand Jury... nor shall any person be subject for the same offence to be twice put in jeopardy of life or limb; nor shall be compelled in any criminal case to be a witness against himself, nor be deprived of life, liberty, or property, without due process of law; nor shall private property be taken for public use, without just compensation."
-                    </div>
-
                     <div class="definition-box">
                         <div class="definition-term">👥 Grand Jury</div>
-                        <div>A group of citizens charged with deciding whether there is enough evidence of a crime to prosecute someone. For serious federal crimes, an indictment from a grand jury is required before prosecution can proceed.</div>
+                        <div>A group of citizens who decide if enough evidence exists to prosecute someone for serious crimes.</div>
                     </div>
 
                     <div class="definition-box">
                         <div class="definition-term">⚖️ Double Jeopardy</div>
-                        <div>The constitutional prohibition against being tried twice for the same crime at the same level of government after acquittal. Note: Separate sovereigns (state and federal) can each prosecute for the same conduct.</div>
+                        <div>Cannot be tried twice for the same crime at the same level of government after acquittal.</div>
                     </div>
 
                     <div class="definition-box">
                         <div class="definition-term">🤐 Self-Incrimination</div>
-                        <div>The right to remain silent and not testify against oneself—"pleading the Fifth." The prosecution cannot use a defendant's silence as evidence of guilt.</div>
+                        <div>The right to remain silent—"pleading the Fifth." Silence cannot be used as evidence of guilt.</div>
                     </div>
 
-                    <div class="definition-box">
-                        <div class="definition-term">📜 Due Process</div>
-                        <div>The guarantee that people will be treated fairly and impartially by government officials when the government seeks to fine or imprison them or take their personal property away from them.</div>
+                    <!-- Card 1: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's4-card1', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Miranda v. Arizona (1966)</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong> Famous rights protection established!</p>
+                            <p>Suspects must be informed of their rights before custodial interrogation:</p>
+                            <ul>
+                                <li>Right to remain silent</li>
+                                <li>Anything said can be used against them</li>
+                                <li>Right to an attorney</li>
+                                <li>If unable to afford one, one will be provided</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="definition-box">
-                        <div class="definition-term">🏠 Takings Clause</div>
-                        <div>The requirement that government must provide "just compensation" when taking private property for public use (eminent domain).</div>
-                    </div>
-
-                    <div class="case-box">
-                        <div class="case-title">Miranda v. Arizona (1966)</div>
-                        <div class="case-year">The "Miranda Warning"</div>
-                        <p>The Supreme Court ruled that suspects must be informed of their rights before custodial interrogation:</p>
-                        <ul>
-                            <li>You have the right to remain silent</li>
-                            <li>Anything you say can be used against you in court</li>
-                            <li>You have the right to an attorney</li>
-                            <li>If you cannot afford an attorney, one will be provided for you</li>
-                        </ul>
-                        <p>However, contrary to some media depictions, police do not have to give Miranda warnings before questioning someone who is free to leave.</p>
-                    </div>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'double-jeopardy-exception', 30)">
+                    <!-- Card 2: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's4-card2', 25)">
                         <div class="card-prompt">🔍 Click to explore: Double Jeopardy Exceptions</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Legal nuance revealed!</p>
-                            <p>The double jeopardy rule has important exceptions:</p>
+                            <p><strong>+25 points!</strong> Legal nuance revealed!</p>
                             <ul>
-                                <li><strong>Separate Sovereigns:</strong> The federal government can try you for violating federal law even if a state court found you not guilty of the same action (as happened with the Rodney King police officers)</li>
-                                <li><strong>Civil Cases:</strong> You can be sued civilly for damages even after criminal acquittal (as in the O.J. Simpson case)</li>
-                                <li><strong>Mistrials:</strong> A new trial is allowed if the first ended in mistrial</li>
+                                <li><strong>Separate Sovereigns:</strong> Federal and state governments can both prosecute</li>
+                                <li><strong>Civil Cases:</strong> Can be sued civilly after criminal acquittal (O.J. Simpson)</li>
+                                <li><strong>Mistrials:</strong> New trial allowed after mistrial</li>
                             </ul>
                         </div>
                     </div>
@@ -1445,110 +1368,90 @@
 
                 <div class="content-block">
                     <h3>The Sixth Amendment</h3>
-                    <p>Once someone has been charged with a crime and indicted, the next stage in a criminal case is typically the trial itself, unless a plea bargain is reached. The Sixth Amendment contains the provisions that govern criminal trials:</p>
-
-                    <div class="quote-box">
-                        "In all criminal prosecutions, the accused shall enjoy the right to a speedy and public trial, by an impartial jury of the State and district wherein the crime shall have been committed... and to be informed of the nature and cause of the accusation; to be confronted with the witnesses against him; to have compulsory process for obtaining witnesses in his favor, and to have the Assistance of Counsel for his defence."
-                    </div>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'sixth-rights', 30)">
+                    <!-- Card 3: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's4-card3', 25)">
                         <div class="card-prompt">🔍 Click to explore: Key Sixth Amendment Protections</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Trial rights explained!</p>
+                            <p><strong>+25 points!</strong> Trial rights explained!</p>
                             <ul>
-                                <li><strong>Speedy Trial:</strong> Protection from indefinite detention; excessive delays must be justified</li>
-                                <li><strong>Public Trial:</strong> Trials must generally be open to the public (with narrow exceptions)</li>
-                                <li><strong>Impartial Jury:</strong> Both sides can reject biased jurors; jury composition cannot discriminate by race or sex</li>
-                                <li><strong>Right to Know Charges:</strong> Must be informed of what you're accused of</li>
-                                <li><strong>Confrontation:</strong> Right to cross-examine witnesses against you</li>
-                                <li><strong>Compulsory Process:</strong> Right to subpoena witnesses in your favor</li>
-                                <li><strong>Right to Counsel:</strong> Right to an attorney at all critical stages</li>
+                                <li><strong>Speedy Trial:</strong> Protection from indefinite detention</li>
+                                <li><strong>Public Trial:</strong> Generally open to the public</li>
+                                <li><strong>Impartial Jury:</strong> Both sides can reject biased jurors</li>
+                                <li><strong>Confrontation:</strong> Cross-examine witnesses</li>
+                                <li><strong>Right to Counsel:</strong> Attorney at all critical stages</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="case-box">
                         <div class="case-title">Gideon v. Wainwright (1963)</div>
-                        <div class="case-year">Right to Counsel for the Poor</div>
-                        <p>Clarence Gideon, charged with breaking and entering in Florida, could not afford a lawyer and was denied one. He represented himself and was convicted. From prison, he sent a handwritten petition to the Supreme Court.</p>
-                        <p>The Court ruled that the Sixth Amendment requires states to provide an attorney to defendants who cannot afford one in criminal cases involving imprisonment. This led to the creation of the public defender system.</p>
+                        <p>States must provide attorneys to defendants who cannot afford one in criminal cases. This created the public defender system.</p>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'plea-bargains', 25)">
+                    <!-- Card 4: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's4-card4', 25)">
                         <div class="card-prompt">🔍 Click to explore: The Reality of Plea Bargaining</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong> Criminal justice reality revealed!</p>
-                            <p>Most people accused of crimes decline their right to a jury trial. Over 90-95% of criminal cases end in <strong>plea bargains</strong>—agreements between the defendant and prosecutor.</p>
-                            <p>Reasons defendants accept plea bargains:</p>
+                            <p>Over 90-95% of criminal cases end in <strong>plea bargains</strong>—agreements between defendant and prosecutor. Reasons:</p>
                             <ul>
-                                <li>Evidence may be overwhelming, making conviction likely</li>
-                                <li>Lighter sentence than risking conviction at trial</li>
-                                <li>Cooperation in exchange for reduced charges</li>
-                                <li>Avoiding the uncertainty and expense of trial</li>
+                                <li>Lighter sentence than risking trial</li>
+                                <li>Overwhelming evidence makes conviction likely</li>
+                                <li>Avoid uncertainty and expense</li>
                             </ul>
-                            <p>Critics argue this system can pressure innocent people to plead guilty to avoid the risk of harsh sentences.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="content-block">
-                    <h3>The Seventh Amendment</h3>
-                    <p>The Seventh Amendment ensures the right to a jury trial in most civil cases where the amount in controversy exceeds $20 (a substantial sum in 1791). However, this amendment has not been incorporated to apply to the states; it applies only in federal courts.</p>
                 </div>
 
                 <div class="content-block">
                     <h3>The Eighth Amendment</h3>
-                    <p>The Eighth Amendment protects those accused and convicted of crimes from excessive punishment:</p>
-
                     <div class="quote-box">
                         "Excessive bail shall not be required, nor excessive fines imposed, nor cruel and unusual punishments inflicted."
                     </div>
 
-                    <div class="definition-box">
-                        <div class="definition-term">💰 Excessive Bail</div>
-                        <div>The Constitution prohibits bail amounts that are unreasonably high given the circumstances. However, there is no right to affordable bail—if you can't pay, you may remain in jail before trial.</div>
-                    </div>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'death-penalty', 30)">
-                        <div class="card-prompt">🔍 Click to explore: The Death Penalty and the Eighth Amendment</div>
+                    <!-- Card 5: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's4-card5', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Death Penalty Limitations</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Capital punishment explained!</p>
-                            <p>The Supreme Court has ruled that the death penalty is NOT automatically "cruel and unusual punishment" (<em>Gregg v. Georgia</em>, 1976), but has placed limitations:</p>
+                            <p><strong>+25 points!</strong> Capital punishment rules revealed!</p>
+                            <p>The death penalty is NOT automatically "cruel and unusual" (<em>Gregg v. Georgia</em>), but limitations include:</p>
                             <ul>
-                                <li><strong>Cannot execute juveniles</strong> (under 18 at time of crime)</li>
-                                <li><strong>Cannot execute intellectually disabled</strong> individuals</li>
-                                <li><strong>Cannot be applied to crimes other than murder</strong> (e.g., not for rape)</li>
-                                <li><strong>Must have proper procedures</strong> to avoid arbitrary application</li>
+                                <li>Cannot execute juveniles (under 18 at time of crime)</li>
+                                <li>Cannot execute intellectually disabled individuals</li>
+                                <li>Cannot apply to crimes other than murder</li>
+                                <li>Must have proper procedures</li>
                             </ul>
-                            <p>Public opinion may have shifted somewhat against the death penalty, perhaps due to DNA evidence revealing wrongful executions. As of recent years, many states have abolished capital punishment or stopped carrying out executions.</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- KC 1: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">The protection against double jeopardy means:</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">You cannot be sued civilly if found not guilty criminally</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">You cannot be tried twice for the same crime at the same level of government after acquittal</div>
+                    <div class="kc-question">Double jeopardy protection means:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">You cannot be sued civilly after criminal acquittal</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-1', 25)">You cannot be tried twice at the same level of government for the same crime</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">Federal and state governments cannot both prosecute you</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">You cannot be charged with multiple crimes from one incident</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-1', 0)">You cannot be charged with multiple crimes</div>
                     <div class="feedback-box" id="feedback-q4-1"></div>
                 </div>
 
+                <!-- KC 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">Gideon v. Wainwright established that:</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">The right to counsel only applies to federal cases</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">Right to counsel only applies to federal cases</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">Government must provide a lawyer if you cannot afford one</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">Only applies if you can afford a lawyer</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-2', 25)">The government must provide a lawyer if you cannot afford one</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-2', 0)">You must have a lawyer even if you don't want one</div>
                     <div class="feedback-box" id="feedback-q4-2"></div>
                 </div>
 
+                <!-- KC 3: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">The Supreme Court has decided that the death penalty:</div>
+                    <div class="kc-question">The Supreme Court has ruled that the death penalty:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">Is always cruel and unusual punishment</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">Is never cruel and unusual punishment</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">May be applied only to acts of terrorism</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-3', 25)">May not be applied to those who were under 18 when they committed a crime</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q4-3', 25)">May not be applied to those under 18 at time of crime</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q4-3', 0)">May be applied to any felony</div>
                     <div class="feedback-box" id="feedback-q4-3"></div>
                 </div>
 
@@ -1556,165 +1459,157 @@
             </div>
         </div>
 
-        <!-- SECTION 5: Interpreting the Bill of Rights -->
+        <!-- SECTION 5: Interpreting the Bill of Rights (200 points: 5×25 cards + 3×25 KCs) -->
         <div id="section5" class="page">
             <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
             
             <div class="section-header">
                 <h2>🔒 Section 5: Interpreting the Bill of Rights</h2>
-                <p>The Ninth and Tenth Amendments, Privacy Rights, and Modern Challenges</p>
+                <p>Privacy Rights and Modern Challenges</p>
             </div>
 
             <div class="section-content">
-                <div class="content-block">
-                    <h3>Introduction</h3>
-                    <p>The first eight amendments are largely silent on the status of traditional common law, which was the legal basis for many of the natural rights claimed by the framers in the Declaration of Independence. These amendments largely reflect the worldview of the time in which they were written. New technology, societal norms, and economic realities furnish challenges that fail to fit neatly into the framework established in the late eighteenth century.</p>
-                </div>
-
                 <div class="content-block">
                     <h3>The Ninth Amendment</h3>
                     <div class="quote-box">
                         "The enumeration in the Constitution, of certain rights, shall not be construed to deny or disparage others retained by the people."
                     </div>
-
-                    <p>The framers were aware they might endanger some rights if they listed a few in the Constitution and omitted others. The Ninth Amendment ensures that those interpreting the Constitution would recognize that the listing of freedoms and rights in the Bill of Rights was not exhaustive.</p>
-
-                    <p>These rights "retained by the people" include the common-law and natural rights inherited from the laws, traditions, and past court decisions of England. To this day, we regularly exercise and take for granted rights that aren't written down in the federal constitution, like the right to marry, the right to seek opportunities for employment and education, and the right to have children and raise a family.</p>
+                    <p>This ensures that listing certain rights doesn't mean other rights don't exist. We exercise unenumerated rights daily—like the right to marry, work, and raise children.</p>
                 </div>
 
                 <div class="content-block">
                     <h3>The Tenth Amendment</h3>
                     <div class="quote-box">
-                        "The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people."
+                        "The powers not delegated to the United States by the Constitution... are reserved to the States respectively, or to the people."
                     </div>
-
-                    <p>This amendment clarifies the federal system, reserving powers to states and the people that aren't given to the federal government. States often provide broader rights protections than federal minimums. For example, some state constitutions explicitly list the right to privacy, the right to a free public education, or even the right to hunt.</p>
                 </div>
 
                 <div class="content-block">
                     <h3>The Right to Privacy</h3>
-                    <p>Although several state constitutions do list the right to privacy as a protected right, the explicit recognition by the Supreme Court of a right to privacy in the U.S. Constitution emerged only in the middle of the twentieth century.</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'privacy-sources', 30)">
-                        <div class="card-prompt">🔍 Click to explore: Constitutional Sources of Privacy Rights</div>
+                    <!-- Card 1: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's5-card1', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Constitutional Sources of Privacy</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Privacy foundations revealed!</p>
-                            <p>The Supreme Court has found privacy in the "penumbras" (shadows) of explicit rights:</p>
+                            <p><strong>+25 points!</strong> Privacy foundations revealed!</p>
+                            <p>The Supreme Court found privacy in the "penumbras" of explicit rights:</p>
                             <ul>
                                 <li><strong>First Amendment:</strong> Privacy of beliefs and associations</li>
-                                <li><strong>Third Amendment:</strong> Privacy of the home from soldiers</li>
+                                <li><strong>Third Amendment:</strong> Privacy of the home</li>
                                 <li><strong>Fourth Amendment:</strong> Privacy from unreasonable searches</li>
-                                <li><strong>Fifth Amendment:</strong> Privacy of personal information (self-incrimination)</li>
-                                <li><strong>Ninth Amendment:</strong> Unenumerated rights retained by the people</li>
+                                <li><strong>Fifth Amendment:</strong> Privacy of personal information</li>
+                                <li><strong>Ninth Amendment:</strong> Unenumerated rights</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="case-box">
-                        <div class="case-title">Griswold v. Connecticut (1965)</div>
-                        <div class="case-year">Birth of Privacy Rights</div>
-                        <p>The Supreme Court struck down a Connecticut law forbidding even married individuals to use any form of contraception. Justice William O. Douglas wrote that various guarantees in the Bill of Rights create "zones of privacy" that the government cannot enter.</p>
-                        <p>This was the first explicit recognition of a constitutional right to privacy.</p>
+                    <!-- Card 2: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's5-card2', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Griswold v. Connecticut (1965)</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong> Birth of privacy rights!</p>
+                            <p>The Supreme Court struck down a Connecticut law forbidding married couples from using contraception. Justice Douglas wrote that various Bill of Rights guarantees create "zones of privacy."</p>
+                            <p>This was the first explicit recognition of a constitutional right to privacy.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="content-block">
-                    <h3>Sexual Privacy and Reproductive Rights</h3>
-                    <p>The Supreme Court's application of the right to privacy doctrine to abortion rights proved far more problematic, legally and politically.</p>
-
+                    <h3>Privacy Rights Timeline</h3>
                     <div class="timeline-container">
                         <div class="timeline-item">
                             <span class="timeline-date">1973</span>
-                            <div class="timeline-content">
-                                <strong>Roe v. Wade:</strong> The Supreme Court decided the right to privacy encompassed a right for women to terminate a pregnancy. The Court established a trimester framework for balancing state interests with women's rights.
-                            </div>
+                            <div><strong>Roe v. Wade:</strong> Privacy right includes abortion decision</div>
                         </div>
                         <div class="timeline-item">
                             <span class="timeline-date">1992</span>
-                            <div class="timeline-content">
-                                <strong>Planned Parenthood v. Casey:</strong> The Court rejected Roe's trimester framework and replaced it with the "undue burden" test—states cannot place "substantial obstacles" to abortion before viability.
-                            </div>
+                            <div><strong>Planned Parenthood v. Casey:</strong> "Undue burden" test replaces trimester framework</div>
                         </div>
                         <div class="timeline-item">
                             <span class="timeline-date">2003</span>
-                            <div class="timeline-content">
-                                <strong>Lawrence v. Texas:</strong> The Court struck down state laws criminalizing sodomy, recognizing that adults have a right to engage in consensual intimate conduct without government interference.
-                            </div>
+                            <div><strong>Lawrence v. Texas:</strong> Laws criminalizing sodomy struck down</div>
                         </div>
                         <div class="timeline-item">
                             <span class="timeline-date">2015</span>
-                            <div class="timeline-content">
-                                <strong>Obergefell v. Hodges:</strong> The Court recognized a constitutional right to same-sex marriage under the Fourteenth Amendment's due process and equal protection clauses.
-                            </div>
+                            <div><strong>Obergefell v. Hodges:</strong> Same-sex marriage recognized</div>
                         </div>
                         <div class="timeline-item">
                             <span class="timeline-date">2022</span>
-                            <div class="timeline-content">
-                                <strong>Dobbs v. Jackson Women's Health:</strong> The Court overruled Roe v. Wade and Planned Parenthood v. Casey, holding there is no federal constitutional right to abortion. The issue returned to the states.
-                            </div>
+                            <div><strong>Dobbs v. Jackson:</strong> Roe overruled; abortion returned to states</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block">
                     <h3>Privacy in the Digital Age</h3>
-                    <p>Another example of heightened concerns about privacy in the modern era is the reality that society is under pervasive surveillance. Technology has made it much easier to track and monitor people than ever before.</p>
-
-                    <div class="interactive-card" onclick="revealCard(this, 'surveillance-tech', 30)">
+                    <!-- Card 3: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's5-card3', 25)">
                         <div class="card-prompt">🔍 Click to explore: Modern Surveillance Technology</div>
                         <div class="card-content">
-                            <p><strong>+30 points!</strong> Digital privacy challenges revealed!</p>
+                            <p><strong>+25 points!</strong> Digital privacy challenges!</p>
                             <ul>
-                                <li><strong>License plate readers:</strong> Record every passing vehicle's plate</li>
-                                <li><strong>Toll transponders:</strong> Track vehicle movements</li>
-                                <li><strong>Facial recognition:</strong> Cameras can identify people as they walk or bike</li>
-                                <li><strong>Cell phones:</strong> Constantly report location to cell towers and wireless networks</li>
-                                <li><strong>Stingray devices:</strong> Police can mimic cell towers to intercept communications</li>
-                                <li><strong>Smart devices:</strong> Collect data about habits, preferences, and movements</li>
+                                <li><strong>License plate readers:</strong> Record every passing vehicle</li>
+                                <li><strong>Facial recognition:</strong> Identify people in public</li>
+                                <li><strong>Cell phones:</strong> Constantly report location</li>
+                                <li><strong>Stingray devices:</strong> Mimic cell towers</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="case-box">
-                        <div class="case-title">Carpenter v. United States (2018)</div>
-                        <div class="case-year">Cell Phone Location Privacy</div>
-                        <p>The Supreme Court ruled that accessing historical cell-site location information (cell phone location data) constitutes a search under the Fourth Amendment, requiring a warrant. The Court recognized that this data reveals an "all-encompassing record" of a person's movements.</p>
+                    <!-- Card 4: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's5-card4', 25)">
+                        <div class="card-prompt">🔍 Click to explore: Carpenter v. United States (2018)</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong> Cell phone location privacy!</p>
+                            <p>The Supreme Court ruled that accessing historical cell phone location data requires a warrant. This data reveals an "all-encompassing record" of a person's movements.</p>
+                        </div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'third-party-doctrine', 25)">
+                    <!-- Card 5: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's5-card5', 25)">
                         <div class="card-prompt">🔍 Click to explore: The Third-Party Doctrine Challenge</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong> Legal doctrine explained!</p>
-                            <p>The <strong>third-party doctrine</strong> holds that if you voluntarily give information to a third party (bank, email provider, phone company), you lose privacy protection.</p>
-                            <p>Critics argue this doctrine needs updating for the digital age, when we must share vast amounts of data with companies just to function in modern society.</p>
-                            <p><em>Carpenter v. United States</em> began to chip away at this doctrine, but its full implications are still being worked out in the courts.</p>
+                            <p>The <strong>third-party doctrine</strong> holds that if you voluntarily share information with third parties (banks, email providers, phone companies), you lose privacy protection.</p>
+                            <p>Critics argue this needs updating—we must share data with companies to function in modern society. <em>Carpenter</em> began chipping away at this doctrine.</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- KC 1: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">The right to privacy has been controversial for all the following reasons EXCEPT:</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">It is not explicitly included in the Constitution or Bill of Rights</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">It has been interpreted to protect women's right to have an abortion</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">It has been used to overturn laws that have substantial public support</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 25)">Most U.S. citizens today believe the government should be allowed to outlaw birth control</div>
+                    <div class="kc-question">The right to privacy has been controversial for all reasons EXCEPT:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">It is not explicitly in the Constitution</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">It has been interpreted to protect abortion rights</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-1', 0)">It has overturned laws with public support</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-1', 25)">Most Americans believe government should ban birth control</div>
                     <div class="feedback-box" id="feedback-q5-1"></div>
                 </div>
 
+                <!-- KC 2: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">The Ninth Amendment addresses concerns that:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">States have too much power</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 25)">Listing specific rights might be seen as denying other rights that exist</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 25)">Listing rights might be seen as denying other rights</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">The federal government needs more authority</div>
-                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">Privacy needs explicit constitutional protection</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 0)">Privacy needs explicit protection</div>
                     <div class="feedback-box" id="feedback-q5-2"></div>
+                </div>
+
+                <!-- KC 3: 25 points -->
+                <div class="knowledge-check">
+                    <div class="kc-question">Griswold v. Connecticut was significant because it:</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q5-3', 25)">First explicitly recognized a constitutional right to privacy</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 0)">Legalized abortion nationwide</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 0)">Struck down sodomy laws</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q5-3', 0)">Recognized same-sex marriage</div>
+                    <div class="feedback-box" id="feedback-q5-3"></div>
                 </div>
 
                 <button class="complete-section-btn" onclick="completeSection('section5', 'card5')">✓ Complete Section 5</button>
             </div>
         </div>
 
-        <!-- SECTION 6: Review & Application -->
+        <!-- SECTION 6: Review & Application (200 points: 5×25 cards + 3×25 KCs) -->
         <div id="section6" class="page">
             <button class="back-button no-print" onclick="goHome()">← Back to Home</button>
             
@@ -1727,30 +1622,43 @@
                 <div class="content-block">
                     <h3>Key Terms Review</h3>
                     
-                    <div class="interactive-card" onclick="revealCard(this, 'key-terms-1', 25)">
+                    <!-- Card 1: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's6-card1', 25)">
                         <div class="card-prompt">🔍 Click to review: First Amendment Terms</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong></p>
                             <ul>
-                                <li><strong>Establishment Clause:</strong> Government cannot create or sponsor an official religion</li>
-                                <li><strong>Free Exercise Clause:</strong> Government cannot interfere with religious practice</li>
-                                <li><strong>Prior Restraint:</strong> Government censorship before publication (almost always unconstitutional)</li>
-                                <li><strong>Symbolic Speech:</strong> Nonverbal expression (e.g., flag burning) protected like verbal speech</li>
-                                <li><strong>Libel:</strong> Written defamation; Slander: Spoken defamation</li>
+                                <li><strong>Establishment Clause:</strong> No official religion</li>
+                                <li><strong>Free Exercise Clause:</strong> Can't interfere with religious practice</li>
+                                <li><strong>Prior Restraint:</strong> Censorship before publication</li>
+                                <li><strong>Symbolic Speech:</strong> Nonverbal expression (e.g., flag burning)</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="interactive-card" onclick="revealCard(this, 'key-terms-2', 25)">
+                    <!-- Card 2: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's6-card2', 25)">
                         <div class="card-prompt">🔍 Click to review: Criminal Justice Terms</div>
                         <div class="card-content">
                             <p><strong>+25 points!</strong></p>
                             <ul>
-                                <li><strong>Probable Cause:</strong> Reasonable belief that a crime has been or is being committed</li>
-                                <li><strong>Exclusionary Rule:</strong> Illegally obtained evidence cannot be used in court</li>
-                                <li><strong>Grand Jury:</strong> Citizens who decide if enough evidence exists to prosecute</li>
-                                <li><strong>Double Jeopardy:</strong> Cannot be tried twice for the same crime at the same government level</li>
-                                <li><strong>Plea Bargain:</strong> Agreement between defendant and prosecutor</li>
+                                <li><strong>Probable Cause:</strong> Reasonable belief crime occurred</li>
+                                <li><strong>Exclusionary Rule:</strong> Illegal evidence excluded</li>
+                                <li><strong>Double Jeopardy:</strong> No second trial after acquittal</li>
+                                <li><strong>Plea Bargain:</strong> Agreement to plead guilty</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's6-card3', 25)">
+                        <div class="card-prompt">🔍 Click to review: Privacy and Incorporation Terms</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong></p>
+                            <ul>
+                                <li><strong>Selective Incorporation:</strong> Bill of Rights applied to states via 14th Amendment</li>
+                                <li><strong>Penumbras:</strong> "Shadows" of explicit rights creating privacy</li>
+                                <li><strong>Third-Party Doctrine:</strong> Shared info loses protection</li>
                             </ul>
                         </div>
                     </div>
@@ -1759,93 +1667,76 @@
                 <div class="content-block">
                     <h3>Landmark Supreme Court Cases</h3>
                     <table class="amendment-table">
-                        <tr>
-                            <th>Case</th>
-                            <th>Year</th>
-                            <th>Significance</th>
-                        </tr>
-                        <tr>
-                            <td>Barron v. Baltimore</td>
-                            <td>1833</td>
-                            <td>Bill of Rights applies only to federal government (later changed through incorporation)</td>
-                        </tr>
-                        <tr>
-                            <td>Lemon v. Kurtzman</td>
-                            <td>1971</td>
-                            <td>Three-part test for establishment clause violations</td>
-                        </tr>
-                        <tr>
-                            <td>Brandenburg v. Ohio</td>
-                            <td>1969</td>
-                            <td>Speech protected unless it incites imminent lawless action</td>
-                        </tr>
-                        <tr>
-                            <td>New York Times v. Sullivan</td>
-                            <td>1964</td>
-                            <td>Public figures must prove "actual malice" in defamation cases</td>
-                        </tr>
-                        <tr>
-                            <td>DC v. Heller</td>
-                            <td>2008</td>
-                            <td>Individual right to bear arms for self-defense</td>
-                        </tr>
-                        <tr>
-                            <td>Miranda v. Arizona</td>
-                            <td>1966</td>
-                            <td>Suspects must be informed of rights before custodial interrogation</td>
-                        </tr>
-                        <tr>
-                            <td>Gideon v. Wainwright</td>
-                            <td>1963</td>
-                            <td>Right to attorney for defendants who cannot afford one</td>
-                        </tr>
-                        <tr>
-                            <td>Griswold v. Connecticut</td>
-                            <td>1965</td>
-                            <td>Constitutional right to privacy established</td>
-                        </tr>
-                        <tr>
-                            <td>Riley v. California</td>
-                            <td>2014</td>
-                            <td>Warrant required to search cell phones</td>
-                        </tr>
+                        <tr><th>Case</th><th>Year</th><th>Significance</th></tr>
+                        <tr><td>Barron v. Baltimore</td><td>1833</td><td>Bill of Rights only applies to federal government</td></tr>
+                        <tr><td>Lemon v. Kurtzman</td><td>1971</td><td>Three-part test for establishment clause</td></tr>
+                        <tr><td>Brandenburg v. Ohio</td><td>1969</td><td>Speech protected unless inciting imminent lawless action</td></tr>
+                        <tr><td>DC v. Heller</td><td>2008</td><td>Individual right to bear arms</td></tr>
+                        <tr><td>Miranda v. Arizona</td><td>1966</td><td>Must inform suspects of rights</td></tr>
+                        <tr><td>Gideon v. Wainwright</td><td>1963</td><td>Right to attorney if can't afford one</td></tr>
+                        <tr><td>Griswold v. Connecticut</td><td>1965</td><td>Constitutional right to privacy</td></tr>
                     </table>
                 </div>
 
                 <div class="content-block">
                     <h3>Critical Thinking Questions</h3>
-                    <div class="interactive-card" onclick="revealCard(this, 'critical-thinking', 25)">
+                    <!-- Card 4: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's6-card4', 25)">
                         <div class="card-prompt">🔍 Click to consider: Balancing Rights and Security</div>
                         <div class="card-content">
-                            <p><strong>+25 points!</strong> Thoughtful engagement!</p>
-                            <p>Consider these questions as you apply what you've learned:</p>
+                            <p><strong>+25 points!</strong></p>
                             <ul>
-                                <li>Should the government be able to restrict speech in times of international conflict?</li>
-                                <li>How should we balance privacy against public safety in the digital age?</li>
-                                <li>Is it better for 100 guilty people to go free than for one innocent person to be unjustly punished?</li>
-                                <li>How should the Fourth Amendment apply to technologies the framers never imagined?</li>
-                                <li>Which rights and freedoms do you think are most at risk of government intrusion today?</li>
+                                <li>Should government restrict speech in wartime?</li>
+                                <li>How should privacy balance with public safety?</li>
+                                <li>Is it better for 100 guilty to go free than one innocent punished?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: 25 points -->
+                    <div class="interactive-card" onclick="revealCard(this, 's6-card5', 25)">
+                        <div class="card-prompt">🔍 Click to consider: Modern Civil Liberties Challenges</div>
+                        <div class="card-content">
+                            <p><strong>+25 points!</strong></p>
+                            <p>Consider how civil liberties apply to:</p>
+                            <ul>
+                                <li>Social media content moderation</li>
+                                <li>Facial recognition technology</li>
+                                <li>Government access to encrypted communications</li>
+                                <li>Drone surveillance</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
+                <!-- KC 1: 25 points -->
                 <div class="knowledge-check">
                     <div class="kc-question">Selective incorporation is the process by which:</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">States adopt the federal constitution</div>
-                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6-1', 25)">Bill of Rights protections are applied to the states through the Fourteenth Amendment</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6-1', 25)">Bill of Rights protections apply to states via the Fourteenth Amendment</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">Congress adds new amendments</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q6-1', 0)">The Supreme Court reviews state laws</div>
                     <div class="feedback-box" id="feedback-q6-1"></div>
                 </div>
 
+                <!-- KC 2: 25 points -->
                 <div class="knowledge-check">
-                    <div class="kc-question">Which case established that police must inform suspects of their rights before interrogation?</div>
+                    <div class="kc-question">Which case established that police must inform suspects of their rights?</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q6-2', 0)">Gideon v. Wainwright</div>
                     <div class="kc-option" onclick="handleAnswer(this, true, 'q6-2', 25)">Miranda v. Arizona</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q6-2', 0)">Mapp v. Ohio</div>
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q6-2', 0)">Escobedo v. Illinois</div>
                     <div class="feedback-box" id="feedback-q6-2"></div>
+                </div>
+
+                <!-- KC 3: 25 points -->
+                <div class="knowledge-check">
+                    <div class="kc-question">Which case incorporated the Second Amendment to apply to states?</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-3', 0)">District of Columbia v. Heller</div>
+                    <div class="kc-option" onclick="handleAnswer(this, true, 'q6-3', 25)">McDonald v. Chicago</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-3', 0)">United States v. Miller</div>
+                    <div class="kc-option" onclick="handleAnswer(this, false, 'q6-3', 0)">Printz v. United States</div>
+                    <div class="feedback-box" id="feedback-q6-3"></div>
                 </div>
 
                 <button class="complete-section-btn" onclick="completeSection('section6', 'card6')">✓ Complete Section 6</button>
@@ -1918,7 +1809,7 @@
                         </div>
 
                         <div class="instructor-note">
-                            <strong>Instructor Note:</strong> This report documents student engagement with the Chapter 4: Civil Liberties interactive module. Points reflect completion of interactive elements and knowledge check questions. This module covers the Bill of Rights, selective incorporation, First Amendment freedoms, rights of the accused, and privacy rights.
+                            <strong>Instructor Note:</strong> This report documents student engagement with Chapter 4: Civil Liberties. Points reflect completion of interactive elements and knowledge checks. Total available: 1,200 points (200 per section × 6 sections).
                         </div>
 
                         <button class="print-button no-print" onclick="window.print()">🖨️ Print Report</button>
@@ -1951,6 +1842,7 @@
             1000: 'Civil Liberties Sage'
         };
 
+        // CORRECT MAX POINTS: 6 sections × 200 points = 1200
         const maxPoints = 1200;
 
         // Initialize
@@ -1984,7 +1876,6 @@
                 };
                 document.getElementById('studentName').value = gameState.studentName || '';
                 
-                // Restore completed section cards
                 gameState.completedSections.forEach(sectionId => {
                     const cardNum = sectionId.replace('section', '');
                     const card = document.getElementById('card' + cardNum);
@@ -2126,12 +2017,12 @@
             
             // Section performance
             const sections = [
-                { id: 'section1', name: 'What Are Civil Liberties?' },
-                { id: 'section2', name: 'First Amendment Freedoms' },
-                { id: 'section3', name: 'Securing Basic Freedoms' },
-                { id: 'section4', name: 'Rights of the Accused' },
-                { id: 'section5', name: 'Interpreting the Bill of Rights' },
-                { id: 'section6', name: 'Review & Application' }
+                { id: 'section1', name: 'What Are Civil Liberties?', points: 200 },
+                { id: 'section2', name: 'First Amendment Freedoms', points: 200 },
+                { id: 'section3', name: 'Securing Basic Freedoms', points: 200 },
+                { id: 'section4', name: 'Rights of the Accused', points: 200 },
+                { id: 'section5', name: 'Interpreting the Bill of Rights', points: 200 },
+                { id: 'section6', name: 'Review & Application', points: 200 }
             ];
             
             let sectionHTML = '';
@@ -2159,7 +2050,9 @@
                 : 0;
             document.getElementById('metricQuiz').textContent = quizScore + '%';
             
-            const engagement = Math.round((gameState.earnedPoints.size / 20) * 100);
+            // 30 total interactive elements (5 cards + 3 KCs per section × 6 sections = 48, but using earnedPoints for cards)
+            const totalInteractiveElements = 30; // 5 cards per section × 6 sections
+            const engagement = Math.round((gameState.earnedPoints.size / totalInteractiveElements) * 100);
             document.getElementById('metricEngagement').textContent = Math.min(100, engagement) + '%';
         }
     </script>
