@@ -724,6 +724,61 @@
             font-weight: bold;
         }
 
+        /* Time Analysis Section */
+        .time-analysis-section {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .time-analysis-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .time-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .time-stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .time-stat-value {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .time-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .time-warning {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-left: 5px solid var(--error);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: var(--text-primary);
+            font-size: 0.95em;
+        }
+
         /* Print Styles */
         @media print {
             .header, .back-button, #pointsPopup, .no-print { display: none !important; }
@@ -741,6 +796,7 @@
             .timeline-item::before { left: -40px !important; }
             .report-sections { grid-template-columns: 1fr; }
             .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .time-analysis-grid { grid-template-columns: repeat(2, 1fr); }
             .header-content { flex-direction: column; gap: 10px; text-align: center; }
         }
 
@@ -799,8 +855,9 @@
         <div class="header-content">
             <div class="header-title">🏛️ TCC Federal Government Trailblazer Trek</div>
             <div class="score-display">
-                <div>⭐ Score: <span id="currentScore">0</span></div>
-                <div>🎯 Level: <span id="currentLevel">Explorer</span></div>
+                <div>&#9201;&#65039; Time: <span id="elapsedTime">0:00</span></div>
+                <div>&#11088; Score: <span id="currentScore">0</span></div>
+                <div>&#127919; Level: <span id="currentLevel">Explorer</span></div>
             </div>
         </div>
     </div>
@@ -1954,6 +2011,10 @@
                                     <span>Time:</span>
                                     <span id="reportTime">-</span>
                                 </div>
+                                <div class="info-row">
+                                    <span>Total Time Spent:</span>
+                                    <span id="reportTotalTime">-</span>
+                                </div>
                             </div>
                             <div class="performance-section">
                                 <h3>Section Performance</h3>
@@ -1961,30 +2022,37 @@
                                     <tr>
                                         <th>Section</th>
                                         <th>Status</th>
+                                        <th>Time Spent</th>
                                     </tr>
                                     <tr>
                                         <td>1. What is Government?</td>
-                                        <td id="s1Status">⭕ Not Started</td>
+                                        <td id="s1Status">&#11093; Not Started</td>
+                                        <td id="s1Time">0:00</td>
                                     </tr>
                                     <tr>
-                                        <td>2. Types of Goods & Services</td>
-                                        <td id="s2Status">⭕ Not Started</td>
+                                        <td>2. Types of Goods &amp; Services</td>
+                                        <td id="s2Status">&#11093; Not Started</td>
+                                        <td id="s2Time">0:00</td>
                                     </tr>
                                     <tr>
                                         <td>3. Elitism vs. Pluralism</td>
-                                        <td id="s3Status">⭕ Not Started</td>
+                                        <td id="s3Status">&#11093; Not Started</td>
+                                        <td id="s3Time">0:00</td>
                                     </tr>
                                     <tr>
                                         <td>4. Engagement in Democracy</td>
-                                        <td id="s4Status">⭕ Not Started</td>
+                                        <td id="s4Status">&#11093; Not Started</td>
+                                        <td id="s4Time">0:00</td>
                                     </tr>
                                     <tr>
-                                        <td>5. Critical Thinking & Culture</td>
-                                        <td id="s5Status">⭕ Not Started</td>
+                                        <td>5. Critical Thinking &amp; Culture</td>
+                                        <td id="s5Status">&#11093; Not Started</td>
+                                        <td id="s5Time">0:00</td>
                                     </tr>
                                     <tr>
-                                        <td>6. Governing Systems & Power</td>
-                                        <td id="s6Status">⭕ Not Started</td>
+                                        <td>6. Governing Systems &amp; Power</td>
+                                        <td id="s6Status">&#11093; Not Started</td>
+                                        <td id="s6Time">0:00</td>
                                     </tr>
                                 </table>
                             </div>
@@ -2010,10 +2078,36 @@
                             </div>
                         </div>
 
+                        <!-- Time Analysis -->
+                        <div class="time-analysis-section" id="timeAnalysis">
+                            <h3>&#9201;&#65039; Time Analysis</h3>
+                            <div class="time-analysis-grid">
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="totalModuleTime">0:00</div>
+                                    <div class="time-stat-label">Total Module Time</div>
+                                </div>
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="avgSectionTime">0:00</div>
+                                    <div class="time-stat-label">Avg per Section</div>
+                                </div>
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="fastestSection">-</div>
+                                    <div class="time-stat-label">Fastest Section</div>
+                                </div>
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="slowestSection">-</div>
+                                    <div class="time-stat-label">Slowest Section</div>
+                                </div>
+                            </div>
+                            <div id="timeWarning" class="time-warning" style="display:none;">
+                                &#9888;&#65039; <strong>Pacing Alert:</strong> <span id="timeWarningText"></span>
+                            </div>
+                        </div>
+
                         <!-- Footer -->
                         <div class="report-footer">
                             <p class="instructor-note">
-                                <strong>Instructor Note:</strong> This report documents the student's completion of Chapter 1: Critical Thinking and the American Political System in the TCC Federal Government Trailblazer Trek learning module. Points are earned through interactive exploration cards and knowledge check questions. A score of 90% or higher indicates mastery of the material.
+                                <strong>Instructor Note:</strong> This report documents the student's completion of Chapter 1: Critical Thinking and the American Political System in the TCC Federal Government Trailblazer Trek learning module. Points are earned through interactive exploration cards and knowledge check questions. A score of 90% or higher indicates mastery of the material. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                             </p>
                             <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
                         </div>
@@ -2032,8 +2126,49 @@
             revealedCards: new Set(),
             answeredQuestions: new Set(),
             correctAnswers: 0,
-            totalQuestions: 12
+            totalQuestions: 12,
+            // Timer tracking
+            moduleStartTime: Date.now(),
+            sectionTimers: {
+                section1: 0, section2: 0, section3: 0,
+                section4: 0, section5: 0, section6: 0
+            },
+            currentSection: null,
+            sectionEntryTime: null
         };
+
+        // Format milliseconds to M:SS or H:MM:SS
+        function formatTime(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const hrs = Math.floor(totalSec / 3600);
+            const mins = Math.floor((totalSec % 3600) / 60);
+            const secs = totalSec % 60;
+            if (hrs > 0) {
+                return hrs + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            }
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+
+        // Get total time spent across all sections (including active section)
+        function getTotalTime() {
+            let total = 0;
+            for (let s in gameState.sectionTimers) {
+                total += gameState.sectionTimers[s];
+            }
+            // Add live time if currently in a section
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                total += Date.now() - gameState.sectionEntryTime;
+            }
+            return total;
+        }
+
+        // Update the elapsed-time clock in the header every second
+        setInterval(function() {
+            const el = document.getElementById('elapsedTime');
+            if (el) {
+                el.textContent = formatTime(Date.now() - gameState.moduleStartTime);
+            }
+        }, 1000);
 
         // Level thresholds
         const levels = {
@@ -2050,6 +2185,20 @@
 
         // Show page function
         function showPage(pageId) {
+            // Stop timer for current section if leaving one
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                const elapsed = Date.now() - gameState.sectionEntryTime;
+                gameState.sectionTimers[gameState.currentSection] += elapsed;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
+
+            // Start timer if entering a section page
+            if (pageId.startsWith('section')) {
+                gameState.currentSection = pageId;
+                gameState.sectionEntryTime = Date.now();
+            }
+
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -2180,6 +2329,88 @@
                     markSectionComplete(section);
                 }
             }
+
+            // Check pacing for current section if inside one
+            if (gameState.currentSection) {
+                checkSectionPacing(gameState.currentSection);
+            }
+        }
+
+        // Define all interactive elements per section
+        const sectionElements = {
+            'section1': { cards: ['locke','democracy_capitalism','civic_engagement'], questions: ['q1a','q1b'] },
+            'section2': { cards: ['goods_types','gov_services','gov_types'], questions: ['q2a','q2b'] },
+            'section3': { cards: ['elite_evidence','tradeoffs','congress_tradeoffs'], questions: ['q3a','q3b'] },
+            'section4': { cards: ['counterarguments','pathways','youth_turnout'], questions: ['q4a','q4b'] },
+            'section5': { cards: ['core_values','equality_debate'], questions: ['q5a','q5b'] },
+            'section6': { cards: ['three_systems','freemarket','power_balance'], questions: ['q6a','q6b'] }
+        };
+
+        // Track which sections have already shown a pacing warning
+        const pacingAlertShown = new Set();
+
+        function checkSectionPacing(sectionKey) {
+            if (pacingAlertShown.has(sectionKey)) return;
+
+            const elements = sectionElements[sectionKey];
+            if (!elements) return;
+
+            // Check if ALL cards in this section are revealed
+            const allCardsRevealed = elements.cards.every(function(cardId) {
+                return gameState.revealedCards.has(cardId);
+            });
+
+            // Check if ALL questions in this section are answered
+            const allQuestionsAnswered = elements.questions.every(function(qId) {
+                return gameState.answeredQuestions.has(qId);
+            });
+
+            if (!allCardsRevealed || !allQuestionsAnswered) return;
+
+            // All elements done — now check pacing
+            pacingAlertShown.add(sectionKey);
+
+            let sectionMs = gameState.sectionTimers[sectionKey] || 0;
+            if (gameState.currentSection === sectionKey && gameState.sectionEntryTime) {
+                sectionMs += Date.now() - gameState.sectionEntryTime;
+            }
+
+            if (sectionMs >= 0 && sectionMs < 120000) {
+                showPacingWarning(sectionKey, sectionMs);
+            }
+        }
+
+        // Show immediate on-screen pacing warning
+        function showPacingWarning(sectionId, ms) {
+            const sectionNum = sectionId.replace('section', '');
+            const timeStr = ms > 0 ? formatTime(ms) : 'never opened';
+            
+            let overlay = document.getElementById('pacingWarningOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'pacingWarningOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
+                
+                const box = document.createElement('div');
+                box.id = 'pacingWarningBox';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #B71C1C;';
+                overlay.appendChild(box);
+                document.body.appendChild(overlay);
+            }
+            
+            const box = document.getElementById('pacingWarningBox');
+            box.innerHTML = 
+                '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">' +
+                'Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
+                '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">' +
+                'Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. ' +
+                'Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" ' +
+                'style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+            
+            overlay.style.display = 'flex';
         }
 
         // Mark section as complete
@@ -2243,6 +2474,12 @@
 
         // Update report
         function updateReport() {
+            // Snapshot current section time before rendering
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.sectionEntryTime = Date.now(); // reset entry so time keeps accumulating if they go back
+            }
+
             // Update student name
             const studentName = document.getElementById('studentName').value || 'Not entered';
             document.getElementById('reportName').textContent = studentName;
@@ -2266,21 +2503,96 @@
             document.getElementById('reportPercentage').textContent = percentage;
             document.getElementById('reportCompletion').textContent = Math.round((gameState.completedSections.length / 6) * 100);
             
-            // Update section statuses
+            // Update section statuses and times
+            const sectionNames = {
+                1: 'What is Government?',
+                2: 'Types of Goods & Services',
+                3: 'Elitism vs. Pluralism',
+                4: 'Engagement in Democracy',
+                5: 'Critical Thinking & Culture',
+                6: 'Governing Systems & Power'
+            };
+
+            let visitedCount = 0;
+            let totalSectionMs = 0;
+            let fastestMs = Infinity;
+            let slowestMs = 0;
+            let fastestName = '-';
+            let slowestName = '-';
+            let rushSections = [];
+
             for (let i = 1; i <= 6; i++) {
                 const statusEl = document.getElementById('s' + i + 'Status');
-                if (gameState.completedSections.includes('section' + i)) {
-                    statusEl.textContent = '✅ Completed';
+                const timeEl = document.getElementById('s' + i + 'Time');
+                const sectionMs = gameState.sectionTimers['section' + i];
+                const isCompleted = gameState.completedSections.includes('section' + i);
+
+                // Format time for this section
+                timeEl.textContent = sectionMs > 0 ? formatTime(sectionMs) : '--:--';
+
+                if (sectionMs > 0) {
+                    visitedCount++;
+                    totalSectionMs += sectionMs;
+
+                    if (sectionMs < fastestMs) {
+                        fastestMs = sectionMs;
+                        fastestName = formatTime(sectionMs) + ' (S' + i + ')';
+                    }
+                    if (sectionMs > slowestMs) {
+                        slowestMs = sectionMs;
+                        slowestName = formatTime(sectionMs) + ' (S' + i + ')';
+                    }
+
+                    // Flag sections completed in under 2 minutes as suspiciously fast
+                    if (sectionMs < 120000 && isCompleted) {
+                        rushSections.push('Section ' + i + ' (' + formatTime(sectionMs) + ')');
+                    }
+                } else if (isCompleted) {
+                    // Section marked complete but never visited — most suspicious
+                    rushSections.push('Section ' + i + ' (never opened)');
+                }
+
+                if (isCompleted) {
+                    statusEl.textContent = '\u2705 Completed';
                     statusEl.style.color = '#1B5E20';
                 } else if (gameState.score > (i - 1) * 200) {
-                    statusEl.textContent = '🔄 In Progress';
+                    statusEl.textContent = '\uD83D\uDD04 In Progress';
                     statusEl.style.color = '#F57C00';
                 } else {
-                    statusEl.textContent = '⭕ Not Started';
+                    statusEl.textContent = '\u2B55 Not Started';
                     statusEl.style.color = '#B71C1C';
                 }
             }
-            
+
+            // Total module time (wall clock)
+            const totalModuleMs = Date.now() - gameState.moduleStartTime;
+            document.getElementById('reportTotalTime').textContent = formatTime(totalModuleMs);
+            document.getElementById('totalModuleTime').textContent = formatTime(totalModuleMs);
+
+            // Average section time
+            if (visitedCount > 0) {
+                document.getElementById('avgSectionTime').textContent = formatTime(Math.round(totalSectionMs / visitedCount));
+            } else {
+                document.getElementById('avgSectionTime').textContent = '--:--';
+            }
+
+            // Fastest and slowest
+            document.getElementById('fastestSection').textContent = visitedCount > 0 ? fastestName : '-';
+            document.getElementById('slowestSection').textContent = visitedCount > 0 ? slowestName : '-';
+
+            // Pacing alert
+            const warningEl = document.getElementById('timeWarning');
+            const warningTextEl = document.getElementById('timeWarningText');
+            if (rushSections.length > 0) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = rushSections.join(', ') + (rushSections.length === 1 ? ' was' : ' were') + ' completed in under 2 minutes. This may indicate the material was not thoroughly reviewed.';
+            } else if (totalModuleMs < 300000 && gameState.completedSections.length >= 4) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + gameState.completedSections.length + ' sections done. This pacing suggests the material may not have been fully engaged with.';
+            } else {
+                warningEl.style.display = 'none';
+            }
+
             // Update metrics
             document.getElementById('metricPoints').textContent = gameState.score;
             document.getElementById('metricSections').textContent = gameState.completedSections.length + '/6';

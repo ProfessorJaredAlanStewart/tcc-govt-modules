@@ -768,6 +768,15 @@
             margin: 0.5rem;
         }
 
+        /* Time Analysis Section */
+        .time-analysis-section { background: var(--bg-light); padding: 25px; border-radius: 12px; margin: 30px 0; text-align: left; border: 2px solid var(--primary-blue); }
+        .time-analysis-section h3 { color: var(--primary-blue); margin-bottom: 15px; border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px; text-align: center; }
+        .time-analysis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
+        .time-stat-box { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        .time-stat-value { font-size: 1.6em; font-weight: bold; color: var(--primary-green); }
+        .time-stat-label { color: var(--text-secondary); font-size: 0.85em; margin-top: 4px; }
+        .time-warning { background: linear-gradient(135deg, #ffebee, #ffcdd2); border-left: 5px solid #B71C1C; padding: 15px 20px; border-radius: 8px; margin-top: 15px; color: var(--text-primary); font-size: 0.95em; }
+
         @media print {
             .no-print {
                 display: none !important;
@@ -798,6 +807,10 @@
             .report-sections {
                 grid-template-columns: 1fr;
             }
+            
+            .time-analysis-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -805,6 +818,7 @@
     <header class="header">
         <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
         <div class="score-display">
+            <span>&#9201;&#65039; <span id="elapsedTime">0:00</span></span>
             <span>⭐ <span id="currentScore">0</span> pts</span>
             <span>🎯 <span id="currentLevel">Explorer</span></span>
         </div>
@@ -2017,6 +2031,10 @@
                                 <span class="info-label">Time:</span>
                                 <span id="reportTime"></span>
                             </div>
+                            <div class="info-row">
+                                <span class="info-label">Total Time Spent:</span>
+                                <span id="reportTotalTime">-</span>
+                            </div>
                         </div>
 
                         <div class="performance-section">
@@ -2024,23 +2042,28 @@
                             <table class="performance-table">
                                 <tr>
                                     <td>Section 1: Institutional Design</td>
-                                    <td id="section1Status">⭕</td>
+                                    <td id="section1Status">&#11093;</td>
+                                    <td id="time1">--:--</td>
                                 </tr>
                                 <tr>
                                     <td>Section 2: Congressional Elections</td>
-                                    <td id="section2Status">⭕</td>
+                                    <td id="section2Status">&#11093;</td>
+                                    <td id="time2">--:--</td>
                                 </tr>
                                 <tr>
                                     <td>Section 3: Representation</td>
-                                    <td id="section3Status">⭕</td>
+                                    <td id="section3Status">&#11093;</td>
+                                    <td id="time3">--:--</td>
                                 </tr>
                                 <tr>
                                     <td>Section 4: Organizations</td>
-                                    <td id="section4Status">⭕</td>
+                                    <td id="section4Status">&#11093;</td>
+                                    <td id="time4">--:--</td>
                                 </tr>
                                 <tr>
                                     <td>Section 5: Legislative Process</td>
-                                    <td id="section5Status">⭕</td>
+                                    <td id="section5Status">&#11093;</td>
+                                    <td id="time5">--:--</td>
                                 </tr>
                             </table>
                         </div>
@@ -2065,6 +2088,20 @@
                         </div>
                     </div>
 
+                    <!-- Time Analysis -->
+                    <div class="time-analysis-section">
+                        <h3>&#9201;&#65039; Time Analysis</h3>
+                        <div class="time-analysis-grid">
+                            <div class="time-stat-box"><div class="time-stat-value" id="totalModuleTime">0:00</div><div class="time-stat-label">Total Module Time</div></div>
+                            <div class="time-stat-box"><div class="time-stat-value" id="avgSectionTime">0:00</div><div class="time-stat-label">Avg per Section</div></div>
+                            <div class="time-stat-box"><div class="time-stat-value" id="fastestSection">-</div><div class="time-stat-label">Fastest Section</div></div>
+                            <div class="time-stat-box"><div class="time-stat-value" id="slowestSection">-</div><div class="time-stat-label">Slowest Section</div></div>
+                        </div>
+                        <div id="timeWarning" class="time-warning" style="display:none;">
+                            &#9888;&#65039; <strong>Pacing Alert:</strong> <span id="timeWarningText"></span>
+                        </div>
+                    </div>
+
                     <div class="content-block">
                         <h3>🎓 Key Concepts Mastered</h3>
                         <ul>
@@ -2085,7 +2122,7 @@
 
                     <div class="report-footer">
                         <p class="instructor-note">
-                            <strong>📝 Instructor Note:</strong> This report confirms the student's completion of Chapter 6: Congress in the TCC Federal Government Trailblazer Trek module. The score reflects engagement with interactive content and knowledge check questions.
+                            <strong>📝 Instructor Note:</strong> This report confirms the student's completion of Chapter 6: Congress in the TCC Federal Government Trailblazer Trek module. The score reflects engagement with interactive content and knowledge check questions. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                         </p>
                         <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
                         <button class="print-report-button no-print" onclick="goHome()">🏠 Return Home</button>
@@ -2106,8 +2143,72 @@
             earnedPoints: new Set(),
             answeredQuestions: new Set(),
             correctAnswers: 0,
-            totalQuestions: 11
+            totalQuestions: 11,
+            moduleStartTime: Date.now(),
+            sectionTimers: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+            currentSection: null,
+            sectionEntryTime: null
         };
+
+        function formatTime(ms) {
+            var totalSec = Math.floor(ms / 1000);
+            var hrs = Math.floor(totalSec / 3600);
+            var mins = Math.floor((totalSec % 3600) / 60);
+            var secs = totalSec % 60;
+            if (hrs > 0) return hrs + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+        setInterval(function() {
+            var el = document.getElementById('elapsedTime');
+            if (el) el.textContent = formatTime(Date.now() - gameState.moduleStartTime);
+        }, 1000);
+
+        const sectionElements = {
+            '1': { cards: ['shays','plans','purposes','redistrict','gerrymander','purse','commerce'], questions: ['kc1-1','kc1-2'] },
+            '2': { cards: ['structural','superpac','incumbent','national','house-senate-diff','midterm-pattern'], questions: ['kc2-1','kc2-2'] },
+            '3': { cards: ['models','women','cbc','aca','approval','deficit-politics'], questions: ['kc3-1','kc3-2'] },
+            '4': { cards: ['leadership','committee-types','committee-work','speaker-power','senate-traditions'], questions: ['kc4-1','kc4-2'] },
+            '5': { cards: ['bill-process','filibuster-modern','modern-leg','power-shift','war-powers'], questions: ['kc5-1','kc5-2','kc5-3'] }
+        };
+        const pacingAlertShown = new Set();
+
+        function checkSectionPacing(sectionNum) {
+            var key = String(sectionNum);
+            if (pacingAlertShown.has(key)) return;
+            var elements = sectionElements[key];
+            if (!elements) return;
+            var allCards = elements.cards.every(function(id) { return gameState.earnedPoints.has(id); });
+            var allQs = elements.questions.every(function(id) { return gameState.answeredQuestions.has(id); });
+            if (!allCards || !allQs) return;
+            pacingAlertShown.add(key);
+            var sectionMs = gameState.sectionTimers[key] || 0;
+            if (gameState.currentSection === key && gameState.sectionEntryTime) {
+                sectionMs += Date.now() - gameState.sectionEntryTime;
+            }
+            if (sectionMs >= 0 && sectionMs < 120000) showPacingWarning(key, sectionMs);
+        }
+
+        function showPacingWarning(sectionNum, ms) {
+            var timeStr = ms > 0 ? formatTime(ms) : 'never opened';
+            var overlay = document.getElementById('pacingWarningOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'pacingWarningOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
+                var box = document.createElement('div');
+                box.id = 'pacingWarningBox';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #B71C1C;';
+                overlay.appendChild(box);
+                document.body.appendChild(overlay);
+            }
+            document.getElementById('pacingWarningBox').innerHTML =
+                '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
+                '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+            overlay.style.display = 'flex';
+        }
 
         // Level Thresholds
         const levels = {
@@ -2121,7 +2222,8 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            loadProgress();
+            // Clear saved progress so each session starts fresh with accurate timing
+            localStorage.removeItem('congressChapterProgress');
             updateDisplay();
         });
 
@@ -2152,7 +2254,11 @@
                     ...data,
                     completedSections: new Set(data.completedSections || []),
                     earnedPoints: new Set(data.earnedPoints || []),
-                    answeredQuestions: new Set(data.answeredQuestions || [])
+                    answeredQuestions: new Set(data.answeredQuestions || []),
+                    moduleStartTime: Date.now(),
+                    sectionTimers: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+                    currentSection: null,
+                    sectionEntryTime: null
                 };
                 
                 const nameInput = document.getElementById('studentName');
@@ -2172,12 +2278,27 @@
 
         // Navigation
         function goToSection(sectionId) {
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
+            var sMatch = sectionId.match(/^section(\d)$/);
+            if (sMatch) {
+                gameState.currentSection = sMatch[1];
+                gameState.sectionEntryTime = Date.now();
+            }
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             window.scrollTo(0, 0);
         }
 
         function goHome() {
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('homePage').classList.add('active');
             window.scrollTo(0, 0);
@@ -2220,6 +2341,7 @@
             
             gameState.earnedPoints.add(id);
             addPoints(points);
+            if (gameState.currentSection) checkSectionPacing(gameState.currentSection);
         }
 
         // Knowledge Check Handler
@@ -2256,6 +2378,7 @@
             }
             
             saveProgress();
+            if (gameState.currentSection) checkSectionPacing(gameState.currentSection);
         }
 
         // Complete Section
@@ -2294,19 +2417,21 @@
 
         // Generate Report
         function generateReport() {
-            const percentage = Math.round((gameState.currentScore / gameState.maxScore) * 100);
-            const sectionsCompleted = gameState.completedSections.size;
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
+
+            var percentage = Math.round((gameState.currentScore / gameState.maxScore) * 100);
+            var sectionsCompleted = gameState.completedSections.size;
             
-            // Calculate grade
-            let letterGrade = 'F';
-            let gradeColor = '#B71C1C';
-            
+            var letterGrade = 'F', gradeColor = '#B71C1C';
             if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
             else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
             else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
             else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
             
-            // Update report elements
             document.getElementById('reportTotalPoints').textContent = gameState.currentScore;
             document.getElementById('reportPercentage').textContent = percentage;
             document.getElementById('reportCompletion').textContent = Math.round((sectionsCompleted / 5) * 100);
@@ -2318,23 +2443,59 @@
             document.getElementById('reportName').textContent = gameState.studentName || 'Not Entered';
             document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
             document.getElementById('reportTime').textContent = new Date().toLocaleTimeString();
+
+            var totalModuleMs = Date.now() - gameState.moduleStartTime;
+            document.getElementById('reportTotalTime').textContent = formatTime(totalModuleMs);
+            document.getElementById('totalModuleTime').textContent = formatTime(totalModuleMs);
             
-            // Section statuses
-            for (let i = 1; i <= 5; i++) {
-                const status = gameState.completedSections.has(`section${i}`) ? '✅' : '⭕';
-                document.getElementById(`section${i}Status`).textContent = status;
+            var visitedCount = 0, totalSectionMs = 0, fastestMs = Infinity, slowestMs = 0;
+            var fastestName = '-', slowestName = '-', rushSections = [];
+
+            for (var i = 1; i <= 5; i++) {
+                var status = gameState.completedSections.has('section' + i) ? '\u2705' : '\u2B55';
+                document.getElementById('section' + i + 'Status').textContent = status;
+
+                var timeCell = document.getElementById('time' + i);
+                var sectionMs = gameState.sectionTimers[String(i)] || 0;
+                var isCompleted = gameState.completedSections.has('section' + i);
+
+                timeCell.textContent = sectionMs > 0 ? formatTime(sectionMs) : '--:--';
+
+                if (sectionMs > 0) {
+                    visitedCount++;
+                    totalSectionMs += sectionMs;
+                    if (sectionMs < fastestMs) { fastestMs = sectionMs; fastestName = formatTime(sectionMs) + ' (S' + i + ')'; }
+                    if (sectionMs > slowestMs) { slowestMs = sectionMs; slowestName = formatTime(sectionMs) + ' (S' + i + ')'; }
+                    if (sectionMs < 120000 && isCompleted) rushSections.push('Section ' + i + ' (' + formatTime(sectionMs) + ')');
+                } else if (isCompleted) {
+                    rushSections.push('Section ' + i + ' (never opened)');
+                }
+            }
+
+            document.getElementById('avgSectionTime').textContent = visitedCount > 0 ? formatTime(Math.round(totalSectionMs / visitedCount)) : '--:--';
+            document.getElementById('fastestSection').textContent = visitedCount > 0 ? fastestName : '-';
+            document.getElementById('slowestSection').textContent = visitedCount > 0 ? slowestName : '-';
+
+            var warningEl = document.getElementById('timeWarning');
+            var warningTextEl = document.getElementById('timeWarningText');
+            if (rushSections.length > 0) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = rushSections.join(', ') + (rushSections.length === 1 ? ' was' : ' were') + ' completed in under 2 minutes. This may indicate the material was not thoroughly reviewed.';
+            } else if (totalModuleMs < 300000 && sectionsCompleted >= 3) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + sectionsCompleted + ' sections done.';
+            } else {
+                warningEl.style.display = 'none';
             }
             
-            // Metrics
             document.getElementById('metricPoints').textContent = gameState.currentScore;
-            document.getElementById('metricSections').textContent = `${sectionsCompleted}/5`;
+            document.getElementById('metricSections').textContent = sectionsCompleted + '/5';
             
-            const quizScore = gameState.answeredQuestions.size > 0 
-                ? Math.round((gameState.correctAnswers / gameState.answeredQuestions.size) * 100) 
-                : 0;
+            var quizScore = gameState.answeredQuestions.size > 0 
+                ? Math.round((gameState.correctAnswers / gameState.answeredQuestions.size) * 100) : 0;
             document.getElementById('metricQuiz').textContent = quizScore + '%';
             
-            const engagementScore = Math.round((gameState.earnedPoints.size / 20) * 100);
+            var engagementScore = Math.round((gameState.earnedPoints.size / 20) * 100);
             document.getElementById('metricEngagement').textContent = Math.min(100, engagementScore) + '%';
             
             goToSection('reportPage');

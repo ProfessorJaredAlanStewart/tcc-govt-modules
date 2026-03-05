@@ -660,6 +660,55 @@
             cursor: pointer;
         }
 
+        /* Time Analysis Section */
+        .time-analysis-section {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+            border: 2px solid var(--primary-blue);
+        }
+        .time-analysis-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        .time-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .time-stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .time-stat-value {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+        .time-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+        .time-warning {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-left: 5px solid #B71C1C;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: var(--text-primary);
+            font-size: 0.95em;
+        }
+
         @media print {
             .no-print {
                 display: none !important;
@@ -696,6 +745,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .time-analysis-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .container {
                 padding: 1rem;
             }
@@ -707,6 +760,7 @@
     <header class="header">
         <h1>🗽 TCC Federal Government Trailblazer Trek</h1>
         <div class="score-display">
+            <span class="score-badge">&#9201;&#65039; <span id="elapsedTime">0:00</span></span>
             <span class="score-badge">⭐ <span id="currentScore">0</span> pts</span>
             <span class="score-badge">🎯 <span id="currentLevel">Explorer</span></span>
         </div>
@@ -1781,6 +1835,10 @@
                                     <span>Time:</span>
                                     <span id="reportTime"></span>
                                 </div>
+                                <div class="info-row">
+                                    <span>Total Time Spent:</span>
+                                    <span id="reportTotalTime">-</span>
+                                </div>
                             </div>
 
                             <div class="performance-section">
@@ -1808,8 +1866,34 @@
                             </div>
                         </div>
 
+                        <!-- Time Analysis -->
+                        <div class="time-analysis-section" id="timeAnalysis">
+                            <h3>&#9201;&#65039; Time Analysis</h3>
+                            <div class="time-analysis-grid">
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="totalModuleTime">0:00</div>
+                                    <div class="time-stat-label">Total Module Time</div>
+                                </div>
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="avgSectionTime">0:00</div>
+                                    <div class="time-stat-label">Avg per Section</div>
+                                </div>
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="fastestSection">-</div>
+                                    <div class="time-stat-label">Fastest Section</div>
+                                </div>
+                                <div class="time-stat-box">
+                                    <div class="time-stat-value" id="slowestSection">-</div>
+                                    <div class="time-stat-label">Slowest Section</div>
+                                </div>
+                            </div>
+                            <div id="timeWarning" class="time-warning" style="display:none;">
+                                &#9888;&#65039; <strong>Pacing Alert:</strong> <span id="timeWarningText"></span>
+                            </div>
+                        </div>
+
                         <div class="instructor-note">
-                            <strong>Instructor Note:</strong> This report documents student engagement with Chapter 4: Civil Liberties. Points reflect completion of interactive elements and knowledge checks. Total available: 1,200 points (200 per section × 6 sections).
+                            <strong>Instructor Note:</strong> This report documents student engagement with Chapter 4: Civil Liberties. Points reflect completion of interactive elements and knowledge checks. Total available: 1,200 points (200 per section × 6 sections). Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                         </div>
 
                         <button class="print-button no-print" onclick="window.print()">🖨️ Print Report</button>
@@ -1829,8 +1913,76 @@
             earnedPoints: new Set(),
             answeredQuestions: new Set(),
             correctAnswers: 0,
-            totalQuestions: 0
+            totalQuestions: 0,
+            // Timer tracking
+            moduleStartTime: Date.now(),
+            sectionTimers: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0 },
+            currentSection: null,
+            sectionEntryTime: null
         };
+
+        // Format milliseconds to M:SS or H:MM:SS
+        function formatTime(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const hrs = Math.floor(totalSec / 3600);
+            const mins = Math.floor((totalSec % 3600) / 60);
+            const secs = totalSec % 60;
+            if (hrs > 0) return hrs + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+
+        setInterval(function() {
+            const el = document.getElementById('elapsedTime');
+            if (el) el.textContent = formatTime(Date.now() - gameState.moduleStartTime);
+        }, 1000);
+
+        // Interactive elements per section for pacing checks
+        const sectionElements = {
+            '1': { cards: ['s1-card1','s1-card2','s1-card3','s1-card4','s1-card5'], questions: ['q1-1','q1-2','q1-3'] },
+            '2': { cards: ['s2-card1','s2-card2','s2-card3','s2-card4','s2-card5'], questions: ['q2-1','q2-2','q2-3'] },
+            '3': { cards: ['s3-card1','s3-card2','s3-card3','s3-card4','s3-card5'], questions: ['q3-1','q3-2','q3-3'] },
+            '4': { cards: ['s4-card1','s4-card2','s4-card3','s4-card4','s4-card5'], questions: ['q4-1','q4-2','q4-3'] },
+            '5': { cards: ['s5-card1','s5-card2','s5-card3','s5-card4','s5-card5'], questions: ['q5-1','q5-2','q5-3'] },
+            '6': { cards: ['s6-card1','s6-card2','s6-card3','s6-card4','s6-card5'], questions: ['q6-1','q6-2','q6-3'] }
+        };
+        const pacingAlertShown = new Set();
+
+        function checkSectionPacing(sectionNum) {
+            if (pacingAlertShown.has(sectionNum)) return;
+            const elements = sectionElements[sectionNum];
+            if (!elements) return;
+            const allCards = elements.cards.every(function(id) { return gameState.earnedPoints.has(id); });
+            const allQs = elements.questions.every(function(id) { return gameState.answeredQuestions.has(id); });
+            if (!allCards || !allQs) return;
+            pacingAlertShown.add(sectionNum);
+            let sectionMs = gameState.sectionTimers[sectionNum] || 0;
+            if (gameState.currentSection === sectionNum && gameState.sectionEntryTime) {
+                sectionMs += Date.now() - gameState.sectionEntryTime;
+            }
+            if (sectionMs >= 0 && sectionMs < 120000) showPacingWarning(sectionNum, sectionMs);
+        }
+
+        function showPacingWarning(sectionNum, ms) {
+            const timeStr = ms > 0 ? formatTime(ms) : 'never opened';
+            let overlay = document.getElementById('pacingWarningOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'pacingWarningOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
+                const box = document.createElement('div');
+                box.id = 'pacingWarningBox';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #B71C1C;';
+                overlay.appendChild(box);
+                document.body.appendChild(overlay);
+            }
+            document.getElementById('pacingWarningBox').innerHTML =
+                '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
+                '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+            overlay.style.display = 'flex';
+        }
 
         // Level Thresholds
         const levels = {
@@ -1847,7 +1999,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            loadProgress();
+            localStorage.removeItem('chapter4CivilLibertiesProgress');
             updateDisplay();
         });
 
@@ -1872,7 +2024,12 @@
                     ...data,
                     completedSections: new Set(data.completedSections || []),
                     earnedPoints: new Set(data.earnedPoints || []),
-                    answeredQuestions: new Set(data.answeredQuestions || [])
+                    answeredQuestions: new Set(data.answeredQuestions || []),
+                    // Always reset timer properties fresh on load
+                    moduleStartTime: Date.now(),
+                    sectionTimers: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0 },
+                    currentSection: null,
+                    sectionEntryTime: null
                 };
                 document.getElementById('studentName').value = gameState.studentName || '';
                 
@@ -1886,6 +2043,19 @@
 
         // Navigation
         function goToSection(sectionId) {
+            // Stop timer for current section
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
+            // Start timer if entering a section
+            const sectionMatch = sectionId.match(/^section(\d)$/);
+            if (sectionMatch) {
+                gameState.currentSection = sectionMatch[1];
+                gameState.sectionEntryTime = Date.now();
+            }
+
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             window.scrollTo(0, 0);
@@ -1896,6 +2066,12 @@
         }
 
         function goHome() {
+            // Stop timer for current section
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('homePage').classList.add('active');
             window.scrollTo(0, 0);
@@ -1947,6 +2123,7 @@
             
             card.style.cursor = 'default';
             card.onclick = null;
+            if (gameState.currentSection) checkSectionPacing(gameState.currentSection);
         }
 
         // Knowledge Check
@@ -1977,6 +2154,7 @@
             }
             
             saveProgress();
+            if (gameState.currentSection) checkSectionPacing(gameState.currentSection);
         }
 
         // Complete Section
@@ -1991,6 +2169,12 @@
 
         // Generate Report
         function generateReport() {
+            // Snapshot current section time
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.sectionEntryTime = Date.now();
+            }
+
             const now = new Date();
             
             document.getElementById('reportName').textContent = gameState.studentName || 'Not Entered';
@@ -2003,43 +2187,86 @@
             document.getElementById('reportPercentage').textContent = percentage;
             document.getElementById('gradePercentage').textContent = percentage + '%';
             
-            // Calculate letter grade
             let letterGrade = 'F';
             let gradeColor = '#B71C1C';
-            
             if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
             else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
             else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
             else if (percentage >= 60) { letterGrade = 'D'; gradeColor = '#E65100'; }
-            
             document.getElementById('letterGrade').textContent = letterGrade;
             document.getElementById('gradeDisplay').style.background = gradeColor;
+
+            // Total module time
+            const totalModuleMs = Date.now() - gameState.moduleStartTime;
+            document.getElementById('reportTotalTime').textContent = formatTime(totalModuleMs);
+            document.getElementById('totalModuleTime').textContent = formatTime(totalModuleMs);
             
-            // Section performance
+            // Section performance with time
             const sections = [
-                { id: 'section1', name: 'What Are Civil Liberties?', points: 200 },
-                { id: 'section2', name: 'First Amendment Freedoms', points: 200 },
-                { id: 'section3', name: 'Securing Basic Freedoms', points: 200 },
-                { id: 'section4', name: 'Rights of the Accused', points: 200 },
-                { id: 'section5', name: 'Interpreting the Bill of Rights', points: 200 },
-                { id: 'section6', name: 'Review & Application', points: 200 }
+                { id: 'section1', name: 'What Are Civil Liberties?', num: '1' },
+                { id: 'section2', name: 'First Amendment Freedoms', num: '2' },
+                { id: 'section3', name: 'Securing Basic Freedoms', num: '3' },
+                { id: 'section4', name: 'Rights of the Accused', num: '4' },
+                { id: 'section5', name: 'Interpreting the Bill of Rights', num: '5' },
+                { id: 'section6', name: 'Review & Application', num: '6' }
             ];
-            
+
             let sectionHTML = '';
             let completedCount = 0;
+            let visitedCount = 0;
+            let totalSectionMs = 0;
+            let fastestMs = Infinity;
+            let slowestMs = 0;
+            let fastestName = '-';
+            let slowestName = '-';
+            let rushSections = [];
             
-            sections.forEach(section => {
+            sections.forEach(function(section) {
                 const completed = gameState.completedSections.has(section.id);
+                const sectionMs = gameState.sectionTimers[section.num] || 0;
+                const timeStr = sectionMs > 0 ? formatTime(sectionMs) : '--:--';
+
                 if (completed) completedCount++;
-                sectionHTML += `
-                    <div class="info-row">
-                        <span>${section.name}</span>
-                        <span style="color: ${completed ? '#1B5E20' : '#B71C1C'}">${completed ? '✅' : '⭕'}</span>
-                    </div>
-                `;
+
+                if (sectionMs > 0) {
+                    visitedCount++;
+                    totalSectionMs += sectionMs;
+                    if (sectionMs < fastestMs) { fastestMs = sectionMs; fastestName = formatTime(sectionMs) + ' (S' + section.num + ')'; }
+                    if (sectionMs > slowestMs) { slowestMs = sectionMs; slowestName = formatTime(sectionMs) + ' (S' + section.num + ')'; }
+                    if (sectionMs < 120000 && completed) rushSections.push('Section ' + section.num + ' (' + formatTime(sectionMs) + ')');
+                } else if (completed) {
+                    rushSections.push('Section ' + section.num + ' (never opened)');
+                }
+
+                sectionHTML += '<div class="info-row">' +
+                    '<span>' + section.name + '</span>' +
+                    '<span style="color: ' + (completed ? '#1B5E20' : '#B71C1C') + '">' + (completed ? '\u2705' : '\u2B55') + '</span>' +
+                    '<span style="min-width:60px;text-align:right;">' + timeStr + '</span>' +
+                '</div>';
             });
             
             document.getElementById('sectionPerformance').innerHTML = sectionHTML;
+
+            // Time analysis
+            if (visitedCount > 0) {
+                document.getElementById('avgSectionTime').textContent = formatTime(Math.round(totalSectionMs / visitedCount));
+            } else {
+                document.getElementById('avgSectionTime').textContent = '--:--';
+            }
+            document.getElementById('fastestSection').textContent = visitedCount > 0 ? fastestName : '-';
+            document.getElementById('slowestSection').textContent = visitedCount > 0 ? slowestName : '-';
+
+            const warningEl = document.getElementById('timeWarning');
+            const warningTextEl = document.getElementById('timeWarningText');
+            if (rushSections.length > 0) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = rushSections.join(', ') + (rushSections.length === 1 ? ' was' : ' were') + ' completed in under 2 minutes. This may indicate the material was not thoroughly reviewed.';
+            } else if (totalModuleMs < 300000 && completedCount >= 4) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + completedCount + ' sections done. This pacing suggests the material may not have been fully engaged with.';
+            } else {
+                warningEl.style.display = 'none';
+            }
             
             // Metrics
             document.getElementById('metricPoints').textContent = gameState.currentScore;
@@ -2050,8 +2277,7 @@
                 : 0;
             document.getElementById('metricQuiz').textContent = quizScore + '%';
             
-            // 30 total interactive elements (5 cards + 3 KCs per section × 6 sections = 48, but using earnedPoints for cards)
-            const totalInteractiveElements = 30; // 5 cards per section × 6 sections
+            const totalInteractiveElements = 30;
             const engagement = Math.round((gameState.earnedPoints.size / totalInteractiveElements) * 100);
             document.getElementById('metricEngagement').textContent = Math.min(100, engagement) + '%';
         }

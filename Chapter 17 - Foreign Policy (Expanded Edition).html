@@ -797,6 +797,15 @@
             cursor: pointer;
         }
 
+        /* Time Analysis Section */
+        .time-analysis-section { background: var(--bg-light); padding: 25px; border-radius: 12px; margin: 30px 0; text-align: left; border: 2px solid var(--primary-blue); }
+        .time-analysis-section h3 { color: var(--primary-blue); margin-bottom: 15px; border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px; text-align: center; }
+        .time-analysis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
+        .time-stat-box { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        .time-stat-value { font-size: 1.6em; font-weight: bold; color: var(--primary-green); }
+        .time-stat-label { color: var(--text-secondary); font-size: 0.85em; margin-top: 4px; }
+        .time-warning { background: linear-gradient(135deg, #ffebee, #ffcdd2); border-left: 5px solid #B71C1C; padding: 15px 20px; border-radius: 8px; margin-top: 15px; color: var(--text-primary); font-size: 0.95em; }
+
         @media print {
             .no-print {
                 display: none !important;
@@ -827,6 +836,9 @@
             .section-grid {
                 grid-template-columns: 1fr;
             }
+            .time-analysis-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .report-header-bar {
                 flex-direction: column;
                 text-align: center;
@@ -838,6 +850,7 @@
     <div class="header">
         <h1>🌍 Chapter 17: Foreign Policy</h1>
         <div class="score-display">
+            <span>&#9201;&#65039; <span id="elapsedTime">0:00</span></span>
             <span>⭐ <span id="totalPoints">0</span> pts</span>
             <span>🏆 <span id="currentLevel">Explorer</span></span>
         </div>
@@ -1724,6 +1737,10 @@
                                 <span class="info-label">Time:</span>
                                 <span id="reportTime">-</span>
                             </div>
+                            <div class="info-row">
+                                <span>Total Time Spent:</span>
+                                <span id="reportTotalTime">-</span>
+                            </div>
                         </div>
 
                         <div class="performance-section">
@@ -1734,6 +1751,7 @@
                                         <th>Section</th>
                                         <th>Status</th>
                                         <th>Points</th>
+                                        <th>Time Spent</th>
                                     </tr>
                                 </thead>
                                 <tbody id="sectionPerformance">
@@ -1762,8 +1780,22 @@
                         </div>
                     </div>
 
+                    <!-- Time Analysis -->
+                    <div class="time-analysis-section">
+                        <h3>&#9201;&#65039; Time Analysis</h3>
+                        <div class="time-analysis-grid">
+                            <div class="time-stat-box"><div class="time-stat-value" id="totalModuleTime">0:00</div><div class="time-stat-label">Total Module Time</div></div>
+                            <div class="time-stat-box"><div class="time-stat-value" id="avgSectionTime">0:00</div><div class="time-stat-label">Avg per Section</div></div>
+                            <div class="time-stat-box"><div class="time-stat-value" id="fastestSection">-</div><div class="time-stat-label">Fastest Section</div></div>
+                            <div class="time-stat-box"><div class="time-stat-value" id="slowestSection">-</div><div class="time-stat-label">Slowest Section</div></div>
+                        </div>
+                        <div id="timeWarning" class="time-warning" style="display:none;">
+                            &#9888;&#65039; <strong>Pacing Alert:</strong> <span id="timeWarningText"></span>
+                        </div>
+                    </div>
+
                     <div class="instructor-note">
-                        <p><strong>Instructor Note:</strong> This completion report documents the student's engagement with Chapter 17: Foreign Policy interactive learning module. Points are awarded for exploring content and answering knowledge check questions correctly.</p>
+                        <p><strong>Instructor Note:</strong> This completion report documents the student's engagement with Chapter 17: Foreign Policy interactive learning module. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.</p>
                     </div>
 
                     <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
@@ -1794,8 +1826,55 @@
             revealedCards: new Set(),
             answeredQuestions: new Set(),
             correctAnswers: 0,
-            totalQuestions: 8
+            totalQuestions: 8,
+            moduleStartTime: Date.now(),
+            sectionTimers: { '1': 0, '2': 0, '3': 0, '4': 0 },
+            currentSection: null,
+            sectionEntryTime: null
         };
+
+        function formatTime(ms) {
+            var totalSec = Math.floor(ms / 1000), hrs = Math.floor(totalSec / 3600), mins = Math.floor((totalSec % 3600) / 60), secs = totalSec % 60;
+            if (hrs > 0) return hrs + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+        setInterval(function() { var el = document.getElementById('elapsedTime'); if (el) el.textContent = formatTime(Date.now() - gameState.moduleStartTime); }, 1000);
+
+        const sectionElements = {
+            '1': { cards: ['fp_domestic','goal1','goal2','goal3','goal4','challenge1','challenge2','challenge3','challenge4','challenge5'], questions: ['kc1_1','kc1_2'] },
+            '2': { cards: ['broad1','broad2','broad3','sharp1','sharp2','sharp3'], questions: ['kc2_1','kc2_2'] },
+            '3': { cards: ['twopres1','twopres2','actors1','actors2','actors3'], questions: ['kc3_1','kc3_2'] },
+            '4': { cards: ['classic1','classic2','classic3','recent1','recent2','russia','china'], questions: ['kc4_1','kc4_2'] }
+        };
+        const pacingAlertShown = new Set();
+        function checkSectionPacing(sectionNum) {
+            var key = String(sectionNum); if (pacingAlertShown.has(key)) return;
+            var elements = sectionElements[key]; if (!elements) return;
+            var allCards = elements.cards.every(function(id) { return gameState.revealedCards.has(id); });
+            var allQs = elements.questions.every(function(id) { return gameState.answeredQuestions.has(id); });
+            if (!allCards || !allQs) return; pacingAlertShown.add(key);
+            var sectionMs = gameState.sectionTimers[key] || 0;
+            if (gameState.currentSection === key && gameState.sectionEntryTime) sectionMs += Date.now() - gameState.sectionEntryTime;
+            if (sectionMs >= 0 && sectionMs < 120000) showPacingWarning(key, sectionMs);
+        }
+        function showPacingWarning(sectionNum, ms) {
+            var timeStr = ms > 0 ? formatTime(ms) : 'never opened';
+            var overlay = document.getElementById('pacingWarningOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div'); overlay.id = 'pacingWarningOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
+                var box = document.createElement('div'); box.id = 'pacingWarningBox';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #B71C1C;';
+                overlay.appendChild(box); document.body.appendChild(overlay);
+            }
+            document.getElementById('pacingWarningBox').innerHTML =
+                '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
+                '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+            overlay.style.display = 'flex';
+        }
 
         const levels = {
             0: 'Explorer',
@@ -1817,18 +1896,32 @@
 
         // Navigation
         function goHome() {
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null; gameState.sectionEntryTime = null;
+            }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('homePage').classList.add('active');
             updateProgress();
         }
 
         function goToSection(sectionId) {
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null; gameState.sectionEntryTime = null;
+            }
+            var sMatch = sectionId.match(/^section(\d)$/);
+            if (sMatch) { gameState.currentSection = sMatch[1]; gameState.sectionEntryTime = Date.now(); }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             window.scrollTo(0, 0);
         }
 
         function goToReport() {
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null; gameState.sectionEntryTime = null;
+            }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('reportPage').classList.add('active');
             generateReport();
@@ -1850,6 +1943,7 @@
             if (section && gameState.sectionPoints[section] !== undefined) {
                 gameState.sectionPoints[section] += points;
             }
+            if (gameState.currentSection) checkSectionPacing(gameState.currentSection);
         }
 
         // Handle quiz answers
@@ -1882,6 +1976,7 @@
                 feedbackBox.textContent = '✗ Not quite. Review the material above for the correct answer.';
                 feedbackBox.className = 'feedback-box show incorrect';
             }
+            if (gameState.currentSection) checkSectionPacing(gameState.currentSection);
         }
 
         // Add points
@@ -1947,25 +2042,19 @@
 
         // Generate report
         function generateReport() {
-            const now = new Date();
-            
+            var now = new Date();
             document.getElementById('reportStudentName').textContent = gameState.studentName || 'Student';
             document.getElementById('reportDate').textContent = now.toLocaleDateString();
             document.getElementById('reportTime').textContent = now.toLocaleTimeString();
-            
             document.getElementById('reportTotalPoints').textContent = gameState.totalPoints;
             
-            const percentage = Math.round((gameState.totalPoints / gameState.maxPoints) * 100);
+            var percentage = Math.round((gameState.totalPoints / gameState.maxPoints) * 100);
             document.getElementById('reportPercentage').textContent = percentage;
             
-            const completed = Object.values(gameState.sectionsCompleted).filter(v => v).length;
-            const completionPercentage = Math.round((completed / 4) * 100);
-            document.getElementById('reportCompletion').textContent = completionPercentage;
+            var completed = Object.values(gameState.sectionsCompleted).filter(function(v) { return v; }).length;
+            document.getElementById('reportCompletion').textContent = Math.round((completed / 4) * 100);
             
-            // Grade calculation
-            let letterGrade = 'F';
-            let gradeColor = '#B71C1C';
-            
+            var letterGrade = 'F', gradeColor = '#B71C1C';
             if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#1B5E20'; }
             else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#00695C'; }
             else if (percentage >= 70) { letterGrade = 'C'; gradeColor = '#F57C00'; }
@@ -1974,32 +2063,65 @@
             document.getElementById('letterGrade').textContent = letterGrade;
             document.getElementById('gradePercentage').textContent = percentage + '%';
             document.getElementById('gradeDisplay').style.background = gradeColor;
+
+            var totalModuleMs = Date.now() - gameState.moduleStartTime;
+            document.getElementById('reportTotalTime').textContent = formatTime(totalModuleMs);
+            document.getElementById('totalModuleTime').textContent = formatTime(totalModuleMs);
             
-            // Section performance table
-            const sectionNames = {
+            var sectionNames = {
                 section1: 'Defining Foreign Policy',
                 section2: 'Foreign Policy Instruments',
                 section3: 'Institutional Relations',
                 section4: 'Approaches to Foreign Policy'
             };
+
+            var visitedCount = 0, totalSectionMs = 0, fastestMs = Infinity, slowestMs = 0;
+            var fastestName = '-', slowestName = '-', rushSections = [];
             
-            let tableHTML = '';
-            for (const [id, name] of Object.entries(sectionNames)) {
-                const status = gameState.sectionsCompleted[id] ? '✅' : '⭕';
-                const points = gameState.sectionPoints[id] || 0;
-                tableHTML += `<tr><td>${name}</td><td>${status}</td><td>${points}</td></tr>`;
+            var tableHTML = '';
+            var sectionNum = 0;
+            for (var id in sectionNames) {
+                sectionNum++;
+                var name = sectionNames[id];
+                var status = gameState.sectionsCompleted[id] ? '\u2705' : '\u2B55';
+                var points = gameState.sectionPoints[id] || 0;
+                var sectionMs = gameState.sectionTimers[String(sectionNum)] || 0;
+                var timeStr = sectionMs > 0 ? formatTime(sectionMs) : '--:--';
+                var isComplete = gameState.sectionsCompleted[id];
+
+                if (sectionMs > 0) {
+                    visitedCount++; totalSectionMs += sectionMs;
+                    if (sectionMs < fastestMs) { fastestMs = sectionMs; fastestName = formatTime(sectionMs) + ' (S' + sectionNum + ')'; }
+                    if (sectionMs > slowestMs) { slowestMs = sectionMs; slowestName = formatTime(sectionMs) + ' (S' + sectionNum + ')'; }
+                    if (sectionMs < 120000 && isComplete) rushSections.push('Section ' + sectionNum + ' (' + formatTime(sectionMs) + ')');
+                } else if (isComplete) { rushSections.push('Section ' + sectionNum + ' (never opened)'); }
+
+                tableHTML += '<tr><td>' + name + '</td><td>' + status + '</td><td>' + points + '</td><td>' + timeStr + '</td></tr>';
             }
             document.getElementById('sectionPerformance').innerHTML = tableHTML;
+
+            document.getElementById('avgSectionTime').textContent = visitedCount > 0 ? formatTime(Math.round(totalSectionMs / visitedCount)) : '--:--';
+            document.getElementById('fastestSection').textContent = visitedCount > 0 ? fastestName : '-';
+            document.getElementById('slowestSection').textContent = visitedCount > 0 ? slowestName : '-';
+
+            var warningEl = document.getElementById('timeWarning');
+            var warningTextEl = document.getElementById('timeWarningText');
+            if (rushSections.length > 0) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = rushSections.join(', ') + (rushSections.length === 1 ? ' was' : ' were') + ' completed in under 2 minutes. This may indicate the material was not thoroughly reviewed.';
+            } else if (totalModuleMs < 300000 && completed >= 3) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + completed + ' sections done.';
+            } else { warningEl.style.display = 'none'; }
             
-            // Metrics
             document.getElementById('metricPoints').textContent = gameState.totalPoints;
             document.getElementById('metricSections').textContent = completed + '/4';
             
-            const quizPercentage = gameState.totalQuestions > 0 ? 
+            var quizPercentage = gameState.totalQuestions > 0 ? 
                 Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) : 0;
             document.getElementById('metricQuiz').textContent = quizPercentage + '%';
             
-            const engagementPercentage = Math.round((gameState.revealedCards.size / 20) * 100);
+            var engagementPercentage = Math.round((gameState.revealedCards.size / 20) * 100);
             document.getElementById('metricEngagement').textContent = Math.min(engagementPercentage, 100) + '%';
         }
 

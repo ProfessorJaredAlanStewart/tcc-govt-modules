@@ -642,6 +642,61 @@
         }
 
         /* Print Styles */
+        /* Time Analysis Section */
+        .time-analysis-section {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .time-analysis-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .time-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .time-stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .time-stat-value {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .time-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .time-warning {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-left: 5px solid var(--error);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: var(--text-primary);
+            font-size: 0.95em;
+        }
+
         @media print {
             .header, .back-button, #pointsPopup, .no-print { display: none !important; }
             .main-container { margin-top: 0; }
@@ -660,6 +715,7 @@
             }
             .timeline-item::before { left: -40px !important; }
             .content-section { padding: 20px; }
+            .time-analysis-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -669,6 +725,7 @@
         <div class="header-content">
             <div class="header-title">📜 TCC Federal Government Trailblazer Trek</div>
             <div class="score-display">
+                <span>&#9201;&#65039; Time: <span id="elapsedTime">0:00</span></span>
                 <span>⭐ Score: <span id="currentScore">0</span></span>
                 <span>🏆 Level: <span id="currentLevel">Explorer</span></span>
             </div>
@@ -1657,6 +1714,7 @@
                     <p><strong>Student Name:</strong> <span id="reportName">Not entered</span></p>
                     <p><strong>Date:</strong> <span id="reportDate"></span></p>
                     <p><strong>Time:</strong> <span id="reportTime"></span></p>
+                    <p><strong>Total Time Spent:</strong> <span id="reportTotalTime">-</span></p>
                 </div>
 
                 <div class="metrics-grid">
@@ -1684,13 +1742,40 @@
                         <th>Section</th>
                         <th>Status</th>
                         <th>Points</th>
+                        <th>Time Spent</th>
                     </tr>
                     <tbody id="sectionDetails">
                     </tbody>
                 </table>
 
+                <!-- Time Analysis -->
+                <div class="time-analysis-section" id="timeAnalysis">
+                    <h3>&#9201;&#65039; Time Analysis</h3>
+                    <div class="time-analysis-grid">
+                        <div class="time-stat-box">
+                            <div class="time-stat-value" id="totalModuleTime">0:00</div>
+                            <div class="time-stat-label">Total Module Time</div>
+                        </div>
+                        <div class="time-stat-box">
+                            <div class="time-stat-value" id="avgSectionTime">0:00</div>
+                            <div class="time-stat-label">Avg per Section</div>
+                        </div>
+                        <div class="time-stat-box">
+                            <div class="time-stat-value" id="fastestSection">-</div>
+                            <div class="time-stat-label">Fastest Section</div>
+                        </div>
+                        <div class="time-stat-box">
+                            <div class="time-stat-value" id="slowestSection">-</div>
+                            <div class="time-stat-label">Slowest Section</div>
+                        </div>
+                    </div>
+                    <div id="timeWarning" class="time-warning" style="display:none;">
+                        &#9888;&#65039; <strong>Pacing Alert:</strong> <span id="timeWarningText"></span>
+                    </div>
+                </div>
+
                 <div class="instructor-note">
-                    <strong>📋 Instructor Note:</strong> This report documents the student's completion of the interactive Chapter 2: The Constitution and Its Origins learning module. The grade reflects points earned from exploring interactive content and completing knowledge check questions.
+                    <strong>📋 Instructor Note:</strong> This report documents the student's completion of the interactive Chapter 2: The Constitution and Its Origins learning module. The grade reflects points earned from exploring interactive content and completing knowledge check questions. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                 </div>
 
                 <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
@@ -1709,8 +1794,35 @@
             correctAnswers: 0,
             totalAnswers: 0,
             revealedCards: new Set(),
-            sectionPoints: {}
+            sectionPoints: {},
+            // Timer tracking
+            moduleStartTime: Date.now(),
+            sectionTimers: {
+                '1': 0, '2': 0, '3': 0, '4': 0, '5': 0
+            },
+            currentSection: null,
+            sectionEntryTime: null
         };
+
+        // Format milliseconds to M:SS or H:MM:SS
+        function formatTime(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const hrs = Math.floor(totalSec / 3600);
+            const mins = Math.floor((totalSec % 3600) / 60);
+            const secs = totalSec % 60;
+            if (hrs > 0) {
+                return hrs + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            }
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+
+        // Update the elapsed-time clock in the header every second
+        setInterval(function() {
+            const el = document.getElementById('elapsedTime');
+            if (el) {
+                el.textContent = formatTime(Date.now() - gameState.moduleStartTime);
+            }
+        }, 1000);
 
         // Level thresholds
         const levels = {
@@ -1726,6 +1838,21 @@
 
         // Page navigation
         function showPage(pageId) {
+            // Stop timer for current section if leaving one
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                const elapsed = Date.now() - gameState.sectionEntryTime;
+                gameState.sectionTimers[gameState.currentSection] += elapsed;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
+
+            // Start timer if entering a section page
+            if (pageId.startsWith('section')) {
+                const sectionNum = pageId.replace('section', '');
+                gameState.currentSection = sectionNum;
+                gameState.sectionEntryTime = Date.now();
+            }
+
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
@@ -1854,6 +1981,84 @@
                 gameState.completedSections.push(sectionNum);
                 markSectionComplete(sectionNum);
             }
+
+            // Check pacing only when ALL interactive elements in the section are done
+            checkSectionPacing(sectionNum);
+        }
+
+        // Define all interactive elements per section
+        const sectionElements = {
+            '1': { cards: ['locke-content','english-bill-content','revolution-timeline','declaration-content'], questions: ['q1a','q1b'] },
+            '2': { cards: ['articles-creation','articles-powers','economic-problems','shays-rebellion'], questions: ['q2a','q2b'] },
+            '3': { cards: ['delegate-concerns','great-compromise','three-fifths','federal-system'], questions: ['q3a','q3b'] },
+            '4': { cards: ['ratification-strategy','anti-fed-concerns','federalist-papers'], questions: ['q4a','q4b'] },
+            '5': { cards: ['amendment-process','bill-of-rights','civil-war-amendments','voting-amendments'], questions: ['q5a','q5b'] }
+        };
+
+        // Track which sections have already shown a pacing warning
+        const pacingAlertShown = new Set();
+
+        function checkSectionPacing(sectionNum) {
+            if (pacingAlertShown.has(sectionNum)) return;
+
+            const elements = sectionElements[sectionNum];
+            if (!elements) return;
+
+            // Check if ALL cards in this section are revealed
+            const allCardsRevealed = elements.cards.every(function(cardId) {
+                return gameState.revealedCards.has(cardId);
+            });
+
+            // Check if ALL questions in this section are answered
+            const allQuestionsAnswered = elements.questions.every(function(qId) {
+                return gameState.answeredQuestions.has(qId);
+            });
+
+            if (!allCardsRevealed || !allQuestionsAnswered) return;
+
+            // All elements done — now check pacing
+            pacingAlertShown.add(sectionNum);
+
+            let sectionMs = gameState.sectionTimers[sectionNum] || 0;
+            if (gameState.currentSection === sectionNum && gameState.sectionEntryTime) {
+                sectionMs += Date.now() - gameState.sectionEntryTime;
+            }
+
+            if (sectionMs >= 0 && sectionMs < 120000) {
+                showPacingWarning(sectionNum, sectionMs);
+            }
+        }
+
+        // Show immediate on-screen pacing warning
+        function showPacingWarning(sectionNum, ms) {
+            const timeStr = ms > 0 ? formatTime(ms) : 'never opened';
+            
+            let overlay = document.getElementById('pacingWarningOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'pacingWarningOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
+                
+                const box = document.createElement('div');
+                box.id = 'pacingWarningBox';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #B71C1C;';
+                overlay.appendChild(box);
+                document.body.appendChild(overlay);
+            }
+            
+            const box = document.getElementById('pacingWarningBox');
+            box.innerHTML = 
+                '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">' +
+                'Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
+                '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">' +
+                'Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. ' +
+                'Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" ' +
+                'style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+            
+            overlay.style.display = 'flex';
         }
 
         // Mark section as complete
@@ -1895,6 +2100,12 @@
 
         // Update report
         function updateReport() {
+            // Snapshot current section time before rendering
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.sectionEntryTime = Date.now();
+            }
+
             const studentName = document.getElementById('studentName').value || 'Not entered';
             document.getElementById('reportName').textContent = studentName;
             
@@ -1921,8 +2132,13 @@
             document.getElementById('letterGrade').textContent = grade.letter;
             document.getElementById('gradePercentage').textContent = percentage + '%';
             document.getElementById('gradeDisplay').style.background = grade.color;
+
+            // Total module time (wall clock)
+            const totalModuleMs = Date.now() - gameState.moduleStartTime;
+            document.getElementById('reportTotalTime').textContent = formatTime(totalModuleMs);
+            document.getElementById('totalModuleTime').textContent = formatTime(totalModuleMs);
             
-            // Build section details
+            // Build section details with time data
             const sectionNames = [
                 'Pre-Revolutionary Roots',
                 'Articles of Confederation',
@@ -1930,25 +2146,75 @@
                 'Ratification Battle',
                 'Constitutional Change'
             ];
+
+            let visitedCount = 0;
+            let totalSectionMs = 0;
+            let fastestMs = Infinity;
+            let slowestMs = 0;
+            let fastestName = '-';
+            let slowestName = '-';
+            let rushSections = [];
             
             let sectionHTML = '';
             for (let i = 1; i <= 5; i++) {
                 const visited = gameState.visitedSections.has(i.toString());
                 const completed = gameState.completedSections.includes(i.toString());
                 const points = gameState.sectionPoints[i.toString()] || 0;
-                sectionHTML += `
-                    <tr>
-                        <td>${sectionNames[i-1]}</td>
-                        <td style="text-align: center;">
-                            ${completed ? '<span style="color: #1B5E20;">✅ Complete</span>' : 
-                              visited ? '<span style="color: #F57C00;">⭕ In Progress</span>' : 
-                              '<span style="color: #B71C1C;">❌ Not Started</span>'}
-                        </td>
-                        <td style="text-align: center;">${points}</td>
-                    </tr>
-                `;
+                const sectionMs = gameState.sectionTimers[i.toString()] || 0;
+                const timeStr = sectionMs > 0 ? formatTime(sectionMs) : '--:--';
+
+                if (sectionMs > 0) {
+                    visitedCount++;
+                    totalSectionMs += sectionMs;
+                    if (sectionMs < fastestMs) {
+                        fastestMs = sectionMs;
+                        fastestName = formatTime(sectionMs) + ' (S' + i + ')';
+                    }
+                    if (sectionMs > slowestMs) {
+                        slowestMs = sectionMs;
+                        slowestName = formatTime(sectionMs) + ' (S' + i + ')';
+                    }
+                    if (sectionMs < 120000 && completed) {
+                        rushSections.push('Section ' + i + ' (' + formatTime(sectionMs) + ')');
+                    }
+                } else if (completed) {
+                    rushSections.push('Section ' + i + ' (never opened)');
+                }
+
+                sectionHTML += '<tr>' +
+                    '<td>' + sectionNames[i-1] + '</td>' +
+                    '<td style="text-align: center;">' +
+                        (completed ? '<span style="color: #1B5E20;">\u2705 Complete</span>' : 
+                          visited ? '<span style="color: #F57C00;">\u2B55 In Progress</span>' : 
+                          '<span style="color: #B71C1C;">\u274C Not Started</span>') +
+                    '</td>' +
+                    '<td style="text-align: center;">' + points + '</td>' +
+                    '<td style="text-align: center;">' + timeStr + '</td>' +
+                '</tr>';
             }
             document.getElementById('sectionDetails').innerHTML = sectionHTML;
+
+            // Time analysis stats
+            if (visitedCount > 0) {
+                document.getElementById('avgSectionTime').textContent = formatTime(Math.round(totalSectionMs / visitedCount));
+            } else {
+                document.getElementById('avgSectionTime').textContent = '--:--';
+            }
+            document.getElementById('fastestSection').textContent = visitedCount > 0 ? fastestName : '-';
+            document.getElementById('slowestSection').textContent = visitedCount > 0 ? slowestName : '-';
+
+            // Pacing alert on report
+            const warningEl = document.getElementById('timeWarning');
+            const warningTextEl = document.getElementById('timeWarningText');
+            if (rushSections.length > 0) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = rushSections.join(', ') + (rushSections.length === 1 ? ' was' : ' were') + ' completed in under 2 minutes. This may indicate the material was not thoroughly reviewed.';
+            } else if (totalModuleMs < 300000 && gameState.completedSections.length >= 3) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + gameState.completedSections.length + ' sections done. This pacing suggests the material may not have been fully engaged with.';
+            } else {
+                warningEl.style.display = 'none';
+            }
         }
 
         // Initialize on page load

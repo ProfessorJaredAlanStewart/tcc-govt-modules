@@ -797,6 +797,15 @@
             font-weight: bold;
         }
 
+        /* Time Analysis Section */
+        .time-analysis-section { background: var(--bg-light); padding: 25px; border-radius: 12px; margin: 30px 0; text-align: left; border: 2px solid var(--primary-blue); }
+        .time-analysis-section h3 { color: var(--primary-blue); margin-bottom: 15px; border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px; text-align: center; }
+        .time-analysis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
+        .time-stat-box { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        .time-stat-value { font-size: 1.6em; font-weight: bold; color: var(--primary-green); }
+        .time-stat-label { color: var(--text-secondary); font-size: 0.85em; margin-top: 4px; }
+        .time-warning { background: linear-gradient(135deg, #ffebee, #ffcdd2); border-left: 5px solid #B71C1C; padding: 15px 20px; border-radius: 8px; margin-top: 15px; color: var(--text-primary); font-size: 0.95em; }
+
         @media print {
             .no-print {
                 display: none !important;
@@ -849,6 +858,10 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            .time-analysis-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .report-header-bar {
                 flex-direction: column;
                 text-align: center;
@@ -860,6 +873,7 @@
     <div class="header">
         <h1>🏛️ Chapter 12: The Presidency</h1>
         <div class="score-display">
+            <span>&#9201;&#65039; <span id="elapsedTime">0:00</span></span>
             <span>⭐ <span id="score">0</span> pts</span>
             <span>🎖️ <span id="level">Explorer</span></span>
         </div>
@@ -2633,30 +2647,39 @@
                                     <span>Time:</span>
                                     <span id="reportTime"></span>
                                 </div>
+                                <div class="info-row">
+                                    <span>Total Time Spent:</span>
+                                    <span id="reportTotalTime">-</span>
+                                </div>
                             </div>
 
                             <div class="performance-section">
                                 <h3>📊 Section Performance</h3>
                                 <table class="performance-table">
                                     <tr>
-                                        <td>12.1 Design & Evolution</td>
-                                        <td id="sec1Status" class="status-incomplete">⭕</td>
+                                        <td>12.1 Design &amp; Evolution</td>
+                                        <td id="sec1Status" class="status-incomplete">&#11093;</td>
+                                        <td id="time1">--:--</td>
                                     </tr>
                                     <tr>
                                         <td>12.2 Election Process</td>
-                                        <td id="sec2Status" class="status-incomplete">⭕</td>
+                                        <td id="sec2Status" class="status-incomplete">&#11093;</td>
+                                        <td id="time2">--:--</td>
                                     </tr>
                                     <tr>
                                         <td>12.3 Organizing to Govern</td>
-                                        <td id="sec3Status" class="status-incomplete">⭕</td>
+                                        <td id="sec3Status" class="status-incomplete">&#11093;</td>
+                                        <td id="time3">--:--</td>
                                     </tr>
                                     <tr>
                                         <td>12.4 The Public Presidency</td>
-                                        <td id="sec4Status" class="status-incomplete">⭕</td>
+                                        <td id="sec4Status" class="status-incomplete">&#11093;</td>
+                                        <td id="time4">--:--</td>
                                     </tr>
                                     <tr>
                                         <td>12.5 Direct Presidential Action</td>
-                                        <td id="sec5Status" class="status-incomplete">⭕</td>
+                                        <td id="sec5Status" class="status-incomplete">&#11093;</td>
+                                        <td id="time5">--:--</td>
                                     </tr>
                                 </table>
                             </div>
@@ -2681,6 +2704,20 @@
                             </div>
                         </div>
 
+                        <!-- Time Analysis -->
+                        <div class="time-analysis-section">
+                            <h3>&#9201;&#65039; Time Analysis</h3>
+                            <div class="time-analysis-grid">
+                                <div class="time-stat-box"><div class="time-stat-value" id="totalModuleTime">0:00</div><div class="time-stat-label">Total Module Time</div></div>
+                                <div class="time-stat-box"><div class="time-stat-value" id="avgSectionTime">0:00</div><div class="time-stat-label">Avg per Section</div></div>
+                                <div class="time-stat-box"><div class="time-stat-value" id="fastestSection">-</div><div class="time-stat-label">Fastest Section</div></div>
+                                <div class="time-stat-box"><div class="time-stat-value" id="slowestSection">-</div><div class="time-stat-label">Slowest Section</div></div>
+                            </div>
+                            <div id="timeWarning" class="time-warning" style="display:none;">
+                                &#9888;&#65039; <strong>Pacing Alert:</strong> <span id="timeWarningText"></span>
+                            </div>
+                        </div>
+
                         <div class="content-block">
                             <h3>📚 Key Concepts Mastered</h3>
                             <ul class="bullet-list">
@@ -2699,9 +2736,7 @@
                             <p class="instructor-note">
                                 <strong>Instructor Note:</strong> This report documents the student's engagement with 
                                 Chapter 12: The Presidency interactive learning module. The score reflects completion of 
-                                interactive activities and knowledge check questions. This module covers the constitutional 
-                                design of the executive branch, presidential elections, cabinet organization, public 
-                                communication, and direct presidential powers.
+                                interactive activities and knowledge check questions. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                             </p>
                             <button class="print-report-button no-print" onclick="window.print()">🖨️ Print Report</button>
                         </div>
@@ -2725,8 +2760,72 @@
             earnedPoints: new Set(),
             answeredQuestions: new Set(),
             correctAnswers: 0,
-            totalQuestions: 10
+            totalQuestions: 10,
+            moduleStartTime: Date.now(),
+            sectionTimers: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+            currentSection: null,
+            sectionEntryTime: null
         };
+
+        function formatTime(ms) {
+            var totalSec = Math.floor(ms / 1000);
+            var hrs = Math.floor(totalSec / 3600);
+            var mins = Math.floor((totalSec % 3600) / 60);
+            var secs = totalSec % 60;
+            if (hrs > 0) return hrs + ':' + String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+        setInterval(function() {
+            var el = document.getElementById('elapsedTime');
+            if (el) el.textContent = formatTime(Date.now() - gameState.moduleStartTime);
+        }, 1000);
+
+        const sectionElements = {
+            '1': { cards: ['card1-1','card1-2','card1-3','card1-4','card1-5'], questions: ['kc1-1','kc1-2'] },
+            '2': { cards: ['card2-1','card2-2','card2-3','card2-4','card2-5'], questions: ['kc2-1','kc2-2'] },
+            '3': { cards: ['card3-1','card3-2','card3-3','card3-4','card3-5'], questions: ['kc3-1','kc3-2'] },
+            '4': { cards: ['card4-1','card4-2','card4-3','card4-4','card4-5'], questions: ['kc4-1','kc4-2'] },
+            '5': { cards: ['card5-1','card5-2','card5-3','card5-4','card5-5'], questions: ['kc5-1','kc5-2'] }
+        };
+        const pacingAlertShown = new Set();
+
+        function checkSectionPacing(sectionNum) {
+            var key = String(sectionNum);
+            if (pacingAlertShown.has(key)) return;
+            var elements = sectionElements[key];
+            if (!elements) return;
+            var allCards = elements.cards.every(function(id) { return gameState.earnedPoints.has(id); });
+            var allQs = elements.questions.every(function(id) { return gameState.answeredQuestions.has(id); });
+            if (!allCards || !allQs) return;
+            pacingAlertShown.add(key);
+            var sectionMs = gameState.sectionTimers[key] || 0;
+            if (gameState.currentSection === key && gameState.sectionEntryTime) {
+                sectionMs += Date.now() - gameState.sectionEntryTime;
+            }
+            if (sectionMs >= 0 && sectionMs < 120000) showPacingWarning(key, sectionMs);
+        }
+
+        function showPacingWarning(sectionNum, ms) {
+            var timeStr = ms > 0 ? formatTime(ms) : 'never opened';
+            var overlay = document.getElementById('pacingWarningOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'pacingWarningOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
+                var box = document.createElement('div');
+                box.id = 'pacingWarningBox';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #B71C1C;';
+                overlay.appendChild(box);
+                document.body.appendChild(overlay);
+            }
+            document.getElementById('pacingWarningBox').innerHTML =
+                '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
+                '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+            overlay.style.display = 'flex';
+        }
 
         const levels = {
             0: 'Explorer',
@@ -2741,6 +2840,16 @@
 
         // Navigation functions
         function navigateToSection(sectionId) {
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.currentSection = null;
+                gameState.sectionEntryTime = null;
+            }
+            var sMatch = sectionId.match(/^section(\d)$/);
+            if (sMatch) {
+                gameState.currentSection = sMatch[1];
+                gameState.sectionEntryTime = Date.now();
+            }
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
@@ -2885,6 +2994,7 @@
                 if (card) {
                     card.classList.add('completed');
                 }
+                checkSectionPacing(sectionNumber);
             }
         }
 
@@ -2910,12 +3020,17 @@
         }
 
         function updateReportPage() {
-            const percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
-            const grade = calculateLetterGrade(percentage);
-            const completedCount = gameState.completedSections.size;
-            const quizPercentage = gameState.totalQuestions > 0 ? 
+            if (gameState.currentSection && gameState.sectionEntryTime) {
+                gameState.sectionTimers[gameState.currentSection] += Date.now() - gameState.sectionEntryTime;
+                gameState.sectionEntryTime = Date.now();
+            }
+
+            var percentage = Math.min(100, Math.round((gameState.score / maxPoints) * 100));
+            var grade = calculateLetterGrade(percentage);
+            var completedCount = gameState.completedSections.size;
+            var quizPercentage = gameState.totalQuestions > 0 ? 
                 Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) : 0;
-            const engagementPercentage = Math.round((gameState.earnedPoints.size / 20) * 100);
+            var engagementPercentage = Math.round((gameState.earnedPoints.size / 20) * 100);
 
             document.getElementById('reportName').textContent = gameState.studentName || 'Not provided';
             document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
@@ -2934,15 +3049,55 @@
             document.getElementById('metricQuiz').textContent = quizPercentage + '%';
             document.getElementById('metricEngagement').textContent = Math.min(100, engagementPercentage) + '%';
 
-            for (let i = 1; i <= 5; i++) {
-                const statusEl = document.getElementById('sec' + i + 'Status');
-                if (gameState.completedSections.has(String(i))) {
-                    statusEl.textContent = '✅';
+            // Total module time
+            var totalModuleMs = Date.now() - gameState.moduleStartTime;
+            document.getElementById('reportTotalTime').textContent = formatTime(totalModuleMs);
+            document.getElementById('totalModuleTime').textContent = formatTime(totalModuleMs);
+
+            var visitedCount = 0, totalSectionMs = 0, fastestMs = Infinity, slowestMs = 0;
+            var fastestName = '-', slowestName = '-', rushSections = [];
+
+            for (var i = 1; i <= 5; i++) {
+                var statusEl = document.getElementById('sec' + i + 'Status');
+                var timeEl = document.getElementById('time' + i);
+                var sectionMs = gameState.sectionTimers[String(i)] || 0;
+                var isCompleted = gameState.completedSections.has(String(i));
+
+                timeEl.textContent = sectionMs > 0 ? formatTime(sectionMs) : '--:--';
+
+                if (sectionMs > 0) {
+                    visitedCount++;
+                    totalSectionMs += sectionMs;
+                    if (sectionMs < fastestMs) { fastestMs = sectionMs; fastestName = formatTime(sectionMs) + ' (S' + i + ')'; }
+                    if (sectionMs > slowestMs) { slowestMs = sectionMs; slowestName = formatTime(sectionMs) + ' (S' + i + ')'; }
+                    if (sectionMs < 120000 && isCompleted) rushSections.push('Section ' + i + ' (' + formatTime(sectionMs) + ')');
+                } else if (isCompleted) {
+                    rushSections.push('Section ' + i + ' (never opened)');
+                }
+
+                if (isCompleted) {
+                    statusEl.textContent = '\u2705';
                     statusEl.className = 'status-complete';
                 } else {
-                    statusEl.textContent = '⭕';
+                    statusEl.textContent = '\u2B55';
                     statusEl.className = 'status-incomplete';
                 }
+            }
+
+            document.getElementById('avgSectionTime').textContent = visitedCount > 0 ? formatTime(Math.round(totalSectionMs / visitedCount)) : '--:--';
+            document.getElementById('fastestSection').textContent = visitedCount > 0 ? fastestName : '-';
+            document.getElementById('slowestSection').textContent = visitedCount > 0 ? slowestName : '-';
+
+            var warningEl = document.getElementById('timeWarning');
+            var warningTextEl = document.getElementById('timeWarningText');
+            if (rushSections.length > 0) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = rushSections.join(', ') + (rushSections.length === 1 ? ' was' : ' were') + ' completed in under 2 minutes. This may indicate the material was not thoroughly reviewed.';
+            } else if (totalModuleMs < 300000 && completedCount >= 3) {
+                warningEl.style.display = 'block';
+                warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + completedCount + ' sections done.';
+            } else {
+                warningEl.style.display = 'none';
             }
         }
 
