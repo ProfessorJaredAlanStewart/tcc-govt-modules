@@ -5,399 +5,808 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCC Federal Government Trailblazer Trek</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --primary-blue: #005A87;
             --primary-green: #00695C;
             --secondary-blue: #0277BD;
             --secondary-green: #00897B;
+            --success: #1B5E20;
+            --warning: #F57C00;
             --text-primary: #212121;
             --text-secondary: #424242;
-            --bg-light: #F5F5F5;
+            --bg-white: #FFFFFF;
+            --bg-light: #F5F7FA;
+            --bg-section: #E0F2F1;
             --highlight-blue: #E3F2FD;
+            --highlight-green: #E8F5E9;
+            --gold: #FFD700;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: Georgia, serif;
             line-height: 1.7;
             color: var(--text-primary);
-            background-color: var(--bg-light);
-            min-height: 100vh;
+            background: var(--bg-light);
         }
 
+        /* ── HEADER ── */
         .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
             background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
             color: white;
-            padding: 1.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.9rem 2rem;
+            box-shadow: 0 3px 18px rgba(0,0,0,0.18);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .header-logo {
+            font-size: 1.6rem;
+        }
         .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.02em;
+        }
+        .header-right {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .header-badge {
+            background: rgba(255,255,255,0.18);
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-weight: 600;
         }
 
-        .header p {
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
+        /* ── HERO ── */
         .hero {
+            margin-top: 60px;
             background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
             color: white;
-            padding: 3rem;
-            border-radius: 15px;
             text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 4rem 2rem 3.5rem;
+            position: relative;
+            overflow: hidden;
         }
-
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .hero-icon { font-size: 3.8rem; margin-bottom: 0.5rem; display: block; }
         .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 2.8rem;
+            margin-bottom: 0.6rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+            line-height: 1.2;
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
+        .hero-sub {
+            font-size: 1.15rem;
+            opacity: 0.93;
+            margin-bottom: 2rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .hero-icons {
+        .hero-stats {
             display: flex;
             justify-content: center;
             gap: 3rem;
-            margin-top: 2rem;
             flex-wrap: wrap;
         }
-
-        .hero-icon {
+        .hero-stat {
             text-align: center;
         }
-
-        .hero-icon .icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .hero-stat-icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.2rem;
         }
-
-        .hero-icon .label {
-            font-size: 0.95rem;
+        .hero-stat-label {
+            font-size: 0.9rem;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             opacity: 0.9;
         }
 
-        .section-title {
-            color: var(--primary-blue);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--primary-green);
+        /* ── CONTAINER ── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 3rem;
         }
 
-        .chapters-grid {
+        /* ── SECTION TITLES ── */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+        .section-title span { font-size: 1.8rem; }
+        .section-title h2 {
+            font-size: 1.7rem;
+            color: var(--primary-blue);
+        }
+
+        /* ── INFO PANELS ── */
+        .info-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .step-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-top: 1rem;
         }
-
-        .chapter-card {
-            background: white;
-            border-radius: 12px;
+        .step-card {
+            background: var(--bg-section);
+            border-radius: 10px;
             padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
             position: relative;
-            border-left: 4px solid var(--primary-blue);
+            border-left: 5px solid var(--primary-green);
         }
-
-        .chapter-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .chapter-number {
-            position: absolute;
-            top: -10px;
-            right: 20px;
+        .step-number {
+            width: 36px;
+            height: 36px;
             background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
             color: white;
-            width: 40px;
-            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1rem;
             font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .chapter-card h3 {
-            color: var(--primary-green);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            padding-right: 30px;
-        }
-
-        .chapter-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             margin-bottom: 0.75rem;
         }
-
-        .chapter-card .tag {
-            display: inline-block;
-            background: var(--highlight-blue);
+        .step-card h4 {
             color: var(--primary-blue);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+        .step-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
         }
 
-        .info-box {
+        /* ── POINT SYSTEM OVERVIEW ── */
+        .points-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+        .points-item {
+            background: var(--highlight-blue);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .points-item .pts-icon { font-size: 2rem; display: block; margin-bottom: 0.3rem; }
+        .points-item .pts-label {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+        .points-item .pts-detail {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        /* ── CHAPTER GRID ── */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .chapter-card {
             background: white;
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            padding: 1.6rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
         }
-
-        .info-box h3 {
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(0,90,135,0.14);
+            border-color: var(--primary-blue);
+        }
+        .chapter-card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        .chapter-num {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        .chapter-card h3 {
             color: var(--primary-blue);
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.3;
         }
-
-        .info-box ul {
-            margin-left: 1.5rem;
-        }
-
-        .info-box li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 2rem;
+        .chapter-desc {
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            border-top: 1px solid #ddd;
-            margin-top: 2rem;
+            margin-bottom: 0.8rem;
         }
-
-        .footer a {
+        .chapter-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.82rem;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            color: var(--secondary-green);
+            font-weight: 600;
+        }
+        .chapter-card::after {
+            content: '→';
+            position: absolute;
+            bottom: 1.2rem;
+            right: 1.4rem;
+            font-size: 1.4rem;
             color: var(--primary-blue);
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: all 0.25s ease;
+        }
+        .chapter-card:hover::after {
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        .tcc-logo {
+        /* ── TIPS BOX ── */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .tip-item {
+            background: var(--highlight-green);
+            border-radius: 8px;
+            padding: 1.1rem 1.2rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .tip-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .tip-text { font-size: 0.93rem; color: var(--text-secondary); }
+        .tip-text strong { color: var(--text-primary); }
+
+        /* ── SUBMISSION BOX ── */
+        .submission-box {
+            background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .submission-box h3 {
+            color: var(--warning);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+        .submission-steps {
+            counter-reset: sub-step;
+            list-style: none;
+            padding: 0;
+        }
+        .submission-steps li {
+            counter-increment: sub-step;
+            padding: 0.5rem 0 0.5rem 2.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        .submission-steps li::before {
+            content: counter(sub-step);
+            position: absolute;
+            left: 0;
+            top: 0.45rem;
+            width: 28px;
+            height: 28px;
+            background: var(--warning);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        /* ── FAQ ── */
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+        .faq-q {
             font-weight: bold;
             color: var(--primary-blue);
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .faq-q::before { content: '▸'; font-size: 0.9rem; transition: transform 0.2s; }
+        .faq-q.open::before { transform: rotate(90deg); }
+        .faq-a {
+            display: none;
+            padding-left: 1.2rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--bg-section);
+            padding: 0.5rem 0 0.5rem 1rem;
+        }
+        .faq-a.show { display: block; }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        .footer p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.3rem; }
+        .footer .footer-brand { font-size: 1rem; font-weight: bold; margin-bottom: 0.5rem; }
+
+        /* ── NAV BUTTONS ── */
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-tab {
+            background: white;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            font-family: Georgia, serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--primary-blue);
+            color: white;
         }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero-icons {
-                gap: 1.5rem;
-            }
-
-            .chapters-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 1rem;
-            }
+            .hero h2 { font-size: 1.9rem; }
+            .hero { padding: 3rem 1.2rem 2.5rem; }
+            .hero-stats { gap: 1.5rem; }
+            .header h1 { font-size: 1rem; }
+            .header-badge { display: none; }
+            .container { padding: 1.5rem 1rem 2rem; }
+            .chapter-grid { grid-template-columns: 1fr; }
+            .step-grid { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 1.3rem; }
         }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards;
+        }
+        .chapter-card:nth-child(1) { animation-delay: 0.03s; }
+        .chapter-card:nth-child(2) { animation-delay: 0.06s; }
+        .chapter-card:nth-child(3) { animation-delay: 0.09s; }
+        .chapter-card:nth-child(4) { animation-delay: 0.12s; }
+        .chapter-card:nth-child(5) { animation-delay: 0.15s; }
+        .chapter-card:nth-child(6) { animation-delay: 0.18s; }
+        .chapter-card:nth-child(7) { animation-delay: 0.21s; }
+        .chapter-card:nth-child(8) { animation-delay: 0.24s; }
+        .chapter-card:nth-child(9) { animation-delay: 0.27s; }
+        .chapter-card:nth-child(10) { animation-delay: 0.30s; }
+        .chapter-card:nth-child(11) { animation-delay: 0.33s; }
+        .chapter-card:nth-child(12) { animation-delay: 0.36s; }
+        .chapter-card:nth-child(13) { animation-delay: 0.39s; }
+        .chapter-card:nth-child(14) { animation-delay: 0.42s; }
+        .chapter-card:nth-child(15) { animation-delay: 0.45s; }
+        .chapter-card:nth-child(16) { animation-delay: 0.48s; }
+
+        /* ── SCROLL TO TOP ── */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .scroll-top.visible { opacity: 1; }
+        .scroll-top:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
+
+    <!-- ══════════ HEADER ══════════ -->
     <header class="header">
-        <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
-        <p>GOVT 2305 - Federal Government | Tarrant County College</p>
+        <div class="header-left">
+            <span class="header-logo">&#127963;</span>
+            <h1>TCC Federal Government Trailblazer Trek</h1>
+        </div>
+        <div class="header-right">
+            <span class="header-badge">GOVT 2305</span>
+            <span class="header-badge">&#11088; 16 Modules</span>
+        </div>
     </header>
 
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-icon">&#127963;&#65039;</span>
+            <h2>Federal Government<br>Trailblazer Trek</h2>
+            <p class="hero-sub">Interactive, gamified learning modules for GOVT 2305 at Tarrant County College. Earn points, level up, and master American government &#8212; one chapter at a time.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-icon">&#128214;</span>
+                    <span class="hero-stat-label">16 Chapters</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-icon">&#127942;</span>
+                    <span class="hero-stat-label">1,000+ Pts Each</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-icon">&#9201;&#65039;</span>
+                    <span class="hero-stat-label">45&#8211;60 Min Each</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-icon">&#9889;</span>
+                    <span class="hero-stat-label">No Downloads</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ NAV TABS ══════════ -->
     <div class="container">
-        <div class="hero">
-            <h2>🗽 Interactive Learning Modules 📚</h2>
-            <p>Explore the foundations of American government through engaging, gamified learning experiences. Earn points, unlock achievements, and master the concepts that shape our democracy.</p>
-            <div class="hero-icons">
-                <div class="hero-icon">
-                    <div class="icon">🎯</div>
-                    <div class="label">1000+ Points<br>Per Chapter</div>
-                </div>
-                <div class="hero-icon">
-                    <div class="icon">📖</div>
-                    <div class="label">16 Interactive<br>Chapters</div>
-                </div>
-                <div class="hero-icon">
-                    <div class="icon">✅</div>
-                    <div class="label">Instant<br>Feedback</div>
-                </div>
-                <div class="hero-icon">
-                    <div class="icon">📊</div>
-                    <div class="label">Progress<br>Reports</div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="scrollToSection('chapters')">&#128218; Chapters</button>
+            <button class="nav-tab" onclick="scrollToSection('howto')">&#128640; How It Works</button>
+            <button class="nav-tab" onclick="scrollToSection('scoring')">&#11088; Scoring</button>
+            <button class="nav-tab" onclick="scrollToSection('submit')">&#128232; Submitting</button>
+            <button class="nav-tab" onclick="scrollToSection('tips')">&#128161; Tips</button>
+            <button class="nav-tab" onclick="scrollToSection('faq')">&#10067; FAQ</button>
+        </div>
+
+        <!-- ══════════ CHAPTERS ══════════ -->
+        <div id="chapters">
+            <div class="section-title">
+                <span>&#128218;</span>
+                <h2>Course Chapters</h2>
+            </div>
+            <p style="margin-bottom:1.5rem; color:var(--text-secondary); font-size:0.97rem;">Click any chapter to launch the interactive module in your browser. Complete all sections within a chapter to generate your Completion Report.</p>
+            <div class="chapter-grid" id="chapterGrid">
+                <!-- Chapters injected by JS -->
+            </div>
+        </div>
+
+        <!-- ══════════ HOW IT WORKS ══════════ -->
+        <div id="howto" style="margin-top:3rem;">
+            <div class="section-title">
+                <span>&#128640;</span>
+                <h2>How It Works</h2>
+            </div>
+            <div class="info-panel">
+                <div class="step-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Open the Chapter</h4>
+                        <p>Click a chapter link above (or use the link provided by your instructor in Canvas). The module opens directly in your browser &#8212; no downloads, no accounts, no plugins.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Enter Your Full Name</h4>
+                        <p>Type your <strong>first and last name</strong> exactly as it appears on your class roster. This name prints on your Completion Report, so accuracy matters.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Work Through Sections</h4>
+                        <p>Each chapter has 4&#8211;8 sections. Read the content, click <strong>reveal cards</strong> to uncover key concepts, and answer <strong>knowledge check</strong> questions for points.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Complete Each Section</h4>
+                        <p>After finishing a section&#8217;s content and questions, click <strong>&#8220;Complete Section&#8221;</strong> at the bottom. The section card on the home page turns green with a checkmark.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h4>Generate Your Report</h4>
+                        <p>Once all sections are complete, a <strong>&#8220;View Completion Report&#8221;</strong> button appears. Click it to see your letter grade, points, and section-by-section breakdown.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <h4>Screenshot &amp; Submit</h4>
+                        <p>Take a <strong>screenshot</strong> of your Completion Report (or use the Print button to save as PDF). Submit it via <strong>Canvas</strong> per your instructor&#8217;s directions.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <h2 class="section-title">📚 Course Chapters</h2>
-
-        <div class="chapters-grid">
-            <a href="Chapter%201%20-%20Critical%20Thinking%20%26%20Political%20Culture%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">1</div>
-                <h3>🧠 Critical Thinking & Political Culture</h3>
-                <p>Explore how government works, who really governs, and why your participation matters.</p>
-                <span class="tag">🌟 Foundation</span>
-            </a>
-
-            <a href="Chapter%202%20-%20The%20Constitution%20and%20Its%20Origins%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">2</div>
-                <h3>📜 The Constitution and Its Origins</h3>
-                <p>Discover the founding principles, the Constitutional Convention, and the birth of American democracy.</p>
-                <span class="tag">🌟 Foundation</span>
-            </a>
-
-            <a href="Chapter%203%20-%20American%20Federalism%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">3</div>
-                <h3>🏛️ American Federalism</h3>
-                <p>Understand the division of power between federal and state governments.</p>
-                <span class="tag">🌟 Foundation</span>
-            </a>
-
-            <a href="Chapter%204%20-%20Civil%20Liberties%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">4</div>
-                <h3>🗽 Civil Liberties</h3>
-                <p>Explore the freedoms protected by the Bill of Rights and how they've evolved.</p>
-                <span class="tag">⚖️ Rights</span>
-            </a>
-
-            <a href="Chapter%205%20-%20Civil%20Rights%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">5</div>
-                <h3>✊ Civil Rights</h3>
-                <p>Learn about the struggle for equality and the ongoing fight for civil rights in America.</p>
-                <span class="tag">⚖️ Rights</span>
-            </a>
-
-            <a href="Chapter%206%20-%20Public%20Opinion%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">6</div>
-                <h3>📊 Public Opinion</h3>
-                <p>Discover how public opinion is measured and its influence on government policy.</p>
-                <span class="tag">🗳️ Participation</span>
-            </a>
-
-            <a href="Chapter%207%20-%20Voting%20and%20Elections%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">7</div>
-                <h3>🗳️ Voting and Elections</h3>
-                <p>Understand the electoral process, voting behavior, and campaign strategies.</p>
-                <span class="tag">🗳️ Participation</span>
-            </a>
-
-            <a href="Chapter%208%20-%20The%20Media%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">8</div>
-                <h3>📺 The Media</h3>
-                <p>Explore the role of media in politics and its impact on public discourse.</p>
-                <span class="tag">🗳️ Participation</span>
-            </a>
-
-            <a href="Chapter%209%20-%20Political%20Parties%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">9</div>
-                <h3>🐘🫏 Political Parties</h3>
-                <p>Learn about the two-party system, party platforms, and political mobilization.</p>
-                <span class="tag">🗳️ Participation</span>
-            </a>
-
-            <a href="Chapter%2010%20-%20Interest%20Groups%20and%20Lobbying%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">10</div>
-                <h3>🤝 Interest Groups and Lobbying</h3>
-                <p>Discover how organized interests influence government decisions.</p>
-                <span class="tag">🗳️ Participation</span>
-            </a>
-
-            <a href="Chapter%2011%20-%20Congress%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">11</div>
-                <h3>🏛️ Congress</h3>
-                <p>Explore the legislative branch, how laws are made, and congressional powers.</p>
-                <span class="tag">🏛️ Institutions</span>
-            </a>
-
-            <a href="Chapter%2012%20-%20Presidency%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">12</div>
-                <h3>🦅 The Presidency</h3>
-                <p>Understand executive power, presidential leadership, and the modern presidency.</p>
-                <span class="tag">🏛️ Institutions</span>
-            </a>
-
-            <a href="Chapter%2013%20-%20The%20Courts%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">13</div>
-                <h3>⚖️ The Courts</h3>
-                <p>Learn about the judicial system, Supreme Court, and constitutional interpretation.</p>
-                <span class="tag">🏛️ Institutions</span>
-            </a>
-
-            <a href="Chapter%2015%20-%20The%20Bureaucracy%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">15</div>
-                <h3>📋 The Bureaucracy</h3>
-                <p>Explore the federal bureaucracy, civil service, and government administration.</p>
-                <span class="tag">🏛️ Institutions</span>
-            </a>
-
-            <a href="Chapter%2016%20-%20Domestic%20Policy%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">16</div>
-                <h3>🏠 Domestic Policy</h3>
-                <p>Understand how government addresses issues like healthcare, education, and the economy.</p>
-                <span class="tag">📋 Policy</span>
-            </a>
-
-            <a href="Chapter%2017%20-%20Foreign%20Policy%20(Expanded%20Edition).html" class="chapter-card">
-                <div class="chapter-number">17</div>
-                <h3>🌍 Foreign Policy</h3>
-                <p>Explore America's role in the world and the making of foreign policy.</p>
-                <span class="tag">📋 Policy</span>
-            </a>
+        <!-- ══════════ SCORING ══════════ -->
+        <div id="scoring" style="margin-top:3rem;">
+            <div class="section-title">
+                <span>&#11088;</span>
+                <h2>How Scoring Works</h2>
+            </div>
+            <div class="info-panel">
+                <p style="margin-bottom:1rem;">Every interaction in a Trailblazer Trek module earns you points. Your final grade is based on the percentage of total available points you earned.</p>
+                <div class="points-overview">
+                    <div class="points-item">
+                        <span class="pts-icon">&#128215;</span>
+                        <div class="pts-label">Reveal Cards</div>
+                        <div class="pts-detail">~10 pts each &#8212; click to expand hidden content</div>
+                    </div>
+                    <div class="points-item">
+                        <span class="pts-icon">&#9989;</span>
+                        <div class="pts-label">Knowledge Checks</div>
+                        <div class="pts-detail">~15&#8211;20 pts correct, partial credit for incorrect</div>
+                    </div>
+                    <div class="points-item">
+                        <span class="pts-icon">&#127937;</span>
+                        <div class="pts-label">Section Completion</div>
+                        <div class="pts-detail">Bonus points for finishing each section</div>
+                    </div>
+                    <div class="points-item">
+                        <span class="pts-icon">&#127941;</span>
+                        <div class="pts-label">Chapter Total</div>
+                        <div class="pts-detail">1,000&#8211;1,200 points available per chapter</div>
+                    </div>
+                </div>
+                <div style="margin-top:1.5rem;">
+                    <p style="font-weight:bold; color:var(--primary-blue); margin-bottom:0.5rem;">Grading Scale</p>
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; font-family:'Segoe UI',Tahoma,sans-serif; font-size:0.9rem;">
+                        <span style="background:#1B5E20; color:white; padding:0.35rem 0.9rem; border-radius:6px;"><strong>A</strong> &nbsp; 90&#8211;100%</span>
+                        <span style="background:#00695C; color:white; padding:0.35rem 0.9rem; border-radius:6px;"><strong>B</strong> &nbsp; 80&#8211;89%</span>
+                        <span style="background:#F57C00; color:white; padding:0.35rem 0.9rem; border-radius:6px;"><strong>C</strong> &nbsp; 70&#8211;79%</span>
+                        <span style="background:#E65100; color:white; padding:0.35rem 0.9rem; border-radius:6px;"><strong>D</strong> &nbsp; 60&#8211;69%</span>
+                        <span style="background:#B71C1C; color:white; padding:0.35rem 0.9rem; border-radius:6px;"><strong>F</strong> &nbsp; Below 60%</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="info-box">
-            <h3>📖 How to Use These Modules</h3>
-            <ul>
-                <li><strong>Enter your name</strong> when you start each module to personalize your experience</li>
-                <li><strong>Click on interactive cards</strong> to reveal content and earn points</li>
-                <li><strong>Answer knowledge check questions</strong> to test your understanding</li>
-                <li><strong>Complete all sections</strong> to unlock the full completion report</li>
-                <li><strong>Print your report</strong> at the end to submit for credit</li>
-            </ul>
+        <!-- ══════════ SUBMITTING ══════════ -->
+        <div id="submit" style="margin-top:3rem;">
+            <div class="section-title">
+                <span>&#128232;</span>
+                <h2>Submitting Your Score</h2>
+            </div>
+            <div class="submission-box">
+                <h3>&#9888;&#65039; Important: How to Submit</h3>
+                <ol class="submission-steps">
+                    <li>Complete <strong>all sections</strong> of the assigned chapter &#8212; the report will not generate until every section is finished.</li>
+                    <li>Click <strong>&#8220;View Completion Report&#8221;</strong> on the home page to generate your report.</li>
+                    <li>Verify that your <strong>name, letter grade, percentage, and date</strong> are all visible on the report.</li>
+                    <li>Take a <strong>full-page screenshot</strong> of the report. On Windows, press <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> and select the full report area. On Mac, press <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>4</kbd>. Alternatively, click the <strong>Print</strong> button and choose &#8220;Save as PDF.&#8221;</li>
+                    <li>Upload your screenshot or PDF to the <strong>Canvas assignment</strong> for that chapter.</li>
+                </ol>
+                <p style="margin-top:1rem; font-size:0.92rem; color:var(--text-secondary);"><strong>Pro tip:</strong> Take your screenshot immediately after generating the report. If you close the browser tab, your session data may be lost.</p>
+            </div>
         </div>
 
-        <div class="info-box">
-            <h3>ℹ️ About This Resource</h3>
-            <p>These interactive modules are part of the <strong>TCC Trailblazer Trek</strong> series, designed to make learning about American government engaging and accessible. Content is based on OpenStax American Government 4e, an Open Educational Resource (OER).</p>
-            <p style="margin-top: 1rem;"><strong>Course:</strong> GOVT 2305 - Federal Government<br>
-            <strong>Institution:</strong> Tarrant County College<br>
-            <strong>Format:</strong> Self-paced, interactive, gamified learning</p>
+        <!-- ══════════ TIPS ══════════ -->
+        <div id="tips" style="margin-top:3rem;">
+            <div class="section-title">
+                <span>&#128161;</span>
+                <h2>Tips for Success</h2>
+            </div>
+            <div class="info-panel">
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <span class="tip-icon">&#9201;&#65039;</span>
+                        <div class="tip-text"><strong>Don&#8217;t rush.</strong> Modules include pacing alerts. Take your time reading &#8212; you&#8217;ll earn a better score and actually learn the material.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">&#128270;</span>
+                        <div class="tip-text"><strong>Click every reveal card.</strong> The hidden content often appears in knowledge checks. Plus, each one earns you points.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">&#128187;</span>
+                        <div class="tip-text"><strong>Use a laptop or desktop.</strong> Modules work on phones, but the experience is best on a larger screen.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">&#128170;</span>
+                        <div class="tip-text"><strong>Finish in one sitting.</strong> Progress is session-based. If you close the tab, you may need to start over.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">&#127919;</span>
+                        <div class="tip-text"><strong>Answer carefully.</strong> First-attempt correct answers earn full points. Incorrect answers earn partial credit but lower your quiz accuracy.</div>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">&#128248;</span>
+                        <div class="tip-text"><strong>Screenshot immediately.</strong> As soon as the report generates, capture it. Don&#8217;t navigate away first.</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <!-- ══════════ FAQ ══════════ -->
+        <div id="faq" style="margin-top:3rem;">
+            <div class="section-title">
+                <span>&#10067;</span>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="info-panel">
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Do I need to download or install anything?</div>
+                    <div class="faq-a">No. Each module is a standalone HTML file that runs entirely in your web browser. Just click the link and start learning. Works on Chrome, Firefox, Safari, and Edge.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Can I complete the module on my phone?</div>
+                    <div class="faq-a">Yes, all modules are mobile-responsive. However, a laptop or desktop provides the best experience, especially for taking screenshots of your report.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">What happens if I close my browser before finishing?</div>
+                    <div class="faq-a">Your progress is stored in your browser session. If you close the tab or browser, your progress <strong>may be lost</strong>. Plan to complete each chapter in a single sitting of 45&#8211;60 minutes.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Can I redo a chapter for a better score?</div>
+                    <div class="faq-a">You can re-open the module and start from scratch at any time. Check with your instructor about whether re-submissions are accepted.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Why did I get a pacing alert?</div>
+                    <div class="faq-a">Pacing alerts appear if you complete a section faster than the expected reading and engagement time. This is a gentle reminder to slow down and genuinely engage with the material. The alert does not affect your score.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">I finished all sections but don&#8217;t see the report button. What do I do?</div>
+                    <div class="faq-a">Make sure every section card on the home page shows a green checkmark. If one is missing, click into that section, scroll to the bottom, and click &#8220;Complete Section.&#8221; The report button appears only when 100% of sections are marked complete.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Who do I contact if a module isn&#8217;t working?</div>
+                    <div class="faq-a">Reach out to your instructor via Canvas Inbox. Include which chapter, which browser you&#8217;re using, and a screenshot of any error you see.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">Where does my data go? Is it tracked?</div>
+                    <div class="faq-a">Your data stays entirely in your browser. These modules do not send data to any server, do not use cookies for tracking, and do not require login. Your score exists only in your browser session and on the screenshot you submit.</div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end container -->
+
+    <!-- ══════════ FOOTER ══════════ -->
     <footer class="footer">
-        <p><span class="tcc-logo">Tarrant County College</span> | GOVT 2305 Federal Government</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Content adapted from <a href="https://openstax.org/details/books/american-government-4e" target="_blank">OpenStax American Government 4e</a> (CC BY 4.0)</p>
-        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #888;">© 2025 TCC Trailblazer Trek Project</p>
+        <p class="footer-brand">&#127963;&#65039; TCC Federal Government Trailblazer Trek</p>
+        <p>Tarrant County College &bull; GOVT 2305 &bull; Professor Jared Alan Stewart</p>
+        <p style="font-size:0.82rem; opacity:0.7; margin-top:0.5rem;">Content adapted from OpenStax American Government (OER) &bull; &#169; 2025 Educational Use</p>
     </footer>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">&#8593;</button>
+
+    <script>
+        // ── Chapter Data ──
+        const chapters = [
+            { num: 1, title: "Critical Thinking & Political Culture", desc: "Analytical frameworks, American political values, and the foundations of government", file: "Chapter 1 - Critical Thinking & Political Culture (Expanded Edition).html", icon: "&#129504;" },
+            { num: 2, title: "The Constitution and Its Origins", desc: "Founding documents, constitutional principles, and the road to ratification", file: "Chapter 2 - The Constitution and Its Origins (Expanded Edition).html", icon: "&#128220;" },
+            { num: 3, title: "American Federalism", desc: "Federal vs. state power, intergovernmental relations, and cooperative federalism", file: "Chapter 3 - American Federalism (Expanded Edition).html", icon: "&#127991;&#65039;" },
+            { num: 4, title: "Civil Liberties", desc: "Bill of Rights, individual freedoms, and landmark Supreme Court cases", file: "Chapter 4 - Civil Liberties (Expanded Edition).html", icon: "&#128739;&#65039;" },
+            { num: 5, title: "Civil Rights", desc: "Equal protection, landmark legislation, and the ongoing struggle for equality", file: "Chapter 5 - Civil Rights (Expanded Edition).html", icon: "&#9878;&#65039;" },
+            { num: 6, title: "Public Opinion", desc: "Polling, political socialization, ideology, and the role of public sentiment", file: "Chapter 6 - Public Opinion (Expanded Edition).html", icon: "&#128202;" },
+            { num: 7, title: "Voting and Elections", desc: "Electoral systems, voter behavior, campaigns, and election infrastructure", file: "Chapter 7 - Voting and Elections (Expanded Edition).html", icon: "&#128499;&#65039;" },
+            { num: 8, title: "The Media", desc: "Press freedom, media influence, bias, and the digital media landscape", file: "Chapter 8 - The Media (Expanded Edition).html", icon: "&#128240;" },
+            { num: 9, title: "Political Parties", desc: "Party systems, platforms, realignment, and third-party movements", file: "Chapter 9 - Political Parties (Expanded Edition).html", icon: "&#127912;" },
+            { num: 10, title: "Interest Groups and Lobbying", desc: "PACs, advocacy organizations, pluralism vs. elitism, and grassroots movements", file: "Chapter 10 - Interest Groups and Lobbying (Expanded Edition).html", icon: "&#128227;" },
+            { num: 11, title: "Congress", desc: "Legislative process, committee system, representation, and congressional powers", file: "Chapter 11 - Congress (Expanded Edition).html", icon: "&#127963;" },
+            { num: 12, title: "The Presidency", desc: "Executive power, presidential roles, and the expanding modern presidency", file: "Chapter 12 - Presidency (Expanded Edition).html", icon: "&#129730;" },
+            { num: 13, title: "The Courts", desc: "Judicial review, court structure, judicial philosophy, and landmark decisions", file: "Chapter 13 - The Courts (Expanded Edition).html", icon: "&#9878;&#65039;" },
+            { num: 15, title: "The Bureaucracy", desc: "Federal agencies, regulation, accountability, and bureaucratic reform", file: "Chapter 15 - The Bureaucracy (Expanded Edition).html", icon: "&#128451;&#65039;" },
+            { num: 16, title: "Domestic Policy", desc: "Economic and social policy, the policy-making process, and safety net programs", file: "Chapter 16 - Domestic Policy (Expanded Edition).html", icon: "&#127968;" },
+            { num: 17, title: "Foreign Policy", desc: "Diplomacy, national security, international organizations, and global challenges", file: "Chapter 17 - Foreign Policy (Expanded Edition).html", icon: "&#127758;" }
+        ];
+
+        // ── Build chapter cards ──
+        const grid = document.getElementById('chapterGrid');
+        chapters.forEach(ch => {
+            const a = document.createElement('a');
+            a.href = encodeURI(ch.file);
+            a.className = 'chapter-card animate-in';
+            a.innerHTML = `
+                <div class="chapter-card-top">
+                    <div class="chapter-num">${ch.num}</div>
+                    <h3>${ch.icon} ${ch.title}</h3>
+                </div>
+                <div class="chapter-desc">${ch.desc}</div>
+                <div class="chapter-meta">
+                    <span>&#128218; Interactive Module</span>
+                    <span>&#11088; 1,000+ pts</span>
+                    <span>&#9201;&#65039; ~50 min</span>
+                </div>
+            `;
+            grid.appendChild(a);
+        });
+
+        // ── Smooth scroll ──
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Update nav active state
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // ── FAQ toggle ──
+        function toggleFaq(el) {
+            el.classList.toggle('open');
+            const answer = el.nextElementSibling;
+            answer.classList.toggle('show');
+        }
+
+        // ── Scroll-to-top button ──
+        window.addEventListener('scroll', () => {
+            document.getElementById('scrollBtn').classList.toggle('visible', window.scrollY > 500);
+        });
+    </script>
 </body>
 </html>
