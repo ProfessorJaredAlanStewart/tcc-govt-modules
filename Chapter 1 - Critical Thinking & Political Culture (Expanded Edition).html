@@ -847,6 +847,42 @@
             color: var(--success);
             margin-bottom: 10px;
         }
+
+        /* ===== Chapter Images ===== */
+        .chapter-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .chapter-image img {
+            max-width: 100%;
+            width: 700px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 3px solid var(--bg-section);
+        }
+
+        .chapter-image figcaption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .chapter-image figcaption .img-credit {
+            display: block;
+            font-size: 0.85em;
+            color: #757575;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-image img {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -958,6 +994,13 @@
                     </h2>
                 </div>
 
+                <figure class="chapter-image">
+                    <img src="images/ch1-us-capitol.jpg" alt="The United States Capitol Building in Washington, D.C., where Congress meets to make federal laws" loading="lazy">
+                    <figcaption>The United States Capitol Building — the seat of the U.S. Congress and a symbol of representative democracy.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <p class="content-paragraph">
                     Since its founding, the United States has relied on citizen participation to govern at the local, state, and national levels. This <strong>civic engagement</strong> ensures that representative democracy will continue to flourish and that people will continue to influence government. The right of citizens to participate in government is an important feature of democracy, and over the centuries many have fought to acquire and defend this right.
                 </p>
@@ -965,6 +1008,13 @@
                 <p class="content-paragraph">
                     During the <strong>American Revolution (1775–1783)</strong>, British colonists fought for the right to govern themselves. In the early nineteenth century, agitated citizens called for the removal of property requirements for voting so poor White men could participate in government just as wealthy men could. Throughout the late nineteenth and twentieth centuries, women, African Americans, Native Americans, and many other groups fought for the right to vote and hold office.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch1-suffrage-march.jpg" alt="Women suffragists marching for the right to vote in the early 1900s, carrying banners demanding equal suffrage" loading="lazy">
+                    <figcaption>Suffragists march for women's right to vote, early 20th century. Expanding democratic participation has been an ongoing struggle throughout American history.
+                        <span class="img-credit">Source: Library of Congress / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="important-box">
                     <div class="important-box-title">📢 Why This Matters</div>
@@ -1124,6 +1174,13 @@
                 <p class="content-paragraph">
                     However, the market cannot provide everything in enough quantity or at low enough costs to meet everyone's needs. Therefore, some goods are provided by the government. Understanding the different types of goods helps us understand what role government plays in our lives.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch1-public-services.jpg" alt="A public school building representing government-provided public goods funded by taxpayer dollars" loading="lazy">
+                    <figcaption>Public schools are one of the most visible examples of government-provided public goods — available to all citizens and funded through taxes.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="interactive-card" onclick="revealCard(this, 'goods_types', 45)">
                     <div class="card-prompt">🔍 Click to explore: Four Types of Goods</div>
@@ -1327,6 +1384,13 @@
                     The United States allows its citizens to participate in government in many ways. It also has many different levels and branches of government that any citizen or group might approach. Many people take this as evidence that U.S. citizens, especially as represented by competing groups, are able to influence government actions. Some political theorists, however, argue that this is not the case. They claim that only a handful of economic and political elites have any influence over government.
                 </p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch1-wall-street.jpg" alt="The New York Stock Exchange on Wall Street, representing the intersection of economic wealth and political power in America" loading="lazy">
+                    <figcaption>Wall Street and the New York Stock Exchange — elite theorists argue that concentrations of economic wealth translate directly into political power.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <div class="definition-box">
                     <div class="definition-term">🎩 Elite Theory of Government</div>
                     <div>The belief that a set of elite citizens is really in charge of government and that others have no influence. The foremost supporter was <strong>C. Wright Mills</strong>, who argued in his book <em>The Power Elite</em> that government was controlled by a combination of business, military, and political elites. According to this theory, the wealthy use their power to control the nation's economy so that those below them cannot advance economically. Their wealth allows the elite to secure important positions in politics, where they make decisions and allocate resources in ways that benefit themselves.</div>
@@ -1477,6 +1541,13 @@
                 <p class="content-paragraph">
                     Participation in government matters. Although people may not get all that they want, they can achieve many goals and improve their lives through <strong>civic engagement</strong>. According to the pluralist theory, government cannot function without active participation by at least some citizens. Even if we believe the elite make political decisions, participation in government through the act of voting can change who the members of the elite are.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch1-young-voters.jpg" alt="Young Americans participating in the democratic process at a polling location on Election Day" loading="lazy">
+                    <figcaption>Young Americans exercising their right to vote. Youth voter turnout reached a record 53% in the 2020 presidential election.
+                        <span class="img-credit">Source: Wikimedia Commons / Creative Commons</span>
+                    </figcaption>
+                </figure>
 
                 <div class="key-concept">
                     <div class="key-concept-title">📉 Is Civic Engagement Declining?</div>
@@ -1705,6 +1776,13 @@
                     </div>
                 </div>
 
+                <figure class="chapter-image">
+                    <img src="images/ch1-declaration.jpg" alt="The original Declaration of Independence document from 1776, establishing America's founding principles of liberty and equality" loading="lazy">
+                    <figcaption>The Declaration of Independence (1776) — the foundational document articulating America's core values of liberty, equality, and self-government.
+                        <span class="img-credit">Source: National Archives / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <div class="quote-box">
                     <p>"We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.—That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed."</p>
                     <p class="quote-author">— Declaration of Independence, 1776</p>
@@ -1850,6 +1928,13 @@
                     <div class="definition-term">📊 Majoritarianism</div>
                     <div>The principle that the majority effectively determines what government does. In a democratic system, policies reflect the preferences of more than half of those voting.</div>
                 </div>
+
+                <figure class="chapter-image">
+                    <img src="images/ch1-supreme-court.jpg" alt="The United States Supreme Court Building in Washington, D.C., representing the constitutional system of checks and balances" loading="lazy">
+                    <figcaption>The U.S. Supreme Court Building — the judiciary serves as a critical check on government power and a channel through which citizens can assert their constitutional rights.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="key-concept">
                     <div class="key-concept-title">📜 A Constitutional System</div>
