@@ -903,6 +903,42 @@
                 box-shadow: none;
             }
         }
+
+        /* ===== Chapter Images ===== */
+        .chapter-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .chapter-image img {
+            max-width: 100%;
+            width: 700px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 3px solid var(--bg-section);
+        }
+
+        .chapter-image figcaption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .chapter-image figcaption .img-credit {
+            display: block;
+            font-size: 0.85em;
+            color: #757575;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-image img {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1023,6 +1059,13 @@
                 </div>
 
                 <p>In the 2016 election, most polls showed Democratic nominee Hillary Clinton with an advantage nationwide and in the battleground states in the days leading up to the election. However, Republican nominee Donald Trump was elected president as many new voters joined the process, voters who were not studied in the polls as likely voters. As many a disappointed candidate knows, <strong>public opinion matters</strong>. The way opinions are formed and the way we measure public opinion also matter. But how much, and why? These are some of the questions we'll explore in this chapter.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch6_polling_place.jpg" alt="American voters lined up at a polling place on Election Day, where public opinion is ultimately expressed through the ballot box" loading="lazy">
+                    <figcaption>Voters at a polling place on Election Day — public opinion polling attempts to predict how millions of individual decisions like these will add up, but as many candidates have learned, polls can be wrong.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="definition-box">
                     <div class="definition-term">📊 What Is Public Opinion?</div>
@@ -1187,6 +1230,13 @@
                 </div>
 
                 <h3>Family: The First Teacher</h3>
+
+                <figure class="chapter-image">
+                    <img src="images/ch6_family_politics.jpg" alt="An American family engaged in discussion, representing how family serves as the first and most powerful agent of political socialization" loading="lazy">
+                    <figcaption>Family is the first agent of political socialization — children often adopt their parents' political party identification and core political values long before they can vote.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <p>For many children, family is the first introduction to politics. Children may hear adult conversations at home and piece together the political messages their parents support. They often know how their parents or grandparents plan to vote, which in turn can socialize them into political behavior such as political party membership.</p>
 
@@ -1413,6 +1463,13 @@
 
                 <p>Most public opinion polls aim to be accurate, but this is not an easy task. Political polling is a science. From design to implementation, polls are complex and require careful planning and care. Mitt Romney's campaign polls are only a recent example of problems stemming from polling methods. Our history is littered with examples of polling companies producing results that incorrectly predicted public opinion due to poor survey design or bad polling methods.</p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch6_dewey_truman.jpg" alt="Harry Truman holding up the Chicago Daily Tribune newspaper with the incorrect headline 'Dewey Defeats Truman' after winning the 1948 presidential election" loading="lazy">
+                    <figcaption>Truman holds up the infamous "Dewey Defeats Truman" headline (1948) — one of the most famous polling failures in American history, caused by pollsters who stopped surveying too early and missed a late shift in voter opinion.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <div class="case-study-box">
                     <div class="case-study-title">📰 The 1936 Literary Digest Disaster</div>
                     <p>In 1936, Literary Digest continued its tradition of polling citizens to determine who would win the presidential election. The magazine sent opinion cards to people who had a subscription, a phone, or a car registration. Only some of the recipients sent back their cards.</p>
@@ -1461,6 +1518,13 @@
                 <h3>Sample Size and Accuracy</h3>
 
                 <p>Pollsters try to interview a set number of citizens to create a reasonable sample of the population. This sample size will vary based on the size of the population being interviewed and the level of accuracy the pollster wishes to reach.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch6_gallup_polling.jpg" alt="George Gallup, pioneer of scientific public opinion polling, who developed the methods that transformed how we measure what Americans think" loading="lazy">
+                    <figcaption>George Gallup pioneered scientific polling in the 1930s. His methods — random sampling, careful question design, and statistical analysis — replaced the unscientific straw polls that had dominated for over a century.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <table>
                     <tr>
@@ -1557,6 +1621,13 @@
                 </div>
 
                 <h3>Question Wording and Framing</h3>
+
+                <figure class="chapter-image">
+                    <img src="images/ch6_phone_survey.jpg" alt="A person conducting a telephone survey, representing the challenges pollsters face in reaching representative samples and avoiding bias" loading="lazy">
+                    <figcaption>Telephone surveys remain a common polling method — but declining response rates, caller ID, and the shift to cell phones have made reaching a representative sample increasingly difficult.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <p>Polls begin with a list of carefully written questions. The questions need to be free of framing, meaning they should not be worded to lead respondents to a particular answer.</p>
 
@@ -1661,6 +1732,13 @@
                 </div>
 
                 <p>While attitudes and beliefs are slow to change, ideology can be influenced by events. A student might leave college with a liberal ideology but become more conservative as she ages. A first-year teacher may view unions with suspicion based on second-hand information but change his mind after reading newsletters and attending union meetings. These shifts may change the way citizens vote and the answers they give in polls.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch6_political_spectrum.jpg" alt="Americans representing diverse political viewpoints, illustrating how public opinion spans a wide ideological spectrum from liberal to conservative" loading="lazy">
+                    <figcaption>Public opinion spans a wide ideological spectrum — life experiences, generational shifts, and major events can all move individuals and the public as a whole along the liberal-conservative continuum.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <h3>Experiences That Affect Public Opinion</h3>
 
@@ -1854,6 +1932,13 @@
                 <h3>Public Opinion and Elections</h3>
 
                 <p>Elections are the events on which opinion polls have the greatest measured effect. Public opinion polls do more than show how we feel on issues or project who might win an election. The media use public opinion polls to decide which candidates are ahead of the others and therefore of interest to voters and worthy of interview.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch6_election_night.jpg" alt="Election night news coverage showing poll results and vote tallies, illustrating how public opinion polling shapes media coverage and voter behavior" loading="lazy">
+                    <figcaption>Election night coverage — public opinion polls shape which candidates the media covers, influence donor behavior, and can create a "bandwagon effect" that builds momentum for front-runners.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="interactive-card" onclick="revealCard(this, 'bandwagon-effect', 35)">
                     <div class="card-prompt">🔍 Click to explore: The Bandwagon Effect</div>
