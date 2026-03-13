@@ -717,6 +717,42 @@
             .content-section { padding: 20px; }
             .time-analysis-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+        /* ===== Chapter Images ===== */
+        .chapter-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .chapter-image img {
+            max-width: 100%;
+            width: 700px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 3px solid var(--bg-section);
+        }
+
+        .chapter-image figcaption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .chapter-image figcaption .img-credit {
+            display: block;
+            font-size: 0.85em;
+            color: #757575;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-image img {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -842,6 +878,13 @@
 
                 <p>The beliefs and attitudes that led to the call for independence had long been an important part of colonial life. Of all the political thinkers who influenced American beliefs about government, the most important is surely <strong>John Locke</strong>. The most significant contributions of Locke, a seventeenth-century English philosopher, were his ideas regarding the relationship between government and <strong>natural rights</strong>, which were believed to be God-given rights to life, liberty, and property.</p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch2_magna_carta.jpg" alt="The Magna Carta document from 1215, one of the earliest protections for individual rights that influenced American political thought" loading="lazy">
+                    <figcaption>Magna Carta (1215) — King John's promise to protect the lives, liberties, and property of English subjects became a foundation for the natural rights philosophy that would shape American government.
+                        <span class="img-credit">Source: British Library / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <div class="interactive-card" onclick="revealCard(this, 'locke-content', 35)">
                     <div class="card-prompt">🔍 Click to explore: John Locke's Revolutionary Ideas</div>
                     <div class="card-content" id="locke-content">
@@ -888,6 +931,13 @@
                 <h2 style="color: var(--primary-blue); margin: 30px 0;">The Road to Revolution</h2>
                 
                 <p>The American Revolution began when a small and vocal group of colonists became convinced the king and Parliament were abusing them and depriving them of their rights. For more than a century, England had treated the colonies with <strong>benign neglect</strong>. Each colony had its own legislature. Taxes were low, and property ownership was widespread. People readily proclaimed their loyalty to the king and were proud to be British citizens.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch2_boston_tea_party.jpg" alt="Depiction of the Boston Tea Party of 1773, when colonists dumped tea into Boston Harbor to protest British taxation without representation" loading="lazy">
+                    <figcaption>The Boston Tea Party (1773) — colonists destroyed an entire shipment of tea to protest British taxation policies, a pivotal act of defiance on the road to revolution.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="interactive-card" onclick="revealCard(this, 'revolution-timeline', 35)">
                     <div class="card-prompt">🔍 Click to explore: The Chain of Events Leading to Revolution</div>
@@ -996,6 +1046,13 @@
                 <p>Waging a successful war against Great Britain required that the individual colonies, now sovereign states that often distrusted one another, form a unified nation with a central government capable of directing the country's defense. Gaining recognition and aid from foreign nations would also be easier if the new United States had a national government able to borrow money and negotiate treaties.</p>
 
                 <p>The Second Continental Congress called upon its delegates to create a new government strong enough to win the country's independence but <strong>not so powerful</strong> that it would deprive people of the very liberties for which they were fighting.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch2_articles_confederation.jpg" alt="The Articles of Confederation document, America's first constitution that created a weak central government" loading="lazy">
+                    <figcaption>The Articles of Confederation (1777) — America's first governing document created a deliberately weak central government, reflecting the colonists' deep fear of concentrated power.
+                        <span class="img-credit">Source: National Archives / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="interactive-card" onclick="revealCard(this, 'articles-creation', 40)">
                     <div class="card-prompt">🔍 Click to explore: Birth of the Articles of Confederation</div>
@@ -1189,6 +1246,13 @@
                 
                 <p><strong>Fifty-five delegates</strong> arrived in Philadelphia in May 1787 for what became known as the <strong>Constitutional Convention</strong>. Notable absences included John Adams and Thomas Jefferson, who were overseas as diplomats. The only decision all could agree on was the election of <strong>George Washington</strong> as president of the convention.</p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch2_independence_hall.jpg" alt="Independence Hall in Philadelphia, Pennsylvania, where the Constitutional Convention met in 1787 to draft the U.S. Constitution" loading="lazy">
+                    <figcaption>Independence Hall, Philadelphia — where 55 delegates gathered in the summer of 1787 to draft the United States Constitution behind closed doors.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <div class="interactive-card" onclick="revealCard(this, 'delegate-concerns', 45)">
                     <div class="card-prompt">🔍 Click to explore: The Delegates' Competing Concerns</div>
                     <div class="card-content" id="delegate-concerns">
@@ -1373,6 +1437,13 @@
                 
                 <p>On <strong>September 17, 1787</strong>, the delegates voted to approve the Constitution. But before it could become law, it faced another hurdle: ratification by the states.</p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch2_signing_constitution.jpg" alt="Scene at the Signing of the Constitution of the United States by Howard Chandler Christy, depicting the delegates at the Constitutional Convention" loading="lazy">
+                    <figcaption>The signing of the Constitution, September 17, 1787. After months of intense debate and compromise, the delegates approved a new framework for American government.
+                        <span class="img-credit">Source: Architect of the Capitol / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <p><strong>Article VII</strong> required that <strong>nine of the thirteen states</strong> ratify the Constitution before it could take effect. Eleven days after approval, copies were sent to each state for ratifying conventions.</p>
 
                 <div class="interactive-card" onclick="revealCard(this, 'ratification-strategy', 45)">
@@ -1393,6 +1464,13 @@
                 <h2 style="color: var(--primary-blue); margin: 30px 0;">Federalists vs. Anti-Federalists</h2>
                 
                 <p>Citizens quickly separated into two groups on the question of ratification.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch2_federalist_papers.jpg" alt="Title page of The Federalist Papers, a collection of essays by Hamilton, Madison, and Jay arguing for ratification of the Constitution" loading="lazy">
+                    <figcaption>The Federalist Papers — Alexander Hamilton, James Madison, and John Jay published 85 essays arguing for ratification, making the case for a strong but balanced national government.
+                        <span class="img-credit">Source: Library of Congress / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <table class="comparison-table">
                     <tr>
@@ -1556,6 +1634,13 @@
                 <p>A major problem with the Articles of Confederation was the difficulty of changing them without unanimous consent. The framers learned this lesson and built into the Constitution the ability to amend it—but made the process difficult enough that it wouldn't be changed repeatedly.</p>
 
                 <p>Since ratification in 1789, the Constitution has been amended only <strong>27 times</strong>. The first ten amendments were added in 1791, and only seventeen have been added since.</p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch2_bill_of_rights.jpg" alt="The United States Bill of Rights, the first ten amendments to the Constitution ratified in 1791, guaranteeing fundamental individual liberties" loading="lazy">
+                    <figcaption>The Bill of Rights (1791) — the first ten amendments to the Constitution, added to guarantee fundamental individual liberties and satisfy Anti-Federalist concerns.
+                        <span class="img-credit">Source: National Archives / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <div class="interactive-card" onclick="revealCard(this, 'amendment-process', 35)">
                     <div class="card-prompt">🔍 Click to explore: How Amendments Are Made</div>
