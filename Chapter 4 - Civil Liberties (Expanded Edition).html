@@ -753,6 +753,42 @@
                 padding: 1rem;
             }
         }
+
+        /* ===== Chapter Images ===== */
+        .chapter-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .chapter-image img {
+            max-width: 100%;
+            width: 700px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 3px solid var(--bg-section);
+        }
+
+        .chapter-image figcaption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .chapter-image figcaption .img-credit {
+            display: block;
+            font-size: 0.85em;
+            color: #757575;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-image img {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -878,6 +914,13 @@
                     <p>Black Lives Matter demonstrations across the nation provided an example of the freedom of assembly protected by the Bill of Rights. This right may now be in jeopardy as bills in several state legislatures threaten peaceful gatherings and even shield citizens who attack such protesters. Fights like this—in the streets, courts, legislatures, and public opinion—are hardly unique in U.S. history. In fact, they are the main driver of political change.</p>
                     
                     <p>The framers of the Constitution wanted a government that would not repeat the abuses of individual liberties and rights that caused them to declare independence from Britain. However, laws and other "parchment barriers" (or written documents) alone have not protected freedoms over the years; instead, citizens have learned the truth of the old saying (often attributed to Thomas Jefferson but actually said by Irish politician John Philpot Curran), <strong>"Eternal vigilance is the price of liberty."</strong></p>
+
+                    <figure class="chapter-image">
+                        <img src="images/ch4_bill_of_rights.jpg" alt="The United States Bill of Rights, the first ten amendments to the Constitution that protect individual civil liberties from government intrusion" loading="lazy">
+                        <figcaption>The Bill of Rights — the first ten amendments to the Constitution protect fundamental civil liberties by placing limits on what the government can do to individuals.
+                            <span class="img-credit">Source: National Archives / Public Domain</span>
+                        </figcaption>
+                    </figure>
                 </div>
 
                 <div class="content-block">
@@ -1000,6 +1043,13 @@
                     <h3>Extending the Bill of Rights to the States</h3>
                     <p>In <em>Barron v. Baltimore</em> (1833), the Supreme Court ruled that the Bill of Rights applied only to the federal government, not the states. After the Civil War, the Fourteenth Amendment changed this through <strong>selective incorporation</strong>.</p>
 
+                    <figure class="chapter-image">
+                        <img src="images/ch4_fourteenth_amendment.jpg" alt="The Fourteenth Amendment to the United States Constitution, which enabled selective incorporation of the Bill of Rights to apply to state governments" loading="lazy">
+                        <figcaption>The Fourteenth Amendment (1868) — its due process clause became the vehicle through which the Supreme Court applied most Bill of Rights protections to state governments, one case at a time.
+                            <span class="img-credit">Source: National Archives / Public Domain</span>
+                        </figcaption>
+                    </figure>
+
                     <div class="definition-box">
                         <div class="definition-term">🔄 Selective Incorporation</div>
                         <div>The process by which the Supreme Court has applied most Bill of Rights protections to the states through the Fourteenth Amendment's due process clause, on a case-by-case basis.</div>
@@ -1072,6 +1122,13 @@
                     <div class="quote-box">
                         "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances."
                     </div>
+
+                    <figure class="chapter-image">
+                        <img src="images/ch4_free_speech.jpg" alt="Citizens exercising their First Amendment rights to freedom of speech and peaceful assembly at a public demonstration" loading="lazy">
+                        <figcaption>Citizens exercising First Amendment freedoms — the rights to free speech, press, assembly, and petition are the cornerstones of American civil liberties.
+                            <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                        </figcaption>
+                    </figure>
                 </div>
 
                 <div class="content-block">
@@ -1243,6 +1300,13 @@
                         "A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed."
                     </div>
 
+                    <figure class="chapter-image">
+                        <img src="images/ch4_second_amendment.jpg" alt="Historical depiction of colonial militia members bearing arms, representing the origins of the Second Amendment right to keep and bear arms" loading="lazy">
+                        <figcaption>The Second Amendment's meaning remains one of the most debated questions in constitutional law — does it protect a collective militia right or an individual right to bear arms?
+                            <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                        </figcaption>
+                    </figure>
+
                     <!-- Card 1: 25 points -->
                     <div class="interactive-card" onclick="revealCard(this, 's3-card1', 25)">
                         <div class="card-prompt">🔍 Click to explore: Collective vs. Individual Rights Views</div>
@@ -1294,6 +1358,13 @@
                     <div class="quote-box">
                         "The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated..."
                     </div>
+
+                    <figure class="chapter-image">
+                        <img src="images/ch4_fourth_amendment.jpg" alt="A search warrant document, representing the Fourth Amendment protection against unreasonable searches and seizures" loading="lazy">
+                        <figcaption>The Fourth Amendment requires police to obtain a warrant based on probable cause before searching a person's home or property — a protection rooted in colonial-era outrage over British "writs of assistance."
+                            <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                        </figcaption>
+                    </figure>
 
                     <div class="definition-box">
                         <div class="definition-term">🔍 Probable Cause</div>
@@ -1376,6 +1447,14 @@
             <div class="section-content">
                 <div class="content-block">
                     <h3>The Fifth Amendment</h3>
+
+                    <figure class="chapter-image">
+                        <img src="images/ch4_courtroom.jpg" alt="Interior of a United States courtroom, representing the constitutional protections afforded to those accused of crimes under the Fifth through Eighth Amendments" loading="lazy">
+                        <figcaption>A federal courtroom — the Fifth through Eighth Amendments guarantee critical protections for anyone accused of a crime, from the right to remain silent to protection against cruel and unusual punishment.
+                            <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                        </figcaption>
+                    </figure>
+
                     <div class="definition-box">
                         <div class="definition-term">👥 Grand Jury</div>
                         <div>A group of citizens who decide if enough evidence exists to prosecute someone for serious crimes.</div>
@@ -1540,6 +1619,14 @@
 
                 <div class="content-block">
                     <h3>The Right to Privacy</h3>
+
+                    <figure class="chapter-image">
+                        <img src="images/ch4_supreme_court.jpg" alt="The United States Supreme Court Building, where landmark privacy and civil liberties cases have been decided" loading="lazy">
+                        <figcaption>The U.S. Supreme Court — through landmark cases like Griswold v. Connecticut and Roe v. Wade, the Court found a constitutional right to privacy in the "penumbras" of the Bill of Rights.
+                            <span class="img-credit">Source: Wikimedia Commons / CC BY-SA 3.0</span>
+                        </figcaption>
+                    </figure>
+
                     <!-- Card 1: 25 points -->
                     <div class="interactive-card" onclick="revealCard(this, 's5-card1', 25)">
                         <div class="card-prompt">🔍 Click to explore: Constitutional Sources of Privacy</div>
