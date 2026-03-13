@@ -853,6 +853,42 @@
                 position: relative;
             }
         }
+
+        /* ===== Chapter Images ===== */
+        .chapter-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .chapter-image img {
+            max-width: 100%;
+            width: 700px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 3px solid var(--bg-section);
+        }
+
+        .chapter-image figcaption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .chapter-image figcaption .img-credit {
+            display: block;
+            font-size: 0.85em;
+            color: #757575;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .chapter-image img {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -967,6 +1003,13 @@
                     The Internet also allows citizens to initiate public discussion by uploading images and video for viewing, such as videos documenting interactions between citizens and the police. Provided we are connected digitally, we have a bewildering amount of choices for finding information about the world.
                 </p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch8_news_media.jpg" alt="A television news broadcast studio, representing the mass media's role in informing citizens and shaping public discourse in American democracy" loading="lazy">
+                    <figcaption>A television news studio — from print to radio to TV to social media, the mass media serve as the primary link between citizens and the political events that shape their lives.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <div class="definition-box">
                     <div class="definition-term">📰 Mass Media</div>
                     <div>The collection of all forms of media that communicate information to the general public, including television, print, radio, and Internet. One of the primary reasons citizens turn to the media is for news. We expect the media to cover important political and social events and information in a concise and neutral manner.</div>
@@ -997,6 +1040,13 @@
                 <p>
                     Each form of media has its own complexities and is used by different demographics. <strong>Millennials</strong> (born 1981-1996) and <strong>Generation Z</strong> (born 1997-2012) are more likely to get news and information from social media, such as Instagram, TikTok, Twitter, and YouTube, while <strong>Baby Boomers</strong> (born 1946-1964) are most likely to get their news from television, either national broadcasts or local news.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch8_social_media.jpg" alt="A smartphone displaying social media news feeds, representing how younger generations increasingly get their political information through digital platforms" loading="lazy">
+                    <figcaption>Social media on a smartphone — Millennials and Gen Z are more likely to get news from Instagram, TikTok, and YouTube than from traditional television, fundamentally changing how political information spreads.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <!-- Card 2: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'tv-types', 30)">
@@ -1238,6 +1288,13 @@
                     Early news was presented to local populations through the print press. While several colonies had printers and occasional newspapers, high literacy rates combined with the desire for self-government made Boston a perfect location for the creation of a newspaper, and the first continuous press was started there in 1704.
                 </p>
 
+                <figure class="chapter-image">
+                    <img src="images/ch8_printing_press.jpg" alt="A historical printing press, representing the birth of American media and the critical role newspapers played in the founding of the republic" loading="lazy">
+                    <figcaption>A colonial-era printing press — the first continuous American newspaper began in Boston in 1704, and by the Revolution, newspapers were instrumental in building support for independence.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
+
                 <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'revolutionary-press', 30)">
                     <div class="card-prompt">🔍 Click to explore: Newspapers and the Revolutionary War</div>
@@ -1306,6 +1363,13 @@
                 <p>
                     Radio news made its appearance in the 1920s. The National Broadcasting Company (NBC) and the Columbia Broadcasting System (CBS) began running sponsored news programs and radio dramas. Comedy programs like Amos 'n' Andy and Easy Aces became popular during the 1930s as listeners sought humor during the Depression.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch8_fdr_fireside.jpg" alt="President Franklin D. Roosevelt delivering one of his famous fireside chats over the radio, demonstrating how new media technologies transform political communication" loading="lazy">
+                    <figcaption>FDR delivers a fireside chat — Roosevelt mastered radio the way later politicians would master TV and social media, speaking directly to citizens and bypassing traditional media gatekeepers.
+                        <span class="img-credit">Source: FDR Presidential Library / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <!-- Card 3: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'radio-golden-age', 30)">
@@ -1381,6 +1445,13 @@
                 <p>
                     Television combined the best attributes of radio and pictures and changed media forever. The first official broadcast in the United States was President Franklin Roosevelt's speech at the opening of the 1939 World's Fair in New York. By the 1950s, the price of television sets had dropped, more stations were being created, and advertisers were buying spots.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch8_kennedy_nixon.jpg" alt="The 1960 Kennedy-Nixon presidential debate, the first televised debate in American history, which demonstrated the power of television to shape political outcomes" loading="lazy">
+                    <figcaption>The 1960 Kennedy-Nixon debate — the first televised presidential debate showed that on TV, appearance matters as much as substance. Radio listeners thought Nixon won; TV viewers gave it to Kennedy.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <!-- Card 5: 35 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'tv-politics', 35)">
@@ -1553,6 +1624,13 @@
                     "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the government for a redress of grievances."
                     <div class="quote-attribution">— First Amendment to the U.S. Constitution</div>
                 </div>
+
+                <figure class="chapter-image">
+                    <img src="images/ch8_press_freedom.jpg" alt="Journalists and press photographers at work, representing the First Amendment protection of freedom of the press in American democracy" loading="lazy">
+                    <figcaption>Journalists at work — the First Amendment's protection of press freedom is not absolute. Courts have balanced it against national security, libel laws, and the FCC's regulatory authority over broadcast media.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'zenger-trial', 30)">
@@ -1828,6 +1906,13 @@
                 <p>
                     Concerns about the effects of media on consumers and the existence and extent of media bias go back to the 1920s. Reporter and commentator Walter Lippmann noted that citizens have limited personal experience with government and the world and posited that the media, through their stories, place ideas in citizens' minds.
                 </p>
+
+                <figure class="chapter-image">
+                    <img src="images/ch8_newspapers.jpg" alt="A newspaper stand displaying multiple newspaper front pages, illustrating how media agenda-setting determines which issues the public considers most important" loading="lazy">
+                    <figcaption>Newspaper front pages — the media may not tell us what to think, but they powerfully shape what we think about. This "agenda-setting" function determines which issues rise to national attention.
+                        <span class="img-credit">Source: Wikimedia Commons / Public Domain</span>
+                    </figcaption>
+                </figure>
 
                 <!-- Card 1: 30 points -->
                 <div class="interactive-card" onclick="revealCard(this, 'media-theories', 30)">
