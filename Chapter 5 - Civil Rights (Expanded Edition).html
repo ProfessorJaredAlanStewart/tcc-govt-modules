@@ -13,21 +13,21 @@
 
         :root {
             /* ADA Compliant Colors - Blue-Green Theme */
-            --primary-blue: #005A87;
-            --primary-green: #00695C;
-            --secondary-blue: #0277BD;
-            --secondary-green: #00897B;
-            --success: #1B5E20;
+            --primary-blue: #0c2753;
+            --primary-green: #1a4d8f;
+            --secondary-blue: #2c74ae;
+            --secondary-green: #8dc63f;
+            --success: #4a8c2a;
             --error: #B71C1C;
             --warning: #F57C00;
             --text-primary: #212121;
             --text-secondary: #424242;
             --bg-white: #FFFFFF;
             --bg-light: #F5F5F5;
-            --bg-section: #E0F2F1;
+            --bg-section: #e8edf4;
             --highlight-yellow: #FFD54F;
-            --highlight-blue: #E3F2FD;
-            --highlight-green: #E8F5E9;
+            --highlight-blue: #dce5f2;
+            --highlight-green: #eaf5e0;
         }
 
         body {
@@ -86,7 +86,7 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            background: linear-gradient(135deg, #2c74ae, #3d8cc4);
             color: white;
             padding: 3rem;
             border-radius: 15px;
@@ -329,7 +329,7 @@
         }
 
         .interactive-card {
-            background: linear-gradient(135deg, var(--bg-section), #B2DFDB);
+            background: linear-gradient(135deg, var(--bg-section), #c5d5ea);
             border: 2px solid var(--secondary-green);
             padding: 1.5rem;
             margin: 1.5rem 0;
@@ -2269,7 +2269,7 @@
                 '<div style="font-size:1.4em;font-weight:bold;color:#B71C1C;margin-bottom:12px;">Pacing Alert</div>' +
                 '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
                 '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
-                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+                '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" style="background:linear-gradient(135deg,#0c2753,#1a4d8f);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
             overlay.style.display = 'flex';
         }
 
@@ -2481,8 +2481,8 @@
             var gradeDisplay = document.getElementById('gradeDisplay');
             var letterGrade = document.getElementById('letterGrade');
             var grade, color;
-            if (percentage >= 90) { grade = 'A'; color = '#1B5E20'; }
-            else if (percentage >= 80) { grade = 'B'; color = '#00695C'; }
+            if (percentage >= 90) { grade = 'A'; color = '#4a8c2a'; }
+            else if (percentage >= 80) { grade = 'B'; color = '#1a4d8f'; }
             else if (percentage >= 70) { grade = 'C'; color = '#F57C00'; }
             else if (percentage >= 60) { grade = 'D'; color = '#E65100'; }
             else { grade = 'F'; color = '#B71C1C'; }

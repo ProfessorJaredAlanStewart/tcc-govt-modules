@@ -13,21 +13,21 @@
 
         :root {
             /* ADA Compliant Colors - Blue-Green Theme */
-            --primary-blue: #005A87;
-            --primary-green: #00695C;
-            --secondary-blue: #0277BD;
-            --secondary-green: #00897B;
-            --success: #1B5E20;
+            --primary-blue: #0c2753;
+            --primary-green: #1a4d8f;
+            --secondary-blue: #2c74ae;
+            --secondary-green: #8dc63f;
+            --success: #4a8c2a;
             --error: #B71C1C;
             --warning: #F57C00;
             --text-primary: #212121;
             --text-secondary: #424242;
             --bg-white: #FFFFFF;
             --bg-light: #F5F5F5;
-            --bg-section: #E0F2F1;
+            --bg-section: #e8edf4;
             --highlight-yellow: #FFD54F;
-            --highlight-blue: #E3F2FD;
-            --highlight-green: #E8F5E9;
+            --highlight-blue: #dce5f2;
+            --highlight-green: #eaf5e0;
             --accent-orange: #E65100;
         }
 
@@ -115,7 +115,7 @@
         .hero-section {
             text-align: center;
             padding: 40px;
-            background: linear-gradient(135deg, #4FC3F7, #4DB6AC);
+            background: linear-gradient(135deg, #2c74ae, #3d8cc4);
             border-radius: 15px;
             margin-bottom: 30px;
             color: white;
@@ -433,7 +433,7 @@
 
         /* Important Box */
         .important-box {
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            background: linear-gradient(135deg, #dce5f2, #bbdefb);
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
@@ -835,7 +835,7 @@
 
         /* Example Box */
         .example-box {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            background: linear-gradient(135deg, #eaf5e0, #d4e8c4);
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
@@ -2493,7 +2493,7 @@
                 'Each section contains important reading material that typically takes 8&#8211;15 minutes to review carefully. ' +
                 'Rushing through may affect your understanding of the material. This time will appear on your completion report.</div>' +
                 '<button onclick="document.getElementById(\'pacingWarningOverlay\').style.display=\'none\';" ' +
-                'style="background:linear-gradient(135deg,#005A87,#00695C);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
+                'style="background:linear-gradient(135deg,#0c2753,#1a4d8f);color:white;border:none;padding:12px 30px;border-radius:8px;font-size:1em;font-weight:bold;cursor:pointer;">I Understand</button>';
             
             overlay.style.display = 'flex';
         }
@@ -2539,11 +2539,11 @@
             
             if (percentage >= 90) { 
                 letterGrade = 'A'; 
-                gradeColor = '#1B5E20'; 
+                gradeColor = '#4a8c2a'; 
             }
             else if (percentage >= 80) { 
                 letterGrade = 'B'; 
-                gradeColor = '#00695C'; 
+                gradeColor = '#1a4d8f'; 
             }
             else if (percentage >= 70) { 
                 letterGrade = 'C'; 
@@ -2639,7 +2639,7 @@
 
                 if (isCompleted) {
                     statusEl.textContent = '\u2705 Completed';
-                    statusEl.style.color = '#1B5E20';
+                    statusEl.style.color = '#4a8c2a';
                 } else if (gameState.score > (i - 1) * 200) {
                     statusEl.textContent = '\uD83D\uDD04 In Progress';
                     statusEl.style.color = '#F57C00';
