@@ -890,17 +890,110 @@
         }
 
         /* Print Styles */
-        @media print {
-            .no-print {
-                display: none !important;
+                @media print {
+            /* Hide everything except the report */
+            .no-print, .back-button, .report-back-button,
+            .header, .print-report-button, .pdf-note { display: none !important; }
+            
+            /* Show only the report page */
+            body > .container > .page { display: none !important; }
+            body > .container > #reportPage { display: block !important; }
+            body > .container > #homePage { display: none !important; }
+            .page { display: none !important; }
+            #reportPage { display: block !important; }
+            
+            /* Clean print layout */
+            body { background: white !important; margin: 0; padding: 0; font-size: 11pt; }
+            .container { margin: 0; padding: 0; max-width: 100%; box-shadow: none !important; }
+            .report-container { box-shadow: none !important; border: none; padding: 20px; }
+            
+            /* Ensure report header prints with color */
+            .report-header-bar {
+                background: #0c2753 !important; 
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color: white !important;
+                padding: 15px 20px !important;
             }
-
-            body {
-                background: white;
+            .report-header-bar h1 { color: white !important; font-size: 14pt !important; }
+            .score-badge { 
+                background: rgba(255,255,255,0.2) !important; 
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color: white !important; 
             }
-
-            .report-main {
-                box-shadow: none;
+            
+            /* Grade display */
+            .report-grade-display {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .letter-grade {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Time analysis must print */
+            .time-analysis-section { 
+                display: block !important; 
+                page-break-inside: avoid;
+            }
+            .time-analysis-grid { 
+                display: grid !important; 
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+            .time-stat-box {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border: 1px solid #ccc;
+            }
+            .time-stat-value {
+                color: #8dc63f !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Pacing warning MUST show in print */
+            .time-warning {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border-left: 5px solid #B71C1C !important;
+            }
+            
+            /* Metrics grid */
+            .metrics-grid { 
+                display: grid !important;
+                page-break-inside: avoid;
+            }
+            .metric-box {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                border: 1px solid #ccc;
+            }
+            
+            /* Performance table */
+            .performance-table { width: 100%; }
+            .performance-section { page-break-inside: avoid; }
+            
+            /* Footer */
+            .report-footer { page-break-inside: avoid; }
+            .instructor-note { 
+                border: 1px solid #ccc; 
+                padding: 10px; 
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Print-only verification footer */
+            .print-verification {
+                display: block !important;
+                margin-top: 20px;
+                padding: 10px;
+                border-top: 2px solid #0c2753;
+                font-size: 9pt;
+                color: #666;
+                text-align: center;
             }
         }
 
@@ -2165,7 +2258,8 @@
                             <p class="instructor-note">
                                 <strong>Instructor Note:</strong> This student has completed the Chapter 6: Public Opinion module of the TCC Federal Government Trailblazer Trek. This comprehensive interactive module covered the nature of public opinion, political socialization, agents of socialization, ideological spectrum, polling methodologies, sampling techniques, polling problems including the Bradley Effect and push polls, demographic differences in opinion, effects of public opinion on elections and government branches, and the relationship between polls and political behavior. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                             </p>
-                            <button class="print-report-button no-print" onclick="window.print()">🖨 Print Report</button>
+                            <button class="print-report-button no-print" onclick="window.print()">📄 Download Completion Report (PDF)</button>
+                            <p class="pdf-note no-print" style="font-size:0.85em; color:#757575; margin-top:8px; font-style:italic;">Use your browser's "Save as PDF" option. Submit this PDF — screenshots will not be accepted.</p>
                         </div>
                     </div>
                 </div>
