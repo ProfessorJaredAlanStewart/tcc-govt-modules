@@ -2044,7 +2044,12 @@
         <!-- REPORT PAGE -->
         <div id="reportPage" class="page">
             <div class="report-container">
-                <div class="report-header">
+                
+                    <div class="no-print" style="text-align:center; margin: 1.5rem 0; padding: 1rem; background: #eaf5e0; border: 2px solid #8dc63f; border-radius: 12px;">
+                        <button onclick="window.print()" style="background:linear-gradient(135deg,#0c2753,#1a4d8f);color:white;padding:0.8rem 2rem;border:none;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;">📄 Download Completion Report (PDF)</button>
+                        <p style="font-size:0.85em; color:#555; margin-top:8px; margin-bottom:0; font-style:italic;">Use your browser's "Save as PDF" option. Submit this PDF — screenshots will not be accepted.</p>
+                    </div>
+<div class="report-header">
                     <h1>🗳️ TCC Federal Government Trailblazer Trek</h1>
                     <div class="report-scores">
                         <span class="report-score-badge">⭐ <span id="reportPoints">0</span> pts</span>
@@ -2141,8 +2146,6 @@
                     </div>
 
                     <div class="report-footer">
-                        <button class="print-button no-print" onclick="window.print()">📄 Download Completion Report (PDF)</button>
-                        <p class="pdf-note no-print" style="font-size:0.85em; color:#757575; margin-top:8px; font-style:italic;">Use your browser's "Save as PDF" option. Submit this PDF — screenshots will not be accepted.</p>
                     </div>
                 </div>
             </div>

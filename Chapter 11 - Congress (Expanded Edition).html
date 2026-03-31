@@ -2115,7 +2115,12 @@
         <!-- REPORT PAGE -->
         <div id="reportPage" class="page">
             <div class="report-container">
-                <div class="report-header-bar">
+                
+                    <div class="no-print" style="text-align:center; margin: 1.5rem 0; padding: 1rem; background: #eaf5e0; border: 2px solid #8dc63f; border-radius: 12px;">
+                        <button onclick="window.print()" style="background:linear-gradient(135deg,#0c2753,#1a4d8f);color:white;padding:0.8rem 2rem;border:none;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;">📄 Download Completion Report (PDF)</button>
+                        <p style="font-size:0.85em; color:#555; margin-top:8px; margin-bottom:0; font-style:italic;">Use your browser's "Save as PDF" option. Submit this PDF — screenshots will not be accepted.</p>
+                    </div>
+<div class="report-header-bar">
                     <h1>🏛️ TCC Federal Government Trailblazer Trek</h1>
                     <div class="report-scores">
                         <span class="score-badge">⭐ <span id="reportTotalPoints">0</span> pts</span>
@@ -2243,8 +2248,6 @@
                         <p class="instructor-note">
                             <strong>📝 Instructor Note:</strong> This report confirms the student's completion of Chapter 11: Congress in the TCC Federal Government Trailblazer Trek module. The score reflects engagement with interactive content and knowledge check questions. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                         </p>
-                        <button class="print-report-button no-print" onclick="window.print()">📄 Download Completion Report (PDF)</button>
-                            <p class="pdf-note no-print" style="font-size:0.85em; color:#757575; margin-top:8px; font-style:italic;">Use your browser's "Save as PDF" option. Submit this PDF — screenshots will not be accepted.</p>
                         <button class="print-report-button no-print" onclick="goHome()">🏠 Return Home</button>
                     </div>
                 </div>
