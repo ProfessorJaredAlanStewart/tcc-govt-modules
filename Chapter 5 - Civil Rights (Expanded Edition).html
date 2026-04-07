@@ -2634,6 +2634,52 @@
     <!--   2. Tamper-evident integrity hash on completion report       -->
     <!-- ============================================================ -->
     <style>
+        /* Section/chapter cards — visible outline so users can see the
+           clickable boundaries against any background. */
+        .section-card {
+            border: 2px solid #2c74ae !important;
+            box-shadow: 0 2px 8px rgba(12, 39, 83, 0.12);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .section-card:hover {
+            border-color: #0c2753 !important;
+            box-shadow: 0 6px 18px rgba(12, 39, 83, 0.22) !important;
+        }
+        .section-card.completed {
+            border-color: #8dc63f !important;
+            box-shadow: 0 2px 10px rgba(141, 198, 63, 0.3);
+        }
+
+        /* Standardized green "Generate Completion Report" button */
+        .trek-report-btn-container {
+            text-align: center;
+            margin: 32px auto 24px auto;
+            padding: 0 16px;
+        }
+        .trek-report-btn {
+            background: linear-gradient(135deg, #6ba428, #8dc63f);
+            color: #ffffff !important;
+            border: 2px solid #5a8e1f;
+            padding: 16px 36px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(141, 198, 63, 0.45);
+            font-family: inherit;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .trek-report-btn:hover {
+            background: linear-gradient(135deg, #5a8e1f, #7ab832);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(141, 198, 63, 0.55);
+        }
+        .trek-report-btn:active {
+            transform: translateY(0);
+        }
+
         .trek-integrity-box {
             margin: 24px auto 8px auto;
             max-width: 560px;
@@ -2899,12 +2945,86 @@
         }
 
         // ====================================================================
-        // 3. WIRE-UP
+        // 3. NORMALIZE COMPLETION REPORT BUTTON
+        // Some chapters present "Completion Report" as a tile inside the
+        // section grid; some have it as a separate button; the styles vary.
+        // This function standardizes all of them: hides any existing report
+        // navigation element on the home page and inserts one consistent
+        // green button below the section grid.
+        // ====================================================================
+
+        function normalizeReportButton() {
+            // Find the home / landing container
+            var home = document.getElementById('homePage')
+                || document.getElementById('home')
+                || document.getElementById('page-home')
+                || document.querySelector('[data-page="home"]');
+            if (!home) {
+                var anyGrid = document.querySelector('.section-grid, .sections-grid, .section-cards');
+                if (anyGrid) {
+                    home = anyGrid.closest('.page') || anyGrid.parentElement;
+                }
+            }
+            if (!home) return;
+
+            // Don't run twice
+            if (home.querySelector('#trekReportBtnContainer')) return;
+
+            // Find any element on the home page whose onclick navigates to
+            // the report — covers section-card tiles AND existing buttons.
+            // Patterns in use across chapters:
+            //   generateReport(), goToReport(), showReport(),
+            //   showPage('report'), navigateTo('reportPage'),
+            //   navigateToSection('reportPage'), goToSection('reportPage')
+            var navs = [];
+            home.querySelectorAll('[onclick]').forEach(function(el) {
+                var oc = el.getAttribute('onclick') || '';
+                if (/[Rr]eport/.test(oc)) {
+                    navs.push(el);
+                }
+            });
+            if (navs.length === 0) return;
+
+            // Capture the onclick handler from the first match
+            var reportOnclick = navs[0].getAttribute('onclick');
+
+            // Hide all existing report nav elements (don't delete — leaves
+            // chapter logic intact in case anything references them)
+            navs.forEach(function(el) { el.style.display = 'none'; });
+
+            // Build the standardized green button
+            var container = document.createElement('div');
+            container.id = 'trekReportBtnContainer';
+            container.className = 'trek-report-btn-container';
+            var btn = document.createElement('button');
+            btn.className = 'trek-report-btn';
+            btn.type = 'button';
+            btn.setAttribute('onclick', reportOnclick);
+            btn.innerHTML = '📋 Generate Completion Report';
+            container.appendChild(btn);
+
+            // Insert immediately after the section grid if we can find it,
+            // otherwise append to home.
+            var grid = home.querySelector('.section-grid')
+                || home.querySelector('.sections-grid')
+                || home.querySelector('.section-cards');
+            if (grid && grid.parentElement) {
+                grid.parentElement.insertBefore(container, grid.nextSibling);
+            } else {
+                home.appendChild(container);
+            }
+        }
+
+        // ====================================================================
+        // 4. WIRE-UP
         // ====================================================================
 
         function init() {
             // Resume
             offerResume();
+
+            // Standardize the completion-report button
+            normalizeReportButton();
 
             // Auto-save loop + lifecycle saves
             setInterval(saveState, 5000);
@@ -2947,6 +3067,8 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
+
 
 
 </body>
