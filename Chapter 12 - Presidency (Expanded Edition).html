@@ -3230,5 +3230,302 @@
             updateProgress();
         });
     </script>
+    <!-- ============================================================ -->
+    <!-- TCC Trailblazer Trek — Resume & Integrity Extensions          -->
+    <!-- Injected by tools/inject_extras.py — do not hand-edit         -->
+    <!-- Provides:                                                     -->
+    <!--   1. Auto-save / resume via localStorage                      -->
+    <!--   2. Tamper-evident integrity hash on completion report       -->
+    <!-- ============================================================ -->
+    <style>
+        .trek-integrity-box {
+            margin: 24px auto 8px auto;
+            max-width: 560px;
+            padding: 14px 18px;
+            background: #f4f8fb;
+            border: 2px solid #2c74ae;
+            border-radius: 8px;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #0c2753;
+        }
+        .trek-integrity-box .trek-hash-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2c74ae;
+        }
+        .trek-integrity-box .trek-hash-code {
+            display: block;
+            margin-top: 6px;
+            font-family: 'SF Mono', Menlo, Consolas, monospace;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #0c2753;
+        }
+        .trek-integrity-box .trek-hash-note {
+            display: block;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #555;
+            font-style: italic;
+        }
+        @media print {
+            .trek-integrity-box {
+                border-color: #000 !important;
+                background: #fff !important;
+            }
+        }
+    </style>
+    <script>
+    (function() {
+        'use strict';
+
+        // ----- Storage key (one per chapter, derived from title) -----
+        var CHAPTER_KEY = (document.title || location.pathname || 'trek')
+            .replace(/\s+/g, '_').replace(/[^A-Za-z0-9_\-]/g, '');
+        var STORAGE_KEY = 'tcc-trek-resume::' + CHAPTER_KEY;
+
+        function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+        function safeSet(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+        function safeDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+        function getScore() {
+            if (typeof gameState === 'undefined' || !gameState) return 0;
+            return gameState.score || gameState.totalPoints || gameState.currentScore || 0;
+        }
+
+        // ====================================================================
+        // 1. AUTO-SAVE / RESUME
+        // ====================================================================
+
+        function saveState() {
+            if (typeof gameState === 'undefined' || !gameState) return;
+            try {
+                var snap = JSON.parse(JSON.stringify(gameState));
+                snap._savedAt = Date.now();
+                if (typeof gameState.moduleStartTime === 'number') {
+                    snap._elapsedAtSave = Date.now() - gameState.moduleStartTime;
+                }
+                safeSet(STORAGE_KEY, JSON.stringify(snap));
+            } catch (e) { /* swallow — never break the chapter */ }
+        }
+
+        function restoreState(saved) {
+            if (typeof gameState === 'undefined' || !gameState) return;
+            try {
+                Object.keys(saved).forEach(function(k) {
+                    if (k.charAt(0) === '_') return;
+                    gameState[k] = saved[k];
+                });
+                if (saved._elapsedAtSave && 'moduleStartTime' in gameState) {
+                    gameState.moduleStartTime = Date.now() - saved._elapsedAtSave;
+                }
+
+                // Restore visual state of revealed cards
+                var revealed = gameState.cardsRevealed || [];
+                var answered = gameState.questionsAnswered || [];
+                var sectionsDone = gameState.sectionsCompleted || [];
+
+                document.querySelectorAll('[onclick]').forEach(function(el) {
+                    var oc = el.getAttribute('onclick') || '';
+                    if (oc.indexOf('revealCard') !== -1) {
+                        for (var i = 0; i < revealed.length; i++) {
+                            if (oc.indexOf("'" + revealed[i] + "'") !== -1) {
+                                el.classList.add('revealed');
+                                break;
+                            }
+                        }
+                    }
+                    if (oc.indexOf('handleAnswer') !== -1) {
+                        for (var j = 0; j < answered.length; j++) {
+                            if (oc.indexOf("'" + answered[j] + "'") !== -1) {
+                                el.style.pointerEvents = 'none';
+                                el.style.opacity = '0.7';
+                                // Mark correct/incorrect visually if pattern is recognizable
+                                if (oc.indexOf('true') !== -1) el.classList.add('correct');
+                                else if (oc.indexOf('false') !== -1) el.classList.add('incorrect');
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                // Mark completed section cards on the home page
+                sectionsDone.forEach(function(secNum) {
+                    var card = document.getElementById('card' + secNum)
+                        || document.getElementById('section' + secNum + '-card');
+                    if (card) card.classList.add('completed');
+                });
+
+                // Trigger any existing UI update functions
+                if (typeof updateDisplay === 'function') { try { updateDisplay(); } catch (e) {} }
+                if (typeof updateReport === 'function') { try { updateReport(); } catch (e) {} }
+            } catch (e) { /* never break the chapter */ }
+        }
+
+        function offerResume() {
+            var raw = safeGet(STORAGE_KEY);
+            if (!raw) return;
+            var saved;
+            try { saved = JSON.parse(raw); } catch (e) { safeDel(STORAGE_KEY); return; }
+            if (!saved || typeof saved !== 'object') { safeDel(STORAGE_KEY); return; }
+
+            var savedScore = saved.score || saved.totalPoints || saved.currentScore || 0;
+            if (savedScore === 0) { safeDel(STORAGE_KEY); return; }
+
+            var ageMs = Date.now() - (saved._savedAt || Date.now());
+            var ageStr;
+            if (ageMs < 3600000) ageStr = 'less than an hour ago';
+            else if (ageMs < 86400000) ageStr = Math.round(ageMs / 3600000) + ' hour(s) ago';
+            else ageStr = Math.round(ageMs / 86400000) + ' day(s) ago';
+
+            var msg =
+                'Welcome back! You have saved progress on this chapter.\n\n' +
+                '  • Points earned so far: ' + savedScore + '\n' +
+                '  • Last saved: ' + ageStr + '\n\n' +
+                'Click OK to RESUME where you left off.\n' +
+                'Click Cancel to START OVER (saved progress will be erased).';
+
+            if (window.confirm(msg)) {
+                restoreState(saved);
+            } else {
+                safeDel(STORAGE_KEY);
+            }
+        }
+
+        // ====================================================================
+        // 2. INTEGRITY HASH
+        // ====================================================================
+
+        function getStudentName() {
+            var ids = ['studentName', 'studentNameInput', 'reportName', 'nameInput', 'name'];
+            for (var i = 0; i < ids.length; i++) {
+                var el = document.getElementById(ids[i]);
+                if (el) {
+                    var v = (el.value || el.textContent || '').trim();
+                    if (v) return v;
+                }
+            }
+            return '';
+        }
+
+        function fallbackHash(str) {
+            // Non-cryptographic FNV-1a — used only if SubtleCrypto is unavailable
+            var h = 2166136261;
+            for (var i = 0; i < str.length; i++) {
+                h ^= str.charCodeAt(i);
+                h = (h * 16777619) >>> 0;
+            }
+            return ('00000000' + h.toString(16)).slice(-8).toUpperCase();
+        }
+
+        function computeIntegrityHash(callback) {
+            var name = getStudentName();
+            var score = getScore();
+            var chapter = (document.title || '').replace(/\s+/g, ' ').trim();
+            var date = new Date().toISOString().slice(0, 10);
+            var payload = name + '|' + date + '|' + score + '|' + chapter;
+
+            if (window.crypto && window.crypto.subtle && window.TextEncoder) {
+                try {
+                    var buf = new TextEncoder().encode(payload);
+                    window.crypto.subtle.digest('SHA-256', buf).then(function(digest) {
+                        var bytes = new Uint8Array(digest);
+                        var hex = '';
+                        for (var i = 0; i < bytes.length; i++) {
+                            hex += ('00' + bytes[i].toString(16)).slice(-2);
+                        }
+                        callback(hex.slice(0, 8).toUpperCase());
+                    }).catch(function() { callback(fallbackHash(payload)); });
+                    return;
+                } catch (e) { /* fall through */ }
+            }
+            callback(fallbackHash(payload));
+        }
+
+        function findReportContainer() {
+            var ids = ['reportPage', 'section-report', 'reportSection', 'completionReport', 'report'];
+            for (var i = 0; i < ids.length; i++) {
+                var el = document.getElementById(ids[i]);
+                if (el) return el;
+            }
+            return document.querySelector('.report-page, .report, .completion-report');
+        }
+
+        function injectIntegrityHash() {
+            var container = findReportContainer();
+            if (!container) return;
+            computeIntegrityHash(function(hash) {
+                var box = document.getElementById('trekIntegrityBox');
+                if (!box) {
+                    box = document.createElement('div');
+                    box.id = 'trekIntegrityBox';
+                    box.className = 'trek-integrity-box';
+                    container.appendChild(box);
+                }
+                box.innerHTML =
+                    '<span class="trek-hash-label">🔒 Integrity Code</span>' +
+                    '<span class="trek-hash-code">' + hash + '</span>' +
+                    '<span class="trek-hash-note">' +
+                    'Computed from your name, today\'s date, your score, and this chapter. ' +
+                    'Your instructor uses this code to verify the report has not been altered. ' +
+                    'Editing the PDF will invalidate the code.' +
+                    '</span>';
+            });
+        }
+
+        // ====================================================================
+        // 3. WIRE-UP
+        // ====================================================================
+
+        function init() {
+            // Resume
+            offerResume();
+
+            // Auto-save loop + lifecycle saves
+            setInterval(saveState, 5000);
+            document.addEventListener('visibilitychange', saveState);
+            window.addEventListener('pagehide', saveState);
+            window.addEventListener('beforeunload', saveState);
+
+            // Recompute hash on name input
+            ['studentName', 'studentNameInput', 'reportName', 'nameInput', 'name'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.addEventListener('input', function() {
+                    setTimeout(injectIntegrityHash, 50);
+                });
+            });
+
+            // Inject hash right before printing (guarantees it's in the PDF)
+            window.addEventListener('beforeprint', injectIntegrityHash);
+
+            // Also inject when the report page becomes visible. Use a polling
+            // check to keep this resilient across all the different page-show
+            // implementations in use.
+            var lastVisible = false;
+            setInterval(function() {
+                var c = findReportContainer();
+                if (!c) return;
+                var visible = c.offsetParent !== null
+                    && getComputedStyle(c).display !== 'none';
+                if (visible && !lastVisible) injectIntegrityHash();
+                lastVisible = visible;
+            }, 1000);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+    <!-- ============================================================ -->
+    <!-- End TCC Trailblazer Trek Extensions                           -->
+    <!-- ============================================================ -->
+
 </body>
 </html>

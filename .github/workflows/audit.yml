@@ -1,0 +1,31 @@
+name: Point Total Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Chapter*.html'
+      - 'tools/audit_points.py'
+      - '.github/workflows/audit.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'Chapter*.html'
+      - 'tools/audit_points.py'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: Verify chapter point totals
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run point total audit
+        run: python3 tools/audit_points.py .
