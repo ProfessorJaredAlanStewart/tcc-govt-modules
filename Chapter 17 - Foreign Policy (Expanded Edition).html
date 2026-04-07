@@ -2345,10 +2345,11 @@
                     gameState.moduleStartTime = Date.now() - saved._elapsedAtSave;
                 }
 
-                // Restore visual state of revealed cards
-                var revealed = gameState.cardsRevealed || [];
-                var answered = gameState.questionsAnswered || [];
-                var sectionsDone = gameState.sectionsCompleted || [];
+                // Different chapters use different naming conventions —
+                // accept either spelling for each tracked array.
+                var revealed = gameState.cardsRevealed || gameState.revealedCards || [];
+                var answered = gameState.questionsAnswered || gameState.answeredQuestions || [];
+                var sectionsDone = gameState.sectionsCompleted || gameState.completedSections || [];
 
                 document.querySelectorAll('[onclick]').forEach(function(el) {
                     var oc = el.getAttribute('onclick') || '';
@@ -2365,7 +2366,6 @@
                             if (oc.indexOf("'" + answered[j] + "'") !== -1) {
                                 el.style.pointerEvents = 'none';
                                 el.style.opacity = '0.7';
-                                // Mark correct/incorrect visually if pattern is recognizable
                                 if (oc.indexOf('true') !== -1) el.classList.add('correct');
                                 else if (oc.indexOf('false') !== -1) el.classList.add('incorrect');
                                 break;
@@ -2374,16 +2374,41 @@
                     }
                 });
 
-                // Mark completed section cards on the home page
                 sectionsDone.forEach(function(secNum) {
                     var card = document.getElementById('card' + secNum)
                         || document.getElementById('section' + secNum + '-card');
                     if (card) card.classList.add('completed');
                 });
 
-                // Trigger any existing UI update functions
-                if (typeof updateDisplay === 'function') { try { updateDisplay(); } catch (e) {} }
-                if (typeof updateReport === 'function') { try { updateReport(); } catch (e) {} }
+                // Re-populate the student name input if we saved one
+                var nameIds = ['studentName', 'studentNameInput', 'nameInput', 'name'];
+                for (var n = 0; n < nameIds.length; n++) {
+                    var ni = document.getElementById(nameIds[n]);
+                    if (ni && gameState.studentName) {
+                        if ('value' in ni) ni.value = gameState.studentName;
+                        else ni.textContent = gameState.studentName;
+                        break;
+                    }
+                }
+
+                // Direct DOM update — guaranteed fallback that works regardless
+                // of which update functions a particular chapter happens to define.
+                var score = getScore();
+                ['totalPoints', 'currentScore', 'score', 'reportTotalPoints',
+                 'reportPoints', 'metricPoints', 'finalPoints'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.textContent = score;
+                });
+
+                // THEN call any of the chapter's own update functions that exist —
+                // most chapters use updateScore + updateLevel + updateProgress as
+                // separate functions; a handful use updateDisplay/updateReport.
+                ['updateScore', 'updateLevel', 'updateProgress', 'updateDisplay',
+                 'updateReport', 'updateReportPage'].forEach(function(fn) {
+                    if (typeof window[fn] === 'function') {
+                        try { window[fn](); } catch (e) {}
+                    }
+                });
             } catch (e) { /* never break the chapter */ }
         }
 
@@ -2547,6 +2572,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 </body>
 </html>
