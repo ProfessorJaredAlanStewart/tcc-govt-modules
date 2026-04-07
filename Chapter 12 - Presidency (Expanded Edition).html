@@ -3334,6 +3334,21 @@
             .replace(/\s+/g, '_').replace(/[^A-Za-z0-9_\-]/g, '');
         var STORAGE_KEY = 'tcc-trek-resume::' + CHAPTER_KEY;
 
+        // Capture which top-level fields of gameState were Set/Map at init
+        // time so we can coerce them back if a save round-tripped them
+        // through plain JSON (which loses Set type information).
+        var INITIAL_TYPES = {};
+        function captureInitialTypes() {
+            if (typeof gameState === 'undefined' || !gameState) return;
+            try {
+                Object.keys(gameState).forEach(function(k) {
+                    var v = gameState[k];
+                    if (typeof Set !== 'undefined' && v instanceof Set) INITIAL_TYPES[k] = 'Set';
+                    else if (typeof Map !== 'undefined' && v instanceof Map) INITIAL_TYPES[k] = 'Map';
+                });
+            } catch (e) {}
+        }
+
         function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
         function safeSet(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
         function safeDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
@@ -3350,7 +3365,21 @@
         function saveState() {
             if (typeof gameState === 'undefined' || !gameState) return;
             try {
-                var snap = JSON.parse(JSON.stringify(gameState));
+                // Custom replacer: tag Sets and Maps so we can rebuild them on
+                // load (plain JSON.stringify converts both to {} which is the
+                // root cause of the .has()/.add() crashes after a refresh).
+                var json = JSON.stringify(gameState, function(key, value) {
+                    if (value && typeof value === 'object') {
+                        if (typeof Set !== 'undefined' && value instanceof Set) {
+                            return { __trekSet__: Array.from(value) };
+                        }
+                        if (typeof Map !== 'undefined' && value instanceof Map) {
+                            return { __trekMap__: Array.from(value.entries()) };
+                        }
+                    }
+                    return value;
+                });
+                var snap = JSON.parse(json);
                 snap._savedAt = Date.now();
                 if (typeof gameState.moduleStartTime === 'number') {
                     snap._elapsedAtSave = Date.now() - gameState.moduleStartTime;
@@ -3359,12 +3388,32 @@
             } catch (e) { /* swallow — never break the chapter */ }
         }
 
+        function reviveValue(value) {
+            if (value && typeof value === 'object') {
+                if (value.__trekSet__) return new Set(value.__trekSet__);
+                if (value.__trekMap__) return new Map(value.__trekMap__);
+            }
+            return value;
+        }
+
         function restoreState(saved) {
             if (typeof gameState === 'undefined' || !gameState) return;
             try {
                 Object.keys(saved).forEach(function(k) {
                     if (k.charAt(0) === '_') return;
-                    gameState[k] = saved[k];
+                    var v = reviveValue(saved[k]);
+                    // Backward compat: if this field SHOULD be a Set/Map per
+                    // initial types but came back as a plain object (older
+                    // saves before tagged-serialization), coerce it.
+                    if (INITIAL_TYPES[k] === 'Set' && !(v instanceof Set)) {
+                        if (Array.isArray(v)) v = new Set(v);
+                        else if (v && typeof v === 'object') v = new Set(Object.keys(v));
+                        else v = new Set();
+                    } else if (INITIAL_TYPES[k] === 'Map' && !(v instanceof Map)) {
+                        if (Array.isArray(v)) v = new Map(v);
+                        else v = new Map();
+                    }
+                    gameState[k] = v;
                 });
                 if (saved._elapsedAtSave && 'moduleStartTime' in gameState) {
                     gameState.moduleStartTime = Date.now() - saved._elapsedAtSave;
@@ -3372,9 +3421,20 @@
 
                 // Different chapters use different naming conventions —
                 // accept either spelling for each tracked array.
-                var revealed = gameState.cardsRevealed || gameState.revealedCards || [];
-                var answered = gameState.questionsAnswered || gameState.answeredQuestions || [];
+                var revealedSrc = gameState.cardsRevealed || gameState.revealedCards;
+                var answeredSrc = gameState.questionsAnswered || gameState.answeredQuestions;
                 var sectionsDone = gameState.sectionsCompleted || gameState.completedSections || [];
+
+                // Sets need to be iterated differently than arrays
+                function toArr(x) {
+                    if (!x) return [];
+                    if (Array.isArray(x)) return x;
+                    if (typeof Set !== 'undefined' && x instanceof Set) return Array.from(x);
+                    if (typeof x === 'object') return Object.keys(x);
+                    return [];
+                }
+                var revealed = toArr(revealedSrc);
+                var answered = toArr(answeredSrc);
 
                 document.querySelectorAll('[onclick]').forEach(function(el) {
                     var oc = el.getAttribute('onclick') || '';
@@ -3399,7 +3459,7 @@
                     }
                 });
 
-                sectionsDone.forEach(function(secNum) {
+                toArr(sectionsDone).forEach(function(secNum) {
                     var card = document.getElementById('card' + secNum)
                         || document.getElementById('section' + secNum + '-card');
                     if (card) card.classList.add('completed');
@@ -3425,13 +3485,16 @@
                     if (el) el.textContent = score;
                 });
 
-                // THEN call any of the chapter's own update functions that exist —
-                // most chapters use updateScore + updateLevel + updateProgress as
-                // separate functions; a handful use updateDisplay/updateReport.
+                // Call chapter update functions — but ONLY ones that take no
+                // required arguments. Some chapters define `updateScore(points)`
+                // as an additive helper (NOT a refresh), and calling it with
+                // undefined corrupts the score to NaN. Function.length excludes
+                // params with default values, so this filter is safe.
                 ['updateScore', 'updateLevel', 'updateProgress', 'updateDisplay',
                  'updateReport', 'updateReportPage'].forEach(function(fn) {
-                    if (typeof window[fn] === 'function') {
-                        try { window[fn](); } catch (e) {}
+                    var f = window[fn];
+                    if (typeof f === 'function' && f.length === 0) {
+                        try { f(); } catch (e) {}
                     }
                 });
             } catch (e) { /* never break the chapter */ }
@@ -3441,7 +3504,9 @@
             var raw = safeGet(STORAGE_KEY);
             if (!raw) return;
             var saved;
-            try { saved = JSON.parse(raw); } catch (e) { safeDel(STORAGE_KEY); return; }
+            try {
+                saved = JSON.parse(raw, function(k, v) { return reviveValue(v); });
+            } catch (e) { safeDel(STORAGE_KEY); return; }
             if (!saved || typeof saved !== 'object') { safeDel(STORAGE_KEY); return; }
 
             var savedScore = saved.score || saved.totalPoints || saved.currentScore || 0;
@@ -3624,6 +3689,9 @@
         // ====================================================================
 
         function init() {
+            // Capture which fields are Sets/Maps before anything mutates them
+            captureInitialTypes();
+
             // Resume
             offerResume();
 
@@ -3671,6 +3739,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 
 

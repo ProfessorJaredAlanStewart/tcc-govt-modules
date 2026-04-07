@@ -300,6 +300,48 @@
             opacity: 1;
             transform: translateX(0);
         }
+        /* ── PROGRESS DECORATION (computed from localStorage) ── */
+        .chapter-card.in-progress {
+            border-color: #f9a825 !important;
+            background: linear-gradient(180deg, #ffffff 60%, #fff8e1 100%);
+        }
+        .chapter-card.completed {
+            border-color: #4caf50 !important;
+            background: linear-gradient(180deg, #ffffff 60%, #e8f5e9 100%);
+        }
+        .progress-badge {
+            display: inline-block;
+            margin-top: 0.6rem;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+        .progress-badge.in-progress {
+            background: #fff3cd;
+            color: #856404;
+            border: 1.5px solid #f9a825;
+        }
+        .progress-badge.completed {
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 1.5px solid #4caf50;
+        }
+        .progress-summary {
+            text-align: center;
+            margin: 0 0 1.2rem 0;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            font-weight: 600;
+            color: #1b5e20;
+            display: none;
+        }
+        .progress-summary.has-progress {
+            display: block;
+        }
 
         /* ── TIPS BOX ── */
         .tips-grid {
@@ -547,6 +589,7 @@
                 <h2>Course Chapters</h2>
             </div>
             <p style="margin-bottom:1.5rem; color:var(--text-secondary); font-size:0.97rem;">Click any chapter to launch the interactive module in your browser. Complete all sections within a chapter to generate your Completion Report.</p>
+            <div class="progress-summary" id="progressSummary"></div>
             <div class="chapter-grid" id="chapterGrid">
                 <!-- Chapters injected by JS -->
             </div>
@@ -787,6 +830,88 @@
             `;
             grid.appendChild(a);
         });
+
+        // ── Read per-chapter progress from localStorage and decorate cards ──
+        function reviveTrekValue(v) {
+            if (v && typeof v === 'object') {
+                if (v.__trekSet__) return v.__trekSet__;
+                if (v.__trekMap__) return v.__trekMap__;
+            }
+            return v;
+        }
+        function decorateProgress() {
+            var cards = document.querySelectorAll('.chapter-card');
+            var inProgress = 0, completed = 0;
+            try {
+                for (var i = 0; i < localStorage.length; i++) {
+                    var key = localStorage.key(i);
+                    if (!key || key.indexOf('tcc-trek-resume::') !== 0) continue;
+                    // Filter to FED only — keys for TX chapters contain "Texas_Government"
+                    if (key.indexOf('Texas_Government') !== -1) continue;
+                    if (key.indexOf('Federal_Government') === -1) continue;
+
+                    var raw = localStorage.getItem(key);
+                    if (!raw) continue;
+                    var saved;
+                    try { saved = JSON.parse(raw, function(k, v) { return reviveTrekValue(v); }); }
+                    catch (e) { continue; }
+                    if (!saved || typeof saved !== 'object') continue;
+
+                    var score = saved.score || saved.totalPoints || saved.currentScore || 0;
+                    if (!score) continue;
+
+                    // Match key suffix to a chapter by looking for "Chapter_N" or "Chapter_N_"
+                    var m = key.match(/Chapter_(\d+)/);
+                    if (!m) continue;
+                    var chNum = parseInt(m[1], 10);
+
+                    // Determine completion: count truthy entries in sectionsCompleted
+                    var secs = saved.sectionsCompleted || saved.completedSections || [];
+                    if (secs && typeof secs === 'object' && !Array.isArray(secs)) {
+                        secs = Object.keys(secs);
+                    }
+                    var doneSections = 0;
+                    if (Array.isArray(secs)) {
+                        secs.forEach(function(s) { if (s) doneSections++; });
+                    }
+
+                    // Find the matching card (chapter-num text equals chNum)
+                    cards.forEach(function(card) {
+                        var numEl = card.querySelector('.chapter-num');
+                        if (!numEl) return;
+                        if (parseInt(numEl.textContent, 10) !== chNum) return;
+
+                        // Skip if we've already badged this card (in case of duplicate keys)
+                        if (card.querySelector('.progress-badge')) return;
+
+                        var isComplete = doneSections >= 4; // heuristic: 4+ sections done
+                        var badge = document.createElement('span');
+                        badge.className = 'progress-badge ' + (isComplete ? 'completed' : 'in-progress');
+                        badge.textContent = isComplete
+                            ? '✓ Completed · ' + score + ' pts'
+                            : '⏳ In progress · ' + score + ' pts';
+                        // Insert before the .chapter-meta row
+                        var meta = card.querySelector('.chapter-meta');
+                        if (meta) card.insertBefore(badge, meta);
+                        else card.appendChild(badge);
+                        card.classList.add(isComplete ? 'completed' : 'in-progress');
+                        if (isComplete) completed++; else inProgress++;
+                    });
+                }
+            } catch (e) { /* swallow */ }
+
+            // Update the summary banner
+            var summary = document.getElementById('progressSummary');
+            if (summary && (inProgress + completed) > 0) {
+                summary.classList.add('has-progress');
+                var total = cards.length;
+                var parts = [];
+                if (completed > 0) parts.push('✓ ' + completed + ' completed');
+                if (inProgress > 0) parts.push('⏳ ' + inProgress + ' in progress');
+                summary.innerHTML = '📊 Your progress: ' + parts.join(' · ') + ' of ' + total + ' chapters';
+            }
+        }
+        decorateProgress();
 
         // ── Smooth scroll ──
         function scrollToSection(id) {
