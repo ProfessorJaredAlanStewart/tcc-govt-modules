@@ -2826,6 +2826,43 @@
             transform: translateY(0);
         }
 
+        /* ── Progress-bar text fix ─────────────────────────────────────
+           Three markup conventions exist across the 31 chapters:
+             A (2):   .progress-bar-container > .progress-bar (fill with text)
+             B (28):  .progress-bar          > .progress-fill (fill with text)
+             C (1):   .progress-track        > .progress-bar (fill with text)
+           In all three, the fill has `display:flex; justify-content:center`
+           and renders "X% Complete" in white. At width:0% the white text
+           leaks below the bar. We hide the text via CSS and overlay a
+           dark label on the parent (track). */
+        .progress-bar-container > .progress-bar,
+        .progress-track > .progress-bar,
+        .progress-fill {
+            font-size: 0 !important;
+            line-height: 0 !important;
+        }
+        .trek-progress-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #002b5c;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.4px;
+            pointer-events: none;
+            z-index: 2;
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            text-shadow:
+                0 0 4px rgba(255, 255, 255, 0.95),
+                0 0 2px rgba(255, 255, 255, 0.95),
+                0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
         .trek-integrity-box {
             margin: 24px auto 8px auto;
             max-width: 560px;
@@ -3227,7 +3264,60 @@
         }
 
         // ====================================================================
-        // 4. WIRE-UP
+        // 4. PROGRESS-BAR TEXT FIX
+        // The chapter markup is:
+        //   <div class="progress-bar-container">
+        //     <div class="progress-bar" style="width:0%">0% Complete</div>
+        //   </div>
+        // At width:0% the inner white text overflows the zero-width flex
+        // container and leaks below the bar. We hide the inner text via
+        // CSS (font-size:0) and overlay a centered dark label that mirrors
+        // the bar's text content, updated via MutationObserver whenever
+        // the chapter's own JS rewrites the bar.
+        // ====================================================================
+
+        function fixProgressBarLabels() {
+            // Find fill elements across all three known markup conventions
+            var fills = [];
+            document.querySelectorAll('.progress-bar-container > .progress-bar').forEach(function(el) { fills.push(el); });
+            document.querySelectorAll('.progress-track > .progress-bar').forEach(function(el) { fills.push(el); });
+            document.querySelectorAll('.progress-fill').forEach(function(el) { fills.push(el); });
+
+            fills.forEach(function(fill) {
+                var track = fill.parentElement;
+                if (!track) return;
+                if (track.querySelector('.trek-progress-label')) return; // already labeled
+
+                // Ensure the track can host an absolutely-positioned overlay
+                var pos = (window.getComputedStyle ? getComputedStyle(track).position : 'static');
+                if (pos === 'static') {
+                    track.style.position = 'relative';
+                }
+
+                var label = document.createElement('div');
+                label.className = 'trek-progress-label';
+                label.textContent = (fill.textContent || '').trim() || '0% Complete';
+                track.appendChild(label);
+
+                // Mirror updates whenever the chapter rewrites the fill's text or width
+                try {
+                    var observer = new MutationObserver(function() {
+                        var t = (fill.textContent || '').trim();
+                        if (t) label.textContent = t;
+                    });
+                    observer.observe(fill, {
+                        childList: true,
+                        characterData: true,
+                        subtree: true,
+                        attributes: true,
+                        attributeFilter: ['style']
+                    });
+                } catch (e) { /* MutationObserver unavailable */ }
+            });
+        }
+
+        // ====================================================================
+        // 5. WIRE-UP
         // ====================================================================
 
         function init() {
@@ -3239,6 +3329,9 @@
 
             // Standardize the completion-report button
             normalizeReportButton();
+
+            // Fix progress-bar text overflow
+            fixProgressBarLabels();
 
             // Auto-save loop + lifecycle saves
             setInterval(saveState, 5000);
@@ -3281,6 +3374,9 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
+
+
 
 
 
