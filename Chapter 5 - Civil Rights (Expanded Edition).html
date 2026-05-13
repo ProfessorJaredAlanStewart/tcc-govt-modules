@@ -2243,7 +2243,7 @@
 
                         <div class="report-footer">
                             <p class="instructor-note">
-                                <strong>Instructor Note:</strong> This report was generated upon completion of the TCC Federal Government Trailblazer Trek - Chapter 5: Civil Rights module. The score reflects the student's engagement with interactive content and performance on knowledge check questions. Total possible points: 960. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
+                                <strong>Instructor Note:</strong> This report was generated upon completion of the Tarrant County College Federal Government Trailblazer Trek - Chapter 5: Civil Rights module. The score reflects the student's engagement with interactive content and performance on knowledge check questions. Total possible points: 960. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                             </p>
                         </div>
                     </div>
@@ -2738,24 +2738,32 @@
             background: #ffffff;
             border: 2px solid #98002e;
             border-radius: 6px;
-            padding: 8px;
+            padding: 6px;
             line-height: 0;
-            box-shadow: 0 1px 3px rgba(0, 43, 92, 0.12);
+            box-shadow: 0 1px 3px rgba(0, 43, 92, 0.18);
         }
         .tcc-logo img {
             display: block;
-            height: 56px;
+            height: 40px;
             width: auto;
         }
+        /* Header-embedded logo: lives INSIDE the chapter's existing
+           (typically fixed) header bar so it doesn't get hidden behind it.
+           Position absolute against the header's left edge. */
         .tcc-logo-header-wrap {
-            display: flex;
-            justify-content: center;
-            padding: 12px 16px 0 16px;
-            background: transparent;
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
         }
+        /* Bigger logo on the report (printed, not fixed positioning) */
         .tcc-logo-report {
             margin: 0 auto 18px auto;
             text-align: center;
+        }
+        .tcc-logo-report .tcc-logo {
+            padding: 10px;
         }
         .tcc-logo-report .tcc-logo img {
             height: 72px;
@@ -2765,6 +2773,14 @@
                 box-shadow: none !important;
                 border-color: #98002e !important;
             }
+            .tcc-logo-header-wrap { display: none; }
+        }
+        /* Narrow screens — shrink the header logo so it doesn't crowd
+           the chapter title */
+        @media (max-width: 700px) {
+            .tcc-logo-header-wrap { left: 8px; }
+            .tcc-logo-header-wrap .tcc-logo img { height: 28px; }
+            .tcc-logo-header-wrap .tcc-logo { padding: 4px; }
         }
         @media print {
             .tcc-brand-footer { color: #000; }
@@ -3382,12 +3398,21 @@
                 || document.querySelector('.header')
                 || document.querySelector('header');
             if (!header) return;
+
+            // Ensure the header is positioned so our absolutely-positioned
+            // logo anchors to it. Most chapter headers are already
+            // position:fixed; the ones that aren't will use position:relative.
+            var pos = (window.getComputedStyle ? getComputedStyle(header).position : 'static');
+            if (pos === 'static') {
+                header.style.position = 'relative';
+            }
+
             var wrap = document.createElement('div');
             wrap.className = 'tcc-logo-header-wrap';
             wrap.appendChild(buildLogoElement());
-            // Insert BEFORE the header so the logo sits at the very top
-            // of the page; brand stripe + chapter header chrome follow.
-            header.parentNode.insertBefore(wrap, header);
+            // Insert INSIDE the header (not before it) so it travels with
+            // the header — visible whether the header is fixed or static.
+            header.insertBefore(wrap, header.firstChild);
         }
 
         function addLogoToReport() {
@@ -3481,6 +3506,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 
 
