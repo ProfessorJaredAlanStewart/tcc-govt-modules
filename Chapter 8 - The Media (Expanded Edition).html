@@ -2881,6 +2881,54 @@
             text-transform: uppercase;
             font-size: 11px;
         }
+        /* TCC Brand Stripe ON THE HERO
+           Wrap the chapter's hero panel in the same four-color TCC brand
+           stripe used under the header. The hero gets stripes on the top
+           AND bottom, plus a subtle border and rounded corners, so the
+           chapter's intro feels framed by TCC's brand colors. */
+        .hero-section {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .hero-section::before,
+        .hero-section::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 6px;
+            display: block;
+            background: linear-gradient(to right,
+                #002b5c 0, #002b5c 25%,
+                #dac792 25%, #dac792 50%,
+                #98002e 50%, #98002e 75%,
+                #00788a 75%, #00788a 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .hero-section::before { top: 0; }
+        .hero-section::after { bottom: 0; }
+
+        /* TCC Brand Stripe SEPARATOR (used on the index between the
+           teal hero region and the white body). Same construction as
+           above but as a standalone block. */
+        .tcc-brand-separator {
+            height: 6px;
+            width: 100%;
+            background: linear-gradient(to right,
+                #002b5c 0, #002b5c 25%,
+                #dac792 25%, #dac792 50%,
+                #98002e 50%, #98002e 75%,
+                #00788a 75%, #00788a 100%);
+            display: block;
+        }
+
+        @media print {
+            .hero-section::before,
+            .hero-section::after { display: none; }
+        }
+
         .tcc-brand-footer .url {
             color: #00788a;
             text-decoration: none;
@@ -3702,6 +3750,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 
 

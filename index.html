@@ -577,6 +577,17 @@
         }
         .scroll-top.visible { opacity: 1; }
         .scroll-top:hover { transform: scale(1.1); }
+
+        /* TCC four-color brand stripe separator */
+        .brand-stripe-separator {
+            height: 6px;
+            width: 100%;
+            background: linear-gradient(to right,
+                #002b5c 0, #002b5c 25%,
+                #dac792 25%, #dac792 50%,
+                #98002e 50%, #98002e 75%,
+                #00788a 75%, #00788a 100%);
+        }
     </style>
 </head>
 <body>
@@ -619,6 +630,9 @@
             </div>
         </div>
     </section>
+
+    <!-- TCC four-color brand stripe between hero and body -->
+    <div class="brand-stripe-separator" aria-hidden="true"></div>
 
     <!-- ══════════ NAV TABS ══════════ -->
     <div class="container">
