@@ -15,10 +15,10 @@
             /* ADA Compliant Colors - Blue-Green Theme */
             --primary-blue: #002b5c;
             --primary-green: #003a73;
-            --secondary-blue: #00788a;
+            --secondary-blue: #006272;
             --secondary-green: #8dc63f;
             --success: #4a8c2a;
-            --error: #98002e;
+            --error: #862633;
             --warning: #F57C00;
             --text-primary: #212121;
             --text-secondary: #424242;
@@ -115,7 +115,7 @@
         .hero-section {
             text-align: center;
             padding: 40px;
-            background: linear-gradient(135deg, #00788a, #1a8fa0);
+            background: linear-gradient(135deg, #006272, #1a8090);
             border-radius: 15px;
             margin-bottom: 30px;
             color: white;
@@ -2550,7 +2550,7 @@
                 
                 const box = document.createElement('div');
                 box.id = 'pacingWarningBox';
-                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #98002e;';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #862633;';
                 overlay.appendChild(box);
                 document.body.appendChild(overlay);
             }
@@ -2558,7 +2558,7 @@
             const box = document.getElementById('pacingWarningBox');
             box.innerHTML = 
                 '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
-                '<div style="font-size:1.4em;font-weight:bold;color:#98002e;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#862633;margin-bottom:12px;">Pacing Alert</div>' +
                 '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">' +
                 'Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
                 '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">' +
@@ -2607,7 +2607,7 @@
         // Calculate letter grade
         function calculateLetterGrade(percentage) {
             let letterGrade = 'F';
-            let gradeColor = '#98002e';
+            let gradeColor = '#862633';
             
             if (percentage >= 90) { 
                 letterGrade = 'A'; 
@@ -2717,7 +2717,7 @@
                     statusEl.style.color = '#F57C00';
                 } else {
                     statusEl.textContent = '\u2B55 Not Started';
-                    statusEl.style.color = '#98002e';
+                    statusEl.style.color = '#862633';
                 }
             }
 
@@ -2783,7 +2783,7 @@
         /* Section/chapter cards — visible outline so users can see the
            clickable boundaries against any background. */
         .section-card {
-            border: 2px solid #00788a !important;
+            border: 2px solid #006272 !important;
             box-shadow: 0 2px 8px rgba(12, 39, 83, 0.12);
             transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
         }
@@ -2831,7 +2831,7 @@
             max-width: 560px;
             padding: 14px 18px;
             background: #f3fafb;
-            border: 2px solid #00788a;
+            border: 2px solid #006272;
             border-radius: 8px;
             text-align: center;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -2842,7 +2842,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #00788a;
+            color: #006272;
         }
         .trek-integrity-box .trek-hash-code {
             display: block;
