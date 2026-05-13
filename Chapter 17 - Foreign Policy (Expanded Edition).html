@@ -3038,6 +3038,33 @@
             // Insert INSIDE the header (not before it) so it travels with
             // the header — visible whether the header is fixed or static.
             header.insertBefore(wrap, header.firstChild);
+
+            // Reserve space on the left so the header's title text doesn't
+            // collide with the logo. Computed from the logo's width plus a
+            // gap. We do this dynamically rather than via CSS because chapter
+            // headers vary widely in their existing padding/layout.
+            function reserveSpace() {
+                try {
+                    var logoWidth = wrap.offsetWidth;
+                    if (!logoWidth) return;
+                    var needed = logoWidth + 32; // 16px left offset + 16px gap
+                    var curPad = parseInt(getComputedStyle(header).paddingLeft, 10) || 0;
+                    if (curPad < needed) {
+                        header.style.paddingLeft = needed + 'px';
+                    }
+                } catch (e) {}
+            }
+            // Run now, then again after the image loads (since offsetWidth
+            // can be 0 before the image data is laid out).
+            reserveSpace();
+            var img = wrap.querySelector('img');
+            if (img) {
+                if (img.complete) reserveSpace();
+                else img.addEventListener('load', reserveSpace);
+            }
+            // Also re-run on window resize, since header padding may need
+            // to shrink on the mobile breakpoint.
+            window.addEventListener('resize', reserveSpace);
         }
 
         function addLogoToReport() {
@@ -3131,6 +3158,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 
 
