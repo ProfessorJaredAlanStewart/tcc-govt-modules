@@ -300,6 +300,55 @@
             opacity: 1;
             transform: translateX(0);
         }
+
+        /* ── Instructor Tools panel ── */
+        .instructor-tools {
+            margin-top: 2rem;
+            border-top: 4px solid #98002e;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.4rem;
+            margin-top: 1rem;
+        }
+        .tool-card {
+            background: #fff;
+            border: 2px solid #00788a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 8px rgba(0, 43, 92, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .tool-card:hover {
+            transform: translateY(-2px);
+            border-color: #002b5c;
+            box-shadow: 0 6px 18px rgba(0, 43, 92, 0.18);
+        }
+        .tool-icon { font-size: 2.2rem; margin-bottom: 0.3rem; }
+        .tool-title {
+            font-family: 'EB Garamond', Garamond, serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #002b5c;
+            margin-bottom: 0.5rem;
+        }
+        .tool-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary, #555);
+            line-height: 1.5;
+            flex: 1;
+        }
+        .tool-cta {
+            margin-top: 0.9rem;
+            color: #00788a;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
         /* ── PROGRESS DECORATION (computed from localStorage) ── */
         .chapter-card.in-progress {
             border-color: #b89968 !important;
@@ -592,6 +641,39 @@
             <div class="progress-summary" id="progressSummary"></div>
             <div class="chapter-grid" id="chapterGrid">
                 <!-- Chapters injected by JS -->
+            </div>
+        </div>
+
+        <div class="section instructor-tools" id="instructorTools">
+            <div class="section-header">
+                <span>&#128104;&#8205;&#127979;</span>
+                <h2>Instructor Tools</h2>
+            </div>
+            <p style="margin-bottom:1.2rem; color:var(--text-secondary); font-size:0.97rem;">
+                Tools for instructors verifying student work. Students do not need these.
+            </p>
+            <div class="tools-grid">
+                <a class="tool-card" href="tools/integrity_verifier.html">
+                    <div class="tool-icon">&#128274;</div>
+                    <div class="tool-title">Integrity Code Verifier</div>
+                    <div class="tool-desc">
+                        Drop a student's completion-report PDF onto this tool to confirm it has
+                        not been altered. Works for both the current 'Tarrant County College'
+                        branding and the legacy 'TCC' branding. All verification runs locally
+                        in your browser &mdash; no student data is uploaded.
+                    </div>
+                    <div class="tool-cta">Open verifier &rarr;</div>
+                </a>
+                <a class="tool-card" href="https://github.com/ProfessorJaredAlanStewart/tcc-govt-modules#readme" target="_blank" rel="noopener">
+                    <div class="tool-icon">&#128214;</div>
+                    <div class="tool-title">Instructor README</div>
+                    <div class="tool-desc">
+                        Full documentation for the Trailblazer Trek system: how scoring works,
+                        how to interpret integrity codes, how to handle grade disputes, and
+                        how to add or update chapters.
+                    </div>
+                    <div class="tool-cta">View on GitHub &rarr;</div>
+                </a>
             </div>
         </div>
 

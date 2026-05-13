@@ -1,165 +1,100 @@
-<div align="center">
+# Tarrant County College Federal Government Trailblazer Trek
 
-# 🏛️ TCC Federal Government Trailblazer Trek
+Interactive HTML learning modules for **GOVT 2305 (Federal Government)** at Tarrant County College. Adopted by the TCC Professional Development Center as the primary reading for the course.
 
-### Interactive Learning Modules for GOVT 2305 — Federal Government
-
-**Tarrant County College | Professor Jared Alan Stewart**
-
-[![HTML](https://img.shields.io/badge/Built_With-HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![JavaScript](https://img.shields.io/badge/Powered_By-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![License](https://img.shields.io/badge/License-Educational_Use-00695C?style=for-the-badge)](LICENSE)
-[![Chapters](https://img.shields.io/badge/Chapters-16_Modules-005A87?style=for-the-badge)](https://professorjaredalanstewart.github.io/tcc-govt-modules/)
+Sister repository: [Texas Government Trailblazer Trek](https://github.com/ProfessorJaredAlanStewart/texas-govt-modules) (GOVT 2306).
 
 ---
 
-**Gamified, self-paced, standalone HTML modules that transform OER textbook content into engaging interactive experiences. No logins, no installs, no external dependencies — just open and learn.**
+## For Students
 
-[🚀 **Launch the Modules**](https://professorjaredalanstewart.github.io/tcc-govt-modules/) · [📖 Student Guide](#-student-quick-start-guide) · [📋 Chapter List](#-available-chapters)
+Open any chapter from the [course index](https://professorjaredalanstewart.github.io/tcc-govt-modules/), enter your name, work through each section, and download your completion-report PDF when finished. Submit the PDF to Canvas. **Screenshots are not accepted** — only the PDF carries the integrity code your instructor uses to confirm you completed the work.
 
-</div>
-
----
-
-## 🌟 What Is Trailblazer Trek?
-
-Trailblazer Trek is a series of **interactive, gamified learning modules** designed for the GOVT 2305 (Federal Government) course at Tarrant County College. Each chapter from the course textbook has been converted into a standalone HTML experience that you complete in your web browser — no app downloads, no account creation, and no internet connection required after the initial load.
-
-Each module features:
-
-- **🎮 Gamification** — Earn points (1,000–1,200 per chapter) through interactive reveal cards, knowledge checks, and section completion bonuses
-- **📊 Real-Time Progress Tracking** — A live score display and progress bar keep you motivated throughout each chapter
-- **🏆 Leveling System** — Progress through levels (Trailblazer Scout → Trailblazer Legend) as you accumulate points
-- **📝 Completion Report** — A professional report page with your letter grade, section-by-section performance, and time analysis — ready to screenshot and submit
-- **⏱️ Pacing Alerts** — Gentle reminders if you're moving through content too quickly, ensuring genuine engagement
-- **♿ Accessibility** — ADA-compliant colors, contrast ratios, and responsive design that works on phones, tablets, and desktops
+If you close a tab mid-chapter, your progress is saved automatically. Reopen the chapter and click **OK** on the "Welcome back" prompt to resume.
 
 ---
 
-## 🎓 Student Quick-Start Guide
+## For Instructors
 
-### Step 1: Access the Modules
+### What you're looking at
 
-Your instructor will provide module links through **Canvas** (or another LMS). You can also access all modules directly from the landing page:
+Each chapter is a self-contained HTML file with no external dependencies (other than two Google Fonts and the integrity-verifier's `pdf.js` library). Chapters host on GitHub Pages and can also be uploaded directly to Canvas as files — Canvas renders them inline via iframe.
 
-> 🔗 **[https://professorjaredalanstewart.github.io/tcc-govt-modules/](https://professorjaredalanstewart.github.io/tcc-govt-modules/)**
+| Property | Value |
+|---|---|
+| Chapters | 16 (Federal) + 15 (Texas) = 31 |
+| Points per chapter | 800 – 1,800 (varies by content) |
+| Branding | TCC Graphic Identity Standards Manual v1.2 (Sept 2013) |
+| Hosting | GitHub Pages + Canvas LMS |
+| Offline support | Yes, via `localStorage` resume |
 
-Click the chapter assigned to you. The module will open in your browser — **no downloads or plugins required**.
+### Verifying a student's completion report
 
-### Step 2: Enter Your Name
+Every PDF a student submits carries a **tamper-evident integrity code** — an 8-character hex hash of `name | date | score | chapter title`. Editing any of those four fields after the PDF is generated breaks the hash.
 
-When the module loads, you will see a **home page** with a hero banner, a progress bar, and a section grid. Before starting:
+**To verify:**
 
-1. Enter your **full name** (First and Last) in the name field at the top
-2. This name will appear on your **Completion Report**, so enter it exactly as it appears on your course roster
+1. Open the verifier: [**tools/integrity_verifier.html**](https://professorjaredalanstewart.github.io/tcc-govt-modules/tools/integrity_verifier.html) (or browse to the Instructor Tools panel on the [course index](https://professorjaredalanstewart.github.io/tcc-govt-modules/))
+2. Drag the student's PDF onto the dropzone (or click to choose).
+3. Read the verdict:
+   - ✅ **Verified — report is authentic.** The integrity code matches the visible fields. Grade the work as submitted.
+   - ❌ **Integrity code does NOT match.** Either a field was edited after printing, or the PDF was not generated by a Trailblazer Trek chapter. Ask the student to redo and re-print.
+   - ⚠️ **Could not auto-extract all fields.** The PDF text was unreadable in places. Use the manual fallback to type in the visible fields plus the 8-character code.
 
-### Step 3: Work Through Each Section
+The verifier runs **entirely in your browser**. No student data is uploaded anywhere. You can save the file locally and use it offline.
 
-- Click any **section card** on the home page to begin
-- Read the content carefully — each section contains **interactive reveal cards** (click to expand) and **knowledge check questions** (select the best answer)
-- Every interaction earns you points:
-  - 📘 **Reveal Cards**: ~10 points each — click to reveal hidden content
-  - ✅ **Knowledge Checks**: ~15–20 points for correct answers (partial credit for incorrect)
-  - 🏁 **Section Completion**: Bonus points when you finish a section
-- After finishing a section's content, click the **"Complete Section"** button at the bottom
-- You can complete sections in **any order**, but working sequentially is recommended
+It handles both branding eras automatically — PDFs printed before the brand-compliance rename (when chapter titles started with "TCC ...") and PDFs printed after (titles starting with "Tarrant County College ...") both verify.
 
-### Step 4: Monitor Your Progress
+### Handling common situations
 
-- The **fixed header** at the top always shows your current score and level
-- The **progress bar** on the home page fills as you complete sections
-- Section cards turn **green with a checkmark** ✅ once completed
-- Your **level title** updates as you earn more points
+- **Student says "I completed it but the report won't generate."** The completion-report button appears once all sections of the chapter are done. Have them check for any sections without the green "completed" indicator.
+- **Student submits a screenshot, not a PDF.** Decline and request the PDF. Screenshots have no integrity code and can't be verified.
+- **Student submits a PDF with the integrity code blacked out or removed.** Treat as suspect; ask for a fresh submission.
+- **Integrity code doesn't match but the work looks legitimate.** Use the manual-fallback panel of the verifier to enter the values you see; sometimes pdf.js misreads a field. If the manual entry also fails, the PDF was likely altered.
+- **Student earns > 100%.** This used to happen due to a points-audit bug. It shouldn't anymore — a CI workflow catches mismatched totals. If you see this again, please file a GitHub issue with the chapter name.
 
-### Step 5: Generate Your Completion Report
+### How scoring works
 
-Once you have completed **all sections**, a **"View Completion Report"** button will appear on the home page. Click it to generate your report, which includes:
+Each chapter has reveal cards (15 pts each) and knowledge-check questions (50 pts for correct, 0 for wrong). Some chapters add a per-section completion bonus (50 pts). Total earnable points and declared `maxScore` are kept in sync by [`tools/audit_points.py`](tools/audit_points.py), which runs on every push via [.github/workflows/audit.yml](.github/workflows/audit.yml).
 
-- Your **letter grade** (A through F) with color coding
-- **Section-by-section breakdown** showing points earned per section
-- **Time analysis** showing how long you spent in each section
-- **Performance metrics** (total points, quiz accuracy, engagement percentage)
-- Your **name and completion date/time**
+A student's percentage = `earned / maxScore × 100`, capped naturally at 100% as long as the audit is green.
 
-### Step 6: Submit Your Score
+### Resume and integrity, under the hood
 
-1. On the Completion Report page, take a **screenshot** of the full report (or use the **Print** button to save as PDF)
-2. Submit the screenshot/PDF to your instructor via **Canvas** (or your LMS assignment submission)
-3. Make sure your **name, grade, and date** are clearly visible in the submission
+Both features are injected into every chapter from a single shared block (see `trek_extras` content in any chapter file, delimited by the sentinel comment `<!-- TCC Trailblazer Trek — Resume & Integrity Extensions -->`).
 
-> 💡 **Tip:** Your instructor may ask you to submit the report immediately upon completion. The report generates only once all sections are done — you cannot skip sections.
+- **Resume** saves `gameState` to `localStorage` every 5 seconds plus on tab hide/close. The key is per-chapter, derived from `document.title`. Sets are tagged with `{__trekSet__: [...]}` so they survive JSON serialization.
+- **Integrity** computes `SHA-256(name|YYYY-MM-DD|score|chapterTitle)`, takes the first 8 hex characters, and renders them in a styled box on the completion report. Recomputes on `beforeprint` so the value in the PDF is always fresh.
 
----
+### For developers — adding or editing a chapter
 
-## 📋 Available Chapters
-
-| # | Chapter Title | Key Topics |
-|---|---|---|
-| 1 | Critical Thinking & Political Culture | Analytical frameworks, American political values |
-| 2 | The Constitution and Its Origins | Founding documents, constitutional principles |
-| 3 | American Federalism | Federal vs. state power, intergovernmental relations |
-| 4 | Civil Liberties | Bill of Rights, individual freedoms, Supreme Court cases |
-| 5 | Civil Rights | Equal protection, landmark legislation, social movements |
-| 6 | Public Opinion | Polling, political socialization, ideology |
-| 7 | Voting and Elections | Electoral systems, voter behavior, campaigns |
-| 8 | The Media | Press freedom, media influence, digital media |
-| 9 | Political Parties | Party systems, party platforms, realignment |
-| 10 | Interest Groups and Lobbying | PACs, advocacy, pluralism vs. elitism |
-| 11 | Congress | Legislative process, committee system, representation |
-| 12 | The Presidency | Executive power, presidential roles, bureaucratic leadership |
-| 13 | The Courts | Judicial review, court structure, landmark decisions |
-| 15 | The Bureaucracy | Federal agencies, regulation, accountability |
-| 16 | Domestic Policy | Economic and social policy, policy-making process |
-| 17 | Foreign Policy | Diplomacy, national security, international organizations |
-
-> **Note:** Chapter 14 is not included in this module series per the course curriculum design.
+1. Create or open the chapter HTML file at the repo root.
+2. Make sure scoring uses one of the 8 supported patterns (see `tools/audit_points.py` for the full list — the common ones are `gameState.maxScore` and per-section `{earned, max}` objects).
+3. Run the audit locally: `python3 tools/audit_points.py .`
+4. Commit and push. The audit re-runs in CI; a red ✗ means a mismatch needs fixing.
+5. The `trek_extras` block is **idempotent** — it gets re-applied to every chapter when injection runs. Don't edit the block manually in a single chapter; if changes are needed, edit the central injection source.
 
 ---
 
-## 💡 Tips for Success
+## Brand compliance
 
-- **Don't rush.** Pacing alerts will fire if you click through too quickly. The modules are designed for 45–60 minutes of genuine engagement per chapter.
-- **Read the reveal cards.** Clicking them is not just for points — the hidden content often appears in knowledge check questions.
-- **Answer carefully.** You get more points for correct first-attempt answers on knowledge checks. Incorrect answers still earn partial credit, but your quiz accuracy percentage will reflect it.
-- **Use a laptop or desktop** for the best experience, though modules are fully responsive on mobile devices.
-- **Your progress is session-based.** If you close the browser tab before finishing, your progress may not be saved. Complete each chapter in a single sitting when possible.
-- **Take the screenshot immediately** after generating your report. If you navigate away from the report page, you can return to it, but it's best to capture it right away.
+This project follows the **TCC Graphic Identity Standards Manual v1.2 (September 2013)**:
 
----
+- Official Pantone hex codes from manual p.16 (Pantone 289 navy `#002b5c`, Pantone 3155 teal `#00788a`, Pantone 202 burgundy `#98002e`, Pantone 4525 tan `#dac792`)
+- Typography per manual p.17 (EB Garamond as the Adobe Garamond Pro analog, Inter as the Frutiger LT Std analog — both free Google Fonts)
+- Four-color brand stripe from the official PowerPoint template (manual p.25)
+- "Tarrant County College" on first reference per the manual's Do/Do Not checklist (p.28)
+- EEOC statement included in every chapter footer per manual p.19
+- Official TCC star-mark logo embedded in each chapter header and completion report
 
-## 🛠️ Technical Details
-
-These modules are built as **standalone HTML files** with all CSS and JavaScript embedded directly — no frameworks, no build tools, no server required. Each file is self-contained and can be:
-
-- Opened directly in any modern web browser
-- Hosted on any static site (GitHub Pages, LMS, personal server)
-- Downloaded and used offline
-- Printed (report pages have print-optimized styles)
-
-### Content Source
-
-Module content is adapted from **OpenStax American Government** (OER), a free and openly licensed textbook, ensuring broad accessibility and alignment with standard government course curricula.
-
-### Accessibility
-
-All modules meet **WCAG AA** standards with a minimum contrast ratio of 4.5:1 for text, keyboard-navigable elements, responsive layouts, and color-independent status indicators.
+The TCC logo, name, and marks are property of the Tarrant County College District. This is faculty-produced course material authorized for course use.
 
 ---
 
-## 📬 Contact
+## License & attribution
 
-For questions about course content, grading, or module issues:
+Course content adapted from OpenStax *American Government* (3e/4e), licensed CC BY 4.0. Texas Government chapter content draws on Wikimedia Commons images and OpenStax. Code is provided as-is for TCC course use.
 
-**Professor Jared Alan Stewart**
-Tarrant County College
-📧 *Contact via Canvas Inbox or office hours*
+Maintained by Professor Jared Alan Stewart, Tarrant County College.
 
----
-
-<div align="center">
-
-*Built with ❤️ for student success at Tarrant County College*
-
-**© 2025 Professor Jared Alan Stewart — Educational Use**
-
-</div>
+For issues, suggestions, or grade-dispute help: open a GitHub issue or contact the maintainer.
