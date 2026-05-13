@@ -15,10 +15,10 @@
             /* ADA Compliant Colors */
             --primary-blue: #002b5c;
             --primary-green: #003a73;
-            --secondary-blue: #006272;
+            --secondary-blue: #00788a;
             --secondary-green: #8dc63f;
             --success: #4a8c2a;
-            --error: #862633;
+            --error: #98002e;
             --warning: #F57C00;
             --text-primary: #212121;
             --text-secondary: #424242;
@@ -125,7 +125,7 @@
         .hero-section {
             text-align: center;
             padding: 40px;
-            background: linear-gradient(135deg, #006272, #1a8090);
+            background: linear-gradient(135deg, #00788a, #1a8fa0);
             border-radius: 15px;
             margin-bottom: 30px;
             color: white;
@@ -823,7 +823,7 @@
 
         .time-warning {
             background: linear-gradient(135deg, #fbe9ee, #f5c5cf);
-            border-left: 5px solid #862633;
+            border-left: 5px solid #98002e;
             padding: 15px 20px;
             border-radius: 8px;
             margin-top: 15px;
@@ -2755,14 +2755,14 @@
                 overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;justify-content:center;align-items:center;';
                 const box = document.createElement('div');
                 box.id = 'pacingWarningBox';
-                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #862633;';
+                box.style.cssText = 'background:white;border-radius:16px;padding:35px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);border-top:6px solid #98002e;';
                 overlay.appendChild(box);
                 document.body.appendChild(overlay);
             }
             const box = document.getElementById('pacingWarningBox');
             box.innerHTML =
                 '<div style="font-size:3em;margin-bottom:10px;">&#9888;&#65039;</div>' +
-                '<div style="font-size:1.4em;font-weight:bold;color:#862633;margin-bottom:12px;">Pacing Alert</div>' +
+                '<div style="font-size:1.4em;font-weight:bold;color:#98002e;margin-bottom:12px;">Pacing Alert</div>' +
                 '<div style="font-size:1.05em;color:#212121;line-height:1.6;margin-bottom:8px;">' +
                 'Section ' + sectionNum + ' was completed in <strong>' + timeStr + '</strong>.</div>' +
                 '<div style="font-size:0.95em;color:#424242;line-height:1.5;margin-bottom:20px;">' +
@@ -2819,7 +2819,7 @@
             
             // Calculate and display grade
             let letterGrade = 'F';
-            let gradeColor = '#862633';
+            let gradeColor = '#98002e';
             
             if (percentage >= 90) { letterGrade = 'A'; gradeColor = '#4a8c2a'; }
             else if (percentage >= 80) { letterGrade = 'B'; gradeColor = '#003a73'; }
@@ -2875,7 +2875,7 @@
                     statusEl.style.color = '#4a8c2a';
                 } else {
                     statusEl.textContent = '\u2B55 Not Complete';
-                    statusEl.style.color = '#862633';
+                    statusEl.style.color = '#98002e';
                 }
             }
 
@@ -2920,7 +2920,93 @@
     <!--   1. Auto-save / resume via localStorage                      -->
     <!--   2. Tamper-evident integrity hash on completion report       -->
     <!-- ============================================================ -->
+    <!-- TCC Official Typography: EB Garamond (Adobe Garamond Pro analog) +
+         Inter (Frutiger LT Std analog), per TCC Graphic Identity Standards
+         Manual v1.2 page 17. Loaded from Google Fonts CDN. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* TCC Brand Typography
+           Per the TCC Graphic Identity Standards Manual, the official
+           type families are Adobe Garamond Pro (serif) and Frutiger LT Std
+           (sans-serif). EB Garamond and Inter are the closest free
+           Google-Font analogs available for standalone HTML delivery. */
+        body, .trek-extras-typography,
+        h1, h2, h3, h4, h5, h6,
+        .section-card, .section-card-title,
+        .hero-section, .hero-title,
+        .chapter-title, .chapter-header {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Display + body text — TCC Garamond family */
+        h1, h2, h3, .hero-title, .chapter-title,
+        .section-card-title, .report-title {
+            font-family: 'EB Garamond', 'Adobe Garamond Pro', Garamond,
+                         'Times New Roman', serif !important;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+        }
+
+        /* UI chrome and small text — TCC Frutiger family analog */
+        .header, .game-header, .stats, .badge, .level-badge,
+        .progress-bar, .progress-fill, .trek-progress-label,
+        .points-popup, .trek-report-btn, .trek-integrity-box,
+        button, input, select, textarea {
+            font-family: 'Inter', 'Frutiger LT Std', Frutiger,
+                         -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                         Tahoma, Arial, sans-serif !important;
+        }
+
+        /* TCC Four-Color Brand Stripe
+           Replicated from the TCC PowerPoint template footer (manual p.25):
+           navy, tan, burgundy, teal in horizontal proportion. Sits
+           directly under the header to signal "this is a TCC publication"
+           at a glance. */
+        .tcc-brand-stripe {
+            display: flex;
+            height: 6px;
+            width: 100%;
+            position: relative;
+            z-index: 5;
+        }
+        .tcc-brand-stripe > span {
+            flex: 1;
+            display: block;
+        }
+        .tcc-brand-stripe > .nv { background: #002b5c; }
+        .tcc-brand-stripe > .tn { background: #dac792; }
+        .tcc-brand-stripe > .bg { background: #98002e; }
+        .tcc-brand-stripe > .tl { background: #00788a; }
+
+        /* TCC Footer */
+        .tcc-brand-footer {
+            text-align: center;
+            padding: 18px 16px 22px 16px;
+            margin-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .tcc-brand-footer .tagline {
+            color: #002b5c;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        .tcc-brand-footer .url {
+            color: #00788a;
+            text-decoration: none;
+        }
+        @media print {
+            .tcc-brand-footer { color: #000; }
+        }
+
         /* Section/chapter cards — visible outline so users can see the
            clickable boundaries against any background. */
         .section-card {
@@ -3458,7 +3544,46 @@
         }
 
         // ====================================================================
-        // 5. WIRE-UP
+        // 5. TCC BRAND STRIPE + FOOTER
+        // Per the TCC Graphic Identity Standards Manual. The four-color
+        // stripe replicates the official PowerPoint template footer signature.
+        // ====================================================================
+
+        function addBrandStripe() {
+            if (document.querySelector('.tcc-brand-stripe')) return;
+            // Find the chapter's header bar to insert the stripe right after
+            var header = document.querySelector('.game-header')
+                || document.querySelector('.header')
+                || document.querySelector('header');
+            if (!header) return;
+            var stripe = document.createElement('div');
+            stripe.className = 'tcc-brand-stripe';
+            stripe.setAttribute('aria-hidden', 'true');
+            stripe.innerHTML =
+                '<span class="nv"></span>' +
+                '<span class="tn"></span>' +
+                '<span class="bg"></span>' +
+                '<span class="tl"></span>';
+            if (header.nextSibling) {
+                header.parentNode.insertBefore(stripe, header.nextSibling);
+            } else {
+                header.parentNode.appendChild(stripe);
+            }
+        }
+
+        function addBrandFooter() {
+            if (document.querySelector('.tcc-brand-footer')) return;
+            var footer = document.createElement('footer');
+            footer.className = 'tcc-brand-footer';
+            footer.innerHTML =
+                '<div class="tagline">Tomorrow Starts Here</div>' +
+                '<div>Tarrant County College &middot; ' +
+                '<a class="url" href="https://www.tccd.edu" target="_blank" rel="noopener">www.tccd.edu</a></div>';
+            document.body.appendChild(footer);
+        }
+
+        // ====================================================================
+        // 6. WIRE-UP
         // ====================================================================
 
         function init() {
@@ -3473,6 +3598,10 @@
 
             // Fix progress-bar text overflow
             fixProgressBarLabels();
+
+            // TCC brand chrome
+            addBrandStripe();
+            addBrandFooter();
 
             // Auto-save loop + lifecycle saves
             setInterval(saveState, 5000);
@@ -3515,6 +3644,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 
 
