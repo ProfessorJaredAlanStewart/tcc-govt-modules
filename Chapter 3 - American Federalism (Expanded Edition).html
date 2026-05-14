@@ -3116,6 +3116,35 @@
             .tcc-logo-header-wrap { left: 8px; }
             .tcc-logo-header-wrap .tcc-logo img { height: 28px; }
             .tcc-logo-header-wrap .tcc-logo { padding: 4px; }
+
+            /* Hide the long chapter-chrome title on mobile and show a
+               shortened brand mark instead. The full chapter title is
+               already visible in the chapter's hero section below the
+               header, so no information is lost. */
+            .header-title,
+            .header h1,
+            .game-header h1 {
+                font-size: 0 !important;
+                line-height: 0 !important;
+            }
+            .header-title::after,
+            .header h1::after,
+            .game-header h1::after {
+                content: "Trailblazer Trek";
+                display: inline;
+                font-size: 16px;
+                line-height: 1.2;
+                font-weight: 700;
+                color: #ffffff;
+                font-family: 'Inter', sans-serif;
+            }
+            /* Compress the score widget so it doesn't push the title off */
+            .score-display,
+            .stats {
+                gap: 8px !important;
+                font-size: 12px !important;
+                flex-wrap: wrap;
+            }
         }
         @media print {
             .tcc-brand-footer { color: #000; }
@@ -3868,6 +3897,7 @@
     <!-- ============================================================ -->
     <!-- End TCC Trailblazer Trek Extensions                           -->
     <!-- ============================================================ -->
+
 
 
 
