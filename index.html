@@ -78,11 +78,11 @@
             margin-top: 60px;
             color: white;
             text-align: center;
-            min-height: 560px;
+            min-height: 500px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 1.5rem 2rem 2.5rem;
+            padding: 3rem 2rem 2.5rem;
         }
         .hero::before {
             content: '';
@@ -149,6 +149,20 @@
         @media print {
             .hero::before, .hero::after { display: none; }
             .hero { background: #00788a; }
+        }
+        /* Compact hero for short viewports — e.g. when the index is
+           embedded in a Canvas LMS iframe, which is much shorter than a
+           full browser window. Keeps the Capitol visible but trims the
+           vertical space so chapters are reachable without much scroll. */
+        @media (max-height: 720px) {
+            .hero {
+                min-height: 340px;
+                padding: 2rem 2rem 1.75rem;
+            }
+            .hero h2 { font-size: 2.1rem; }
+            .hero-sub { font-size: 1rem; margin-bottom: 0; }
+            .hero-stats { gap: 1.8rem; }
+            .hero-stat-icon { font-size: 1.9rem; }
         }
 
         /* ── CONTAINER ── */
