@@ -796,7 +796,12 @@
                 color: #666;
                 text-align: center;
             }
-        }
+        
+            /* Keep each reflection together and avoid stranded headings */
+            #studentReflectionsReport { page-break-inside: auto; }
+            #studentReflectionsReport h3 { page-break-after: avoid !important; break-after: avoid-page; }
+            .report-reflections, .report-reflections > div { page-break-inside: avoid !important; }
+}
 
         /* Responsive Design */
         @media (max-width: 768px) {

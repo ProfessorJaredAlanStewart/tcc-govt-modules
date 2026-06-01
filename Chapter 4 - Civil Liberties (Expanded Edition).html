@@ -808,7 +808,12 @@
                 color: #666;
                 text-align: center;
             }
-        }
+        
+            /* Keep each reflection together and avoid stranded headings */
+            #studentReflectionsReport { page-break-inside: auto; }
+            #studentReflectionsReport h3 { page-break-after: avoid !important; break-after: avoid-page; }
+            .report-reflections, .report-reflections > div { page-break-inside: avoid !important; }
+}
 
         @media (max-width: 768px) {
             .header {
@@ -2244,7 +2249,7 @@
                     var r=refs?refs['reflection'+n]:null;
                     var pe=document.querySelector('#reflection-section'+n+' .reflection-prompt');
                     var prompt=pe?pe.textContent.trim():('Section '+n);
-                    html+='<div style="border:1px solid #cfd8dc;border-left:5px solid #00695C;border-radius:8px;padding:14px 16px;margin:10px 0;page-break-inside:auto;">';
+                    html+='<div style="border:1px solid #cfd8dc;border-left:5px solid #00695C;border-radius:8px;padding:14px 16px;margin:10px 0;page-break-inside:avoid;">';
                     html+='<div style="font-weight:700;color:#005A87;margin-bottom:6px;">Section '+n+'</div>';
                     html+='<div style="font-size:0.9em;color:#546e7a;font-style:italic;margin-bottom:8px;">'+escapeHtmlRR(prompt)+'</div>';
                     if(r&&r.credited&&r.text){
