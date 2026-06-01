@@ -887,6 +887,32 @@
         }
 
         /* Print Styles */
+        .reflection-box {
+            background: linear-gradient(135deg, var(--highlight-blue) 0%, var(--bg-section) 100%);
+            border: 2px solid var(--primary-blue);
+            border-left: 6px solid var(--secondary-blue);
+            border-radius: 12px; padding: 22px 25px; margin: 25px 0;
+        }
+        .reflection-header { font-size: 1.15em; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .reflection-points { font-size: 0.7em; background: var(--secondary-blue); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+        .reflection-prompt { color: var(--text-primary); font-size: 1em; line-height: 1.55; margin-bottom: 14px; }
+        .reflection-input { width: 100%; padding: 12px 14px; border: 1.5px solid #B0BEC5; border-radius: 8px; font-family: inherit; font-size: 0.98em; line-height: 1.5; resize: vertical; box-sizing: border-box; color: var(--text-primary); }
+        .reflection-input:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(0,43,92,0.12); }
+        .reflection-input.locked { background: #F5F5F5; color: var(--text-secondary); }
+        .reflection-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 12px; }
+        .reflection-counter { font-size: 0.88em; color: var(--text-secondary); font-weight: 600; }
+        .reflection-counter.met { color: var(--success); }
+        .reflection-counter.over { color: var(--warning); }
+        .reflection-submit { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 0.95em; font-weight: 600; font-family: inherit; cursor: pointer; transition: opacity 0.15s ease; }
+        .reflection-submit:hover { opacity: 0.9; }
+        .reflection-submit:disabled { background: #90A4AE; cursor: default; opacity: 0.7; }
+        .reflection-feedback { margin-top: 12px; font-size: 0.92em; line-height: 1.5; display: none; }
+        .reflection-feedback.show { display: block; padding: 11px 15px; border-radius: 8px; }
+        .reflection-feedback.short { background: #FFF3E0; border-left: 4px solid var(--warning); color: #E65100; }
+        .reflection-feedback.lowffort { background: #fdecef; border-left: 4px solid var(--error); color: var(--error); }
+        .reflection-feedback.success { background: var(--highlight-green); border-left: 4px solid var(--success); color: var(--success); }
+        .reflection-feedback.verbose { background: var(--highlight-blue); border-left: 4px solid var(--secondary-blue); color: var(--primary-blue); }
+
         @media print {
             /* Hide navigation and buttons */
             .no-print, .back-button, .report-back-button, .print-report-button,
@@ -1058,7 +1084,7 @@
                     <div class="section-number">1</div>
                     <div class="section-title">The Division of Powers</div>
                     <div class="section-desc">Explore federalism, constitutional provisions, and how power is distributed between federal, state, and local governments.</div>
-                    <div class="section-points">🎯 200 points available</div>
+                    <div class="section-points">🎯 235 points available</div>
                     <div class="completion-check" id="check1"></div>
                 </div>
 
@@ -1066,7 +1092,7 @@
                     <div class="section-number">2</div>
                     <div class="section-title">The Evolution of American Federalism</div>
                     <div class="section-desc">Trace the historical development from dual federalism through cooperative federalism to new federalism.</div>
-                    <div class="section-points">🎯 200 points available</div>
+                    <div class="section-points">🎯 250 points available</div>
                     <div class="completion-check" id="check2"></div>
                 </div>
 
@@ -1074,7 +1100,7 @@
                     <div class="section-number">3</div>
                     <div class="section-title">Intergovernmental Relationships</div>
                     <div class="section-desc">Learn about federal grants, categorical vs. block grants, and unfunded mandates.</div>
-                    <div class="section-points">🎯 200 points available</div>
+                    <div class="section-points">🎯 185 points available</div>
                     <div class="completion-check" id="check3"></div>
                 </div>
 
@@ -1082,7 +1108,7 @@
                     <div class="section-number">4</div>
                     <div class="section-title">Competitive Federalism Today</div>
                     <div class="section-desc">Examine contemporary issues like immigration federalism, marriage equality, and venue shopping.</div>
-                    <div class="section-points">🎯 200 points available</div>
+                    <div class="section-points">🎯 170 points available</div>
                     <div class="completion-check" id="check4"></div>
                 </div>
 
@@ -1090,7 +1116,7 @@
                     <div class="section-number">5</div>
                     <div class="section-title">Advantages and Disadvantages</div>
                     <div class="section-desc">Weigh the benefits and drawbacks of the federal system for American citizens.</div>
-                    <div class="section-points">🎯 200 points available</div>
+                    <div class="section-points">🎯 155 points available</div>
                     <div class="completion-check" id="check5"></div>
                 </div>
 
@@ -1511,7 +1537,17 @@
                 <div class="feedback-box" id="feedback-q3s1"></div>
             </div>
 
-            <button class="complete-section-btn" onclick="completeSection(1)">✓ Complete Section 1</button>
+                            <div class="reflection-box" id="reflection-section1">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">Federalism splits power between national and state governments. Name one policy area where you think the states (not Washington) should have the final say — and explain your reasoning.</p>
+                    <textarea class="reflection-input" id="reflectionInput1" rows="5" placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;" oninput="updateReflectionCount(1)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter1">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit1" onclick="submitReflection(1)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback1"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(1)">✓ Complete Section 1</button>
         </div>
 
         <!-- SECTION 2: The Evolution of American Federalism -->
@@ -1865,7 +1901,17 @@
                 <div class="feedback-box" id="feedback-q3s2"></div>
             </div>
 
-            <button class="complete-section-btn" onclick="completeSection(2)">✓ Complete Section 2</button>
+                            <div class="reflection-box" id="reflection-section2">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">The balance between national and state power has shifted dramatically over time. Which era’s approach to federalism do you find most persuasive, and why?</p>
+                    <textarea class="reflection-input" id="reflectionInput2" rows="5" placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;" oninput="updateReflectionCount(2)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter2">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit2" onclick="submitReflection(2)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback2"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(2)">✓ Complete Section 2</button>
         </div>
 
         <!-- SECTION 3: Intergovernmental Relationships -->
@@ -2115,7 +2161,17 @@
                 </tr>
             </table>
 
-            <button class="complete-section-btn" onclick="completeSection(3)">✓ Complete Section 3</button>
+                            <div class="reflection-box" id="reflection-section3">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">Federal grants come with strings attached. Is that a fair trade for the money, or federal overreach? Use a specific example to make your case.</p>
+                    <textarea class="reflection-input" id="reflectionInput3" rows="5" placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;" oninput="updateReflectionCount(3)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter3">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit3" onclick="submitReflection(3)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback3"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(3)">✓ Complete Section 3</button>
         </div>
 
         <!-- SECTION 4: Competitive Federalism Today -->
@@ -2251,7 +2307,17 @@
                 <div class="feedback-box" id="feedback-q2s4"></div>
             </div>
 
-            <button class="complete-section-btn" onclick="completeSection(4)">✓ Complete Section 4</button>
+                            <div class="reflection-box" id="reflection-section4">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">When state and federal law conflict, who should win — and does your answer change depending on the issue? Explain with an example.</p>
+                    <textarea class="reflection-input" id="reflectionInput4" rows="5" placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;" oninput="updateReflectionCount(4)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter4">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit4" onclick="submitReflection(4)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback4"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(4)">✓ Complete Section 4</button>
         </div>
 
         <!-- SECTION 5: Advantages and Disadvantages of Federalism -->
@@ -2413,7 +2479,17 @@
                 </table>
             </div>
 
-            <button class="complete-section-btn" onclick="completeSection(5)">✓ Complete Section 5</button>
+                            <div class="reflection-box" id="reflection-section5">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">Federalism lets states act as ‘laboratories of democracy,’ but it also produces inequality between states. On balance, do the benefits outweigh the costs? Defend your view.</p>
+                    <textarea class="reflection-input" id="reflectionInput5" rows="5" placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;" oninput="updateReflectionCount(5)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter5">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit5" onclick="submitReflection(5)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback5"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(5)">✓ Complete Section 5</button>
         </div>
 
         <!-- REPORT PAGE -->
@@ -2558,9 +2634,10 @@
         // Game State
         const gameState = {
             score: 0,
-            totalPossible: 870,
+            totalPossible: 995,  // 870 activities + 125 reflections (5 x 25)
             level: 'Explorer',
             sectionsCompleted: [false, false, false, false, false],
+            reflections: {},
             revealedCards: new Set(),
             answeredQuestions: new Set(),
             correctAnswers: 0,
@@ -2733,7 +2810,8 @@
                 return gameState.answeredQuestions.has(qId);
             });
 
-            if (!allCardsRevealed || !allQuestionsAnswered) return;
+            var _rd = gameState.reflections && gameState.reflections['reflection'+sectionNum] && gameState.reflections['reflection'+sectionNum].credited;
+            if (!allCardsRevealed || !allQuestionsAnswered || !_rd) return;
 
             pacingAlertShown.add(sectionNum);
 
@@ -2774,7 +2852,128 @@
         }
 
         // Complete section function
+        const REFLECTION_POINTS = 25;
+
+        function countWords(text) {
+            const t = (text || '').trim();
+            return t ? t.split(/\s+/).length : 0;
+        }
+
+        function updateReflectionCount(n) {
+            const input = document.getElementById('reflectionInput' + n);
+            const counter = document.getElementById('reflectionCounter' + n);
+            const words = countWords(input.value);
+            counter.textContent = words + (words === 1 ? ' word' : ' words');
+            counter.className = 'reflection-counter';
+            if (words >= 50 && words <= 100) counter.classList.add('met');
+            else if (words > 100) counter.classList.add('over');
+        }
+
+        function reflectionLowEffort(text, n) {
+            const clean = text.trim();
+            const promptEl = document.querySelector('#reflection-section' + n + ' .reflection-prompt');
+            let stripped = clean;
+            if (promptEl) {
+                const p = promptEl.textContent.trim().toLowerCase();
+                if (stripped.toLowerCase().includes(p)) {
+                    stripped = stripped.toLowerCase().split(p).join(' ').trim();
+                }
+            }
+            const letters = (clean.match(/[a-zA-Z]/g) || []);
+            const uniqueLetters = new Set(letters.map(c => c.toLowerCase()));
+            if (letters.length >= 20 && uniqueLetters.size <= 4) {
+                return 'This doesn\u2019t look like a complete thought yet \u2014 tell us what <em>you</em> think in your own words.';
+            }
+            const words = stripped.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean);
+            if (words.length >= 10) {
+                const freq = {}; let top = 0;
+                words.forEach(w => { freq[w] = (freq[w] || 0) + 1; if (freq[w] > top) top = freq[w]; });
+                if (top / words.length > 0.4) {
+                    return 'This looks repetitive \u2014 try expanding it with your own reasoning.';
+                }
+            }
+            if (countWords(stripped) < 50 && countWords(clean) >= 50) {
+                return 'Most of this repeats the question \u2014 add your own thoughts to reach 50 words.';
+            }
+            return null;
+        }
+
+
+
+        
+        // --- Student Reflections in completion report ---
+        function escapeHtmlRR(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+        function renderReflectionReport(){
+            try{
+                var refs = (typeof gameState!=='undefined' && gameState.reflections) ? gameState.reflections : null;
+                var container = (typeof findReportContainer==='function' ? findReportContainer() : null)
+                    || document.getElementById('reportPage') || document.getElementById('page-report') || document.getElementById('reportSection')
+                    || document.getElementById('completionReport') || document.getElementById('report');
+                if(!container) return;
+                var old=document.getElementById('studentReflectionsReport'); if(old) old.parentNode.removeChild(old);
+                var boxes=Array.prototype.slice.call(document.querySelectorAll('[id^="reflection-section"]'));
+                var nums=boxes.map(function(el){ var m=el.id.match(/reflection-section(\d+)/); return m?parseInt(m[1]):null; }).filter(function(x){return x!==null;});
+                nums.sort(function(a,b){return a-b;});
+                if(!nums.length) return;
+                var html='<div id="studentReflectionsReport" class="performance-section" style="margin-top:25px;grid-column:1 / -1;width:100%;box-sizing:border-box;">';
+                html+='<h3 style="color:#005A87;">&#128172; Student Reflections</h3>';
+                html+='<div style="background:#eef6f9;border:1px solid #b3d4dd;border-radius:8px;padding:10px 14px;margin:6px 0 14px;font-size:0.85em;color:#37474f;line-height:1.5;">&#128221; <strong>Note for instructors:</strong> Each reflection is automatically credited 25 points once it meets the 50-word minimum with genuine, on-topic effort. After reading the reflections below, you may adjust the chapter score up or down to reflect their quality, or accept the auto-awarded total as-is &#8212; your discretion.</div>';
+                nums.forEach(function(n){
+                    var r=refs?refs['reflection'+n]:null;
+                    var pe=document.querySelector('#reflection-section'+n+' .reflection-prompt');
+                    var prompt=pe?pe.textContent.trim():('Section '+n);
+                    html+='<div style="border:1px solid #cfd8dc;border-left:5px solid #00695C;border-radius:8px;padding:14px 16px;margin:10px 0;page-break-inside:auto;">';
+                    html+='<div style="font-weight:700;color:#005A87;margin-bottom:6px;">Section '+n+'</div>';
+                    html+='<div style="font-size:0.9em;color:#546e7a;font-style:italic;margin-bottom:8px;">'+escapeHtmlRR(prompt)+'</div>';
+                    if(r&&r.credited&&r.text){
+                        html+='<div style="color:#212121;line-height:1.55;white-space:pre-wrap;">'+escapeHtmlRR(r.text)+'</div>';
+                        html+='<div style="font-size:0.82em;color:#78909c;margin-top:6px;">'+(r.words||0)+' words</div>';
+                    } else {
+                        html+='<div style="color:#98002e;font-style:italic;">No reflection submitted for this section.</div>';
+                    }
+                    html+='</div>';
+                });
+                html+='</div>';
+                var anchor=null, h3s=container.querySelectorAll('h3');
+                for(var i=0;i<h3s.length;i++){ if(/Section Performance/i.test(h3s[i].textContent)){ anchor=h3s[i].closest('.performance-section')||h3s[i].parentNode; break; } }
+                var w=document.createElement('div'); w.innerHTML=html; var node=w.firstChild;
+                if(anchor&&anchor.parentNode) anchor.parentNode.insertBefore(node, anchor.nextSibling);
+                else container.appendChild(node);
+            }catch(e){}
+        }
+        if (typeof window!=='undefined') window.renderReflectionReport = renderReflectionReport;
+
+        function submitReflection(n) {
+            const input = document.getElementById('reflectionInput' + n);
+            const feedback = document.getElementById('reflectionFeedback' + n);
+            const submitBtn = document.getElementById('reflectionSubmit' + n);
+            const text = input.value.trim();
+            const words = countWords(text);
+            const refId = 'reflection' + n;
+            function showFb(cls, msg){ feedback.className='reflection-feedback show '+cls; feedback.innerHTML=msg; }
+            if (gameState.reflections[refId] && gameState.reflections[refId].credited) { gameState.reflections[refId].text=text; showFb('success','&#10003; Reflection updated and saved.'); return; }
+            if (words < 50) { showFb('short','You\u2019re at <strong>'+words+' word'+(words===1?'':'s')+'</strong> \u2014 reflections need at least <strong>50</strong> for credit. Keep developing your thought!'); return; }
+            const reason = reflectionLowEffort(text, n);
+            if (reason) { showFb('lowffort', reason); return; }
+            gameState.reflections[refId] = { text:text, credited:true, words:words };
+            updateScore(REFLECTION_POINTS);   // Ch.3: additive updater (score + popup + progress)
+            if(typeof checkSectionPacing==='function')checkSectionPacing(String(n)); input.classList.add('locked'); submitBtn.textContent='Saved \u2713'; submitBtn.disabled=true;
+            if (words > 100) { showFb('verbose','You clearly have a lot to say \u2014 great! For next time, make your point in <strong>100 words or less</strong>. <strong>(Saved &#10003; +25 points)</strong>'); }
+            else { showFb('success','&#10003; Reflection saved! <strong>+25 points</strong> \u2014 thanks for sharing your thinking.'); }
+        }
+
         function completeSection(sectionNum) {
+            var _key = String(sectionNum);
+            var _el = sectionElements[_key];
+            var _fb = document.getElementById('reflectionFeedback' + sectionNum);
+            function _tell(msg){ if(_fb){ _fb.className='reflection-feedback show short'; _fb.innerHTML=msg; } var _box=document.getElementById('reflection-section'+sectionNum); if(_box&&_box.scrollIntoView) _box.scrollIntoView({behavior:'smooth',block:'center'}); }
+            if (_el) {
+                var _cardsDone = _el.cards.every(function(c){ return gameState.revealedCards.has(c); });
+                var _qDone = _el.questions.every(function(q){ return gameState.answeredQuestions.has(q); });
+                if (!_cardsDone || !_qDone) { _tell('&#9757;&#65039; Reveal all cards and answer all knowledge-check questions in this section first.'); return; }
+            }
+            var _reflId = 'reflection' + sectionNum;
+            if (!(gameState.reflections && gameState.reflections[_reflId] && gameState.reflections[_reflId].credited)) { _tell('&#9757;&#65039; Please complete the reflection above (at least 50 words) before finishing this section.'); return; }
             if (!gameState.sectionsCompleted[sectionNum - 1]) {
                 gameState.sectionsCompleted[sectionNum - 1] = true;
                 
@@ -3381,6 +3580,17 @@
                 var answeredSrc = gameState.questionsAnswered || gameState.answeredQuestions;
                 var sectionsDone = gameState.sectionsCompleted || gameState.completedSections || [];
 
+                if (gameState.reflections) {
+                    Object.keys(gameState.reflections).forEach(function(rid){
+                        var rn = rid.replace('reflection','');
+                        var rr = gameState.reflections[rid];
+                        var rta = document.getElementById('reflectionInput'+rn);
+                        var rbtn = document.getElementById('reflectionSubmit'+rn);
+                        if (rta && rr && rr.text){ rta.value=rr.text; if(rr.credited){ rta.classList.add('locked'); if(rbtn){ rbtn.textContent='Saved \u2713'; rbtn.disabled=true; } } }
+                    });
+                }
+
+
                 // Sets need to be iterated differently than arrays
                 function toArr(x) {
                     if (!x) return [];
@@ -3624,7 +3834,7 @@
             var btn = document.createElement('button');
             btn.className = 'trek-report-btn';
             btn.type = 'button';
-            btn.setAttribute('onclick', reportOnclick);
+            btn.setAttribute('onclick', reportOnclick + ';if(window.renderReflectionReport){window.renderReflectionReport();}');
             btn.innerHTML = '📋 Generate Completion Report';
             container.appendChild(btn);
 

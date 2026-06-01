@@ -5,7 +5,7 @@ TCC Trailblazer Trek — Point Total Audit
 Walks every Chapter*.html file in the current directory and verifies that the
 declared maximum score equals the sum of points actually earnable from reveal
 cards and knowledge-check correct answers (plus any per-section completion
-bonuses).
+bonuses, plus a 25-point written reflection in each section).
 
 Exits non-zero if any chapter is mismatched, so this script is safe to run
 in CI to block bad commits.
@@ -48,12 +48,34 @@ def compute_actual_earnable(html):
 
     reveal_total = sum(int(p) for _, p in reveals)
     quiz_total = sum(q_max.values())
-    return reveal_total + quiz_total, {
+    # Reflections: each section ends with a written reflection worth 25 points,
+    # credited automatically on a 50+ word genuine response. There is exactly one
+    # textarea (id="reflectionInputN") per reflection section, so counting those
+    # ids is a reliable, pattern-independent way to total the reflection points.
+    reflection_sections = set(re.findall(r'id="reflectionInput(\d+)"', html))
+    reflection_total = 25 * len(reflection_sections)
+    return reveal_total + quiz_total + reflection_total, {
         "n_reveals": len(reveals),
         "reveal_total": reveal_total,
         "n_questions": len(q_max),
         "quiz_total": quiz_total,
+        "n_reflections": len(reflection_sections),
+        "reflection_total": reflection_total,
     }
+
+
+def _brace_block(text, open_idx):
+    """Return the substring from the '{' at open_idx through its matching '}'.
+    Used to scope a search to a specific JS object literal."""
+    depth = 0
+    for j in range(open_idx, len(text)):
+        if text[j] == "{":
+            depth += 1
+        elif text[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[open_idx:j + 1]
+    return text[open_idx:]
 
 
 def detect_declared(html):
@@ -61,14 +83,19 @@ def detect_declared(html):
     Returns (pattern_letter, declared_total, completion_bonus_total)."""
     bonus_total = 0
 
-    # Pattern C: sectionPoints: { N: { earned, max: NNN } }
-    if re.search(r"\d+\s*:\s*\{\s*earned\s*:\s*\d+\s*,\s*max\s*:\s*\d+", html):
-        section_maxes = [
-            int(m.group(1))
-            for m in re.finditer(r"max\s*:\s*(\d+)\s*\}", html)
-        ]
-        # Heuristic: per-section +50 completion bonus
-        if re.search(r"sectionPoints\[\w+\]\.earned\s*\+=\s*50", html):
+    # Pattern C: sectionPoints: { N: { earned, max } } — either key order
+    if re.search(
+        r"\d+\s*:\s*\{\s*(?:earned\s*:\s*\d+\s*,\s*max|max\s*:\s*\d+\s*,\s*earned)\s*:",
+        html,
+    ):
+        sp = re.search(r"sectionPoints\s*:\s*\{", html)
+        block = _brace_block(html, sp.end() - 1) if sp else ""
+        section_maxes = [int(x) for x in re.findall(r"\bmax\s*:\s*(\d+)", block)]
+        # Per-section +50 completion bonus, awarded inside completeSection in any
+        # of the forms in use: `.earned += 50`, `addPoints(50, ..)`, `awardPoints(50)`.
+        if re.search(
+            r"\.earned\s*\+=\s*50|addPoints\(\s*50\s*,|awardPoints\(\s*50\s*\)", html
+        ):
             bonus_total = 50 * len(section_maxes)
         return "C", sum(section_maxes), bonus_total
 

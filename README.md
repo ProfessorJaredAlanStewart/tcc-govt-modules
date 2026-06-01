@@ -23,7 +23,7 @@ Each chapter is a self-contained HTML file with no external dependencies (other 
 | Property | Value |
 |---|---|
 | Chapters | 16 (Federal) + 15 (Texas) = 31 |
-| Points per chapter | 800 – 1,800 (varies by content) |
+| Points per chapter | ~900 – 1,800 (varies by content; includes a 25-pt reflection per section) |
 | Branding | TCC Graphic Identity Standards Manual v1.2 (Sept 2013) |
 | Hosting | GitHub Pages + Canvas LMS |
 | Offline support | Yes, via `localStorage` resume |
@@ -55,7 +55,9 @@ It handles both branding eras automatically — PDFs printed before the brand-co
 
 ### How scoring works
 
-Each chapter has reveal cards (15 pts each) and knowledge-check questions (50 pts for correct, 0 for wrong). Some chapters add a per-section completion bonus (50 pts). Total earnable points and declared `maxScore` are kept in sync by [`tools/audit_points.py`](tools/audit_points.py), which runs on every push via [.github/workflows/audit.yml](.github/workflows/audit.yml).
+Each chapter has reveal cards (15 pts each) and knowledge-check questions (50 pts for correct, 0 for wrong). Some chapters add a per-section completion bonus (50 pts). In addition, **every section ends with a written reflection worth 25 points**, credited automatically once the student writes at least 50 words of genuine, on-topic response. A section is not marked complete until its cards, questions, and reflection are all finished, and the pacing alert holds off until the reflection is submitted. Total earnable points and the declared maximum are kept in sync by [`tools/audit_points.py`](tools/audit_points.py), which is reflection- and bonus-aware and runs on every push via [.github/workflows/audit.yml](.github/workflows/audit.yml).
+
+**Grading the reflections.** Reflections are auto-credited for meeting the minimum, so the PDF score a student submits already includes them. The completion report prints each reflection in full, with a note reminding you that you may **adjust a chapter's score up or down to reflect the quality of the reflections, or accept the auto-awarded total as-is** — that judgment is left to you when reading the work.
 
 A student's percentage = `earned / maxScore × 100`, capped naturally at 100% as long as the audit is green.
 

@@ -697,6 +697,32 @@
             font-size: 0.95em;
         }
 
+        /* Complete Section button — matches Chapter 3 (green gradient pill) */
+        .complete-section-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .complete-section-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .complete-section-btn:disabled {
+            background: #9E9E9E;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         @media print {
             /* Hide navigation and buttons */
             .no-print, .back-button, .report-back-button, .print-report-button,
@@ -822,6 +848,39 @@
                 width: 100%;
             }
         }
+        .reflection-box {
+            background: linear-gradient(135deg, var(--highlight-blue) 0%, var(--bg-section) 100%);
+            border: 2px solid var(--primary-blue);
+            border-left: 6px solid var(--secondary-blue);
+            border-radius: 12px; padding: 22px 25px; margin: 25px 0;
+        }
+        .reflection-header { font-size: 1.15em; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .reflection-points { font-size: 0.7em; background: var(--secondary-blue); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+        .reflection-prompt { color: var(--text-primary); font-size: 1em; line-height: 1.55; margin-bottom: 14px; }
+        .reflection-input { width: 100%; padding: 12px 14px; border: 1.5px solid #B0BEC5; border-radius: 8px; font-family: inherit; font-size: 0.98em; line-height: 1.5; resize: vertical; box-sizing: border-box; color: var(--text-primary); }
+        .reflection-input:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(0,43,92,0.12); }
+        .reflection-input.locked { background: #F5F5F5; color: var(--text-secondary); }
+        .reflection-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 12px; }
+        .reflection-counter { font-size: 0.88em; color: var(--text-secondary); font-weight: 600; }
+        .reflection-counter.met { color: var(--success); }
+        .reflection-counter.over { color: var(--warning); }
+        .reflection-submit { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 0.95em; font-weight: 600; font-family: inherit; cursor: pointer; transition: opacity 0.15s ease; }
+        .reflection-submit:hover { opacity: 0.9; }
+        .reflection-submit:disabled { background: #90A4AE; cursor: default; opacity: 0.7; }
+        .reflection-feedback { margin-top: 12px; font-size: 0.92em; line-height: 1.5; display: none; }
+        .reflection-feedback.show { display: block; padding: 11px 15px; border-radius: 8px; }
+        .reflection-feedback.short { background: #FFF3E0; border-left: 4px solid var(--warning); color: #E65100; }
+        .reflection-feedback.lowffort { background: #fdecef; border-left: 4px solid var(--error); color: var(--error); }
+        .reflection-feedback.success { background: var(--highlight-green); border-left: 4px solid var(--success); color: var(--success); }
+        .reflection-feedback.verbose { background: var(--highlight-blue); border-left: 4px solid var(--secondary-blue); color: var(--primary-blue); }
+        .report-reflections { margin: 25px 0; padding: 20px 24px; background: var(--bg-light); border-radius: 12px; border-left: 5px solid var(--secondary-blue); }
+        .report-reflections h3 { color: var(--primary-blue); margin-bottom: 14px; }
+        .report-reflection-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #E0E0E0; }
+        .report-reflection-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .report-reflection-q { font-weight: 700; color: var(--secondary-blue); font-size: 0.92em; margin-bottom: 5px; }
+        .report-reflection-a { color: var(--text-primary); font-size: 0.95em; line-height: 1.55; white-space: pre-wrap; }
+        .report-reflection-meta { font-size: 0.8em; color: var(--text-secondary); margin-top: 4px; font-style: italic; }
+        .report-reflection-empty { color: var(--text-secondary); font-style: italic; }
     </style>
 </head>
 <body>
@@ -882,35 +941,35 @@
                     <div class="section-number">1</div>
                     <h3 class="section-title">Pre-Revolutionary Roots</h3>
                     <p class="section-description">Explore the political ideas and events that sparked American independence</p>
-                    <span class="section-points">🎯 200 points</span>
+                    <span class="section-points">🎯 185 points</span>
                 </div>
 
                 <div class="section-card" id="card2" onclick="showPage('section2')">
                     <div class="section-number">2</div>
                     <h3 class="section-title">Articles of Confederation</h3>
                     <p class="section-description">Examine America's first attempt at national government and its failures</p>
-                    <span class="section-points">🎯 200 points</span>
+                    <span class="section-points">🎯 185 points</span>
                 </div>
 
                 <div class="section-card" id="card3" onclick="showPage('section3')">
                     <div class="section-number">3</div>
                     <h3 class="section-title">Constitutional Convention</h3>
                     <p class="section-description">Discover the debates, compromises, and design of the Constitution</p>
-                    <span class="section-points">🎯 250 points</span>
+                    <span class="section-points">🎯 185 points</span>
                 </div>
 
                 <div class="section-card" id="card4" onclick="showPage('section4')">
                     <div class="section-number">4</div>
                     <h3 class="section-title">Ratification Battle</h3>
                     <p class="section-description">Follow the Federalists vs. Anti-Federalists debate</p>
-                    <span class="section-points">🎯 200 points</span>
+                    <span class="section-points">🎯 170 points</span>
                 </div>
 
                 <div class="section-card" id="card5" onclick="showPage('section5')">
                     <div class="section-number">5</div>
                     <h3 class="section-title">Constitutional Change</h3>
                     <p class="section-description">Learn about the amendment process and key changes over time</p>
-                    <span class="section-points">🎯 200 points</span>
+                    <span class="section-points">🎯 185 points</span>
                 </div>
 
                 <div class="section-card" onclick="showPage('report')">
@@ -1083,6 +1142,21 @@
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q1b', 0)">The taxes only applied to certain colonies</div>
                     <div class="feedback-box" id="feedback-q1b"></div>
                 </div>
+
+                <div class="reflection-box" id="reflection-section1">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">The colonists drew on specific ideas about rights and government. Which of those founding-era ideas still feels most alive in American life today, and which feels most outdated to you? Why?</p>
+                    <textarea class="reflection-input" id="reflectionInput1" rows="5"
+                        placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;"
+                        oninput="updateReflectionCount(1)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter1">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit1" onclick="submitReflection(1)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback1"></div>
+                </div>
+
+                <button class="complete-section-btn" id="completeBtn1" onclick="completeSectionBtn(1)">&#10003; Complete Section 1</button>
 
                 <div class="achievement" id="section1-complete" style="display: none;">
                     🎉 SECTION COMPLETE! 🎉<br>
@@ -1280,6 +1354,21 @@
                     <div class="feedback-box" id="feedback-q2b"></div>
                 </div>
 
+                <div class="reflection-box" id="reflection-section2">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">The Articles of Confederation failed because the national government was too weak. In your view, is a weak central government always a problem, or are there areas today where you'd actually prefer it? Explain.</p>
+                    <textarea class="reflection-input" id="reflectionInput2" rows="5"
+                        placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;"
+                        oninput="updateReflectionCount(2)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter2">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit2" onclick="submitReflection(2)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback2"></div>
+                </div>
+
+                <button class="complete-section-btn" id="completeBtn2" onclick="completeSectionBtn(2)">&#10003; Complete Section 2</button>
+
                 <div class="achievement" id="section2-complete" style="display: none;">
                     🎉 SECTION COMPLETE! 🎉<br>
                     You understand why America's first government failed!
@@ -1475,6 +1564,21 @@
                     <div class="kc-option" onclick="handleAnswer(this, false, 'q3b', 0)">To allow the president to make laws directly</div>
                     <div class="feedback-box" id="feedback-q3b"></div>
                 </div>
+
+                <div class="reflection-box" id="reflection-section3">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">The Constitutional Convention was full of compromises. Which compromise do you think was most necessary, and which one do you most wish they'd handled differently? Why?</p>
+                    <textarea class="reflection-input" id="reflectionInput3" rows="5"
+                        placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;"
+                        oninput="updateReflectionCount(3)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter3">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit3" onclick="submitReflection(3)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback3"></div>
+                </div>
+
+                <button class="complete-section-btn" id="completeBtn3" onclick="completeSectionBtn(3)">&#10003; Complete Section 3</button>
 
                 <div class="achievement" id="section3-complete" style="display: none;">
                     🎉 SECTION COMPLETE! 🎉<br>
@@ -1672,6 +1776,21 @@
                     <div class="feedback-box" id="feedback-q4b"></div>
                 </div>
 
+                <div class="reflection-box" id="reflection-section4">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">Federalists and Anti-Federalists disagreed about how much to trust a strong national government. Whose worries feel more justified to you looking at government today? Explain your reasoning.</p>
+                    <textarea class="reflection-input" id="reflectionInput4" rows="5"
+                        placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;"
+                        oninput="updateReflectionCount(4)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter4">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit4" onclick="submitReflection(4)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback4"></div>
+                </div>
+
+                <button class="complete-section-btn" id="completeBtn4" onclick="completeSectionBtn(4)">&#10003; Complete Section 4</button>
+
                 <div class="achievement" id="section4-complete" style="display: none;">
                     🎉 SECTION COMPLETE! 🎉<br>
                     You understand the ratification battle!
@@ -1842,6 +1961,21 @@
                     <div class="feedback-box" id="feedback-q5b"></div>
                 </div>
 
+                <div class="reflection-box" id="reflection-section5">
+                    <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
+                    <p class="reflection-prompt">The Constitution is deliberately hard to amend. Do you think that difficulty protects us or holds us back? Give an example that shaped your view.</p>
+                    <textarea class="reflection-input" id="reflectionInput5" rows="5"
+                        placeholder="Share your own thoughts here (50&ndash;100 words)&hellip;"
+                        oninput="updateReflectionCount(5)"></textarea>
+                    <div class="reflection-footer">
+                        <span class="reflection-counter" id="reflectionCounter5">0 words</span>
+                        <button class="reflection-submit" id="reflectionSubmit5" onclick="submitReflection(5)">Submit Reflection</button>
+                    </div>
+                    <div class="reflection-feedback" id="reflectionFeedback5"></div>
+                </div>
+
+                <button class="complete-section-btn" id="completeBtn5" onclick="completeSectionBtn(5)">&#10003; Complete Section 5</button>
+
                 <div class="achievement" id="section5-complete" style="display: none;">
                     🎉 SECTION COMPLETE! 🎉<br>
                     You've mastered Constitutional change!
@@ -1928,6 +2062,12 @@
                     </div>
                 </div>
 
+                <div class="report-reflections" id="reportReflections">
+                    <h3>Student Reflections</h3>
+                    <div style="background:#eef6f9;border:1px solid #b3d4dd;border-radius:8px;padding:10px 14px;margin:6px 0 14px;font-size:0.85em;color:#37474f;line-height:1.5;">&#128221; <strong>Note for instructors:</strong> Each reflection is automatically credited 25 points once it meets the 50-word minimum with genuine, on-topic effort. After reading the reflections below, you may adjust the chapter score up or down to reflect their quality, or accept the auto-awarded total as-is &#8212; your discretion.</div>
+                    <div id="reflectionReportList"></div>
+                </div>
+
                 <div class="instructor-note">
                     <strong>📋 Instructor Note:</strong> This report documents the student's completion of the interactive Chapter 2: The Constitution and Its Origins learning module. The grade reflects points earned from exploring interactive content and completing knowledge check questions. Time spent per section is tracked automatically&#8212;sections completed in under 2 minutes will trigger a pacing alert.
                 </div>
@@ -1942,6 +2082,7 @@
             level: 'Explorer',
             visitedSections: new Set(),
             completedSections: [],
+            reflections: {},
             answeredQuestions: new Set(),
             correctAnswers: 0,
             totalAnswers: 0,
@@ -1986,7 +2127,7 @@
             1000: 'Constitution Sage'
         };
 
-        const totalPossiblePoints = 785;
+        const totalPossiblePoints = 910;  // 785 activities + 125 reflections (5 x 25)
 
         // Page navigation
         function showPage(pageId) {
@@ -2031,6 +2172,113 @@
         }
 
         // Handle knowledge check answers
+        // ============ REFLECTION SYSTEM ============
+        // Required short metacognition reflection per section, worth 25 pts.
+        // Hard floor 50 words (no credit below). Soft ceiling 100 (still full
+        // credit, gentle "be concise" nudge). Light low-effort checks catch
+        // padding/repetition. Answers flow to the completion report.
+        const REFLECTION_POINTS = 25;
+
+        function countWords(text) {
+            const t = (text || '').trim();
+            return t ? t.split(/\s+/).length : 0;
+        }
+
+        function updateReflectionCount(n) {
+            const input = document.getElementById('reflectionInput' + n);
+            const counter = document.getElementById('reflectionCounter' + n);
+            const words = countWords(input.value);
+            counter.textContent = words + (words === 1 ? ' word' : ' words');
+            counter.className = 'reflection-counter';
+            if (words >= 50 && words <= 100) counter.classList.add('met');
+            else if (words > 100) counter.classList.add('over');
+        }
+
+        function reflectionLowEffort(text, n) {
+            const clean = text.trim();
+            const promptEl = document.querySelector('#reflection-section' + n + ' .reflection-prompt');
+            let stripped = clean;
+            if (promptEl) {
+                const p = promptEl.textContent.trim().toLowerCase();
+                if (stripped.toLowerCase().includes(p)) {
+                    stripped = stripped.toLowerCase().split(p).join(' ').trim();
+                }
+            }
+            const letters = (clean.match(/[a-zA-Z]/g) || []);
+            const uniqueLetters = new Set(letters.map(c => c.toLowerCase()));
+            if (letters.length >= 20 && uniqueLetters.size <= 4) {
+                return 'This doesn\u2019t look like a complete thought yet \u2014 tell us what <em>you</em> think in your own words.';
+            }
+            const words = stripped.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean);
+            if (words.length >= 10) {
+                const freq = {}; let top = 0;
+                words.forEach(w => { freq[w] = (freq[w] || 0) + 1; if (freq[w] > top) top = freq[w]; });
+                if (top / words.length > 0.4) {
+                    return 'This looks repetitive \u2014 try expanding it with your own reasoning.';
+                }
+            }
+            if (countWords(stripped) < 50 && countWords(clean) >= 50) {
+                return 'Most of this repeats the question \u2014 add your own thoughts to reach 50 words.';
+            }
+            return null;
+        }
+
+        function submitReflection(n) {
+            const input = document.getElementById('reflectionInput' + n);
+            const feedback = document.getElementById('reflectionFeedback' + n);
+            const submitBtn = document.getElementById('reflectionSubmit' + n);
+            const text = input.value.trim();
+            const words = countWords(text);
+            const refId = 'reflection' + n;
+
+            function showFb(cls, msg) {
+                feedback.className = 'reflection-feedback show ' + cls;
+                feedback.innerHTML = msg;
+            }
+
+            if (gameState.reflections[refId] && gameState.reflections[refId].credited) {
+                gameState.reflections[refId].text = text;
+                showFb('success', '&#10003; Reflection updated and saved.');
+                return;
+            }
+            if (words < 50) {
+                showFb('short', 'You\u2019re at <strong>' + words + ' word' + (words === 1 ? '' : 's') +
+                    '</strong> \u2014 reflections need at least <strong>50</strong> for credit. Keep developing your thought!');
+                return;
+            }
+            const reason = reflectionLowEffort(text, n);
+            if (reason) { showFb('lowffort', reason); return; }
+
+            gameState.reflections[refId] = { text: text, credited: true, words: words };
+            gameState.score += REFLECTION_POINTS;
+            // Ch.2 also tracks per-section points (completion depends on them)
+            if (gameState.sectionPoints) {
+                gameState.sectionPoints[String(n)] = (gameState.sectionPoints[String(n)] || 0) + REFLECTION_POINTS;
+            }
+            showPoints(REFLECTION_POINTS);
+            updateScore();
+
+            input.classList.add('locked');
+            submitBtn.textContent = 'Saved \u2713';
+            submitBtn.disabled = true;
+
+            if (words > 100) {
+                showFb('verbose', 'You clearly have a lot to say about this \u2014 that\u2019s great! ' +
+                    'For next time, challenge yourself to make your point in <strong>100 words or less</strong>. ' +
+                    'Concise writing is powerful writing. <strong>(Saved &#10003; +25 points)</strong>');
+            } else {
+                showFb('success', '&#10003; Reflection saved! <strong>+25 points</strong> \u2014 thanks for sharing your thinking.');
+            }
+
+            setTimeout(function () {
+                submitBtn.textContent = 'Update Reflection';
+                submitBtn.disabled = false;
+                input.classList.remove('locked');
+            }, 1200);
+
+            checkSectionCompletion(String(n));
+        }
+
         function handleAnswer(element, isCorrect, questionId, points) {
             if (gameState.answeredQuestions.has(questionId)) {
                 return;
@@ -2124,27 +2372,21 @@
 
         // Check section completion
         function checkSectionCompletion(sectionNum) {
-            const thresholds = {
-                '1': 160, '2': 160, '3': 200, '4': 160, '5': 160
-            };
-            
-            if (gameState.sectionPoints[sectionNum] >= thresholds[sectionNum] && 
-                !gameState.completedSections.includes(sectionNum)) {
-                gameState.completedSections.push(sectionNum);
-                markSectionComplete(sectionNum);
-            }
-
-            // Check pacing only when ALL interactive elements in the section are done
+            // NOTE: Section completion is now handled exclusively by the
+            // "Complete Section" button (completeSectionBtn), which requires all
+            // cards, questions, and the reflection. This function now only drives
+            // the pacing check; it no longer auto-marks completion (that caused
+            // inconsistent "In Progress" states on the report).
             checkSectionPacing(sectionNum);
         }
 
         // Define all interactive elements per section
         const sectionElements = {
-            '1': { cards: ['locke-content','english-bill-content','revolution-timeline','declaration-content'], questions: ['q1a','q1b'] },
-            '2': { cards: ['articles-creation','articles-powers','economic-problems','shays-rebellion'], questions: ['q2a','q2b'] },
-            '3': { cards: ['delegate-concerns','great-compromise','three-fifths','federal-system'], questions: ['q3a','q3b'] },
-            '4': { cards: ['ratification-strategy','anti-fed-concerns','federalist-papers'], questions: ['q4a','q4b'] },
-            '5': { cards: ['amendment-process','bill-of-rights','civil-war-amendments','voting-amendments'], questions: ['q5a','q5b'] }
+            '1': { cards: ['locke-content','english-bill-content','revolution-timeline','declaration-content'], questions: ['q1a','q1b'], reflection: 'reflection1' },
+            '2': { cards: ['articles-creation','articles-powers','economic-problems','shays-rebellion'], questions: ['q2a','q2b'], reflection: 'reflection2' },
+            '3': { cards: ['delegate-concerns','great-compromise','three-fifths','federal-system'], questions: ['q3a','q3b'], reflection: 'reflection3' },
+            '4': { cards: ['ratification-strategy','anti-fed-concerns','federalist-papers'], questions: ['q4a','q4b'], reflection: 'reflection4' },
+            '5': { cards: ['amendment-process','bill-of-rights','civil-war-amendments','voting-amendments'], questions: ['q5a','q5b'], reflection: 'reflection5' }
         };
 
         // Track which sections have already shown a pacing warning
@@ -2166,7 +2408,15 @@
                 return gameState.answeredQuestions.has(qId);
             });
 
-            if (!allCardsRevealed || !allQuestionsAnswered) return;
+            // Reflection is the final required step — only judge pacing once
+            // it's submitted, so the alert never fires before the student
+            // reaches the reflection box and the reflection-writing time counts.
+            const reflectionDone = !elements.reflection ||
+                (gameState.reflections &&
+                 gameState.reflections[elements.reflection] &&
+                 gameState.reflections[elements.reflection].credited);
+
+            if (!allCardsRevealed || !allQuestionsAnswered || !reflectionDone) return;
 
             // All elements done — now check pacing
             pacingAlertShown.add(sectionNum);
@@ -2224,6 +2474,41 @@
             if (achievement) {
                 achievement.style.display = 'block';
             }
+        }
+
+        // Unified "Complete Section" button handler. Requires ALL cards revealed,
+        // ALL questions answered, AND the reflection submitted before a section
+        // can be marked complete. Gives specific feedback on what's missing.
+        function completeSectionBtn(n) {
+            var key = String(n);
+            var el = sectionElements[key];
+            var fb = document.getElementById('reflectionFeedback' + n);
+            function tell(msg) {
+                if (fb) { fb.className = 'reflection-feedback show short'; fb.innerHTML = msg; }
+                var box = document.getElementById('reflection-section' + n);
+                if (box && box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            if (el) {
+                var cardsDone = el.cards.every(function(c){ return gameState.revealedCards.has(c); });
+                var qDone = el.questions.every(function(q){ return gameState.answeredQuestions.has(q); });
+                if (!cardsDone || !qDone) {
+                    tell('&#9757;&#65039; Reveal all cards and answer all knowledge-check questions in this section first.');
+                    return;
+                }
+            }
+            var reflId = 'reflection' + n;
+            var reflectionDone = gameState.reflections && gameState.reflections[reflId] && gameState.reflections[reflId].credited;
+            if (!reflectionDone) {
+                tell('&#9757;&#65039; Please complete the reflection above (at least 50 words) before finishing this section.');
+                return;
+            }
+            if (!gameState.completedSections.includes(key)) {
+                gameState.completedSections.push(key);
+                markSectionComplete(key);
+            }
+            // Confirmation + return home
+            if (fb) { fb.className = 'reflection-feedback show success'; fb.innerHTML = '&#10003; Section ' + n + ' complete! Returning to the chapter menu&hellip;'; }
+            setTimeout(function(){ showPage('home'); }, 900);
         }
 
         // Update progress bar
@@ -2366,6 +2651,33 @@
                 warningTextEl.textContent = 'The entire module was completed in under 5 minutes with ' + gameState.completedSections.length + ' sections done. This pacing suggests the material may not have been fully engaged with.';
             } else {
                 warningEl.style.display = 'none';
+            }
+
+            // Populate student reflections on the report
+            var reflSectionNames = {
+                1: 'Pre-Revolutionary Roots', 2: 'The Articles of Confederation',
+                3: 'The Development of the Constitution', 4: 'The Ratification of the Constitution',
+                5: 'Constitutional Change'
+            };
+            var listEl = document.getElementById('reflectionReportList');
+            if (listEl) {
+                var html = '', any = false;
+                for (var i = 1; i <= 5; i++) {
+                    var r = gameState.reflections && gameState.reflections['reflection' + i];
+                    if (r && r.text) {
+                        any = true;
+                        var esc = r.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                        html += '<div class="report-reflection-item">' +
+                            '<div class="report-reflection-q">Section ' + i + ' \u2014 ' + reflSectionNames[i] + '</div>' +
+                            '<div class="report-reflection-a">' + esc + '</div>' +
+                            '<div class="report-reflection-meta">' + r.words + ' words' +
+                                (r.credited ? ' \u00b7 +25 pts' : '') + '</div>' +
+                            '</div>';
+                    }
+                }
+                listEl.innerHTML = any ? html :
+                    '<p class="report-reflection-empty">No reflections submitted yet. ' +
+                    'Each section\u2019s reflection is required to complete that section.</p>';
             }
         }
 
@@ -2882,6 +3194,24 @@
                         || document.getElementById('section' + secNum + '-card');
                     if (card) card.classList.add('completed');
                 });
+
+                // Re-populate saved reflection answers into their textareas
+                if (gameState.reflections && typeof gameState.reflections === 'object') {
+                    for (var rn = 1; rn <= 8; rn++) {
+                        var rec = gameState.reflections['reflection' + rn];
+                        var ta = document.getElementById('reflectionInput' + rn);
+                        if (rec && ta) {
+                            if ('value' in ta) ta.value = rec.text || '';
+                            if (typeof updateReflectionCount === 'function') updateReflectionCount(rn);
+                            if (rec.credited) {
+                                var sb = document.getElementById('reflectionSubmit' + rn);
+                                if (sb) sb.textContent = 'Update Reflection';
+                                var fb = document.getElementById('reflectionFeedback' + rn);
+                                if (fb) { fb.className = 'reflection-feedback show success'; fb.innerHTML = '&#10003; Reflection saved (+25 points).'; }
+                            }
+                        }
+                    }
+                }
 
                 // Re-populate the student name input if we saved one
                 var nameIds = ['studentName', 'studentNameInput', 'nameInput', 'name'];

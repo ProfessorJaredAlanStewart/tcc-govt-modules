@@ -840,6 +840,32 @@
             }
         }
 
+                .reflection-box {
+            background: linear-gradient(135deg, var(--highlight-blue) 0%, var(--bg-section) 100%);
+            border: 2px solid var(--primary-blue);
+            border-left: 6px solid var(--secondary-blue);
+            border-radius: 12px; padding: 22px 25px; margin: 25px 0;
+        }
+        .reflection-header { font-size: 1.15em; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .reflection-points { font-size: 0.7em; background: var(--secondary-blue); color: #fff; padding: 3px 10px; border-radius: 12px; font-weight: 600; }
+        .reflection-prompt { color: var(--text-primary); font-size: 1em; line-height: 1.55; margin-bottom: 14px; }
+        .reflection-input { width: 100%; padding: 12px 14px; border: 1.5px solid #B0BEC5; border-radius: 8px; font-family: inherit; font-size: 0.98em; line-height: 1.5; resize: vertical; box-sizing: border-box; color: var(--text-primary); }
+        .reflection-input:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(0,43,92,0.12); }
+        .reflection-input.locked { background: #F5F5F5; color: var(--text-secondary); }
+        .reflection-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 12px; }
+        .reflection-counter { font-size: 0.88em; color: var(--text-secondary); font-weight: 600; }
+        .reflection-counter.met { color: var(--success); }
+        .reflection-counter.over { color: var(--warning); }
+        .reflection-submit { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: #fff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 0.95em; font-weight: 600; font-family: inherit; cursor: pointer; transition: opacity 0.15s ease; }
+        .reflection-submit:hover { opacity: 0.9; }
+        .reflection-submit:disabled { background: #90A4AE; cursor: default; opacity: 0.7; }
+        .reflection-feedback { margin-top: 12px; font-size: 0.92em; line-height: 1.5; display: none; }
+        .reflection-feedback.show { display: block; padding: 11px 15px; border-radius: 8px; }
+        .reflection-feedback.short { background: #FFF3E0; border-left: 4px solid var(--warning); color: #E65100; }
+        .reflection-feedback.lowffort { background: #fdecef; border-left: 4px solid var(--error); color: var(--error); }
+        .reflection-feedback.success { background: var(--highlight-green); border-left: 4px solid var(--success); color: var(--success); }
+        .reflection-feedback.verbose { background: var(--highlight-blue); border-left: 4px solid var(--secondary-blue); color: var(--primary-blue); }
+
         @media print {
             /* Hide navigation and buttons */
             .no-print, .back-button, .report-back-button, .print-report-button,
@@ -1006,7 +1032,7 @@
                     <div class="badge">1</div>
                     <h3>What Is the Media?</h3>
                     <p class="description">Understanding mass media, types, functions, and conglomerates</p>
-                    <p class="points">⭐ 255 points available</p>
+                    <p class="points">⭐ 265 points available</p>
                 </div>
 
                 <div class="section-card" id="card2" onclick="navigateToSection('section2')">
@@ -1020,14 +1046,14 @@
                     <div class="badge">3</div>
                     <h3>Regulating the Media</h3>
                     <p class="description">First Amendment, FCC, and media transparency</p>
-                    <p class="points">⭐ 340 points available</p>
+                    <p class="points">⭐ 310 points available</p>
                 </div>
 
                 <div class="section-card" id="card4" onclick="navigateToSection('section4')">
                     <div class="badge">4</div>
                     <h3>The Impact of the Media</h3>
                     <p class="description">Bias, framing, campaigns, and societal effects</p>
-                    <p class="points">⭐ 370 points available</p>
+                    <p class="points">⭐ 360 points available</p>
                 </div>
             </div>
 
@@ -1321,7 +1347,17 @@
                     <div class="feedback-box" id="feedback-q1-3"></div>
                 </div>
             </div>
-        </div>
+        
+                <div class="reflection-box" id="reflection-section1">
+                    <div class="reflection-header">&#128172; Reflection <span class="reflection-points">+25 points</span></div>
+                    <div class="reflection-prompt">The media is often called the &#8220;fourth estate&#8221; &#8212; a check on government. Using what you read, explain one way the press holds power accountable, and one way its commercial incentives can undercut that role.</div>
+                    <textarea class="reflection-input" id="reflectionInput1" rows="5" placeholder="Write at least 50 words in your own words&#8230;" oninput="updateReflectionCount(1)"></textarea>
+                    <div class="reflection-footer"><span class="reflection-counter" id="reflectionCounter1">0 words</span><button class="reflection-submit" id="reflectionSubmit1" onclick="submitReflection(1)">Submit Reflection</button></div>
+                    <div class="reflection-feedback" id="reflectionFeedback1"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(1)">&#10003; Complete Section 1</button>
+                <div class="section-gate-msg" id="sectionGate1" style="display:none;margin:15px auto;max-width:420px;padding:12px 18px;background:#fbe9ee;border-left:5px solid #98002e;border-radius:8px;color:#212121;font-size:0.95em;text-align:center;"></div>
+            </div>
 
         <!-- Section 2: Evolution of the Media -->
         <!-- Points: 8 cards (7×30 + 1×35 = 245) + 4 questions × 25 = 100 = 345 total -->
@@ -1654,7 +1690,17 @@
                     </p>
                 </div>
             </div>
-        </div>
+        
+                <div class="reflection-box" id="reflection-section2">
+                    <div class="reflection-header">&#128172; Reflection <span class="reflection-points">+25 points</span></div>
+                    <div class="reflection-prompt">Media has evolved from partisan newspapers to radio, TV, and social feeds. Pick one shift and explain how it changed the relationship between citizens and political information &#8212; for better or worse.</div>
+                    <textarea class="reflection-input" id="reflectionInput2" rows="5" placeholder="Write at least 50 words in your own words&#8230;" oninput="updateReflectionCount(2)"></textarea>
+                    <div class="reflection-footer"><span class="reflection-counter" id="reflectionCounter2">0 words</span><button class="reflection-submit" id="reflectionSubmit2" onclick="submitReflection(2)">Submit Reflection</button></div>
+                    <div class="reflection-feedback" id="reflectionFeedback2"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(2)">&#10003; Complete Section 2</button>
+                <div class="section-gate-msg" id="sectionGate2" style="display:none;margin:15px auto;max-width:420px;padding:12px 18px;background:#fbe9ee;border-left:5px solid #98002e;border-radius:8px;color:#212121;font-size:0.95em;text-align:center;"></div>
+            </div>
 
         <!-- Section 3: Regulating the Media -->
         <!-- Points: 9 cards (8×30 + 1×25 = 265) + 3 questions × 25 = 75 = 340 total -->
@@ -1940,7 +1986,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
+                <div class="reflection-box" id="reflection-section3">
+                    <div class="reflection-header">&#128172; Reflection <span class="reflection-points">+25 points</span></div>
+                    <div class="reflection-prompt">The government regulates some media (broadcast) far more than others (print, internet). Explain one reason for that difference and whether you think today&#8217;s rules still make sense in a streaming, social-media age.</div>
+                    <textarea class="reflection-input" id="reflectionInput3" rows="5" placeholder="Write at least 50 words in your own words&#8230;" oninput="updateReflectionCount(3)"></textarea>
+                    <div class="reflection-footer"><span class="reflection-counter" id="reflectionCounter3">0 words</span><button class="reflection-submit" id="reflectionSubmit3" onclick="submitReflection(3)">Submit Reflection</button></div>
+                    <div class="reflection-feedback" id="reflectionFeedback3"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(3)">&#10003; Complete Section 3</button>
+                <div class="section-gate-msg" id="sectionGate3" style="display:none;margin:15px auto;max-width:420px;padding:12px 18px;background:#fbe9ee;border-left:5px solid #98002e;border-radius:8px;color:#212121;font-size:0.95em;text-align:center;"></div>
+            </div>
 
         <!-- Section 4: The Impact of the Media -->
         <!-- Points: 9 cards × 30 = 270 + 4 questions × 25 = 100 = 370 total -->
@@ -2306,7 +2362,17 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        
+                <div class="reflection-box" id="reflection-section4">
+                    <div class="reflection-header">&#128172; Reflection <span class="reflection-points">+25 points</span></div>
+                    <div class="reflection-prompt">Framing, sound bites, and bias shape how we receive news. Describe one specific example where you noticed coverage shaping the story, and analyze how it may have influenced what audiences took away.</div>
+                    <textarea class="reflection-input" id="reflectionInput4" rows="5" placeholder="Write at least 50 words in your own words&#8230;" oninput="updateReflectionCount(4)"></textarea>
+                    <div class="reflection-footer"><span class="reflection-counter" id="reflectionCounter4">0 words</span><button class="reflection-submit" id="reflectionSubmit4" onclick="submitReflection(4)">Submit Reflection</button></div>
+                    <div class="reflection-feedback" id="reflectionFeedback4"></div>
+                </div>
+                <button class="complete-section-btn" onclick="completeSection(4)">&#10003; Complete Section 4</button>
+                <div class="section-gate-msg" id="sectionGate4" style="display:none;margin:15px auto;max-width:420px;padding:12px 18px;background:#fbe9ee;border-left:5px solid #98002e;border-radius:8px;color:#212121;font-size:0.95em;text-align:center;"></div>
+            </div>
 
         <!-- Report Page -->
         <div id="reportPage" class="page">
@@ -2420,6 +2486,7 @@
             level: 'Explorer',
             completedSections: [],
             cardsRevealed: {},
+            reflections: {},
             questionsAnswered: {},
             correctAnswers: 0,
             totalQuestions: 0,
@@ -2452,6 +2519,118 @@
             '3': { cards: ['zenger-trial','libel-standards','pentagon-papers','fcc-history','equal-time-examples','indecency-rules','foia-details','deep-throat','press-relations'], questions: ['q3-1','q3-2','q3-3'] },
             '4': { cards: ['media-theories','framing-types','campaign-bubble','sound-bites','cable-bias','trump-media','racial-framing','women-coverage','palin-coverage'], questions: ['q4-1','q4-2','q4-3','q4-4'] }
         };
+                const REFLECTION_POINTS = 25;
+
+        function countWords(text) {
+            const t = (text || '').trim();
+            return t ? t.split(/\s+/).length : 0;
+        }
+
+        function updateReflectionCount(n) {
+            const input = document.getElementById('reflectionInput' + n);
+            const counter = document.getElementById('reflectionCounter' + n);
+            const words = countWords(input.value);
+            counter.textContent = words + (words === 1 ? ' word' : ' words');
+            counter.className = 'reflection-counter';
+            if (words >= 50 && words <= 100) counter.classList.add('met');
+            else if (words > 100) counter.classList.add('over');
+        }
+
+        function reflectionLowEffort(text, n) {
+            const clean = text.trim();
+            const promptEl = document.querySelector('#reflection-section' + n + ' .reflection-prompt');
+            let stripped = clean;
+            if (promptEl) {
+                const p = promptEl.textContent.trim().toLowerCase();
+                if (stripped.toLowerCase().includes(p)) {
+                    stripped = stripped.toLowerCase().split(p).join(' ').trim();
+                }
+            }
+            const letters = (clean.match(/[a-zA-Z]/g) || []);
+            const uniqueLetters = new Set(letters.map(c => c.toLowerCase()));
+            if (letters.length >= 20 && uniqueLetters.size <= 4) {
+                return 'This doesn\u2019t look like a complete thought yet \u2014 tell us what <em>you</em> think in your own words.';
+            }
+            const words = stripped.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean);
+            if (words.length >= 10) {
+                const freq = {}; let top = 0;
+                words.forEach(w => { freq[w] = (freq[w] || 0) + 1; if (freq[w] > top) top = freq[w]; });
+                if (top / words.length > 0.4) {
+                    return 'This looks repetitive \u2014 try expanding it with your own reasoning.';
+                }
+            }
+            if (countWords(stripped) < 50 && countWords(clean) >= 50) {
+                return 'Most of this repeats the question \u2014 add your own thoughts to reach 50 words.';
+            }
+            return null;
+        }
+
+        function submitReflection(n) {
+            const input=document.getElementById('reflectionInput'+n);
+            const feedback=document.getElementById('reflectionFeedback'+n);
+            const submitBtn=document.getElementById('reflectionSubmit'+n);
+            const text=input.value.trim(); const words=countWords(text); const refId='reflection'+n;
+            function showFb(c,m){ feedback.className='reflection-feedback show '+c; feedback.style.display='block'; feedback.innerHTML=m; }
+            if(!gameState.reflections) gameState.reflections={};
+            if(gameState.reflections[refId]&&gameState.reflections[refId].credited){ gameState.reflections[refId].text=text; showFb('success','&#10003; Reflection updated and saved.'); return; }
+            if(words<50){ showFb('short','You\u2019re at <strong>'+words+' word'+(words===1?'':'s')+'</strong> \u2014 reflections need at least <strong>50</strong> for credit. Keep developing your thought!'); return; }
+            const reason=reflectionLowEffort(text,n); if(reason){ showFb('lowffort',reason); return; }
+            gameState.reflections[refId]={text:text,credited:true,words:words};
+            addPoints(REFLECTION_POINTS);
+            if(gameState.sectionPoints) gameState.sectionPoints['section'+n] = (gameState.sectionPoints['section'+n]||0) + REFLECTION_POINTS;
+            if(typeof checkSectionPacing==='function')checkSectionPacing(String(n));
+            if(typeof saveProgress==='function')saveProgress();
+            input.classList.add('locked'); submitBtn.textContent='Saved \u2713'; submitBtn.disabled=true;
+            if(words>100){ showFb('verbose','You clearly have a lot to say \u2014 great! For next time, make your point in <strong>100 words or less</strong>. <strong>(Saved &#10003; +25 points)</strong>'); }
+            else{ showFb('success','&#10003; Reflection saved! <strong>+25 points</strong> \u2014 thanks for sharing your thinking.'); }
+        }
+        function showSectionGate(key, need) {
+            var el = document.getElementById('sectionGate'+key);
+            var msg = '&#9888;&#65039; Before completing this section, please: ' + need.join('; ') + '.';
+            if (!el) { alert(msg.replace(/<[^>]+>/g,'')); return; }
+            el.innerHTML = msg; el.style.display='block'; if(el.scrollIntoView) el.scrollIntoView({behavior:'smooth',block:'center'});
+        }
+
+
+        function escapeHtmlRR(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+        function renderReflectionReport(){
+            try{
+                var refs = (typeof gameState!=='undefined' && gameState.reflections) ? gameState.reflections : null;
+                var container = (typeof findReportContainer==='function' ? findReportContainer() : null)
+                    || document.getElementById('reportPage') || document.getElementById('page-report') || document.getElementById('reportSection')
+                    || document.getElementById('completionReport') || document.getElementById('report');
+                if(!container) return;
+                var old=document.getElementById('studentReflectionsReport'); if(old) old.parentNode.removeChild(old);
+                var boxes=Array.prototype.slice.call(document.querySelectorAll('[id^="reflection-section"]'));
+                var nums=boxes.map(function(el){ var m=el.id.match(/reflection-section(\d+)/); return m?parseInt(m[1]):null; }).filter(function(x){return x!==null;});
+                nums.sort(function(a,b){return a-b;});
+                if(!nums.length) return;
+                var html='<div id="studentReflectionsReport" class="performance-section" style="margin-top:25px;grid-column:1 / -1;width:100%;box-sizing:border-box;">';
+                html+='<h3 style="color:#005A87;">&#128172; Student Reflections</h3>';
+                html+='<div style="background:#eef6f9;border:1px solid #b3d4dd;border-radius:8px;padding:10px 14px;margin:6px 0 14px;font-size:0.85em;color:#37474f;line-height:1.5;">&#128221; <strong>Note for instructors:</strong> Each reflection is automatically credited 25 points once it meets the 50-word minimum with genuine, on-topic effort. After reading the reflections below, you may adjust the chapter score up or down to reflect their quality, or accept the auto-awarded total as-is &#8212; your discretion.</div>';
+                nums.forEach(function(n){
+                    var r=refs?refs['reflection'+n]:null;
+                    var pe=document.querySelector('#reflection-section'+n+' .reflection-prompt');
+                    var prompt=pe?pe.textContent.trim():('Section '+n);
+                    html+='<div style="border:1px solid #cfd8dc;border-left:5px solid #00695C;border-radius:8px;padding:14px 16px;margin:10px 0;page-break-inside:auto;">';
+                    html+='<div style="font-weight:700;color:#005A87;margin-bottom:6px;">Section '+n+'</div>';
+                    html+='<div style="font-size:0.9em;color:#546e7a;font-style:italic;margin-bottom:8px;">'+escapeHtmlRR(prompt)+'</div>';
+                    if(r&&r.credited&&r.text){
+                        html+='<div style="color:#212121;line-height:1.55;white-space:pre-wrap;">'+escapeHtmlRR(r.text)+'</div>';
+                        html+='<div style="font-size:0.82em;color:#78909c;margin-top:6px;">'+(r.words||0)+' words</div>';
+                    } else { html+='<div style="color:#98002e;font-style:italic;">No reflection submitted for this section.</div>'; }
+                    html+='</div>';
+                });
+                html+='</div>';
+                var anchor=null, h3s=container.querySelectorAll('h3');
+                for(var i=0;i<h3s.length;i++){ if(/Section Performance/i.test(h3s[i].textContent)){ anchor=h3s[i].closest('.performance-section')||h3s[i].parentNode; break; } }
+                var w=document.createElement('div'); w.innerHTML=html; var node=w.firstChild;
+                if(anchor&&anchor.parentNode) anchor.parentNode.insertBefore(node, anchor.nextSibling);
+                else container.appendChild(node);
+            }catch(e){}
+        }
+        if (typeof window!=='undefined') window.renderReflectionReport = renderReflectionReport;
+
         const pacingAlertShown = new Set();
 
         function checkSectionPacing(sectionNum) {
@@ -2461,7 +2640,8 @@
             if (!elements) return;
             var allCards = elements.cards.every(function(id) { return gameState.cardsRevealed[id]; });
             var allQs = elements.questions.every(function(id) { return gameState.questionsAnswered[id]; });
-            if (!allCards || !allQs) return;
+            var reflDone = gameState.reflections && gameState.reflections['reflection'+key] && gameState.reflections['reflection'+key].credited;
+            if (!allCards || !allQs || !reflDone) return;
             pacingAlertShown.add(key);
             var sectionMs = gameState.sectionTimers[key] || 0;
             if (gameState.currentSection === key && gameState.sectionEntryTime) sectionMs += Date.now() - gameState.sectionEntryTime;
@@ -2537,15 +2717,25 @@
 
         // Complete section
         function completeSection(sectionNum) {
+            var key = String(sectionNum); var el = sectionElements[key];
+            if (el) {
+                var cardsDone = el.cards.every(function(id){ return gameState.cardsRevealed[id]; });
+                var qsDone = el.questions.every(function(id){ return gameState.questionsAnswered[id]; });
+                var reflDone = gameState.reflections && gameState.reflections['reflection'+key] && gameState.reflections['reflection'+key].credited;
+                if (!cardsDone || !qsDone || !reflDone) {
+                    var need=[]; if(!cardsDone)need.push('reveal all cards'); if(!qsDone)need.push('answer all knowledge checks'); if(!reflDone)need.push('submit your reflection (50+ words)');
+                    showSectionGate(key, need); return;
+                }
+            }
             const sectionId = 'section' + sectionNum;
             if (!gameState.completedSections.includes(sectionId)) {
                 gameState.completedSections.push(sectionId);
                 const card = document.getElementById('card' + sectionNum);
-                if (card) {
-                    card.classList.add('completed');
-                }
+                if (card) { card.classList.add('completed'); }
                 updateProgress();
             }
+            if (typeof saveProgress==='function') saveProgress();
+            if (typeof navigateToSection==='function') navigateToSection('homePage');
         }
 
         // Interactive card reveal
@@ -2623,7 +2813,7 @@
                 });
 
                 if (cards.length === 0 && allQuestionsAnswered) {
-                    completeSection(sectionNum);
+                    // Completion is gated through the Complete Section button (requires reflection).
                     checkSectionPacing(sectionNum);
                 }
             }
@@ -2697,7 +2887,7 @@
             document.getElementById('reportTime').textContent = now.toLocaleTimeString();
             document.getElementById('reportStudentName').textContent = gameState.studentName || 'Not Provided';
             
-            var maxPoints = 1180;
+            var maxPoints = 1280;
             var percentage = Math.round((gameState.score / maxPoints) * 100);
             
             document.getElementById('reportTotalPoints').textContent = gameState.score;
@@ -2736,10 +2926,10 @@
             tbody.innerHTML = '';
             
             var sections = [
-                { name: 'What Is the Media?', id: 'section1', maxPts: 255 },
+                { name: 'What Is the Media?', id: 'section1', maxPts: 265 },
                 { name: 'Evolution of the Media', id: 'section2', maxPts: 345 },
-                { name: 'Regulating the Media', id: 'section3', maxPts: 340 },
-                { name: 'The Impact of the Media', id: 'section4', maxPts: 370 }
+                { name: 'Regulating the Media', id: 'section3', maxPts: 310 },
+                { name: 'The Impact of the Media', id: 'section4', maxPts: 360 }
             ];
 
             var visitedCount = 0, totalSectionMs = 0;
@@ -3506,7 +3696,7 @@
             var btn = document.createElement('button');
             btn.className = 'trek-report-btn';
             btn.type = 'button';
-            btn.setAttribute('onclick', reportOnclick);
+            btn.setAttribute('onclick', reportOnclick + ';if(window.renderReflectionReport){window.renderReflectionReport();}');
             btn.innerHTML = '📋 Generate Completion Report';
             container.appendChild(btn);
 
