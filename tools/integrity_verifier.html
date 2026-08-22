@@ -274,7 +274,13 @@ function expandVariants(bases, kind, label) {
             kind: kind,
             variants: [
                 base + ' - TCC ' + kind + ' Government Trailblazer Trek',
-                base + ' - Tarrant County College ' + kind + ' Government Trailblazer Trek'
+                base + ' - Tarrant County College ' + kind + ' Government Trailblazer Trek',
+                // Some chapter files carry an edition suffix in <title>, and the
+                // title is part of the hash payload. Chapter 6 (Federal) is the
+                // known case; kept generic so a future suffix doesn't silently
+                // break verification again.
+                base + ' - TCC ' + kind + ' Government Trailblazer Trek (Complete Edition)',
+                base + ' - Tarrant County College ' + kind + ' Government Trailblazer Trek (Complete Edition)'
             ]
         });
     });
