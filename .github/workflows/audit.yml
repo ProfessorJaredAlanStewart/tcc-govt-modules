@@ -1,4 +1,4 @@
-name: Point Total Audit
+name: Chapter Audit
 
 on:
   push:
@@ -6,17 +6,21 @@ on:
     paths:
       - 'Chapter*.html'
       - 'tools/audit_points.py'
+      - 'tools/audit_features.py'
+      - 'tools/integrity_verifier.html'
       - '.github/workflows/audit.yml'
   pull_request:
     branches: [main]
     paths:
       - 'Chapter*.html'
       - 'tools/audit_points.py'
+      - 'tools/audit_features.py'
+      - 'tools/integrity_verifier.html'
   workflow_dispatch:
 
 jobs:
   audit:
-    name: Verify chapter point totals
+    name: Verify chapter point totals and feature parity
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -27,5 +31,21 @@ jobs:
         with:
           python-version: '3.11'
 
+      # Both audits run even if the first fails, so a single push surfaces
+      # every problem rather than one problem per push.
       - name: Run point total audit
+        id: points
+        continue-on-error: true
         run: python3 tools/audit_points.py .
+
+      - name: Run feature parity audit
+        id: features
+        continue-on-error: true
+        run: python3 tools/audit_features.py .
+
+      - name: Fail if either audit failed
+        if: steps.points.outcome == 'failure' || steps.features.outcome == 'failure'
+        run: |
+          echo "Point audit:   ${{ steps.points.outcome }}"
+          echo "Feature audit: ${{ steps.features.outcome }}"
+          exit 1
