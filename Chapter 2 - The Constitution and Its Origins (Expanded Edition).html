@@ -1991,7 +1991,12 @@
         <!-- REPORT PAGE -->
         <div class="page" id="page-report">
             <button class="back-button no-print" onclick="showPage('home')">← Back to Menu</button>
-            
+
+            <div class="no-print" style="text-align:center; margin: 1.5rem 0; padding: 1rem; background: #eaf5e0; border: 2px solid #8dc63f; border-radius: 12px;">
+                <button onclick="window.print()" style="background:linear-gradient(135deg,#002b5c,#003a73);color:white;padding:0.8rem 2rem;border:none;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;">📄 Download Completion Report (PDF)</button>
+                <p style="font-size:0.85em; color:#555; margin-top:8px; margin-bottom:0; font-style:italic;">Use your browser's "Save as PDF" option. Submit this PDF — screenshots will not be accepted.</p>
+            </div>
+
             <div class="report-container">
                 <div class="report-header-bar">
                     <h1 style="text-align: center; margin: 0;">📊 Tarrant County College Federal Government Trailblazer Trek</h1>
@@ -3340,7 +3345,7 @@
         }
 
         function findReportContainer() {
-            var ids = ['reportPage', 'section-report', 'reportSection', 'completionReport', 'report'];
+            var ids = ['reportPage', 'page-report', 'section-report', 'reportSection', 'completionReport', 'report'];
             for (var i = 0; i < ids.length; i++) {
                 var el = document.getElementById(ids[i]);
                 if (el) return el;
