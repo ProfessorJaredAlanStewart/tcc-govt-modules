@@ -1848,6 +1848,26 @@
                 <div class="feedback-box" id="feedback-q4-3"></div>
             </div>
 
+            <div class="interactive-card" onclick="revealCard(this, 'card4-upd', 15)">
+                <div class="card-prompt">&#128269; Click to explore: How did the second Trump administration try to shrink the bureaucracy?</div>
+                <div class="card-content">
+                    <p><strong>+15 points!</strong> &#128269; A dramatic attempt at reform!</p>
+                    <p>In January 2025, President Trump created the <strong>Department of Government Efficiency (DOGE)</strong> by executive order, tapping billionaire Elon Musk to lead an aggressive drive to cut federal spending, staffing, and regulations. DOGE pushed mass layoffs, agency reorganizations, and cancellations of contracts and programs.</p>
+                    <p>It drew intense controversy and many lawsuits over whether the executive branch can unilaterally dismantle agencies and fire workers that Congress created and funded, a live separation-of-powers question about who controls the bureaucracy.</p>
+                    <p>Musk departed in May 2025 amid a public break with Trump. DOGE claimed roughly $175 billion in savings, far short of its trillion-dollar goal, and was largely wound down before its charter formally expired on July 4, 2026.</p>
+                    <p>The courts limited agency power around the same time: in <strong>Loper Bright (2024)</strong> the Supreme Court ended <em>Chevron</em> deference, making it harder for agencies to interpret ambiguous laws on their own.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">&#10067; What was DOGE (the Department of Government Efficiency), created in 2025?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-upd', 50)">An executive-branch effort, led initially by Elon Musk, to cut federal spending and staffing</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-upd', 30)">A permanent Cabinet department created by Congress</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-upd', 30)">A newly created federal court</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-upd', 30)">A Supreme Court case about agency power</div>
+                <div class="feedback-box" id="feedback-q4-upd"></div>
+            </div>
+
             <div class="reflection-box" id="reflection-section4">
                     <div class="reflection-header">&#128172; Reflection <span class="reflection-points">+25 points</span></div>
                     <div class="reflection-prompt">Who actually controls the bureaucracy &#8212; the president, Congress, the courts, or no one fully? Pick the check you find most effective, argue why it beats the others, and name the gap it still leaves open.</div>
@@ -2340,7 +2360,7 @@
         };
 
         // Total possible points
-        const maxPoints = 1110;
+        const maxPoints = 1175;
 
         // Navigation
         function navigateTo(sectionId) {

@@ -1634,7 +1634,7 @@
 
                 <div class="key-concept-box">
                     <h4>🔑 Key Point: Court Composition</h4>
-                    <p>Currently, there are six justices who are considered part of the Court's more conservative wing—Chief Justice Roberts and Associate Justices Thomas, Alito, Gorsuch, Kavanaugh, and Barrett—while three are considered more liberal-leaning—Justices Breyer (later replaced), Sotomayor, and Kagan.</p>
+                    <p>Currently, there are six justices who are considered part of the Court's more conservative wing—Chief Justice Roberts and Associate Justices Thomas, Alito, Gorsuch, Kavanaugh, and Barrett—while three are considered more liberal-leaning—Justices Sotomayor, Kagan, and Ketanji Brown Jackson (who replaced the retired Stephen Breyer in 2022).</p>
                     <p>However, none of the justices works completely in an ideological bubble. While their numerous opinions have revealed certain ideological tendencies, they still consider each case as it comes to them, and they don't always rule in a consistently predictable or expected way.</p>
                 </div>
             </div>
@@ -1908,6 +1908,26 @@
                 <div class="kc-option" onclick="handleAnswer(this, true, 'q5-2', 50)">Concurring opinion</div>
                 <div class="kc-option" onclick="handleAnswer(this, false, 'q5-2', 35)">Per curiam opinion</div>
                 <div class="feedback-box" id="feedback-q5-2"></div>
+            </div>
+
+            <div class="interactive-card" onclick="revealCard(this, 'card5-upd', 15)">
+                <div class="card-prompt">&#128269; Click to explore: How has the Supreme Court reshaped federal power recently?</div>
+                <div class="card-content">
+                    <p><strong>+15 points!</strong> &#9878; Two blockbuster rulings!</p>
+                    <p>Beyond overturning Roe in 2022, the Court issued two decisions in 2024 that significantly shifted federal power.</p>
+                    <p><strong>Loper Bright Enterprises v. Raimondo (2024)</strong> overturned the 40-year-old <em>Chevron</em> deference doctrine. Under <em>Chevron</em> (1984), courts deferred to federal agencies' reasonable interpretations of ambiguous laws. Now courts decide for themselves what a statute means, shifting power away from agencies (the EPA, FDA, and others) and toward judges, and making it harder for agencies to set rules without clear authorization from Congress.</p>
+                    <p><strong>Trump v. United States (2024)</strong> held that a former president has broad immunity from criminal prosecution for official acts: absolute immunity for core constitutional powers, presumptive immunity for other official acts, and no immunity for unofficial acts. The ruling strengthened protections for the presidency and sent Donald Trump's federal election-interference case back to the lower courts.</p>
+                    <p>Together, these rulings show the Court's power to reshape the balance among the three branches.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">&#10067; What did the Supreme Court do in Loper Bright v. Raimondo (2024)?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-upd', 50)">Overturned Chevron deference, so courts no longer defer to agencies' reading of ambiguous laws</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-upd', 30)">Banned all federal agencies</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-upd', 30)">Gave agencies unlimited rulemaking power</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-upd', 30)">Overturned Roe v. Wade</div>
+                <div class="feedback-box" id="feedback-q5-upd"></div>
             </div>
 
             <div class="reflection-box" id="reflection-section5">
@@ -2252,7 +2272,7 @@
         };
 
         // Total possible points
-        const maxPoints = 925;
+        const maxPoints = 990;
 
         // Navigation
         function navigateTo(sectionId) {

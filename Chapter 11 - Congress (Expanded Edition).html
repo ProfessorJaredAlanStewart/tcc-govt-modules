@@ -990,7 +990,7 @@
                     <div class="badge">4</div>
                     <h4>👥 House and Senate Organizations</h4>
                     <p>Party leadership structure, committee system, and how Congress divides its work</p>
-                    <div class="points">⭐ 200 points available</div>
+                    <div class="points">⭐ 265 points available</div>
                 </div>
 
                 <div class="section-card" onclick="goToSection('section5')">
@@ -1941,6 +1941,25 @@
                 <div class="feedback-box" id="feedback-kc4-2"></div>
             </div>
 
+                            <div class="interactive-card" onclick="revealCard(this, 'card4-upd', 15)">
+                                <div class="card-prompt">&#128269; Click to explore: How is power divided in Congress today?</div>
+                                <div class="card-content">
+                                    <p><strong>+15 points!</strong> &#127963; Unified government in action!</p>
+                                    <p>After the 2024 elections, Republicans won unified control of the federal government: the presidency (Donald Trump), the Senate, and the House. The <strong>119th Congress</strong> (2025-2027) opened with a 53-47 Republican Senate majority and one of the narrowest House majorities in modern history, roughly 220-215.</p>
+                                    <p>Leadership reflects that control. In the House, <strong>Mike Johnson</strong> (R-LA) was reelected Speaker; in the Senate, <strong>John Thune</strong> (R-SD) became Majority Leader, succeeding Mitch McConnell. Vice President <strong>JD Vance</strong> serves as President of the Senate and can cast tie-breaking votes. The Democratic leaders are Hakeem Jeffries in the House and Chuck Schumer in the Senate.</p>
+                                    <p>Why the margins matter: with a razor-thin House majority, a few members can block their own party's bills, so the Speaker must hold nearly every Republican together. Unified government makes it easier for the majority to move its agenda (as with the 2025 budget reconciliation law), but internal divisions can still stall it.</p>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-check">
+                                <div class="kc-question">&#10067; In the 119th Congress (2025-2027), which party holds the presidency, the Senate, and the House?</div>
+                                <div class="kc-option" onclick="handleAnswer(this, true, 'q4-upd', 50)">Republicans hold all three (unified government)</div>
+                                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-upd', 30)">Democrats hold all three</div>
+                                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-upd', 30)">Republicans hold the House; Democrats hold the Senate and presidency</div>
+                                <div class="kc-option" onclick="handleAnswer(this, false, 'q4-upd', 30)">Control is split with no clear majority</div>
+                                <div class="feedback-box" id="feedback-q4-upd"></div>
+                            </div>
+
                             <div class="reflection-box" id="reflection-section4">
                     <div class="reflection-header">&#128221; Reflection <span class="reflection-points">+25 points</span></div>
                     <p class="reflection-prompt">Congress's approval is dismal, yet incumbents almost always win re-election. From what you read and what you've seen, explain that paradox &#8212; why do people loathe Congress but keep returning their own member to it?</p>
@@ -2327,7 +2346,7 @@
             reflections: {},
             studentName: '',
             currentScore: 0,
-            maxScore: 1110,
+            maxScore: 1175,
             currentLevel: 'Explorer',
             completedSections: new Set(),
             earnedPoints: new Set(),

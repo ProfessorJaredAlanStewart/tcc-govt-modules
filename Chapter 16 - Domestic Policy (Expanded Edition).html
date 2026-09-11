@@ -2003,6 +2003,26 @@
                 <div class="feedback-box" id="feedback-q5-3"></div>
             </div>
 
+            <div class="interactive-card" onclick="revealCard(this, 'card5-upd', 15)">
+                <div class="card-prompt">&#128269; Click to explore: What did the 2025 "One Big Beautiful Bill" do?</div>
+                <div class="card-content">
+                    <p><strong>+15 points!</strong> &#128176; The biggest law of Trump's second term!</p>
+                    <p>In July 2025, Congress passed and President Trump signed the <strong>One Big Beautiful Bill Act</strong> (H.R. 1), a sweeping budget reconciliation law. Because it moved as a reconciliation bill, it needed only simple majorities and could not be filibustered, passing the House 215-214 and the Senate 51-50 (with the vice president breaking the tie).</p>
+                    <p>On the tax side, it made the 2017 Trump tax cuts permanent and added new deductions, including no tax on tips and overtime and a $6,000 deduction for seniors.</p>
+                    <p>On the spending side, it cut Medicaid and SNAP by hundreds of billions of dollars and added Medicaid work requirements, boosted border-security and defense funding, ended most clean-energy tax credits, and raised the debt ceiling.</p>
+                    <p>Supporters called it tax relief and border security; critics said it funded tax cuts for higher earners by cutting health coverage and food aid. It is a clear example of how the reconciliation process lets a unified majority enact major policy without bipartisan support.</p>
+                </div>
+            </div>
+
+            <div class="knowledge-check">
+                <div class="kc-question">&#10067; How was the 2025 One Big Beautiful Bill Act able to pass with only simple majorities?</div>
+                <div class="kc-option" onclick="handleAnswer(this, true, 'q5-upd', 50)">It moved as a budget reconciliation bill, which cannot be filibustered</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-upd', 30)">It received a two-thirds vote in both chambers</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-upd', 30)">It was issued as an executive order</div>
+                <div class="kc-option" onclick="handleAnswer(this, false, 'q5-upd', 30)">It was approved by a national referendum</div>
+                <div class="feedback-box" id="feedback-q5-upd"></div>
+            </div>
+
             <div class="reflection-box" id="reflection-section5">
                     <div class="reflection-header">&#128172; Reflection <span class="reflection-points">+25 points</span></div>
                     <div class="reflection-prompt">A budget is values written in dollars. Pick one trade-off buried in how government taxes and spends, make it visible, and then commit: if you controlled the budget, what would you fund more, fund less, and who would be unhappy with you?</div>
@@ -2329,7 +2349,7 @@
         };
 
         // Total possible points
-        const maxPoints = 1175;
+        const maxPoints = 1240;
 
         // Navigation
         function navigateTo(sectionId) {
