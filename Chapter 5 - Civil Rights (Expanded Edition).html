@@ -3109,6 +3109,23 @@
             font-size: 0 !important;
             line-height: 0 !important;
         }
+        /* TCC — percentage shown in white inside the colored fill, crisp at every fill level */
+        #progressBar, #progressFill {
+            color: #ffffff !important;
+            font-size: 0.8rem !important;
+            line-height: 1 !important;
+            font-weight: 700 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 2.75em !important;
+        }
+        #progressText {
+            color: #ffffff !important;
+            font-size: 0.8rem !important;
+            line-height: 1 !important;
+        }
+        .trek-progress-label { display: none !important; }
         .trek-progress-label {
             position: absolute;
             top: 0;
@@ -3566,7 +3583,7 @@
             document.querySelectorAll('.progress-fill').forEach(function(el) { fills.push(el); });
 
             fills.forEach(function(fill) {
-                var track = fill.parentElement;
+                var track = (fill.classList.contains('progress-fill') && fill.querySelector('.progress-fill-inner')) ? fill : fill.parentElement;
                 if (!track) return;
                 if (track.querySelector('.trek-progress-label')) return; // already labeled
 
