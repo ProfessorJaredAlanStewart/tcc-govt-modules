@@ -3790,7 +3790,7 @@
             document.querySelectorAll('.progress-fill').forEach(function(el) { fills.push(el); });
 
             fills.forEach(function(fill) {
-                var track = (fill.classList.contains('progress-fill') && fill.querySelector('.progress-fill-inner')) ? fill : fill.parentElement;
+                var track = fill.parentElement; // always a sibling container, never the observed fill (prevents MutationObserver self-loop)
                 if (!track) return;
                 if (track.querySelector('.trek-progress-label')) return; // already labeled
 
@@ -3809,7 +3809,7 @@
                 try {
                     var observer = new MutationObserver(function() {
                         var t = (fill.textContent || '').trim();
-                        if (t) label.textContent = t;
+                        if (t && t !== label.textContent) label.textContent = t;
                     });
                     observer.observe(fill, {
                         childList: true,
