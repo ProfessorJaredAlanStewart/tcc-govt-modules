@@ -85,8 +85,35 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Return to chapter list */
+        .back-to-list {
+            display: inline-block;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            white-space: nowrap;
+            transition: background 0.2s ease;
+        }
+        .back-to-list:hover,
+        .back-to-list:focus { background: rgba(255, 255, 255, 0.28); }
+        .back-to-list:focus-visible {
+            outline: 3px solid #FFD54F;
+            outline-offset: 2px;
+        }
+        .back-to-list[hidden] { display: none; }
+        @media (max-width: 768px) {
+            .back-to-list { align-self: center; }
+        }
+
+
         .hero-section {
-            background: linear-gradient(135deg, #00788a, #1a8fa0);
+            background: linear-gradient(135deg, #002b5c, #00406e);
             color: white;
             padding: 3rem;
             border-radius: 15px;
@@ -949,6 +976,7 @@
 <body>
     <!-- Fixed Header -->
     <div class="header">
+        <a href="index.html" class="back-to-list" id="backToList">&#8592; All Chapters</a>
         <h1>🏛️ Tarrant County College Federal Government Trailblazer Trek</h1>
         <div class="score-display">
             <span>&#9201;&#65039; <span id="elapsedTime">0:00</span></span>
@@ -3632,6 +3660,21 @@
 
 
 
+
+    <script>
+    /* Visible by default so it always works on the published site, even if
+       fetch is unavailable. Removed only when index.html is confirmed missing
+       (a chapter used standalone), so students never get a link that 404s. */
+    (function () {
+        var el = document.getElementById('backToList');
+        if (!el || !window.fetch) return;
+        try {
+            fetch('index.html', { method: 'HEAD' })
+                .then(function (r) { if (!r || !r.ok) { el.hidden = true; } })
+                .catch(function () { el.hidden = true; });
+        } catch (e) { /* leave visible */ }
+    })();
+    </script>
 <!-- A11Y-ENHANCEMENT-START -->
 <style>
 /* Visible focus for keyboard users (WCAG 2.4.7). */
