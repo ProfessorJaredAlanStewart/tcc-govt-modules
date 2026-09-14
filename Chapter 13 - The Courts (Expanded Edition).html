@@ -107,6 +107,35 @@
             outline-offset: 2px;
         }
         .back-to-list[hidden] { display: none; }
+
+        /* Room for the chapter-list link: the header bar now holds three
+           items, so give them a gap and reclaim width for the title. */
+        .header-content { max-width: 1400px; }
+        /* Explicit margins rather than flex `gap`: gap is unsupported in
+           older engines, and this spacing must never collapse. */
+        .back-to-list { margin-right: 1.5rem; }
+        .score-display { margin-left: 1.5rem; }
+        .header-title,
+        .header h1 { min-width: 0; }
+        @media (max-width: 1400px) {
+            .header-title,
+            .header h1 { font-size: 1.05em; }
+            .score-display { gap: 12px; font-size: 1em; }
+        }
+        /* Between the phone rules (<=700px) and full width the bar is still
+           too tight for the full institution name, so fall back to the same
+           short brand mark used on mobile. The chapter title is in the hero
+           immediately below, so nothing is lost. */
+        .hdr-short { display: none; }
+        /* Between the phone rules (<=700px) and full width the bar is too
+           tight for the full institution name, so swap in a short brand mark.
+           Uses display, not font-size:0 with ::after, so it is deterministic
+           across engines. The chapter title sits in the hero below. */
+        @media (min-width: 701px) and (max-width: 1250px) {
+            .hdr-full { display: none; }
+            .hdr-short { display: inline; }
+            .score-display { gap: 10px; font-size: 0.95em; }
+        }
         @media (max-width: 768px) {
             .back-to-list { align-self: center; }
         }
@@ -965,7 +994,7 @@
     <!-- Fixed Header -->
     <div class="header">
         <a href="index.html" class="back-to-list" id="backToList">&#8592; All Chapters</a>
-        <h1>⚖️ Tarrant County College Federal Government Trailblazer Trek</h1>
+        <h1><span class="hdr-full">⚖️ Tarrant County College Federal Government Trailblazer Trek</span><span class="hdr-short">⚖️ Federal Government Trailblazer Trek</span></h1>
         <div class="score-display">
             <span>&#9201;&#65039; <span id="elapsedTime">0:00</span></span>
             <span>⭐ <span id="score">0</span> pts</span>
