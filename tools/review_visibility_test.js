@@ -12,7 +12,7 @@ for(const f of files){
   const w=dom.window,d=w.document;
   await new Promise(r=>setTimeout(r,500));
   const entry=[...d.querySelectorAll('[onclick]')]
-    .find(e=>/\('(page-)?review'\)/.test(e.getAttribute('onclick')||''));
+    .find(e=>/\('(page-)?review'\)|showChapterReview\(\)/.test(e.getAttribute('onclick')||''));
   const name=f.split(' - ')[0];
   ck(!!entry, name+': no review entry found');
   if(entry){

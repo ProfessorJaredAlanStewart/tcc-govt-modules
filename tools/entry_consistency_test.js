@@ -14,7 +14,7 @@ for(const f of files){
   const w=dom.window,d=w.document;
   await new Promise(r=>setTimeout(r,500));
   const e=[...d.querySelectorAll('[onclick]')]
-    .find(x=>/\('(page-)?review'\)/.test(x.getAttribute('onclick')||''));
+    .find(x=>/\('(page-)?review'\)|showChapterReview\(\)/.test(x.getAttribute('onclick')||''));
   ck(!!e, name+': no review entry');
   if(e){
     ck(e.tagName==='BUTTON', name+': entry is '+e.tagName+', expected BUTTON');

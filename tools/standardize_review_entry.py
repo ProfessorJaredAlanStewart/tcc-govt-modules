@@ -33,7 +33,10 @@ BTN = ('        <div class="trek-review-btn-container" '
 
 def nav_call(c):
     m = re.search(r'onclick="([a-zA-Z]+)\(\'(page-)?review\'\)"', c)
-    return f"{m.group(1)}('{(m.group(2) or '')}review')" if m else None
+    if m:
+        return f"{m.group(1)}('{(m.group(2) or '')}review')"
+    # chapters whose section navigation is numeric-only get a dedicated function
+    return "showChapterReview()" if "function showChapterReview" in c else None
 
 
 def patch(path):
