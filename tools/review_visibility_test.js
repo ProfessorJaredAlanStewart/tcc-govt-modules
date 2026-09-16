@@ -1,5 +1,12 @@
 // Verifies the Chapter Review entry survives the runtime button-standardisation
 // script, which hides every home-page element whose onclick mentions "report".
+
+// Returns the nearest ancestor with display:none, or null.
+function hiddenBy(el){
+  let n=el;
+  while(n && n.style){ if(n.style.display==='none') return n.className||n.id||'(unnamed)'; n=n.parentElement; }
+  return null;
+}
 const fs=require('fs'); const {JSDOM}=require('jsdom');
 const files=fs.readdirSync('.').filter(f=>/^Chapter .*\(Expanded Edition\)\.html$/.test(f)).sort();
 let pass=0,fail=0;
@@ -17,12 +24,15 @@ for(const f of files){
   ck(!!entry, name+': no review entry found');
   if(entry){
     // walk ancestors for display:none
-    let el=entry, hidden=null;
-    while(el && el.style){
-      if(el.style.display==='none'){ hidden=el.className||el.id; break; }
-      el=el.parentElement;
-    }
-    ck(hidden===null, name+': review entry hidden by ancestor ['+hidden+']');
+    // The right invariant is not "always visible" but "as visible as the
+    // section cards". Some chapters gate all home content behind a start
+    // button, and the review entry should be gated exactly the same way.
+    const sectionCard=[...d.querySelectorAll('[onclick]')]
+      .find(x=>/(navigateToSection|showPage|goToSection)\(\s*'?(page-)?section1'?\s*\)|navigateToSection\(\s*1\s*\)/.test(x.getAttribute('onclick')||''));
+    const entryHidden=hiddenBy(entry);
+    const cardHidden=sectionCard?hiddenBy(sectionCard):null;
+    ck(entryHidden===cardHidden,
+       name+': review entry visibility ['+entryHidden+'] differs from section cards ['+cardHidden+']');
     // must not be nested inside another section-card
     const p=entry.parentElement;
     ck(!(p && /section-card/.test(p.className||'')), name+': review card nested inside another card');
