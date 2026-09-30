@@ -3823,10 +3823,52 @@
                     }
                 });
 
-                toArr(sectionsDone).forEach(function(secNum) {
-                    var card = document.getElementById('card' + secNum)
-                        || document.getElementById('section' + secNum + '-card');
+                // Re-mark completed section tiles on the home page.
+                // Chapters store completion in different shapes: ['section1'],
+                // [1, 2], Set{'1'}, [true, false, ...] (index = section - 1),
+                // or {section1: true}. Normalize all of them to section
+                // numbers, then find the tile by id, by its onclick target,
+                // or by position (the same fallback chapters use in-session).
+                function completedSectionNums(done) {
+                    var out = [];
+                    function pushNum(v) {
+                        var m = String(v).match(/(\d+)\s*$/);
+                        if (m && out.indexOf(m[1]) === -1) out.push(m[1]);
+                    }
+                    if (!done) return out;
+                    if (typeof Set !== 'undefined' && done instanceof Set) done = Array.from(done);
+                    if (Array.isArray(done)) {
+                        var boolArr = done.length > 0 && done.every(function(v) {
+                            return typeof v === 'boolean' || v === null || v === undefined;
+                        });
+                        done.forEach(function(v, i) {
+                            if (boolArr) { if (v === true) pushNum(i + 1); }
+                            else pushNum(v);
+                        });
+                    } else if (typeof done === 'object') {
+                        Object.keys(done).forEach(function(k) { if (done[k]) pushNum(k); });
+                    }
+                    return out;
+                }
+                function findSectionTile(n) {
+                    var byId = document.getElementById('card' + n)
+                        || document.getElementById('section' + n + '-card')
+                        || document.getElementById('section' + n + 'Card');
+                    if (byId) return byId;
+                    var tiles = document.querySelectorAll('.section-card');
+                    var re = new RegExp("\\(\\s*['\"]?(?:section[-_]?)?" + n + "['\"]?\\s*\\)");
+                    for (var t = 0; t < tiles.length; t++) {
+                        if (re.test(tiles[t].getAttribute('onclick') || '')) return tiles[t];
+                    }
+                    return tiles[parseInt(n, 10) - 1] || null;
+                }
+                completedSectionNums(sectionsDone).forEach(function(n) {
+                    var card = findSectionTile(n);
                     if (card) card.classList.add('completed');
+                    var chk = document.getElementById('check' + n);
+                    if (chk && chk.classList.contains('completion-check') && !chk.textContent.trim()) chk.textContent = '\u2713';
+                    var ach = document.getElementById('section' + n + '-complete');
+                    if (ach && ach.classList.contains('achievement')) ach.style.display = 'block';
                 });
 
                 // Re-populate the student name input if we saved one
