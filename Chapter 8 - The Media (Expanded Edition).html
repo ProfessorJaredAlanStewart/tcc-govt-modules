@@ -3690,7 +3690,10 @@
                     if (typeof x === 'object') return Object.keys(x);
                     return [];
                 }
-                var revealed = toArr(revealedSrc);
+                // Some chapters (4, 11, 12, 13) track reveals in earnedPoints
+                // instead; without it, restored cards stay shut and the click
+                // handler bails because the id is already recorded.
+                var revealed = toArr(revealedSrc).concat(toArr(gameState.earnedPoints));
                 var answered = toArr(answeredSrc);
 
                 document.querySelectorAll('[onclick]').forEach(function(el) {
@@ -3699,6 +3702,12 @@
                         for (var i = 0; i < revealed.length; i++) {
                             if (oc.indexOf("'" + revealed[i] + "'") !== -1) {
                                 el.classList.add('revealed');
+                                // Chapters reveal content via .show, .visible, or
+                                // .revealed on .card-content; set all three so a
+                                // restored card is actually open, not just styled.
+                                var cc = el.querySelector('.card-content');
+                                if (cc) cc.classList.add('revealed', 'show', 'visible');
+                                el.setAttribute('aria-expanded', 'true');
                                 break;
                             }
                         }
