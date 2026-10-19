@@ -2804,7 +2804,69 @@
         });
     </script>
     <!-- ============================================================ -->
-    <!-- TCC Trailblazer Trek — Resume & Integrity Extensions          -->
+    <!-- Trek time guard: pause section timers when idle or hidden; repair restored state -->
+<script id="trek-time-guard">
+(function () {
+    'use strict';
+    if (typeof gameState === 'undefined' || !gameState || !gameState.sectionTimers) { return; }
+    var copy = function (o) { try { return JSON.parse(JSON.stringify(o)); } catch (e) { return null; } };
+    var DEF_TIMERS = copy(gameState.sectionTimers) || {};
+    var DEF_POINTS = gameState.sectionPoints ? copy(gameState.sectionPoints) : null;
+    var IDLE_MS = 10 * 60 * 1000;
+    var lastActive = Date.now();
+    var hiddenAt = null;
+
+    window.__trekRepairState = function () {
+        var gs = gameState;
+        // A save made mid-section carries an old entry timestamp; crediting it
+        // would add all the time the student was away.
+        gs.currentSection = null;
+        gs.sectionEntryTime = null;
+        if (!gs.sectionTimers || typeof gs.sectionTimers !== 'object') { gs.sectionTimers = {}; }
+        Object.keys(DEF_TIMERS).forEach(function (k) {
+            var v = gs.sectionTimers[k];
+            if (typeof v !== 'number' || !isFinite(v) || v < 0) { gs.sectionTimers[k] = 0; }
+        });
+        if (DEF_POINTS && gs.sectionPoints && typeof gs.sectionPoints === 'object') {
+            Object.keys(DEF_POINTS).forEach(function (k) {
+                var d = DEF_POINTS[k], cur = gs.sectionPoints[k];
+                if (!cur || typeof cur !== 'object') { gs.sectionPoints[k] = copy(d); }
+                else if (d && typeof d === 'object' && 'max' in d) { cur.max = d.max; }
+            });
+        }
+    };
+
+    function tick() {
+        var gs = gameState;
+        if (!gs.currentSection || !gs.sectionEntryTime) { return; }
+        var now = Date.now();
+        var until = Math.min(now, lastActive + IDLE_MS);
+        if (hiddenAt !== null) { until = Math.min(until, hiddenAt); }
+        var add = until - gs.sectionEntryTime;
+        if (add > 0) {
+            var k = gs.currentSection;
+            gs.sectionTimers[k] = (Number(gs.sectionTimers[k]) || 0) + add;
+        }
+        gs.sectionEntryTime = now;
+    }
+
+    ['mousemove', 'mousedown', 'keydown', 'scroll', 'wheel', 'touchstart'].forEach(function (ev) {
+        window.addEventListener(ev, function () { lastActive = Date.now(); }, { passive: true, capture: true });
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            hiddenAt = Date.now();
+            tick();
+        } else {
+            hiddenAt = null;
+            lastActive = Date.now();
+            if (gameState.currentSection && gameState.sectionEntryTime) { gameState.sectionEntryTime = Date.now(); }
+        }
+    });
+    setInterval(tick, 15000);
+})();
+</script>
+<!-- TCC Trailblazer Trek — Resume & Integrity Extensions          -->
     <!-- Shared block — keep identical across all chapters.            -->
     <!-- Hand-maintained; tools/audit_features.py enforces parity.     -->
     <!-- Provides:                                                     -->
@@ -3283,6 +3345,7 @@
                     }
                     gameState[k] = v;
                 });
+                if (window.__trekRepairState) { try { window.__trekRepairState(); } catch (e) {} }
                 if (saved._elapsedAtSave && 'moduleStartTime' in gameState) {
                     gameState.moduleStartTime = Date.now() - saved._elapsedAtSave;
                 }
